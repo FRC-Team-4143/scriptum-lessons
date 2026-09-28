@@ -22,8 +22,8 @@ fi
 
 # Only set these if the student hasn't already configured their own -
 # students may return to this lesson after having set a real identity.
-git config --global user.name >/dev/null 2>&1 || git config --global user.name "CodeRunner Student"
-git config --global user.email >/dev/null 2>&1 || git config --global user.email "student@coderunner.local"
+git config --global user.name >/dev/null 2>&1 || git config --global user.name "Scriptum Student"
+git config --global user.email >/dev/null 2>&1 || git config --global user.email "student@scriptum.local"
 git config --global init.defaultBranch main
 git config --global core.editor nano
 git config --global pull.rebase false
