@@ -17,12 +17,12 @@
 			}
 		},
 		{
-			"id": "day-name",
-			"title": "Day name",
-			"description": "dayName(day) uses a switch statement to name the day of the week.",
+			"id": "drive-mode-name",
+			"title": "Drive mode name",
+			"description": "driveModeName(mode) uses a switch statement to name a drive mode.",
 			"verifier": {
 				"type": "script",
-				"path": "checkpoints/java-conditions/verify/day-name.sh"
+				"path": "checkpoints/java-conditions/verify/drive-mode-name.sh"
 			}
 		},
 		{

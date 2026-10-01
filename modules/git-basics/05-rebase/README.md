@@ -18,3 +18,9 @@ new `develop`. (This scenario is set up so it rebases cleanly — no conflict
 to resolve here, that was exercise 4.)
 
 Don't touch `develop`. Run **Verify** when you're done.
+
+## You're done when
+
+`git log --oneline --graph --all` shows `issue-15-led-colors` as a straight
+line on top of `develop`'s newest commit - no merge commit, and no fork in
+the graph. `develop` is unchanged.

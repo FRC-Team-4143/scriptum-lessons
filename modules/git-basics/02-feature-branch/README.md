@@ -18,3 +18,9 @@ commit. There's an imaginary issue #12: "Add a turbo boost feature."
 4. Leave `main` and `develop` alone — don't commit directly to either.
 
 Run **Verify** from the Checkpoints panel when you're done.
+
+## You're done when
+
+`git branch` shows `issue-12-...` checked out, `git log --oneline` shows at
+least two new commits on it, and `main` and `develop` still point at the
+original commit.
