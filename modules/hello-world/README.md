@@ -3,10 +3,14 @@
 A bare-bones Java project to make sure everything works. The code lives in
 `src/Main.java`.
 
-## Running it
+## What you need to do
 
-Click the editor **Run** button. You should see `Hello, World!` printed in the
-terminal.
+1. Open `src/Main.java` and read it - `main` is where Java starts running,
+   and `System.out.println` prints a line of text to the terminal.
+2. Click **Run** and confirm `Hello, World!` shows up in the terminal.
+3. Open **Checkpoints** and run **Verify**. It passes as long as your
+   program still prints exactly `Hello, World!`, so experiment freely, then
+   put it back before you verify.
 
 ## Try stuff
 

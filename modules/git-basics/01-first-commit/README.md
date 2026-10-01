@@ -11,3 +11,9 @@ to see it).
 
 That's it. Click **Checkpoints** in the top bar and run **Verify** when
 you're done.
+
+## You're done when
+
+`git log` shows a new commit on top of the original one, your name is in
+`roster.txt`, and `git status` says the working tree is clean (nothing left
+unstaged).

@@ -25,3 +25,9 @@ conflict.
    just save and close it.)
 
 Run **Verify** when you're done.
+
+## You're done when
+
+`git status` reports no merge in progress, `Constants.java` has a single
+`MAX_SPEED` with no conflict markers left in it, and `git log` on `develop`
+shows a merge commit with both parents.
