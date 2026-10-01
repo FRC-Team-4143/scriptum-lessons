@@ -45,9 +45,11 @@ only sees the answers, but each step below names the tool to use.
    `"FULL"` at 90 and above. Use an `if` / `else if` / `else` chain. Order
    matters: check the most specific case first, and think about what
    happens exactly at the boundaries (0, 50, 90).
-2. **One value, many cases.** `String dayName(int day)` returns `"Monday"`
-   through `"Sunday"` for `day` 1-7. This is what a `switch` statement is
-   for; use its `default` case to return `"Invalid day"` for anything else.
+2. **One value, many cases.** `String driveModeName(int mode)` turns a
+   drive mode number into its name: `1` is `"Tank"`, `2` is `"Arcade"`, `3`
+   is `"Swerve"`, and `4` is `"Field-Oriented Swerve"`. This is what a
+   `switch` statement is for; use its `default` case to return
+   `"Unknown mode"` for anything else.
 3. **Combining conditions.** Each of these is a single `return` of a
    boolean expression - no `if` required.
    - `boolean canEnable(boolean hasComms, boolean eStopped)` - `true` only

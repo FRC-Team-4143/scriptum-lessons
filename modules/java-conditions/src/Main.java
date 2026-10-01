@@ -8,10 +8,13 @@ public class Main {
         return null;
     }
 
-    // TODO: use a switch statement on day (1-7) to return the day's name,
-    // "Monday" through "Sunday". Return "Invalid day" for anything else
-    // (the switch's default case).
-    public static String dayName(int day) {
+    // TODO: use a switch statement on mode to return the drive mode's name:
+    //   1 -> "Tank"
+    //   2 -> "Arcade"
+    //   3 -> "Swerve"
+    //   4 -> "Field-Oriented Swerve"
+    // Return "Unknown mode" for anything else (the switch's default case).
+    public static String driveModeName(int mode) {
         return null;
     }
 
@@ -35,7 +38,7 @@ public class Main {
 
     public static void main(String[] args) {
         System.out.println("Battery at 75%: " + batteryStatus(75));
-        System.out.println("Day 4: " + dayName(4));
+        System.out.println("Drive mode 3: " + driveModeName(3));
         System.out.println("Can enable (comms, not e-stopped)? " + canEnable(true, false));
         System.out.println("Is Saturday a weekend? " + isWeekend("Saturday"));
         System.out.println("Motor direction (reversed): " + motorDirection(true));
