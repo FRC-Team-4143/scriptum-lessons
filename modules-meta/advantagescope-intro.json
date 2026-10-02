@@ -1,5 +1,5 @@
 {
-	"title": "AdvantageScope: Reading Robot Telemetry",
+	"title": "AdvantageScope",
 	"description": "Configure AdvantageScope's layout to display already-published robot telemetry.",
 	"subdir": "modules/advantagescope-intro",
 	"kind": "robot",

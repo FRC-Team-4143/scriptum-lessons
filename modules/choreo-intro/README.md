@@ -1,4 +1,4 @@
-# Choreo: Planning Autonomous Paths
+# Choreo
 
 Background: [Choreo](https://choreo.autos/) is the tool teams use to plan
 autonomous paths - dragging waypoints around the field, adding constraints,

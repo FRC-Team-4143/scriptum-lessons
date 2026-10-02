@@ -1,4 +1,4 @@
-# AdvantageScope: Reading Robot Telemetry
+# AdvantageScope
 
 Background: [AdvantageScope](https://docs.advantagescope.org/) is the tool
 teams use to visualize robot telemetry - line graphs, 3D/2D fields, tables,
