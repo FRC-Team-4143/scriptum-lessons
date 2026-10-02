@@ -1,5 +1,5 @@
 {
-	"title": "Elastic: Configuring a Competition Dashboard",
+	"title": "Elastic",
 	"description": "Configure Elastic's dashboard layout to display already-published robot telemetry.",
 	"subdir": "modules/elastic-intro",
 	"kind": "robot",
