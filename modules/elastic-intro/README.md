@@ -1,4 +1,4 @@
-# Elastic: Configuring a Competition Dashboard
+# Elastic
 
 Background: [Elastic](https://frc-elastic.gitbook.io/docs) is the dashboard
 teams run on the driver station laptop during a match - number displays,
