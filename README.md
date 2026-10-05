@@ -91,7 +91,7 @@ and uses them right away. The Java modules remain available as a deeper, standal
 | 4 Objects and Odometry | classes and objects, `new`, `import`, `static`, `abstract` |
 | 5 Mechanisms and Subsystems | enums and `switch`, inheritance (`extends`, `@Override`), constructors, lists |
 | 6 Control Theory | practice: unit conversion, `switch`, small methods |
-| 7 State Machines and Commands | `&&` `||` `!`, boolean methods, lambdas |
+| 7 State Machines and Commands | `&&` `\|\|` `!`, boolean methods, lambdas |
 | 8 Autonomous | extending `Command`, command groups (and a `for` loop used again) |
 
 Recursion is not used on the robot.
