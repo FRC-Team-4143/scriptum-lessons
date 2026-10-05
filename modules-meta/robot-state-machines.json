@@ -1,0 +1,44 @@
+{
+	"title": "State Machines and Commands",
+	"description": "Give the shooter a state machine and control it with commands bound to buttons.",
+	"subdir": "modules/robot-state-machines",
+	"kind": "robot",
+	"requires": [
+		"robot-subsystems"
+	],
+	"checkpoints": [
+		{
+			"id": "bindings",
+			"title": "Button bindings",
+			"description": "OI binds the right bumper to ShooterCommands.shoot() and A to simulateBallLaunch().",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/robot-state-machines/verify/bindings.sh"
+			}
+		},
+		{
+			"id": "spin-up-first",
+			"title": "Spins up before shooting",
+			"description": "Hold the right bumper until the shooter reaches SHOOT. It must pass through SPIN_UP first (IDLE cannot jump to SHOOT).",
+			"verifier": {
+				"type": "nt4-value",
+				"topic": "/AdvantageKit/RealOutputs/Subsystem/Shooter/SpinUpSeconds",
+				"check": "range",
+				"min": 0.05,
+				"max": 1.6
+			}
+		},
+		{
+			"id": "recovers-from-launch",
+			"title": "Recovers after a launch",
+			"description": "Hold the right bumper, then tap A. The shooter should fall back to SPIN_UP and return to SHOOT, so the shot count reaches 2.",
+			"verifier": {
+				"type": "nt4-value",
+				"topic": "/AdvantageKit/RealOutputs/Check/Subsystem/Shooter/ShotCount/Max",
+				"check": "range",
+				"min": 2,
+				"max": 50
+			}
+		}
+	]
+}
