@@ -72,8 +72,43 @@
 			"track": "Java Programming"
 		},
 		{
-			"id": "robot-starter",
+			"id": "robot-drivetrain",
 			"order": 20,
+			"track": "FRC Robot"
+		},
+		{
+			"id": "robot-sensors",
+			"order": 21,
+			"track": "FRC Robot"
+		},
+		{
+			"id": "robot-methods",
+			"order": 22,
+			"track": "FRC Robot"
+		},
+		{
+			"id": "robot-oop-wpilib",
+			"order": 23,
+			"track": "FRC Robot"
+		},
+		{
+			"id": "robot-subsystems",
+			"order": 24,
+			"track": "FRC Robot"
+		},
+		{
+			"id": "robot-state-machines",
+			"order": 25,
+			"track": "FRC Robot"
+		},
+		{
+			"id": "robot-control-theory",
+			"order": 26,
+			"track": "FRC Robot"
+		},
+		{
+			"id": "robot-autonomous",
+			"order": 27,
 			"track": "FRC Robot"
 		}
 	]

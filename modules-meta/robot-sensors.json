@@ -1,0 +1,56 @@
+{
+	"title": "Sensors and Feedback",
+	"description": "Turn encoder readings into speed and distance, ignore stick drift with an if statement, then drive exactly 2 meters with bang-bang control.",
+	"subdir": "modules/robot-sensors",
+	"kind": "robot",
+	"requires": [
+		"robot-drivetrain"
+	],
+	"checkpoints": [
+		{
+			"id": "deadband-and-ifs",
+			"title": "Deadband and if statements",
+			"description": "Robot.java has a DEADBAND constant used in an if statement on each stick, and an if / else in autonomousPeriodic().",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/robot-sensors/verify/deadband.sh"
+			}
+		},
+		{
+			"id": "linear-speed",
+			"title": "Linear speed",
+			"description": "Drive both sides forward at full speed. Robot/LinearSpeed should read about 5 m/s.",
+			"verifier": {
+				"type": "nt4-value",
+				"topic": "/AdvantageKit/RealOutputs/Check/Robot/LinearSpeed/Max",
+				"check": "range",
+				"min": 3.0,
+				"max": 6.5
+			}
+		},
+		{
+			"id": "angular-speed",
+			"title": "Angular speed",
+			"description": "Spin in place at full speed (one stick forward, one back, left side backward). Robot/AngularSpeed should be positive.",
+			"verifier": {
+				"type": "nt4-value",
+				"topic": "/AdvantageKit/RealOutputs/Check/Robot/AngularSpeed/Max",
+				"check": "range",
+				"min": 10.0,
+				"max": 25.0
+			}
+		},
+		{
+			"id": "drive-two-meters",
+			"title": "Drive 2 meters",
+			"description": "Run Auto and let the robot stop. Robot/Distance should read about 2 meters (it may coast a little past).",
+			"verifier": {
+				"type": "nt4-value",
+				"topic": "/AdvantageKit/RealOutputs/Robot/Distance",
+				"check": "range",
+				"min": 1.95,
+				"max": 2.6
+			}
+		}
+	]
+}

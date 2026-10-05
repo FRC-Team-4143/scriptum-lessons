@@ -1,0 +1,92 @@
+{
+	"title": "Methods",
+	"description": "Move the drivetrain math into reusable methods: unit conversion, speeds, arcade drive, and an average built with an array and a for loop.",
+	"subdir": "modules/robot-methods",
+	"kind": "robot",
+	"requires": [
+		"robot-sensors"
+	],
+	"checkpoints": [
+		{
+			"id": "rotations-to-meters",
+			"title": "rotationsToMeters",
+			"description": "DriveMath.rotationsToMeters(rotations, radius) converts wheel rotations to meters.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/robot-methods/verify/rotations-to-meters.sh"
+			}
+		},
+		{
+			"id": "linear-speed",
+			"title": "linearSpeed",
+			"description": "DriveMath.linearSpeed(left, right) is the robot's forward speed.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/robot-methods/verify/linear-speed.sh"
+			}
+		},
+		{
+			"id": "angular-speed",
+			"title": "angularSpeed",
+			"description": "DriveMath.angularSpeed(left, right, trackWidth) is the robot's turning speed.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/robot-methods/verify/angular-speed.sh"
+			}
+		},
+		{
+			"id": "arcade-math",
+			"title": "arcadeToWheelSpeeds",
+			"description": "DriveMath.arcadeToWheelSpeeds(forward, turn) returns {left, right} and never goes past 1.0.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/robot-methods/verify/arcade-math.sh"
+			}
+		},
+		{
+			"id": "average",
+			"title": "average",
+			"description": "DriveMath.average(values) adds up an array with a for loop and divides by its length.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/robot-methods/verify/average.sh"
+			}
+		},
+		{
+			"id": "arcade-forward",
+			"title": "Arcade forward",
+			"description": "In Teleop, push the left stick forward. The drivetrain should drive forward through arcadeDrive.",
+			"verifier": {
+				"type": "nt4-value",
+				"topic": "/AdvantageKit/RealOutputs/Check/Drive/LeftOutput/Max",
+				"check": "range",
+				"min": 0.9,
+				"max": 1.0
+			}
+		},
+		{
+			"id": "arcade-turn",
+			"title": "Arcade turn",
+			"description": "In Teleop, push the right stick to the right. The right side should reverse.",
+			"verifier": {
+				"type": "nt4-value",
+				"topic": "/AdvantageKit/RealOutputs/Check/Drive/RightOutput/Min",
+				"check": "range",
+				"min": -1.0,
+				"max": -0.5
+			}
+		},
+		{
+			"id": "smoothed-speed",
+			"title": "Smoothed speed",
+			"description": "Drive forward at full speed in Teleop. Robot/SmoothedSpeed should read about 5 m/s.",
+			"verifier": {
+				"type": "nt4-value",
+				"topic": "/AdvantageKit/RealOutputs/Check/Robot/SmoothedSpeed/Max",
+				"check": "range",
+				"min": 3.0,
+				"max": 6.5
+			}
+		}
+	]
+}

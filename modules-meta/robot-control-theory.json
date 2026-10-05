@@ -1,0 +1,74 @@
+{
+	"title": "Control Theory",
+	"description": "Hold the flywheel at speed three ways: bang-bang, feedforward and PID. Then tune the gains and compare how each handles a disturbance.",
+	"subdir": "modules/robot-control-theory",
+	"kind": "robot",
+	"requires": [
+		"robot-state-machines"
+	],
+	"checkpoints": [
+		{
+			"id": "bang-bang-written",
+			"title": "Bang-bang",
+			"description": "bangBang() runs the flywheel at full power while it is too slow and stops it once it is fast enough.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/robot-control-theory/verify/bang-bang-written.sh"
+			}
+		},
+		{
+			"id": "feedforward-written",
+			"title": "Feedforward",
+			"description": "feedforward() works out the power for the target speed from FLYWHEEL_KV.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/robot-control-theory/verify/feedforward-written.sh"
+			}
+		},
+		{
+			"id": "pid-selected",
+			"title": "PID selected and tuned",
+			"description": "FLYWHEEL_CONTROL is PID with a feedforward (kV) and some feedback (kP).",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/robot-control-theory/verify/pid-selected.sh"
+			}
+		},
+		{
+			"id": "spin-up-time",
+			"title": "Fast spin-up",
+			"description": "With your final settings, hold the right bumper. The shooter should reach SHOOT in under about 1.5 seconds.",
+			"verifier": {
+				"type": "nt4-value",
+				"topic": "/AdvantageKit/RealOutputs/Subsystem/Shooter/SpinUpSeconds",
+				"check": "range",
+				"min": 0.05,
+				"max": 1.6
+			}
+		},
+		{
+			"id": "no-overshoot",
+			"title": "No big overshoot",
+			"description": "Start the robot fresh with your final settings. The flywheel should peak near its target speed, not far above it.",
+			"verifier": {
+				"type": "nt4-value",
+				"topic": "/AdvantageKit/RealOutputs/Check/Subsystem/Shooter/FlywheelVelocity/Max",
+				"check": "range",
+				"min": 290,
+				"max": 330
+			}
+		},
+		{
+			"id": "recovers-from-launch",
+			"title": "Recovers after a launch",
+			"description": "Hold the right bumper, then tap A. The shooter should fall back to SPIN_UP and return to SHOOT.",
+			"verifier": {
+				"type": "nt4-value",
+				"topic": "/AdvantageKit/RealOutputs/Check/Subsystem/Shooter/ShotCount/Max",
+				"check": "range",
+				"min": 2,
+				"max": 50
+			}
+		}
+	]
+}
