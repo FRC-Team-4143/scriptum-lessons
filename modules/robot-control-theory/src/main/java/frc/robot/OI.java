@@ -1,17 +1,14 @@
 package frc.robot;
 
 import edu.wpi.first.math.MathUtil;
-import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
-import frc.robot.subsystems.shooter.ShooterCommands;
+import edu.wpi.first.wpilibj.XboxController;
 
 /**
- * OI stands for "Operator Interface": everything the human drivers do. It now also connects
- * controller buttons to commands.
+ * OI stands for "Operator Interface": everything the human drivers do. The rest of the code asks OI
+ * questions and never touches the controller directly.
  */
 public abstract class OI {
-  // A CommandXboxController is an XboxController whose buttons can start commands.
-  private static final CommandXboxController driverController = new CommandXboxController(0);
+  private static final XboxController driverController = new XboxController(0);
 
   /** How far forward the driver is pushing, -1.0 to 1.0. */
   public static double getForward() {
@@ -23,14 +20,16 @@ public abstract class OI {
     return MathUtil.applyDeadband(driverController.getRightX(), 0.1);
   }
 
-  /** Connects buttons to commands. Robot calls this once at startup. */
-  public static void configureBindings() {
-    DriverStation.silenceJoystickConnectionWarning(true);
+  public static boolean getShootButton() {
+    return driverController.getRightBumperButton();
+  }
 
-    // whileTrue(command): the command runs while the button is held and stops when it is released.
-    driverController.rightBumper().whileTrue(ShooterCommands.shoot());
+  public static boolean getIndexButton() {
+    return driverController.getLeftBumperButton();
+  }
 
-    // onTrue(command): the command runs once each time the button is pressed.
-    driverController.a().onTrue(ShooterCommands.simulateBallLaunch());
+  /** True while the driver holds the A button, which pretends a game piece was just launched. */
+  public static boolean getLaunchButton() {
+    return driverController.getAButton();
   }
 }

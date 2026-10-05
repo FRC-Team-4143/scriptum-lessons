@@ -122,11 +122,11 @@ public class ShooterSubsystem extends MwSubsystem<ShooterStates, ShooterConstant
 
     switch (system_state_) {
       case SPIN_UP:
-        flywheel.setTargetVelocity(CONSTANTS.SHOOT_VELOCITY);
+        runFlywheel();
         roller.setTargetDutyCycle(0.0);
         break;
       case SHOOT:
-        flywheel.setTargetVelocity(CONSTANTS.SHOOT_VELOCITY);
+        runFlywheel();
         roller.setTargetDutyCycle(CONSTANTS.INDEX_DUTY_CYCLE);
         break;
       case IDLE:
@@ -140,6 +140,44 @@ public class ShooterSubsystem extends MwSubsystem<ShooterStates, ShooterConstant
     MwLog.log(getSubsystemKey() + "FlywheelTarget", CONSTANTS.SHOOT_VELOCITY);
     MwLog.log(getSubsystemKey() + "ShotCount", shotCount);
     MwLog.log(getSubsystemKey() + "SpinUpSeconds", spinUpSeconds);
+  }
+
+  /** Holds the flywheel at its target speed using whichever control style the constants choose. */
+  private void runFlywheel() {
+    switch (CONSTANTS.FLYWHEEL_CONTROL) {
+      case BANG_BANG:
+        bangBang();
+        break;
+      case FEEDFORWARD:
+        feedforward();
+        break;
+      case PID:
+      default:
+        // The motor controller runs feedforward (kV) plus feedback (kP) for us.
+        flywheel.setTargetVelocity(CONSTANTS.SHOOT_VELOCITY);
+        break;
+    }
+  }
+
+  /**
+   * Bang-bang control: full power while the flywheel is too slow, no power once it is fast enough.
+   */
+  private void bangBang() {
+    if (flywheel.getCurrentVelocity() < CONSTANTS.SHOOT_VELOCITY) {
+      flywheel.setTargetDutyCycle(1.0);
+    } else {
+      flywheel.setTargetDutyCycle(0.0);
+    }
+  }
+
+  /**
+   * Feedforward control: no measuring at all. Work out how much power the target speed needs and
+   * apply it.
+   */
+  private void feedforward() {
+    double targetRps = CONSTANTS.SHOOT_VELOCITY / (2.0 * Math.PI);
+    double volts = CONSTANTS.FLYWHEEL_KV * targetRps;
+    flywheel.setTargetDutyCycle(volts / 12.0);
   }
 
   /** Counts launches and times each spin-up. Used by the lesson checks. */

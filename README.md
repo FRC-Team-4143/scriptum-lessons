@@ -29,10 +29,11 @@ Three tracks, listed in curriculum order in `modules.json`:
   from the first lesson. The seven modules follow the training lessons, one after another, and each
   starts from the previous module's finished robot:
   `robot-drivetrain` (Motors and Drivetrains), `robot-sensors` (Sensors and Feedback),
-  `robot-methods` (Methods), `robot-oop-wpilib` (OOP and WPILib), `robot-subsystems` (Mechanisms and
-  Subsystems), `robot-state-machines` (State Machines and Commands), `robot-control-theory`
-  (Control Theory) and `robot-autonomous` (Autonomous). Each module's `README.md` is the lesson.
-  Computer Vision has no robot code, so it has no module. See [Robot modules](#robot-modules).
+  `robot-drive-math` (Drive Math and Methods), `robot-odometry` (Objects and Odometry),
+  `robot-subsystems` (Mechanisms and Subsystems), `robot-control-theory` (Control Theory),
+  `robot-state-machines` (State Machines and Commands) and `robot-autonomous` (Autonomous).
+  Each module's `README.md` is the lesson. Computer Vision has no robot code, so it has no module.
+  See [Robot modules](#robot-modules).
 
 ## Publishing
 
@@ -86,11 +87,11 @@ and uses them right away. The Java modules remain available as a deeper, standal
 | --- | --- |
 | 1 Motors and Drivetrains | calling methods, `double` variables, `+ - * /` operators, comments |
 | 2 Sensors and Feedback | `if` / `else`, comparison operators, `static final` constants |
-| 3 Methods | writing methods (parameters, return values), arrays, `for` loops, `%`, `Math` |
-| 4 OOP and WPILib | classes and objects, `new`, `import`, `static`, `abstract` |
+| 3 Drive Math and Methods | writing methods (parameters, return values), arrays, `for` loops, `%`, `Math` |
+| 4 Objects and Odometry | classes and objects, `new`, `import`, `static`, `abstract` |
 | 5 Mechanisms and Subsystems | enums and `switch`, inheritance (`extends`, `@Override`), constructors, lists |
-| 6 State Machines and Commands | `&&` `||` `!`, boolean methods, lambdas |
-| 7 Control Theory | practice: unit conversion, `switch`, small methods |
+| 6 Control Theory | practice: unit conversion, `switch`, small methods |
+| 7 State Machines and Commands | `&&` `||` `!`, boolean methods, lambdas |
 | 8 Autonomous | extending `Command`, command groups (and a `for` loop used again) |
 
 Recursion is not used on the robot.

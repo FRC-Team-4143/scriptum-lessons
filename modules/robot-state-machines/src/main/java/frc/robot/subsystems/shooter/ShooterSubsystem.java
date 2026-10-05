@@ -77,8 +77,7 @@ public class ShooterSubsystem extends MwSubsystem<ShooterStates, ShooterConstant
 
   /** Pretends a game piece was just launched, which pushes back on the flywheel. */
   public void simulateBallLaunch() {
-    // TODO: tell the flywheel about a load with flywheel.applyLoadTorque(...) using
-    // CONSTANTS.BALL_LOAD_TORQUE.
+    flywheel.applyLoadTorque(CONSTANTS.BALL_LOAD_TORQUE);
   }
 
   /**
@@ -102,14 +101,51 @@ public class ShooterSubsystem extends MwSubsystem<ShooterStates, ShooterConstant
 
     // TODO: write a switch (system_state_) with a case for each state:
     //   IDLE:    flywheel.setTargetDutyCycle(0.0) and roller.setTargetDutyCycle(0.0)
-    //   SPIN_UP: flywheel.setTargetVelocity(CONSTANTS.SHOOT_VELOCITY), roller stopped
-    //   SHOOT:   flywheel.setTargetVelocity(CONSTANTS.SHOOT_VELOCITY),
-    //            roller.setTargetDutyCycle(CONSTANTS.INDEX_DUTY_CYCLE)
+    //   SPIN_UP: runFlywheel() (from last lesson), roller stopped
+    //   SHOOT:   runFlywheel(), and roller.setTargetDutyCycle(CONSTANTS.INDEX_DUTY_CYCLE)
 
     MwLog.log(getSubsystemKey() + "FlywheelVelocity", flywheel.getCurrentVelocity());
     MwLog.log(getSubsystemKey() + "FlywheelTarget", CONSTANTS.SHOOT_VELOCITY);
     MwLog.log(getSubsystemKey() + "ShotCount", shotCount);
     MwLog.log(getSubsystemKey() + "SpinUpSeconds", spinUpSeconds);
+  }
+
+  /** Holds the flywheel at its target speed using whichever control style the constants choose. */
+  private void runFlywheel() {
+    switch (CONSTANTS.FLYWHEEL_CONTROL) {
+      case BANG_BANG:
+        bangBang();
+        break;
+      case FEEDFORWARD:
+        feedforward();
+        break;
+      case PID:
+      default:
+        // The motor controller runs feedforward (kV) plus feedback (kP) for us.
+        flywheel.setTargetVelocity(CONSTANTS.SHOOT_VELOCITY);
+        break;
+    }
+  }
+
+  /**
+   * Bang-bang control: full power while the flywheel is too slow, no power once it is fast enough.
+   */
+  private void bangBang() {
+    if (flywheel.getCurrentVelocity() < CONSTANTS.SHOOT_VELOCITY) {
+      flywheel.setTargetDutyCycle(1.0);
+    } else {
+      flywheel.setTargetDutyCycle(0.0);
+    }
+  }
+
+  /**
+   * Feedforward control: no measuring at all. Work out how much power the target speed needs and
+   * apply it.
+   */
+  private void feedforward() {
+    double targetRps = CONSTANTS.SHOOT_VELOCITY / (2.0 * Math.PI);
+    double volts = CONSTANTS.FLYWHEEL_KV * targetRps;
+    flywheel.setTargetDutyCycle(volts / 12.0);
   }
 
   /** Counts launches and times each spin-up. Used by the lesson checks. */

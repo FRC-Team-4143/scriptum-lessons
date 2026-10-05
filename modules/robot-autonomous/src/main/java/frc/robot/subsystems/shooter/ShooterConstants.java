@@ -6,7 +6,10 @@ import com.marswars.mechanisms.MotorConfig.TalonMotorType;
 import com.marswars.subsystem.MwConstants;
 import edu.wpi.first.math.util.Units;
 
-/** Every number that describes the shooter, in one place. */
+/**
+ * Every number that describes the shooter, in one place. Subsystem code uses names like
+ * CONSTANTS.SHOOT_VELOCITY instead of raw numbers, so changing the robot means editing one file.
+ */
 public class ShooterConstants extends MwConstants {
 
   /** The things the shooter can be doing. */
@@ -30,10 +33,10 @@ public class ShooterConstants extends MwConstants {
   }
 
   // =============================================================================
-  // FLYWHEEL
+  // FLYWHEEL: the fast spinning wheel that launches the game piece
   // =============================================================================
 
-  // Change this, run again, and watch Subsystem/Shooter/FlywheelVelocity in AdvantageScope.
+  // The style and gains you chose in the Control Theory lesson. Put your own numbers here.
   public final FlywheelControl FLYWHEEL_CONTROL = FlywheelControl.PID;
 
   // Feedforward: volts needed just to HOLD a speed, per (rotation per second). A first guess is
@@ -43,10 +46,10 @@ public class ShooterConstants extends MwConstants {
   public final double FLYWHEEL_KP = 0.2;
 
   public final int FLYWHEEL_MOTOR_ID = 20;
-  public final double FLYWHEEL_GEAR_RATIO = 1.0;
-  // These match the real flywheel on the robot.
+  public final double FLYWHEEL_GEAR_RATIO = 1.0; // motor turns for every 1 flywheel turn
   public final double FLYWHEEL_RADIUS = Units.inchesToMeters(3.0);
   public final double FLYWHEEL_MASS = 2.3; // kg, approximate
+  // A solid wheel is harder to spin the heavier and wider it is: 1/2 * mass * radius^2 (kg*m^2).
   public final double FLYWHEEL_INERTIA = 0.5 * FLYWHEEL_MASS * FLYWHEEL_RADIUS * FLYWHEEL_RADIUS;
   public final double SHOOT_VELOCITY = 300.0; // radians per second
   public final MotorConfig FLYWHEEL_MOTOR_CONFIG =
@@ -61,12 +64,13 @@ public class ShooterConstants extends MwConstants {
   public final double BALL_LOAD_TORQUE = 25.0;
 
   // =============================================================================
-  // ROLLER
+  // ROLLER: feeds ("indexes") the game piece into the flywheel
   // =============================================================================
 
   public final int ROLLER_MOTOR_ID = 21;
   public final double ROLLER_GEAR_RATIO = 3.0;
-  public final double ROLLER_INERTIA = 0.0005;
+  public final double ROLLER_INERTIA = 0.0005; // kg*m^2, used by the simulation
+
   public final MotorConfig ROLLER_MOTOR_CONFIG = rollerConfig(ROLLER_MOTOR_ID);
   public final double INDEX_DUTY_CYCLE = 0.5;
 

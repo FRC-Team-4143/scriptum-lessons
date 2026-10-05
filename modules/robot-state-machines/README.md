@@ -1,7 +1,8 @@
 # State Machines and Commands
 
-The shooter works, but it is clumsy: the flywheel and roller start at the same time, so game
-pieces get fed into a wheel that is not up to speed yet. In this lesson you will give the shooter a
+Your flywheel now holds its speed well, but the shooter is still clumsy: the driver has to hold one
+button to spin up and another to feed, and can feed a game piece into a wheel that is not up to speed
+yet. The subsystem also reads the buttons itself, which gets messy as robots grow. In this lesson you will give the shooter a
 **state machine** and control it with **commands**.
 
 Companion docs pages: [State Machines and Commands](https://docs.marswars.org/docs/software/training/state-machines-commands),
@@ -70,7 +71,7 @@ A suggested pace that adds up to the 3 hour session. Take short breaks whenever 
 | 35 | Part 1: transitions |
 | 30 | Part 1: what each state does |
 | 25 | Part 2: commands |
-| 20 | Simulate a launch |
+| 20 | The launch command |
 | 20 | Bind the buttons |
 | 20 | Try it and watch the states in AdvantageScope |
 | 5 | Verify |
@@ -92,17 +93,15 @@ Go slower on anything that is new. Finishing every bonus is not expected.
 
 3. **Write the shoot command.** In `ShooterCommands.java`, `shoot()` returns a command that sets
    the wanted state to `SHOOT` when it starts and back to `IDLE` when it ends.
-4. **Write the launch simulator.** In `ShooterSubsystem.java`, fill in `simulateBallLaunch()`. In
-   the real world a launched game piece slows the flywheel down. In simulation the flywheel only
-   knows that if you tell it. Also write the matching instant command in `ShooterCommands.java`.
+4. **Write the launch command.** `simulateBallLaunch()` is already in `ShooterSubsystem.java` (you
+   used it last lesson, when the subsystem read the A button itself). Write the matching instant
+   command in `ShooterCommands.java`.
 5. **Bind them to buttons.** In `OI.java`, hold the **right bumper** to shoot
    (`whileTrue(...)`) and press **A** to simulate a launch (`onTrue(...)`).
 6. **Try it.** Start the robot, enable Teleop, and hold the right bumper (**U** on the keyboard). Watch the `State` in
    AdvantageScope go `SPIN_UP` and then `SHOOT`. Tap **A** (**K**): the flywheel slows, the state falls
    back to `SPIN_UP`, then returns to `SHOOT` once it recovers.
 7. **Click Verify.**
-
-Next lesson you will learn how the flywheel holds its speed, and tune it yourself.
 
 ## Bonus challenges
 

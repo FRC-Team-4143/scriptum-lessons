@@ -41,7 +41,9 @@ This lesson adds no new Java syntax. It is practice with what you have learned, 
   `FLYWHEEL_KV` and `FLYWHEEL_KP`.
 - `subsystems/shooter/ShooterSubsystem.java`: `bangBang()` and `feedforward()` (you write these) and
   `runFlywheel()` (it picks the style).
-- Everything from last lesson (states, commands, buttons) is already finished.
+- Everything from last lesson (the drivetrain and shooter subsystems and their buttons) is already
+  finished. The shooter still reads its buttons directly; next lesson replaces that with a state machine
+  and commands.
 
 ## Session plan (about 3 hours)
 
@@ -61,7 +63,7 @@ Go slower on anything that is new. Finishing every bonus is not expected.
 
 ## What you need to do
 
-Hold the **right bumper** (**U**) to shoot and tap **A** (**K**) to simulate a launched game piece. Run the robot
+Hold the **right bumper** (**U**) to spin the flywheel and tap **A** (**K**) to simulate a launched game piece. Run the robot
 after each change and watch `Subsystem/Shooter/FlywheelVelocity` and `FlywheelError` in
 AdvantageScope. Each run starts the simulation fresh.
 
@@ -80,17 +82,19 @@ AdvantageScope. Each run starts the simulation fresh.
 4. **Add feedback.** Set `FLYWHEEL_CONTROL = PID`, keep your `kV`, and raise `FLYWHEEL_KP` from `0.0`
    upward (`0.05`, `0.2`, `1.0`, `3.0`). Watch the spin-up and the recovery after tapping **A**. A bigger
    `kP` fights error harder. Too big and a real robot starts to buzz or oscillate.
-5. **Pick your final settings.** Choose `PID` with a `kV` and `kP` that reach `SHOOT` in under about
-   1.5 seconds and recover quickly after a launch. Run the robot fresh one more time with those
+5. **Pick your final settings.** Choose `PID` with a `kV` and `kP` that reach full speed in under about
+   1.5 seconds and get back to speed within about 0.8 seconds after a launch. The robot logs both
+   times as `Subsystem/Shooter/SpinUpSeconds` and `Subsystem/Shooter/RecoverySeconds`. Run the robot fresh one more time with those
    settings, hold the bumper, and tap **A** once.
 6. **Click Verify.** It checks your latest run.
 
 ## Think about it
 
-- Why does bang-bang spin up *fastest* but still lose to PID everywhere else?
+- Bang-bang and PID with a big `kP` spin up about equally fast. Why? (Look at the motor output while
+  spinning up.) Then why do we still prefer PID?
 - If the flywheel were twice as heavy, which gain would you have to change, `kV` or `kP`? (Hint: which
   one is "the power to hold a speed"?)
-- Last lesson's `DriveDistance` and turn commands in the next lesson use the same idea: an output that
+- The `DriveDistance` and turn commands in the Autonomous lesson use the same idea: an output that
   grows with the error. That is proportional control, `kP`, for position instead of speed.
 
 ## Bonus challenges

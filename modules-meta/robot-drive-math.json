@@ -1,7 +1,7 @@
 {
-	"title": "Methods",
+	"title": "Drive Math and Methods",
 	"description": "Move the drivetrain math into reusable methods: unit conversion, speeds, arcade drive, and an average built with an array and a for loop.",
-	"subdir": "modules/robot-methods",
+	"subdir": "modules/robot-drive-math",
 	"kind": "robot",
 	"requires": [
 		"robot-sensors"
@@ -13,7 +13,7 @@
 			"description": "DriveMath.rotationsToMeters(rotations, radius) converts wheel rotations to meters.",
 			"verifier": {
 				"type": "script",
-				"path": "checkpoints/robot-methods/verify/rotations-to-meters.sh"
+				"path": "checkpoints/robot-drive-math/verify/rotations-to-meters.sh"
 			}
 		},
 		{
@@ -22,7 +22,7 @@
 			"description": "DriveMath.linearSpeed(left, right) is the robot's forward speed.",
 			"verifier": {
 				"type": "script",
-				"path": "checkpoints/robot-methods/verify/linear-speed.sh"
+				"path": "checkpoints/robot-drive-math/verify/linear-speed.sh"
 			}
 		},
 		{
@@ -31,7 +31,7 @@
 			"description": "DriveMath.angularSpeed(left, right, trackWidth) is the robot's turning speed.",
 			"verifier": {
 				"type": "script",
-				"path": "checkpoints/robot-methods/verify/angular-speed.sh"
+				"path": "checkpoints/robot-drive-math/verify/angular-speed.sh"
 			}
 		},
 		{
@@ -40,7 +40,7 @@
 			"description": "DriveMath.arcadeToWheelSpeeds(forward, turn) returns {left, right} and never goes past 1.0.",
 			"verifier": {
 				"type": "script",
-				"path": "checkpoints/robot-methods/verify/arcade-math.sh"
+				"path": "checkpoints/robot-drive-math/verify/arcade-math.sh"
 			}
 		},
 		{
@@ -49,7 +49,7 @@
 			"description": "DriveMath.average(values) adds up an array with a for loop and divides by its length.",
 			"verifier": {
 				"type": "script",
-				"path": "checkpoints/robot-methods/verify/average.sh"
+				"path": "checkpoints/robot-drive-math/verify/average.sh"
 			}
 		},
 		{

@@ -1,10 +1,10 @@
 {
-	"title": "OOP and WPILib",
+	"title": "Objects and Odometry",
 	"description": "Write an abstract OI class, then use WPILib kinematics and a pose estimator to track where the robot is.",
-	"subdir": "modules/robot-oop-wpilib",
+	"subdir": "modules/robot-odometry",
 	"kind": "robot",
 	"requires": [
-		"robot-methods"
+		"robot-drive-math"
 	],
 	"checkpoints": [
 		{
@@ -13,7 +13,7 @@
 			"description": "OI has static getForward() and getTurn() methods, and Robot.java uses them instead of XboxController.",
 			"verifier": {
 				"type": "script",
-				"path": "checkpoints/robot-oop-wpilib/verify/oi-class.sh"
+				"path": "checkpoints/robot-odometry/verify/oi-class.sh"
 			}
 		},
 		{

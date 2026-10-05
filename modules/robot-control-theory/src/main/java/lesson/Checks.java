@@ -6,8 +6,7 @@ package lesson;
  */
 public final class Checks {
   private static final LessonChecks checks =
-      new LessonChecks(
-          "Drive/LeftOutput", "Subsystem/Shooter/FlywheelVelocity", "Subsystem/Shooter/ShotCount");
+      new LessonChecks("Drive/LeftOutput", "Subsystem/Shooter/FlywheelVelocity");
 
   private Checks() {}
 
