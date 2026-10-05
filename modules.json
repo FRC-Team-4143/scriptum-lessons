@@ -82,12 +82,12 @@
 			"track": "FRC Robot"
 		},
 		{
-			"id": "robot-methods",
+			"id": "robot-drive-math",
 			"order": 22,
 			"track": "FRC Robot"
 		},
 		{
-			"id": "robot-oop-wpilib",
+			"id": "robot-odometry",
 			"order": 23,
 			"track": "FRC Robot"
 		},
@@ -97,12 +97,12 @@
 			"track": "FRC Robot"
 		},
 		{
-			"id": "robot-state-machines",
+			"id": "robot-control-theory",
 			"order": 25,
 			"track": "FRC Robot"
 		},
 		{
-			"id": "robot-control-theory",
+			"id": "robot-state-machines",
 			"order": 26,
 			"track": "FRC Robot"
 		},

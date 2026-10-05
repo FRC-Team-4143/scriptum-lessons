@@ -143,10 +143,6 @@ public class ShooterSubsystem extends MwSubsystem<ShooterStates, ShooterConstant
 
     MwLog.log(getSubsystemKey() + "FlywheelVelocity", flywheel.getCurrentVelocity());
     MwLog.log(getSubsystemKey() + "FlywheelTarget", CONSTANTS.SHOOT_VELOCITY);
-    MwLog.log(
-        getSubsystemKey() + "FlywheelError",
-        CONSTANTS.SHOOT_VELOCITY - flywheel.getCurrentVelocity());
-    MwLog.log(getSubsystemKey() + "FlywheelStyle", CONSTANTS.FLYWHEEL_CONTROL);
     MwLog.log(getSubsystemKey() + "ShotCount", shotCount);
     MwLog.log(getSubsystemKey() + "SpinUpSeconds", spinUpSeconds);
   }

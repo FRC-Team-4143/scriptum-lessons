@@ -4,7 +4,7 @@
 	"subdir": "modules/robot-subsystems",
 	"kind": "robot",
 	"requires": [
-		"robot-oop-wpilib"
+		"robot-odometry"
 	],
 	"checkpoints": [
 		{

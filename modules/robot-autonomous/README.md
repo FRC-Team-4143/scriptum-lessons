@@ -23,7 +23,7 @@ idea as the flywheel, but for position.
 
 ## Java you will learn in this lesson
 
-**Loops again.** You used a `for` loop in the Methods lesson. Here it builds a list of commands instead of adding up numbers:
+**Loops again.** You used a `for` loop in the Drive Math and Methods lesson. Here it builds a list of commands instead of adding up numbers:
 
 ```java
 for (int i = 1; i <= 4; i++) {

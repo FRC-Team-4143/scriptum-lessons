@@ -4,7 +4,7 @@
 	"subdir": "modules/robot-state-machines",
 	"kind": "robot",
 	"requires": [
-		"robot-subsystems"
+		"robot-control-theory"
 	],
 	"checkpoints": [
 		{

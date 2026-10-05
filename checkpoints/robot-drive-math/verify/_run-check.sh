@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Shared by the robot-methods verifiers: compiles the student's DriveMath.java together with one
+# Shared by the robot-drive-math verifiers: compiles the student's DriveMath.java together with one
 # hidden check class (pure Java, no WPILib needed) and runs it.
 #   usage: _run-check.sh <projectDir> <CheckClassName>
 set -euo pipefail

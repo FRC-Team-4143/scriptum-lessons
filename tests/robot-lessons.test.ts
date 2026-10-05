@@ -16,11 +16,11 @@ const ROBOT_SRC = "src/main/java/frc/robot";
 const ROBOT_MODULES = [
 	"robot-drivetrain",
 	"robot-sensors",
-	"robot-methods",
-	"robot-oop-wpilib",
+	"robot-drive-math",
+	"robot-odometry",
 	"robot-subsystems",
-	"robot-state-machines",
 	"robot-control-theory",
+	"robot-state-machines",
 	"robot-autonomous",
 ];
 
@@ -125,12 +125,12 @@ describe("FRC Robot track manifest", () => {
 				await readFile(join(repoRoot, "modules-meta", `${id}.json`), "utf8"),
 			).requires ?? [];
 		expect(await requires("robot-sensors")).toContain("robot-drivetrain");
-		expect(await requires("robot-methods")).toContain("robot-sensors");
-		expect(await requires("robot-oop-wpilib")).toContain("robot-methods");
-		expect(await requires("robot-subsystems")).toContain("robot-oop-wpilib");
-		expect(await requires("robot-state-machines")).toContain("robot-subsystems");
-		expect(await requires("robot-control-theory")).toContain("robot-state-machines");
-		expect(await requires("robot-autonomous")).toContain("robot-control-theory");
+		expect(await requires("robot-drive-math")).toContain("robot-sensors");
+		expect(await requires("robot-odometry")).toContain("robot-drive-math");
+		expect(await requires("robot-subsystems")).toContain("robot-odometry");
+		expect(await requires("robot-control-theory")).toContain("robot-subsystems");
+		expect(await requires("robot-state-machines")).toContain("robot-control-theory");
+		expect(await requires("robot-autonomous")).toContain("robot-state-machines");
 	});
 });
 
@@ -177,27 +177,27 @@ describe.skipIf(!hasJdk)("FRC Robot script checkpoints", () => {
 		}
 	}, 30_000);
 
-	test("robot-methods: every DriveMath checkpoint fails fresh, passes once solved", async () => {
+	test("robot-drive-math: every DriveMath checkpoint fails fresh, passes once solved", async () => {
 		await expectRoundTrip(
-			"robot-methods",
+			"robot-drive-math",
 			["rotations-to-meters", "linear-speed", "angular-speed", "arcade-math", "average"],
 			["DriveMath.java"],
 		);
 	}, 30_000);
 
-	test("robot-oop-wpilib: oi-class fails fresh, passes once OI answers the controller questions and Robot uses it", async () => {
+	test("robot-odometry: oi-class fails fresh, passes once OI answers the controller questions and Robot uses it", async () => {
 		await expectRoundTrip(
-			"robot-oop-wpilib",
+			"robot-odometry",
 			["oi-class"],
 			["OI.java", "Robot.java"],
 		);
 	}, 30_000);
 
-	test("robot-oop-wpilib: a Robot that still uses XboxController fails oi-class", async () => {
-		const project = await makeProject("robot-oop-wpilib");
+	test("robot-odometry: a Robot that still uses XboxController fails oi-class", async () => {
+		const project = await makeProject("robot-odometry");
 		try {
-			await applySolution(project, "robot-oop-wpilib", ["OI.java"]);
-			const result = verify(project, "robot-oop-wpilib", "oi-class");
+			await applySolution(project, "robot-odometry", ["OI.java"]);
+			const result = verify(project, "robot-odometry", "oi-class");
 			expect(result.exitCode).not.toBe(0);
 			expect(result.text).toContain("XboxController");
 		} finally {

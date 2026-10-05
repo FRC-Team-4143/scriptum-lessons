@@ -1,10 +1,10 @@
-# Methods
+# Drive Math and Methods
 
 Last lesson you wrote the same math inside one long `robotPeriodic()`. In this lesson you will
 move that math into **methods**: small named pieces of code that do one job and can be reused. When
 you are done, `Robot.java` reads almost like a sentence.
 
-Companion docs page: [Methods](https://docs.marswars.org/docs/software/training/methods)
+Companion docs page: [Drive Math and Methods](https://docs.marswars.org/docs/software/training/drive-math-methods)
 
 ## Java you will learn in this lesson
 

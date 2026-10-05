@@ -4,7 +4,7 @@
 	"subdir": "modules/robot-control-theory",
 	"kind": "robot",
 	"requires": [
-		"robot-state-machines"
+		"robot-subsystems"
 	],
 	"checkpoints": [
 		{
@@ -37,7 +37,7 @@
 		{
 			"id": "spin-up-time",
 			"title": "Fast spin-up",
-			"description": "With your final settings, hold the right bumper. The shooter should reach SHOOT in under about 1.5 seconds.",
+			"description": "With your final settings, hold the right bumper. The flywheel should reach its speed in under about 1.5 seconds.",
 			"verifier": {
 				"type": "nt4-value",
 				"topic": "/AdvantageKit/RealOutputs/Subsystem/Shooter/SpinUpSeconds",
@@ -61,13 +61,13 @@
 		{
 			"id": "recovers-from-launch",
 			"title": "Recovers after a launch",
-			"description": "Hold the right bumper, then tap A. The shooter should fall back to SPIN_UP and return to SHOOT.",
+			"description": "Hold the right bumper until the flywheel is at speed, then tap A. It should get back to speed in under about 0.8 seconds.",
 			"verifier": {
 				"type": "nt4-value",
-				"topic": "/AdvantageKit/RealOutputs/Check/Subsystem/Shooter/ShotCount/Max",
+				"topic": "/AdvantageKit/RealOutputs/Subsystem/Shooter/RecoverySeconds",
 				"check": "range",
-				"min": 2,
-				"max": 50
+				"min": 0.01,
+				"max": 0.8
 			}
 		}
 	]

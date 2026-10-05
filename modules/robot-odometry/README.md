@@ -1,10 +1,10 @@
-# OOP and WPILib
+# Objects and Odometry
 
 Your robot knows how far it has driven. Now it learns **where it is** on the field. You will use
 WPILib's classes for **kinematics** and **pose estimation**, and you will make your own classes to
 organize the code.
 
-Companion docs page: [OOP and WPILib](https://docs.marswars.org/docs/software/training/oop-wpilib)
+Companion docs page: [Objects and Odometry](https://docs.marswars.org/docs/software/training/objects-odometry)
 
 ## Java you will learn in this lesson
 
