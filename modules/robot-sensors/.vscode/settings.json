@@ -36,7 +36,9 @@
     "**/Main.java": true,
     "**/BuildConstants.java": true,
     "**/deploy": true,
-    "**/mechanisms": true
+    "**/mechanisms": true,
+    "ctre_sim": true,
+    "networktables.json": true
   },
   "search.exclude": {
     "gradle": true,
@@ -59,6 +61,8 @@
     "**/Main.java": true,
     "**/BuildConstants.java": true,
     "**/deploy": true,
-    "**/mechanisms": true
+    "**/mechanisms": true,
+    "ctre_sim": true,
+    "networktables.json": true
   }
 }
