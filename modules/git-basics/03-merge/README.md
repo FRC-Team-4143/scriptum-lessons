@@ -16,3 +16,9 @@ git merge issue-7-auto-distance
 ```
 
 Don't touch `main`. Run **Verify** when you're done.
+
+## You're done when
+
+`develop` contains `AUTO_DISTANCE_METERS` in `Constants.java` and
+`git log --oneline develop` includes the feature branch's commits. `main`
+is unchanged.

@@ -147,7 +147,7 @@ describe.skipIf(!hasJdk)("Java Basics checkpoints", () => {
 	test("java-conditions: every checkpoint fails fresh, passes once solved", async () => {
 		await expectRoundTrip(
 			"java-conditions",
-			["battery-status", "day-name"],
+			["battery-status", "drive-mode-name"],
 			`public class Main {
     public static String batteryStatus(double percent) {
         if (percent == 0) return "EMPTY";
@@ -155,16 +155,13 @@ describe.skipIf(!hasJdk)("Java Basics checkpoints", () => {
         if (percent < 90) return "MEDIUM";
         return "FULL";
     }
-    public static String dayName(int day) {
-        switch (day) {
-            case 1: return "Monday";
-            case 2: return "Tuesday";
-            case 3: return "Wednesday";
-            case 4: return "Thursday";
-            case 5: return "Friday";
-            case 6: return "Saturday";
-            case 7: return "Sunday";
-            default: return "Invalid day";
+    public static String driveModeName(int mode) {
+        switch (mode) {
+            case 1: return "Tank";
+            case 2: return "Arcade";
+            case 3: return "Swerve";
+            case 4: return "Field-Oriented Swerve";
+            default: return "Unknown mode";
         }
     }
     public static void main(String[] args) {}

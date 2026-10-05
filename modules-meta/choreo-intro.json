@@ -1,5 +1,5 @@
 {
-	"title": "Choreo: Planning Autonomous Paths",
+	"title": "Choreo",
 	"description": "Build two different autonomous paths with real constraints and confirm they generate correctly.",
 	"subdir": "modules/choreo-intro",
 	"kind": "robot",

@@ -1,6 +1,15 @@
 # Variables
 
-Background: [Variables and Datatypes](https://frc-team-4143.github.io/docs/software/java/vars-dt).
+:::tip[Read this first: Variables and Datatypes]
+
+The team docs page for this lesson is the best place to learn the ideas
+before you write any code: [Variables and
+Datatypes](https://frc-team-4143.github.io/docs/software/java/vars-dt) -
+Declaring a Variable, Assigning a Variable, Datatypes, Enums, and Constants – every section maps to something you'll write below. Come back here when
+you're ready to apply it. If a step below feels unfamiliar, that page is
+where to look first.
+
+:::
 
 All the code lives in `src/Main.java`. Click **Run** any time to see your
 output printed to the terminal.
@@ -37,48 +46,46 @@ it later. Constants are also named differently from regular variables, in
 public static final double MAX_SPEED = 5.0;
 ```
 
-## Contract
+## What you need to do
 
-Inside `main`, declare four local variables — name them whatever you like —
-and print each one with `System.out.println` so your output matches this
-table exactly (the checkpoint reads what gets printed, not your variable
-names):
+1. **Store four facts in local variables.** Inside `main`, declare one
+   variable for each row below, choosing the datatype shown, and declare and
+   assign on the same line. Name them whatever you like - the checkpoint
+   reads what gets printed, not your variable names.
 
-| Datatype | Value | Printed key |
-| --- | --- | --- |
-| `int` | `4143` | `Team number` |
-| `double` | `3.14` | `Pi` |
-| `boolean` | `true` | `Robot is on` |
-| `String` | `"I am a string!"` | `Message` |
+   | Datatype | Value | Printed key |
+   | --- | --- | --- |
+   | `int` | `4143` | `Team number` |
+   | `double` | `3.14` | `Pi` |
+   | `boolean` | `true` | `Robot is on` |
+   | `String` | `"I am a string!"` | `Message` |
 
-For example, the `int` row means: declare an `int` set to `4143`, then print
-`System.out.println("Team number: " + yourVariableName);`. Do the same for
-the other three rows.
+2. **Print each one** with `System.out.println`, as the key, a colon, one
+   space, then the value - e.g.
+   `System.out.println("Team number: " + yourVariableName);`.
 
-:::warning[Match the printed format exactly]
+   :::warning[Match the printed format exactly]
 
-The checkpoint looks for the exact text `key: value` — the printed key, a
-colon, one space, then the value. `Team number:4143` (missing the space) or
-`team number: 4143` (wrong capitalization) won't match, even though they
-print basically the same information.
+   The checkpoint looks for the exact text `key: value`. `Team number:4143`
+   (missing the space) or `team number: 4143` (wrong capitalization) won't
+   match, even though they print basically the same information.
 
-:::
+   :::
 
-The constants and enums below are different — the checkpoints look these up
-by name via reflection, so fill them in exactly as named:
+3. **Add four named values to the `Main` class itself**, outside of `main`.
+   The checkpoints look these up by name via reflection, so use exactly
+   these names. Team standard: constants and enums are `final` /
+   `SCREAMING_SNAKE_CASE`.
+   - `String TEAM_NAME` - a `public static final` constant equal to
+     `"Team 4143"`.
+   - `double MAX_SPEED` - a `public static final` constant equal to `5.0`.
+   - An `enum` named `ALLIANCE` with values `RED` and `BLUE`.
+   - An `enum` named `MATCH_PERIOD` with values `AUTONOMOUS`, `TELEOP`, and
+     `ENDGAME`.
 
-- `String TEAM_NAME` — a `public static final` constant equal to
-  `"Team 4143"`. Team standard: constants are `SCREAMING_SNAKE_CASE` and
-  `final`.
-- An `enum` named `ALLIANCE` with two values, `RED` and `BLUE`. Define it
-  as a nested type inside the `Main` class, not as its own top-level type -
-  it's only used by `Main`, so it belongs in `Main`. Team standard: enum
-  names *and* their values are both `SCREAMING_SNAKE_CASE`.
-- An `enum` named `MATCH_PERIOD` with three values, `AUTONOMOUS`, `TELEOP`,
-  and `ENDGAME`. Same rules as `ALLIANCE`: nested inside `Main`,
-  `SCREAMING_SNAKE_CASE` name and values.
-- `double MAX_SPEED` — a `public static final` constant equal to `5.0`.
-  Team standard: constants are `SCREAMING_SNAKE_CASE` and `final`.
+   Define both enums as nested types inside `Main`, not as their own
+   top-level types - they're only used by `Main`, so they belong there.
+4. **Run it** and compare your output against the table, then verify.
 
 ## Checking your work
 
