@@ -13,7 +13,7 @@ brushless motors, read their sensors and simulate the robot, so you never progra
 directly. Instead you tell the drivetrain what you want.
 
 - `Robot.java` is **your code**. Everything you write goes in `teleopPeriodic()`.
-- `Constants.java` lists the robot's motors and measurements.
+- `Constants.java` lists the robot's motors (one on each side) and measurements.
 - The drivetrain is the `drive` object in `Robot.java`. The one thing you need from it is
   `drive.setDutyCycles(left, right)`.
 - The controller is the `controller` object. It can tell you how far each stick is pushed.
@@ -74,8 +74,8 @@ A suggested pace that adds up to the 3 hour session. Take short breaks whenever 
 | 15 | Read "Java you will learn" and try the examples out loud |
 | 35 | Step 1: tank drive |
 | 40 | Step 2: arcade drive |
-| 25 | Step 3: followers, then compare acceleration in AdvantageScope |
-| 15 | Verify |
+| 25 | Look at the AdvantageScope graphs while you drive: what do the left and right outputs do when you turn? |
+| 15 | Step 3: Verify |
 | 30 | Bonus challenges (do these after Verify) |
 
 Go slower on anything that is new. Finishing every bonus is not expected.
@@ -101,11 +101,7 @@ Everything here is code **you write** in `teleopPeriodic()`. Run it after each s
    Run it. **W** drives forward, **S** drives backward, and **Arrow Left / Right** spin the robot in
    place. If it turns the wrong way, check your signs. (The motors cap at `-1.0` to `1.0`, so very big
    sticks will clip.)
-3. **Add a follower to each side.** Open `Constants.java`. Each side has one motor, but a real
-   drivetrain has two per side. Add a second motor to each list, as the `TODO` describes. A follower
-   copies its leader, so nothing in `Robot.java` changes. In AdvantageScope the robot should now
-   accelerate faster, because there is twice the power.
-4. **Click Verify** to check your work.
+3. **Click Verify** to check your work.
 
 ## Bonus challenges
 
@@ -121,5 +117,4 @@ Everything here is code **you write** in `teleopPeriodic()`. Run it after each s
 - **Differential drive:** a drivetrain with a left side and a right side, steered by running the
   sides at different speeds.
 - **Duty cycle:** how much of the battery voltage the motor gets, from `-1.0` to `1.0`.
-- **Leader / follower:** one motor controller makes the decisions and the others copy it.
 - **Method / variable / operator:** see the Java section above.

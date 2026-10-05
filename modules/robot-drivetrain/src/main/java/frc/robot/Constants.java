@@ -18,15 +18,11 @@ public final class Constants {
       Units.inchesToMeters(24.0); // left to right wheels
   public static final double ROBOT_MASS_KG = 50.0;
 
-  // Each drive motor is a brushless Kraken X60.
-  //
-  // The FIRST motor in a list is the "leader". Any motors after it are "followers": they copy the
-  // leader exactly, so one side of the robot can use two motors but you only command it once.
-  //
-  // TODO: give each side a follower. Add a second motor to each list (left: id 2, right: id 4).
-  // The right side's motors are mounted backwards, so they use "true" for inverted.
+  // Each side of the drivetrain has one brushless Kraken X60. A side is a List of motors, so a
+  // robot
+  // with more motors per side could simply add to its list.
   public static final List<MotorConfig> LEFT_MOTORS = List.of(motor(1, false));
-  public static final List<MotorConfig> RIGHT_MOTORS = List.of(motor(3, true));
+  public static final List<MotorConfig> RIGHT_MOTORS = List.of(motor(2, true));
 
   /** Builds the settings for one drive motor: its CAN id and whether it spins backwards. */
   private static MotorConfig motor(int canId, boolean inverted) {

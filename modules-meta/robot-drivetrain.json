@@ -1,6 +1,6 @@
 {
 	"title": "Motors and Drivetrains",
-	"description": "Drive a differential drive robot in simulation with MWLib. Learn your first Java (methods, variables, operators) while writing tank drive, arcade drive and followers.",
+	"description": "Drive a differential drive robot in simulation with MWLib. Learn your first Java (methods, variables, operators) while writing tank drive and arcade drive.",
 	"subdir": "modules/robot-drivetrain",
 	"kind": "robot",
 	"requires": [
@@ -50,15 +50,6 @@
 				"check": "range",
 				"min": 1.5,
 				"max": 2.0
-			}
-		},
-		{
-			"id": "followers",
-			"title": "Leader and follower",
-			"description": "Each side of the drivetrain has two motors in Constants.java.",
-			"verifier": {
-				"type": "script",
-				"path": "checkpoints/robot-drivetrain/verify/followers.sh"
 			}
 		}
 	]

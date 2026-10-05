@@ -135,12 +135,8 @@ describe("FRC Robot track manifest", () => {
 });
 
 describe.skipIf(!hasJdk)("FRC Robot script checkpoints", () => {
-	test("robot-drivetrain: followers and teleop-code fail fresh, pass once solved", async () => {
-		await expectRoundTrip(
-			"robot-drivetrain",
-			["followers", "teleop-code"],
-			["Constants.java", "Robot.java"],
-		);
+	test("robot-drivetrain: teleop-code fails fresh, passes once solved", async () => {
+		await expectRoundTrip("robot-drivetrain", ["teleop-code"], ["Robot.java"]);
 	}, 30_000);
 
 	test("robot-sensors: deadband fails fresh, passes once the constant and ifs are written", async () => {
