@@ -1,0 +1,32 @@
+{
+	"about": {
+		"never": "This lesson makes sure everything works: you run a tiny Java program that prints **Hello, World!**. Every programmer's first program does exactly this.",
+		"bit": "A first Java program: run it and make sure it prints Hello, World!",
+		"lot": "Smoke test: run `Main` and check it prints `Hello, World!` exactly."
+	},
+	"checkpoints": {
+		"prints-hello-world": {
+			"why": {
+				"never": "The checker runs your program and looks for the exact words `Hello, World!`, with the comma and the exclamation mark.",
+				"lot": "Output must be exactly `Hello, World!`."
+			},
+			"guide": "hello-world-first-program",
+			"hints": [
+				{
+					"never": "Open `src/Main.java`. The line with `System.out.println` is the one that prints.",
+					"bit": "Look at the `System.out.println` line in `Main.java`.",
+					"lot": "Check the string literal in `Main.java`."
+				},
+				{
+					"never": "Between the quote marks it should say exactly `Hello, World!`: capital H, capital W, a comma, a space, and an exclamation mark.",
+					"bit": "It must be exactly `Hello, World!`, punctuation included.",
+					"lot": "Case and punctuation matter."
+				},
+				{
+					"never": "Make the line `System.out.println(\"Hello, World!\");`, save with **Ctrl+S**, click **Run** (▷), then **Verify**.",
+					"bit": "`System.out.println(\"Hello, World!\");` then save, Run, Verify."
+				}
+			]
+		}
+	}
+}
