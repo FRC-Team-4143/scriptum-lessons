@@ -40,6 +40,12 @@
 			"open": [
 				"editor"
 			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
 			"target": {
 				"pane": "editor"
 			},
@@ -50,7 +56,8 @@
 					"selector": ".tabs-container .tab",
 					"text": "ShooterCommands.java"
 				},
-				"hint": "open ShooterCommands.java with Ctrl+P."
+				"hint": "open ShooterCommands.java with Ctrl+P.",
+				"skipIfDone": true
 			}
 		},
 		{
@@ -66,7 +73,8 @@
 					"selector": ".view-lines .view-line",
 					"text": "public static Command shoot"
 				},
-				"hint": "find Command shoot with Ctrl+F."
+				"hint": "find Command shoot with Ctrl+F.",
+				"skipIfDone": true
 			}
 		},
 		{

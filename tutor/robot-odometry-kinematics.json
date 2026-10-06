@@ -27,6 +27,12 @@
 			"open": [
 				"editor"
 			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
 			"target": {
 				"pane": "editor"
 			},
@@ -37,7 +43,8 @@
 					"selector": ".tabs-container .tab",
 					"text": "DifferentialDriveMech.java"
 				},
-				"hint": "open DifferentialDriveMech.java with Ctrl+P."
+				"hint": "open DifferentialDriveMech.java with Ctrl+P.",
+				"skipIfDone": true
 			}
 		},
 		{

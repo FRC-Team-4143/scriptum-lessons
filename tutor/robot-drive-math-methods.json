@@ -31,6 +31,12 @@
 			"open": [
 				"editor"
 			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
 			"target": {
 				"pane": "editor"
 			},
@@ -41,7 +47,25 @@
 					"selector": ".tabs-container .tab",
 					"text": "DriveMath.java"
 				},
-				"hint": "open DriveMath.java with Ctrl+P."
+				"hint": "open DriveMath.java with Ctrl+P.",
+				"skipIfDone": true
+			}
+		},
+		{
+			"title": "Find it",
+			"say": "It may be further down. Press **Ctrl+F**, type `public static double rotationsToMeters` and press Enter to jump to it.",
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "public static double rotationsToMeters"
+				},
+				"hint": "find public static double rotationsToMeters with Ctrl+F.",
+				"skipIfDone": true
 			}
 		},
 		{
@@ -67,7 +91,8 @@
 					"selector": ".view-lines .view-line",
 					"text": "public static double linearSpeed"
 				},
-				"hint": "find linearSpeed with Ctrl+F."
+				"hint": "find linearSpeed with Ctrl+F.",
+				"skipIfDone": true
 			}
 		},
 		{

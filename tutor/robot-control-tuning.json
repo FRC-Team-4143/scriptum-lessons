@@ -23,6 +23,12 @@
 			"open": [
 				"editor"
 			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
 			"target": {
 				"pane": "editor"
 			},
@@ -33,7 +39,8 @@
 					"selector": ".tabs-container .tab",
 					"text": "ShooterConstants.java"
 				},
-				"hint": "open ShooterConstants.java with Ctrl+P."
+				"hint": "open ShooterConstants.java with Ctrl+P.",
+				"skipIfDone": true
 			}
 		},
 		{

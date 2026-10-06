@@ -6,6 +6,12 @@
 			"open": [
 				"editor"
 			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
 			"target": {
 				"pane": "editor"
 			},
@@ -16,7 +22,8 @@
 					"selector": ".tabs-container .tab",
 					"text": "Robot.java"
 				},
-				"hint": "open Robot.java with Ctrl+P."
+				"hint": "open Robot.java with Ctrl+P.",
+				"skipIfDone": true
 			}
 		},
 		{
@@ -32,7 +39,8 @@
 					"selector": ".view-lines .view-line",
 					"text": "public void teleopPeriodic"
 				},
-				"hint": "find teleopPeriodic with Ctrl+F."
+				"hint": "find teleopPeriodic with Ctrl+F.",
+				"skipIfDone": true
 			}
 		},
 		{

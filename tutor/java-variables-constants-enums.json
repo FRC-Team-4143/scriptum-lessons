@@ -65,6 +65,12 @@
 			"open": [
 				"editor"
 			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
 			"target": {
 				"pane": "editor"
 			},
@@ -75,7 +81,25 @@
 					"selector": ".tabs-container .tab",
 					"text": "Main.java"
 				},
-				"hint": "open Main.java with Ctrl+P."
+				"hint": "open Main.java with Ctrl+P.",
+				"skipIfDone": true
+			}
+		},
+		{
+			"title": "Find it",
+			"say": "It may be further down. Press **Ctrl+F**, type `TEAM_NAME =` and press Enter to jump to it.",
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "TEAM_NAME ="
+				},
+				"hint": "find TEAM_NAME = with Ctrl+F.",
+				"skipIfDone": true
 			}
 		},
 		{
@@ -87,6 +111,23 @@
 				"text": "TEAM_NAME ="
 			},
 			"cardAt": "bottom-right"
+		},
+		{
+			"title": "Find it",
+			"say": "It may be further down. Press **Ctrl+F**, type `define an enum named ALLIANCE` and press Enter to jump to it.",
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "define an enum named ALLIANCE"
+				},
+				"hint": "find define an enum named ALLIANCE with Ctrl+F.",
+				"skipIfDone": true
+			}
 		},
 		{
 			"title": "Your enum goes here",

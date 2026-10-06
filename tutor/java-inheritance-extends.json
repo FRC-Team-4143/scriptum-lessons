@@ -53,6 +53,12 @@
 			"open": [
 				"editor"
 			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
 			"target": {
 				"pane": "editor"
 			},
@@ -63,7 +69,25 @@
 					"selector": ".tabs-container .tab",
 					"text": "SavingsAccount.java"
 				},
-				"hint": "open SavingsAccount.java with Ctrl+P."
+				"hint": "open SavingsAccount.java with Ctrl+P.",
+				"skipIfDone": true
+			}
+		},
+		{
+			"title": "Find it",
+			"say": "It may be further down. Press **Ctrl+F**, type `public class SavingsAccount` and press Enter to jump to it.",
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "public class SavingsAccount"
+				},
+				"hint": "find public class SavingsAccount with Ctrl+F.",
+				"skipIfDone": true
 			}
 		},
 		{

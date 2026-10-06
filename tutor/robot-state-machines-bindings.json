@@ -23,6 +23,12 @@
 			"open": [
 				"editor"
 			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
 			"target": {
 				"pane": "editor"
 			},
@@ -33,7 +39,8 @@
 					"selector": ".tabs-container .tab",
 					"text": "OI.java"
 				},
-				"hint": "open OI.java with Ctrl+P."
+				"hint": "open OI.java with Ctrl+P.",
+				"skipIfDone": true
 			}
 		},
 		{
@@ -49,7 +56,8 @@
 					"selector": ".view-lines .view-line",
 					"text": "bind the right bumper"
 				},
-				"hint": "find configureBindings with Ctrl+F."
+				"hint": "find configureBindings with Ctrl+F.",
+				"skipIfDone": true
 			}
 		},
 		{

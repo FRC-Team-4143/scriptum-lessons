@@ -10,6 +10,12 @@
 			"open": [
 				"editor"
 			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
 			"target": {
 				"pane": "editor"
 			},
@@ -20,7 +26,8 @@
 					"selector": ".tabs-container .tab",
 					"text": "Main.java"
 				},
-				"hint": "open Main.java with Ctrl+P."
+				"hint": "open Main.java with Ctrl+P.",
+				"skipIfDone": true
 			}
 		},
 		{

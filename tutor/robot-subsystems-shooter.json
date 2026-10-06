@@ -6,6 +6,12 @@
 			"open": [
 				"editor"
 			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
 			"target": {
 				"pane": "editor"
 			},
@@ -16,7 +22,8 @@
 					"selector": ".tabs-container .tab",
 					"text": "ShooterConstants.java"
 				},
-				"hint": "open ShooterConstants.java with Ctrl+P."
+				"hint": "open ShooterConstants.java with Ctrl+P.",
+				"skipIfDone": true
 			}
 		},
 		{
@@ -32,7 +39,8 @@
 					"selector": ".view-lines .view-line",
 					"text": "create ROLLER_MOTOR_CONFIG"
 				},
-				"hint": "find ROLLER_MOTOR_CONFIG with Ctrl+F."
+				"hint": "find ROLLER_MOTOR_CONFIG with Ctrl+F.",
+				"skipIfDone": true
 			}
 		},
 		{
@@ -51,6 +59,12 @@
 			"open": [
 				"editor"
 			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
 			"target": {
 				"pane": "editor"
 			},
@@ -61,7 +75,8 @@
 					"selector": ".tabs-container .tab",
 					"text": "ShooterSubsystem.java"
 				},
-				"hint": "open ShooterSubsystem.java with Ctrl+P."
+				"hint": "open ShooterSubsystem.java with Ctrl+P.",
+				"skipIfDone": true
 			}
 		},
 		{
@@ -77,7 +92,8 @@
 					"selector": ".view-lines .view-line",
 					"text": "create the roller the same way"
 				},
-				"hint": "find RollerMech with Ctrl+F."
+				"hint": "find RollerMech with Ctrl+F.",
+				"skipIfDone": true
 			}
 		},
 		{
@@ -109,6 +125,12 @@
 			"open": [
 				"editor"
 			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
 			"target": {
 				"pane": "editor"
 			},
@@ -119,7 +141,25 @@
 					"selector": ".tabs-container .tab",
 					"text": "RobotContainer.java"
 				},
-				"hint": "open RobotContainer.java with Ctrl+P."
+				"hint": "open RobotContainer.java with Ctrl+P.",
+				"skipIfDone": true
+			}
+		},
+		{
+			"title": "Find it",
+			"say": "It may be further down. Press **Ctrl+F**, type `register the ShooterSubsystem` and press Enter to jump to it.",
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "register the ShooterSubsystem"
+				},
+				"hint": "find register the ShooterSubsystem with Ctrl+F.",
+				"skipIfDone": true
 			}
 		},
 		{

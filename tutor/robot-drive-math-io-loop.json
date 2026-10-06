@@ -31,6 +31,12 @@
 			"open": [
 				"editor"
 			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
 			"target": {
 				"pane": "editor"
 			},
@@ -41,7 +47,8 @@
 					"selector": ".tabs-container .tab",
 					"text": "DifferentialDriveMech.java"
 				},
-				"hint": "open DifferentialDriveMech.java with Ctrl+P."
+				"hint": "open DifferentialDriveMech.java with Ctrl+P.",
+				"skipIfDone": true
 			}
 		},
 		{
@@ -57,7 +64,8 @@
 					"selector": ".view-lines .view-line",
 					"text": "public void readInputs"
 				},
-				"hint": "find readInputs with Ctrl+F."
+				"hint": "find readInputs with Ctrl+F.",
+				"skipIfDone": true
 			}
 		},
 		{

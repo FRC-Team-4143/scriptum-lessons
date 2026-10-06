@@ -6,6 +6,12 @@
 			"open": [
 				"editor"
 			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
 			"target": {
 				"pane": "editor"
 			},
@@ -16,7 +22,25 @@
 					"selector": ".tabs-container .tab",
 					"text": "Main.java"
 				},
-				"hint": "open Main.java with Ctrl+P."
+				"hint": "open Main.java with Ctrl+P.",
+				"skipIfDone": true
+			}
+		},
+		{
+			"title": "Find it",
+			"say": "It may be further down. Press **Ctrl+F**, type `public class Main` and press Enter to jump to it.",
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "public class Main"
+				},
+				"hint": "find public class Main with Ctrl+F.",
+				"skipIfDone": true
 			}
 		},
 		{
@@ -30,6 +54,23 @@
 			"cardAt": "bottom-right"
 		},
 		{
+			"title": "Find it",
+			"say": "It may be further down. Press **Ctrl+F**, type `public static void main` and press Enter to jump to it.",
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "public static void main"
+				},
+				"hint": "find public static void main with Ctrl+F.",
+				"skipIfDone": true
+			}
+		},
+		{
 			"title": "Where it starts",
 			"say": "`main` is the method Java runs first. Copy this line exactly in every program for now; you'll learn what each word means in the Methods lesson.",
 			"target": {
@@ -38,6 +79,23 @@
 				"text": "public static void main"
 			},
 			"cardAt": "bottom-right"
+		},
+		{
+			"title": "Find it",
+			"say": "It may be further down. Press **Ctrl+F**, type `System.out.println` and press Enter to jump to it.",
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "System.out.println"
+				},
+				"hint": "find System.out.println with Ctrl+F.",
+				"skipIfDone": true
+			}
 		},
 		{
 			"title": "Printing",

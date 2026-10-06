@@ -39,6 +39,7 @@ type Step = {
 		more?: boolean;
 		atLeast?: number;
 		gone?: boolean;
+		skipIfDone?: boolean;
 	};
 };
 
@@ -153,6 +154,7 @@ describe.each(index.concepts.map((c) => c.id))("tutor/%s.json", (id) => {
 					checkTarget(`${where} waitFor`, target);
 				}
 				expect([more, gone, atLeast !== undefined].filter(Boolean).length, `${where}: one of more/atLeast/gone`).toBeLessThanOrEqual(1);
+				if (step.waitFor.skipIfDone) expect(target, `${where}: skipIfDone needs a target`).toBeDefined();
 			}
 			if (step.board) {
 				expect(["java", "shell", "text", undefined]).toContain(step.board.language);

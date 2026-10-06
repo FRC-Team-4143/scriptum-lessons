@@ -44,6 +44,12 @@
 			"open": [
 				"editor"
 			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
 			"target": {
 				"pane": "editor"
 			},
@@ -54,7 +60,8 @@
 					"selector": ".tabs-container .tab",
 					"text": "Robot.java"
 				},
-				"hint": "open Robot.java with Ctrl+P."
+				"hint": "open Robot.java with Ctrl+P.",
+				"skipIfDone": true
 			}
 		},
 		{
@@ -70,7 +77,8 @@
 					"selector": ".view-lines .view-line",
 					"text": "STEP 4: DEADBAND"
 				},
-				"hint": "find DEADBAND with Ctrl+F."
+				"hint": "find DEADBAND with Ctrl+F.",
+				"skipIfDone": true
 			}
 		},
 		{

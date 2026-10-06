@@ -40,6 +40,12 @@
 			"open": [
 				"editor"
 			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
 			"target": {
 				"pane": "editor"
 			},
@@ -50,7 +56,8 @@
 					"selector": ".tabs-container .tab",
 					"text": "ShooterSubsystem.java"
 				},
-				"hint": "open ShooterSubsystem.java with Ctrl+P."
+				"hint": "open ShooterSubsystem.java with Ctrl+P.",
+				"skipIfDone": true
 			}
 		},
 		{

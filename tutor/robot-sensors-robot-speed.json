@@ -37,6 +37,12 @@
 			"open": [
 				"editor"
 			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
 			"target": {
 				"pane": "editor"
 			},
@@ -47,7 +53,8 @@
 					"selector": ".tabs-container .tab",
 					"text": "Robot.java"
 				},
-				"hint": "open Robot.java with Ctrl+P."
+				"hint": "open Robot.java with Ctrl+P.",
+				"skipIfDone": true
 			}
 		},
 		{
@@ -63,7 +70,8 @@
 					"selector": ".view-lines .view-line",
 					"text": "STEP 2: describe the whole robot"
 				},
-				"hint": "find STEP 2 with Ctrl+F."
+				"hint": "find STEP 2 with Ctrl+F.",
+				"skipIfDone": true
 			}
 		},
 		{

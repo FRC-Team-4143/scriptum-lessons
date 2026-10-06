@@ -45,6 +45,12 @@
 			"open": [
 				"editor"
 			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
 			"target": {
 				"pane": "editor"
 			},
@@ -55,7 +61,25 @@
 					"selector": ".tabs-container .tab",
 					"text": "Main.java"
 				},
-				"hint": "open Main.java with Ctrl+P."
+				"hint": "open Main.java with Ctrl+P.",
+				"skipIfDone": true
+			}
+		},
+		{
+			"title": "Find it",
+			"say": "It may be further down. Press **Ctrl+F**, type `public static int sumTo` and press Enter to jump to it.",
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "public static int sumTo"
+				},
+				"hint": "find public static int sumTo with Ctrl+F.",
+				"skipIfDone": true
 			}
 		},
 		{

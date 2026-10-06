@@ -40,6 +40,12 @@
 			"open": [
 				"editor"
 			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
 			"target": {
 				"pane": "editor"
 			},
@@ -50,7 +56,8 @@
 					"selector": ".tabs-container .tab",
 					"text": "Main.java"
 				},
-				"hint": "open Main.java with Ctrl+P."
+				"hint": "open Main.java with Ctrl+P.",
+				"skipIfDone": true
 			}
 		},
 		{
@@ -66,7 +73,8 @@
 					"selector": ".view-lines .view-line",
 					"text": "try your methods out here"
 				},
-				"hint": "find try your methods with Ctrl+F."
+				"hint": "find try your methods with Ctrl+F.",
+				"skipIfDone": true
 			}
 		},
 		{

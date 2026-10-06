@@ -40,6 +40,12 @@
 			"open": [
 				"editor"
 			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
 			"target": {
 				"pane": "editor"
 			},
@@ -50,7 +56,8 @@
 					"selector": ".tabs-container .tab",
 					"text": "Autos.java"
 				},
-				"hint": "open Autos.java with Ctrl+P."
+				"hint": "open Autos.java with Ctrl+P.",
+				"skipIfDone": true
 			}
 		},
 		{
@@ -66,7 +73,8 @@
 					"selector": ".view-lines .view-line",
 					"text": "public static Command leftAuto"
 				},
-				"hint": "find leftAuto with Ctrl+F."
+				"hint": "find leftAuto with Ctrl+F.",
+				"skipIfDone": true
 			}
 		},
 		{
@@ -85,6 +93,12 @@
 			"open": [
 				"editor"
 			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
 			"target": {
 				"pane": "editor"
 			},
@@ -95,7 +109,8 @@
 					"selector": ".tabs-container .tab",
 					"text": "RobotContainer.java"
 				},
-				"hint": "open RobotContainer.java with Ctrl+P."
+				"hint": "open RobotContainer.java with Ctrl+P.",
+				"skipIfDone": true
 			}
 		},
 		{
@@ -111,7 +126,8 @@
 					"selector": ".view-lines .view-line",
 					"text": "add the autos to the chooser"
 				},
-				"hint": "find addOption with Ctrl+F."
+				"hint": "find addOption with Ctrl+F.",
+				"skipIfDone": true
 			}
 		},
 		{

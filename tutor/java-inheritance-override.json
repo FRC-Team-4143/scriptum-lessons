@@ -36,6 +36,12 @@
 			"open": [
 				"editor"
 			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
 			"target": {
 				"pane": "editor"
 			},
@@ -46,7 +52,25 @@
 					"selector": ".tabs-container .tab",
 					"text": "CheckingAccount.java"
 				},
-				"hint": "open CheckingAccount.java with Ctrl+P."
+				"hint": "open CheckingAccount.java with Ctrl+P.",
+				"skipIfDone": true
+			}
+		},
+		{
+			"title": "Find it",
+			"say": "It may be further down. Press **Ctrl+F**, type `public class CheckingAccount` and press Enter to jump to it.",
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "public class CheckingAccount"
+				},
+				"hint": "find public class CheckingAccount with Ctrl+F.",
+				"skipIfDone": true
 			}
 		},
 		{

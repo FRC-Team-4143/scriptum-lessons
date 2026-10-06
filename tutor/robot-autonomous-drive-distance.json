@@ -40,6 +40,12 @@
 			"open": [
 				"editor"
 			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
 			"target": {
 				"pane": "editor"
 			},
@@ -50,7 +56,8 @@
 					"selector": ".tabs-container .tab",
 					"text": "DriveDistanceCommand.java"
 				},
-				"hint": "open DriveDistanceCommand.java with Ctrl+P."
+				"hint": "open DriveDistanceCommand.java with Ctrl+P.",
+				"skipIfDone": true
 			}
 		},
 		{
@@ -66,7 +73,8 @@
 					"selector": ".view-lines .view-line",
 					"text": "remember where the robot is right now"
 				},
-				"hint": "find initialize with Ctrl+F."
+				"hint": "find initialize with Ctrl+F.",
+				"skipIfDone": true
 			}
 		},
 		{

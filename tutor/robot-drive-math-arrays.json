@@ -53,6 +53,12 @@
 			"open": [
 				"editor"
 			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
 			"target": {
 				"pane": "editor"
 			},
@@ -63,7 +69,8 @@
 					"selector": ".tabs-container .tab",
 					"text": "DriveMath.java"
 				},
-				"hint": "open DriveMath.java with Ctrl+P."
+				"hint": "open DriveMath.java with Ctrl+P.",
+				"skipIfDone": true
 			}
 		},
 		{
@@ -79,7 +86,8 @@
 					"selector": ".view-lines .view-line",
 					"text": "public static double[] arcadeToWheelSpeeds"
 				},
-				"hint": "find arcadeToWheelSpeeds with Ctrl+F."
+				"hint": "find arcadeToWheelSpeeds with Ctrl+F.",
+				"skipIfDone": true
 			}
 		},
 		{
