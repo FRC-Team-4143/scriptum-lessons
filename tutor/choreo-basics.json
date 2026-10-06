@@ -54,12 +54,12 @@
 		},
 		{
 			"title": "Add a constraint",
-			"say": "Constraints are rules the path has to obey. Pick **Max Velocity**, then click a waypoint to cap the speed there (or drag between two to cover the stretch between them).",
+			"say": "Constraints are rules the path has to obey. Pick **Max Velocity** in the toolbar, then click the waypoint where the limit starts and the one where it ends (click the same one twice to limit just that point). It shows up in the list as **Max Velo**.",
 			"target": { "pane": "choreo", "selector": "[aria-label='Max Velocity']" },
 			"waitFor": {
-				"target": { "pane": "choreo", "selector": "[class*='_SidebarLabel_']", "text": "Max Velocity" },
+				"target": { "pane": "choreo", "selector": "[class*='_SidebarLabel_']", "text": "Max Velo" },
 				"more": true,
-				"hint": "pick Max Velocity and click a waypoint."
+				"hint": "pick Max Velocity, then click a start and an end waypoint."
 			}
 		},
 		{
