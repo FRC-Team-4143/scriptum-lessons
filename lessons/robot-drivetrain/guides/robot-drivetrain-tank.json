@@ -1,0 +1,142 @@
+{
+	"title": "Tank drive",
+	"summary": "One stick per side: your first driving code.",
+	"topic": "Robot",
+	"order": 388,
+	"steps": [
+		{
+			"title": "Tank drive",
+			"say": "Like a tank: the left stick runs the left side, the right stick runs the right side.",
+			"board": {
+				"code": "double leftSpeed = -controller.getLeftY();\ndouble rightSpeed = -controller.getRightY();\ndrive.setDutyCycles(leftSpeed, rightSpeed);",
+				"marks": [
+					{
+						"text": "double leftSpeed",
+						"label": "a variable for each side"
+					},
+					{
+						"text": "-controller.getRightY()",
+						"label": "right stick, flipped"
+					},
+					{
+						"text": "drive.setDutyCycles(leftSpeed, rightSpeed);",
+						"label": "send both to the motors"
+					}
+				]
+			}
+		},
+		{
+			"title": "Open Robot.java",
+			"say": "Press **Ctrl+P**, type `Robot` and press Enter. Quick Open finds any file by name, so you never have to dig through folders.",
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "Robot.java"
+				},
+				"hint": "open Robot.java with Ctrl+P.",
+				"skipIfDone": true
+			}
+		},
+		{
+			"title": "Find teleopPeriodic",
+			"say": "Find where it goes. Press **Ctrl+F**, type `teleopPeriodic` and press Enter to jump to it.",
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "public void teleopPeriodic"
+				},
+				"hint": "find teleopPeriodic with Ctrl+F.",
+				"skipIfDone": true
+			}
+		},
+		{
+			"title": "Type it here",
+			"say": "Write those three lines inside `teleopPeriodic()`, between its braces.",
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "public void teleopPeriodic"
+			},
+			"cardAt": "bottom-right"
+		},
+		{
+			"title": "Start the robot",
+			"say": "Your code only runs once it's built and started.",
+			"target": {
+				"selector": "[data-tour='sim-controls']"
+			},
+			"waitFor": {
+				"target": {
+					"selector": "[data-tour='code-status']",
+					"text": "Running"
+				},
+				"hint": "press Start and wait for Running."
+			}
+		},
+		{
+			"title": "Enable in Teleop",
+			"say": "Pick **Teleop** and press **Enable**. Robot code runs only while it's enabled.",
+			"target": {
+				"selector": "[data-tour='enable']"
+			},
+			"waitFor": {
+				"target": {
+					"selector": "[data-tour='enable'] button",
+					"text": "Enabled"
+				},
+				"hint": "choose Teleop, then Enable."
+			}
+		},
+		{
+			"title": "Drive it",
+			"say": "**W / S** move the left side, **Arrow Up / Down** the right side. Push one forward and one back to spin in place.",
+			"target": {
+				"selector": "[data-tour='mode']"
+			},
+			"cardAt": "top-right"
+		},
+		{
+			"title": "Watch the output",
+			"say": "See what you're sending to the motors. In AdvantageScope, search for `LeftOutput`, then drag **Drive/LeftOutput** onto the **Left Axis**.",
+			"close": [
+				"editor",
+				"preview",
+				"elastic"
+			],
+			"open": [
+				"scope"
+			],
+			"target": {
+				"pane": "scope",
+				"selector": ".line-graph-left.source-list"
+			},
+			"waitFor": {
+				"target": {
+					"pane": "scope",
+					"selector": ".line-graph-left.source-list .key-container",
+					"text": "Drive/LeftOutput"
+				},
+				"hint": "drag Drive/LeftOutput onto the graph."
+			}
+		}
+	]
+}

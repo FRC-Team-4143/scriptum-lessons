@@ -1,0 +1,167 @@
+{
+	"title": "Make a folder and a file",
+	"summary": "Make my-team, put about.txt inside it, and type your first words.",
+	"topic": "Editor",
+	"order": 3,
+	"steps": [
+		{
+			"title": "Open the Explorer",
+			"say": "The **Explorer** lists every file and folder in your project. Click the top icon on the far left to show it. If you can already see it, I'll skip ahead.",
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
+			"target": {
+				"pane": "editor",
+				"selector": ".activitybar .action-label[aria-label^='Explorer']"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".explorer-viewlet .monaco-list-row"
+				},
+				"hint": "click the Explorer icon (the top one).",
+				"skipIfDone": true
+			}
+		},
+		{
+			"title": "The PROJECT bar",
+			"say": "Move your mouse over this dark bar that says **PROJECT**. Little icons pop up on its right: **New File**, **New Folder**, Refresh and Collapse. We'll make a folder first, to keep our team things in.",
+			"target": {
+				"pane": "editor",
+				"selector": ".explorer-viewlet .pane-header[aria-label^='Explorer Section']"
+			},
+			"cardAt": "bottom-right"
+		},
+		{
+			"title": "New Folder",
+			"say": "Hover over the PROJECT bar again and click the **second** icon (a folder with a little plus). A box opens so you can type the folder's name. If nothing happens, click it again.",
+			"target": {
+				"pane": "editor",
+				"selector": ".explorer-viewlet .pane-header[aria-label^='Explorer Section']"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".explorer-viewlet .monaco-inputbox input"
+				},
+				"hint": "click the New Folder icon."
+			}
+		},
+		{
+			"title": "Name it",
+			"say": "Type `my-team` and press **Enter**. Use small letters and a dash instead of a space. Computers like names without spaces.",
+			"target": {
+				"pane": "editor",
+				"selector": ".explorer-viewlet .monaco-inputbox"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".explorer-viewlet .monaco-list-row[aria-label='my-team']"
+				},
+				"hint": "type my-team and press Enter."
+			}
+		},
+		{
+			"title": "Your first folder",
+			"say": "There it is: a folder called **my-team**. The little arrow beside a folder opens it to show what's inside. It's empty for now.",
+			"target": {
+				"pane": "editor",
+				"selector": ".explorer-viewlet .monaco-list-row[aria-label='my-team']"
+			},
+			"cardAt": "bottom-right"
+		},
+		{
+			"title": "Which folder?",
+			"say": "New things are made **inside whichever folder is highlighted**. **my-team** is highlighted right now, so the next thing you make goes inside it. (If it ever isn't, click the folder once first. With nothing picked, new things go in the main project folder.)",
+			"target": {
+				"pane": "editor",
+				"selector": ".explorer-viewlet .monaco-list-row[aria-label='my-team']"
+			},
+			"cardAt": "bottom-right"
+		},
+		{
+			"title": "New File",
+			"say": "Hover over the PROJECT bar and click the **first** icon (a page with a plus). If nothing happens, click it again.",
+			"target": {
+				"pane": "editor",
+				"selector": ".explorer-viewlet .pane-header[aria-label^='Explorer Section']"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".explorer-viewlet .monaco-inputbox input"
+				},
+				"hint": "click the New File icon."
+			}
+		},
+		{
+			"title": "Name the file",
+			"say": "Type `about.txt` and press **Enter**. The `.txt` ending says it's a plain text file.",
+			"target": {
+				"pane": "editor",
+				"selector": ".explorer-viewlet .monaco-inputbox"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "about.txt"
+				},
+				"hint": "type about.txt and press Enter."
+			}
+		},
+		{
+			"title": "Your first file",
+			"say": "The new file opened in a **tab**. It lives inside my-team: the Explorer shows it indented under the folder. Its path is `my-team/about.txt`.",
+			"target": {
+				"pane": "editor",
+				"selector": ".tabs-container .tab",
+				"text": "about.txt"
+			},
+			"cardAt": "bottom-right"
+		},
+		{
+			"title": "Type something",
+			"say": "Click in the big empty space under the tab and type a sentence about our team, like `We build robots.` Press **Enter** to start a new line.",
+			"waitFor": {
+				"hint": "type a sentence in about.txt."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": "[id='workbench.parts.editor']"
+			},
+			"cardAt": "bottom-right"
+		},
+		{
+			"title": "Save it",
+			"say": "Press **Ctrl+S** to **save**. Saving writes your words into the file so they're kept. This editor may also save for you a moment after you stop typing, but press Ctrl+S anyway: it's a good habit.",
+			"waitFor": {
+				"hint": "press Ctrl+S."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": "[id='workbench.parts.editor']"
+			},
+			"cardAt": "bottom-right"
+		},
+		{
+			"title": "Check your work",
+			"say": "That's two of the five jobs. Open the lesson chip and press **Verify**: it checks that `my-team` is a folder and `my-team/about.txt` has words in it.",
+			"target": {
+				"selector": "[data-tour='lesson']"
+			}
+		}
+	]
+}

@@ -1,0 +1,112 @@
+{
+	"title": "Summarizing an array",
+	"summary": "Largest so far, totals, and stopping early.",
+	"topic": "Java",
+	"order": 295,
+	"steps": [
+		{
+			"title": "Largest so far",
+			"say": "Start with the first value, then replace it whenever you find a bigger one.",
+			"board": {
+				"code": "int best = values[0];\nfor (int i = 1; i < values.length; i++) {\n    if (values[i] > best) {\n        best = values[i];\n    }\n}\nreturn best;",
+				"marks": [
+					{
+						"text": "int best = values[0];",
+						"label": "start with the first"
+					},
+					{
+						"text": "values[i] > best",
+						"label": "found a bigger one?"
+					}
+				]
+			}
+		},
+		{
+			"title": "Stop as soon as you know",
+			"say": "`contains` can `return true` the moment it finds the target. It only returns false after checking everything.",
+			"board": {
+				"code": "for (int i = 0; i < values.length; i++) {\n    if (values[i] == target) {\n        return true;\n    }\n}\nreturn false;",
+				"marks": [
+					{
+						"text": "return true;",
+						"label": "found it: done"
+					},
+					{
+						"text": "return false;",
+						"label": "checked them all"
+					}
+				]
+			}
+		},
+		{
+			"title": "Average",
+			"say": "Total the values, then divide. Watch out for integer division!",
+			"board": {
+				"code": "int total = 0;\nfor (int v : values) { total += v; }\nreturn (double) total / values.length;",
+				"marks": [
+					{
+						"text": "for (int v : values)",
+						"label": "a for-each loop: every value, no index"
+					},
+					{
+						"text": "(double) total",
+						"label": "decimal division"
+					}
+				]
+			}
+		},
+		{
+			"title": "Open Main.java",
+			"say": "Press **Ctrl+P**, type `Main` and press Enter. Quick Open finds any file by name, so you never have to dig through folders.",
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "Main.java"
+				},
+				"hint": "open Main.java with Ctrl+P.",
+				"skipIfDone": true
+			}
+		},
+		{
+			"title": "Find it",
+			"say": "It may be further down. Press **Ctrl+F**, type `public static int max` and press Enter to jump to it.",
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "public static int max"
+				},
+				"hint": "find public static int max with Ctrl+F.",
+				"skipIfDone": true
+			}
+		},
+		{
+			"title": "Your turn",
+			"say": "Start with `max`.",
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "public static int max"
+			},
+			"cardAt": "bottom-right"
+		}
+	]
+}

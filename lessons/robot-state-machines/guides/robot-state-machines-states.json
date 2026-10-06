@@ -1,0 +1,76 @@
+{
+	"title": "States and transitions",
+	"summary": "IDLE, SPIN_UP, SHOOT, and the rules between them.",
+	"topic": "Robot",
+	"order": 509,
+	"steps": [
+		{
+			"title": "The machine",
+			"say": "The shooter is always in exactly one state. It can't jump straight to SHOOT: it has to spin up first.",
+			"board": {
+				"code": "        wants SHOOT           at speed\n  IDLE ------------> SPIN_UP ---------> SHOOT\n   ^                   ^                  |\n   |    lets go        |    slows down    |\n   +-------------------+------------------+",
+				"marks": [
+					{
+						"text": "SPIN_UP",
+						"label": "can't feed until it's at speed"
+					},
+					{
+						"text": "slows down",
+						"label": "a launch drops it back"
+					}
+				]
+			}
+		},
+		{
+			"title": "Transitions",
+			"say": "The driver only says what they **want**. The subsystem decides where it's allowed to be.",
+			"board": {
+				"code": "if (wanted == ShooterStates.IDLE) {\n    system_state_ = ShooterStates.IDLE;\n} else if (isAtSpeed()) {\n    system_state_ = ShooterStates.SHOOT;\n} else {\n    system_state_ = ShooterStates.SPIN_UP;\n}",
+				"marks": [
+					{
+						"text": "wanted",
+						"label": "what the driver asked for"
+					},
+					{
+						"text": "isAtSpeed()",
+						"label": "a yes/no method reads like English"
+					}
+				]
+			}
+		},
+		{
+			"title": "Open ShooterSubsystem.java",
+			"say": "Press **Ctrl+P**, type `ShooterSubsystem` and press Enter. Quick Open finds any file by name, so you never have to dig through folders.",
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "ShooterSubsystem.java"
+				},
+				"hint": "open ShooterSubsystem.java with Ctrl+P.",
+				"skipIfDone": true
+			}
+		},
+		{
+			"title": "Find handleStateTransition",
+			"say": "Press **Ctrl+F**, search for `handleStateTransition`, and write the rules from the comment above it.",
+			"waitFor": {
+				"hint": "write the transitions."
+			},
+			"cardAt": "bottom-right"
+		}
+	]
+}

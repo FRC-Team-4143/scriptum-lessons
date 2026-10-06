@@ -1,0 +1,48 @@
+{
+	"title": "Choreo",
+	"description": "Build two different autonomous paths with real constraints and confirm they generate correctly.",
+	"kind": "robot",
+	"track": "Tools",
+	"order": 9,
+	"restrictTools": [
+		"choreo"
+	],
+	"checkpoints": [
+		{
+			"id": "has-waypoints",
+			"title": "Paths have waypoints",
+			"description": "Every path has at least four waypoints.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/has-waypoints.sh"
+			}
+		},
+		{
+			"id": "has-two-distinct-paths",
+			"title": "Two different paths",
+			"description": "At least two paths exist, and they aren't just copies of each other.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/has-two-distinct-paths.sh"
+			}
+		},
+		{
+			"id": "has-constraint",
+			"title": "Path has a constraint",
+			"description": "The path has at least one enabled constraint (Max Velocity, Max Angular Velocity, or Keep In Rectangle).",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/has-constraint.sh"
+			}
+		},
+		{
+			"id": "generates-successfully",
+			"title": "Path generates",
+			"description": "Choreo successfully solves the path into a trajectory.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/generates-successfully.sh"
+			}
+		}
+	]
+}

@@ -1,0 +1,57 @@
+{
+	"title": "Saving and opening layouts",
+	"summary": "File → Save, and getting back to a clean slate.",
+	"topic": "Tools",
+	"order": 141,
+	"steps": [
+		{
+			"title": "Your dashboard is a file",
+			"say": "An Elastic layout is saved as JSON in your project at `src/main/deploy/elastic-layout.json`. The checkpoints read that file.",
+			"target": {
+				"pane": "elastic"
+			},
+			"close": [
+				"editor",
+				"preview",
+				"scope"
+			],
+			"open": [
+				"elastic"
+			]
+		},
+		{
+			"title": "Save",
+			"say": "**File → Save** writes your layout. Do it before every Verify.",
+			"target": {
+				"pane": "elastic",
+				"selector": "flt-semantics[role='button']",
+				"text": "File"
+			},
+			"waitFor": {
+				"hint": "save with File, Save."
+			}
+		},
+		{
+			"title": "An old dashboard?",
+			"say": "Elastic remembers whatever it last had open, separately from this project. If you see a dashboard from another lesson, use **File → Open Layout** (Ctrl+O) and pick `src/main/deploy/elastic-layout.json`.",
+			"target": {
+				"pane": "elastic",
+				"selector": "flt-semantics[role='button']",
+				"text": "File"
+			}
+		},
+		{
+			"title": "Tabs",
+			"say": "Each tab is a page of the dashboard. Teams keep one for **Autonomous** and one for **Teleoperated**, so drivers see only what matters right now.",
+			"target": {
+				"pane": "elastic",
+				"region": {
+					"left": 0,
+					"top": "36px",
+					"right": "110px",
+					"height": "36px"
+				}
+			}
+		}
+	]
+}

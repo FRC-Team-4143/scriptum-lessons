@@ -1,0 +1,86 @@
+{
+	"title": "AdvantageScope",
+	"description": "Configure AdvantageScope's layout to display already-published robot telemetry.",
+	"kind": "robot",
+	"track": "Tools",
+	"order": 7,
+	"restrictTools": [
+		"scope"
+	],
+	"checkpoints": [
+		{
+			"id": "flywheel-graph",
+			"title": "Flywheel line graph",
+			"description": "A Line Graph tab plots FlywheelRPM on its left axis.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/flywheel-graph.sh"
+			}
+		},
+		{
+			"id": "flywheel-axis-scale",
+			"title": "Locked axis scale",
+			"description": "The Line Graph's left Y axis is locked to roughly 0-3000.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/flywheel-axis-scale.sh"
+			}
+		},
+		{
+			"id": "flywheel-rpm-differentiated",
+			"title": "Differentiated flywheel RPM",
+			"description": "FlywheelRPM also plots on the right axis with the Differentiate filter applied.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/flywheel-rpm-differentiated.sh"
+			}
+		},
+		{
+			"id": "game-piece-discrete",
+			"title": "Game piece discrete field",
+			"description": "GamePieceLoaded is added to the Line Graph's discrete field.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/game-piece-discrete.sh"
+			}
+		},
+		{
+			"id": "field2d-figure-eight",
+			"title": "2D field pose",
+			"description": "A 2D Field tab plots RobotPose2d on the Evergreen field.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/field2d-figure-eight.sh"
+			}
+		},
+		{
+			"id": "field3d-figure-eight",
+			"title": "3D field pose",
+			"description": "A 3D Field tab plots RobotPose3d on the Evergreen field, camera set to Orbit Robot.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/field3d-figure-eight.sh"
+			}
+		},
+		{
+			"id": "swerve-tab",
+			"title": "Swerve tab",
+			"description": "A Swerve tab plots module states, chassis speeds, and chassis rotation.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/swerve-tab.sh"
+			}
+		},
+		{
+			"id": "flywheel-target-rpm-tunable",
+			"title": "Tuned flywheel target",
+			"description": "FlywheelTargetRPM was written from AdvantageScope's Tuning Mode.",
+			"verifier": {
+				"type": "nt4-value",
+				"topic": "/AdvantageKit/RealOutputs/FlywheelTargetRPM",
+				"check": "differs-from-default",
+				"expected": 3000
+			}
+		}
+	]
+}

@@ -1,0 +1,117 @@
+{
+	"title": "Widgets that send values",
+	"summary": "Sliders, choosers and toggles that the robot reads.",
+	"topic": "Tools",
+	"order": 140,
+	"steps": [
+		{
+			"title": "The other direction",
+			"say": "So far every widget **showed** a value. These **send** one: you change it in Elastic and the robot code reads it, the same way drivers set things before a match.",
+			"target": {
+				"pane": "elastic"
+			},
+			"close": [
+				"editor",
+				"preview",
+				"scope"
+			],
+			"open": [
+				"elastic"
+			]
+		},
+		{
+			"title": "Start the robot",
+			"say": "Your code only runs once it's built and started.",
+			"target": {
+				"selector": "[data-tour='sim-controls']"
+			},
+			"waitFor": {
+				"target": {
+					"selector": "[data-tour='code-status']",
+					"text": "Running"
+				},
+				"hint": "press Start and wait for Running."
+			}
+		},
+		{
+			"title": "Which widget",
+			"say": "Pick the widget that matches the kind of value.",
+			"board": {
+				"code": "Number Slider         ShooterAngleDegrees   (Min 0, Max 45)\nComboBox Chooser      AutoRoutine\nText Display          AutoDelaySeconds      (Show Submit Button on)\nToggle Button         BrakeModeEnabledButton",
+				"language": "text",
+				"marks": [
+					{
+						"text": "Number Slider",
+						"label": "a number in a range"
+					},
+					{
+						"text": "ComboBox Chooser",
+						"label": "pick one option"
+					},
+					{
+						"text": "Toggle Button",
+						"label": "on or off"
+					}
+				]
+			}
+		},
+		{
+			"title": "Add a slider",
+			"say": "Open **Add Widget**, drag **ShooterAngleDegrees** onto the grid, then right-click it and change its Widget Type to **Number Slider**.",
+			"target": {
+				"pane": "elastic",
+				"selector": "flt-semantics[role='button']",
+				"text": "Add Widget"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"hint": "add ShooterAngleDegrees as a Number Slider."
+			}
+		},
+		{
+			"title": "Set its range",
+			"say": "In Edit Properties, set **Min 0** and **Max 45**.",
+			"target": {
+				"pane": "elastic",
+				"region": {
+					"left": 0,
+					"top": "72px",
+					"right": 0,
+					"bottom": "32px"
+				}
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "elastic",
+					"selector": "flt-semantics[aria-label='Alert']"
+				},
+				"hint": "open Edit Properties on the slider."
+			}
+		},
+		{
+			"title": "Move it",
+			"say": "Close the dialog and drag the slider. The checkpoint watches the **live** value, so you have to actually move it.",
+			"waitFor": {
+				"hint": "drag the slider to a new angle."
+			},
+			"target": {
+				"pane": "elastic"
+			},
+			"cardAt": "bottom-right"
+		},
+		{
+			"title": "Submit button",
+			"say": "For `AutoDelaySeconds`, turn on **Show Submit Button** in its properties. Then it only sends when you press Enter, not on every keystroke."
+		},
+		{
+			"title": "Save",
+			"say": "Elastic doesn't always save right away. Use **File → Save** before you Verify.",
+			"target": {
+				"pane": "elastic",
+				"selector": "flt-semantics[role='button']",
+				"text": "File"
+			}
+		}
+	]
+}

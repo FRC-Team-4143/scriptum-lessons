@@ -1,0 +1,147 @@
+{
+	"title": "The terminal",
+	"summary": "Give the computer instructions by typing. Five commands.",
+	"topic": "Editor",
+	"order": 6,
+	"steps": [
+		{
+			"title": "Open the terminal",
+			"say": "Press **Ctrl+`** (the key just above Tab, on the left). A panel slides up at the bottom: that's the **terminal**. Click somewhere in the editor first, so it hears your keys.",
+			"open": [
+				"editor"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "top-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".terminal-wrapper"
+				},
+				"hint": "press Ctrl+` (the key above Tab).",
+				"skipIfDone": true
+			}
+		},
+		{
+			"title": "Commands",
+			"say": "In the terminal you type a **command** and press **Enter**. The computer does it and tells you the result. Here are five to try. (They're the same files you see in the Explorer. The terminal is just another way to work with them.)",
+			"board": {
+				"code": "pwd\nls\nls my-team\ncat my-team/about.txt\nmkdir practice",
+				"language": "shell",
+				"marks": [
+					{
+						"text": "pwd",
+						"label": "where am I?"
+					},
+					{
+						"text": "ls",
+						"label": "what's in here?"
+					},
+					{
+						"text": "ls my-team",
+						"label": "what's inside the my-team folder?"
+					},
+					{
+						"text": "cat my-team/about.txt",
+						"label": "show the words in a file"
+					},
+					{
+						"text": "mkdir practice",
+						"label": "make a folder called practice"
+					}
+				]
+			}
+		},
+		{
+			"title": "Where am I?",
+			"say": "Click in the terminal, type `pwd` and press **Enter**. It prints the **path** of the folder you're in. That's your project folder.",
+			"target": {
+				"pane": "editor",
+				"selector": "[id='workbench.parts.panel']"
+			},
+			"cardAt": "top-right",
+			"waitFor": {
+				"hint": "type pwd and press Enter."
+			}
+		},
+		{
+			"title": "What's here?",
+			"say": "Type `ls` and press **Enter**. It **l**i**s**ts the files and folders here. They match the Explorer.",
+			"target": {
+				"pane": "editor",
+				"selector": "[id='workbench.parts.panel']"
+			},
+			"cardAt": "top-right",
+			"waitFor": {
+				"hint": "type ls and press Enter."
+			}
+		},
+		{
+			"title": "Look inside a folder",
+			"say": "Type `ls my-team` and press **Enter**. You'll see what's inside the folder you made. (If it says no such file, make my-team with the **Make a folder and a file** guide.)",
+			"target": {
+				"pane": "editor",
+				"selector": "[id='workbench.parts.panel']"
+			},
+			"cardAt": "top-right",
+			"waitFor": {
+				"hint": "type ls my-team and press Enter."
+			}
+		},
+		{
+			"title": "Read a file",
+			"say": "Type `cat my-team/about.txt` and press **Enter**. It shows the words in your file. The path tells it which file.",
+			"target": {
+				"pane": "editor",
+				"selector": "[id='workbench.parts.panel']"
+			},
+			"cardAt": "top-right",
+			"waitFor": {
+				"hint": "type cat my-team/about.txt and press Enter."
+			}
+		},
+		{
+			"title": "Make a folder",
+			"say": "Type `mkdir practice` and press **Enter**. Then watch the Explorer on the left: a new folder appears by itself.",
+			"target": {
+				"pane": "editor",
+				"selector": "[id='workbench.parts.sidebar']"
+			},
+			"cardAt": "top-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".explorer-viewlet .monaco-list-row[aria-label='practice']"
+				},
+				"hint": "type mkdir practice and press Enter."
+			}
+		},
+		{
+			"title": "Tidy up",
+			"say": "Let's remove it again. Type `rmdir practice` and press **Enter**. It disappears from the Explorer.",
+			"target": {
+				"pane": "editor",
+				"selector": "[id='workbench.parts.panel']"
+			},
+			"cardAt": "top-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".explorer-viewlet .monaco-list-row[aria-label='practice']"
+				},
+				"hint": "type rmdir practice and press Enter.",
+				"gone": true
+			}
+		},
+		{
+			"title": "Two handy tricks",
+			"say": "Press the **up arrow** in the terminal to bring back your last command, so you don't have to retype it. And press **Tab** while typing a name to let the terminal finish it for you.",
+			"target": {
+				"pane": "editor",
+				"selector": "[id='workbench.parts.panel']"
+			},
+			"cardAt": "top-right"
+		}
+	]
+}

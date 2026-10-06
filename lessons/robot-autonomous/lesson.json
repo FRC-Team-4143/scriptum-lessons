@@ -1,0 +1,78 @@
+{
+	"title": "Autonomous",
+	"description": "Build Left and Right autonomous routines from drive, turn and shoot commands, and pick them from a chooser.",
+	"kind": "robot",
+	"track": "FRC Robot",
+	"order": 27,
+	"requires": [
+		"robot-state-machines"
+	],
+	"guides": [
+		"build-and-run",
+		"robot-state-machines-commands"
+	],
+	"checkpoints": [
+		{
+			"id": "autos-in-chooser",
+			"title": "Autos in the chooser",
+			"description": "RobotContainer adds the Left Auto, Right Auto and Square Auto to the chooser.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/autos-in-chooser.sh"
+			}
+		},
+		{
+			"id": "square-loop",
+			"title": "Square auto uses a loop",
+			"description": "squareAuto() builds the square with a for loop and a command group.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/square-loop.sh"
+			}
+		},
+		{
+			"id": "left-forward",
+			"title": "Left auto drives forward",
+			"description": "Run Left Auto. The robot should travel more than 6 meters in x.",
+			"verifier": {
+				"type": "nt4-value",
+				"topic": "/AdvantageKit/RealOutputs/Check/Drive/PoseX/Max",
+				"check": "range",
+				"min": 6.0
+			}
+		},
+		{
+			"id": "left-sideways",
+			"title": "Left auto ends to the left",
+			"description": "Run Left Auto. After turning 45 degrees, the robot should be more than 1 meter to the left (positive y).",
+			"verifier": {
+				"type": "nt4-value",
+				"topic": "/AdvantageKit/RealOutputs/Check/Drive/PoseY/Max",
+				"check": "range",
+				"min": 1.0
+			}
+		},
+		{
+			"id": "right-sideways",
+			"title": "Right auto ends to the right",
+			"description": "Run Right Auto. After turning -45 degrees, the robot should be more than 1 meter to the right (negative y).",
+			"verifier": {
+				"type": "nt4-value",
+				"topic": "/AdvantageKit/RealOutputs/Check/Drive/PoseY/Min",
+				"check": "range",
+				"max": -1.0
+			}
+		},
+		{
+			"id": "autos-shoot",
+			"title": "Autos shoot",
+			"description": "Both routines should end by shooting at least once.",
+			"verifier": {
+				"type": "nt4-value",
+				"topic": "/AdvantageKit/RealOutputs/Check/Subsystem/Shooter/ShotCount/Max",
+				"check": "range",
+				"min": 1
+			}
+		}
+	]
+}

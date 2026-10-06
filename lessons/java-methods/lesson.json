@@ -1,0 +1,69 @@
+{
+	"title": "Methods",
+	"description": "Write reusable methods, build new methods on top of them instead of copy-pasting, and practice on a few programming-course classics.",
+	"kind": "plain-java",
+	"track": "Java Programming",
+	"order": 16,
+	"requires": [
+		"java-arrays"
+	],
+	"guides": [
+		"java-methods-edge-cases"
+	],
+	"checkpoints": [
+		{
+			"id": "clamp",
+			"title": "Clamp",
+			"description": "clamp(value, min, max) squeezes value into the [min, max] range.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/clamp.sh"
+			}
+		},
+		{
+			"id": "scale-joystick",
+			"title": "Scale joystick",
+			"description": "scaleJoystick(rawInput, sensitivity) scales and clamps, reusing clamp.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/scale-joystick.sh"
+			}
+		},
+		{
+			"id": "is-prime",
+			"title": "Is prime",
+			"description": "isPrime(n) returns whether n is a prime number.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/is-prime.sh"
+			}
+		},
+		{
+			"id": "factorial",
+			"title": "Factorial",
+			"description": "factorial(n) returns n!.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/factorial.sh"
+			}
+		},
+		{
+			"id": "reverse-string",
+			"title": "Reverse a string",
+			"description": "reverseString(s) returns a new String with s reversed.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/reverse-string.sh"
+			}
+		},
+		{
+			"id": "is-palindrome",
+			"title": "Is palindrome",
+			"description": "isPalindrome(s) returns whether s reads the same backwards, reusing reverseString.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/is-palindrome.sh"
+			}
+		}
+	]
+}

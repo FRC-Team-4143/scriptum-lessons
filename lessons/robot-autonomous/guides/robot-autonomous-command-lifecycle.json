@@ -1,0 +1,63 @@
+{
+	"title": "Inside a command",
+	"summary": "initialize, execute, isFinished, end.",
+	"topic": "Robot",
+	"order": 532,
+	"steps": [
+		{
+			"title": "Four methods",
+			"say": "A command class overrides the parts it needs. WPILib calls them for you.",
+			"board": {
+				"code": "@Override public void initialize() { }   // once, at the start\n@Override public void execute() { }      // every 20 ms\n@Override public boolean isFinished() { } // stop when true\n@Override public void end(boolean interrupted) { } // once, at the end",
+				"marks": [
+					{
+						"text": "initialize()",
+						"label": "once"
+					},
+					{
+						"text": "execute()",
+						"label": "every loop"
+					},
+					{
+						"text": "isFinished()",
+						"label": "when to stop"
+					}
+				]
+			}
+		},
+		{
+			"title": "Open TurnToAngleCommand.java",
+			"say": "Read the finished one first. Press **Ctrl+P**, type `TurnToAngleCommand` and press Enter. Quick Open finds any file by name, so you never have to dig through folders.",
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "TurnToAngleCommand.java"
+				},
+				"hint": "open TurnToAngleCommand.java with Ctrl+P.",
+				"skipIfDone": true
+			}
+		},
+		{
+			"title": "Find the error",
+			"say": "Find where it works out the **error** and turns it into a motor command. Press I did it when you've spotted it.",
+			"waitFor": {
+				"hint": "find the error in TurnToAngleCommand."
+			},
+			"cardAt": "bottom-right"
+		}
+	]
+}

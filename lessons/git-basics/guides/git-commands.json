@@ -1,0 +1,126 @@
+{
+	"title": "The git commands you'll type",
+	"summary": "status, add, commit and switch, one at a time on the board.",
+	"topic": "Git",
+	"order": 11,
+	"steps": [
+		{
+			"title": "Four commands",
+			"say": "Most days you only need four git commands. Let's go through them one at a time.",
+			"board": {
+				"language": "shell",
+				"code": "git status\ngit add roster.txt\ngit commit -m \"Add my name to the roster\"\ngit switch -c issue-12-add-turbo-boost"
+			}
+		},
+		{
+			"title": "status",
+			"say": "**What's changed?** Run it whenever you're unsure. It lists changed files and tells you which branch you're on.",
+			"board": {
+				"language": "shell",
+				"code": "git status\ngit add roster.txt\ngit commit -m \"Add my name to the roster\"\ngit switch -c issue-12-add-turbo-boost",
+				"marks": [
+					{
+						"text": "git status",
+						"label": "what changed, and which branch am I on?"
+					}
+				]
+			}
+		},
+		{
+			"title": "add",
+			"say": "**Stage** a file: put it in the next snapshot. You choose what goes in, so half-finished work can wait.",
+			"board": {
+				"language": "shell",
+				"code": "git status\ngit add roster.txt\ngit commit -m \"Add my name to the roster\"\ngit switch -c issue-12-add-turbo-boost",
+				"marks": [
+					{
+						"text": "git status",
+						"label": "what changed, and which branch am I on?"
+					},
+					{
+						"text": "git add roster.txt",
+						"label": "put this file in the next commit"
+					}
+				]
+			}
+		},
+		{
+			"title": "commit",
+			"say": "**Save the snapshot** with a message. `-m` means \"here's the message\". Write it for a teammate reading the history next month.",
+			"board": {
+				"language": "shell",
+				"code": "git status\ngit add roster.txt\ngit commit -m \"Add my name to the roster\"\ngit switch -c issue-12-add-turbo-boost",
+				"marks": [
+					{
+						"text": "git status",
+						"label": "what changed, and which branch am I on?"
+					},
+					{
+						"text": "git add roster.txt",
+						"label": "put this file in the next commit"
+					},
+					{
+						"text": "git commit -m",
+						"label": "save a snapshot of what's staged"
+					},
+					{
+						"text": "\"Add my name to the roster\"",
+						"label": "the message: what changed and why"
+					}
+				]
+			}
+		},
+		{
+			"title": "switch",
+			"say": "**Move to another branch.** `-c` creates it first. New work goes on a feature branch off `develop`, never straight onto `main`.",
+			"board": {
+				"language": "shell",
+				"code": "git status\ngit add roster.txt\ngit commit -m \"Add my name to the roster\"\ngit switch -c issue-12-add-turbo-boost",
+				"marks": [
+					{
+						"text": "git status",
+						"label": "what changed, and which branch am I on?"
+					},
+					{
+						"text": "git add roster.txt",
+						"label": "put this file in the next commit"
+					},
+					{
+						"text": "git commit -m",
+						"label": "save a snapshot of what's staged"
+					},
+					{
+						"text": "\"Add my name to the roster\"",
+						"label": "the message: what changed and why"
+					},
+					{
+						"text": "git switch -c",
+						"label": "make a new branch and move onto it"
+					},
+					{
+						"text": "issue-12-add-turbo-boost",
+						"label": "team naming: issue-<number>-<what it does>"
+					}
+				]
+			}
+		},
+		{
+			"title": "Bringing work together",
+			"say": "When a feature is done, you **merge** it into `develop`. If two branches changed the same line, git stops and asks you to choose. That's a merge conflict, and the git lesson walks you through one.",
+			"board": {
+				"language": "shell",
+				"code": "git switch develop\ngit merge issue-12-add-turbo-boost",
+				"marks": [
+					{
+						"text": "git switch develop",
+						"label": "go to the branch you're merging into"
+					},
+					{
+						"text": "git merge issue-12-add-turbo-boost",
+						"label": "bring the feature branch's commits in"
+					}
+				]
+			}
+		}
+	]
+}

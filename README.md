@@ -9,22 +9,44 @@ in the Scriptum repo for the full schema reference this repo follows.
 
 ## Layout
 
+One folder per lesson, and everything about a lesson is inside it:
+
 ```text
-modules.json               curriculum-order index: each module's id, order, and track
-tutor.json                 Dozer's walkthroughs (the tutor): each concept's id, title, topic, lessons
-tutor/<id>.json            one walkthrough's steps
-help/<module id>.json      Dozer's hints for stuck students in one lesson (outside modules/, so never copied to students)
-help/errors.json           plain-English help for common Java errors, shared by every lesson
-modules-meta/<id>.json     one module's title, description, kind, prerequisites, checkpoints
-modules/<id>/              one directory per module: the complete starting project
-checkpoints/<id>/setup.sh  optional, runs once right after the module loads
-checkpoints/<id>/verify/   per-checkpoint verifier scripts
-tests/                     bun tests for the checkpoint verifiers
+lessons/<id>/
+  lesson.json            title, description, kind, track, order, requires, checkpoints,
+                         and which shared guides the lesson uses
+  project/               the starter files students get (copied into their workspace)
+  checkpoints/           verify scripts (verify/<checkpoint id>.sh) and an optional setup.sh
+  guides/<guide id>.json this lesson's Dozer guides: title, summary, topic, order, steps
+  help.json              Dozer's hints for stuck students in this lesson
+  solution/              reference files that make every checkpoint pass (for the tests)
+  lesson.test.ts         the lesson's own test
+common/
+  guides/<guide id>.json guides several lessons use (a lesson lists them in lesson.json)
+  help/errors.json       plain-English help for common Java errors, shared by every lesson
+  scripts/               build-catalog.ts, which writes catalog.json
+  tests/                 tests that look at the whole repo, and the kit lesson tests use
+catalog.json             GENERATED index Scriptum reads. Run `bun run index` after changing it
 ```
+
+`catalog.json` exists because GitHub's raw files can't be listed: it records which lessons and
+guides there are, so Scriptum reads one file and then fetches a lesson's project, scripts, guides or
+help only when they're needed. Don't edit it by hand; the tests fail when it is out of date.
+
+### Adding a lesson
+
+1. Copy a similar lesson's folder to `lessons/<new-id>/` (the id is lowercase kebab-case).
+2. Edit `lesson.json` (title, order, track, checkpoints) and replace `project/` with the starter files.
+3. Put each checkpoint's verify script in `checkpoints/verify/<checkpoint id>.sh`.
+4. Add guides in `guides/` and hints in `help.json` if the lesson has them.
+5. Run `bun run index`, then `bun test`, and commit.
+
+Paths in `lesson.json` (`checkpoints/verify/x.sh`, `setupScript`) are relative to the lesson's
+folder; the generated `catalog.json` makes them relative to the repo.
 
 ## What's here
 
-Three tracks, listed in curriculum order in `modules.json`:
+Three tracks, in curriculum order (each lesson's `track` and `order` are in its `lesson.json`):
 
 - **Tools**: `editor-basics` (Meet the Editor: files, folders, saving, the terminal, for someone
   who has never used a code editor), then git, AdvantageScope, Elastic, and Choreo introductions.
@@ -44,23 +66,16 @@ Three tracks, listed in curriculum order in `modules.json`:
 
 The **Dozer** button in Scriptum's top bar opens short walkthroughs: Dozer, the team's plow
 robot, spotlights the real buttons inside AdvantageScope, Choreo, Elastic, the editor and the
-Driver Station, and can label code on a board. They're listed in `tutor.json` and each one's
-steps are in `tutor/<id>.json`:
+Driver Station, and can label code on a board. A lesson's own guides are in its `guides/` folder,
+one file each (title, summary, topic, order, and the steps). A guide that several lessons use,
+like `build-and-run`, goes in `common/guides/` and each lesson that uses it lists it in
+`lesson.json` (`"guides": ["build-and-run"]`).
 
-- **Editor** (for `editor-basics`, written for someone who knows nothing): `editor-tour`,
-  `files-and-folders`, `files-make`, `editor-typing`, `files-rename-delete`, `terminal-basics`,
-  `find-things-fast`, `editor-first-run`
-- **Tools**: `advantagescope-basics`, `choreo-basics`, `elastic-basics`
-- **Git**: `git-source-control` (Source Control in the editor), `git-commands` (on the board)
-- **Building & running**: `build-and-run` (Start, the console, Enable)
-- **Java**: `java-variables`
-
-A concept shows up in Dozer's list only while one of its `modules` is loaded (there's no browsing
-the rest), so list only lessons that teach or use what it shows. The step
-format (targets, regions, boards, "your turn") is in Scriptum's
-`docs/lessons/tutor.md`. `bun test tests/tutor.test.ts` checks the files. To check the
-walkthrough itself, open it in Scriptum: a step whose ring is missing has a selector that
-didn't match.
+A guide shows up in Dozer's list only while one of the lessons it belongs to is loaded (there's no
+browsing the rest). The step format (targets, regions, boards, "your turn") is in Scriptum's
+`docs/lessons/tutor.md`; `bun test common/tests/guides.test.ts` checks every guide. To check a
+walkthrough itself, open it in Scriptum: a step whose ring is missing has a selector that didn't
+match.
 
 ## Publishing
 
@@ -69,8 +84,8 @@ didn't match.
 2. On the Scriptum control plane, set
    `LESSONS_CATALOG_REPO=FRC-Team-4143/scriptum-lessons` (and
    `LESSONS_CATALOG_BRANCH` if not using `main`).
-3. Commit and push changes here — Scriptum caches the module list for 60
-   seconds, so edits go live within about a minute.
+3. Commit and push changes here (with `catalog.json` regenerated) — Scriptum caches each file for
+   60 seconds, so edits go live within about a minute.
 
 ## Testing
 
@@ -78,11 +93,15 @@ didn't match.
 bun test
 ```
 
+Each lesson's `lesson.test.ts` round-trips its checkpoints (every one fails on the starter and passes
+with `solution/`); `common/tests/` checks `catalog.json`, the repo's layout, and every guide and
+help file. The Java round trips need a JDK on your PATH and are skipped without one.
+
 ## Robot modules
 
 The first four `robot-*` modules keep the student's code in `Robot.java`, and the last three move to
 subsystems and commands. They share one scaffold, so a change to the drivetrain or the build usually
-has to be made in every module (`modules/robot-*/`):
+has to be made in every module (`lessons/robot-*/project/`):
 
 - `mechanisms/DifferentialDriveMech.java` is the lesson-local drive mech. It extends MWLib's
   `MechBase`, simulates the drivetrain (including slightly imperfect encoders, so a student's pose
@@ -98,10 +117,10 @@ has to be made in every module (`modules/robot-*/`):
 - The shooter uses the real flywheel's wheel radius (3 in) and mass (2.3 kg). In
   `robot-control-theory` the flywheel starts in bang-bang mode with untuned gains on purpose; that
   lesson's task is to write bang-bang and feedforward, then tune PID (`kV` about 0.12, `kP` about 0.2
-  works). `tests/solutions/robot-control-theory/` is the finished version.
+  works). `lessons/robot-control-theory/solution/` is the finished version.
 - MWLib comes from jitpack (`com.github.FRC-Team-4143.MW-Lib:mw-lib-java:<tag>`), with no
   credentials. Bump the tag in every `build.gradle` together.
-- `tests/solutions/<module>/` holds the reference solution used by `tests/robot-lessons.test.ts` to
+- `lessons/<id>/solution/` holds the reference solution used by that lesson's `lesson.test.ts` to
   round-trip the script checkpoints. The `nt4-value` checkpoints need a running simulator.
 
 ### Java taught along the way

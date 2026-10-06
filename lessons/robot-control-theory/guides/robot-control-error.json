@@ -1,0 +1,129 @@
+{
+	"title": "Error and bang-bang",
+	"summary": "The difference between want and have, and on/off control.",
+	"topic": "Robot",
+	"order": 486,
+	"steps": [
+		{
+			"title": "Error",
+			"say": "Every controller starts here: how far are we from the target?",
+			"board": {
+				"code": "double error = CONSTANTS.SHOOT_VELOCITY - flywheel.getCurrentVelocity();",
+				"marks": [
+					{
+						"text": "SHOOT_VELOCITY",
+						"label": "where it should be"
+					},
+					{
+						"text": "getCurrentVelocity()",
+						"label": "where it is"
+					}
+				]
+			}
+		},
+		{
+			"title": "Bang-bang",
+			"say": "Too slow? Full power. Fast enough? Nothing.",
+			"board": {
+				"code": "if (flywheel.getCurrentVelocity() < CONSTANTS.SHOOT_VELOCITY) {\n    duty = 1.0;\n} else {\n    duty = 0.0;\n}",
+				"marks": [
+					{
+						"text": "duty = 1.0;",
+						"label": "full power"
+					},
+					{
+						"text": "duty = 0.0;",
+						"label": "off"
+					}
+				],
+				"caption": "Fast to spin up, but it slams the motor on and off."
+			}
+		},
+		{
+			"title": "Open ShooterSubsystem.java",
+			"say": "Press **Ctrl+P**, type `ShooterSubsystem` and press Enter. Quick Open finds any file by name, so you never have to dig through folders.",
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "ShooterSubsystem.java"
+				},
+				"hint": "open ShooterSubsystem.java with Ctrl+P.",
+				"skipIfDone": true
+			}
+		},
+		{
+			"title": "Find bangBang",
+			"say": "Press **Ctrl+F**, search for `bangBang`, and write it. Then set `FLYWHEEL_CONTROL = BANG_BANG` in ShooterConstants.",
+			"waitFor": {
+				"hint": "write bangBang()."
+			},
+			"cardAt": "bottom-right"
+		},
+		{
+			"title": "Start the robot",
+			"say": "Your code only runs once it's built and started.",
+			"target": {
+				"selector": "[data-tour='sim-controls']"
+			},
+			"waitFor": {
+				"target": {
+					"selector": "[data-tour='code-status']",
+					"text": "Running"
+				},
+				"hint": "press Start and wait for Running."
+			}
+		},
+		{
+			"title": "Enable in Teleop",
+			"say": "Pick **Teleop** and press **Enable**. Robot code runs only while it's enabled.",
+			"target": {
+				"selector": "[data-tour='enable']"
+			},
+			"waitFor": {
+				"target": {
+					"selector": "[data-tour='enable'] button",
+					"text": "Enabled"
+				},
+				"hint": "choose Teleop, then Enable."
+			}
+		},
+		{
+			"title": "Watch it wobble",
+			"say": "Hold **U**. Look closely around the target. In AdvantageScope, search for `FlywheelVelocity`, then drag **Subsystem/Shooter/FlywheelVelocity** onto the **Left Axis**.",
+			"close": [
+				"editor",
+				"preview",
+				"elastic"
+			],
+			"open": [
+				"scope"
+			],
+			"target": {
+				"pane": "scope",
+				"selector": ".line-graph-left.source-list"
+			},
+			"waitFor": {
+				"target": {
+					"pane": "scope",
+					"selector": ".line-graph-left.source-list .key-container",
+					"text": "Subsystem/Shooter/FlywheelVelocity"
+				},
+				"hint": "drag Subsystem/Shooter/FlywheelVelocity onto the graph."
+			}
+		}
+	]
+}

@@ -1,0 +1,48 @@
+{
+	"title": "Inheritance",
+	"description": "Extend the BankAccount class from Classes & Objects with two subclasses - one that adds a new method, one that overrides an existing one.",
+	"kind": "plain-java",
+	"track": "Java Programming",
+	"order": 19,
+	"requires": [
+		"java-classes-objects"
+	],
+	"checkpoints": [
+		{
+			"id": "savings-interest",
+			"title": "Savings interest",
+			"description": "SavingsAccount.applyInterest() deposits balance * interest_rate.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/savings-interest.sh"
+			}
+		},
+		{
+			"id": "checking-overdraft",
+			"title": "Checking overdraft",
+			"description": "CheckingAccount's overridden withdraw allows going negative up to the overdraft limit.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/checking-overdraft.sh"
+			}
+		},
+		{
+			"id": "checking-normal-withdraw",
+			"title": "Checking normal withdraw",
+			"description": "A withdrawal that never touches the overdraft still behaves like a normal withdraw.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/checking-normal-withdraw.sh"
+			}
+		},
+		{
+			"id": "inherited-deposit",
+			"title": "Inherited methods",
+			"description": "deposit, getBalance, and transfer still work as inherited, with no extra code.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/inherited-deposit.sh"
+			}
+		}
+	]
+}

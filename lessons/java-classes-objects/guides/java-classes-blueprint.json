@@ -1,0 +1,78 @@
+{
+	"title": "Classes and objects",
+	"summary": "A class is a blueprint; new makes an object from it.",
+	"topic": "Java",
+	"order": 320,
+	"steps": [
+		{
+			"title": "Blueprint and object",
+			"say": "`BankAccount` is the blueprint. Each `new BankAccount(...)` builds a separate account with its own balance.",
+			"board": {
+				"code": "BankAccount checking = new BankAccount(\"Ada\", 100.0);\nBankAccount savings = new BankAccount(\"Ada\", 50.0);\nchecking.deposit(25.0);   // only checking changes",
+				"marks": [
+					{
+						"text": "new BankAccount",
+						"label": "build an object"
+					},
+					{
+						"text": "checking.deposit",
+						"label": "call a method on one object"
+					}
+				]
+			}
+		},
+		{
+			"title": "Open Main.java",
+			"say": "Main is already written: it uses your class. Press **Ctrl+P**, type `Main` and press Enter. Quick Open finds any file by name, so you never have to dig through folders.",
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "Main.java"
+				},
+				"hint": "open Main.java with Ctrl+P.",
+				"skipIfDone": true
+			}
+		},
+		{
+			"title": "Find it",
+			"say": "It may be further down. Press **Ctrl+F**, type `new BankAccount` and press Enter to jump to it.",
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "new BankAccount"
+				},
+				"hint": "find new BankAccount with Ctrl+F.",
+				"skipIfDone": true
+			}
+		},
+		{
+			"title": "Main uses it",
+			"say": "Main makes two accounts like this. Once your class works, it prints real balances.",
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "new BankAccount"
+			},
+			"cardAt": "bottom-right"
+		}
+	]
+}

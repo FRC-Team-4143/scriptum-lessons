@@ -1,0 +1,59 @@
+{
+	"title": "Arrays and indexes",
+	"summary": "Making, reading and measuring an array.",
+	"topic": "Java",
+	"order": 294,
+	"steps": [
+		{
+			"title": "An array",
+			"say": "An array holds a fixed number of values of one type, in numbered slots.",
+			"board": {
+				"code": "int[] values = {4, 1, 3};\nint first = values[0];   // 4\nint last = values[2];    // 3\nint n = values.length;   // 3",
+				"marks": [
+					{
+						"text": "int[]",
+						"label": "an array of ints"
+					},
+					{
+						"text": "values[0]",
+						"label": "slots start at 0"
+					},
+					{
+						"text": "values.length",
+						"label": "how many slots"
+					}
+				]
+			}
+		},
+		{
+			"title": "The last slot",
+			"say": "Because counting starts at 0, the last index is `length - 1`. Asking for `values[3]` here crashes with an out-of-bounds error.",
+			"board": {
+				"code": "values[values.length - 1]   // the last value\nvalues[values.length]       // crash!",
+				"marks": [
+					{
+						"text": "values.length - 1",
+						"label": "the last valid index"
+					}
+				]
+			}
+		},
+		{
+			"title": "Looping over it",
+			"say": "This loop visits every slot once, in order.",
+			"board": {
+				"code": "for (int i = 0; i < values.length; i++) {\n    System.out.println(values[i]);\n}",
+				"marks": [
+					{
+						"text": "int i = 0",
+						"label": "first index"
+					},
+					{
+						"text": "i < values.length",
+						"label": "stop before length"
+					}
+				]
+			}
+		}
+	]
+}

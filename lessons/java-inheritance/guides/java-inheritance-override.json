@@ -1,0 +1,110 @@
+{
+	"title": "Overriding a method",
+	"summary": "CheckingAccount replaces withdraw with its own rules.",
+	"topic": "Java",
+	"order": 366,
+	"steps": [
+		{
+			"title": "Replace, don't add",
+			"say": "`@Override` says this method **replaces** the parent's version. Everything else (deposit, transfer) still works as before.",
+			"board": {
+				"code": "@Override\npublic boolean withdraw(double amount) {\n    if (amount <= 0 || balance_ - amount < -overdraft_limit_) {\n        return false;\n    }\n    balance_ -= amount;\n    return true;\n}",
+				"marks": [
+					{
+						"text": "@Override",
+						"label": "replaces BankAccount's withdraw"
+					},
+					{
+						"text": "-overdraft_limit_",
+						"label": "can go negative, but only this far"
+					}
+				]
+			}
+		},
+		{
+			"title": "It just works",
+			"say": "`transfer` was written in BankAccount, but on a checking account it calls the **overridden** withdraw. That's the power of inheritance.",
+			"board": {
+				"code": "checking.transfer(savings, 120.0);  // uses CheckingAccount.withdraw",
+				"marks": [
+					{
+						"text": "transfer",
+						"label": "inherited, unchanged"
+					}
+				]
+			}
+		},
+		{
+			"title": "Open CheckingAccount.java",
+			"say": "Press **Ctrl+P**, type `CheckingAccount` and press Enter. Quick Open finds any file by name, so you never have to dig through folders.",
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "CheckingAccount.java"
+				},
+				"hint": "open CheckingAccount.java with Ctrl+P.",
+				"skipIfDone": true
+			}
+		},
+		{
+			"title": "Find it",
+			"say": "It may be further down. Press **Ctrl+F**, type `public class CheckingAccount` and press Enter to jump to it.",
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "public class CheckingAccount"
+				},
+				"hint": "find public class CheckingAccount with Ctrl+F.",
+				"skipIfDone": true
+			}
+		},
+		{
+			"title": "Same start",
+			"say": "First, `extends BankAccount` on this line, just like SavingsAccount.",
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "public class CheckingAccount"
+			},
+			"cardAt": "bottom-right"
+		},
+		{
+			"title": "Your turn",
+			"say": "Write the constructor and the overriding `withdraw`.",
+			"waitFor": {
+				"hint": "build CheckingAccount."
+			},
+			"cardAt": "bottom-right"
+		},
+		{
+			"title": "Run it",
+			"say": "Click the **Run** button (▷) at the top right of the file. The output appears in the terminal at the bottom.",
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "top-right",
+			"waitFor": {
+				"hint": "run the program and read the output."
+			}
+		}
+	]
+}

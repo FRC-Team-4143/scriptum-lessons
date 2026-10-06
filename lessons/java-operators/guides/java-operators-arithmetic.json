@@ -1,0 +1,120 @@
+{
+	"title": "Arithmetic and return",
+	"summary": "Turning a stub into a real answer with + - * /.",
+	"topic": "Java",
+	"order": 224,
+	"steps": [
+		{
+			"title": "A stub",
+			"say": "Every method starts by returning a placeholder so the program still builds. Your job is to replace it.",
+			"board": {
+				"code": "public static int addInts(int a, int b) {\n    return 0;\n}",
+				"marks": [
+					{
+						"text": "int a, int b",
+						"label": "the inputs you're handed"
+					},
+					{
+						"text": "return 0;",
+						"label": "the placeholder to replace"
+					}
+				]
+			}
+		},
+		{
+			"title": "The real answer",
+			"say": "Replace the placeholder with an **expression**: a bit of math that works out to a value.",
+			"board": {
+				"code": "public static int addInts(int a, int b) {\n    return a + b;\n}",
+				"marks": [
+					{
+						"text": "a + b",
+						"label": "the expression; its result is returned"
+					}
+				],
+				"caption": "addInts(2, 3) gives 5"
+			}
+		},
+		{
+			"title": "Conversions",
+			"say": "Inches to meters is a multiply. The way back is a divide by the same number, so the two undo each other.",
+			"board": {
+				"code": "double meters = inches * 0.0254;\ndouble inches = meters / 0.0254;",
+				"marks": [
+					{
+						"text": "* 0.0254",
+						"label": "inches to meters"
+					},
+					{
+						"text": "/ 0.0254",
+						"label": "meters back to inches"
+					}
+				]
+			}
+		},
+		{
+			"title": "Open Main.java",
+			"say": "Press **Ctrl+P**, type `Main` and press Enter. Quick Open finds any file by name, so you never have to dig through folders.",
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "Main.java"
+				},
+				"hint": "open Main.java with Ctrl+P.",
+				"skipIfDone": true
+			}
+		},
+		{
+			"title": "Find it",
+			"say": "It may be further down. Press **Ctrl+F**, type `public static int addInts` and press Enter to jump to it.",
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "public static int addInts"
+				},
+				"hint": "find public static int addInts with Ctrl+F.",
+				"skipIfDone": true
+			}
+		},
+		{
+			"title": "Start here",
+			"say": "Here's your first stub. Change its `return` line.",
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "public static int addInts"
+			},
+			"cardAt": "bottom-right"
+		},
+		{
+			"title": "Run it",
+			"say": "Click the **Run** button (▷) at the top right of the file. The output appears in the terminal at the bottom.",
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "top-right",
+			"waitFor": {
+				"hint": "run the program and read the output."
+			}
+		}
+	]
+}

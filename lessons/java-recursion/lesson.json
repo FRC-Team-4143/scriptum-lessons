@@ -1,0 +1,51 @@
+{
+	"title": "Recursion",
+	"description": "Solve a few problems you already solved with loops, using recursion instead - methods that call themselves down to a base case.",
+	"kind": "plain-java",
+	"track": "Java Programming",
+	"order": 18,
+	"requires": [
+		"java-methods"
+	],
+	"guides": [
+		"java-methods-edge-cases"
+	],
+	"checkpoints": [
+		{
+			"id": "factorial-recursive",
+			"title": "Factorial (recursive)",
+			"description": "factorial(n) returns n!, computed recursively.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/factorial-recursive.sh"
+			}
+		},
+		{
+			"id": "fibonacci-recursive",
+			"title": "Fibonacci (recursive)",
+			"description": "fibonacci(n) returns the nth Fibonacci number, computed recursively.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/fibonacci-recursive.sh"
+			}
+		},
+		{
+			"id": "sum-digits",
+			"title": "Sum of digits",
+			"description": "sumDigits(n) returns the sum of n's digits, computed recursively.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/sum-digits.sh"
+			}
+		},
+		{
+			"id": "reverse-string-recursive",
+			"title": "Reverse a string (recursive)",
+			"description": "reverseString(s) returns s reversed, computed recursively.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/reverse-string-recursive.sh"
+			}
+		}
+	]
+}
