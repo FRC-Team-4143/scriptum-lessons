@@ -32,7 +32,13 @@ type Step = {
 		language?: string;
 		marks?: { text: string; label: string; nth?: number }[];
 	};
-	waitFor?: { target: Target; hint?: string };
+	waitFor?: {
+		target?: Target;
+		hint?: string;
+		more?: boolean;
+		atLeast?: number;
+		gone?: boolean;
+	};
 };
 
 const index = readJson("tutor.json") as {
@@ -135,8 +141,16 @@ describe.each(index.concepts.map((c) => c.id))("tutor/%s.json", (id) => {
 			for (const pane of [...(step.open ?? []), ...(step.close ?? [])]) expect(PANES, where).toContain(pane);
 			if (step.target) checkTarget(`${where} target`, step.target);
 			if (step.waitFor) {
-				expect(step.waitFor.target.selector, `${where} waitFor needs a selector`).toBeDefined();
-				checkTarget(`${where} waitFor`, step.waitFor.target);
+				const { target, more, atLeast, gone } = step.waitFor;
+				// No target: an "I did it" step, which needs words telling them what to do.
+				if (!target) {
+					expect(step.waitFor.hint, `${where}: an "I did it" step needs a hint`).toBeDefined();
+					expect(more || gone || atLeast !== undefined, `${where}: more/atLeast/gone need a target`).toBeFalsy();
+				} else {
+					expect(target.selector, `${where} waitFor needs a selector`).toBeDefined();
+					checkTarget(`${where} waitFor`, target);
+				}
+				expect([more, gone, atLeast !== undefined].filter(Boolean).length, `${where}: one of more/atLeast/gone`).toBeLessThanOrEqual(1);
 			}
 			if (step.board) {
 				expect(["java", "shell", "text", undefined]).toContain(step.board.language);

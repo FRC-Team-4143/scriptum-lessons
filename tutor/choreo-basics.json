@@ -2,55 +2,86 @@
 	"steps": [
 		{
 			"title": "This is Choreo",
-			"say": "Choreo plans **autonomous paths**: where the robot should drive, and how fast it's allowed to go. It works out the quickest route your robot can really follow.",
+			"say": "Choreo plans **autonomous paths**: where the robot drives, and how fast it's allowed to go. Let's build one together. Everything works while I'm here, so just do each step when I ask.",
 			"close": ["editor", "preview"],
 			"open": ["choreo"],
 			"target": { "pane": "choreo" }
 		},
 		{
-			"title": "Paths",
-			"say": "Each path is one trajectory, like \"leave the start line and pick up a game piece\". The list of them lives here.",
-			"target": { "pane": "choreo", "selector": "[class*='_SidebarHeading_']", "text": "PATHS" }
+			"title": "Make a path",
+			"say": "Each path is one trajectory, like \"leave the start line and pick up a game piece\". The **+** in the paths list makes a new one.",
+			"target": { "pane": "choreo", "selector": "[aria-label='Add Path']" },
+			"waitFor": {
+				"target": { "pane": "choreo", "selector": "[class*='_SidebarLabel_'] input" },
+				"more": true,
+				"hint": "press + to add a path."
+			}
 		},
 		{
-			"title": "Add a path",
-			"say": "The **+** makes a new, empty path.",
-			"target": { "pane": "choreo", "selector": "[aria-label='Add Path']" }
-		},
-		{
-			"title": "Pose waypoint",
-			"say": "Waypoints are the points the path goes through. A **pose waypoint** pins both where the robot is and which way it's facing. Use one for the start and the end.",
+			"title": "Pose waypoints",
+			"say": "Waypoints are the points the path goes through. The **pose waypoint** tool is already picked: it pins both where the robot is and which way it faces. Use it for the start and the end.",
 			"target": { "pane": "choreo", "selector": "[aria-label='Pose Waypoint']" }
 		},
 		{
-			"title": "Translation waypoint",
-			"say": "A **translation waypoint** only pins where the robot is, and lets Choreo pick the heading. Use these for points in the middle.",
-			"target": { "pane": "choreo", "selector": "[aria-label='Translation Waypoint']" }
+			"title": "Drop the first waypoint",
+			"say": "Click anywhere on the field to drop a waypoint there.",
+			"target": { "pane": "choreo", "region": { "left": "300px", "top": "64px", "right": "70px", "bottom": "32px" } },
+			"waitFor": {
+				"target": { "pane": "choreo", "selector": "[class*='_SidebarLabel_']", "text": "Waypoint" },
+				"more": true,
+				"hint": "click on the field."
+			}
 		},
 		{
-			"title": "The field",
-			"say": "With a waypoint tool picked, **click on the field** to drop a waypoint there. Drag it to move it.",
-			"target": { "pane": "choreo", "region": { "left": "300px", "top": "64px", "bottom": "32px" } }
+			"title": "Points in the middle",
+			"say": "For points along the way, pick **Translation Waypoint**. It pins only the position and lets Choreo choose which way the robot faces.",
+			"target": { "pane": "choreo", "selector": "[aria-label='Translation Waypoint']" },
+			"waitFor": {
+				"target": { "pane": "choreo", "selector": "[class*='_SidebarLabel_']", "text": "Waypoint" },
+				"more": true,
+				"hint": "pick Translation Waypoint and click the field."
+			}
 		},
 		{
-			"title": "Constraints",
-			"say": "These tools add **constraints**: rules the path has to obey, like a top speed between two waypoints, or a zone the robot must stay out of.",
-			"target": { "pane": "choreo", "selector": "[aria-label='Max Velocity']" }
+			"title": "Four waypoints",
+			"say": "Keep clicking until the path has at least four. They're listed here as you add them. Drag any waypoint on the field to move it.",
+			"target": { "pane": "choreo", "selector": "[class*='_SidebarHeading_']", "text": "FEATURES" },
+			"waitFor": {
+				"target": { "pane": "choreo", "selector": "[class*='_SidebarLabel_']", "text": "Waypoint" },
+				"atLeast": 4,
+				"hint": "add waypoints until there are four."
+			}
 		},
 		{
-			"title": "Event markers",
-			"say": "An **event marker** says \"do something here\", like start the intake halfway along the path. Your robot code listens for its name.",
-			"target": { "pane": "choreo", "selector": "[aria-label='Event Marker']" }
+			"title": "Add a constraint",
+			"say": "Constraints are rules the path has to obey. Pick **Max Velocity**, then click a waypoint to cap the speed there (or drag between two to cover the stretch between them).",
+			"target": { "pane": "choreo", "selector": "[aria-label='Max Velocity']" },
+			"waitFor": {
+				"target": { "pane": "choreo", "selector": "[class*='_SidebarLabel_']", "text": "Max Velocity" },
+				"more": true,
+				"hint": "pick Max Velocity and click a waypoint."
+			}
 		},
 		{
-			"title": "Features",
-			"say": "Everything on the current path is listed here: waypoints, constraints and markers. Click one to edit its exact numbers.",
-			"target": { "pane": "choreo", "selector": "[class*='_SidebarHeading_']", "text": "FEATURES" }
+			"title": "Generate it",
+			"say": "**Generate** works out the fastest path through every waypoint that obeys every constraint, and saves it. If you change anything, generate again.",
+			"target": { "pane": "choreo", "selector": "[aria-label='Generate All']" },
+			"waitFor": { "hint": "press Generate and watch the path appear." }
 		},
 		{
-			"title": "Generate",
-			"say": "When the waypoints are where you want them, **Generate** works out the trajectory: the fastest path that goes through every waypoint and obeys every constraint. Change anything and generate again.",
-			"target": { "pane": "choreo", "selector": "[aria-label='Generate All']" }
+			"title": "A second path",
+			"say": "The lesson wants two **different** paths. Make another one and give it four waypoints somewhere new.",
+			"target": { "pane": "choreo", "selector": "[aria-label='Add Path']" },
+			"waitFor": {
+				"target": { "pane": "choreo", "selector": "[class*='_SidebarLabel_'] input" },
+				"more": true,
+				"hint": "press + for a second path."
+			}
+		},
+		{
+			"title": "Check your work",
+			"say": "When both paths have their waypoints and generate, open the lesson chip and press **Verify** to check off the checkpoints.",
+			"target": { "selector": "[data-tour='lesson']" }
 		}
 	]
 }
