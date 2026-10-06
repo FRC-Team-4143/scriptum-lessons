@@ -17,6 +17,7 @@
 		},
 		{
 			"title": "Open the file",
+			"cardAt": "bottom-right",
 			"say": "Go to the **Explorer** (the top icon) and open `01-first-commit/roster.txt`.",
 			"target": { "pane": "editor", "selector": ".activitybar .action-label[aria-label^='Explorer']" },
 			"waitFor": {
@@ -26,6 +27,7 @@
 		},
 		{
 			"title": "Make a change",
+			"cardAt": "bottom-right",
 			"say": "Add your name on a new line, then press **Ctrl+S** to save. The Source Control icon will show a number: that's how many files you've changed.",
 			"target": { "pane": "editor", "selector": "[id='workbench.parts.editor']" },
 			"waitFor": {
@@ -44,11 +46,13 @@
 		},
 		{
 			"title": "Your change",
+			"cardAt": "bottom-right",
 			"say": "There it is. **M** means modified. Click it to see exactly what changed, side by side.",
 			"target": { "pane": "editor", "selector": ".monaco-list-row[aria-label^='roster.txt']" }
 		},
 		{
 			"title": "Stage it",
+			"cardAt": "bottom-right",
 			"say": "**Staging** picks what goes into the next commit. Hover over `roster.txt` and press the **+**.",
 			"target": { "pane": "editor", "selector": ".monaco-list-row[aria-label^='roster.txt']" },
 			"waitFor": {
@@ -58,6 +62,7 @@
 		},
 		{
 			"title": "Commit it",
+			"cardAt": "bottom-right",
 			"say": "Type a message saying what you changed, like `Add my name to the roster`, then press **Commit**. A commit is a saved snapshot of your work.",
 			"target": { "pane": "editor", "selector": ".scm-input" },
 			"waitFor": {
@@ -68,6 +73,7 @@
 		},
 		{
 			"title": "In the history",
+			"cardAt": "bottom-right",
 			"say": "Your commit is now at the top of the **Graph**: who made it, when, and your message.",
 			"target": { "pane": "editor", "selector": ".pane-header[aria-label='Graph Section']" }
 		},
@@ -78,6 +84,7 @@
 		},
 		{
 			"title": "The terminal",
+			"cardAt": "top-right",
 			"say": "Everything here can be done by typing git commands too.",
 			"target": { "pane": "editor" },
 			"waitFor": {
@@ -87,6 +94,7 @@
 		},
 		{
 			"title": "Try it",
+			"cardAt": "top-right",
 			"say": "Type `cd 01-first-commit`, press Enter, then `git log --oneline`. Your commit is the first line.",
 			"target": { "pane": "editor", "selector": "[id='workbench.parts.panel']" },
 			"waitFor": { "hint": "run git log --oneline in 01-first-commit." }
