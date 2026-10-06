@@ -203,7 +203,7 @@
 			"title": "Writing a method",
 			"summary": "Every part of a method declaration, using clamp.",
 			"topic": "Java",
-			"modules": ["java-methods", "robot-drive-math"],
+			"modules": ["java-methods"],
 			"order": 317
 		},
 		{
