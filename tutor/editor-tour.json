@@ -41,7 +41,7 @@
 		},
 		{
 			"title": "The terminal",
-			"say": "Now let's open one more thing. Press **Ctrl+`** (the key just above Tab) to open the **terminal**.",
+			"say": "Now let's open one more thing. Press **Ctrl+`** (the key just above Tab) to open the **terminal**. Click somewhere in the editor first, so it hears your keys.",
 			"target": {
 				"pane": "editor"
 			},

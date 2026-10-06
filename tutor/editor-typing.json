@@ -2,7 +2,7 @@
 	"steps": [
 		{
 			"title": "Open about.txt",
-			"say": "Let's practice on the file you made. (Make it first with the **Make a folder and a file** guide if it's not there.) Press **Ctrl+P**, type `about` and press Enter. Quick Open finds any file by name, so you never have to dig through folders.",
+			"say": "Let's practice on the file you made. (Make it first with the **Make a folder and a file** guide if it's not there.) Press **Ctrl+P**, type `about` and press Enter. Quick Open finds any file by name, so you never have to dig through folders. Click somewhere in the editor first, so it hears your keys.",
 			"open": [
 				"editor"
 			],

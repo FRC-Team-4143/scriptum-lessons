@@ -2,7 +2,7 @@
 	"steps": [
 		{
 			"title": "Quick Open",
-			"say": "Big projects have lots of files. To jump to one, press **Ctrl+P**. A little box opens at the top.",
+			"say": "Big projects have lots of files. To jump to one, press **Ctrl+P**. A little box opens at the top. Click somewhere in the editor first, so it hears your keys.",
 			"open": [
 				"editor"
 			],
