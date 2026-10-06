@@ -99,10 +99,10 @@
 		},
 		{
 			"title": "Make a folder",
-			"say": "Type `mkdir practice` and press **Enter**. Watch the Explorer on the left: a new folder appears by itself.",
+			"say": "Type `mkdir practice` and press **Enter**. Then watch the Explorer on the left: a new folder appears by itself.",
 			"target": {
 				"pane": "editor",
-				"selector": ".explorer-viewlet .monaco-list-row[aria-label='practice']"
+				"selector": "[id='workbench.parts.sidebar']"
 			},
 			"cardAt": "top-right",
 			"waitFor": {
