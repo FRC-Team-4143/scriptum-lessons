@@ -1,0 +1,88 @@
+{
+	"steps": [
+		{
+			"title": "Combining",
+			"say": "`&&` is **and** (both true), `||` is **or** (at least one), `!` is **not** (flip it).",
+			"board": {
+				"code": "hasComms && !eStopped    // comms AND not e-stopped\nday.equals(\"Saturday\") || day.equals(\"Sunday\")",
+				"marks": [
+					{
+						"text": "&&",
+						"label": "both must be true"
+					},
+					{
+						"text": "!eStopped",
+						"label": "true when NOT e-stopped"
+					},
+					{
+						"text": "||",
+						"label": "either one is enough"
+					}
+				]
+			}
+		},
+		{
+			"title": "Comparing Strings",
+			"say": "Use `.equals(...)` for Strings, not `==`. `==` asks \"same object?\", which is usually not what you mean.",
+			"board": {
+				"code": "day.equals(\"Sunday\")   // compares the text\nday == \"Sunday\"        // compares objects: unreliable",
+				"marks": [
+					{
+						"text": ".equals",
+						"label": "compare text this way"
+					}
+				]
+			}
+		},
+		{
+			"title": "Ternary",
+			"say": "`condition ? a : b` is a one-line if/else that **gives back a value**.",
+			"board": {
+				"code": "return isReversed ? \"REVERSED\" : \"FORWARD\";",
+				"marks": [
+					{
+						"text": "isReversed ?",
+						"label": "the question"
+					},
+					{
+						"text": "\"REVERSED\"",
+						"label": "if true"
+					},
+					{
+						"text": "\"FORWARD\"",
+						"label": "if false"
+					}
+				]
+			}
+		},
+		{
+			"title": "Open Main.java",
+			"say": "Press **Ctrl+P**, type `Main` and press Enter. Quick Open finds any file by name, so you never have to dig through folders.",
+			"open": [
+				"editor"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "Main.java"
+				},
+				"hint": "open Main.java with Ctrl+P."
+			}
+		},
+		{
+			"title": "Your turn",
+			"say": "Each of these is one `return` line.",
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "public static boolean canEnable"
+			},
+			"cardAt": "bottom-right"
+		}
+	]
+}

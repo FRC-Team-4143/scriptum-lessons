@@ -1,0 +1,83 @@
+{
+	"steps": [
+		{
+			"title": "A shortcut",
+			"say": "`x += 1` means `x = x + 1`: take what's in x, add 1, store it back. The others work the same way.",
+			"board": {
+				"code": "x += 1;   // x = x + 1\nx -= 0.14; // x = x - 0.14\nx *= 6;   // x = x * 6\nx /= 3;   // x = x / 3",
+				"marks": [
+					{
+						"text": "x += 1;",
+						"label": "add, then store back"
+					},
+					{
+						"text": "x *= 6;",
+						"label": "multiply, then store back"
+					}
+				]
+			}
+		},
+		{
+			"title": "Trace it",
+			"say": "Follow x through applyAssignments(1.0), one line at a time.",
+			"board": {
+				"code": "double x = start;  // 1.0\nx += 1;            // 2.0\nx -= 0.14;         // 1.86\nx *= 6;            // 11.16\nx /= 3;            // 3.72\nreturn x;",
+				"marks": [
+					{
+						"text": "double x = start;",
+						"label": "one variable, updated in place"
+					},
+					{
+						"text": "return x;",
+						"label": "the final value"
+					}
+				]
+			}
+		},
+		{
+			"title": "Open Main.java",
+			"say": "Press **Ctrl+P**, type `Main` and press Enter. Quick Open finds any file by name, so you never have to dig through folders.",
+			"open": [
+				"editor"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "Main.java"
+				},
+				"hint": "open Main.java with Ctrl+P."
+			}
+		},
+		{
+			"title": "Find applyAssignments",
+			"say": "It's near the bottom of the file. Press **Ctrl+F**, type `applyAssignments` and press Enter to jump to it.",
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "public static double applyAssignments"
+				},
+				"hint": "find applyAssignments with Ctrl+F."
+			}
+		},
+		{
+			"title": "Your turn",
+			"say": "Write the five lines in `applyAssignments`, one operator each.",
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "public static double applyAssignments"
+			},
+			"cardAt": "bottom-right"
+		}
+	]
+}

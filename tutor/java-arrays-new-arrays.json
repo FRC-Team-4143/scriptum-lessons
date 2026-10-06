@@ -1,0 +1,55 @@
+{
+	"steps": [
+		{
+			"title": "Don't change theirs",
+			"say": "Changing `values[i]` changes the caller's array too: they share it. Make a new one the same length and fill that.",
+			"board": {
+				"code": "int[] result = new int[values.length];\nfor (int i = 0; i < values.length; i++) {\n    result[i] = values[i] * 2;\n}\nreturn result;",
+				"marks": [
+					{
+						"text": "new int[values.length]",
+						"label": "a fresh array, all zeros"
+					},
+					{
+						"text": "result[i] =",
+						"label": "fill the new one"
+					}
+				]
+			}
+		},
+		{
+			"title": "Sorting a copy",
+			"say": "`Arrays.copyOf` makes a copy you can sort without touching the original.",
+			"board": {
+				"code": "int[] copy = java.util.Arrays.copyOf(values, values.length);\njava.util.Arrays.sort(copy);\nreturn copy;",
+				"marks": [
+					{
+						"text": "Arrays.copyOf",
+						"label": "copy first"
+					},
+					{
+						"text": "Arrays.sort(copy)",
+						"label": "then sort the copy"
+					}
+				]
+			}
+		},
+		{
+			"title": "Fibonacci",
+			"say": "Each slot depends on the two before it. Fill the first two, then loop from slot 2.",
+			"board": {
+				"code": "int[] fib = new int[n];\nif (n > 0) fib[0] = 0;\nif (n > 1) fib[1] = 1;\nfor (int i = 2; i < n; i++) {\n    fib[i] = fib[i - 1] + fib[i - 2];\n}",
+				"marks": [
+					{
+						"text": "if (n > 1)",
+						"label": "small n mustn't crash"
+					},
+					{
+						"text": "fib[i - 1] + fib[i - 2]",
+						"label": "the two before"
+					}
+				]
+			}
+		}
+	]
+}

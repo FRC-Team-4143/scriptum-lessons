@@ -1,0 +1,42 @@
+{
+	"steps": [
+		{
+			"title": "States",
+			"say": "An enum lists every mode a subsystem can be in.",
+			"board": {
+				"code": "public enum DriveStates {\n    IDLE,\n    ARCADE\n}",
+				"marks": [
+					{
+						"text": "IDLE",
+						"label": "stopped"
+					},
+					{
+						"text": "ARCADE",
+						"label": "driving from the sticks"
+					}
+				]
+			}
+		},
+		{
+			"title": "One switch",
+			"say": "`updateLogic` runs every 20 ms and does what the current state says.",
+			"board": {
+				"code": "switch (system_state_) {\n    case ARCADE:\n        drive.arcadeDrive(OI.getForward(), OI.getTurn());\n        break;\n    case IDLE:\n    default:\n        drive.arcadeDrive(0.0, 0.0);\n        break;\n}",
+				"marks": [
+					{
+						"text": "case ARCADE:",
+						"label": "teleop"
+					},
+					{
+						"text": "break;",
+						"label": "end of this case"
+					},
+					{
+						"text": "default:",
+						"label": "anything else"
+					}
+				]
+			}
+		}
+	]
+}

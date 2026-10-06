@@ -1,0 +1,74 @@
+{
+	"steps": [
+		{
+			"title": "Merge",
+			"say": "Merging brings another branch's commits into the branch you're on. You stand on the branch that **receives** them.",
+			"board": {
+				"code": "git checkout develop\ngit merge issue-7-auto-distance",
+				"language": "shell",
+				"marks": [
+					{
+						"text": "git checkout develop",
+						"label": "stand on the receiving branch"
+					},
+					{
+						"text": "git merge issue-7-auto-distance",
+						"label": "bring its commits in"
+					}
+				]
+			}
+		},
+		{
+			"title": "Before and after",
+			"say": "After the merge, develop has the feature's commits too.",
+			"board": {
+				"code": "before:  develop   o---o\n         issue-7       \\--o--o\n\nafter:   develop   o---o--o--o",
+				"language": "text",
+				"marks": [
+					{
+						"text": "o--o--o",
+						"label": "develop now includes issue-7"
+					}
+				]
+			}
+		},
+		{
+			"title": "Open a terminal",
+			"say": "These exercises are easiest in the terminal.",
+			"open": [
+				"editor"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "top-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".terminal-wrapper"
+				},
+				"hint": "press Ctrl+` (the key above Tab)."
+			}
+		},
+		{
+			"title": "Your turn",
+			"say": "`cd 03-merge`, then merge. Look at `Constants.java` afterwards: `AUTO_DISTANCE_METERS` is there.",
+			"target": {
+				"pane": "editor",
+				"selector": "[id='workbench.parts.panel']"
+			},
+			"cardAt": "top-right",
+			"waitFor": {
+				"hint": "merge issue-7-auto-distance into develop."
+			}
+		},
+		{
+			"title": "See it in the graph",
+			"say": "Open Source Control: the **Graph** shows the feature's commits now on develop.",
+			"target": {
+				"pane": "editor",
+				"selector": ".activitybar .action-label[aria-label^='Source Control']"
+			}
+		}
+	]
+}

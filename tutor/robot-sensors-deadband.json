@@ -1,0 +1,87 @@
+{
+	"steps": [
+		{
+			"title": "Sticks drift",
+			"say": "Real sticks never rest at exactly 0.0. A tiny 0.03 would make the robot creep. A **deadband** treats small values as zero."
+		},
+		{
+			"title": "A constant",
+			"say": "Give the number a name, at the top of the class. `final` means it never changes.",
+			"board": {
+				"code": "private static final double DEADBAND = 0.1;",
+				"marks": [
+					{
+						"text": "final",
+						"label": "can't change"
+					},
+					{
+						"text": "DEADBAND",
+						"label": "a name instead of a mystery 0.1"
+					}
+				]
+			}
+		},
+		{
+			"title": "The if",
+			"say": "`Math.abs` ignores the sign, so one check covers both directions.",
+			"board": {
+				"code": "if (Math.abs(forward) < DEADBAND) {\n    forward = 0.0;\n}\nif (Math.abs(turn) < DEADBAND) {\n    turn = 0.0;\n}",
+				"marks": [
+					{
+						"text": "Math.abs(forward)",
+						"label": "size without sign"
+					},
+					{
+						"text": "forward = 0.0;",
+						"label": "close enough to zero: stop"
+					}
+				]
+			}
+		},
+		{
+			"title": "Open Robot.java",
+			"say": "Press **Ctrl+P**, type `Robot` and press Enter. Quick Open finds any file by name, so you never have to dig through folders.",
+			"open": [
+				"editor"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "Robot.java"
+				},
+				"hint": "open Robot.java with Ctrl+P."
+			}
+		},
+		{
+			"title": "Find DEADBAND",
+			"say": "It's in teleopPeriodic. Press **Ctrl+F**, type `DEADBAND` and press Enter to jump to it.",
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "STEP 4: DEADBAND"
+				},
+				"hint": "find DEADBAND with Ctrl+F."
+			}
+		},
+		{
+			"title": "STEP 4",
+			"say": "Add the constant at the top of the class, then the two `if`s here.",
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "STEP 4: DEADBAND"
+			},
+			"cardAt": "bottom-right"
+		}
+	]
+}

@@ -1,0 +1,110 @@
+{
+	"steps": [
+		{
+			"title": "Why conflicts happen",
+			"say": "Both `develop` and `issue-9-max-speed` changed `MAX_SPEED`, to different values. Git can't guess which you want, so it stops and asks you."
+		},
+		{
+			"title": "Open a terminal",
+			"say": "These exercises are easiest in the terminal.",
+			"open": [
+				"editor"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "top-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".terminal-wrapper"
+				},
+				"hint": "press Ctrl+` (the key above Tab)."
+			}
+		},
+		{
+			"title": "Start the merge",
+			"say": "`cd 04-merge-conflict`, `git checkout develop`, then `git merge issue-9-max-speed`. Git says **CONFLICT**.",
+			"target": {
+				"pane": "editor",
+				"selector": "[id='workbench.parts.panel']"
+			},
+			"cardAt": "top-right",
+			"waitFor": {
+				"hint": "start the merge and see the conflict."
+			}
+		},
+		{
+			"title": "Conflict markers",
+			"say": "Git writes **both** versions into the file, fenced off with markers.",
+			"board": {
+				"code": "<<<<<<< HEAD\n    public static final double MAX_SPEED = 4.5;\n=======\n    public static final double MAX_SPEED = 5.2;\n>>>>>>> issue-9-max-speed",
+				"language": "text",
+				"marks": [
+					{
+						"text": "<<<<<<< HEAD",
+						"label": "start: your branch's version (develop)"
+					},
+					{
+						"text": "=======",
+						"label": "the divider"
+					},
+					{
+						"text": ">>>>>>> issue-9-max-speed",
+						"label": "end: the incoming branch's version"
+					}
+				]
+			}
+		},
+		{
+			"title": "Open Constants.java",
+			"say": "Press **Ctrl+P**, type `Constants` and press Enter. Quick Open finds any file by name, so you never have to dig through folders.",
+			"open": [
+				"editor"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "Constants.java"
+				},
+				"hint": "open Constants.java with Ctrl+P."
+			}
+		},
+		{
+			"title": "The editor helps",
+			"say": "Right above the conflict the editor offers **Accept Current Change**, **Accept Incoming Change** and **Accept Both Changes**. Pick one value for MAX_SPEED.",
+			"target": {
+				"pane": "editor",
+				"selector": ".codelens-decoration",
+				"text": "Accept Current Change"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "<<<<<<<"
+				},
+				"gone": true,
+				"hint": "accept one of the changes."
+			}
+		},
+		{
+			"title": "Finish the merge",
+			"say": "Save, then `git add Constants.java` and `git commit`. A commit with no `-m` opens a pre-filled merge message: just save and close it.",
+			"target": {
+				"pane": "editor",
+				"selector": "[id='workbench.parts.panel']"
+			},
+			"cardAt": "top-right",
+			"waitFor": {
+				"hint": "stage and commit the resolved file."
+			}
+		}
+	]
+}

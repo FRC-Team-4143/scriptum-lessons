@@ -1,0 +1,96 @@
+{
+	"steps": [
+		{
+			"title": "Open Main.java",
+			"say": "Every Java program starts somewhere. Press **Ctrl+P**, type `Main` and press Enter. Quick Open finds any file by name, so you never have to dig through folders.",
+			"open": [
+				"editor"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "Main.java"
+				},
+				"hint": "open Main.java with Ctrl+P."
+			}
+		},
+		{
+			"title": "The class",
+			"say": "`public class Main` is the **class**: a container for code. The file's name matches it (`Main.java`). Everything else goes between its `{` and the last `}`.",
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "public class Main"
+			},
+			"cardAt": "bottom-right"
+		},
+		{
+			"title": "Where it starts",
+			"say": "`main` is the method Java runs first. Copy this line exactly in every program for now; you'll learn what each word means in the Methods lesson.",
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "public static void main"
+			},
+			"cardAt": "bottom-right"
+		},
+		{
+			"title": "Printing",
+			"say": "`System.out.println(...)` prints a line of text. The text in double quotes is a **String**, printed exactly as written. The `;` ends the statement.",
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "System.out.println"
+			},
+			"cardAt": "bottom-right"
+		},
+		{
+			"title": "The pieces",
+			"say": "Here it is again, labeled.",
+			"board": {
+				"code": "public class Main {\n  public static void main(String[] args) {\n    System.out.println(\"Hello, World!\");\n  }\n}",
+				"marks": [
+					{
+						"text": "public class Main",
+						"label": "the class: the file's container"
+					},
+					{
+						"text": "public static void main(String[] args)",
+						"label": "where the program starts"
+					},
+					{
+						"text": "\"Hello, World!\"",
+						"label": "a String: text in double quotes"
+					},
+					{
+						"text": ";",
+						"label": "end of the statement"
+					}
+				]
+			}
+		},
+		{
+			"title": "Run it",
+			"say": "Click the **Run** button (▷) at the top right of the file. The output appears in the terminal at the bottom.",
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "top-right",
+			"waitFor": {
+				"hint": "run the program and read the output."
+			}
+		},
+		{
+			"title": "Check your work",
+			"say": "When it runs the way you expect, open the lesson chip and press **Verify**. Each checkpoint tells you what it's looking for if it doesn't pass yet.",
+			"target": {
+				"selector": "[data-tour='lesson']"
+			}
+		}
+	]
+}

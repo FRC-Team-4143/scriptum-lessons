@@ -24,16 +24,7 @@
 			"summary": "Start, watch it build, read the console, then enable the robot.",
 			"topic": "Building & running",
 			"order": 20,
-			"modules": [
-				"robot-drivetrain",
-				"robot-sensors",
-				"robot-drive-math",
-				"robot-odometry",
-				"robot-subsystems",
-				"robot-control-theory",
-				"robot-state-machines",
-				"robot-autonomous"
-			],
+			"modules": ["robot-drivetrain", "robot-sensors", "robot-drive-math", "robot-odometry", "robot-subsystems", "robot-control-theory", "robot-state-machines", "robot-autonomous"],
 			"needs": ["driverStation"]
 		},
 		{
@@ -70,6 +61,510 @@
 			"topic": "Java",
 			"order": 40,
 			"modules": ["java-variables", "robot-drivetrain"]
+		},
+		{
+			"id": "hello-world-first-program",
+			"title": "Your first Java program",
+			"summary": "What every line of Main.java does, then run it.",
+			"topic": "Java",
+			"modules": ["hello-world"],
+			"order": 180
+		},
+		{
+			"id": "hello-world-errors",
+			"title": "Reading an error",
+			"summary": "Break your program on purpose and learn to read what Java tells you.",
+			"topic": "Java",
+			"modules": ["hello-world"],
+			"order": 181
+		},
+		{
+			"id": "java-variables-printing",
+			"title": "Printing a variable",
+			"summary": "Join text and values with + so the output says what it means.",
+			"topic": "Java",
+			"modules": ["java-variables"],
+			"order": 202
+		},
+		{
+			"id": "java-variables-constants-enums",
+			"title": "Constants and enums",
+			"summary": "final, SCREAMING_SNAKE_CASE, and enums nested in Main.",
+			"topic": "Java",
+			"modules": ["java-variables"],
+			"order": 203
+		},
+		{
+			"id": "java-operators-arithmetic",
+			"title": "Arithmetic and return",
+			"summary": "Turning a stub into a real answer with + - * /.",
+			"topic": "Java",
+			"modules": ["java-operators"],
+			"order": 224
+		},
+		{
+			"id": "java-operators-remainder",
+			"title": "Remainder and even numbers",
+			"summary": "What % does, and returning a comparison directly.",
+			"topic": "Java",
+			"modules": ["java-operators"],
+			"order": 225
+		},
+		{
+			"id": "java-operators-assignment",
+			"title": "Assignment operators",
+			"summary": "+=, -=, *= and /=, traced one line at a time.",
+			"topic": "Java",
+			"modules": ["java-operators"],
+			"order": 226
+		},
+		{
+			"id": "java-operators-integer-division",
+			"title": "Integer division",
+			"summary": "Why 5 / 2 is 2, and how to get 2.5.",
+			"topic": "Java",
+			"modules": ["java-operators", "java-arrays"],
+			"order": 227
+		},
+		{
+			"id": "java-conditions-if-chain",
+			"title": "if, else if, else",
+			"summary": "Sorting a value into ranges, and why order matters.",
+			"topic": "Java",
+			"modules": ["java-conditions"],
+			"order": 248
+		},
+		{
+			"id": "java-conditions-switch",
+			"title": "switch",
+			"summary": "One value, many cases, and a default.",
+			"topic": "Java",
+			"modules": ["java-conditions"],
+			"order": 249
+		},
+		{
+			"id": "java-conditions-logic",
+			"title": "&&, || and !",
+			"summary": "Combining true/false values, and the ternary shortcut.",
+			"topic": "Java",
+			"modules": ["java-conditions"],
+			"order": 250
+		},
+		{
+			"id": "java-loops-for",
+			"title": "The for loop",
+			"summary": "Its three parts, and counting from 1 to n.",
+			"topic": "Java",
+			"modules": ["java-loops"],
+			"order": 271
+		},
+		{
+			"id": "java-loops-accumulate",
+			"title": "Adding things up in a loop",
+			"summary": "Declare the total before the loop, update it inside.",
+			"topic": "Java",
+			"modules": ["java-loops"],
+			"order": 272
+		},
+		{
+			"id": "java-loops-fizzbuzz",
+			"title": "FizzBuzz",
+			"summary": "Checking the combined case first, and joining with commas.",
+			"topic": "Java",
+			"modules": ["java-loops"],
+			"order": 273
+		},
+		{
+			"id": "java-arrays-basics",
+			"title": "Arrays and indexes",
+			"summary": "Making, reading and measuring an array.",
+			"topic": "Java",
+			"modules": ["java-arrays"],
+			"order": 294
+		},
+		{
+			"id": "java-arrays-summaries",
+			"title": "Summarizing an array",
+			"summary": "Largest so far, totals, and stopping early.",
+			"topic": "Java",
+			"modules": ["java-arrays"],
+			"order": 295
+		},
+		{
+			"id": "java-arrays-new-arrays",
+			"title": "Building a new array",
+			"summary": "Leaving the caller's array alone, and filling Fibonacci.",
+			"topic": "Java",
+			"modules": ["java-arrays"],
+			"order": 296
+		},
+		{
+			"id": "java-methods-anatomy",
+			"title": "Writing a method",
+			"summary": "Every part of a method declaration, using clamp.",
+			"topic": "Java",
+			"modules": ["java-methods", "robot-drive-math"],
+			"order": 317
+		},
+		{
+			"id": "java-methods-reuse",
+			"title": "Methods that use methods",
+			"summary": "scaleJoystick calls clamp; isPalindrome calls reverseString.",
+			"topic": "Java",
+			"modules": ["java-methods"],
+			"order": 318
+		},
+		{
+			"id": "java-methods-edge-cases",
+			"title": "Edge cases",
+			"summary": "0, 1, negatives and empty strings: where methods usually break.",
+			"topic": "Java",
+			"modules": ["java-methods", "java-recursion"],
+			"order": 319
+		},
+		{
+			"id": "java-classes-blueprint",
+			"title": "Classes and objects",
+			"summary": "A class is a blueprint; new makes an object from it.",
+			"topic": "Java",
+			"modules": ["java-classes-objects"],
+			"order": 320
+		},
+		{
+			"id": "java-classes-fields-constructor",
+			"title": "Fields and constructors",
+			"summary": "What each account remembers, and starting it in a valid state.",
+			"topic": "Java",
+			"modules": ["java-classes-objects"],
+			"order": 321
+		},
+		{
+			"id": "java-classes-encapsulation",
+			"title": "Protecting the data",
+			"summary": "Rules in methods, a getter, and transfer built from them.",
+			"topic": "Java",
+			"modules": ["java-classes-objects"],
+			"order": 322
+		},
+		{
+			"id": "java-recursion-recipe",
+			"title": "Base case and recursive step",
+			"summary": "The two-part recipe every recursive method follows.",
+			"topic": "Java",
+			"modules": ["java-recursion"],
+			"order": 343
+		},
+		{
+			"id": "java-recursion-stack-overflow",
+			"title": "When recursion never stops",
+			"summary": "What StackOverflowError means and how to fix it.",
+			"topic": "Java",
+			"modules": ["java-recursion"],
+			"order": 344
+		},
+		{
+			"id": "java-inheritance-extends",
+			"title": "extends and super",
+			"summary": "Building SavingsAccount on top of BankAccount.",
+			"topic": "Java",
+			"modules": ["java-inheritance"],
+			"order": 365
+		},
+		{
+			"id": "java-inheritance-override",
+			"title": "Overriding a method",
+			"summary": "CheckingAccount replaces withdraw with its own rules.",
+			"topic": "Java",
+			"modules": ["java-inheritance"],
+			"order": 366
+		},
+		{
+			"id": "robot-drivetrain-where-code-goes",
+			"title": "Where your robot code goes",
+			"summary": "Robot.java, teleopPeriodic, and how often it runs.",
+			"topic": "Robot",
+			"modules": ["robot-drivetrain"],
+			"order": 387
+		},
+		{
+			"id": "robot-drivetrain-tank",
+			"title": "Tank drive",
+			"summary": "One stick per side: your first driving code.",
+			"topic": "Robot",
+			"modules": ["robot-drivetrain"],
+			"order": 388
+		},
+		{
+			"id": "robot-drivetrain-arcade",
+			"title": "Arcade drive math",
+			"summary": "forward + turn and forward - turn, and why it turns.",
+			"topic": "Robot",
+			"modules": ["robot-drivetrain"],
+			"order": 389
+		},
+		{
+			"id": "robot-sensors-encoders",
+			"title": "Encoders and meters",
+			"summary": "Wheel rotations to distance and speed.",
+			"topic": "Robot",
+			"modules": ["robot-sensors"],
+			"order": 410
+		},
+		{
+			"id": "robot-sensors-robot-speed",
+			"title": "From two wheels to one robot",
+			"summary": "Linear speed, angular speed and distance.",
+			"topic": "Robot",
+			"modules": ["robot-sensors"],
+			"order": 411
+		},
+		{
+			"id": "robot-sensors-deadband",
+			"title": "Deadbands and constants",
+			"summary": "Stopping a drifting stick from creeping the robot.",
+			"topic": "Robot",
+			"modules": ["robot-sensors"],
+			"order": 412
+		},
+		{
+			"id": "robot-sensors-bang-bang",
+			"title": "Driving 2 meters by itself",
+			"summary": "Bang-bang control, and why it overshoots.",
+			"topic": "Robot",
+			"modules": ["robot-sensors"],
+			"order": 413
+		},
+		{
+			"id": "robot-drive-math-methods",
+			"title": "Moving math into methods",
+			"summary": "DriveMath: numbers in, a number out.",
+			"topic": "Robot",
+			"modules": ["robot-drive-math"],
+			"order": 434
+		},
+		{
+			"id": "robot-drive-math-arrays",
+			"title": "Returning two numbers",
+			"summary": "arcadeToWheelSpeeds returns {left, right} in an array.",
+			"topic": "Robot",
+			"modules": ["robot-drive-math"],
+			"order": 435
+		},
+		{
+			"id": "robot-drive-math-average",
+			"title": "Smoothing with a loop",
+			"summary": "average() over an array, and the SmoothedSpeed graph.",
+			"topic": "Robot",
+			"modules": ["robot-drive-math"],
+			"order": 436
+		},
+		{
+			"id": "robot-drive-math-io-loop",
+			"title": "The robot loop",
+			"summary": "readInputs, your code, writeOutputs: every 20 ms.",
+			"topic": "Robot",
+			"modules": ["robot-drive-math", "robot-odometry"],
+			"order": 437
+		},
+		{
+			"id": "robot-odometry-objects",
+			"title": "Objects from WPILib",
+			"summary": "new, fields, methods, and import.",
+			"topic": "Robot",
+			"modules": ["robot-odometry"],
+			"order": 458
+		},
+		{
+			"id": "robot-odometry-oi",
+			"title": "The OI class",
+			"summary": "static methods on an abstract class that owns the controller.",
+			"topic": "Robot",
+			"modules": ["robot-odometry", "robot-subsystems"],
+			"order": 459
+		},
+		{
+			"id": "robot-odometry-kinematics",
+			"title": "Kinematics",
+			"summary": "Wheel speeds to robot speeds, the WPILib way.",
+			"topic": "Robot",
+			"modules": ["robot-odometry"],
+			"order": 440
+		},
+		{
+			"id": "robot-odometry-pose",
+			"title": "Where is the robot?",
+			"summary": "Pose estimation, and why it drifts from the truth.",
+			"topic": "Robot",
+			"modules": ["robot-odometry"],
+			"order": 441
+		},
+		{
+			"id": "robot-subsystems-big-idea",
+			"title": "Mechanisms, subsystems, container",
+			"summary": "How a real robot's code is organized.",
+			"topic": "Robot",
+			"modules": ["robot-subsystems"],
+			"order": 462
+		},
+		{
+			"id": "robot-subsystems-states",
+			"title": "Enums and switch",
+			"summary": "A subsystem's states, and doing something different in each.",
+			"topic": "Robot",
+			"modules": ["robot-subsystems", "robot-state-machines"],
+			"order": 463
+		},
+		{
+			"id": "robot-subsystems-singleton",
+			"title": "One shared subsystem",
+			"summary": "private constructor, getInstance(), and inheritance.",
+			"topic": "Robot",
+			"modules": ["robot-subsystems"],
+			"order": 464
+		},
+		{
+			"id": "robot-subsystems-shooter",
+			"title": "Building the shooter",
+			"summary": "Constants, the roller, getIos, and registering it.",
+			"topic": "Robot",
+			"modules": ["robot-subsystems"],
+			"order": 465
+		},
+		{
+			"id": "robot-control-error",
+			"title": "Error and bang-bang",
+			"summary": "The difference between want and have, and on/off control.",
+			"topic": "Robot",
+			"modules": ["robot-control-theory"],
+			"order": 486
+		},
+		{
+			"id": "robot-control-units",
+			"title": "Getting the units right",
+			"summary": "rad/s to rotations per second to volts to duty cycle.",
+			"topic": "Robot",
+			"modules": ["robot-control-theory"],
+			"order": 487
+		},
+		{
+			"id": "robot-control-tuning",
+			"title": "Tuning kV and kP",
+			"summary": "Feedforward first, then add feedback, watching the graph.",
+			"topic": "Robot",
+			"modules": ["robot-control-theory"],
+			"order": 488
+		},
+		{
+			"id": "robot-state-machines-states",
+			"title": "States and transitions",
+			"summary": "IDLE, SPIN_UP, SHOOT, and the rules between them.",
+			"topic": "Robot",
+			"modules": ["robot-state-machines"],
+			"order": 509
+		},
+		{
+			"id": "robot-state-machines-commands",
+			"title": "Commands and lambdas",
+			"summary": "startEnd, runOnce, and handing over code to run later.",
+			"topic": "Robot",
+			"modules": ["robot-state-machines", "robot-autonomous"],
+			"order": 510
+		},
+		{
+			"id": "robot-state-machines-bindings",
+			"title": "Buttons to commands",
+			"summary": "whileTrue vs onTrue, then watch the state change.",
+			"topic": "Robot",
+			"modules": ["robot-state-machines"],
+			"order": 511
+		},
+		{
+			"id": "robot-autonomous-command-lifecycle",
+			"title": "Inside a command",
+			"summary": "initialize, execute, isFinished, end.",
+			"topic": "Robot",
+			"modules": ["robot-autonomous"],
+			"order": 532
+		},
+		{
+			"id": "robot-autonomous-drive-distance",
+			"title": "Driving to a distance",
+			"summary": "Proportional control: speed that shrinks as you arrive.",
+			"topic": "Robot",
+			"modules": ["robot-autonomous"],
+			"order": 533
+		},
+		{
+			"id": "robot-autonomous-sequences",
+			"title": "Building routines",
+			"summary": "Commands.sequence, and a for loop for the square.",
+			"topic": "Robot",
+			"modules": ["robot-autonomous"],
+			"order": 534
+		},
+		{
+			"id": "git-branches",
+			"title": "Feature branches",
+			"summary": "Exercise 2: branch off develop, name it right, commit twice.",
+			"topic": "Git",
+			"modules": ["git-basics"],
+			"order": 115
+		},
+		{
+			"id": "git-merging",
+			"title": "Merging a finished feature",
+			"summary": "Exercise 3: bring issue-7 into develop.",
+			"topic": "Git",
+			"modules": ["git-basics"],
+			"order": 116
+		},
+		{
+			"id": "git-merge-conflicts",
+			"title": "Resolving a merge conflict",
+			"summary": "Exercise 4: when two branches changed the same line.",
+			"topic": "Git",
+			"modules": ["git-basics"],
+			"order": 117
+		},
+		{
+			"id": "git-rebase",
+			"title": "Rebase instead of merge",
+			"summary": "Exercise 5: replay your commit on top of the new develop.",
+			"topic": "Git",
+			"modules": ["git-basics"],
+			"order": 118
+		},
+		{
+			"id": "advantagescope-3d-swerve",
+			"title": "3D field and swerve",
+			"summary": "Lesson steps 6 to 8: RobotPose3d, Orbit Robot, the Swerve tab.",
+			"topic": "Tools",
+			"modules": ["advantagescope-intro"],
+			"order": 139
+		},
+		{
+			"id": "elastic-writing-values",
+			"title": "Widgets that send values",
+			"summary": "Sliders, choosers and toggles that the robot reads.",
+			"topic": "Tools",
+			"modules": ["elastic-intro"],
+			"order": 140
+		},
+		{
+			"id": "elastic-layouts",
+			"title": "Saving and opening layouts",
+			"summary": "File → Save, and getting back to a clean slate.",
+			"topic": "Tools",
+			"modules": ["elastic-intro"],
+			"order": 141
+		},
+		{
+			"id": "choreo-why-not-generate",
+			"title": "When a path won't generate",
+			"summary": "Constraints the robot can't meet, and the starter ones.",
+			"topic": "Tools",
+			"modules": ["choreo-intro"],
+			"order": 162
 		}
 	]
 }

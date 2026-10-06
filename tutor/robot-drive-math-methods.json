@@ -1,0 +1,84 @@
+{
+	"steps": [
+		{
+			"title": "A method",
+			"say": "A method names a job. This one takes two numbers and returns their average.",
+			"board": {
+				"code": "public static double linearSpeed(double leftMetersPerSecond, double rightMetersPerSecond) {\n    return (leftMetersPerSecond + rightMetersPerSecond) / 2.0;\n}",
+				"marks": [
+					{
+						"text": "double linearSpeed",
+						"label": "returns a double, named linearSpeed"
+					},
+					{
+						"text": "double leftMetersPerSecond, double rightMetersPerSecond",
+						"label": "what the caller provides"
+					},
+					{
+						"text": "return",
+						"label": "hands the answer back"
+					}
+				]
+			}
+		},
+		{
+			"title": "Why bother",
+			"say": "`DriveMath` never touches a motor or sensor, so each method can be tested on its own. The drivetrain calls them, and `Robot.java` reads almost like a sentence."
+		},
+		{
+			"title": "Open DriveMath.java",
+			"say": "Press **Ctrl+P**, type `DriveMath` and press Enter. Quick Open finds any file by name, so you never have to dig through folders.",
+			"open": [
+				"editor"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "DriveMath.java"
+				},
+				"hint": "open DriveMath.java with Ctrl+P."
+			}
+		},
+		{
+			"title": "Your first method",
+			"say": "Start with `rotationsToMeters`, then click **Verify**: each method has its own checkpoint.",
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "public static double rotationsToMeters"
+			},
+			"cardAt": "bottom-right"
+		},
+		{
+			"title": "Find linearSpeed",
+			"say": "The next method down. Press **Ctrl+F**, type `linearSpeed` and press Enter to jump to it.",
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "public static double linearSpeed"
+				},
+				"hint": "find linearSpeed with Ctrl+F."
+			}
+		},
+		{
+			"title": "Then this one",
+			"say": "The average of the two sides.",
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "public static double linearSpeed"
+			},
+			"cardAt": "bottom-right"
+		}
+	]
+}

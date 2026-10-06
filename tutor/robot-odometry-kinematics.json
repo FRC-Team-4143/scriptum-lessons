@@ -1,0 +1,128 @@
+{
+	"steps": [
+		{
+			"title": "Wheel speeds in, robot speeds out",
+			"say": "`DifferentialDriveKinematics` does the math you wrote by hand last lesson.",
+			"board": {
+				"code": "DifferentialDriveWheelSpeeds wheels =\n    new DifferentialDriveWheelSpeeds(getLeftSpeed(), getRightSpeed());\nChassisSpeeds speeds = kinematics.toChassisSpeeds(wheels);\n// speeds.vxMetersPerSecond     forward\n// speeds.omegaRadiansPerSecond turning",
+				"marks": [
+					{
+						"text": "new DifferentialDriveWheelSpeeds",
+						"label": "left and right"
+					},
+					{
+						"text": "kinematics.toChassisSpeeds",
+						"label": "convert"
+					},
+					{
+						"text": "vxMetersPerSecond",
+						"label": "forward speed"
+					}
+				]
+			}
+		},
+		{
+			"title": "Open DifferentialDriveMech.java",
+			"say": "Press **Ctrl+P**, type `DifferentialDriveMech` and press Enter. Quick Open finds any file by name, so you never have to dig through folders.",
+			"open": [
+				"editor"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "DifferentialDriveMech.java"
+				},
+				"hint": "open DifferentialDriveMech.java with Ctrl+P."
+			}
+		},
+		{
+			"title": "Find getChassisSpeeds",
+			"say": "Press **Ctrl+F** and search for `getChassisSpeeds`, then fill it in.",
+			"waitFor": {
+				"hint": "write getChassisSpeeds."
+			},
+			"cardAt": "bottom-right"
+		},
+		{
+			"title": "Start the robot",
+			"say": "Your code only runs once it's built and started.",
+			"target": {
+				"selector": "[data-tour='sim-controls']"
+			},
+			"waitFor": {
+				"target": {
+					"selector": "[data-tour='code-status']",
+					"text": "Running"
+				},
+				"hint": "press Start and wait for Running."
+			}
+		},
+		{
+			"title": "Enable in Teleop",
+			"say": "Pick **Teleop** and press **Enable**. Robot code runs only while it's enabled.",
+			"target": {
+				"selector": "[data-tour='enable']"
+			},
+			"waitFor": {
+				"target": {
+					"selector": "[data-tour='enable'] button",
+					"text": "Enabled"
+				},
+				"hint": "choose Teleop, then Enable."
+			}
+		},
+		{
+			"title": "WPILib's answer",
+			"say": "Drive around. In AdvantageScope, search for `LinearSpeed`, then drag **Drive/LinearSpeed** onto the **Left Axis**.",
+			"close": [
+				"editor",
+				"preview",
+				"elastic"
+			],
+			"open": [
+				"scope"
+			],
+			"target": {
+				"pane": "scope",
+				"selector": ".line-graph-left.source-list"
+			},
+			"waitFor": {
+				"target": {
+					"pane": "scope",
+					"selector": ".line-graph-left.source-list .key-container",
+					"text": "Drive/LinearSpeed"
+				},
+				"hint": "drag Drive/LinearSpeed onto the graph."
+			}
+		},
+		{
+			"title": "Your answer",
+			"say": "Your DriveMath version should sit right on top of it. In AdvantageScope, search for `LinearSpeedByHand`, then drag **Drive/LinearSpeedByHand** onto the **Right Axis**.",
+			"close": [
+				"editor",
+				"preview",
+				"elastic"
+			],
+			"open": [
+				"scope"
+			],
+			"target": {
+				"pane": "scope",
+				"selector": ".line-graph-right.source-list"
+			},
+			"waitFor": {
+				"target": {
+					"pane": "scope",
+					"selector": ".line-graph-right.source-list .key-container",
+					"text": "Drive/LinearSpeedByHand"
+				},
+				"hint": "drag Drive/LinearSpeedByHand onto the graph."
+			}
+		}
+	]
+}

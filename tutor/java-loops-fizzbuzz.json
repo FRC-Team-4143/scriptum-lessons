@@ -1,0 +1,39 @@
+{
+	"steps": [
+		{
+			"title": "Order of checks",
+			"say": "15 is divisible by 3 **and** 5. If you test 3 first, it says Fizz and never reaches FizzBuzz.",
+			"board": {
+				"code": "if (i % 15 == 0) {\n    word = \"FizzBuzz\";\n} else if (i % 3 == 0) {\n    word = \"Fizz\";\n} else if (i % 5 == 0) {\n    word = \"Buzz\";\n} else {\n    word = \"\" + i;\n}",
+				"marks": [
+					{
+						"text": "i % 15 == 0",
+						"label": "both 3 and 5: check this first"
+					},
+					{
+						"text": "\"\" + i",
+						"label": "turns the number into text"
+					}
+				]
+			}
+		},
+		{
+			"title": "Commas between",
+			"say": "Add `\", \"` **before** every item except the first, so nothing trails at the end.",
+			"board": {
+				"code": "String result = \"\";\nfor (int i = 1; i <= n; i++) {\n    if (i > 1) {\n        result += \", \";\n    }\n    result += word;\n}",
+				"marks": [
+					{
+						"text": "if (i > 1)",
+						"label": "not before the first item"
+					},
+					{
+						"text": "result += \", \";",
+						"label": "the separator"
+					}
+				],
+				"caption": "fizzBuzz(5) is \"1, 2, Fizz, 4, Buzz\""
+			}
+		}
+	]
+}

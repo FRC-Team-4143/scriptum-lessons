@@ -1,0 +1,29 @@
+{
+	"steps": [
+		{
+			"title": "A chain of conversions",
+			"say": "The target is in radians per second, kV wants rotations per second, and the motor wants a duty cycle.",
+			"board": {
+				"code": "double rps = CONSTANTS.SHOOT_VELOCITY / (2 * Math.PI);   // rad/s -> rotations/s\ndouble volts = CONSTANTS.FLYWHEEL_KV * rps;              // what it takes to hold that speed\ndouble duty = volts / 12.0;                              // a fraction of the battery",
+				"marks": [
+					{
+						"text": "/ (2 * Math.PI)",
+						"label": "one rotation is 2 pi radians"
+					},
+					{
+						"text": "FLYWHEEL_KV * rps",
+						"label": "feedforward"
+					},
+					{
+						"text": "/ 12.0",
+						"label": "volts to duty cycle"
+					}
+				]
+			}
+		},
+		{
+			"title": "Half of robot programming",
+			"say": "A wrong unit doesn't crash: it just makes the robot do the wrong thing. Write the unit next to every number you can."
+		}
+	]
+}

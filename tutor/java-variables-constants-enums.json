@@ -1,0 +1,102 @@
+{
+	"steps": [
+		{
+			"title": "A constant",
+			"say": "A constant is a value that never changes. `static` makes it belong to the class, so it's declared **outside** `main`.",
+			"board": {
+				"code": "public static final double MAX_SPEED = 5.0;",
+				"marks": [
+					{
+						"text": "static",
+						"label": "belongs to the class, not one method"
+					},
+					{
+						"text": "final",
+						"label": "can never be reassigned"
+					},
+					{
+						"text": "MAX_SPEED",
+						"label": "team standard: ALL_CAPS for constants"
+					}
+				]
+			}
+		},
+		{
+			"title": "An enum",
+			"say": "An **enum** is a type you invent with a fixed list of values. A variable of that type can only hold one of them, so typos are impossible.",
+			"board": {
+				"code": "enum ALLIANCE {\n    RED,\n    BLUE\n}\n\nALLIANCE ours = ALLIANCE.RED;",
+				"marks": [
+					{
+						"text": "enum ALLIANCE",
+						"label": "a new type named ALLIANCE"
+					},
+					{
+						"text": "RED,\n    BLUE",
+						"label": "its only allowed values"
+					},
+					{
+						"text": "ALLIANCE.RED",
+						"label": "using one of them"
+					}
+				]
+			}
+		},
+		{
+			"title": "Where they go",
+			"say": "Both enums go **inside** `Main`, next to the constants, because only `Main` uses them.",
+			"board": {
+				"code": "public class Main {\n    public static final String TEAM_NAME = \"Team 4143\";\n    enum ALLIANCE { RED, BLUE }\n\n    public static void main(String[] args) { ... }\n}",
+				"marks": [
+					{
+						"text": "enum ALLIANCE { RED, BLUE }",
+						"label": "nested inside Main"
+					},
+					{
+						"text": "public static void main",
+						"label": "not inside main"
+					}
+				]
+			}
+		},
+		{
+			"title": "Open Main.java",
+			"say": "Press **Ctrl+P**, type `Main` and press Enter. Quick Open finds any file by name, so you never have to dig through folders.",
+			"open": [
+				"editor"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "Main.java"
+				},
+				"hint": "open Main.java with Ctrl+P."
+			}
+		},
+		{
+			"title": "Your first TODO",
+			"say": "This line is waiting for its value. Put `\"Team 4143\"` between the quotes.",
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "TEAM_NAME ="
+			},
+			"cardAt": "bottom-right"
+		},
+		{
+			"title": "Your enum goes here",
+			"say": "Write `enum ALLIANCE { RED, BLUE }` under this comment.",
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "define an enum named ALLIANCE"
+			},
+			"cardAt": "bottom-right"
+		}
+	]
+}

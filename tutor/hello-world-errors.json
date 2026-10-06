@@ -1,0 +1,83 @@
+{
+	"steps": [
+		{
+			"title": "Mistakes are normal",
+			"say": "Every programmer writes code that doesn't build. The skill is reading the error. Let's make one on purpose."
+		},
+		{
+			"title": "Open Main.java",
+			"say": "Press **Ctrl+P**, type `Main` and press Enter. Quick Open finds any file by name, so you never have to dig through folders.",
+			"open": [
+				"editor"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "Main.java"
+				},
+				"hint": "open Main.java with Ctrl+P."
+			}
+		},
+		{
+			"title": "Break it",
+			"say": "Delete the `;` at the end of the `println` line. A red squiggle appears right away: the editor checks your code as you type.",
+			"waitFor": {
+				"hint": "delete the semicolon."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "System.out.println"
+			},
+			"cardAt": "bottom-right"
+		},
+		{
+			"title": "The problem count",
+			"say": "The bottom-left corner counts problems. Click it to open the list: each one says the **file**, the **line**, and what's wrong.",
+			"target": {
+				"pane": "editor",
+				"selector": "[id='status.problems']"
+			}
+		},
+		{
+			"title": "What the error says",
+			"say": "Java errors look scary but have the same shape every time.",
+			"board": {
+				"code": "Main.java:3: error: ';' expected\n    System.out.println(\"Hello, World!\")\n                                       ^",
+				"marks": [
+					{
+						"text": "Main.java:3",
+						"label": "which file, which line"
+					},
+					{
+						"text": "';' expected",
+						"label": "what Java wanted"
+					},
+					{
+						"text": "^",
+						"label": "where it noticed"
+					}
+				],
+				"caption": "Read the first error first: later ones are often caused by it."
+			}
+		},
+		{
+			"title": "Fix it",
+			"say": "Put the `;` back. The squiggle and the problem count disappear.",
+			"waitFor": {
+				"hint": "put the semicolon back."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "System.out.println"
+			},
+			"cardAt": "bottom-right"
+		}
+	]
+}
