@@ -60,7 +60,7 @@
 			"summary": "Paths, waypoints, constraints, and generating a trajectory.",
 			"topic": "Tools",
 			"order": 32,
-			"modules": ["choreo-intro", "robot-autonomous"],
+			"modules": ["choreo-intro"],
 			"needs": ["choreo"]
 		},
 		{
@@ -69,7 +69,7 @@
 			"summary": "Type, name and value, the four types you'll use most, and constants.",
 			"topic": "Java",
 			"order": 40,
-			"modules": ["hello-world", "java-variables", "robot-drivetrain"]
+			"modules": ["java-variables", "robot-drivetrain"]
 		}
 	]
 }

@@ -99,6 +99,14 @@ describe("tutor.json", () => {
 		}
 	});
 
+	test("every concept belongs to a lesson, since that's the only way to reach it", () => {
+		// The Dozer button lists only the loaded lesson's guides, so a concept no
+		// lesson names can never be started.
+		for (const concept of index.concepts) {
+			expect(concept.modules?.length, `${concept.id} lists no lessons`).toBeGreaterThan(0);
+		}
+	});
+
 	test("every file in tutor/ is listed", () => {
 		const listed = new Set(index.concepts.map((c) => `${c.id}.json`));
 		for (const file of readdirSync(resolve(repoRoot, "tutor"))) {

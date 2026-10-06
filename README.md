@@ -49,7 +49,8 @@ steps are in `tutor/<id>.json`:
 - **Building & running**: `build-and-run` (Start, the console, Enable)
 - **Java**: `java-variables`
 
-A concept shows up first under "For this lesson" while one of its `modules` is loaded. The step
+A concept shows up in Dozer's list only while one of its `modules` is loaded (there's no browsing
+the rest), so list only lessons that teach or use what it shows. The step
 format (targets, regions, boards, "your turn") is in Scriptum's
 `docs/lessons/tutor.md`. `bun test tests/tutor.test.ts` checks the files. To check the
 walkthrough itself, open it in Scriptum: a step whose ring is missing has a selector that

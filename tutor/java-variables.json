@@ -88,18 +88,9 @@
 		},
 		{
 			"title": "Now in your code",
-			"say": "Let's find one in your own project. In the java-variables lesson it's `src/Main.java`.",
+			"say": "Your lesson's code is full of these. Look for a line shaped like the one on the board: a **type**, a **name**, `=`, a **value**, and a `;`. Every one is a named box holding something.",
 			"open": ["editor"],
-			"target": { "pane": "editor" },
-			"waitFor": {
-				"target": { "pane": "editor", "selector": ".view-lines .view-line", "text": "TEAM_NAME =" },
-				"hint": "open src/Main.java from the Explorer."
-			}
-		},
-		{
-			"title": "There it is",
-			"say": "That's a constant waiting for its value: type `String`, name `TEAM_NAME`, and an empty value `\"\"`. Your task is to put the right text between the quotes.",
-			"target": { "pane": "editor", "selector": ".view-lines .view-line", "text": "TEAM_NAME =" }
+			"target": { "pane": "editor" }
 		}
 	]
 }
