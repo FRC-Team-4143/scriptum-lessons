@@ -11,6 +11,8 @@ in the Scriptum repo for the full schema reference this repo follows.
 
 ```text
 modules.json               curriculum-order index: each module's id, order, and track
+tutor.json                 Dozer's walkthroughs (the tutor): each concept's id, title, topic, lessons
+tutor/<id>.json            one walkthrough's steps
 modules-meta/<id>.json     one module's title, description, kind, prerequisites, checkpoints
 modules/<id>/              one directory per module: the complete starting project
 checkpoints/<id>/setup.sh  optional, runs once right after the module loads
@@ -34,6 +36,25 @@ Three tracks, listed in curriculum order in `modules.json`:
   `robot-state-machines` (State Machines and Commands) and `robot-autonomous` (Autonomous).
   Each module's `README.md` is the lesson. Computer Vision has no robot code, so it has no module.
   See [Robot modules](#robot-modules).
+
+## Tutor (Dozer)
+
+The **Dozer** button in Scriptum's top bar opens short walkthroughs: Dozer, the team's plow
+robot, spotlights the real buttons inside AdvantageScope, Choreo, Elastic, the editor and the
+Driver Station, and can label code on a board. They're listed in `tutor.json` and each one's
+steps are in `tutor/<id>.json`:
+
+- **Tools**: `advantagescope-basics`, `choreo-basics`, `elastic-basics`
+- **Git**: `git-source-control` (Source Control in the editor), `git-commands` (on the board)
+- **Building & running**: `build-and-run` (Start, the console, Enable)
+- **Java**: `java-variables`
+
+A concept shows up in Dozer's list only while one of its `modules` is loaded (there's no browsing
+the rest), so list only lessons that teach or use what it shows. The step
+format (targets, regions, boards, "your turn") is in Scriptum's
+`docs/lessons/tutor.md`. `bun test tests/tutor.test.ts` checks the files. To check the
+walkthrough itself, open it in Scriptum: a step whose ring is missing has a selector that
+didn't match.
 
 ## Publishing
 
