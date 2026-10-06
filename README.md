@@ -24,7 +24,8 @@ tests/                     bun tests for the checkpoint verifiers
 
 Three tracks, listed in curriculum order in `modules.json`:
 
-- **Tools**: git, AdvantageScope, Elastic, and Choreo introductions.
+- **Tools**: `editor-basics` (Meet the Editor: files, folders, saving, the terminal, for someone
+  who has never used a code editor), then git, AdvantageScope, Elastic, and Choreo introductions.
 - **Java Programming**: `hello-world` through `java-inheritance`, each
   module locked until its prerequisite is complete.
 - **FRC Robot**: a differential-drive robot that uses [MWLib](https://github.com/FRC-Team-4143/MW-Lib)
@@ -44,6 +45,9 @@ robot, spotlights the real buttons inside AdvantageScope, Choreo, Elastic, the e
 Driver Station, and can label code on a board. They're listed in `tutor.json` and each one's
 steps are in `tutor/<id>.json`:
 
+- **Editor** (for `editor-basics`, written for someone who knows nothing): `editor-tour`,
+  `files-and-folders`, `files-make`, `editor-typing`, `files-rename-delete`, `terminal-basics`,
+  `find-things-fast`, `editor-first-run`
 - **Tools**: `advantagescope-basics`, `choreo-basics`, `elastic-basics`
 - **Git**: `git-source-control` (Source Control in the editor), `git-commands` (on the board)
 - **Building & running**: `build-and-run` (Start, the console, Enable)

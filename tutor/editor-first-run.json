@@ -1,0 +1,98 @@
+{
+	"steps": [
+		{
+			"title": "Open Main.java",
+			"say": "Time to run some code. Press **Ctrl+P**, type `Main` and press Enter. Quick Open finds any file by name, so you never have to dig through folders.",
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "Main.java"
+				},
+				"hint": "open Main.java with Ctrl+P.",
+				"skipIfDone": true
+			}
+		},
+		{
+			"title": "A program",
+			"say": "This is Java. You don't need to understand all of it yet. Here's just the part that matters today.",
+			"board": {
+				"code": "System.out.println(\"Hello, my name is ...\");",
+				"language": "java",
+				"marks": [
+					{
+						"text": "System.out.println",
+						"label": "print a line of words in the terminal"
+					},
+					{
+						"text": "\"Hello, my name is ...\"",
+						"label": "the words to print, inside quote marks"
+					},
+					{
+						"text": ";",
+						"label": "every instruction ends with a semicolon"
+					}
+				]
+			}
+		},
+		{
+			"title": "Add your name",
+			"say": "Replace the three dots `...` with your name. Keep the quote marks, and don't remove the semicolon at the end. Then press **Ctrl+S** to save.",
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "my name is"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "my name is ..."
+				},
+				"hint": "replace the dots with your name.",
+				"gone": true
+			}
+		},
+		{
+			"title": "Run it",
+			"say": "Click the **Run** button (▷) at the top right of the file. The output appears in the terminal at the bottom.",
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "top-right",
+			"waitFor": {
+				"hint": "run the program and read the output."
+			}
+		},
+		{
+			"title": "Read the output",
+			"say": "Your words appear in the terminal at the bottom. That's your program talking. If you see an error instead, read the first line: it usually says which line is wrong. A missing quote or semicolon is the most common reason.",
+			"target": {
+				"pane": "editor",
+				"selector": "[id='workbench.parts.panel']"
+			},
+			"cardAt": "top-right"
+		},
+		{
+			"title": "Check your work",
+			"say": "Press **Verify** in the lesson chip. It runs your program and checks it says your name.",
+			"target": {
+				"selector": "[data-tour='lesson']"
+			}
+		}
+	]
+}

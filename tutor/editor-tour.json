@@ -1,0 +1,87 @@
+{
+	"steps": [
+		{
+			"title": "Welcome!",
+			"say": "Hi, I'm Dozer. This is the **editor**: the program we write code in. It has a lot of buttons, but you'll only use a few. I'll point at each part and say what it's for. Press **Next** to move along, whenever you're ready.",
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic"
+			]
+		},
+		{
+			"title": "The Explorer",
+			"say": "This list is the **Explorer**. It shows everything in your project: your **files** and **folders**. Think of it as the list of what's in your backpack.",
+			"target": {
+				"pane": "editor",
+				"selector": "[id='workbench.parts.sidebar']"
+			},
+			"cardAt": "bottom-right"
+		},
+		{
+			"title": "The icon bar",
+			"say": "These icons switch what the left panel shows. The top one is the Explorer (your files). The magnifying glass is **Search** (find words in all your files). The branching one is **Source Control** (saving versions of your work with git). You'll meet them later.",
+			"target": {
+				"pane": "editor",
+				"selector": ".activitybar"
+			},
+			"cardAt": "bottom-right"
+		},
+		{
+			"title": "Where files open",
+			"say": "This big area is where a file opens so you can read it and type in it. Every open file gets a **tab** at the top, just like tabs in a web browser. Click a tab to switch files; click the **x** on it to close it.",
+			"target": {
+				"pane": "editor",
+				"selector": "[id='workbench.parts.editor']"
+			},
+			"cardAt": "bottom-right"
+		},
+		{
+			"title": "The terminal",
+			"say": "Now let's open one more thing. Press **Ctrl+`** (the key just above Tab) to open the **terminal**.",
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "top-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".terminal-wrapper"
+				},
+				"hint": "press Ctrl+` (the key above Tab)."
+			}
+		},
+		{
+			"title": "What the terminal is",
+			"say": "The terminal is a place where you give the computer instructions by **typing** instead of clicking. When you run a program, its words show up here too. We'll practice in a later guide.",
+			"target": {
+				"pane": "editor",
+				"selector": "[id='workbench.parts.panel']"
+			},
+			"cardAt": "top-right"
+		},
+		{
+			"title": "The status bar",
+			"say": "The thin bar at the very bottom is the **status bar**. It tells you little things: what kind of file is open, and a count of **problems** (mistakes the editor found in your code). Zeros are good.",
+			"target": {
+				"pane": "editor",
+				"selector": ".statusbar"
+			},
+			"cardAt": "top-right"
+		},
+		{
+			"title": "Scriptum's own bar",
+			"say": "Up at the top is Scriptum itself. This chip shows the lesson you're in. Open it to see your **checkpoints** (the little jobs to finish) and press **Verify** to check your work.",
+			"target": {
+				"selector": "[data-tour='lesson']"
+			}
+		},
+		{
+			"title": "That's the tour",
+			"say": "That's everything you need to get going. Come back to me any time: press the **Dozer** button at the top and pick a guide. Try **What are files and folders?** next."
+		}
+	]
+}

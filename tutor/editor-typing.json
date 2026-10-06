@@ -1,0 +1,106 @@
+{
+	"steps": [
+		{
+			"title": "Open about.txt",
+			"say": "Let's practice on the file you made. (Make it first with the **Make a folder and a file** guide if it's not there.) Press **Ctrl+P**, type `about` and press Enter. Quick Open finds any file by name, so you never have to dig through folders.",
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "about.txt"
+				},
+				"hint": "open about.txt with Ctrl+P.",
+				"skipIfDone": true
+			}
+		},
+		{
+			"title": "The cursor",
+			"say": "The blinking line in the text is the **cursor**. It's where your typing goes. Click anywhere in your words to move it, and press the **arrow keys** to walk it around.",
+			"waitFor": {
+				"hint": "click in your text and press the arrow keys."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": "[id='workbench.parts.editor']"
+			},
+			"cardAt": "bottom-right"
+		},
+		{
+			"title": "Erase",
+			"say": "Press **Backspace** to erase the letter before the cursor, and **Delete** to erase the one after it. Type a few extra letters and erase them again.",
+			"waitFor": {
+				"hint": "type some letters, then erase them."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": "[id='workbench.parts.editor']"
+			},
+			"cardAt": "bottom-right"
+		},
+		{
+			"title": "Undo!",
+			"say": "Made a mistake? Press **Ctrl+Z** to **undo**: it takes back your last change. Press it again to go back further. **Ctrl+Y** puts a change back (redo). Nothing you type is permanent until you want it to be.",
+			"waitFor": {
+				"hint": "type something, then press Ctrl+Z."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": "[id='workbench.parts.editor']"
+			},
+			"cardAt": "bottom-right"
+		},
+		{
+			"title": "Select",
+			"say": "**Double-click** a word to select it (it turns highlighted). **Triple-click** selects the whole line, and **Ctrl+A** selects everything.",
+			"waitFor": {
+				"hint": "double-click a word, then try triple-click."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": "[id='workbench.parts.editor']"
+			},
+			"cardAt": "bottom-right"
+		},
+		{
+			"title": "Copy and paste",
+			"say": "With some words selected, press **Ctrl+C** to **copy** them, click somewhere else, and press **Ctrl+V** to **paste** a copy. **Ctrl+X** is **cut**: copy, and remove the original.",
+			"waitFor": {
+				"hint": "select a word, copy it, and paste it."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": "[id='workbench.parts.editor']"
+			},
+			"cardAt": "bottom-right"
+		},
+		{
+			"title": "Save",
+			"say": "Press **Ctrl+S** to save. Do it after every change you want to keep, even if the editor sometimes saves by itself. Programs only see what's been saved.",
+			"waitFor": {
+				"hint": "press Ctrl+S."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": "[id='workbench.parts.editor']"
+			},
+			"cardAt": "bottom-right"
+		},
+		{
+			"title": "Nice work",
+			"say": "Undo, copy, paste and save are the four moves you'll use all day. Next, try **Rename and delete**."
+		}
+	]
+}

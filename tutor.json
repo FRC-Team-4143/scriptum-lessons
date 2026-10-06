@@ -2,6 +2,70 @@
 	"schemaVersion": 1,
 	"concepts": [
 		{
+			"id": "editor-tour",
+			"title": "Tour of the editor",
+			"summary": "Where everything is, in five minutes. No experience needed.",
+			"topic": "Editor",
+			"modules": ["editor-basics"],
+			"order": 1
+		},
+		{
+			"id": "files-and-folders",
+			"title": "What are files and folders?",
+			"summary": "The two things everything on a computer is made of, and what a path is.",
+			"topic": "Editor",
+			"modules": ["editor-basics"],
+			"order": 2
+		},
+		{
+			"id": "files-make",
+			"title": "Make a folder and a file",
+			"summary": "Make my-team, put about.txt inside it, and type your first words.",
+			"topic": "Editor",
+			"modules": ["editor-basics"],
+			"order": 3
+		},
+		{
+			"id": "editor-typing",
+			"title": "Typing and fixing mistakes",
+			"summary": "Undo, copy and paste, selecting words, and saving.",
+			"topic": "Editor",
+			"modules": ["editor-basics"],
+			"order": 4
+		},
+		{
+			"id": "files-rename-delete",
+			"title": "Rename and delete",
+			"summary": "Fix a name, and get rid of a file you don't need.",
+			"topic": "Editor",
+			"modules": ["editor-basics"],
+			"order": 5
+		},
+		{
+			"id": "terminal-basics",
+			"title": "The terminal",
+			"summary": "Give the computer instructions by typing. Five commands.",
+			"topic": "Editor",
+			"modules": ["editor-basics"],
+			"order": 6
+		},
+		{
+			"id": "find-things-fast",
+			"title": "Find things fast",
+			"summary": "Quick Open, searching, and the command palette.",
+			"topic": "Editor",
+			"modules": ["editor-basics"],
+			"order": 7
+		},
+		{
+			"id": "editor-first-run",
+			"title": "Run your first program",
+			"summary": "Put your name in some Java and run it.",
+			"topic": "Editor",
+			"modules": ["editor-basics"],
+			"order": 8
+		},
+		{
 			"id": "git-source-control",
 			"title": "Git in the editor",
 			"summary": "Where your changes show up, how to commit them, and which branch you're on.",

@@ -1,0 +1,38 @@
+{
+	"title": "Meet the Editor",
+	"description": "Your first steps in the code editor: files, folders, saving, the terminal, and running a program. No experience needed.",
+	"subdir": "modules/editor-basics",
+	"kind": "plain-java",
+	"checkpoints": [
+		{
+			"id": "make-folder",
+			"title": "Make a folder",
+			"description": "Make a new folder called my-team.",
+			"verifier": { "type": "script", "path": "checkpoints/editor-basics/verify/make-folder.sh" }
+		},
+		{
+			"id": "make-file",
+			"title": "Make a file",
+			"description": "Make a file called about.txt inside my-team, with a sentence in it.",
+			"verifier": { "type": "script", "path": "checkpoints/editor-basics/verify/make-file.sh" }
+		},
+		{
+			"id": "rename-file",
+			"title": "Rename a file",
+			"description": "Rename untitled.txt to team.txt.",
+			"verifier": { "type": "script", "path": "checkpoints/editor-basics/verify/rename-file.sh" }
+		},
+		{
+			"id": "delete-file",
+			"title": "Delete a file",
+			"description": "Delete delete-me.txt.",
+			"verifier": { "type": "script", "path": "checkpoints/editor-basics/verify/delete-file.sh" }
+		},
+		{
+			"id": "edit-and-run",
+			"title": "Run a program",
+			"description": "Put your name in Main.java and run it.",
+			"verifier": { "type": "script", "path": "checkpoints/editor-basics/verify/edit-and-run.sh" }
+		}
+	]
+}
