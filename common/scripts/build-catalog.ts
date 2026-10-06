@@ -146,7 +146,7 @@ export function buildCatalog(root: string): Built {
 	}
 	const orderOf = new Map(lessons.map((l) => [l.id, l.order]));
 	const outGuides = [...guides.values()]
-		.map((g) => ({
+		.map((g): Json & { id: string } => ({
 			id: g.id,
 			...pick(g.file, ["title", "summary", "topic", "order"]),
 			modules: [...g.owners].sort((a, b) => (orderOf.get(a) ?? 0) - (orderOf.get(b) ?? 0) || a.localeCompare(b)),
