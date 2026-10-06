@@ -37,7 +37,7 @@
 		},
 		{
 			"title": "New Folder",
-			"say": "Hover over the PROJECT bar again and click the **second** icon (a folder with a little plus). A box opens so you can type the folder's name.",
+			"say": "Hover over the PROJECT bar again and click the **second** icon (a folder with a little plus). A box opens so you can type the folder's name. If nothing happens, click it again.",
 			"target": {
 				"pane": "editor",
 				"selector": ".explorer-viewlet .pane-header[aria-label^='Explorer Section']"
@@ -77,24 +77,17 @@
 			"cardAt": "bottom-right"
 		},
 		{
-			"title": "Pick the folder",
-			"say": "New things are made **inside whichever folder is selected**. Click **my-team** once so it's highlighted. (If nothing is picked, new things go in the main project folder.)",
+			"title": "Which folder?",
+			"say": "New things are made **inside whichever folder is highlighted**. **my-team** is highlighted right now, so the next thing you make goes inside it. (If it ever isn't, click the folder once first. With nothing picked, new things go in the main project folder.)",
 			"target": {
 				"pane": "editor",
 				"selector": ".explorer-viewlet .monaco-list-row[aria-label='my-team']"
 			},
-			"cardAt": "bottom-right",
-			"waitFor": {
-				"target": {
-					"pane": "editor",
-					"selector": ".explorer-viewlet .monaco-list-row[aria-label='my-team'][aria-selected='true']"
-				},
-				"hint": "click my-team once."
-			}
+			"cardAt": "bottom-right"
 		},
 		{
 			"title": "New File",
-			"say": "Hover over the PROJECT bar and click the **first** icon (a page with a plus).",
+			"say": "Hover over the PROJECT bar and click the **first** icon (a page with a plus). If nothing happens, click it again.",
 			"target": {
 				"pane": "editor",
 				"selector": ".explorer-viewlet .pane-header[aria-label^='Explorer Section']"
