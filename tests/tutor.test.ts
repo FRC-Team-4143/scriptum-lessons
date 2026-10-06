@@ -32,6 +32,7 @@ type Step = {
 		language?: string;
 		marks?: { text: string; label: string; nth?: number }[];
 	};
+	cardAt?: string;
 	waitFor?: {
 		target?: Target;
 		hint?: string;
@@ -140,6 +141,7 @@ describe.each(index.concepts.map((c) => c.id))("tutor/%s.json", (id) => {
 			const where = `step ${i + 1}`;
 			for (const pane of [...(step.open ?? []), ...(step.close ?? [])]) expect(PANES, where).toContain(pane);
 			if (step.target) checkTarget(`${where} target`, step.target);
+			if (step.cardAt) expect(["top-left", "top-right", "bottom-left", "bottom-right"], `${where} cardAt`).toContain(step.cardAt);
 			if (step.waitFor) {
 				const { target, more, atLeast, gone } = step.waitFor;
 				// No target: an "I did it" step, which needs words telling them what to do.

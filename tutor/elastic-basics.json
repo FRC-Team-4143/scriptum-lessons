@@ -37,12 +37,14 @@
 		},
 		{
 			"title": "Drag one onto the grid",
+			"cardAt": "bottom-right",
 			"say": "Find **Counter** (search for it) and drag it onto the grid. Elastic picks a widget to match: a number gets a text display.",
 			"target": { "pane": "elastic", "region": { "left": "450px", "top": "72px", "right": 0, "bottom": "32px" } },
 			"waitFor": { "hint": "drag Counter onto the grid, then press I did it." }
 		},
 		{
 			"title": "Open its menu",
+			"cardAt": "bottom-right",
 			"say": "Close the topic list, then **right-click** your new widget.",
 			"target": { "pane": "elastic", "region": { "left": 0, "top": "72px", "right": 0, "bottom": "32px" } },
 			"waitFor": {
@@ -91,6 +93,7 @@
 		},
 		{
 			"title": "Move and resize",
+			"cardAt": "bottom-right",
 			"say": "Drag a widget to move it, and drag its bottom-right corner to resize it. It snaps to the grid.",
 			"target": { "pane": "elastic", "region": { "left": 0, "top": "72px", "right": 0, "bottom": "32px" } },
 			"waitFor": { "hint": "move or resize your widget." }
