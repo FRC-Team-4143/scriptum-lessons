@@ -1,0 +1,56 @@
+{
+	"steps": [
+		{
+			"title": "This is Choreo",
+			"say": "Choreo plans **autonomous paths**: where the robot should drive, and how fast it's allowed to go. It works out the quickest route your robot can really follow.",
+			"close": ["editor", "preview"],
+			"open": ["choreo"],
+			"target": { "pane": "choreo" }
+		},
+		{
+			"title": "Paths",
+			"say": "Each path is one trajectory, like \"leave the start line and pick up a game piece\". The list of them lives here.",
+			"target": { "pane": "choreo", "selector": "[class*='_SidebarHeading_']", "text": "PATHS" }
+		},
+		{
+			"title": "Add a path",
+			"say": "The **+** makes a new, empty path.",
+			"target": { "pane": "choreo", "selector": "[aria-label='Add Path']" }
+		},
+		{
+			"title": "Pose waypoint",
+			"say": "Waypoints are the points the path goes through. A **pose waypoint** pins both where the robot is and which way it's facing. Use one for the start and the end.",
+			"target": { "pane": "choreo", "selector": "[aria-label='Pose Waypoint']" }
+		},
+		{
+			"title": "Translation waypoint",
+			"say": "A **translation waypoint** only pins where the robot is, and lets Choreo pick the heading. Use these for points in the middle.",
+			"target": { "pane": "choreo", "selector": "[aria-label='Translation Waypoint']" }
+		},
+		{
+			"title": "The field",
+			"say": "With a waypoint tool picked, **click on the field** to drop a waypoint there. Drag it to move it.",
+			"target": { "pane": "choreo", "region": { "left": "300px", "top": "64px", "bottom": "32px" } }
+		},
+		{
+			"title": "Constraints",
+			"say": "These tools add **constraints**: rules the path has to obey, like a top speed between two waypoints, or a zone the robot must stay out of.",
+			"target": { "pane": "choreo", "selector": "[aria-label='Max Velocity']" }
+		},
+		{
+			"title": "Event markers",
+			"say": "An **event marker** says \"do something here\", like start the intake halfway along the path. Your robot code listens for its name.",
+			"target": { "pane": "choreo", "selector": "[aria-label='Event Marker']" }
+		},
+		{
+			"title": "Features",
+			"say": "Everything on the current path is listed here: waypoints, constraints and markers. Click one to edit its exact numbers.",
+			"target": { "pane": "choreo", "selector": "[class*='_SidebarHeading_']", "text": "FEATURES" }
+		},
+		{
+			"title": "Generate",
+			"say": "When the waypoints are where you want them, **Generate** works out the trajectory: the fastest path that goes through every waypoint and obeys every constraint. Change anything and generate again.",
+			"target": { "pane": "choreo", "selector": "[aria-label='Generate All']" }
+		}
+	]
+}

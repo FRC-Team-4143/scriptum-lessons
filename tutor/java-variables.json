@@ -1,0 +1,105 @@
+{
+	"steps": [
+		{
+			"title": "A named box",
+			"say": "A **variable** is a box with a name on it. You put a value in, and later you use the name to get the value back out. Here's one:",
+			"board": { "code": "int wheelCount = 4;" }
+		},
+		{
+			"title": "The type",
+			"say": "First comes the **type**: what kind of value fits in the box. `int` holds whole numbers.",
+			"board": {
+				"code": "int wheelCount = 4;",
+				"marks": [{ "text": "int", "label": "type: whole numbers only" }]
+			}
+		},
+		{
+			"title": "The name",
+			"say": "Next, the **name**: how you'll refer to the box later. Pick one that says what it holds. Java names start lowercase, and each new word starts with a capital (`wheelCount`).",
+			"board": {
+				"code": "int wheelCount = 4;",
+				"marks": [
+					{ "text": "int", "label": "type: whole numbers only" },
+					{ "text": "wheelCount", "label": "name: how you use it later" }
+				]
+			}
+		},
+		{
+			"title": "The value",
+			"say": "`=` means **put this value in the box**. It isn't \"equals\" like in math. It's an instruction.",
+			"board": {
+				"code": "int wheelCount = 4;",
+				"marks": [
+					{ "text": "int", "label": "type: whole numbers only" },
+					{ "text": "wheelCount", "label": "name: how you use it later" },
+					{ "text": "= 4", "label": "store the value 4 in it" }
+				]
+			}
+		},
+		{
+			"title": "The semicolon",
+			"say": "Every Java statement ends with a **semicolon**. Forgetting one is the most common build error, and the console will point right at it.",
+			"board": {
+				"code": "int wheelCount = 4;",
+				"marks": [
+					{ "text": "int", "label": "type: whole numbers only" },
+					{ "text": "wheelCount", "label": "name: how you use it later" },
+					{ "text": "= 4", "label": "store the value 4 in it" },
+					{ "text": ";", "label": "end of the statement" }
+				]
+			}
+		},
+		{
+			"title": "Four types you'll use most",
+			"say": "Different values need different types. These four cover almost everything at first.",
+			"board": {
+				"code": "int wheelCount = 4;\ndouble speed = 0.5;\nboolean enabled = false;\nString teamName = \"MARS/WARS\";",
+				"marks": [
+					{ "text": "int", "label": "whole numbers: 4, -2, 4143" },
+					{ "text": "double", "label": "decimals: 0.5, 3.14" },
+					{ "text": "boolean", "label": "only true or false" },
+					{ "text": "String", "label": "text, in double quotes" }
+				]
+			}
+		},
+		{
+			"title": "Changing what's in the box",
+			"say": "After a variable exists you can put a new value in it. You don't write the type again, because the box already exists. Java works out the right-hand side first, then stores the answer.",
+			"board": {
+				"code": "int score = 0;\nscore = score + 5;\nSystem.out.println(score);",
+				"marks": [
+					{ "text": "int score = 0", "label": "make the box once, with its type" },
+					{ "text": "score = score + 5", "label": "no type: same box. 0 + 5 is stored back in score" },
+					{ "text": "System.out.println(score)", "label": "use the name to read the value" }
+				],
+				"caption": "Prints: 5"
+			}
+		},
+		{
+			"title": "Constants",
+			"say": "Some values should never change, like a robot's top speed. `final` locks the box, so the compiler stops anyone who tries to change it. Team standard: constants are named in `SCREAMING_SNAKE_CASE`.",
+			"board": {
+				"code": "public static final double MAX_SPEED = 5.0;",
+				"marks": [
+					{ "text": "final", "label": "can never be changed" },
+					{ "text": "MAX_SPEED", "label": "constant names are ALL_CAPS" }
+				]
+			}
+		},
+		{
+			"title": "Now in your code",
+			"say": "Let's find one in your own project. In the java-variables lesson it's `src/Main.java`.",
+			"open": ["editor"],
+			"target": { "pane": "editor" },
+			"waitFor": {
+				"target": { "pane": "editor", "selector": ".view-lines .view-line", "text": "TEAM_NAME =" },
+				"hint": "open src/Main.java from the Explorer."
+			}
+		},
+		{
+			"title": "There it is",
+			"say": "That's a constant waiting for its value: type `String`, name `TEAM_NAME`, and an empty value `\"\"`. Your task is to put the right text between the quotes.",
+			"target": { "pane": "editor", "selector": ".view-lines .view-line", "text": "TEAM_NAME =" }
+		}
+	]
+}

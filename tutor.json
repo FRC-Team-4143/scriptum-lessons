@@ -1,0 +1,75 @@
+{
+	"schemaVersion": 1,
+	"concepts": [
+		{
+			"id": "git-source-control",
+			"title": "Git in the editor",
+			"summary": "Where your changes show up, how to commit them, and which branch you're on.",
+			"topic": "Git",
+			"order": 10,
+			"modules": ["git-basics"],
+			"needs": ["editor"]
+		},
+		{
+			"id": "git-commands",
+			"title": "The git commands you'll type",
+			"summary": "status, add, commit and switch, one at a time on the board.",
+			"topic": "Git",
+			"order": 11,
+			"modules": ["git-basics"]
+		},
+		{
+			"id": "build-and-run",
+			"title": "Building and running your code",
+			"summary": "Start, watch it build, read the console, then enable the robot.",
+			"topic": "Building & running",
+			"order": 20,
+			"modules": [
+				"robot-drivetrain",
+				"robot-sensors",
+				"robot-drive-math",
+				"robot-odometry",
+				"robot-subsystems",
+				"robot-control-theory",
+				"robot-state-machines",
+				"robot-autonomous"
+			],
+			"needs": ["driverStation"]
+		},
+		{
+			"id": "advantagescope-basics",
+			"title": "AdvantageScope basics",
+			"summary": "The field list, tabs, and plotting a value on a line graph and the field.",
+			"topic": "Tools",
+			"order": 30,
+			"modules": ["advantagescope-intro"],
+			"needs": ["scope"]
+		},
+		{
+			"id": "elastic-basics",
+			"title": "Elastic basics",
+			"summary": "Dashboard tabs, adding widgets, and the connection status.",
+			"topic": "Tools",
+			"order": 31,
+			"modules": ["elastic-intro"],
+			"needs": ["elastic"]
+		},
+		{
+			"id": "choreo-basics",
+			"title": "Choreo basics",
+			"summary": "Paths, waypoints, constraints, and generating a trajectory.",
+			"topic": "Tools",
+			"order": 32,
+			"modules": ["choreo-intro", "robot-autonomous"],
+			"needs": ["choreo"]
+		},
+		{
+			"id": "java-variables",
+			"title": "What is a variable?",
+			"summary": "Type, name and value, the four types you'll use most, and constants.",
+			"topic": "Java",
+			"order": 40,
+			"modules": ["hello-world", "java-variables", "robot-drivetrain"]
+		}
+	]
+}
