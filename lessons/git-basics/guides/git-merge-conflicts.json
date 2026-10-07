@@ -6,11 +6,17 @@
 	"steps": [
 		{
 			"title": "Why conflicts happen",
-			"say": "Both `develop` and `issue-9-max-speed` changed `MAX_SPEED`, to different values. Git can't guess which you want, so it stops and asks you."
+			"say": {
+				"never": "Both `develop` and `issue-9-max-speed` changed the same line, `MAX_SPEED`, to *different* numbers. Git can't guess which one is right, so it stops and asks *you* to choose. That's a **merge conflict**. It's not an error, just git asking a question.",
+				"bit": "Both `develop` and `issue-9-max-speed` changed `MAX_SPEED`, to different values. Git can't guess which you want, so it stops and asks you."
+			}
 		},
 		{
 			"title": "Open a terminal",
-			"say": "These exercises are easiest in the terminal.",
+			"say": {
+				"never": "Open the **terminal**: the typing area at the bottom of the screen where you give the computer instructions. Hold **Ctrl** and tap the backtick key, the one above **Tab**. Most of these exercises are easier there.",
+				"bit": "These exercises are easiest in the terminal."
+			},
 			"open": [
 				"editor"
 			],
@@ -23,26 +29,38 @@
 					"pane": "editor",
 					"selector": ".terminal-wrapper"
 				},
-				"hint": "press Ctrl+` (the key above Tab)."
+				"hint": {
+					"never": "press Ctrl and the backtick key (above Tab).",
+					"bit": "press Ctrl+` (the key above Tab)."
+				}
 			},
 			"assist": true
 		},
 		{
 			"title": "Start the merge",
-			"say": "`cd 04-merge-conflict`, `git checkout develop`, then `git merge issue-9-max-speed`. Git says **CONFLICT**.",
+			"say": {
+				"never": "Type `cd 04-merge-conflict`, press **Enter**. Then `git checkout develop`, **Enter**. Then `git merge issue-9-max-speed`, **Enter**. Git will say **CONFLICT**. That's what we wanted!",
+				"bit": "`cd 04-merge-conflict`, `git checkout develop`, then `git merge issue-9-max-speed`. Git says **CONFLICT**."
+			},
 			"target": {
 				"pane": "editor",
 				"selector": "[id='workbench.parts.panel']"
 			},
 			"cardAt": "top-right",
 			"waitFor": {
-				"hint": "start the merge and see the conflict."
+				"hint": {
+					"never": "start the merge and see the conflict.",
+					"bit": "start the merge and see the conflict."
+				}
 			},
 			"assist": true
 		},
 		{
 			"title": "Conflict markers",
-			"say": "Git writes **both** versions into the file, fenced off with markers.",
+			"say": {
+				"never": "Git puts **both** versions into the file, fenced off with markers. The part between `<<<<<<<` and `=======` is what's on your branch. The part between `=======` and `>>>>>>>` is what's coming in. Your job is to keep the right one and delete the markers.",
+				"bit": "Git writes **both** versions into the file, fenced off with markers."
+			},
 			"board": {
 				"code": "<<<<<<< HEAD\n    public static final double MAX_SPEED = 4.5;\n=======\n    public static final double MAX_SPEED = 5.2;\n>>>>>>> issue-9-max-speed",
 				"language": "text",
@@ -94,7 +112,10 @@
 		},
 		{
 			"title": "The editor helps",
-			"say": "Right above the conflict the editor offers **Accept Current Change**, **Accept Incoming Change** and **Accept Both Changes**. Pick one value for MAX_SPEED.",
+			"say": {
+				"never": "The editor makes this easy. Just above the conflict you'll see three little links: **Accept Current Change**, **Accept Incoming Change**, **Accept Both Changes**. Click the one that gives the right value for `MAX_SPEED`, and the markers disappear.",
+				"bit": "Right above the conflict the editor offers **Accept Current Change**, **Accept Incoming Change** and **Accept Both Changes**. Pick one value for MAX_SPEED."
+			},
 			"target": {
 				"pane": "editor",
 				"selector": ".codelens-decoration",
@@ -108,20 +129,29 @@
 					"text": "<<<<<<<"
 				},
 				"gone": true,
-				"hint": "accept one of the changes."
+				"hint": {
+					"never": "click one of the Accept links.",
+					"bit": "accept one of the changes."
+				}
 			},
 			"assist": true
 		},
 		{
 			"title": "Finish the merge",
-			"say": "Save, then `git add Constants.java` and `git commit`. A commit with no `-m` opens a pre-filled merge message: just save and close it.",
+			"say": {
+				"never": "Save the file. Then type `git add Constants.java` and press **Enter** (that says \"I fixed it\"). Then type `git commit` and press **Enter**. A message appears already filled in. Just save and close it, and the merge is finished.",
+				"bit": "Save, then `git add Constants.java` and `git commit`. A commit with no `-m` opens a pre-filled merge message: just save and close it."
+			},
 			"target": {
 				"pane": "editor",
 				"selector": "[id='workbench.parts.panel']"
 			},
 			"cardAt": "top-right",
 			"waitFor": {
-				"hint": "stage and commit the resolved file."
+				"hint": {
+					"never": "stage and commit the fixed file.",
+					"bit": "stage and commit the resolved file."
+				}
 			},
 			"assist": true
 		}

@@ -6,7 +6,10 @@
 	"steps": [
 		{
 			"title": "Four commands",
-			"say": "Most days you only need four git commands. Let's go through them one at a time.",
+			"say": {
+				"never": "Most days you only need four git commands. We'll go through them one at a time. A command is just an instruction you type in the terminal.",
+				"bit": "Most days you only need four git commands. Let's go through them one at a time."
+			},
 			"board": {
 				"language": "shell",
 				"code": "git status\ngit add roster.txt\ngit commit -m \"Add my name to the roster\"\ngit switch -c issue-12-add-turbo-boost"
@@ -14,7 +17,10 @@
 		},
 		{
 			"title": "status",
-			"say": "**What's changed?** Run it whenever you're unsure. It lists changed files and tells you which branch you're on.",
+			"say": {
+				"never": "`git status` asks: **what has changed?** Run it whenever you're not sure what's going on. It lists the files you changed and tells you which branch you're on.",
+				"bit": "**What's changed?** Run it whenever you're unsure. It lists changed files and tells you which branch you're on."
+			},
 			"board": {
 				"language": "shell",
 				"code": "git status\ngit add roster.txt\ngit commit -m \"Add my name to the roster\"\ngit switch -c issue-12-add-turbo-boost",
@@ -28,7 +34,10 @@
 		},
 		{
 			"title": "add",
-			"say": "**Stage** a file: put it in the next snapshot. You choose what goes in, so half-finished work can wait.",
+			"say": {
+				"never": "`git add` **stages** a file, which means \"put this in the next save point\". You choose what goes in, so half-finished work can stay out until it's ready.",
+				"bit": "**Stage** a file: put it in the next snapshot. You choose what goes in, so half-finished work can wait."
+			},
 			"board": {
 				"language": "shell",
 				"code": "git status\ngit add roster.txt\ngit commit -m \"Add my name to the roster\"\ngit switch -c issue-12-add-turbo-boost",
@@ -46,7 +55,10 @@
 		},
 		{
 			"title": "commit",
-			"say": "**Save the snapshot** with a message. `-m` means \"here's the message\". Write it for a teammate reading the history next month.",
+			"say": {
+				"never": "`git commit` **saves the snapshot**. The `-m` means \"here comes my message\", written in quotes. Write it so a teammate reading the history next month knows what you did and why.",
+				"bit": "**Save the snapshot** with a message. `-m` means \"here's the message\". Write it for a teammate reading the history next month."
+			},
 			"board": {
 				"language": "shell",
 				"code": "git status\ngit add roster.txt\ngit commit -m \"Add my name to the roster\"\ngit switch -c issue-12-add-turbo-boost",
@@ -72,7 +84,10 @@
 		},
 		{
 			"title": "switch",
-			"say": "**Move to another branch.** `-c` creates it first. New work goes on a feature branch off `develop`, never straight onto `main`.",
+			"say": {
+				"never": "`git switch` **moves you to another branch**, and the `-c` creates it first. New work always goes on its own feature branch, never straight onto `main`, so the finished robot code stays safe.",
+				"bit": "**Move to another branch.** `-c` creates it first. New work goes on a feature branch off `develop`, never straight onto `main`."
+			},
 			"board": {
 				"language": "shell",
 				"code": "git status\ngit add roster.txt\ngit commit -m \"Add my name to the roster\"\ngit switch -c issue-12-add-turbo-boost",
@@ -106,7 +121,10 @@
 		},
 		{
 			"title": "Bringing work together",
-			"say": "When a feature is done, you **merge** it into `develop`. If two branches changed the same line, git stops and asks you to choose. That's a merge conflict, and the git lesson walks you through one.",
+			"say": {
+				"never": "When a feature is done, you **merge** it into `develop`, which means joining its changes in. If two branches changed the *same line*, git doesn't know which to keep, so it stops and asks you. That's a **merge conflict**. Don't panic: the next exercises walk you through one.",
+				"bit": "When a feature is done, you **merge** it into `develop`. If two branches changed the same line, git stops and asks you to choose. That's a merge conflict, and the git lesson walks you through one."
+			},
 			"board": {
 				"language": "shell",
 				"code": "git switch develop\ngit merge issue-12-add-turbo-boost",
