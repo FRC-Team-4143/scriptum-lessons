@@ -6,7 +6,10 @@
 	"steps": [
 		{
 			"title": "Proportional control",
-			"say": "Drive faster when far away and slower as you arrive: speed = kP x error. No more overshoot like bang-bang.",
+			"say": {
+				"never": "Bang-bang was all-or-nothing. **Proportional control** is smoother: *the farther away you are, the faster you go, and you slow down as you arrive.* The speed is `kP x error`, where `error` is how far you still have to go and `kP` is a number you pick. No more overshooting.",
+				"bit": "Drive faster when far away and slower as you arrive: speed = kP x error. No more overshoot like bang-bang."
+			},
 			"board": {
 				"code": "double error = Math.abs(goalMeters) - distanceDriven();\ndouble speed = constants.DRIVE_KP * error;\nspeed = Math.min(speed, constants.MAX_AUTO_SPEED);",
 				"marks": [
@@ -27,7 +30,10 @@
 		},
 		{
 			"title": "When to stop",
-			"say": "Close enough counts. Exact equality never happens with real numbers.",
+			"say": {
+				"never": "When should the command stop? Not when the error is *exactly* zero, because real measurements are never exactly anything. So we say \"close enough\": stop when the error is smaller than a small tolerance.",
+				"bit": "Close enough counts. Exact equality never happens with real numbers."
+			},
 			"board": {
 				"code": "return error < constants.DRIVE_TOLERANCE_METERS;",
 				"marks": [
@@ -40,7 +46,10 @@
 		},
 		{
 			"title": "Open DriveDistanceCommand.java",
-			"say": "Press **Ctrl+P**, type `DriveDistanceCommand` and press Enter. Quick Open finds any file by name, so you never have to dig through folders.",
+			"say": {
+				"never": "Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `DriveDistanceCommand`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "Press **Ctrl+P**, type `DriveDistanceCommand` and press Enter. Quick Open finds any file by name, so you never have to dig through folders."
+			},
 			"open": [
 				"editor"
 			],
@@ -67,7 +76,10 @@
 		},
 		{
 			"title": "Find initialize",
-			"say": "Start with initialize(). Press **Ctrl+F**, type `initialize` and press Enter to jump to it.",
+			"say": {
+				"never": "Start with initialize(). Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `initialize` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "Start with initialize(). Press **Ctrl+F**, type `initialize` and press Enter to jump to it."
+			},
 			"target": {
 				"pane": "editor"
 			},
@@ -85,7 +97,10 @@
 		},
 		{
 			"title": "Start here",
-			"say": "Follow the TODOs: remember the start pose, then work out the error in execute().",
+			"say": {
+				"never": "Follow the TODO comments, one at a time. First remember where the robot started. Then, in `execute()`, work out the error. Take it slowly and use the board for the pattern.",
+				"bit": "Follow the TODOs: remember the start pose, then work out the error in execute()."
+			},
 			"target": {
 				"pane": "editor",
 				"selector": ".view-lines .view-line",

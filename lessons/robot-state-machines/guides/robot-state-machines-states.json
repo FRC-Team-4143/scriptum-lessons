@@ -6,7 +6,10 @@
 	"steps": [
 		{
 			"title": "The machine",
-			"say": "The shooter is always in exactly one state. It can't jump straight to SHOOT: it has to spin up first.",
+			"say": {
+				"never": "The shooter is in exactly one **state** at a time: `IDLE`, `SPIN_UP` or `SHOOT`. The arrows show which moves are allowed. It can't leap straight from IDLE to SHOOT, because the flywheel has to get up to speed first, like a car can't start at 60 mph.",
+				"bit": "The shooter is always in exactly one state. It can't jump straight to SHOOT: it has to spin up first."
+			},
 			"board": {
 				"code": "        wants SHOOT           at speed\n  IDLE ------------> SPIN_UP ---------> SHOOT\n   ^                   ^                  |\n   |    lets go        |    slows down    |\n   +-------------------+------------------+",
 				"marks": [
@@ -23,7 +26,10 @@
 		},
 		{
 			"title": "Transitions",
-			"say": "The driver only says what they **want**. The subsystem decides where it's allowed to be.",
+			"say": {
+				"never": "The driver only says what they **want**, such as \"shoot\". The subsystem is the one that decides where it's actually allowed to go, using the rules on the board. That keeps the robot safe even if the driver mashes buttons.",
+				"bit": "The driver only says what they **want**. The subsystem decides where it's allowed to be."
+			},
 			"board": {
 				"code": "if (wanted == ShooterStates.IDLE) {\n    system_state_ = ShooterStates.IDLE;\n} else if (isAtSpeed()) {\n    system_state_ = ShooterStates.SHOOT;\n} else {\n    system_state_ = ShooterStates.SPIN_UP;\n}",
 				"marks": [

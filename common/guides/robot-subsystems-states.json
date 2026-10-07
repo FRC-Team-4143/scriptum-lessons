@@ -6,7 +6,10 @@
 	"steps": [
 		{
 			"title": "States",
-			"say": "An enum lists every mode a subsystem can be in.",
+			"say": {
+				"never": "A subsystem is always in exactly one **state**, like a light switch that's either ON or OFF. An **enum** is a list of every state it's allowed to be in. Here the drivetrain can be `IDLE` (doing nothing) or `ARCADE` (being driven). Nothing else is allowed, which prevents silly mistakes.",
+				"bit": "An enum lists every mode a subsystem can be in."
+			},
 			"board": {
 				"code": "public enum DriveStates {\n    IDLE,\n    ARCADE\n}",
 				"marks": [
@@ -23,7 +26,10 @@
 		},
 		{
 			"title": "One switch",
-			"say": "`updateLogic` runs every 20 ms and does what the current state says.",
+			"say": {
+				"never": "A `switch` is like a menu: *look at the current state and run the matching block.* `updateLogic` runs every 20 thousandths of a second, so each time it checks the state and does the right thing. `break` means \"done with this one, leave the menu\".",
+				"bit": "`updateLogic` runs every 20 ms and does what the current state says."
+			},
 			"board": {
 				"code": "switch (system_state_) {\n    case ARCADE:\n        drive.arcadeDrive(OI.getForward(), OI.getTurn());\n        break;\n    case IDLE:\n    default:\n        drive.arcadeDrive(0.0, 0.0);\n        break;\n}",
 				"marks": [

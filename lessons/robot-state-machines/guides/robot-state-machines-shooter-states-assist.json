@@ -7,7 +7,10 @@
 	"steps": [
 		{
 			"title": "Open ShooterSubsystem.java",
-			"say": "Two TODOs live in the shooter subsystem. Press **Ctrl+P**, type `ShooterSubsystem` and press Enter. Quick Open finds any file by name, so you never have to dig through folders.",
+			"say": {
+				"never": "Two TODOs live in the shooter subsystem. Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `ShooterSubsystem`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "Two TODOs live in the shooter subsystem. Press **Ctrl+P**, type `ShooterSubsystem` and press Enter. Quick Open finds any file by name, so you never have to dig through folders."
+			},
 			"open": [
 				"editor"
 			],
@@ -34,7 +37,10 @@
 		},
 		{
 			"title": "Find it",
-			"say": "First the rules for moving between states. Press **Ctrl+F**, type `write the transitions` and press Enter to jump to it.",
+			"say": {
+				"never": "First the rules for moving between states. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `write the transitions` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "First the rules for moving between states. Press **Ctrl+F**, type `write the transitions` and press Enter to jump to it."
+			},
 			"target": {
 				"pane": "editor"
 			},
@@ -52,7 +58,10 @@
 		},
 		{
 			"title": "Transitions",
-			"say": "Turn the comment above it into code: from IDLE, wanting SHOOT goes to SPIN_UP; from SPIN_UP go to SHOOT once `flywheel.isAtSpeed()`; from SHOOT go back to SPIN_UP if `flywheel.hasDipped()`; anything else, IDLE.",
+			"say": {
+				"never": "Turn the comment above into code, one rule at a time. From IDLE, if the driver wants SHOOT, go to SPIN_UP first. From SPIN_UP, go to SHOOT once `flywheel.isAtSpeed()` is true. From SHOOT, go back to SPIN_UP if `flywheel.hasDipped()` is true. Anything else, go to IDLE.",
+				"bit": "Turn the comment above it into code: from IDLE, wanting SHOOT goes to SPIN_UP; from SPIN_UP go to SHOOT once `flywheel.isAtSpeed()`; from SHOOT go back to SPIN_UP if `flywheel.hasDipped()`; anything else, IDLE."
+			},
 			"target": {
 				"pane": "editor",
 				"selector": ".view-lines .view-line",
@@ -63,7 +72,10 @@
 		},
 		{
 			"title": "Find it",
-			"say": "Then what each state does. Press **Ctrl+F**, type `write a switch (system_state_)` and press Enter to jump to it.",
+			"say": {
+				"never": "Then what each state does. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `write a switch (system_state_)` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "Then what each state does. Press **Ctrl+F**, type `write a switch (system_state_)` and press Enter to jump to it."
+			},
 			"target": {
 				"pane": "editor"
 			},
@@ -81,7 +93,10 @@
 		},
 		{
 			"title": "The switch",
-			"say": "One `case` per state, with the three lines the comment lists. IDLE stops both motors, SPIN_UP calls `runFlywheel()`, SHOOT also runs the roller at `CONSTANTS.INDEX_DUTY_CYCLE`.",
+			"say": {
+				"never": "Write a `switch` with one `case` for each state. IDLE stops both motors. SPIN_UP calls `runFlywheel()` and leaves the roller stopped. SHOOT calls `runFlywheel()` and also runs the roller at `CONSTANTS.INDEX_DUTY_CYCLE`. The three lines are listed in the comment.",
+				"bit": "One `case` per state, with the three lines the comment lists. IDLE stops both motors, SPIN_UP calls `runFlywheel()`, SHOOT also runs the roller at `CONSTANTS.INDEX_DUTY_CYCLE`."
+			},
 			"target": {
 				"pane": "editor",
 				"selector": ".view-lines .view-line",

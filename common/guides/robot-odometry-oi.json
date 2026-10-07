@@ -6,7 +6,10 @@
 	"steps": [
 		{
 			"title": "One place for the controls",
-			"say": "`OI` (Operator Interface) owns the controller and answers questions about it. The rest of the robot never cares which stick is which.",
+			"say": {
+				"never": "`OI` stands for **Operator Interface**, which is just a fancy name for \"the controls\". This class is the only place that knows about the gamepad. The rest of the robot asks it questions like \"how far forward is the driver pushing?\" and never cares which stick that comes from. `static` means you call it on the class itself, as `OI.getForward()`. Nobody ever makes a new OI.",
+				"bit": "`OI` (Operator Interface) owns the controller and answers questions about it. The rest of the robot never cares which stick is which."
+			},
 			"board": {
 				"code": "public abstract class OI {\n    private static final XboxController driverController = new XboxController(0);\n\n    public static double getForward() {\n        return -driverController.getLeftY();\n    }\n}",
 				"marks": [

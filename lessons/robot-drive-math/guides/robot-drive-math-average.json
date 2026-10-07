@@ -6,7 +6,10 @@
 	"steps": [
 		{
 			"title": "Add them up",
-			"say": "A `for` loop visits every slot. Keep a running total, then divide by how many.",
+			"say": {
+				"never": "To find an **average**, add up all the numbers, then divide by how many there are. A `for` loop visits each box in the array one at a time, and `total +=` adds it to a running total, like keeping a tally on paper.",
+				"bit": "A `for` loop visits every slot. Keep a running total, then divide by how many."
+			},
 			"board": {
 				"code": "double total = 0.0;\nfor (int i = 0; i < values.length; i++) {\n    total += values[i];\n}\nreturn total / values.length;",
 				"marks": [
@@ -23,11 +26,17 @@
 		},
 		{
 			"title": "Why average?",
-			"say": "Robot.java keeps the last 5 speeds and logs their average as `Robot/SmoothedSpeed`. Averaging hides the jitter, at the cost of reacting a little later."
+			"say": {
+				"never": "Speed readings jump around a little, like a shaky hand. The robot code keeps the last 5 readings and averages them, which smooths out the shakes. The price is that it reacts a tiny bit later.",
+				"bit": "Robot.java keeps the last 5 speeds and logs their average as `Robot/SmoothedSpeed`. Averaging hides the jitter, at the cost of reacting a little later."
+			}
 		},
 		{
 			"title": "Start the robot",
-			"say": "Your code only runs once it's built and started.",
+			"say": {
+				"never": "Your code only works once it's started. Press **Start** and wait until the status says **Running**.",
+				"bit": "Your code only runs once it's built and started."
+			},
 			"target": {
 				"selector": "[data-tour='sim-controls']"
 			},
@@ -36,12 +45,18 @@
 					"selector": "[data-tour='code-status']",
 					"text": "Running"
 				},
-				"hint": "press Start and wait for Running."
+				"hint": {
+					"never": "press Start, then wait for Running.",
+					"bit": "press Start and wait for Running."
+				}
 			}
 		},
 		{
 			"title": "Enable in Teleop",
-			"say": "Pick **Teleop** and press **Enable**. Robot code runs only while it's enabled.",
+			"say": {
+				"never": "Choose **Teleop**, then press **Enable**. The robot stays frozen until it's enabled.",
+				"bit": "Pick **Teleop** and press **Enable**. Robot code runs only while it's enabled."
+			},
 			"target": {
 				"selector": "[data-tour='enable']"
 			},
@@ -50,12 +65,18 @@
 					"selector": "[data-tour='enable'] button",
 					"text": "Enabled"
 				},
-				"hint": "choose Teleop, then Enable."
+				"hint": {
+					"never": "choose Teleop, then press Enable.",
+					"bit": "choose Teleop, then Enable."
+				}
 			}
 		},
 		{
 			"title": "Raw speed",
-			"say": "Drive around a bit. In AdvantageScope, search for `LinearSpeed`, then drag **Robot/LinearSpeed** onto the **Left Axis**.",
+			"say": {
+				"never": "Drive around for a bit. Look at **AdvantageScope**. Type `LinearSpeed` in the search box, then drag **Robot/LinearSpeed** onto the **Left Axis** of the graph. This is the raw, shaky speed.",
+				"bit": "Drive around a bit. In AdvantageScope, search for `LinearSpeed`, then drag **Robot/LinearSpeed** onto the **Left Axis**."
+			},
 			"close": [
 				"editor",
 				"preview",
@@ -74,12 +95,18 @@
 					"selector": ".line-graph-left.source-list .key-container",
 					"text": "Robot/LinearSpeed"
 				},
-				"hint": "drag Robot/LinearSpeed onto the graph."
+				"hint": {
+					"never": "drag Robot/LinearSpeed onto the graph.",
+					"bit": "drag Robot/LinearSpeed onto the graph."
+				}
 			}
 		},
 		{
 			"title": "Smoothed speed",
-			"say": "Now compare the averaged one. Which line is calmer? In AdvantageScope, search for `SmoothedSpeed`, then drag **Robot/SmoothedSpeed** onto the **Right Axis**.",
+			"say": {
+				"never": "Now add the averaged speed. Type `SmoothedSpeed` in the search box and drag **Robot/SmoothedSpeed** onto the **Right Axis**. Which line is calmer?",
+				"bit": "Now compare the averaged one. Which line is calmer? In AdvantageScope, search for `SmoothedSpeed`, then drag **Robot/SmoothedSpeed** onto the **Right Axis**."
+			},
 			"close": [
 				"editor",
 				"preview",
@@ -98,7 +125,10 @@
 					"selector": ".line-graph-right.source-list .key-container",
 					"text": "Robot/SmoothedSpeed"
 				},
-				"hint": "drag Robot/SmoothedSpeed onto the graph."
+				"hint": {
+					"never": "drag Robot/SmoothedSpeed onto the graph.",
+					"bit": "drag Robot/SmoothedSpeed onto the graph."
+				}
 			}
 		}
 	],

@@ -6,7 +6,10 @@
 	"steps": [
 		{
 			"title": "One return, two values",
-			"say": "A method returns one thing, so to hand back a left **and** a right speed, return an array.",
+			"say": {
+				"never": "A method can only hand back **one** thing. But we need two answers, a left speed and a right speed. The trick: put both in an **array**, which is a row of boxes numbered from 0. Box 0 is left, box 1 is right. The caller then picks each one out with `s[0]` and `s[1]`.",
+				"bit": "A method returns one thing, so to hand back a left **and** a right speed, return an array."
+			},
 			"board": {
 				"code": "double[] speeds = {left, right};\nreturn speeds;\n\n// the caller:\ndouble[] s = DriveMath.arcadeToWheelSpeeds(0.5, 0.2);\ndouble leftOut = s[0];\ndouble rightOut = s[1];",
 				"marks": [
@@ -23,7 +26,10 @@
 		},
 		{
 			"title": "Don't clip the turn",
-			"say": "If a side goes past 1.0, the motor clips it, and the turn gets lost. Dividing **both** by the bigger one keeps their ratio.",
+			"say": {
+				"never": "A motor can't go faster than 1.0. If your math says the left side needs 1.2 and the right 0.4, the motor just cuts 1.2 down to 1.0, and now the robot turns *less* than you wanted. The fix is to divide **both** numbers by 1.2. They shrink together, so the turn keeps the same shape.",
+				"bit": "If a side goes past 1.0, the motor clips it, and the turn gets lost. Dividing **both** by the bigger one keeps their ratio."
+			},
 			"board": {
 				"code": "left 1.2, right 0.4   -> clipped: 1.0, 0.4   (turn changed!)\ndivide both by 1.2    -> 1.0, 0.333          (same shape)",
 				"marks": [
@@ -36,7 +42,10 @@
 		},
 		{
 			"title": "In code",
-			"say": "Find the bigger magnitude; if it's over 1, divide both.",
+			"say": {
+				"never": "In code: first find which side has the bigger number (ignoring minus signs with `Math.abs`). If that number is over 1, divide both sides by it. Read the code one line at a time. Each line does one small job.",
+				"bit": "Find the bigger magnitude; if it's over 1, divide both."
+			},
 			"board": {
 				"code": "double biggest = Math.max(Math.abs(left), Math.abs(right));\nif (biggest > 1.0) {\n    left /= biggest;\n    right /= biggest;\n}\nreturn new double[] {left, right};",
 				"marks": [
@@ -53,7 +62,10 @@
 		},
 		{
 			"title": "Open DriveMath.java",
-			"say": "Press **Ctrl+P**, type `DriveMath` and press Enter. Quick Open finds any file by name, so you never have to dig through folders.",
+			"say": {
+				"never": "Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `DriveMath`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "Press **Ctrl+P**, type `DriveMath` and press Enter. Quick Open finds any file by name, so you never have to dig through folders."
+			},
 			"open": [
 				"editor"
 			],
@@ -80,7 +92,10 @@
 		},
 		{
 			"title": "Find arcadeToWheelSpeeds",
-			"say": "It's further down. Press **Ctrl+F**, type `arcadeToWheelSpeeds` and press Enter to jump to it.",
+			"say": {
+				"never": "It's further down. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `arcadeToWheelSpeeds` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "It's further down. Press **Ctrl+F**, type `arcadeToWheelSpeeds` and press Enter to jump to it."
+			},
 			"target": {
 				"pane": "editor"
 			},
@@ -98,7 +113,10 @@
 		},
 		{
 			"title": "Your turn",
-			"say": "Write `arcadeToWheelSpeeds` here.",
+			"say": {
+				"never": "Your turn! Write the `arcadeToWheelSpeeds` method here. Work through the board steps again if you get stuck, and press **Verify** when you're done.",
+				"bit": "Write `arcadeToWheelSpeeds` here."
+			},
 			"target": {
 				"pane": "editor",
 				"selector": ".view-lines .view-line",

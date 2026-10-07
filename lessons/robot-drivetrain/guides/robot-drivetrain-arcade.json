@@ -6,7 +6,10 @@
 	"steps": [
 		{
 			"title": "Two sticks, two jobs",
-			"say": "Arcade drive: one stick goes forward and back, the other turns. Most drivers prefer it.",
+			"say": {
+				"never": "In **arcade drive** you steer with two jobs. One stick says *how fast to go forward or back*. The other says *how much to turn*. It feels like driving a car, which is why many drivers like it.",
+				"bit": "Arcade drive: one stick goes forward and back, the other turns. Most drivers prefer it."
+			},
 			"board": {
 				"code": "double forward = -controller.getLeftY();\ndouble turn = controller.getRightX();",
 				"marks": [
@@ -23,7 +26,10 @@
 		},
 		{
 			"title": "The math",
-			"say": "To turn right, the left side goes faster than the right. Adding and subtracting `turn` does exactly that.",
+			"say": {
+				"never": "Here's the trick. To turn right, the left wheels must go faster than the right wheels, so the robot curves around to the right. Adding `turn` to one side and subtracting it from the other does exactly that. Try it with numbers on the next step.",
+				"bit": "To turn right, the left side goes faster than the right. Adding and subtracting `turn` does exactly that."
+			},
 			"board": {
 				"code": "double leftSpeed = forward + turn;\ndouble rightSpeed = forward - turn;\ndrive.setDutyCycles(leftSpeed, rightSpeed);",
 				"marks": [
@@ -40,7 +46,10 @@
 		},
 		{
 			"title": "Try some numbers",
-			"say": "Work these out in your head before you drive.",
+			"say": {
+				"never": "Work these out in your head before you ever drive. Read each line as: *if the sticks say this, the wheels get that.* Notice that when `forward` is 0, the two sides get opposite numbers, so one pushes and one pulls and the robot spins in place.",
+				"bit": "Work these out in your head before you drive."
+			},
 			"board": {
 				"code": "forward 0.5, turn 0.0  ->  left 0.5,  right 0.5   (straight)\nforward 0.0, turn 0.5  ->  left 0.5,  right -0.5  (spin right)\nforward 0.5, turn 0.5  ->  left 1.0,  right 0.0   (curve right)",
 				"marks": [
@@ -53,11 +62,17 @@
 		},
 		{
 			"title": "Duty cycle",
-			"say": "A **duty cycle** is how much battery voltage the motor gets, from -1.0 (full reverse) to 1.0 (full forward). Bigger numbers get clipped to 1.0."
+			"say": {
+				"never": "A **duty cycle** is just *how hard the motor is pushed*. It's a number from **-1.0** (full speed backward) through **0** (stopped) to **1.0** (full speed forward). If your math says 1.5, the motor still only gives 1.0. It can't go past full.",
+				"bit": "A **duty cycle** is how much battery voltage the motor gets, from -1.0 (full reverse) to 1.0 (full forward). Bigger numbers get clipped to 1.0."
+			}
 		},
 		{
 			"title": "Start the robot",
-			"say": "Your code only runs once it's built and started.",
+			"say": {
+				"never": "Your code only works once it's started. Press **Start** and wait until the status says **Running**.",
+				"bit": "Your code only runs once it's built and started."
+			},
 			"target": {
 				"selector": "[data-tour='sim-controls']"
 			},
@@ -66,12 +81,18 @@
 					"selector": "[data-tour='code-status']",
 					"text": "Running"
 				},
-				"hint": "press Start and wait for Running."
+				"hint": {
+					"never": "press Start, then wait for Running.",
+					"bit": "press Start and wait for Running."
+				}
 			}
 		},
 		{
 			"title": "Enable in Teleop",
-			"say": "Pick **Teleop** and press **Enable**. Robot code runs only while it's enabled.",
+			"say": {
+				"never": "Choose **Teleop**, then press **Enable**. The robot stays frozen until it's enabled.",
+				"bit": "Pick **Teleop** and press **Enable**. Robot code runs only while it's enabled."
+			},
 			"target": {
 				"selector": "[data-tour='enable']"
 			},
@@ -80,12 +101,18 @@
 					"selector": "[data-tour='enable'] button",
 					"text": "Enabled"
 				},
-				"hint": "choose Teleop, then Enable."
+				"hint": {
+					"never": "choose Teleop, then press Enable.",
+					"bit": "choose Teleop, then Enable."
+				}
 			}
 		},
 		{
 			"title": "Drive it",
-			"say": "**W / S** drive forward and back, **Arrow Left / Right** turn. If it turns the wrong way, check the sign on `turn`.",
+			"say": {
+				"never": "Time to drive! **W** and **S** go forward and back. The **left and right arrow keys** turn. If the robot turns the wrong way, the sign on `turn` is backwards. Swap the `+` and `-`, restart, and try again.",
+				"bit": "**W / S** drive forward and back, **Arrow Left / Right** turn. If it turns the wrong way, check the sign on `turn`."
+			},
 			"target": {
 				"selector": "[data-tour='mode']"
 			},

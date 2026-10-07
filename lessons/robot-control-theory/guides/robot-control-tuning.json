@@ -6,7 +6,10 @@
 	"steps": [
 		{
 			"title": "Feedforward plus feedback",
-			"say": "PID here is the feedforward guess **plus** a correction that grows with the error.",
+			"say": {
+				"never": "PID here has two parts added together. **Feedforward** is a smart first guess: \"this speed usually needs about this much power.\" **Feedback** is a correction on top: the bigger the error, the bigger the push. kV scales the guess and kP scales the correction.",
+				"bit": "PID here is the feedforward guess **plus** a correction that grows with the error."
+			},
 			"board": {
 				"code": "duty = (kV * targetRps + kP * error) / 12.0;",
 				"marks": [
@@ -23,7 +26,10 @@
 		},
 		{
 			"title": "Open ShooterConstants.java",
-			"say": "Press **Ctrl+P**, type `ShooterConstants` and press Enter. Quick Open finds any file by name, so you never have to dig through folders.",
+			"say": {
+				"never": "Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `ShooterConstants`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "Press **Ctrl+P**, type `ShooterConstants` and press Enter. Quick Open finds any file by name, so you never have to dig through folders."
+			},
 			"open": [
 				"editor"
 			],
@@ -50,15 +56,24 @@
 		},
 		{
 			"title": "Find kV",
-			"say": "Search for `FLYWHEEL_KV`. Set `FLYWHEEL_CONTROL = FEEDFORWARD` and try kV 0.05, 0.10, 0.12, restarting each time.",
+			"say": {
+				"never": "Search for `FLYWHEEL_KV`. Set `FLYWHEEL_CONTROL = FEEDFORWARD`. Then try kV values 0.05, then 0.10, then 0.12. Restart each time and watch the graph to see which gets the flywheel closest to its target.",
+				"bit": "Search for `FLYWHEEL_KV`. Set `FLYWHEEL_CONTROL = FEEDFORWARD` and try kV 0.05, 0.10, 0.12, restarting each time."
+			},
 			"waitFor": {
-				"hint": "try a few kV values."
+				"hint": {
+					"never": "try a few kV values.",
+					"bit": "try a few kV values."
+				}
 			},
 			"cardAt": "bottom-right"
 		},
 		{
 			"title": "Start the robot",
-			"say": "Your code only runs once it's built and started.",
+			"say": {
+				"never": "Your code only works once it's started. Press **Start** and wait until the status says **Running**.",
+				"bit": "Your code only runs once it's built and started."
+			},
 			"target": {
 				"selector": "[data-tour='sim-controls']"
 			},
@@ -67,12 +82,18 @@
 					"selector": "[data-tour='code-status']",
 					"text": "Running"
 				},
-				"hint": "press Start and wait for Running."
+				"hint": {
+					"never": "press Start, then wait for Running.",
+					"bit": "press Start and wait for Running."
+				}
 			}
 		},
 		{
 			"title": "Enable in Teleop",
-			"say": "Pick **Teleop** and press **Enable**. Robot code runs only while it's enabled.",
+			"say": {
+				"never": "Choose **Teleop**, then press **Enable**. The robot stays frozen until it's enabled.",
+				"bit": "Pick **Teleop** and press **Enable**. Robot code runs only while it's enabled."
+			},
 			"target": {
 				"selector": "[data-tour='enable']"
 			},
@@ -81,12 +102,18 @@
 					"selector": "[data-tour='enable'] button",
 					"text": "Enabled"
 				},
-				"hint": "choose Teleop, then Enable."
+				"hint": {
+					"never": "choose Teleop, then press Enable.",
+					"bit": "choose Teleop, then Enable."
+				}
 			}
 		},
 		{
 			"title": "Watch the speed",
-			"say": "Hold **U**, then tap **K** (A) to launch a game piece. Feedforward never notices the dip. In AdvantageScope, search for `FlywheelVelocity`, then drag **Subsystem/Shooter/FlywheelVelocity** onto the **Left Axis**.",
+			"say": {
+				"never": "Hold **U**, then tap **K** (A) to launch a game piece. Feedforward never notices the dip. Look at **AdvantageScope**, the graphing tool. Type `FlywheelVelocity` in its search box. Find **Subsystem/Shooter/FlywheelVelocity** in the list and drag it with your mouse onto the **Left Axis** of the graph. Then move the robot and watch the line change.",
+				"bit": "Hold **U**, then tap **K** (A) to launch a game piece. Feedforward never notices the dip. In AdvantageScope, search for `FlywheelVelocity`, then drag **Subsystem/Shooter/FlywheelVelocity** onto the **Left Axis**."
+			},
 			"close": [
 				"editor",
 				"preview",
@@ -110,15 +137,24 @@
 		},
 		{
 			"title": "Add kP",
-			"say": "Switch to `PID`, keep your kV, and raise `FLYWHEEL_KP`: 0.05, 0.2, 1.0. Now the dip recovers. Too big and a real robot buzzes.",
+			"say": {
+				"never": "Now switch to `PID` and keep your best kV. Raise `FLYWHEEL_KP` through 0.05, then 0.2, then 1.0. After a shot, the flywheel should now recover faster. Be careful: too big a kP and a real robot starts to buzz.",
+				"bit": "Switch to `PID`, keep your kV, and raise `FLYWHEEL_KP`: 0.05, 0.2, 1.0. Now the dip recovers. Too big and a real robot buzzes."
+			},
 			"waitFor": {
-				"hint": "raise kP and watch the recovery."
+				"hint": {
+					"never": "raise kP and watch the recovery.",
+					"bit": "raise kP and watch the recovery."
+				}
 			},
 			"cardAt": "bottom-right"
 		},
 		{
 			"title": "Measure it",
-			"say": "Aim for a recovery under about 0.8 seconds. In AdvantageScope, search for `RecoverySeconds`, then drag **Subsystem/Shooter/RecoverySeconds** onto the **Right Axis**.",
+			"say": {
+				"never": "Aim for a recovery under about 0.8 seconds. Look at **AdvantageScope**, the graphing tool. Type `RecoverySeconds` in its search box. Find **Subsystem/Shooter/RecoverySeconds** in the list and drag it with your mouse onto the **Right Axis** of the graph. Then move the robot and watch the line change.",
+				"bit": "Aim for a recovery under about 0.8 seconds. In AdvantageScope, search for `RecoverySeconds`, then drag **Subsystem/Shooter/RecoverySeconds** onto the **Right Axis**."
+			},
 			"close": [
 				"editor",
 				"preview",
@@ -142,7 +178,10 @@
 		},
 		{
 			"title": "Check your work",
-			"say": "When it runs the way you expect, open the lesson chip and press **Verify**. Each checkpoint tells you what it's looking for if it doesn't pass yet.",
+			"say": {
+				"never": "When it all works the way you expect, click the lesson chip and press **Verify**. Each checkpoint tells you what it wants if it doesn't pass yet, so read the message.",
+				"bit": "When it runs the way you expect, open the lesson chip and press **Verify**. Each checkpoint tells you what it's looking for if it doesn't pass yet."
+			},
 			"target": {
 				"selector": "[data-tour='lesson']"
 			}

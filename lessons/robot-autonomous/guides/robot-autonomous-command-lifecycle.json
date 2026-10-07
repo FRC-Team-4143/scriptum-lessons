@@ -6,7 +6,10 @@
 	"steps": [
 		{
 			"title": "Four methods",
-			"say": "A command class overrides the parts it needs. WPILib calls them for you.",
+			"say": {
+				"never": "A command is a little program with four parts, and WPILib calls them for you at the right times. `initialize` runs **once** at the start. `execute` runs again and again, every 20 thousandths of a second. `isFinished` answers \"are we done yet?\" and when it says yes, `end` runs once to clean up.",
+				"bit": "A command class overrides the parts it needs. WPILib calls them for you."
+			},
 			"board": {
 				"code": "@Override public void initialize() { }   // once, at the start\n@Override public void execute() { }      // every 20 ms\n@Override public boolean isFinished() { } // stop when true\n@Override public void end(boolean interrupted) { } // once, at the end",
 				"marks": [
@@ -27,7 +30,10 @@
 		},
 		{
 			"title": "Open TurnToAngleCommand.java",
-			"say": "Read the finished one first. Press **Ctrl+P**, type `TurnToAngleCommand` and press Enter. Quick Open finds any file by name, so you never have to dig through folders.",
+			"say": {
+				"never": "Read the finished one first. Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `TurnToAngleCommand`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "Read the finished one first. Press **Ctrl+P**, type `TurnToAngleCommand` and press Enter. Quick Open finds any file by name, so you never have to dig through folders."
+			},
 			"open": [
 				"editor"
 			],
@@ -54,9 +60,15 @@
 		},
 		{
 			"title": "Find the error",
-			"say": "Find where it works out the **error** and turns it into a motor command. Press I did it when you've spotted it.",
+			"say": {
+				"never": "Look through the code for where it works out the **error** (how far off the robot is) and turns that into a motor command. When you've spotted it, press **I did it**.",
+				"bit": "Find where it works out the **error** and turns it into a motor command. Press I did it when you've spotted it."
+			},
 			"waitFor": {
-				"hint": "find the error in TurnToAngleCommand."
+				"hint": {
+					"never": "find the error in TurnToAngleCommand.",
+					"bit": "find the error in TurnToAngleCommand."
+				}
 			},
 			"cardAt": "bottom-right"
 		}

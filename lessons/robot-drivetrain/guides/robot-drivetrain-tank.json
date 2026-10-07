@@ -6,7 +6,10 @@
 	"steps": [
 		{
 			"title": "Tank drive",
-			"say": "Like a tank: the left stick runs the left side, the right stick runs the right side.",
+			"say": {
+				"never": "In **tank drive** each stick runs one side of the robot, just like a real tank has two tracks. Left stick runs the left wheels, right stick runs the right wheels.",
+				"bit": "Like a tank: the left stick runs the left side, the right stick runs the right side."
+			},
 			"board": {
 				"code": "double leftSpeed = -controller.getLeftY();\ndouble rightSpeed = -controller.getRightY();\ndrive.setDutyCycles(leftSpeed, rightSpeed);",
 				"marks": [
@@ -27,7 +30,10 @@
 		},
 		{
 			"title": "Open Robot.java",
-			"say": "Press **Ctrl+P**, type `Robot` and press Enter. Quick Open finds any file by name, so you never have to dig through folders.",
+			"say": {
+				"never": "Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `Robot`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "Press **Ctrl+P**, type `Robot` and press Enter. Quick Open finds any file by name, so you never have to dig through folders."
+			},
 			"open": [
 				"editor"
 			],
@@ -54,7 +60,10 @@
 		},
 		{
 			"title": "Find teleopPeriodic",
-			"say": "Find where it goes. Press **Ctrl+F**, type `teleopPeriodic` and press Enter to jump to it.",
+			"say": {
+				"never": "Find where it goes. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `teleopPeriodic` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "Find where it goes. Press **Ctrl+F**, type `teleopPeriodic` and press Enter to jump to it."
+			},
 			"target": {
 				"pane": "editor"
 			},
@@ -72,7 +81,10 @@
 		},
 		{
 			"title": "Type it here",
-			"say": "Write those three lines inside `teleopPeriodic()`, between its braces.",
+			"say": {
+				"never": "Now type those three lines in. They go inside `teleopPeriodic()`, **between its curly braces `{` and `}`**. Anything between those braces runs over and over while you drive.",
+				"bit": "Write those three lines inside `teleopPeriodic()`, between its braces."
+			},
 			"target": {
 				"pane": "editor",
 				"selector": ".view-lines .view-line",
@@ -83,7 +95,10 @@
 		},
 		{
 			"title": "Start the robot",
-			"say": "Your code only runs once it's built and started.",
+			"say": {
+				"never": "Your code only works once it's started. Press **Start** and wait until the status says **Running**.",
+				"bit": "Your code only runs once it's built and started."
+			},
 			"target": {
 				"selector": "[data-tour='sim-controls']"
 			},
@@ -92,12 +107,18 @@
 					"selector": "[data-tour='code-status']",
 					"text": "Running"
 				},
-				"hint": "press Start and wait for Running."
+				"hint": {
+					"never": "press Start, then wait for Running.",
+					"bit": "press Start and wait for Running."
+				}
 			}
 		},
 		{
 			"title": "Enable in Teleop",
-			"say": "Pick **Teleop** and press **Enable**. Robot code runs only while it's enabled.",
+			"say": {
+				"never": "Choose **Teleop**, then press **Enable**. The robot stays frozen until it's enabled.",
+				"bit": "Pick **Teleop** and press **Enable**. Robot code runs only while it's enabled."
+			},
 			"target": {
 				"selector": "[data-tour='enable']"
 			},
@@ -106,12 +127,18 @@
 					"selector": "[data-tour='enable'] button",
 					"text": "Enabled"
 				},
-				"hint": "choose Teleop, then Enable."
+				"hint": {
+					"never": "choose Teleop, then press Enable.",
+					"bit": "choose Teleop, then Enable."
+				}
 			}
 		},
 		{
 			"title": "Drive it",
-			"say": "**W / S** move the left side, **Arrow Up / Down** the right side. Push one forward and one back to spin in place.",
+			"say": {
+				"never": "Drive! **W** and **S** move the left side. The **up and down arrow keys** move the right side. Push one forward and pull the other back and the robot spins on the spot.",
+				"bit": "**W / S** move the left side, **Arrow Up / Down** the right side. Push one forward and one back to spin in place."
+			},
 			"target": {
 				"selector": "[data-tour='mode']"
 			},
@@ -119,7 +146,10 @@
 		},
 		{
 			"title": "Watch the output",
-			"say": "See what you're sending to the motors. In AdvantageScope, search for `LeftOutput`, then drag **Drive/LeftOutput** onto the **Left Axis**.",
+			"say": {
+				"never": "Let's *see* what your code is telling the motors. In **AdvantageScope**, type `LeftOutput` in the search box, then drag **Drive/LeftOutput** onto the graph's **Left Axis**. Now wiggle the keys and watch the line move.",
+				"bit": "See what you're sending to the motors. In AdvantageScope, search for `LeftOutput`, then drag **Drive/LeftOutput** onto the **Left Axis**."
+			},
 			"close": [
 				"editor",
 				"preview",
@@ -138,7 +168,10 @@
 					"selector": ".line-graph-left.source-list .key-container",
 					"text": "Drive/LeftOutput"
 				},
-				"hint": "drag Drive/LeftOutput onto the graph."
+				"hint": {
+					"never": "drag Drive/LeftOutput onto the graph.",
+					"bit": "drag Drive/LeftOutput onto the graph."
+				}
 			}
 		}
 	],

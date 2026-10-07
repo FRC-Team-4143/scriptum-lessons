@@ -6,7 +6,10 @@
 	"steps": [
 		{
 			"title": "Pose",
-			"say": "A **pose** is where the robot is (x, y) and which way it faces. The pose estimator adds up every small wheel movement.",
+			"say": {
+				"never": "A **pose** is a robot's position on the field (x and y) *and* which way it's facing. The pose estimator works it out by adding up every tiny movement of the wheels, like counting your steps to guess how far you walked.",
+				"bit": "A **pose** is where the robot is (x, y) and which way it faces. The pose estimator adds up every small wheel movement."
+			},
 			"board": {
 				"code": "poseEstimator.update(getYaw(), getLeftMeters(), getRightMeters());\npose = poseEstimator.getEstimatedPosition();",
 				"marks": [
@@ -23,7 +26,10 @@
 		},
 		{
 			"title": "Start the robot",
-			"say": "Your code only runs once it's built and started.",
+			"say": {
+				"never": "Your code only works once it's started. Press **Start** and wait until the status says **Running**.",
+				"bit": "Your code only runs once it's built and started."
+			},
 			"target": {
 				"selector": "[data-tour='sim-controls']"
 			},
@@ -32,12 +38,18 @@
 					"selector": "[data-tour='code-status']",
 					"text": "Running"
 				},
-				"hint": "press Start and wait for Running."
+				"hint": {
+					"never": "press Start, then wait for Running.",
+					"bit": "press Start and wait for Running."
+				}
 			}
 		},
 		{
 			"title": "Enable in Teleop",
-			"say": "Pick **Teleop** and press **Enable**. Robot code runs only while it's enabled.",
+			"say": {
+				"never": "Choose **Teleop**, then press **Enable**. The robot stays frozen until it's enabled.",
+				"bit": "Pick **Teleop** and press **Enable**. Robot code runs only while it's enabled."
+			},
 			"target": {
 				"selector": "[data-tour='enable']"
 			},
@@ -46,12 +58,18 @@
 					"selector": "[data-tour='enable'] button",
 					"text": "Enabled"
 				},
-				"hint": "choose Teleop, then Enable."
+				"hint": {
+					"never": "choose Teleop, then press Enable.",
+					"bit": "choose Teleop, then Enable."
+				}
 			}
 		},
 		{
 			"title": "2D Field",
-			"say": "Open the 2D Field tab in AdvantageScope.",
+			"say": {
+				"never": "Open **AdvantageScope** and click the **2D Field** tab. It's a map of the field from above.",
+				"bit": "Open the 2D Field tab in AdvantageScope."
+			},
 			"close": [
 				"editor",
 				"preview",
@@ -71,13 +89,19 @@
 					"selector": ".tab.tab-selected",
 					"text": "2D Field"
 				},
-				"hint": "click the 2D Field tab."
+				"hint": {
+					"never": "click the 2D Field tab.",
+					"bit": "click the 2D Field tab."
+				}
 			},
 			"assist": true
 		},
 		{
 			"title": "Your estimate",
-			"say": "Search for `Pose` and drag **Drive/Pose** onto **Poses**.",
+			"say": {
+				"never": "Type `Pose` in the search box. Drag **Drive/Pose** onto the **Poses** area. A little robot appears on the map. That's where *your code thinks* the robot is.",
+				"bit": "Search for `Pose` and drag **Drive/Pose** onto **Poses**."
+			},
 			"target": {
 				"pane": "scope",
 				"selector": ".field-2d-sources.source-list"
@@ -88,12 +112,18 @@
 					"selector": ".field-2d-sources.source-list .key-container",
 					"text": "Drive/Pose"
 				},
-				"hint": "drag Drive/Pose onto Poses."
+				"hint": {
+					"never": "drag Drive/Pose onto Poses.",
+					"bit": "drag Drive/Pose onto Poses."
+				}
 			}
 		},
 		{
 			"title": "The truth",
-			"say": "Now drag **Drive/TruePose** on too. The simulator knows where the robot **really** is.",
+			"say": {
+				"never": "Now drag **Drive/TruePose** on too. The simulator secretly knows where the robot *really* is, so you can compare your guess to the truth.",
+				"bit": "Now drag **Drive/TruePose** on too. The simulator knows where the robot **really** is."
+			},
 			"target": {
 				"pane": "scope",
 				"selector": ".field-2d-sources.source-list"
@@ -104,12 +134,18 @@
 					"selector": ".field-2d-sources.source-list .key-container",
 					"text": "Drive/TruePose"
 				},
-				"hint": "drag Drive/TruePose onto Poses."
+				"hint": {
+					"never": "drag Drive/TruePose onto Poses.",
+					"bit": "drag Drive/TruePose onto Poses."
+				}
 			}
 		},
 		{
 			"title": "Drive it",
-			"say": "Drive a long way. The two robots start together and slowly drift apart: wheels slip and encoders are never perfect. Real robots add cameras and gyros to correct it.",
+			"say": {
+				"never": "Drive a long way. The two robots start together but slowly drift apart. Wheels slip a tiny bit and sensors are never perfect, so the guess gets worse over time. Real robots fix this with cameras and a gyro.",
+				"bit": "Drive a long way. The two robots start together and slowly drift apart: wheels slip and encoders are never perfect. Real robots add cameras and gyros to correct it."
+			},
 			"target": {
 				"selector": "[data-tour='mode']"
 			},

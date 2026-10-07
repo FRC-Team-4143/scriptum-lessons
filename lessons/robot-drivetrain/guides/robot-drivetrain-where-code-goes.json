@@ -6,7 +6,10 @@
 	"steps": [
 		{
 			"title": "Open Robot.java",
-			"say": "Everything you write this lesson lives in one file. Press **Ctrl+P**, type `Robot` and press Enter. Quick Open finds any file by name, so you never have to dig through folders.",
+			"say": {
+				"never": "Everything you write this lesson lives in one file. Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `Robot`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "Everything you write this lesson lives in one file. Press **Ctrl+P**, type `Robot` and press Enter. Quick Open finds any file by name, so you never have to dig through folders."
+			},
 			"open": [
 				"editor"
 			],
@@ -33,7 +36,10 @@
 		},
 		{
 			"title": "Find teleopPeriodic",
-			"say": "Your code goes inside one method. Press **Ctrl+F**, type `teleopPeriodic` and press Enter to jump to it.",
+			"say": {
+				"never": "Your code goes inside one method. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `teleopPeriodic` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "Your code goes inside one method. Press **Ctrl+F**, type `teleopPeriodic` and press Enter to jump to it."
+			},
 			"target": {
 				"pane": "editor"
 			},
@@ -51,7 +57,10 @@
 		},
 		{
 			"title": "teleopPeriodic",
-			"say": "`teleopPeriodic()` runs about **50 times a second** while the robot is enabled in teleop. Each time, it runs your lines top to bottom, so the robot keeps reacting to the sticks.",
+			"say": {
+				"never": "`teleopPeriodic()` is a recipe the robot repeats about **50 times every second** while you drive. Each time, it follows your lines from top to bottom. That's why the robot reacts instantly when you move a stick.",
+				"bit": "`teleopPeriodic()` runs about **50 times a second** while the robot is enabled in teleop. Each time, it runs your lines top to bottom, so the robot keeps reacting to the sticks."
+			},
 			"target": {
 				"pane": "editor",
 				"selector": ".view-lines .view-line",
@@ -62,7 +71,10 @@
 		},
 		{
 			"title": "The two objects",
-			"say": "Two objects are already made for you. You call methods on them.",
+			"say": {
+				"never": "Two things are already built for you, and you give them orders. `controller` is the gamepad: you can ask it how far a stick is pushed. `drive` is the drivetrain: you can tell it how fast to spin the wheels. Orders are written as `thing.order(...)`.",
+				"bit": "Two objects are already made for you. You call methods on them."
+			},
 			"board": {
 				"code": "controller.getLeftY()          // how far the left stick is pushed\ndrive.setDutyCycles(0.5, 0.5)  // run both sides at half power",
 				"marks": [
@@ -83,7 +95,10 @@
 		},
 		{
 			"title": "Forward is negative",
-			"say": "Pushing a stick **forward** gives a negative number (that's how gamepads work), so you flip it with a minus sign.",
+			"say": {
+				"never": "On a gamepad, pushing a stick **forward** gives a *negative* number. That's just how they're built, and it feels backwards. So we put a minus sign in front to flip it, and now forward means positive.",
+				"bit": "Pushing a stick **forward** gives a negative number (that's how gamepads work), so you flip it with a minus sign."
+			},
 			"board": {
 				"code": "double leftSpeed = -controller.getLeftY();",
 				"marks": [

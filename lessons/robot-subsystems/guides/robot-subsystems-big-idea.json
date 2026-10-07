@@ -6,7 +6,10 @@
 	"steps": [
 		{
 			"title": "Three layers",
-			"say": "Each layer has one job.",
+			"say": {
+				"never": "A real robot's code is organized in three layers, and each has one job. At the bottom, a **mechanism** knows how to run one device (spin a wheel at a speed). In the middle, a **subsystem** decides *when* (\"the button is held, so spin up\"). At the top, the **container** keeps a list of all the subsystems.",
+				"bit": "Each layer has one job."
+			},
 			"board": {
 				"code": "RobotContainer        // lists every subsystem\n  ShooterSubsystem     // decides: when the button's held, spin up\n    FlywheelMech       // knows how to spin a wheel at a speed\n    RollerMech         // knows how to run a roller",
 				"marks": [
@@ -27,11 +30,17 @@
 		},
 		{
 			"title": "You've used one",
-			"say": "The drivetrain was a mechanism all along. This lesson wraps it in a subsystem and builds a shooter next to it."
+			"say": {
+				"never": "You've already used one! The drivetrain was a mechanism the whole time. In this lesson we wrap it in a subsystem, then build a brand-new shooter next to it.",
+				"bit": "The drivetrain was a mechanism all along. This lesson wraps it in a subsystem and builds a shooter next to it."
+			}
 		},
 		{
 			"title": "Open DrivetrainSubsystem.java",
-			"say": "Read the drivetrain subsystem first. Press **Ctrl+P**, type `DrivetrainSubsystem` and press Enter. Quick Open finds any file by name, so you never have to dig through folders.",
+			"say": {
+				"never": "Read the drivetrain subsystem first. Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `DrivetrainSubsystem`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "Read the drivetrain subsystem first. Press **Ctrl+P**, type `DrivetrainSubsystem` and press Enter. Quick Open finds any file by name, so you never have to dig through folders."
+			},
 			"open": [
 				"editor"
 			],
@@ -58,7 +67,10 @@
 		},
 		{
 			"title": "Find case ARCADE",
-			"say": "Find the teleop state. Press **Ctrl+F**, type `case ARCADE` and press Enter to jump to it.",
+			"say": {
+				"never": "Find the teleop state. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `case ARCADE` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "Find the teleop state. Press **Ctrl+F**, type `case ARCADE` and press Enter to jump to it."
+			},
 			"target": {
 				"pane": "editor"
 			},
@@ -76,7 +88,10 @@
 		},
 		{
 			"title": "ARCADE",
-			"say": "In the ARCADE state, drive with `drive.arcadeDrive(OI.getForward(), OI.getTurn());`.",
+			"say": {
+				"never": "When the drivetrain is in the `ARCADE` state, it drives using the sticks. The line is `drive.arcadeDrive(OI.getForward(), OI.getTurn());`. You'll write it in a moment.",
+				"bit": "In the ARCADE state, drive with `drive.arcadeDrive(OI.getForward(), OI.getTurn());`."
+			},
 			"target": {
 				"pane": "editor",
 				"selector": ".view-lines .view-line",

@@ -6,7 +6,10 @@
 	"steps": [
 		{
 			"title": "A chain of conversions",
-			"say": "The target is in radians per second, kV wants rotations per second, and the motor wants a duty cycle.",
+			"say": {
+				"never": "Numbers in robot code come in different units, and they have to be converted. The target is in radians per second, but kV wants rotations per second, and the motor wants a duty cycle. Each line on the board converts one unit into the next, like converting inches to feet to yards.",
+				"bit": "The target is in radians per second, kV wants rotations per second, and the motor wants a duty cycle."
+			},
 			"board": {
 				"code": "double rps = CONSTANTS.SHOOT_VELOCITY / (2 * Math.PI);   // rad/s -> rotations/s\ndouble volts = CONSTANTS.FLYWHEEL_KV * rps;              // what it takes to hold that speed\ndouble duty = volts / 12.0;                              // a fraction of the battery",
 				"marks": [
@@ -27,7 +30,10 @@
 		},
 		{
 			"title": "Half of robot programming",
-			"say": "A wrong unit doesn't crash: it just makes the robot do the wrong thing. Write the unit next to every number you can."
+			"say": {
+				"never": "Here's the sneaky part: a wrong unit doesn't crash anything. The robot just does the wrong thing, quietly. So write the unit next to every number you can, in a comment or the variable's name.",
+				"bit": "A wrong unit doesn't crash: it just makes the robot do the wrong thing. Write the unit next to every number you can."
+			}
 		}
 	],
 	"kind": "concept"

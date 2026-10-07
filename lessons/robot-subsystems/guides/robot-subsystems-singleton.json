@@ -6,7 +6,10 @@
 	"steps": [
 		{
 			"title": "Exactly one",
-			"say": "The whole robot must share **one** shooter. A private constructor stops anyone writing `new`, and `getInstance()` hands out the single copy.",
+			"say": {
+				"never": "A robot has only one shooter, so the whole program must share the same one. Two things make that happen. A `private` constructor means nobody else can write `new ShooterSubsystem()`. And `getInstance()` hands out the one copy, building it the first time it's asked.",
+				"bit": "The whole robot must share **one** shooter. A private constructor stops anyone writing `new`, and `getInstance()` hands out the single copy."
+			},
 			"board": {
 				"code": "private static ShooterSubsystem instance;\n\npublic static ShooterSubsystem getInstance() {\n    if (instance == null) {\n        instance = new ShooterSubsystem();\n    }\n    return instance;\n}",
 				"marks": [
@@ -23,7 +26,10 @@
 		},
 		{
 			"title": "Is a subsystem",
-			"say": "`extends MwSubsystem` gives the shooter everything a subsystem has. `@Override` marks the methods it fills in.",
+			"say": {
+				"never": "`extends MwSubsystem` means \"the shooter *is a* subsystem\", so it gets everything a subsystem has for free. `@Override` marks the methods where the shooter fills in its own version.",
+				"bit": "`extends MwSubsystem` gives the shooter everything a subsystem has. `@Override` marks the methods it fills in."
+			},
 			"board": {
 				"code": "public class ShooterSubsystem extends MwSubsystem<ShooterStates, ShooterConstants> {\n    @Override\n    public void updateLogic(double timestamp) { ... }\n}",
 				"marks": [

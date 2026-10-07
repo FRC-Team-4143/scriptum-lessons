@@ -6,7 +6,10 @@
 	"steps": [
 		{
 			"title": "Bang-bang",
-			"say": "Full power until you're there, then nothing. That's **bang-bang control**.",
+			"say": {
+				"never": "**Bang-bang** is the simplest way to drive a set distance: go at one speed until you've arrived, then stop completely. It's like a light switch, only on or off, nothing in between. In code that's an `if` that checks the distance, and an `else` for stopping.",
+				"bit": "Full power until you're there, then nothing. That's **bang-bang control**."
+			},
 			"board": {
 				"code": "if (distanceMeters < 2.0) {\n    drive.setDutyCycles(0.4, 0.4);\n} else {\n    drive.setDutyCycles(0.0, 0.0);\n}",
 				"marks": [
@@ -23,7 +26,10 @@
 		},
 		{
 			"title": "Open Robot.java",
-			"say": "Press **Ctrl+P**, type `Robot` and press Enter. Quick Open finds any file by name, so you never have to dig through folders.",
+			"say": {
+				"never": "Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `Robot`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "Press **Ctrl+P**, type `Robot` and press Enter. Quick Open finds any file by name, so you never have to dig through folders."
+			},
 			"open": [
 				"editor"
 			],
@@ -50,7 +56,10 @@
 		},
 		{
 			"title": "Find autonomousPeriodic",
-			"say": "Autonomous code has its own method. Press **Ctrl+F**, type `autonomousPeriodic` and press Enter to jump to it.",
+			"say": {
+				"never": "Autonomous code has its own method. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `autonomousPeriodic` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "Autonomous code has its own method. Press **Ctrl+F**, type `autonomousPeriodic` and press Enter to jump to it."
+			},
 			"target": {
 				"pane": "editor"
 			},
@@ -68,7 +77,10 @@
 		},
 		{
 			"title": "autonomousPeriodic",
-			"say": "Write the if/else inside `autonomousPeriodic()`. It runs on its own in Auto mode, no sticks needed.",
+			"say": {
+				"never": "Write the `if` and `else` inside `autonomousPeriodic()`, between its curly braces. This one runs by itself in **Auto** mode, so nobody has to touch the keys.",
+				"bit": "Write the if/else inside `autonomousPeriodic()`. It runs on its own in Auto mode, no sticks needed."
+			},
 			"target": {
 				"pane": "editor",
 				"selector": ".view-lines .view-line",
@@ -79,7 +91,10 @@
 		},
 		{
 			"title": "Start the robot",
-			"say": "Your code only runs once it's built and started.",
+			"say": {
+				"never": "Your code only works once it's started. Press **Start** and wait until the status says **Running**.",
+				"bit": "Your code only runs once it's built and started."
+			},
 			"target": {
 				"selector": "[data-tour='sim-controls']"
 			},
@@ -88,12 +103,18 @@
 					"selector": "[data-tour='code-status']",
 					"text": "Running"
 				},
-				"hint": "press Start and wait for Running."
+				"hint": {
+					"never": "press Start, then wait for Running.",
+					"bit": "press Start and wait for Running."
+				}
 			}
 		},
 		{
 			"title": "Enable in Auto",
-			"say": "Pick **Auto** and press **Enable**. Robot code runs only while it's enabled.",
+			"say": {
+				"never": "Choose **Auto**, then press **Enable**. In Auto the robot drives itself, so you don't touch the keys.",
+				"bit": "Pick **Auto** and press **Enable**. Robot code runs only while it's enabled."
+			},
 			"target": {
 				"selector": "[data-tour='enable']"
 			},
@@ -102,12 +123,18 @@
 					"selector": "[data-tour='enable'] button",
 					"text": "Enabled"
 				},
-				"hint": "choose Auto, then Enable."
+				"hint": {
+					"never": "choose Auto, then press Enable.",
+					"bit": "choose Auto, then Enable."
+				}
 			}
 		},
 		{
 			"title": "Where did it stop?",
-			"say": "Watch the distance as it drives. In AdvantageScope, search for `Distance`, then drag **Robot/Distance** onto the **Left Axis**.",
+			"say": {
+				"never": "Watch how far it goes. In **AdvantageScope**, type `Distance` in the search box and drag **Robot/Distance** onto the **Left Axis**. Watch the line climb, then flatten out when the robot stops.",
+				"bit": "Watch the distance as it drives. In AdvantageScope, search for `Distance`, then drag **Robot/Distance** onto the **Left Axis**."
+			},
 			"close": [
 				"editor",
 				"preview",
@@ -126,12 +153,18 @@
 					"selector": ".line-graph-left.source-list .key-container",
 					"text": "Robot/Distance"
 				},
-				"hint": "drag Robot/Distance onto the graph."
+				"hint": {
+					"never": "drag Robot/Distance onto the graph.",
+					"bit": "drag Robot/Distance onto the graph."
+				}
 			}
 		},
 		{
 			"title": "Past 2.0",
-			"say": "It almost certainly stopped a little **past** 2.0 m: when the power cuts, the robot is still moving. Bang-bang can't slow down smoothly. The Control Theory lesson fixes that with PID."
+			"say": {
+				"never": "It almost surely stopped a little **past** 2.0 meters. Why? When the motors turn off, the robot keeps rolling for a moment, like a bike when you stop pedaling. Bang-bang can't slow down smoothly. A later lesson (PID) fixes that.",
+				"bit": "It almost certainly stopped a little **past** 2.0 m: when the power cuts, the robot is still moving. Bang-bang can't slow down smoothly. The Control Theory lesson fixes that with PID."
+			}
 		}
 	],
 	"kind": "mixed"

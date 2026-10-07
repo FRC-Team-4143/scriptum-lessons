@@ -7,7 +7,10 @@
 	"steps": [
 		{
 			"title": "A button is true or false",
-			"say": "Holding a button makes it **true**; letting go makes it **false**. A method that answers a yes/no question returns a `boolean`. The controller already knows the answer. You just ask it.",
+			"say": {
+				"never": "A button can only be two things: held (**true**) or not held (**false**). A method that answers yes or no is written with `boolean`. You don't have to figure out whether the button is held. The controller already knows. You just ask it with `getRightBumperButton()`.",
+				"bit": "Holding a button makes it **true**; letting go makes it **false**. A method that answers a yes/no question returns a `boolean`. The controller already knows the answer. You just ask it."
+			},
 			"board": {
 				"code": "public static boolean getShootButton() {\n    return driverController.getRightBumperButton();\n}",
 				"marks": [
@@ -24,7 +27,10 @@
 		},
 		{
 			"title": "Open OI.java",
-			"say": "The buttons live in the same class as the sticks. Press **Ctrl+P**, type `OI` and press Enter. Quick Open finds any file by name, so you never have to dig through folders.",
+			"say": {
+				"never": "The buttons live in the same class as the sticks. Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `OI`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "The buttons live in the same class as the sticks. Press **Ctrl+P**, type `OI` and press Enter. Quick Open finds any file by name, so you never have to dig through folders."
+			},
 			"open": [
 				"editor"
 			],
@@ -51,7 +57,10 @@
 		},
 		{
 			"title": "Find it",
-			"say": "The first one is the shoot button. Press **Ctrl+F**, type `right bumper is held` and press Enter to jump to it.",
+			"say": {
+				"never": "The first one is the shoot button. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `right bumper is held` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "The first one is the shoot button. Press **Ctrl+F**, type `right bumper is held` and press Enter to jump to it."
+			},
 			"target": {
 				"pane": "editor"
 			},
@@ -69,7 +78,10 @@
 		},
 		{
 			"title": "Shoot button",
-			"say": "Replace `return false;` with `return driverController.getRightBumperButton();`.",
+			"say": {
+				"never": "Find the line that says `return false;` right under that comment. Change it to `return driverController.getRightBumperButton();`. Now this method returns true while the right bumper is held.",
+				"bit": "Replace `return false;` with `return driverController.getRightBumperButton();`."
+			},
 			"target": {
 				"pane": "editor",
 				"selector": ".view-lines .view-line",
@@ -80,7 +92,10 @@
 		},
 		{
 			"title": "Find it",
-			"say": "Now the index button, just below. Press **Ctrl+F**, type `left bumper is held` and press Enter to jump to it.",
+			"say": {
+				"never": "Now the index button, just below. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `left bumper is held` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "Now the index button, just below. Press **Ctrl+F**, type `left bumper is held` and press Enter to jump to it."
+			},
 			"target": {
 				"pane": "editor"
 			},
@@ -98,7 +113,10 @@
 		},
 		{
 			"title": "Index button",
-			"say": "Same idea with the other bumper: `return driverController.getLeftBumperButton();`.",
+			"say": {
+				"never": "Same idea for the other bumper. Change `return false;` to `return driverController.getLeftBumperButton();`.",
+				"bit": "Same idea with the other bumper: `return driverController.getLeftBumperButton();`."
+			},
 			"target": {
 				"pane": "editor",
 				"selector": ".view-lines .view-line",

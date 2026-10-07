@@ -6,7 +6,10 @@
 	"steps": [
 		{
 			"title": "A lambda",
-			"say": "`() -> ...` is a tiny method with no name. You're not running it now: you're handing it over to run later.",
+			"say": {
+				"never": "A **lambda** is a tiny method with no name, written `() -> ...`. The key idea: you're *not running it now*. You're handing it over so something else can run it later, like giving someone a note that says \"when I press this button, do this\".",
+				"bit": "`() -> ...` is a tiny method with no name. You're not running it now: you're handing it over to run later."
+			},
 			"board": {
 				"code": "() -> shooter.setWantedState(ShooterStates.SHOOT)",
 				"marks": [
@@ -23,7 +26,10 @@
 		},
 		{
 			"title": "A command",
-			"say": "`startEnd` runs one lambda when the command starts and another when it ends.",
+			"say": {
+				"never": "`startEnd` builds a command out of two notes. The first lambda runs when the command **starts** (here: tell the shooter to SHOOT). The second runs when it **ends** (here: tell it to go back to IDLE). When you let go of the button, the command ends.",
+				"bit": "`startEnd` runs one lambda when the command starts and another when it ends."
+			},
 			"board": {
 				"code": "public static Command shoot() {\n    return Commands.startEnd(\n        () -> shooter.setWantedState(ShooterStates.SHOOT),\n        () -> shooter.setWantedState(ShooterStates.IDLE),\n        shooter);\n}",
 				"marks": [

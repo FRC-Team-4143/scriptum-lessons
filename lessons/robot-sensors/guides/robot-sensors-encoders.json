@@ -6,7 +6,10 @@
 	"steps": [
 		{
 			"title": "What an encoder says",
-			"say": "Each drive motor has an **encoder** that counts how far the wheel has turned, in rotations.",
+			"say": {
+				"never": "Each drive motor has an **encoder**, a little counter that notices how far the wheel has turned. It reports in **rotations**: 1.0 means one full turn of the wheel. It can also tell you how fast it's turning, in rotations per second.",
+				"bit": "Each drive motor has an **encoder** that counts how far the wheel has turned, in rotations."
+			},
 			"board": {
 				"code": "drive.getLeftPositionRotations()  // how far, in rotations\ndrive.getLeftVelocityRps()        // how fast, in rotations per second",
 				"marks": [
@@ -23,7 +26,10 @@
 		},
 		{
 			"title": "Rotations to meters",
-			"say": "One rotation moves the robot one wheel **circumference**: 2 x pi x radius.",
+			"say": {
+				"never": "How far does one rotation move the robot? Exactly one trip around the wheel's edge. That's the **circumference**, which is `2 x pi x radius`. Multiply the rotations by that and you get **meters**, a unit we can understand.",
+				"bit": "One rotation moves the robot one wheel **circumference**: 2 x pi x radius."
+			},
 			"board": {
 				"code": "double metersPerRotation = 2.0 * Math.PI * Constants.WHEEL_RADIUS_METERS;\ndouble leftMeters = drive.getLeftPositionRotations() * metersPerRotation;",
 				"marks": [
@@ -40,7 +46,10 @@
 		},
 		{
 			"title": "Open Robot.java",
-			"say": "Press **Ctrl+P**, type `Robot` and press Enter. Quick Open finds any file by name, so you never have to dig through folders.",
+			"say": {
+				"never": "Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `Robot`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "Press **Ctrl+P**, type `Robot` and press Enter. Quick Open finds any file by name, so you never have to dig through folders."
+			},
 			"open": [
 				"editor"
 			],
@@ -67,7 +76,10 @@
 		},
 		{
 			"title": "Find STEP 1",
-			"say": "It's in robotPeriodic(). Press **Ctrl+F**, type `STEP 1` and press Enter to jump to it.",
+			"say": {
+				"never": "It's in robotPeriodic(). Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `STEP 1` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "It's in robotPeriodic(). Press **Ctrl+F**, type `STEP 1` and press Enter to jump to it."
+			},
 			"target": {
 				"pane": "editor"
 			},
@@ -85,7 +97,10 @@
 		},
 		{
 			"title": "STEP 1",
-			"say": "Fill in the right side the same way the left is done.",
+			"say": {
+				"never": "The left side is already done for you. Fill in the right side the same way. It's a copy of the left, with `Right` instead of `Left`.",
+				"bit": "Fill in the right side the same way the left is done."
+			},
 			"target": {
 				"pane": "editor",
 				"selector": ".view-lines .view-line",
@@ -96,7 +111,10 @@
 		},
 		{
 			"title": "Start the robot",
-			"say": "Your code only runs once it's built and started.",
+			"say": {
+				"never": "Your code only works once it's started. Press **Start** and wait until the status says **Running**.",
+				"bit": "Your code only runs once it's built and started."
+			},
 			"target": {
 				"selector": "[data-tour='sim-controls']"
 			},
@@ -105,12 +123,18 @@
 					"selector": "[data-tour='code-status']",
 					"text": "Running"
 				},
-				"hint": "press Start and wait for Running."
+				"hint": {
+					"never": "press Start, then wait for Running.",
+					"bit": "press Start and wait for Running."
+				}
 			}
 		},
 		{
 			"title": "Enable in Teleop",
-			"say": "Pick **Teleop** and press **Enable**. Robot code runs only while it's enabled.",
+			"say": {
+				"never": "Choose **Teleop**, then press **Enable**. The robot stays frozen until it's enabled.",
+				"bit": "Pick **Teleop** and press **Enable**. Robot code runs only while it's enabled."
+			},
 			"target": {
 				"selector": "[data-tour='enable']"
 			},
@@ -119,12 +143,18 @@
 					"selector": "[data-tour='enable'] button",
 					"text": "Enabled"
 				},
-				"hint": "choose Teleop, then Enable."
+				"hint": {
+					"never": "choose Teleop, then press Enable.",
+					"bit": "choose Teleop, then Enable."
+				}
 			}
 		},
 		{
 			"title": "Watch it count",
-			"say": "Drive forward and watch the distance grow. In AdvantageScope, search for `Distance`, then drag **Robot/Distance** onto the **Left Axis**.",
+			"say": {
+				"never": "Drive forward and watch the distance grow. In **AdvantageScope**, type `Distance` in the search box and drag **Robot/Distance** onto the **Left Axis**. The line should climb as you drive.",
+				"bit": "Drive forward and watch the distance grow. In AdvantageScope, search for `Distance`, then drag **Robot/Distance** onto the **Left Axis**."
+			},
 			"close": [
 				"editor",
 				"preview",
@@ -143,7 +173,10 @@
 					"selector": ".line-graph-left.source-list .key-container",
 					"text": "Robot/Distance"
 				},
-				"hint": "drag Robot/Distance onto the graph."
+				"hint": {
+					"never": "drag Robot/Distance onto the graph.",
+					"bit": "drag Robot/Distance onto the graph."
+				}
 			}
 		}
 	],
