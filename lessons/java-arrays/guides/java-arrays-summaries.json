@@ -28,6 +28,27 @@
 			"title": "Stop as soon as you know",
 			"say": {
 				"never": "When you're searching for something, you can stop the moment you find it: `return true` right away. Only after checking *every* box without a match do you return `false`. That's why the `return false` is after the loop.",
+				"bit": "Return true as soon as one item matches; return false only after checking them all."
+			},
+			"board": {
+				"code": "for (int i = 0; i < scores.length; i++) {\n    if (scores[i] < 0) {\n        return true;   // found a negative one\n    }\n}\nreturn false;",
+				"language": "java",
+				"marks": [
+					{
+						"text": "return true;",
+						"label": "stop early"
+					},
+					{
+						"text": "return false;",
+						"label": "after the whole loop"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Stop as soon as you know",
+			"say": {
+				"never": "When you're searching for something, you can stop the moment you find it: `return true` right away. Only after checking *every* box without a match do you return `false`. That's why the `return false` is after the loop.",
 				"bit": "`contains` can `return true` the moment it finds the target. It only returns false after checking everything."
 			},
 			"board": {
@@ -42,7 +63,8 @@
 						"label": "checked them all"
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Average",

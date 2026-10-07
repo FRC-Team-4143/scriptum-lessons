@@ -7,6 +7,27 @@
 		{
 			"title": "One return, two values",
 			"say": {
+				"never": "A method can only hand back **one** thing. But sometimes we need two answers, a lowest and a highest. The trick: put both in an **array**, which is a row of boxes numbered from 0. Box 0 is the low, box 1 is the high. The caller then picks each one out with `range[0]` and `range[1]`.",
+				"bit": "A method returns one value, so return an array holding both answers."
+			},
+			"board": {
+				"code": "// inside the method:\nreturn new double[] {low, high};\n\n// the caller:\ndouble[] range = Stats.lowAndHigh(readings);\ndouble low = range[0];\ndouble high = range[1];",
+				"language": "java",
+				"marks": [
+					{
+						"text": "new double[] {low, high}",
+						"label": "two answers in one array"
+					},
+					{
+						"text": "range[0]",
+						"label": "box 0 is the low"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: One return, two values",
+			"say": {
 				"never": "A method can only hand back **one** thing. But we need two answers, a left speed and a right speed. The trick: put both in an **array**, which is a row of boxes numbered from 0. Box 0 is left, box 1 is right. The caller then picks each one out with `s[0]` and `s[1]`.",
 				"bit": "A method returns one thing, so to hand back a left **and** a right speed, return an array."
 			},
@@ -22,7 +43,8 @@
 						"label": "index 0 is the first slot"
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Don't clip the turn",

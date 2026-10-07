@@ -57,6 +57,23 @@
 		{
 			"title": "Trace it",
 			"say": {
+				"never": "Trace it like unwrapping nested boxes. `triangle(3)` says \"I'm 3 plus whatever `triangle(2)` is\". That one says \"I'm 2 plus `triangle(1)`\". `triangle(1)` just answers 1, and now every waiting call can finish, adding as the answers come back.",
+				"bit": "Each call waits for the smaller one, then combines; the base case starts the unwinding."
+			},
+			"board": {
+				"code": "triangle(3)\n= 3 + triangle(2)\n= 3 + (2 + triangle(1))\n= 3 + (2 + 1)\n= 6",
+				"language": "java",
+				"marks": [
+					{
+						"text": "triangle(1)",
+						"label": "the base case answers"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Trace it",
+			"say": {
 				"never": "Trace it like unwrapping nested boxes. `factorial(3)` says \"I'm 3 times whatever `factorial(2)` is\". That one says \"I'm 2 times `factorial(1)`\". `factorial(1)` just answers 1, and now every waiting call can finish, multiplying as the answers come back.",
 				"bit": "Each call waits for the smaller one to finish, then multiplies."
 			},
@@ -68,10 +85,28 @@
 						"label": "the base case stops it"
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Splitting a number",
+			"say": {
+				"never": "To work with the digits of a number: `% 10` gives you the **last digit**, and `/ 10` gives you **everything before it**. So counting the digits of 472 is 1 plus counting the digits of 47. Each call peels off one digit.",
+				"bit": "`% 10` is the last digit and `/ 10` is the rest; recursion peels off one digit per call."
+			},
+			"board": {
+				"code": "digitCount(472)\n= 1 + digitCount(47)\n= 1 + (1 + digitCount(4))\n= 1 + 1 + 1 = 3",
+				"language": "java",
+				"marks": [
+					{
+						"text": "digitCount(4)",
+						"label": "one digit left: the base case"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Splitting a number",
 			"say": {
 				"never": "To work with the digits of a number: `% 10` gives you the **last digit**, and `/ 10` gives you **everything before it**. So the sum of the digits of 472 is 2 plus the sum of the digits of 47. Each call peels off one digit.",
 				"bit": "For digits: `% 10` is the last digit, `/ 10` is everything before it."
@@ -84,7 +119,8 @@
 						"label": "one digit: base case"
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Open Main.java",

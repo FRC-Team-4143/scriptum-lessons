@@ -7,6 +7,23 @@
 		{
 			"title": "A chain of conversions",
 			"say": {
+				"never": "Numbers in robot code come in different units, and they have to be converted one step at a time, like converting inches to feet to yards. For example a wheel speed of 20 radians per second becomes about 3.2 rotations per second by dividing by 2 pi. Each line on the board converts one unit into the next.",
+				"bit": "Convert units one step at a time; each line changes one unit into the next."
+			},
+			"board": {
+				"code": "20 rad/s   ->   20 / (2 * pi)   =   3.2 rotations per second\n3.2 rotations/s   ->   3.2 * 60   =   191 rotations per minute",
+				"language": "text",
+				"marks": [
+					{
+						"text": "20 / (2 * pi)",
+						"label": "radians become rotations"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: A chain of conversions",
+			"say": {
 				"never": "Numbers in robot code come in different units, and they have to be converted. The target is in radians per second, but kV wants rotations per second, and the motor wants a duty cycle. Each line on the board converts one unit into the next, like converting inches to feet to yards.",
 				"bit": "The target is in radians per second, kV wants rotations per second, and the motor wants a duty cycle."
 			},
@@ -26,7 +43,8 @@
 						"label": "volts to duty cycle"
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Half of robot programming",
@@ -36,5 +54,5 @@
 			}
 		}
 	],
-	"kind": "concept"
+	"kind": "mixed"
 }

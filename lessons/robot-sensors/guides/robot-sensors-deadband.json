@@ -14,6 +14,27 @@
 		{
 			"title": "A constant",
 			"say": {
+				"never": "Give a number a name, at the top of the class, so it's easy to find and change. `final` means it never changes. Naming numbers like this is how programmers avoid mysterious `0.1`s scattered everywhere.",
+				"bit": "Name important numbers once, as `private static final` constants."
+			},
+			"board": {
+				"code": "private static final double SPEED_LIMIT = 0.8;",
+				"language": "java",
+				"marks": [
+					{
+						"text": "private static final",
+						"label": "a named, unchanging number"
+					},
+					{
+						"text": "SPEED_LIMIT",
+						"label": "say what it means"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: A constant",
+			"say": {
 				"never": "Give the number a name, up at the top of the class, so it's easy to find and change. `final` means \"this never changes\". Naming numbers like this is how programmers avoid mysterious `0.1`s scattered everywhere.",
 				"bit": "Give the number a name, at the top of the class. `final` means it never changes."
 			},
@@ -29,7 +50,8 @@
 						"label": "a name instead of a mystery 0.1"
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "The if",

@@ -50,6 +50,23 @@
 			"title": "When to stop",
 			"say": {
 				"never": "When should the command stop? Not when the error is *exactly* zero, because real measurements are never exactly anything. So we say \"close enough\": stop when the error is smaller than a small tolerance.",
+				"bit": "Finish when the error is within a tolerance, since an exact match never happens."
+			},
+			"board": {
+				"code": "stop when:  |error| < tolerance      // e.g. within 2 cm of the target",
+				"language": "text",
+				"marks": [
+					{
+						"text": "|error| < tolerance",
+						"label": "close enough counts"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: When to stop",
+			"say": {
+				"never": "When should the command stop? Not when the error is *exactly* zero, because real measurements are never exactly anything. So we say \"close enough\": stop when the error is smaller than a small tolerance.",
 				"bit": "Close enough counts. Exact equality never happens with real numbers."
 			},
 			"board": {
@@ -60,7 +77,8 @@
 						"label": "how close is \"there\""
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Open DriveDistanceCommand.java",

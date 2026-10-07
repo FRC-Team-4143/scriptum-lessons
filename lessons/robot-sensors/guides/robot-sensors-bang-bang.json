@@ -129,7 +129,8 @@
 					"never": "press Start, then wait for Running.",
 					"bit": "press Start and wait for Running."
 				}
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Enable in Auto",
@@ -149,7 +150,8 @@
 					"never": "choose Auto, then press Enable.",
 					"bit": "choose Auto, then Enable."
 				}
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Where did it stop?",
@@ -179,7 +181,8 @@
 					"never": "drag Robot/Distance onto the graph.",
 					"bit": "drag Robot/Distance onto the graph."
 				}
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Past 2.0",

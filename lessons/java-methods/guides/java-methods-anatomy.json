@@ -77,6 +77,27 @@
 		{
 			"title": "Calling it",
 			"say": {
+				"never": "To use a method, you **call** it by name and pass in values in the same order as the parameters. `areaOfCircle(2.0)` hands in 2.0 as the radius, and the answer, about 12.57, comes back so you can store it in a variable.",
+				"bit": "Call a method by name with arguments in parameter order; the result comes back."
+			},
+			"board": {
+				"code": "double area = areaOfCircle(2.0);   // about 12.57",
+				"language": "java",
+				"marks": [
+					{
+						"text": "areaOfCircle(2.0)",
+						"label": "pass in the radius"
+					},
+					{
+						"text": "double area =",
+						"label": "catch the answer"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Calling it",
+			"say": {
 				"never": "To use a method, you **call** it by name and pass in values in the same order as the parameters. `clamp(1.7, -1.0, 1.0)` hands in 1.7 as the value, -1.0 as the minimum and 1.0 as the maximum. The answer comes back as 1.0.",
 				"bit": "The caller passes values in the same order as the parameters."
 			},
@@ -88,7 +109,8 @@
 						"label": "value, min, max"
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Open Main.java",

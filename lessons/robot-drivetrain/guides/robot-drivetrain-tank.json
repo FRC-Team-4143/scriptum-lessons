@@ -133,7 +133,8 @@
 					"never": "press Start, then wait for Running.",
 					"bit": "press Start and wait for Running."
 				}
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Enable in Teleop",
@@ -153,7 +154,8 @@
 					"never": "choose Teleop, then press Enable.",
 					"bit": "choose Teleop, then Enable."
 				}
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Drive it",
@@ -194,7 +196,8 @@
 					"never": "drag Drive/LeftOutput onto the graph.",
 					"bit": "drag Drive/LeftOutput onto the graph."
 				}
-			}
+			},
+			"assist": true
 		}
 	],
 	"kind": "mixed"

@@ -7,6 +7,27 @@
 		{
 			"title": "Feedforward plus feedback",
 			"say": {
+				"never": "PID here has two parts added together. **Feedforward** is a smart first guess: \"this speed usually needs about this much power.\" **Feedback** is a correction on top: the bigger the error, the bigger the push. Think of cruise control: it holds the throttle where it usually needs to be (the guess), then adds or eases off depending on how far the speed is from the target (the correction).",
+				"bit": "Output = feedforward guess + feedback correction proportional to the error."
+			},
+			"board": {
+				"code": "throttle = guess + correction\n\nguess      = a usual throttle for this speed\ncorrection = kP * (target speed - current speed)",
+				"language": "text",
+				"marks": [
+					{
+						"text": "guess",
+						"label": "feedforward"
+					},
+					{
+						"text": "correction",
+						"label": "feedback"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Feedforward plus feedback",
+			"say": {
 				"never": "PID here has two parts added together. **Feedforward** is a smart first guess: \"this speed usually needs about this much power.\" **Feedback** is a correction on top: the bigger the error, the bigger the push. kV scales the guess and kP scales the correction.",
 				"bit": "PID here is the feedforward guess **plus** a correction that grows with the error."
 			},
@@ -22,7 +43,8 @@
 						"label": "feedback: push harder when behind"
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Open ShooterConstants.java",
@@ -66,7 +88,8 @@
 					"bit": "try a few kV values."
 				}
 			},
-			"cardAt": "bottom-right"
+			"cardAt": "bottom-right",
+			"assist": true
 		},
 		{
 			"title": "Start the robot",
@@ -86,7 +109,8 @@
 					"never": "press Start, then wait for Running.",
 					"bit": "press Start and wait for Running."
 				}
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Enable in Teleop",
@@ -106,7 +130,8 @@
 					"never": "choose Teleop, then press Enable.",
 					"bit": "choose Teleop, then Enable."
 				}
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Watch the speed",
@@ -133,7 +158,8 @@
 					"text": "Subsystem/Shooter/FlywheelVelocity"
 				},
 				"hint": "drag Subsystem/Shooter/FlywheelVelocity onto the graph."
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Add kP",
@@ -147,7 +173,8 @@
 					"bit": "raise kP and watch the recovery."
 				}
 			},
-			"cardAt": "bottom-right"
+			"cardAt": "bottom-right",
+			"assist": true
 		},
 		{
 			"title": "Measure it",
@@ -174,7 +201,8 @@
 					"text": "Subsystem/Shooter/RecoverySeconds"
 				},
 				"hint": "drag Subsystem/Shooter/RecoverySeconds onto the graph."
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Check your work",

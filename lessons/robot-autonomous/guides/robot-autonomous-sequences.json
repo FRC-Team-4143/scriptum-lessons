@@ -232,7 +232,8 @@
 					"never": "press Start, then wait for Running.",
 					"bit": "press Start and wait for Running."
 				}
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Pick and run",
@@ -243,7 +244,8 @@
 			"target": {
 				"pane": "driverStation"
 			},
-			"cardAt": "top-right"
+			"cardAt": "top-right",
+			"assist": true
 		}
 	],
 	"kind": "mixed"

@@ -70,7 +70,8 @@
 					"bit": "write getChassisSpeeds."
 				}
 			},
-			"cardAt": "bottom-right"
+			"cardAt": "bottom-right",
+			"assist": true
 		},
 		{
 			"title": "Start the robot",
@@ -90,7 +91,8 @@
 					"never": "press Start, then wait for Running.",
 					"bit": "press Start and wait for Running."
 				}
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Enable in Teleop",
@@ -110,7 +112,8 @@
 					"never": "choose Teleop, then press Enable.",
 					"bit": "choose Teleop, then Enable."
 				}
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "WPILib's answer",
@@ -137,7 +140,8 @@
 					"text": "Drive/LinearSpeed"
 				},
 				"hint": "drag Drive/LinearSpeed onto the graph."
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Your answer",
@@ -164,7 +168,8 @@
 					"text": "Drive/LinearSpeedByHand"
 				},
 				"hint": "drag Drive/LinearSpeedByHand onto the graph."
-			}
+			},
+			"assist": true
 		}
 	],
 	"kind": "mixed"

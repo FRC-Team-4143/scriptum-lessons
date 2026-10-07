@@ -7,6 +7,23 @@
 		{
 			"title": "Test the edges",
 			"say": {
+				"never": "Most bugs hide at the smallest, weirdest inputs: 0, 1, negative numbers, and empty text. Before writing a method, decide what the right answer is for each of those. For example, the average of an empty list can't be worked out, and the last letter of an empty word doesn't exist.",
+				"bit": "Bugs hide at 0, 1, negatives and empty text: decide the answer for each before you write the method."
+			},
+			"board": {
+				"code": "half(0)            // 0\nhalf(-4)           // -2\nlastLetter(\"\")     // there is none: decide what to return\nlastLetter(\"a\")    // \"a\"",
+				"language": "java",
+				"marks": [
+					{
+						"text": "lastLetter(\"\")",
+						"label": "the edge case that surprises you"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Test the edges",
+			"say": {
 				"never": "Most bugs hide at the smallest, weirdest inputs: 0, 1, negative numbers, and empty text. Before writing a method, decide what the right answer is for each of those. For example, 1 is *not* a prime number, and 0 factorial is 1 by definition.",
 				"bit": "Most bugs hide at the smallest inputs. Decide the answer for each before you write the method."
 			},
@@ -22,7 +39,8 @@
 						"label": "the edge that's easy to miss"
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Searching, and the empty case",

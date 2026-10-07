@@ -251,7 +251,8 @@
 					"never": "press Start, then wait for Running.",
 					"bit": "press Start and wait for Running."
 				}
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Enable in Teleop",
@@ -271,7 +272,8 @@
 					"never": "choose Teleop, then press Enable.",
 					"bit": "choose Teleop, then Enable."
 				}
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Spin it up",
@@ -298,7 +300,8 @@
 					"text": "Subsystem/Shooter/FlywheelVelocity"
 				},
 				"hint": "drag Subsystem/Shooter/FlywheelVelocity onto the graph."
-			}
+			},
+			"assist": true
 		}
 	],
 	"kind": "mixed"

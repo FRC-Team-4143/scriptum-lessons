@@ -73,6 +73,23 @@
 		{
 			"title": "Boundaries",
 			"say": {
+				"never": "Always test the edges, the exact numbers where the answer changes. Is 15 COLD or WARM? With `temp < 15`, the number 15 is *not* less than 15, so it's WARM. If you wrote `<= 15`, 15 would be COLD. The board lists the answers we expect.",
+				"bit": "Test the boundaries: `< 15` makes 15 WARM; `<= 15` would make it COLD."
+			},
+			"board": {
+				"code": "describe(-1)   // FREEZING\ndescribe(14)   // COLD\ndescribe(15)   // WARM\ndescribe(28)   // HOT",
+				"language": "java",
+				"marks": [
+					{
+						"text": "describe(15)",
+						"label": "right on the edge"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Boundaries",
+			"say": {
 				"never": "Always test the edges, the exact numbers where the answer changes. Is 50 LOW or MEDIUM? With `< 50`, the number 50 is *not* less than 50, so it's MEDIUM. If you wrote `<= 50`, 50 would be LOW. The board lists the answers we expect.",
 				"bit": "Test exactly at the edges: is 50 LOW or MEDIUM? `< 50` means 50 is MEDIUM. `<= 50` would make it LOW."
 			},
@@ -84,7 +101,8 @@
 						"label": "the edge case to check"
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Open Main.java",

@@ -8,6 +8,27 @@
 			"title": "Two kinds of button",
 			"say": {
 				"never": "A **binding** connects a button to a command. There are two kinds. `whileTrue` runs the command *as long as you hold the button* and stops when you let go. `onTrue` runs it **once** each time you press the button.",
+				"bit": "`whileTrue` runs a command while the button is held; `onTrue` runs it once per press."
+			},
+			"board": {
+				"code": "driver.x().whileTrue(spinFanCommand);   // runs while X is held\ndriver.y().onTrue(ringBellCommand);     // runs once each Y press",
+				"language": "java",
+				"marks": [
+					{
+						"text": "whileTrue",
+						"label": "held"
+					},
+					{
+						"text": "onTrue",
+						"label": "once per press"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Two kinds of button",
+			"say": {
+				"never": "A **binding** connects a button to a command. There are two kinds. `whileTrue` runs the command *as long as you hold the button* and stops when you let go. `onTrue` runs it **once** each time you press the button.",
 				"bit": "`whileTrue` runs the command while the button's held. `onTrue` starts it once per press."
 			},
 			"board": {
@@ -22,7 +43,8 @@
 						"label": "pressed: once"
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Open OI.java",
@@ -107,7 +129,8 @@
 					"never": "press Start, then wait for Running.",
 					"bit": "press Start and wait for Running."
 				}
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Enable in Teleop",
@@ -127,7 +150,8 @@
 					"never": "choose Teleop, then press Enable.",
 					"bit": "choose Teleop, then Enable."
 				}
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Drive it",

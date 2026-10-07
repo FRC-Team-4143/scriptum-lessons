@@ -27,6 +27,27 @@
 		{
 			"title": "Trace it",
 			"say": {
+				"never": "Trace it like a detective: follow `y` one line at a time and write down what's in the box after each step. It starts at 10, gets 5 added, then is halved, and so on. The comments show the box after every line.",
+				"bit": "Trace `y` line by line; the comments show its value after each step."
+			},
+			"board": {
+				"code": "double y = 10;   // 10\ny += 5;          // 15\ny /= 3;          // 5\ny *= 4;          // 20\ny -= 0.5;        // 19.5",
+				"language": "java",
+				"marks": [
+					{
+						"text": "y += 5;",
+						"label": "add to the box"
+					},
+					{
+						"text": "y /= 3;",
+						"label": "divide the box"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Trace it",
+			"say": {
 				"never": "Trace it like a detective: follow `x` one line at a time and write down what's in the box after each step. It starts at 1.0, grows to 2.0, shrinks to 1.86, then gets multiplied and divided. The comments show the box after every line.",
 				"bit": "Follow x through applyAssignments(1.0), one line at a time."
 			},
@@ -42,7 +63,8 @@
 						"label": "the final value"
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Open Main.java",

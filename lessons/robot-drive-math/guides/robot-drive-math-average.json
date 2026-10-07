@@ -47,7 +47,8 @@
 			"say": {
 				"never": "Speed readings jump around a little, like a shaky hand. The robot code keeps the last 5 readings and averages them, which smooths out the shakes. The price is that it reacts a tiny bit later.",
 				"bit": "Robot.java keeps the last 5 speeds and logs their average as `Robot/SmoothedSpeed`. Averaging hides the jitter, at the cost of reacting a little later."
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Start the robot",
@@ -67,7 +68,8 @@
 					"never": "press Start, then wait for Running.",
 					"bit": "press Start and wait for Running."
 				}
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Enable in Teleop",
@@ -87,7 +89,8 @@
 					"never": "choose Teleop, then press Enable.",
 					"bit": "choose Teleop, then Enable."
 				}
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Raw speed",
@@ -117,7 +120,8 @@
 					"never": "drag Robot/LinearSpeed onto the graph.",
 					"bit": "drag Robot/LinearSpeed onto the graph."
 				}
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Smoothed speed",
@@ -147,7 +151,8 @@
 					"never": "drag Robot/SmoothedSpeed onto the graph.",
 					"bit": "drag Robot/SmoothedSpeed onto the graph."
 				}
-			}
+			},
+			"assist": true
 		}
 	],
 	"kind": "mixed"

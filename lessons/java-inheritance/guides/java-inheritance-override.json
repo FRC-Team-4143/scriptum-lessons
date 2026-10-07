@@ -7,6 +7,27 @@
 		{
 			"title": "Replace, don't add",
 			"say": {
+				"never": "`@Override` means \"this method **replaces** the parent's version\". A truck has a slower top speed than other vehicles, so it writes its own `getTopSpeed`. Everything else, like `addWeight`, still works exactly as before.",
+				"bit": "`@Override` replaces the parent's method; everything else is inherited unchanged."
+			},
+			"board": {
+				"code": "@Override\npublic double getTopSpeed() {\n    return super.getTopSpeed() * 0.7;   // trucks are slower\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "@Override",
+						"label": "replaces the parent's version"
+					},
+					{
+						"text": "super.getTopSpeed()",
+						"label": "can still use the parent's answer"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Replace, don't add",
+			"say": {
 				"never": "`@Override` means \"this method **replaces** the parent's version\". A checking account has different withdrawing rules (it allows an overdraft), so it writes its own `withdraw`. Everything else, like `deposit` and `transfer`, still works exactly as before.",
 				"bit": "`@Override` says this method **replaces** the parent's version. Everything else (deposit, transfer) still works as before."
 			},
@@ -22,10 +43,32 @@
 						"label": "can go negative, but only this far"
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "It just works",
+			"say": {
+				"never": "Here's the clever part. `describe` was written in `Vehicle`, long before trucks existed. But when you call it on a truck, it uses the **overridden** `getTopSpeed`. Java picks the version that belongs to the real object. That's the power of inheritance.",
+				"bit": "Parent code calls the child's override when the object is a child (polymorphism)."
+			},
+			"board": {
+				"code": "Truck hauler = new Truck(\"Hauler\", 6, 20.0);\nhauler.describe();   // uses Truck.getTopSpeed",
+				"language": "java",
+				"marks": [
+					{
+						"text": "hauler.describe()",
+						"label": "written in Vehicle"
+					},
+					{
+						"text": "Truck.getTopSpeed",
+						"label": "but runs the truck's version"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: It just works",
 			"say": {
 				"never": "Here's the clever part. `transfer` was written in `BankAccount`, long before checking accounts existed. But when you call it on a checking account, it uses the **overridden** `withdraw`. Java picks the version that belongs to the real object. That's the power of inheritance.",
 				"bit": "`transfer` was written in BankAccount, but on a checking account it calls the **overridden** withdraw. That's the power of inheritance."
@@ -38,7 +81,8 @@
 						"label": "inherited, unchanged"
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Open CheckingAccount.java",

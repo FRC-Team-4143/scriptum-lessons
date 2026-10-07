@@ -7,6 +7,23 @@
 		{
 			"title": "Error",
 			"say": {
+				"never": "Every kind of robot control starts with one question: **how far are we from where we want to be?** That difference is the **error**. Target minus current. If the target speed is 100 and you're doing 70, the error is 30. If it's positive we're too slow, and if it's negative we're too fast.",
+				"bit": "Error = target - current. Positive: too slow. Negative: too fast."
+			},
+			"board": {
+				"code": "target 100, current 70   ->   error = 100 - 70 = 30   (too slow)\ntarget 100, current 120  ->   error = 100 - 120 = -20 (too fast)",
+				"language": "text",
+				"marks": [
+					{
+						"text": "error = 100 - 70 = 30",
+						"label": "a positive error: speed up"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Error",
+			"say": {
 				"never": "Every kind of robot control starts with one question: **how far are we from where we want to be?** That difference is the **error**. Target minus current. If it's positive we're too slow, and if it's negative we're too fast.",
 				"bit": "Every controller starts here: how far are we from the target?"
 			},
@@ -22,7 +39,8 @@
 						"label": "where it is"
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Bang-bang",
@@ -105,7 +123,8 @@
 					"bit": "write bangBang()."
 				}
 			},
-			"cardAt": "bottom-right"
+			"cardAt": "bottom-right",
+			"assist": true
 		},
 		{
 			"title": "Start the robot",
@@ -125,7 +144,8 @@
 					"never": "press Start, then wait for Running.",
 					"bit": "press Start and wait for Running."
 				}
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Enable in Teleop",
@@ -145,7 +165,8 @@
 					"never": "choose Teleop, then press Enable.",
 					"bit": "choose Teleop, then Enable."
 				}
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Watch it wobble",
@@ -172,7 +193,8 @@
 					"text": "Subsystem/Shooter/FlywheelVelocity"
 				},
 				"hint": "drag Subsystem/Shooter/FlywheelVelocity onto the graph."
-			}
+			},
+			"assist": true
 		}
 	],
 	"kind": "mixed"

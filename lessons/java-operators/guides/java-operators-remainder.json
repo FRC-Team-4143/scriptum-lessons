@@ -27,6 +27,27 @@
 		{
 			"title": "Even, in one line",
 			"say": {
+				"never": "A number is a multiple of 5 if dividing by 5 leaves nothing, so `value % 5 == 0`. The `==` asks \"are these equal?\" and answers `true` or `false`. Because the whole test is one question, you can `return` it directly in one line.",
+				"bit": "`value % 5 == 0` is true for multiples of 5; return the comparison directly."
+			},
+			"board": {
+				"code": "public static boolean isMultipleOfFive(int value) {\n    return value % 5 == 0;\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "value % 5",
+						"label": "the remainder"
+					},
+					{
+						"text": "== 0",
+						"label": "a yes/no question, returned directly"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Even, in one line",
+			"say": {
 				"never": "A number is even if dividing by 2 leaves nothing, so `value % 2 == 0`. The `==` asks \"are these equal?\" and answers `true` or `false`. Because the whole test is one question, you can `return` it directly in one line.",
 				"bit": "`==` compares two values and gives back `true` or `false`. So the whole test is one expression, and you can return it directly."
 			},
@@ -42,7 +63,8 @@
 						"label": "true when nothing's left over"
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Open Main.java",

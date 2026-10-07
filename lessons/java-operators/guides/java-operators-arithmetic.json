@@ -7,6 +7,23 @@
 		{
 			"title": "A stub",
 			"say": {
+				"never": "Exercises often start as a **stub**: a placeholder that returns 0 so the program still runs. Think of it as an empty answer box. Your job is to replace the placeholder with the real answer.",
+				"bit": "A stub is a placeholder body (it returns 0) that you replace with real code."
+			},
+			"board": {
+				"code": "public static int doubleIt(int number) {\n    return 0;   // placeholder\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "return 0;",
+						"label": "the placeholder"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: A stub",
+			"say": {
 				"never": "Each method in this lesson starts as a **stub**: a placeholder that returns 0 so the program still runs. Think of it as an empty answer box. Your job is to replace the placeholder with the real answer.",
 				"bit": "Every method starts by returning a placeholder so the program still builds. Your job is to replace it."
 			},
@@ -22,10 +39,28 @@
 						"label": "the placeholder to replace"
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "The real answer",
+			"say": {
+				"never": "Replace the placeholder with an **expression**, which is just a bit of math that works out to a value. `number * 2` doubles the number, and `return` hands the answer back to whoever asked.",
+				"bit": "Replace the placeholder with an expression; `return` hands the result back."
+			},
+			"board": {
+				"code": "public static int doubleIt(int number) {\n    return number * 2;\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "number * 2",
+						"label": "an expression: math that works out to a value"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: The real answer",
 			"say": {
 				"never": "Replace the placeholder with an **expression**, which is just a bit of math that works out to a value. `a + b` adds the two numbers, and `return` hands the answer back to whoever asked.",
 				"bit": "Replace the placeholder with an **expression**: a bit of math that works out to a value."
@@ -39,7 +74,8 @@
 					}
 				],
 				"caption": "addInts(2, 3) gives 5"
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Conversions",

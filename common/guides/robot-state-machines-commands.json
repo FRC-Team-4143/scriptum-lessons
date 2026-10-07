@@ -7,6 +7,27 @@
 		{
 			"title": "A lambda",
 			"say": {
+				"never": "A **lambda** is a tiny method with no name, written `() -> ...`. The key idea: you're *not running it now*. You're handing it over so something else can run it later, like giving someone a note that says \"when I press this button, turn the lights on\".",
+				"bit": "A lambda `() -> ...` is a nameless method you hand over to run later."
+			},
+			"board": {
+				"code": "() -> lights.setOn(true)",
+				"language": "java",
+				"marks": [
+					{
+						"text": "() ->",
+						"label": "a note: no name, no parameters"
+					},
+					{
+						"text": "lights.setOn(true)",
+						"label": "what the note says to do"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: A lambda",
+			"say": {
 				"never": "A **lambda** is a tiny method with no name, written `() -> ...`. The key idea: you're *not running it now*. You're handing it over so something else can run it later, like giving someone a note that says \"when I press this button, do this\".",
 				"bit": "`() -> ...` is a tiny method with no name. You're not running it now: you're handing it over to run later."
 			},
@@ -22,7 +43,8 @@
 						"label": "does this:"
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "A command",

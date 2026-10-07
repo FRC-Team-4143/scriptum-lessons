@@ -84,8 +84,8 @@
 		{
 			"title": "Strings too",
 			"say": {
-				"never": "Strings work the same way. `reverseString` makes the text shorter on every call: take the last letter, then add the reverse of everything before it. When the text is empty or has one letter, there's nothing left to reverse, and that's the base case.",
-				"bit": "`reverseString` shrinks the string each call: the last character, plus the reverse of everything before it, until it's 0 or 1 characters long."
+				"never": "Strings work the same way. A method that counts letters can shrink the text on every call: count one letter, then ask the same method about everything after it. When the text is empty, there's nothing left to count, and that's the base case.",
+				"bit": "Strings recurse by shrinking the text each call; the empty string is the base case."
 			}
 		}
 	],

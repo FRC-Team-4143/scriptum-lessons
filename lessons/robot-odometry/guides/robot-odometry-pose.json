@@ -60,7 +60,8 @@
 					"never": "press Start, then wait for Running.",
 					"bit": "press Start and wait for Running."
 				}
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Enable in Teleop",
@@ -80,7 +81,8 @@
 					"never": "choose Teleop, then press Enable.",
 					"bit": "choose Teleop, then Enable."
 				}
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "2D Field",
@@ -134,7 +136,8 @@
 					"never": "drag Drive/Pose onto Poses.",
 					"bit": "drag Drive/Pose onto Poses."
 				}
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "The truth",
@@ -156,7 +159,8 @@
 					"never": "drag Drive/TruePose onto Poses.",
 					"bit": "drag Drive/TruePose onto Poses."
 				}
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Drive it",

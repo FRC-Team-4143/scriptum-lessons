@@ -41,6 +41,23 @@
 		{
 			"title": "Turning speed",
 			"say": {
+				"never": "Turning happens when the two sides go *different* speeds. The bigger the difference, the faster it turns. We divide the difference by how far apart the wheels are (the **track width**), and that gives the turning speed. With the sides at 3 and 5 meters per second and wheels 0.6 meters apart, the robot turns at about 3.3 radians per second.",
+				"bit": "Turning speed = (right - left) / track width."
+			},
+			"board": {
+				"code": "left side 3.0 m/s,  right side 5.0 m/s,  wheels 0.6 m apart\n\nturning speed = (5.0 - 3.0) / 0.6 = 3.3 radians per second",
+				"language": "text",
+				"marks": [
+					{
+						"text": "(5.0 - 3.0) / 0.6",
+						"label": "difference, divided by the width"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Turning speed",
+			"say": {
 				"never": "Turning happens when the two sides go *different* speeds. The bigger the difference, the faster it turns. We divide the difference by how far apart the wheels are (the **track width**), and that gives the turning speed.",
 				"bit": "When the sides go different speeds, the robot turns. Divide the difference by how far apart the wheels are."
 			},
@@ -57,7 +74,8 @@
 					}
 				],
 				"caption": "Units: radians per second."
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Open Robot.java",
@@ -142,7 +160,8 @@
 					"never": "press Start, then wait for Running.",
 					"bit": "press Start and wait for Running."
 				}
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Enable in Teleop",
@@ -162,7 +181,8 @@
 					"never": "choose Teleop, then press Enable.",
 					"bit": "choose Teleop, then Enable."
 				}
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Check it",
@@ -192,7 +212,8 @@
 					"never": "drag Robot/LinearSpeed onto the graph.",
 					"bit": "drag Robot/LinearSpeed onto the graph."
 				}
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "And turning",
@@ -222,7 +243,8 @@
 					"never": "drag Robot/AngularSpeed onto the graph.",
 					"bit": "drag Robot/AngularSpeed onto the graph."
 				}
-			}
+			},
+			"assist": true
 		}
 	],
 	"kind": "mixed"

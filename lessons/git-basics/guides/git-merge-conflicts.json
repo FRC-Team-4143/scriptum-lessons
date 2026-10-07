@@ -7,9 +7,27 @@
 		{
 			"title": "Why conflicts happen",
 			"say": {
+				"never": "Imagine two people editing the same sentence of a shared recipe at the same time. One changes \"1 cup of sugar\" to \"2 cups\", the other to \"half a cup\". Git can't guess which you want, so it stops and asks *you* to choose. That's a **merge conflict**. It's not an error, just git asking a question.",
+				"bit": "A conflict means two branches changed the same lines differently, so git asks you to choose."
+			},
+			"board": {
+				"code": "branch A:   sugar: 2 cups\nbranch B:   sugar: half a cup\n\nmerge ->  CONFLICT: which one do you want?",
+				"language": "text",
+				"marks": [
+					{
+						"text": "CONFLICT",
+						"label": "git needs you to decide"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Why conflicts happen",
+			"say": {
 				"never": "Both `develop` and `issue-9-max-speed` changed the same line, `MAX_SPEED`, to *different* numbers. Git can't guess which one is right, so it stops and asks *you* to choose. That's a **merge conflict**. It's not an error, just git asking a question.",
 				"bit": "Both `develop` and `issue-9-max-speed` changed `MAX_SPEED`, to different values. Git can't guess which you want, so it stops and asks you."
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Open a terminal",
@@ -59,6 +77,31 @@
 			"title": "Conflict markers",
 			"say": {
 				"never": "Git puts **both** versions into the file, fenced off with markers. The part between `<<<<<<<` and `=======` is what's on your branch. The part between `=======` and `>>>>>>>` is what's coming in. Your job is to keep the right one and delete the markers.",
+				"bit": "Git writes both versions between conflict markers; keep the right one and delete the markers."
+			},
+			"board": {
+				"code": "<<<<<<< HEAD\n    sugar: 2 cups\n=======\n    sugar: half a cup\n>>>>>>> issue-3-less-sugar",
+				"language": "text",
+				"marks": [
+					{
+						"text": "<<<<<<< HEAD",
+						"label": "your branch's version starts"
+					},
+					{
+						"text": "=======",
+						"label": "the other version starts"
+					},
+					{
+						"text": ">>>>>>> issue-3-less-sugar",
+						"label": "and ends"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Conflict markers",
+			"say": {
+				"never": "Git puts **both** versions into the file, fenced off with markers. The part between `<<<<<<<` and `=======` is what's on your branch. The part between `=======` and `>>>>>>>` is what's coming in. Your job is to keep the right one and delete the markers.",
 				"bit": "Git writes **both** versions into the file, fenced off with markers."
 			},
 			"board": {
@@ -78,7 +121,8 @@
 						"label": "end: the incoming branch's version"
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Open Constants.java",

@@ -91,7 +91,8 @@
 						"label": "left, then right"
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Forward is negative",
@@ -107,8 +108,9 @@
 						"label": "flip: forward becomes positive"
 					}
 				]
-			}
+			},
+			"assist": true
 		}
 	],
-	"kind": "mixed"
+	"kind": "assist"
 }

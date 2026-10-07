@@ -70,7 +70,8 @@
 					"bit": "find the error in TurnToAngleCommand."
 				}
 			},
-			"cardAt": "bottom-right"
+			"cardAt": "bottom-right",
+			"assist": true
 		}
 	],
 	"kind": "mixed"

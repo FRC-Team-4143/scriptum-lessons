@@ -7,6 +7,27 @@
 		{
 			"title": "Blueprint and object",
 			"say": {
+				"never": "A **class** is a blueprint, and an **object** is a thing built from it. `Playlist` is the blueprint for playlists. Each `new Playlist(...)` builds a separate real playlist with its own songs. Adding a song to `workout` changes only `workout`, not `study`.",
+				"bit": "A class is the blueprint; each `new` makes a separate object with its own state."
+			},
+			"board": {
+				"code": "Playlist workout = new Playlist(\"Workout\", 12);\nPlaylist study = new Playlist(\"Study\", 30);\nworkout.addSong();   // only workout changes",
+				"language": "java",
+				"marks": [
+					{
+						"text": "new Playlist(",
+						"label": "build an object from the blueprint"
+					},
+					{
+						"text": "workout.addSong()",
+						"label": "only that object changes"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Blueprint and object",
+			"say": {
 				"never": "A **class** is a blueprint, and an **object** is a thing built from it. `BankAccount` is the blueprint for accounts. Each `new BankAccount(...)` builds a separate real account with its own balance. Depositing into `checking` changes only `checking`, not `savings`.",
 				"bit": "`BankAccount` is the blueprint. Each `new BankAccount(...)` builds a separate account with its own balance."
 			},
@@ -22,7 +43,8 @@
 						"label": "call a method on one object"
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Open Main.java",

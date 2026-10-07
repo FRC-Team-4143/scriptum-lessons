@@ -7,6 +7,27 @@
 		{
 			"title": "What an encoder says",
 			"say": {
+				"never": "An **encoder** is a little counter that notices how far something has turned. Be careful: it is measuring the thing it is attached to, which is **not always the thing you care about**. On a robot the encoder sits in the **motor**, and a gearbox sits between the motor and the wheel. If the gear ratio is 5, the motor spins 5 times for every 1 turn of the wheel, so the encoder reads 5 when the wheel has turned once. What the sensor measures and what you actually care about are different, so the numbers have to be converted.",
+				"bit": "An encoder counts turns of what it's attached to (the motor). With a gear ratio of 5 the motor turns 5 times per wheel turn, so convert sensor turns into the output you care about (wheel turns)."
+			},
+			"board": {
+				"code": "gear ratio 5   ->   the motor turns 5 times for every 1 wheel turn\n\nencoder reads 10 motor turns   ->   the wheel turned 10 / 5 = 2 times\n\nthe sensor says: 10      what you care about: 2",
+				"language": "text",
+				"marks": [
+					{
+						"text": "encoder reads 10 motor turns",
+						"label": "the value at the sensor"
+					},
+					{
+						"text": "10 / 5 = 2",
+						"label": "the wheel, which is what touches the floor"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: What an encoder says",
+			"say": {
 				"never": "Each drive motor has an **encoder**, a little counter that notices how far the motor has turned. Be careful: the encoder is measuring the **motor**, not the wheel. A gearbox sits between them, and the motor spins about 8 times for every 1 turn of the wheel. That number is the **gear ratio**. What the sensor measures and what you actually care about (the wheel on the floor) are different things, so the numbers have to be converted. The drivetrain code already does that for you, so these readings are in **wheel rotations**: 1.0 means one full turn of the wheel.",
 				"bit": "The encoder sits in the **motor**, so it counts motor turns, not wheel turns. Through the gearbox the motor spins `GEAR_RATIO` (8.45) times per wheel turn. Always know where a sensor is and convert to the output you care about. These getters are already converted to **wheel** rotations."
 			},
@@ -30,10 +51,32 @@
 						"label": "speed"
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Rotations to meters",
+			"say": {
+				"never": "How far does one wheel rotation move the robot? Exactly one trip around the wheel's edge. That's the **circumference**, which is `2 x pi x radius`. Multiply the wheel's rotations by that and you get **meters**, a unit we can understand. A wheel with a 0.05 meter radius travels about 0.31 meters per turn.",
+				"bit": "One wheel rotation moves the robot one circumference (2 x pi x radius); multiply rotations by it to get meters."
+			},
+			"board": {
+				"code": "radius = 0.05 m\ncircumference = 2 * pi * 0.05 = 0.314 m per turn\n\n3 wheel turns  ->  3 * 0.314 = 0.94 m",
+				"language": "text",
+				"marks": [
+					{
+						"text": "circumference = 2 * pi * 0.05",
+						"label": "the edge of the wheel"
+					},
+					{
+						"text": "0.94 m",
+						"label": "rotations become meters"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Rotations to meters",
 			"say": {
 				"never": "How far does one rotation move the robot? Exactly one trip around the wheel's edge. That's the **circumference**, which is `2 x pi x radius`. Multiply the rotations by that and you get **meters**, a unit we can understand.",
 				"bit": "One rotation moves the robot one wheel **circumference**: 2 x pi x radius."
@@ -50,7 +93,8 @@
 						"label": "rotations become meters"
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Open Robot.java",
@@ -135,7 +179,8 @@
 					"never": "press Start, then wait for Running.",
 					"bit": "press Start and wait for Running."
 				}
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Enable in Teleop",
@@ -155,7 +200,8 @@
 					"never": "choose Teleop, then press Enable.",
 					"bit": "choose Teleop, then Enable."
 				}
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Watch it count",
@@ -185,7 +231,8 @@
 					"never": "drag Robot/Distance onto the graph.",
 					"bit": "drag Robot/Distance onto the graph."
 				}
-			}
+			},
+			"assist": true
 		}
 	],
 	"kind": "mixed"

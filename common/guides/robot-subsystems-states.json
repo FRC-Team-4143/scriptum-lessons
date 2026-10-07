@@ -7,6 +7,23 @@
 		{
 			"title": "States",
 			"say": {
+				"never": "An enum lists every mode a subsystem can be in, and the subsystem is always in exactly one of them, like a light switch that's ON or OFF. Here a lamp can be `OFF`, `DIM` or `ON`. Nothing else is allowed, which prevents silly mistakes.",
+				"bit": "An enum lists every state a subsystem can be in; it is always in exactly one."
+			},
+			"board": {
+				"code": "public enum LampStates {\n    OFF,\n    DIM,\n    ON\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "OFF,",
+						"label": "one allowed state"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: States",
+			"say": {
 				"never": "A subsystem is always in exactly one **state**, like a light switch that's either ON or OFF. An **enum** is a list of every state it's allowed to be in. Here the drivetrain can be `IDLE` (doing nothing) or `ARCADE` (being driven). Nothing else is allowed, which prevents silly mistakes.",
 				"bit": "An enum lists every mode a subsystem can be in."
 			},
@@ -22,7 +39,8 @@
 						"label": "driving from the sticks"
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "One switch",

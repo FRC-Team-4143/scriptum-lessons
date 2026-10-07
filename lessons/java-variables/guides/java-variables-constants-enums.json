@@ -8,6 +8,27 @@
 			"title": "A constant",
 			"say": {
 				"never": "A **constant** is a value that never changes, so it's marked `final`. `static` puts it on the class itself, so it must be written *outside* `main`, up near the top of the file. Capital letters with underscores tell every reader \"this one never changes\".",
+				"bit": "A constant is `static final`, declared outside `main`, named in capitals."
+			},
+			"board": {
+				"code": "public static final int SEAT_COUNT = 40;",
+				"language": "java",
+				"marks": [
+					{
+						"text": "static",
+						"label": "belongs to the class, outside main"
+					},
+					{
+						"text": "final",
+						"label": "never changes"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: A constant",
+			"say": {
+				"never": "A **constant** is a value that never changes, so it's marked `final`. `static` puts it on the class itself, so it must be written *outside* `main`, up near the top of the file. Capital letters with underscores tell every reader \"this one never changes\".",
 				"bit": "A constant is a value that never changes. `static` makes it belong to the class, so it's declared **outside** `main`."
 			},
 			"board": {
@@ -26,10 +47,32 @@
 						"label": "team standard: ALL_CAPS for constants"
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "An enum",
+			"say": {
+				"never": "An **enum** is a type you invent yourself with a short, fixed list of allowed values. A `Light` can only be `GREEN` or `RED`, and nothing else. If you misspell one, Java stops you right away, so typos can't sneak in.",
+				"bit": "An enum is your own type with a fixed list of values; misspellings don't compile."
+			},
+			"board": {
+				"code": "enum Light {\n    GREEN,\n    RED\n}\n\nLight now = Light.RED;",
+				"language": "java",
+				"marks": [
+					{
+						"text": "GREEN,",
+						"label": "one allowed value"
+					},
+					{
+						"text": "Light now = Light.RED;",
+						"label": "use it like any type"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: An enum",
 			"say": {
 				"never": "An **enum** is a type you invent yourself with a short, fixed list of allowed values. An `ALLIANCE` can only be `RED` or `BLUE`, and nothing else. If you misspell one, Java stops you right away, so typos can't sneak in.",
 				"bit": "An **enum** is a type you invent with a fixed list of values. A variable of that type can only hold one of them, so typos are impossible."
@@ -50,7 +93,8 @@
 						"label": "using one of them"
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Where they go",

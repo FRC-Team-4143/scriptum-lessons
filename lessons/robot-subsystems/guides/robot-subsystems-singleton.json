@@ -7,6 +7,27 @@
 		{
 			"title": "Exactly one",
 			"say": {
+				"never": "A robot has only one claw, so the whole program must share the same one. Two things make that happen. A `private` constructor means nobody else can write `new ClawSubsystem()`. And `getInstance()` hands out the one copy, building it the first time it's asked.",
+				"bit": "A singleton: private constructor plus `getInstance()` that builds the single copy on first use."
+			},
+			"board": {
+				"code": "private static ClawSubsystem instance;\n\npublic static ClawSubsystem getInstance() {\n    if (instance == null) {\n        instance = new ClawSubsystem();\n    }\n    return instance;\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "if (instance == null)",
+						"label": "first time only"
+					},
+					{
+						"text": "return instance;",
+						"label": "everyone shares one"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Exactly one",
+			"say": {
 				"never": "A robot has only one shooter, so the whole program must share the same one. Two things make that happen. A `private` constructor means nobody else can write `new ShooterSubsystem()`. And `getInstance()` hands out the one copy, building it the first time it's asked.",
 				"bit": "The whole robot must share **one** shooter. A private constructor stops anyone writing `new`, and `getInstance()` hands out the single copy."
 			},
@@ -22,10 +43,32 @@
 						"label": "first time? make it"
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Is a subsystem",
+			"say": {
+				"never": "`extends MwSubsystem` means \"the claw *is a* subsystem\", so it gets everything a subsystem has for free. `@Override` marks the methods where the claw fills in its own version.",
+				"bit": "`extends MwSubsystem` makes the claw a subsystem; `@Override` marks the methods it fills in."
+			},
+			"board": {
+				"code": "public class ClawSubsystem extends MwSubsystem<ClawStates, ClawConstants> {\n    @Override\n    public void updateLogic(double timestamp) { ... }\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "extends MwSubsystem",
+						"label": "inherits what every subsystem has"
+					},
+					{
+						"text": "@Override",
+						"label": "fills in its own logic"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Is a subsystem",
 			"say": {
 				"never": "`extends MwSubsystem` means \"the shooter *is a* subsystem\", so it gets everything a subsystem has for free. `@Override` marks the methods where the shooter fills in its own version.",
 				"bit": "`extends MwSubsystem` gives the shooter everything a subsystem has. `@Override` marks the methods it fills in."
@@ -46,8 +89,9 @@
 						"label": "its own version"
 					}
 				]
-			}
+			},
+			"assist": true
 		}
 	],
-	"kind": "concept"
+	"kind": "mixed"
 }

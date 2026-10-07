@@ -2231,7 +2231,7 @@
 			"modules": [
 				"robot-drivetrain"
 			],
-			"kind": "mixed",
+			"kind": "assist",
 			"path": "lessons/robot-drivetrain/guides/robot-drivetrain-where-code-goes.json"
 		},
 		{
@@ -2474,7 +2474,7 @@
 			"modules": [
 				"robot-subsystems"
 			],
-			"kind": "concept",
+			"kind": "mixed",
 			"path": "lessons/robot-subsystems/guides/robot-subsystems-singleton.json"
 		},
 		{
@@ -2510,7 +2510,7 @@
 			"modules": [
 				"robot-control-theory"
 			],
-			"kind": "concept",
+			"kind": "mixed",
 			"path": "lessons/robot-control-theory/guides/robot-control-units.json"
 		},
 		{

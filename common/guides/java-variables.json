@@ -158,19 +158,20 @@
 		{
 			"title": "Constants",
 			"say": {
-				"never": "Some values should never change, like a robot's top speed. Adding `final` locks the box, so Java refuses to build if anyone tries to change it. Our team writes constant names in ALL CAPITALS with underscores, like `MAX_SPEED`.",
-				"bit": "Some values should never change, like a robot's top speed. `final` locks the box, so the compiler stops anyone who tries to change it. Team standard: constants are named in `SCREAMING_SNAKE_CASE`."
+				"never": "Some values should never change, like the number of seats in a bus. Adding `final` locks the box, so Java refuses to build if anyone tries to change it. Our team writes constant names in ALL CAPITALS with underscores, like `SEAT_COUNT`.",
+				"bit": "`final` locks a variable. Team style: constants are SCREAMING_SNAKE_CASE."
 			},
 			"board": {
-				"code": "public static final double MAX_SPEED = 5.0;",
+				"code": "public static final int SEAT_COUNT = 40;",
+				"language": "java",
 				"marks": [
 					{
 						"text": "final",
-						"label": "can never be changed"
+						"label": "can never change"
 					},
 					{
-						"text": "MAX_SPEED",
-						"label": "constant names are ALL_CAPS"
+						"text": "SEAT_COUNT",
+						"label": "ALL CAPS with underscores"
 					}
 				]
 			}

@@ -53,9 +53,17 @@
 		{
 			"title": "Why bother",
 			"say": {
+				"never": "Keeping math in its own methods means each one never touches a motor or sensor, so you can test it on its own with plain numbers. The code that uses it then reads almost like a sentence: \"give me the temperature in Fahrenheit\". If the math has a bug, you know exactly which method to fix.",
+				"bit": "Pure math methods are easy to test and make the calling code read like a sentence."
+			}
+		},
+		{
+			"title": "In your lesson: Why bother",
+			"say": {
 				"never": "These math methods live in a file called `DriveMath` and never touch a motor. That makes each one easy to check on its own, and it makes the robot code read almost like English: \"give me the linear speed\".",
 				"bit": "`DriveMath` never touches a motor or sensor, so each method can be tested on its own. The drivetrain calls them, and `Robot.java` reads almost like a sentence."
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Open DriveMath.java",
