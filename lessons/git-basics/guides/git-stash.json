@@ -1,0 +1,98 @@
+{
+	"title": "Shelving unfinished work",
+	"summary": "git stash: switch branches without committing half-done work.",
+	"topic": "Tools",
+	"order": 120,
+	"kind": "mixed",
+	"needs": [
+		"editor"
+	],
+	"steps": [
+		{
+			"title": "Why stash",
+			"say": {
+				"never": "Imagine you're halfway through something that isn't ready to save, and a teammate asks you to fix a small bug on another branch *right now*. Git won't let you switch branches if it would overwrite your unfinished work. A **stash** is a shelf: put your unfinished work on it, switch and fix the bug, come back, and take your work off the shelf.",
+				"bit": "Stash shelves uncommitted changes so you can switch branches (git refuses to switch when your changes would be overwritten), then `stash pop` restores them."
+			},
+			"open": [
+				"editor"
+			]
+		},
+		{
+			"title": "Open a terminal",
+			"say": {
+				"never": "Open the **terminal**: hold **Ctrl** and tap the backtick key (above **Tab**). Then type `cd 08-stash` and press **Enter**.",
+				"bit": "Open the terminal (Ctrl+`) and `cd 08-stash`."
+			},
+			"open": [
+				"editor"
+			],
+			"target": {
+				"pane": "editor",
+				"selector": "[id='workbench.parts.panel']"
+			},
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".terminal-wrapper"
+				},
+				"hint": "press Ctrl and the backtick key (above Tab).",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Try to switch",
+			"say": {
+				"never": "Type `git checkout develop` and press **Enter**. Git refuses and says your local changes would be overwritten. That's exactly the problem a stash solves.",
+				"bit": "Try `git checkout develop`. Git refuses: your changes would be overwritten."
+			},
+			"board": {
+				"code": "git checkout develop\n# error: Your local changes would be overwritten",
+				"language": "shell",
+				"marks": [
+					{
+						"text": "error",
+						"label": "git protects your unfinished work"
+					}
+				]
+			},
+			"open": [
+				"editor"
+			],
+			"assist": true
+		},
+		{
+			"title": "Stash, fix, come back",
+			"say": {
+				"never": "Type `git stash` and press **Enter**. Your changes go on the shelf. Now `git checkout develop` works. Change \"Teh\" to \"The\" in `Notes.md`, save, and commit it. Then `git checkout issue-21-new-motor` to go back, and finally `git stash pop` to take your work off the shelf.",
+				"bit": "`git stash`, switch to develop, fix the typo and commit, switch back, `git stash pop`."
+			},
+			"board": {
+				"code": "git stash\ngit checkout develop\n# fix Teh -> The in Notes.md, then:\ngit commit -am \"Fix typo in pit notes\"\ngit checkout issue-21-new-motor\ngit stash pop",
+				"language": "shell",
+				"marks": [
+					{
+						"text": "git stash pop",
+						"label": "your unfinished work comes back"
+					}
+				]
+			},
+			"open": [
+				"editor"
+			],
+			"assist": true
+		},
+		{
+			"title": "Check your work",
+			"say": {
+				"never": "Open the lesson chip and press **Verify** on **Stash**. It checks that develop has the fix, your unfinished line is back, and the shelf is empty.",
+				"bit": "Verify Stash."
+			},
+			"open": [
+				"editor"
+			],
+			"assist": true
+		}
+	]
+}

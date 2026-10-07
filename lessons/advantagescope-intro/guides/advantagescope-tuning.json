@@ -1,0 +1,162 @@
+{
+	"title": "Tuning mode",
+	"summary": "Change a value in the running robot from AdvantageScope, and why only Tuning values can be written.",
+	"topic": "Tools",
+	"order": 142,
+	"kind": "mixed",
+	"needs": [
+		"scope"
+	],
+	"steps": [
+		{
+			"title": "Reading and writing",
+			"say": {
+				"never": "Most of AdvantageScope only **reads**: it shows you numbers the robot sends, like a speedometer. **Tuning mode** is different. It lets you **change** a number inside the running robot, like turning a dial while it drives. You see the result right away, with no need to stop and restart your code.",
+				"bit": "AdvantageScope normally only reads values. **Tuning mode** also lets you write: change a number in the running robot and see the effect at once."
+			},
+			"board": {
+				"code": "// In robot code, a number you can change while it runs:\nTunableNumber armSpeed = new TunableNumber(\"Tuning/ArmSpeed\", 0.5);\n\n// AdvantageScope shows it under the Tuning table.\n// Type a new value and the robot uses it right away.",
+				"language": "java",
+				"marks": [
+					{
+						"text": "\"Tuning/ArmSpeed\"",
+						"label": "only values under Tuning can be written"
+					},
+					{
+						"text": "0.5",
+						"label": "the starting value; a restart goes back to it"
+					}
+				]
+			}
+		},
+		{
+			"title": "What it's for",
+			"say": {
+				"never": "Tuning mode is how teams find the right numbers for a mechanism, like how hard to push a shooter wheel. You try a number, watch the graph, and try another. Two things to remember. Only numbers the robot code chose to publish in the **Tuning** table can be changed. And the robot forgets your change when it restarts, so when you find a good number, **write it into your code**.",
+				"bit": "Teams use it to find numbers like a shooter speed or a PID gain without redeploying. Only values published under `Tuning` are writable, and a restart resets them, so copy the final value into your code."
+			}
+		},
+		{
+			"title": "Start the robot",
+			"say": {
+				"never": "The robot has to be running for tuning to work, because you're talking to the real program. Press **Start** and wait until the status says **Running**.",
+				"bit": "Tuning talks to the running robot, so start it and wait for Running."
+			},
+			"target": {
+				"selector": "[data-tour='sim-controls']"
+			},
+			"waitFor": {
+				"target": {
+					"selector": "[data-tour='code-status']",
+					"text": "Running"
+				},
+				"hint": "press Start and wait for Running.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "The tuning button",
+			"say": {
+				"never": "Look at the top of the field list on the left, next to the search box. There is a small **slider icon**. That's the tuning button. If you can't see it, the robot hasn't published any tunable values yet, so make sure it's running and wait a few seconds.",
+				"bit": "Next to the search box in the field list there's a slider icon: the tuning button. It only appears once the robot publishes values under Tuning."
+			},
+			"target": {
+				"pane": "scope",
+				"selector": ".side-bar-tuning-button"
+			},
+			"waitFor": {
+				"target": {
+					"pane": "scope",
+					"selector": ".side-bar-tuning-button"
+				},
+				"hint": "find the slider icon next to the search box.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Turn tuning mode on",
+			"say": {
+				"never": "Click the slider icon. It turns **purple** when tuning mode is on. Click it again any time to turn it off. While it's on, the values you can change become editable boxes.",
+				"bit": "Click the slider icon. It turns purple when tuning mode is on."
+			},
+			"target": {
+				"pane": "scope",
+				"selector": ".side-bar-tuning-button"
+			},
+			"waitFor": {
+				"target": {
+					"pane": "scope",
+					"selector": ".side-bar-tuning-button.active"
+				},
+				"hint": "click the slider icon so it turns purple."
+			},
+			"assist": true
+		},
+		{
+			"title": "Find the value",
+			"say": {
+				"never": "We want to change the flywheel's target speed. Type `FlywheelTargetRPM` in the search box. Look for the one under the **Tuning** table, not the one under AdvantageKit. Only the Tuning one can be changed.",
+				"bit": "Search for `FlywheelTargetRPM` and pick the one under the Tuning table (not AdvantageKit)."
+			},
+			"target": {
+				"pane": "scope",
+				"selector": ".side-bar-search"
+			},
+			"waitFor": {
+				"target": {
+					"pane": "scope",
+					"selector": ".search-results-item",
+					"text": "FlywheelTargetRPM"
+				},
+				"hint": "search for FlywheelTargetRPM."
+			},
+			"assist": true
+		},
+		{
+			"title": "Jump to it",
+			"say": {
+				"never": "Click the search result that starts with `Tuning/`. The field list scrolls to it.",
+				"bit": "Click the Tuning/FlywheelTargetRPM result."
+			},
+			"target": {
+				"pane": "scope",
+				"selector": ".search-results-item",
+				"text": "Tuning/FlywheelTargetRPM"
+			},
+			"waitFor": {
+				"target": {
+					"pane": "scope",
+					"selector": ".field-item-label",
+					"text": "FlywheelTargetRPM"
+				},
+				"hint": "click the Tuning/FlywheelTargetRPM result."
+			},
+			"assist": true
+		},
+		{
+			"title": "Type a new value",
+			"say": {
+				"never": "Click in the box next to **FlywheelTargetRPM**, type a new number (the starting one is 3000, so try 3500), and press **Enter**. The robot now uses your number. Press **I did it** when you've done that.",
+				"bit": "Type a different number than 3000 into the FlywheelTargetRPM box and press Enter. Press I did it when you have."
+			},
+			"target": {
+				"pane": "scope",
+				"selector": ".side-bar"
+			},
+			"waitFor": {
+				"hint": "type a new value (not 3000) and press Enter."
+			},
+			"assist": true
+		},
+		{
+			"title": "Check your work",
+			"say": {
+				"never": "Open the lesson chip at the top and press **Verify**. The checker looks at the robot and sees that `FlywheelTargetRPM` is no longer 3000. That proves your change reached the robot. Remember: it forgets the new number when the robot restarts.",
+				"bit": "Press Verify. The check reads FlywheelTargetRPM from the robot and wants it changed from 3000."
+			},
+			"assist": true
+		}
+	]
+}

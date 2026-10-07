@@ -10,7 +10,7 @@
 import { describe, expect, test } from "bun:test";
 import { cp, mkdtemp, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
-import { join, resolve } from "node:path";
+import { basename, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const lessonDir = resolve(fileURLToPath(new URL(".", import.meta.url)));
@@ -48,6 +48,8 @@ function requireOk(
 
 async function makeProject(): Promise<string> {
 	const dir = await mkdtemp(join(tmpdir(), "frc-git-basics-"));
+	// The hidden origin the push and pull exercises use, kept with the test's own files.
+	process.env.SCRIPTUM_ORIGINS = join(dir, "..", `${basename(dir)}-origins`);
 	await cp(moduleDir, dir, { recursive: true });
 	const setup = run(dir, ["bash", join(checkpointsDir, "setup.sh")]);
 	requireOk(setup, "setup.sh");
@@ -72,6 +74,9 @@ describe("git-basics lesson", () => {
 				"merge",
 				"merge-conflict",
 				"rebase",
+				"push",
+				"pull",
+				"stash",
 			]) {
 				expect(verify(project, id).exitCode).not.toBe(0);
 			}
@@ -230,6 +235,86 @@ describe("git-basics lesson", () => {
 			requireOk(git(dir, "checkout", "issue-15-led-colors"), "checkout");
 			requireOk(git(dir, "merge", "--no-edit", "develop"), "merge");
 			expect(verify(project, "rebase").exitCode).not.toBe(0);
+		} finally {
+			await rm(project, { recursive: true, force: true });
+		}
+	});
+
+	test("push passes once the branch is on origin, and not before", async () => {
+		const project = await makeProject();
+		try {
+			const dir = join(project, "06-push");
+			expect(verify(project, "push").exitCode).not.toBe(0);
+			requireOk(git(dir, "push", "origin", "issue-18-team-colors"), "push");
+			expect(verify(project, "push").exitCode).toBe(0);
+		} finally {
+			await rm(project, { recursive: true, force: true });
+		}
+	});
+
+	test("push fails if only another branch was pushed", async () => {
+		const project = await makeProject();
+		try {
+			const dir = join(project, "06-push");
+			requireOk(git(dir, "push", "origin", "develop"), "push develop");
+			expect(verify(project, "push").exitCode).not.toBe(0);
+		} finally {
+			await rm(project, { recursive: true, force: true });
+		}
+	});
+
+	test("pull passes once develop has the teammate's commit (pull, or fetch then merge)", async () => {
+		for (const how of [["pull"], ["fetch"]]) {
+			const project = await makeProject();
+			try {
+				const dir = join(project, "07-pull");
+				requireOk(git(dir, ...how), how[0] as string);
+				if (how[0] === "fetch") {
+					// Fetching alone downloads the commit but doesn't bring it in.
+					expect(verify(project, "pull").exitCode).not.toBe(0);
+					requireOk(git(dir, "merge", "origin/develop"), "merge");
+				}
+				expect(verify(project, "pull").exitCode).toBe(0);
+				expect(await Bun.file(join(dir, "Schedule.txt")).text()).toContain("Saturday");
+			} finally {
+				await rm(project, { recursive: true, force: true });
+			}
+		}
+	});
+
+	test("stash refuses to switch branches until the work is shelved, then passes after the whole round trip", async () => {
+		const project = await makeProject();
+		try {
+			const dir = join(project, "08-stash");
+			// Git won't let the student carry unfinished work over to develop.
+			expect(git(dir, "checkout", "develop").exitCode).not.toBe(0);
+			requireOk(git(dir, "stash"), "stash");
+			requireOk(git(dir, "checkout", "develop"), "checkout develop");
+			await Bun.write(
+				join(dir, "Notes.md"),
+				"# Pit Notes\nThe pit crew meets at 8am.\nThe new motor is not ordered yet.\n",
+			);
+			requireOk(git(dir, "commit", "-am", "Fix typo in pit notes"), "fix");
+			// Mid-way (still on develop, work on the shelf) isn't done yet.
+			expect(verify(project, "stash").exitCode).not.toBe(0);
+			requireOk(git(dir, "checkout", "issue-21-new-motor"), "back");
+			requireOk(git(dir, "stash", "pop"), "pop");
+			expect(verify(project, "stash").exitCode).toBe(0);
+		} finally {
+			await rm(project, { recursive: true, force: true });
+		}
+	});
+
+	test("stash fails if the unfinished work was committed instead", async () => {
+		const project = await makeProject();
+		try {
+			const dir = join(project, "08-stash");
+			requireOk(git(dir, "commit", "-am", "wip"), "commit wip");
+			requireOk(git(dir, "checkout", "develop"), "checkout develop");
+			await Bun.write(join(dir, "Notes.md"), "# Pit Notes\nThe pit crew meets at 8am.\nThe new motor is not ordered yet.\n");
+			requireOk(git(dir, "commit", "-am", "Fix typo"), "fix");
+			requireOk(git(dir, "checkout", "issue-21-new-motor"), "back");
+			expect(verify(project, "stash").exitCode).not.toBe(0);
 		} finally {
 			await rm(project, { recursive: true, force: true });
 		}

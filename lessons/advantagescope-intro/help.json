@@ -11,6 +11,12 @@
 			"guides": [
 				"advantagescope-3d-swerve"
 			]
+		},
+		{
+			"checkpoint": "flywheel-target-rpm-tunable",
+			"guides": [
+				"advantagescope-tuning"
+			]
 		}
 	]
 }

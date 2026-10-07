@@ -29,7 +29,7 @@
 		{
 			"id": "has-constraint",
 			"title": "Path has a constraint",
-			"description": "The path has at least one enabled constraint (Max Velocity, Max Angular Velocity, or Keep In Rectangle).",
+			"description": "The path has at least one enabled constraint (Max Velocity or Max Angular Velocity; Keep In Rectangle is the default field boundary and does not count).",
 			"verifier": {
 				"type": "script",
 				"path": "checkpoints/verify/has-constraint.sh"

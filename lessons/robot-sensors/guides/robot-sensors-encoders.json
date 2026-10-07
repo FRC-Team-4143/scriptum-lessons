@@ -7,12 +7,20 @@
 		{
 			"title": "What an encoder says",
 			"say": {
-				"never": "Each drive motor has an **encoder**, a little counter that notices how far the wheel has turned. It reports in **rotations**: 1.0 means one full turn of the wheel. It can also tell you how fast it's turning, in rotations per second.",
-				"bit": "Each drive motor has an **encoder** that counts how far the wheel has turned, in rotations."
+				"never": "Each drive motor has an **encoder**, a little counter that notices how far the motor has turned. Be careful: the encoder is measuring the **motor**, not the wheel. A gearbox sits between them, and the motor spins about 8 times for every 1 turn of the wheel. That number is the **gear ratio**. What the sensor measures and what you actually care about (the wheel on the floor) are different things, so the numbers have to be converted. The drivetrain code already does that for you, so these readings are in **wheel rotations**: 1.0 means one full turn of the wheel.",
+				"bit": "The encoder sits in the **motor**, so it counts motor turns, not wheel turns. Through the gearbox the motor spins `GEAR_RATIO` (8.45) times per wheel turn. Always know where a sensor is and convert to the output you care about. These getters are already converted to **wheel** rotations."
 			},
 			"board": {
-				"code": "drive.getLeftPositionRotations()  // how far, in rotations\ndrive.getLeftVelocityRps()        // how fast, in rotations per second",
+				"code": "// The sensor is in the motor: motorRotations = wheelRotations * GEAR_RATIO\n// These getters have already divided that out, so they are WHEEL rotations:\ndrive.getLeftPositionRotations()  // how far the wheel turned, in rotations\ndrive.getLeftVelocityRps()        // how fast the wheel turns, in rotations per second",
 				"marks": [
+					{
+						"text": "motorRotations = wheelRotations * GEAR_RATIO",
+						"label": "what the sensor really counts"
+					},
+					{
+						"text": "WHEEL rotations",
+						"label": "what you actually care about"
+					},
 					{
 						"text": "PositionRotations",
 						"label": "distance"

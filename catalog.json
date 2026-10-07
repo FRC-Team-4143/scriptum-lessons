@@ -62,7 +62,7 @@
 			"order": 5,
 			"track": "Tools",
 			"title": "Git Basics",
-			"description": "Commit, branch, merge, resolve a conflict, and rebase across five small scenario repos.",
+			"description": "Commit, branch, merge, resolve a conflict, rebase, then push, pull and stash across eight small scenario repos.",
 			"kind": "git",
 			"subdir": "lessons/git-basics/project",
 			"setupScript": "lessons/git-basics/checkpoints/setup.sh",
@@ -110,6 +110,33 @@
 					"verifier": {
 						"type": "script",
 						"path": "lessons/git-basics/checkpoints/verify/rebase.sh"
+					}
+				},
+				{
+					"id": "push",
+					"title": "Push",
+					"description": "Push the issue-18-team-colors branch to origin.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/git-basics/checkpoints/verify/push.sh"
+					}
+				},
+				{
+					"id": "pull",
+					"title": "Pull",
+					"description": "Pull your teammate's new commit from origin into develop.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/git-basics/checkpoints/verify/pull.sh"
+					}
+				},
+				{
+					"id": "stash",
+					"title": "Stash",
+					"description": "Stash unfinished work, fix a typo on develop, then pop the stash back.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/git-basics/checkpoints/verify/stash.sh"
 					}
 				}
 			]
@@ -430,7 +457,7 @@
 				{
 					"id": "has-constraint",
 					"title": "Path has a constraint",
-					"description": "The path has at least one enabled constraint (Max Velocity, Max Angular Velocity, or Keep In Rectangle).",
+					"description": "The path has at least one enabled constraint (Max Velocity or Max Angular Velocity; Keep In Rectangle is the default field boundary and does not count).",
 					"verifier": {
 						"type": "script",
 						"path": "lessons/choreo-intro/checkpoints/verify/has-constraint.sh"
@@ -1635,12 +1662,15 @@
 		},
 		{
 			"id": "git-commands",
-			"title": "The git commands you'll type",
-			"summary": "status, add, commit and switch, one at a time on the board.",
-			"topic": "Git",
+			"title": "Git commands and their buttons",
+			"summary": "status, add, commit, checkout, merge, push, pull and stash, each next to its Source Control button.",
+			"topic": "Tools",
 			"order": 11,
 			"modules": [
 				"git-basics"
+			],
+			"needs": [
+				"editor"
 			],
 			"kind": "concept",
 			"path": "lessons/git-basics/guides/git-commands.json"
@@ -1773,6 +1803,36 @@
 			"path": "lessons/git-basics/guides/git-rebase.json"
 		},
 		{
+			"id": "git-remotes",
+			"title": "Sharing your work",
+			"summary": "Push a branch to origin, then pull a teammate's commit.",
+			"topic": "Tools",
+			"order": 119,
+			"modules": [
+				"git-basics"
+			],
+			"needs": [
+				"editor"
+			],
+			"kind": "mixed",
+			"path": "lessons/git-basics/guides/git-remotes.json"
+		},
+		{
+			"id": "git-stash",
+			"title": "Shelving unfinished work",
+			"summary": "git stash: switch branches without committing half-done work.",
+			"topic": "Tools",
+			"order": 120,
+			"modules": [
+				"git-basics"
+			],
+			"needs": [
+				"editor"
+			],
+			"kind": "mixed",
+			"path": "lessons/git-basics/guides/git-stash.json"
+		},
+		{
 			"id": "advantagescope-3d-swerve",
 			"title": "3D field and swerve",
 			"summary": "Lesson steps 6 to 8: RobotPose3d, Orbit Robot, the Swerve tab.",
@@ -1807,6 +1867,21 @@
 			],
 			"kind": "mixed",
 			"path": "lessons/elastic-intro/guides/elastic-layouts.json"
+		},
+		{
+			"id": "advantagescope-tuning",
+			"title": "Tuning mode",
+			"summary": "Change a value in the running robot from AdvantageScope, and why only Tuning values can be written.",
+			"topic": "Tools",
+			"order": 142,
+			"modules": [
+				"advantagescope-intro"
+			],
+			"needs": [
+				"scope"
+			],
+			"kind": "mixed",
+			"path": "lessons/advantagescope-intro/guides/advantagescope-tuning.json"
 		},
 		{
 			"id": "choreo-why-not-generate",
