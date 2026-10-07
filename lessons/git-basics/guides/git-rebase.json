@@ -70,7 +70,8 @@
 					"selector": ".terminal-wrapper"
 				},
 				"hint": "press Ctrl+` (the key above Tab)."
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Your turn",
@@ -82,11 +83,13 @@
 			"cardAt": "top-right",
 			"waitFor": {
 				"hint": "rebase issue-15-led-colors onto develop."
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Merge or rebase?",
 			"say": "Rebase keeps history straight, but it **rewrites** your commits. Only rebase branches nobody else has pulled yet. When in doubt, merge."
 		}
-	]
+	],
+	"kind": "mixed"
 }

@@ -35,7 +35,8 @@
 				},
 				"more": true,
 				"hint": "press + to add a path."
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Pose waypoints",
@@ -66,7 +67,8 @@
 				},
 				"more": true,
 				"hint": "click on the field."
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Points in the middle",
@@ -84,7 +86,8 @@
 				},
 				"more": true,
 				"hint": "pick Translation Waypoint and click the field."
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Four waypoints",
@@ -103,7 +106,8 @@
 				},
 				"atLeast": 4,
 				"hint": "add waypoints until there are four."
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Add a constraint",
@@ -121,7 +125,8 @@
 				},
 				"more": true,
 				"hint": "pick Max Velocity, then click a start and an end waypoint."
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Generate it",
@@ -132,7 +137,8 @@
 			},
 			"waitFor": {
 				"hint": "press Generate and watch the path appear."
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "A second path",
@@ -148,7 +154,8 @@
 				},
 				"more": true,
 				"hint": "press + for a second path."
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Check your work",
@@ -157,5 +164,6 @@
 				"selector": "[data-tour='lesson']"
 			}
 		}
-	]
+	],
+	"kind": "mixed"
 }

@@ -62,7 +62,8 @@
 				},
 				"hint": "open Main.java with Ctrl+P.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Find try your methods",
@@ -79,7 +80,8 @@
 				},
 				"hint": "find try your methods with Ctrl+F.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Try them in main",
@@ -89,7 +91,9 @@
 				"selector": ".view-lines .view-line",
 				"text": "try your methods out here"
 			},
-			"cardAt": "bottom-right"
+			"cardAt": "bottom-right",
+			"assist": true
 		}
-	]
+	],
+	"kind": "mixed"
 }

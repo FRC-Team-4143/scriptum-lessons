@@ -1,0 +1,16 @@
+{
+	"plan": [
+		{
+			"checkpoint": "has-waypoints",
+			"guides": [
+				"choreo-basics"
+			]
+		},
+		{
+			"checkpoint": "generates-successfully",
+			"guides": [
+				"choreo-why-not-generate"
+			]
+		}
+	]
+}

@@ -62,7 +62,8 @@
 				},
 				"hint": "open BankAccount.java with Ctrl+P.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Your turn",
@@ -70,7 +71,9 @@
 			"waitFor": {
 				"hint": "add the fields and constructor."
 			},
-			"cardAt": "bottom-right"
+			"cardAt": "bottom-right",
+			"assist": true
 		}
-	]
+	],
+	"kind": "mixed"
 }

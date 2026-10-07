@@ -34,7 +34,8 @@
 					"text": "Running"
 				},
 				"hint": "press Start and wait for it to say Running."
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "The field list",
@@ -58,7 +59,8 @@
 					"text": "FlywheelRPM"
 				},
 				"hint": "type FlywheelRPM in the search box."
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Jump to it",
@@ -75,7 +77,8 @@
 					"text": "FlywheelRPM"
 				},
 				"hint": "click the RealOutputs/FlywheelRPM result."
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "A line graph",
@@ -92,7 +95,8 @@
 					"text": "Line Graph"
 				},
 				"hint": "click the Line Graph tab."
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Drag it onto the graph",
@@ -108,7 +112,8 @@
 					"text": "FlywheelRPM"
 				},
 				"hint": "drag FlywheelRPM from the field list onto Left Axis."
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Read the graph",
@@ -127,7 +132,8 @@
 			},
 			"waitFor": {
 				"hint": "lock the left axis to roughly 0-3000."
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "A second scale",
@@ -143,7 +149,8 @@
 					"text": "FlywheelRPM"
 				},
 				"hint": "drag FlywheelRPM onto Right Axis."
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "How fast is it changing?",
@@ -154,7 +161,8 @@
 			},
 			"waitFor": {
 				"hint": "set the right axis to Differentiate."
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "True or false values",
@@ -170,7 +178,8 @@
 					"text": "GamePieceLoaded"
 				},
 				"hint": "find GamePieceLoaded and drag it onto Discrete Fields."
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Where is the robot?",
@@ -187,7 +196,8 @@
 					"text": "2D Field"
 				},
 				"hint": "click the 2D Field tab."
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Put the robot on the field",
@@ -203,7 +213,8 @@
 					"text": "RobotPose2d"
 				},
 				"hint": "drag RobotPose2d onto Poses."
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Pick the field",
@@ -214,7 +225,8 @@
 			},
 			"waitFor": {
 				"hint": "set the field to Evergreen."
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Keep going",
@@ -224,5 +236,6 @@
 				"selector": ".add-tab"
 			}
 		}
-	]
+	],
+	"kind": "mixed"
 }

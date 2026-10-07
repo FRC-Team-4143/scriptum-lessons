@@ -28,7 +28,8 @@
 				},
 				"hint": "open Main.java with Ctrl+P.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Find it",
@@ -45,7 +46,8 @@
 				},
 				"hint": "find public class Main with Ctrl+F.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "The class",
@@ -55,7 +57,8 @@
 				"selector": ".view-lines .view-line",
 				"text": "public class Main"
 			},
-			"cardAt": "bottom-right"
+			"cardAt": "bottom-right",
+			"assist": true
 		},
 		{
 			"title": "Find it",
@@ -72,7 +75,8 @@
 				},
 				"hint": "find public static void main with Ctrl+F.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Where it starts",
@@ -82,7 +86,8 @@
 				"selector": ".view-lines .view-line",
 				"text": "public static void main"
 			},
-			"cardAt": "bottom-right"
+			"cardAt": "bottom-right",
+			"assist": true
 		},
 		{
 			"title": "Find it",
@@ -99,7 +104,8 @@
 				},
 				"hint": "find System.out.println with Ctrl+F.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Printing",
@@ -109,7 +115,8 @@
 				"selector": ".view-lines .view-line",
 				"text": "System.out.println"
 			},
-			"cardAt": "bottom-right"
+			"cardAt": "bottom-right",
+			"assist": true
 		},
 		{
 			"title": "The pieces",
@@ -145,7 +152,8 @@
 			"cardAt": "top-right",
 			"waitFor": {
 				"hint": "run the program and read the output."
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Check your work",
@@ -154,5 +162,6 @@
 				"selector": "[data-tour='lesson']"
 			}
 		}
-	]
+	],
+	"kind": "mixed"
 }

@@ -33,5 +33,6 @@
 			"title": "Where it bites",
 			"say": "Averages are the classic trap: a total of whole numbers divided by a count. Make one side a `double` before dividing."
 		}
-	]
+	],
+	"kind": "concept"
 }

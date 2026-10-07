@@ -23,7 +23,8 @@
 				"pane": "editor",
 				"selector": "[id='workbench.parts.sidebar']"
 			},
-			"cardAt": "bottom-right"
+			"cardAt": "bottom-right",
+			"assist": true
 		},
 		{
 			"title": "The icon bar",
@@ -32,7 +33,8 @@
 				"pane": "editor",
 				"selector": ".activitybar"
 			},
-			"cardAt": "bottom-right"
+			"cardAt": "bottom-right",
+			"assist": true
 		},
 		{
 			"title": "Where files open",
@@ -41,7 +43,8 @@
 				"pane": "editor",
 				"selector": "[id='workbench.parts.editor']"
 			},
-			"cardAt": "bottom-right"
+			"cardAt": "bottom-right",
+			"assist": true
 		},
 		{
 			"title": "The terminal",
@@ -56,7 +59,8 @@
 					"selector": ".terminal-wrapper"
 				},
 				"hint": "press Ctrl+` (the key above Tab)."
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "What the terminal is",
@@ -65,7 +69,8 @@
 				"pane": "editor",
 				"selector": "[id='workbench.parts.panel']"
 			},
-			"cardAt": "top-right"
+			"cardAt": "top-right",
+			"assist": true
 		},
 		{
 			"title": "The status bar",
@@ -74,7 +79,8 @@
 				"pane": "editor",
 				"selector": ".statusbar"
 			},
-			"cardAt": "top-right"
+			"cardAt": "top-right",
+			"assist": true
 		},
 		{
 			"title": "Scriptum's own bar",
@@ -87,5 +93,6 @@
 			"title": "That's the tour",
 			"say": "That's everything you need to get going. Come back to me any time: press the **Dozer** button at the top and pick a guide. Try **What are files and folders?** next."
 		}
-	]
+	],
+	"kind": "mixed"
 }

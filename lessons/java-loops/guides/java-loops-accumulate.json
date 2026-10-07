@@ -67,7 +67,8 @@
 				},
 				"hint": "open Main.java with Ctrl+P.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Find it",
@@ -84,7 +85,8 @@
 				},
 				"hint": "find public static int sumTo with Ctrl+F.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Your turn",
@@ -94,7 +96,8 @@
 				"selector": ".view-lines .view-line",
 				"text": "public static int sumTo"
 			},
-			"cardAt": "bottom-right"
+			"cardAt": "bottom-right",
+			"assist": true
 		},
 		{
 			"title": "Run it",
@@ -105,7 +108,9 @@
 			"cardAt": "top-right",
 			"waitFor": {
 				"hint": "run the program and read the output."
-			}
+			},
+			"assist": true
 		}
-	]
+	],
+	"kind": "mixed"
 }

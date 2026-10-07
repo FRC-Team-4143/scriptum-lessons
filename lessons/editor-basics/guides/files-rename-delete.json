@@ -28,7 +28,8 @@
 				},
 				"hint": "click the Explorer icon (the top one).",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "A badly named file",
@@ -37,7 +38,8 @@
 				"pane": "editor",
 				"selector": ".explorer-viewlet .monaco-list-row[aria-label='untitled.txt']"
 			},
-			"cardAt": "bottom-right"
+			"cardAt": "bottom-right",
+			"assist": true
 		},
 		{
 			"title": "Start renaming",
@@ -53,7 +55,8 @@
 					"selector": ".explorer-viewlet .monaco-inputbox input"
 				},
 				"hint": "click untitled.txt, then press F2."
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Type the new name",
@@ -69,7 +72,8 @@
 					"selector": ".explorer-viewlet .monaco-list-row[aria-label='team.txt']"
 				},
 				"hint": "type team and press Enter."
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Renamed!",
@@ -78,7 +82,8 @@
 				"pane": "editor",
 				"selector": ".explorer-viewlet .monaco-list-row[aria-label='team.txt']"
 			},
-			"cardAt": "bottom-right"
+			"cardAt": "bottom-right",
+			"assist": true
 		},
 		{
 			"title": "Now delete one",
@@ -94,7 +99,8 @@
 					"selector": ".monaco-dialog-box"
 				},
 				"hint": "click delete-me.txt, then press Delete."
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Are you sure?",
@@ -111,7 +117,8 @@
 				},
 				"hint": "click Delete in the box.",
 				"gone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Check your work",
@@ -120,5 +127,6 @@
 				"selector": "[data-tour='lesson']"
 			}
 		}
-	]
+	],
+	"kind": "mixed"
 }

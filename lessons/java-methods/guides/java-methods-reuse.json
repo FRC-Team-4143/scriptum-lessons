@@ -42,5 +42,6 @@
 			"title": "Why it matters",
 			"say": "If the range check ever changes, you fix it in **one** place, and every caller gets the fix. That's the whole point of methods."
 		}
-	]
+	],
+	"kind": "concept"
 }

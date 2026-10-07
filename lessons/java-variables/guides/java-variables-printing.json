@@ -68,7 +68,8 @@
 				},
 				"hint": "open Main.java with Ctrl+P.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Find it",
@@ -85,7 +86,8 @@
 				},
 				"hint": "find Team name: with Ctrl+F.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Already in your code",
@@ -95,7 +97,8 @@
 				"selector": ".view-lines .view-line",
 				"text": "Team name:"
 			},
-			"cardAt": "bottom-right"
+			"cardAt": "bottom-right",
+			"assist": true
 		},
 		{
 			"title": "Run it",
@@ -106,7 +109,9 @@
 			"cardAt": "top-right",
 			"waitFor": {
 				"hint": "run the program and read the output."
-			}
+			},
+			"assist": true
 		}
-	]
+	],
+	"kind": "mixed"
 }

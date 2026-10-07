@@ -75,7 +75,8 @@
 				},
 				"hint": "open Main.java with Ctrl+P.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Find it",
@@ -92,7 +93,8 @@
 				},
 				"hint": "find public static String batteryStatus with Ctrl+F.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Your turn",
@@ -102,7 +104,9 @@
 				"selector": ".view-lines .view-line",
 				"text": "public static String batteryStatus"
 			},
-			"cardAt": "bottom-right"
+			"cardAt": "bottom-right",
+			"assist": true
 		}
-	]
+	],
+	"kind": "mixed"
 }

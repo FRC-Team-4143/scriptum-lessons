@@ -76,7 +76,8 @@
 				},
 				"hint": "open Main.java with Ctrl+P.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Find it",
@@ -93,7 +94,8 @@
 				},
 				"hint": "find public static int addInts with Ctrl+F.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Start here",
@@ -103,7 +105,8 @@
 				"selector": ".view-lines .view-line",
 				"text": "public static int addInts"
 			},
-			"cardAt": "bottom-right"
+			"cardAt": "bottom-right",
+			"assist": true
 		},
 		{
 			"title": "Run it",
@@ -114,7 +117,9 @@
 			"cardAt": "top-right",
 			"waitFor": {
 				"hint": "run the program and read the output."
-			}
+			},
+			"assist": true
 		}
-	]
+	],
+	"kind": "mixed"
 }

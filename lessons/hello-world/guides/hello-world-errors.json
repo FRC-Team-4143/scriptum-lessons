@@ -32,7 +32,8 @@
 				},
 				"hint": "open Main.java with Ctrl+P.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Break it",
@@ -45,7 +46,8 @@
 				"selector": ".view-lines .view-line",
 				"text": "System.out.println"
 			},
-			"cardAt": "bottom-right"
+			"cardAt": "bottom-right",
+			"assist": true
 		},
 		{
 			"title": "The problem count",
@@ -53,7 +55,8 @@
 			"target": {
 				"pane": "editor",
 				"selector": "[id='status.problems']"
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "What the error says",
@@ -88,7 +91,9 @@
 				"selector": ".view-lines .view-line",
 				"text": "System.out.println"
 			},
-			"cardAt": "bottom-right"
+			"cardAt": "bottom-right",
+			"assist": true
 		}
-	]
+	],
+	"kind": "mixed"
 }

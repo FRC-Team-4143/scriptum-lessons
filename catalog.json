@@ -1531,6 +1531,7 @@
 			"modules": [
 				"editor-basics"
 			],
+			"kind": "mixed",
 			"path": "lessons/editor-basics/guides/editor-tour.json"
 		},
 		{
@@ -1542,6 +1543,7 @@
 			"modules": [
 				"editor-basics"
 			],
+			"kind": "mixed",
 			"path": "lessons/editor-basics/guides/files-and-folders.json"
 		},
 		{
@@ -1553,6 +1555,7 @@
 			"modules": [
 				"editor-basics"
 			],
+			"kind": "mixed",
 			"path": "lessons/editor-basics/guides/files-make.json"
 		},
 		{
@@ -1564,6 +1567,7 @@
 			"modules": [
 				"editor-basics"
 			],
+			"kind": "mixed",
 			"path": "lessons/editor-basics/guides/editor-typing.json"
 		},
 		{
@@ -1575,6 +1579,7 @@
 			"modules": [
 				"editor-basics"
 			],
+			"kind": "mixed",
 			"path": "lessons/editor-basics/guides/files-rename-delete.json"
 		},
 		{
@@ -1586,6 +1591,7 @@
 			"modules": [
 				"editor-basics"
 			],
+			"kind": "mixed",
 			"path": "lessons/editor-basics/guides/terminal-basics.json"
 		},
 		{
@@ -1597,6 +1603,7 @@
 			"modules": [
 				"editor-basics"
 			],
+			"kind": "mixed",
 			"path": "lessons/editor-basics/guides/find-things-fast.json"
 		},
 		{
@@ -1608,6 +1615,7 @@
 			"modules": [
 				"editor-basics"
 			],
+			"kind": "mixed",
 			"path": "lessons/editor-basics/guides/editor-first-run.json"
 		},
 		{
@@ -1622,6 +1630,7 @@
 			"needs": [
 				"editor"
 			],
+			"kind": "mixed",
 			"path": "lessons/git-basics/guides/git-source-control.json"
 		},
 		{
@@ -1633,6 +1642,7 @@
 			"modules": [
 				"git-basics"
 			],
+			"kind": "concept",
 			"path": "lessons/git-basics/guides/git-commands.json"
 		},
 		{
@@ -1668,6 +1678,7 @@
 			"needs": [
 				"scope"
 			],
+			"kind": "mixed",
 			"path": "lessons/advantagescope-intro/guides/advantagescope-basics.json"
 		},
 		{
@@ -1682,6 +1693,7 @@
 			"needs": [
 				"elastic"
 			],
+			"kind": "mixed",
 			"path": "lessons/elastic-intro/guides/elastic-basics.json"
 		},
 		{
@@ -1696,6 +1708,7 @@
 			"needs": [
 				"choreo"
 			],
+			"kind": "mixed",
 			"path": "lessons/choreo-intro/guides/choreo-basics.json"
 		},
 		{
@@ -1708,6 +1721,7 @@
 				"java-variables",
 				"robot-drivetrain"
 			],
+			"kind": "mixed",
 			"path": "common/guides/java-variables.json"
 		},
 		{
@@ -1719,6 +1733,7 @@
 			"modules": [
 				"git-basics"
 			],
+			"kind": "mixed",
 			"path": "lessons/git-basics/guides/git-branches.json"
 		},
 		{
@@ -1730,6 +1745,7 @@
 			"modules": [
 				"git-basics"
 			],
+			"kind": "mixed",
 			"path": "lessons/git-basics/guides/git-merging.json"
 		},
 		{
@@ -1741,6 +1757,7 @@
 			"modules": [
 				"git-basics"
 			],
+			"kind": "mixed",
 			"path": "lessons/git-basics/guides/git-merge-conflicts.json"
 		},
 		{
@@ -1752,6 +1769,7 @@
 			"modules": [
 				"git-basics"
 			],
+			"kind": "mixed",
 			"path": "lessons/git-basics/guides/git-rebase.json"
 		},
 		{
@@ -1763,6 +1781,7 @@
 			"modules": [
 				"advantagescope-intro"
 			],
+			"kind": "mixed",
 			"path": "lessons/advantagescope-intro/guides/advantagescope-3d-swerve.json"
 		},
 		{
@@ -1774,6 +1793,7 @@
 			"modules": [
 				"elastic-intro"
 			],
+			"kind": "mixed",
 			"path": "lessons/elastic-intro/guides/elastic-writing-values.json"
 		},
 		{
@@ -1785,6 +1805,7 @@
 			"modules": [
 				"elastic-intro"
 			],
+			"kind": "mixed",
 			"path": "lessons/elastic-intro/guides/elastic-layouts.json"
 		},
 		{
@@ -1796,6 +1817,7 @@
 			"modules": [
 				"choreo-intro"
 			],
+			"kind": "concept",
 			"path": "lessons/choreo-intro/guides/choreo-why-not-generate.json"
 		},
 		{
@@ -1807,6 +1829,7 @@
 			"modules": [
 				"hello-world"
 			],
+			"kind": "mixed",
 			"path": "lessons/hello-world/guides/hello-world-first-program.json"
 		},
 		{
@@ -1818,6 +1841,7 @@
 			"modules": [
 				"hello-world"
 			],
+			"kind": "mixed",
 			"path": "lessons/hello-world/guides/hello-world-errors.json"
 		},
 		{
@@ -1829,6 +1853,7 @@
 			"modules": [
 				"java-variables"
 			],
+			"kind": "mixed",
 			"path": "lessons/java-variables/guides/java-variables-printing.json"
 		},
 		{
@@ -1840,6 +1865,7 @@
 			"modules": [
 				"java-variables"
 			],
+			"kind": "mixed",
 			"path": "lessons/java-variables/guides/java-variables-constants-enums.json"
 		},
 		{
@@ -1851,6 +1877,7 @@
 			"modules": [
 				"java-operators"
 			],
+			"kind": "mixed",
 			"path": "lessons/java-operators/guides/java-operators-arithmetic.json"
 		},
 		{
@@ -1862,6 +1889,7 @@
 			"modules": [
 				"java-operators"
 			],
+			"kind": "mixed",
 			"path": "lessons/java-operators/guides/java-operators-remainder.json"
 		},
 		{
@@ -1873,6 +1901,7 @@
 			"modules": [
 				"java-operators"
 			],
+			"kind": "mixed",
 			"path": "lessons/java-operators/guides/java-operators-assignment.json"
 		},
 		{
@@ -1885,6 +1914,7 @@
 				"java-operators",
 				"java-arrays"
 			],
+			"kind": "concept",
 			"path": "common/guides/java-operators-integer-division.json"
 		},
 		{
@@ -1896,6 +1926,7 @@
 			"modules": [
 				"java-conditions"
 			],
+			"kind": "mixed",
 			"path": "lessons/java-conditions/guides/java-conditions-if-chain.json"
 		},
 		{
@@ -1907,6 +1938,7 @@
 			"modules": [
 				"java-conditions"
 			],
+			"kind": "mixed",
 			"path": "lessons/java-conditions/guides/java-conditions-switch.json"
 		},
 		{
@@ -1918,6 +1950,7 @@
 			"modules": [
 				"java-conditions"
 			],
+			"kind": "mixed",
 			"path": "lessons/java-conditions/guides/java-conditions-logic.json"
 		},
 		{
@@ -1929,6 +1962,7 @@
 			"modules": [
 				"java-loops"
 			],
+			"kind": "concept",
 			"path": "lessons/java-loops/guides/java-loops-for.json"
 		},
 		{
@@ -1940,6 +1974,7 @@
 			"modules": [
 				"java-loops"
 			],
+			"kind": "mixed",
 			"path": "lessons/java-loops/guides/java-loops-accumulate.json"
 		},
 		{
@@ -1951,6 +1986,7 @@
 			"modules": [
 				"java-loops"
 			],
+			"kind": "concept",
 			"path": "lessons/java-loops/guides/java-loops-fizzbuzz.json"
 		},
 		{
@@ -1962,6 +1998,7 @@
 			"modules": [
 				"java-arrays"
 			],
+			"kind": "concept",
 			"path": "lessons/java-arrays/guides/java-arrays-basics.json"
 		},
 		{
@@ -1973,6 +2010,7 @@
 			"modules": [
 				"java-arrays"
 			],
+			"kind": "mixed",
 			"path": "lessons/java-arrays/guides/java-arrays-summaries.json"
 		},
 		{
@@ -1984,6 +2022,7 @@
 			"modules": [
 				"java-arrays"
 			],
+			"kind": "concept",
 			"path": "lessons/java-arrays/guides/java-arrays-new-arrays.json"
 		},
 		{
@@ -1995,6 +2034,7 @@
 			"modules": [
 				"java-methods"
 			],
+			"kind": "mixed",
 			"path": "lessons/java-methods/guides/java-methods-anatomy.json"
 		},
 		{
@@ -2006,6 +2046,7 @@
 			"modules": [
 				"java-methods"
 			],
+			"kind": "concept",
 			"path": "lessons/java-methods/guides/java-methods-reuse.json"
 		},
 		{
@@ -2018,6 +2059,7 @@
 				"java-methods",
 				"java-recursion"
 			],
+			"kind": "mixed",
 			"path": "common/guides/java-methods-edge-cases.json"
 		},
 		{
@@ -2029,6 +2071,7 @@
 			"modules": [
 				"java-classes-objects"
 			],
+			"kind": "mixed",
 			"path": "lessons/java-classes-objects/guides/java-classes-blueprint.json"
 		},
 		{
@@ -2040,6 +2083,7 @@
 			"modules": [
 				"java-classes-objects"
 			],
+			"kind": "mixed",
 			"path": "lessons/java-classes-objects/guides/java-classes-fields-constructor.json"
 		},
 		{
@@ -2051,6 +2095,7 @@
 			"modules": [
 				"java-classes-objects"
 			],
+			"kind": "mixed",
 			"path": "lessons/java-classes-objects/guides/java-classes-encapsulation.json"
 		},
 		{
@@ -2062,6 +2107,7 @@
 			"modules": [
 				"java-recursion"
 			],
+			"kind": "mixed",
 			"path": "lessons/java-recursion/guides/java-recursion-recipe.json"
 		},
 		{
@@ -2073,6 +2119,7 @@
 			"modules": [
 				"java-recursion"
 			],
+			"kind": "concept",
 			"path": "lessons/java-recursion/guides/java-recursion-stack-overflow.json"
 		},
 		{
@@ -2084,6 +2131,7 @@
 			"modules": [
 				"java-inheritance"
 			],
+			"kind": "mixed",
 			"path": "lessons/java-inheritance/guides/java-inheritance-extends.json"
 		},
 		{
@@ -2095,6 +2143,7 @@
 			"modules": [
 				"java-inheritance"
 			],
+			"kind": "mixed",
 			"path": "lessons/java-inheritance/guides/java-inheritance-override.json"
 		},
 		{

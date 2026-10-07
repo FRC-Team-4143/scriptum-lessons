@@ -23,7 +23,8 @@
 					"selector": ".scm-viewlet"
 				},
 				"hint": "click the Source Control icon."
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "One repository per folder",
@@ -31,7 +32,8 @@
 			"target": {
 				"pane": "editor",
 				"selector": ".scm-view"
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Open the file",
@@ -48,7 +50,8 @@
 					"text": "roster.txt"
 				},
 				"hint": "open 01-first-commit/roster.txt."
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Make a change",
@@ -64,7 +67,8 @@
 					"selector": ".activitybar .action-label[aria-label*='pending change']"
 				},
 				"hint": "add your name and press Ctrl+S."
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Back to Source Control",
@@ -79,7 +83,8 @@
 					"selector": ".scm-viewlet"
 				},
 				"hint": "click the Source Control icon."
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Your change",
@@ -88,7 +93,8 @@
 			"target": {
 				"pane": "editor",
 				"selector": ".monaco-list-row[aria-label^='roster.txt']"
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Stage it",
@@ -104,7 +110,8 @@
 					"selector": ".monaco-list-row[aria-label='Staged Changes']"
 				},
 				"hint": "hover over roster.txt and press +."
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Commit it",
@@ -121,7 +128,8 @@
 				},
 				"gone": true,
 				"hint": "write a message and press Commit."
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "In the history",
@@ -130,7 +138,8 @@
 			"target": {
 				"pane": "editor",
 				"selector": ".pane-header[aria-label='Graph Section']"
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Which branch am I on?",
@@ -138,7 +147,8 @@
 			"target": {
 				"pane": "editor",
 				"selector": "[id='status.scm.0']"
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "The terminal",
@@ -153,7 +163,8 @@
 					"selector": ".terminal-wrapper"
 				},
 				"hint": "press Ctrl+` (the key above Tab)."
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Try it",
@@ -165,11 +176,13 @@
 			},
 			"waitFor": {
 				"hint": "run git log --oneline in 01-first-commit."
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Next exercises",
 			"say": "Each numbered folder's `README.md` has the next task: a feature branch, a merge, a conflict and a rebase. Check your progress in the lesson chip at the top."
 		}
-	]
+	],
+	"kind": "mixed"
 }

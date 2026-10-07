@@ -103,9 +103,13 @@ describe("guides", () => {
 		for (const concept of index.concepts) {
 			if (!concept.path.startsWith("common/guides/")) continue;
 			const { steps } = readJson(concept.path) as { steps: Step[] };
-			const walkthrough = steps.filter((s) => s.assist && (s.waitFor?.target?.text || s.target?.text)).length;
-			// The one shared exception is navigation that exists in every lesson (the drive mech).
-			if (concept.id === "robot-drive-math-io-loop" || concept.id === "build-and-run") continue;
+			// Steps that wait for the student (open this file, find that line) are fine when the file and
+			// line exist in every lesson using the guide (the next test checks that). The edit itself, a
+			// "your turn" step with no wait, is what belongs to one lesson.
+			// These point at code that is the same in every lesson using them (main starts empty in both
+			// methods lessons; every drive mech has readInputs) and never ask for a change.
+			if (["java-methods-edge-cases", "robot-drive-math-io-loop"].includes(concept.id)) continue;
+			const walkthrough = steps.filter((s) => s.assist && !s.waitFor && (s.target?.text || s.target?.selector)).length;
 			expect(walkthrough, `${concept.id} is shared by ${concept.modules?.join(", ")} but walks through edits`).toBe(0);
 		}
 	});

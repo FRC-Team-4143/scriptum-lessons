@@ -75,7 +75,8 @@
 				"pane": "editor",
 				"selector": ".explorer-viewlet"
 			},
-			"cardAt": "bottom-right"
+			"cardAt": "bottom-right",
+			"assist": true
 		},
 		{
 			"title": "Paths",
@@ -103,5 +104,6 @@
 			"title": "Why this matters",
 			"say": "Code isn't magic: it's words typed into files. Programmers spend a lot of time making, naming, moving and finding files. So let's practice. Try **Make a folder and a file** next."
 		}
-	]
+	],
+	"kind": "mixed"
 }

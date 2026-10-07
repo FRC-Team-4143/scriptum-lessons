@@ -45,7 +45,8 @@
 				},
 				"hint": "open Main.java with Ctrl+P.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Find it",
@@ -62,7 +63,8 @@
 				},
 				"hint": "find new BankAccount with Ctrl+F.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Main uses it",
@@ -72,7 +74,9 @@
 				"selector": ".view-lines .view-line",
 				"text": "new BankAccount"
 			},
-			"cardAt": "bottom-right"
+			"cardAt": "bottom-right",
+			"assist": true
 		}
-	]
+	],
+	"kind": "mixed"
 }

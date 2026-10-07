@@ -58,7 +58,8 @@
 				},
 				"hint": "open CheckingAccount.java with Ctrl+P.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Find it",
@@ -75,7 +76,8 @@
 				},
 				"hint": "find public class CheckingAccount with Ctrl+F.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Same start",
@@ -85,7 +87,8 @@
 				"selector": ".view-lines .view-line",
 				"text": "public class CheckingAccount"
 			},
-			"cardAt": "bottom-right"
+			"cardAt": "bottom-right",
+			"assist": true
 		},
 		{
 			"title": "Your turn",
@@ -93,7 +96,8 @@
 			"waitFor": {
 				"hint": "build CheckingAccount."
 			},
-			"cardAt": "bottom-right"
+			"cardAt": "bottom-right",
+			"assist": true
 		},
 		{
 			"title": "Run it",
@@ -104,7 +108,9 @@
 			"cardAt": "top-right",
 			"waitFor": {
 				"hint": "run the program and read the output."
-			}
+			},
+			"assist": true
 		}
-	]
+	],
+	"kind": "mixed"
 }

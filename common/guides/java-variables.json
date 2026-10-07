@@ -159,7 +159,9 @@
 			],
 			"target": {
 				"pane": "editor"
-			}
+			},
+			"assist": true
 		}
-	]
+	],
+	"kind": "mixed"
 }

@@ -46,5 +46,6 @@
 			"title": "No while loops",
 			"say": "Team standard: use `for`, not `while`. A `while` loop that never ends freezes a robot. A `for` loop makes you write the ending up front."
 		}
-	]
+	],
+	"kind": "concept"
 }

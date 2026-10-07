@@ -60,7 +60,9 @@
 			"cardAt": "top-right",
 			"waitFor": {
 				"hint": "run the program and read the output."
-			}
+			},
+			"assist": true
 		}
-	]
+	],
+	"kind": "mixed"
 }

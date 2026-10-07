@@ -24,7 +24,8 @@
 					"selector": ".terminal-wrapper"
 				},
 				"hint": "press Ctrl+` (the key above Tab)."
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Start the merge",
@@ -36,7 +37,8 @@
 			"cardAt": "top-right",
 			"waitFor": {
 				"hint": "start the merge and see the conflict."
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Conflict markers",
@@ -84,7 +86,8 @@
 				},
 				"hint": "open Constants.java with Ctrl+P.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "The editor helps",
@@ -103,7 +106,8 @@
 				},
 				"gone": true,
 				"hint": "accept one of the changes."
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Finish the merge",
@@ -115,7 +119,9 @@
 			"cardAt": "top-right",
 			"waitFor": {
 				"hint": "stage and commit the resolved file."
-			}
+			},
+			"assist": true
 		}
-	]
+	],
+	"kind": "mixed"
 }

@@ -26,7 +26,8 @@
 					"selector": ".quick-input-widget input"
 				},
 				"hint": "press Ctrl+P."
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Type part of a name",
@@ -43,7 +44,8 @@
 				},
 				"hint": "type about and press Enter.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Search everything",
@@ -58,7 +60,8 @@
 					"selector": ".search-view"
 				},
 				"hint": "press Ctrl+Shift+F."
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Search for a word",
@@ -70,7 +73,8 @@
 				"pane": "editor",
 				"selector": ".search-view"
 			},
-			"cardAt": "bottom-right"
+			"cardAt": "bottom-right",
+			"assist": true
 		},
 		{
 			"title": "Back to your files",
@@ -86,7 +90,8 @@
 					"selector": ".explorer-viewlet .monaco-list-row"
 				},
 				"hint": "press Ctrl+Shift+E."
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "The command palette",
@@ -101,11 +106,13 @@
 					"selector": ".quick-input-widget input"
 				},
 				"hint": "press Ctrl+Shift+P."
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Your shortcuts",
 			"say": "Ctrl+P finds a file by name. Ctrl+Shift+F finds words everywhere. Ctrl+F finds words in the file you're in. Ctrl+Shift+P finds any command. Together they save you a lot of clicking."
 		}
-	]
+	],
+	"kind": "mixed"
 }

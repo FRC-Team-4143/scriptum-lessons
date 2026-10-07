@@ -1,0 +1,16 @@
+{
+	"plan": [
+		{
+			"checkpoint": "flywheel-graph",
+			"guides": [
+				"advantagescope-basics"
+			]
+		},
+		{
+			"checkpoint": "field3d-figure-eight",
+			"guides": [
+				"advantagescope-3d-swerve"
+			]
+		}
+	]
+}

@@ -39,5 +39,6 @@
 			"title": "Strings too",
 			"say": "`reverseString` shrinks the string each call: the last character, plus the reverse of everything before it, until it's 0 or 1 characters long."
 		}
-	]
+	],
+	"kind": "concept"
 }

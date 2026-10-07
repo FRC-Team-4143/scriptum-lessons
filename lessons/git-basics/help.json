@@ -1,0 +1,35 @@
+{
+	"plan": [
+		{
+			"checkpoint": "first-commit",
+			"guides": [
+				"git-source-control",
+				"git-commands"
+			]
+		},
+		{
+			"checkpoint": "feature-branch",
+			"guides": [
+				"git-branches"
+			]
+		},
+		{
+			"checkpoint": "merge",
+			"guides": [
+				"git-merging"
+			]
+		},
+		{
+			"checkpoint": "merge-conflict",
+			"guides": [
+				"git-merge-conflicts"
+			]
+		},
+		{
+			"checkpoint": "rebase",
+			"guides": [
+				"git-rebase"
+			]
+		}
+	]
+}

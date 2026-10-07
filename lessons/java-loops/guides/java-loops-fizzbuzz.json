@@ -39,5 +39,6 @@
 				"caption": "fizzBuzz(5) is \"1, 2, Fizz, 4, Buzz\""
 			}
 		}
-	]
+	],
+	"kind": "concept"
 }

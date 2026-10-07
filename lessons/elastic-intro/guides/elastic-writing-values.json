@@ -31,7 +31,8 @@
 					"text": "Running"
 				},
 				"hint": "press Start and wait for Running."
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Which widget",
@@ -66,7 +67,8 @@
 			"cardAt": "bottom-right",
 			"waitFor": {
 				"hint": "add ShooterAngleDegrees as a Number Slider."
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Set its range",
@@ -87,7 +89,8 @@
 					"selector": "flt-semantics[aria-label='Alert']"
 				},
 				"hint": "open Edit Properties on the slider."
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Move it",
@@ -98,7 +101,8 @@
 			"target": {
 				"pane": "elastic"
 			},
-			"cardAt": "bottom-right"
+			"cardAt": "bottom-right",
+			"assist": true
 		},
 		{
 			"title": "Submit button",
@@ -113,5 +117,6 @@
 				"text": "File"
 			}
 		}
-	]
+	],
+	"kind": "mixed"
 }

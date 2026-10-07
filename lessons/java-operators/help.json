@@ -1,0 +1,23 @@
+{
+	"plan": [
+		{
+			"checkpoint": "add-ints",
+			"guides": [
+				"java-operators-arithmetic",
+				"java-operators-integer-division"
+			]
+		},
+		{
+			"checkpoint": "is-even",
+			"guides": [
+				"java-operators-remainder"
+			]
+		},
+		{
+			"checkpoint": "apply-assignments",
+			"guides": [
+				"java-operators-assignment"
+			]
+		}
+	]
+}

@@ -62,7 +62,8 @@
 				},
 				"hint": "open Main.java with Ctrl+P.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Find applyAssignments",
@@ -79,7 +80,8 @@
 				},
 				"hint": "find applyAssignments with Ctrl+F.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Your turn",
@@ -89,7 +91,9 @@
 				"selector": ".view-lines .view-line",
 				"text": "public static double applyAssignments"
 			},
-			"cardAt": "bottom-right"
+			"cardAt": "bottom-right",
+			"assist": true
 		}
-	]
+	],
+	"kind": "mixed"
 }

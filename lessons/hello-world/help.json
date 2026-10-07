@@ -28,5 +28,14 @@
 				}
 			]
 		}
-	}
+	},
+	"plan": [
+		{
+			"checkpoint": "prints-hello-world",
+			"guides": [
+				"hello-world-first-program",
+				"hello-world-errors"
+			]
+		}
+	]
 }
