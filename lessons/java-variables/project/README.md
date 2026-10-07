@@ -1,50 +1,10 @@
 # Variables
 
-:::tip[Read this first: Variables and Datatypes]
+> **New to an idea here?** Press the **Dozer** button in the top bar. His guides explain each idea this lesson uses, and **I'm so lost → Teach me, step by step** walks you through every job.
 
-The team docs page for this lesson is the best place to learn the ideas
-before you write any code: [Variables and
-Datatypes](https://frc-team-4143.github.io/docs/software/java/vars-dt) -
-Declaring a Variable, Assigning a Variable, Datatypes, Enums, and Constants – every section maps to something you'll write below. Come back here when
-you're ready to apply it. If a step below feels unfamiliar, that page is
-where to look first.
+All the code lives in `src/Main.java`. Click **Run** any time to see your output in the terminal.
 
-:::
-
-All the code lives in `src/Main.java`. Click **Run** any time to see your
-output printed to the terminal.
-
-## Datatypes you'll use here
-
-- `int` — a whole number, like `4143`.
-- `double` — a decimal number, like `3.14`.
-- `boolean` — either `true` or `false`.
-- `String` — text, wrapped in double quotes, like `"I am a string!"`.
-- `enum` — a type you define yourself, with a fixed set of named values,
-  like `RED` and `BLUE`.
-
-## Declaring vs. assigning
-
-`int team_number;` *declares* a variable without giving it a value yet.
-`team_number = 4143;` *assigns* it one. You can — and usually should — do
-both on one line:
-```java
-int team_number = 4143;
-```
-A variable that's declared but never assigned is dangerous: nothing stops
-other code from reading it before it has a real value. The team standard is
-to always declare and assign together, so that never happens.
-
-## Why constants?
-
-A constant is a variable that's never meant to change, like a robot's max
-speed or a wheel diameter. Adding `final` to the declaration locks it — the
-compiler will stop you if you (or a teammate) accidentally try to reassign
-it later. Constants are also named differently from regular variables, in
-`SCREAMING_SNAKE_CASE`, so they're easy to spot at a glance:
-```java
-public static final double MAX_SPEED = 5.0;
-```
+More depth: the team docs page [Variables](https://frc-team-4143.github.io/docs/software/java/vars-dt).
 
 ## What you need to do
 

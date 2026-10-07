@@ -8,36 +8,7 @@ Companion docs pages: [Autonomous](https://docs.marswars.org/docs/software/train
 [Autonomous (robot dev)](https://docs.marswars.org/docs/software/robot_dev/autonomous). To draw
 smooth paths by hand later, see [Choreo](https://docs.marswars.org/docs/software/tools/choreo).
 
-## The big idea
-
-An autonomous routine is a **sequence** of commands. Each command runs until it is finished, then the
-next one starts:
-
-```text
-drive 5 m  ->  turn to 45 degrees  ->  drive 2 m  ->  shoot
-```
-
-Every step uses the **pose** you built earlier: the robot knows where it is, so a command can
-compare that to where it *wants* to be and correct the difference. That is feedback control, the same
-idea as the flywheel, but for position.
-
-## Java you will learn in this lesson
-
-**Loops again.** You used a `for` loop in the Drive Math and Methods lesson. Here it builds a list of commands instead of adding up numbers:
-
-```java
-for (int i = 1; i <= 4; i++) {
-  // this runs 4 times, with i equal to 1, then 2, then 3, then 4
-}
-```
-
-**Writing your own command: inheritance again.** A command is a class that `extends Command`. You
-`@Override` the four lifecycle methods you need: `initialize()` (once, at the start), `execute()`
-(every 20 ms), `isFinished()` (the command stops when this returns `true`) and `end()` (once, when it
-stops). Any code can then treat your class like any other `Command`.
-
-**Collections of commands.** A `SequentialCommandGroup` holds commands and runs them one after another.
-You add to it with `addCommands(...)`, which a loop can call as many times as you like.
+> **New to an idea here?** Press the **Dozer** button in the top bar. His guides explain each idea this lesson uses, and **I'm so lost → Teach me, step by step** walks you through every job.
 
 ## Where the code lives
 
@@ -67,30 +38,26 @@ Go slower on anything that is new. Finishing every bonus is not expected.
 
 ## What you need to do
 
-1. **Read `TurnToAngleCommand`.** A command has four parts: `initialize()` (runs once at the start),
-   `execute()` (runs every 20 ms), `isFinished()` (says when to stop) and `end()` (runs once when it
-   stops). Find where it works out the *error* (how far from the goal) and how the error becomes a
-   motor command.
-2. **Finish `DriveDistanceCommand`.** Follow the `TODO` comments:
+1. **Read `TurnToAngleCommand`.** Find where it works out the error and turns it into a motor command.
+2. **Finish `DriveDistanceCommand`** by following its `TODO` comments:
    - `initialize()`: remember the starting pose.
-   - `execute()`: the error is the distance still to go. Drive at `DRIVE_KP * error`, no faster
-     than `MAX_AUTO_SPEED`. (A helper keeps the speed from dropping below `MIN_AUTO_SPEED`.)
-   - `isFinished()`: done when the error is smaller than `DRIVE_TOLERANCE_METERS`.
-3. **Build `leftAuto()`** in `Autos.java` with `Commands.sequence(...)`: drive forward 5 meters, turn
-   to 45 degrees, drive forward 2 meters, then shoot (`ShooterCommands.shoot().withTimeout(2.0)` shoots
-   for two seconds and stops).
-4. **Build `rightAuto()`** the same way, but turn to **-45** degrees.
-5. **Build `squareAuto()`.** It should drive a 1 meter square: forward 1 meter, then turn to 90
-   degrees, forward 1 meter, turn to 180, and so on, four times. Do **not** write the eight
-   commands by hand. Create a `SequentialCommandGroup`, then use a `for` loop that runs four times and
-   calls `addCommands(...)` with a `DriveDistanceCommand(1.0)` and a `TurnToAngleCommand(90.0 * i)`.
-6. **Put all three in the chooser.** In `RobotContainer.java`, add them with
-   `autoChooser.addOption(...)`: "Left Auto", "Right Auto" and "Square Auto".
-7. **Run them.** Start the robot. In the Driver Station pick **Left Auto** from the autonomous
-   chooser, choose **Auto** mode and click **Enable**. Open AdvantageScope's 2D Field and watch
-   `Drive/Pose`. Then pick **Right Auto** and run it again, then **Square Auto**: the robot should drive a square and finish back near where it started. The robot should end up about 6.4 m
-   forward and 1.4 m to the side, and the shooter should fire.
+   - `execute()`: error = distance still to go; drive at `DRIVE_KP * error`, no faster than
+     `MAX_AUTO_SPEED`.
+   - `isFinished()`: done when the error is below `DRIVE_TOLERANCE_METERS`.
+3. **`leftAuto()`** in `Autos.java`, with `Commands.sequence(...)`: drive 5 m, turn to 45 degrees,
+   drive 2 m, then `ShooterCommands.shoot().withTimeout(2.0)`.
+4. **`rightAuto()`**: the same, but turn to **-45** degrees.
+5. **`squareAuto()`**: a 1 m square (forward 1 m, turn to 90, forward 1 m, turn to 180, ...). Use a
+   `SequentialCommandGroup` and a `for` loop that runs four times, calling `addCommands(...)` with a
+   `DriveDistanceCommand(1.0)` and a `TurnToAngleCommand(90.0 * i)`.
+6. **`RobotContainer.java`**: add "Left Auto", "Right Auto" and "Square Auto" with
+   `autoChooser.addOption(...)`.
+7. **Run them.** Start, pick an auto in the Driver Station chooser, choose **Auto**, **Enable**, and
+   watch `Drive/Pose` on the 2D Field. Left Auto should end about 6.4 m forward and 1.4 m to the side
+   and fire; Square Auto should finish near where it started.
 8. **Click Verify.**
+
+Stuck on a step? Open **Dozer**: he can explain the idea or walk you through it.
 
 ## Bonus challenges
 
@@ -100,9 +67,3 @@ Go slower on anything that is new. Finishing every bonus is not expected.
 - Tune `DRIVE_KP` and `TURN_KP` in `DrivetrainConstants.java`. Too low is slow. Too high overshoots and
   wobbles. What does the robot do with `TURN_KP = 1.5`?
 
-## Words to know
-
-- **Autonomous:** the part of the match where the robot runs on its own.
-- **Command sequence:** commands that run one after another.
-- **Proportional control (P):** an output that grows with the error.
-- **Tolerance:** how close counts as "there."

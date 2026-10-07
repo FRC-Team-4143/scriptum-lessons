@@ -6,40 +6,7 @@ robot is going, how far it has gone, and then drive an exact distance by yoursel
 
 Companion docs page: [Sensors and Feedback](https://docs.marswars.org/docs/software/training/sensors-feedback)
 
-## Java you will learn in this lesson
-
-**Conditions: making the robot decide.** Until now your code did the same thing every time. An `if`
-statement runs some lines only when something is true:
-
-```java
-if (speed < 0.5) {
-  speed = 0.5;       // only runs when speed is less than 0.5
-}
-```
-
-The part in parentheses is a **condition**: a question with a true or false answer. Compare numbers
-with `<` (less than), `>` (greater than), `<=`, `>=`, `==` (equal) and `!=` (not equal). Add an `else`
-to do something different when the answer is false:
-
-```java
-if (distance < 2.0) {
-  drive.setDutyCycles(0.4, 0.4);   // not there yet: keep driving
-} else {
-  drive.setDutyCycles(0.0, 0.0);   // there: stop
-}
-```
-
-Two helpers you will use: `Math.abs(x)` gives the size of `x` without its sign (`Math.abs(-0.3)` is
-`0.3`), which lets one `if` handle both directions.
-
-**Constants: naming a number that never changes.** If a number appears in your code, give it a name
-so everyone knows what it means. Put this at the top of the class (above your methods):
-
-```java
-private static final double DEADBAND = 0.1;
-```
-
-`final` means it can never change. We write constant names in `CAPITAL_LETTERS`.
+> **New to an idea here?** Press the **Dozer** button in the top bar. His guides explain each idea this lesson uses, and **I'm so lost → Teach me, step by step** walks you through every job.
 
 ## Where the code lives
 
@@ -76,36 +43,20 @@ Go slower on anything that is new. Finishing every bonus is not expected.
 
 ## What you need to do
 
-1. **Rotations to meters.** The robot gives you wheel rotations, but we think in meters. One
-   rotation moves the robot one wheel circumference. The starter already converts the left side:
-   do the same for `rightMeters` and `rightMetersPerSecond` (look at how the left ones are written).
-2. **Describe the whole robot.** Fill in the three `TODO` lines in STEP 2:
-   - `linearSpeed`: how fast the robot moves forward, in meters per second. It is the **average**
-     of the left and right speeds.
-   - `angularSpeed`: how fast it turns, in radians per second. It is
-     `(right - left) / Constants.TRACK_WIDTH_METERS`. A positive number means turning left
-     (counterclockwise).
-   - `distanceMeters`: how far the robot has driven, the average of the left and right distances.
-3. **Check your numbers in AdvantageScope.** Drive forward: linear speed goes up and distance
-   grows. Spin in place with the arrow keys: angular speed jumps and linear speed stays near zero.
-4. **Add a deadband.** Real sticks never rest at exactly `0.0`: they drift a little, and the robot would
-   creep. In `teleopPeriodic()`, declare the `DEADBAND` constant (see above) and use an `if`
-   statement on `forward` and another on `turn`: if the absolute value is less than `DEADBAND`, set it
-   to `0.0`.
-5. **Drive exactly 2 meters, by yourself.** In `autonomousPeriodic()`, write an `if` / `else` on
-   `distanceMeters`: drive at `0.4` while the distance is below `2.0`, and stop otherwise. This is
-   called **bang-bang control**: the motors are fully on or fully off. Run Auto and look at where
-   the robot stops. Does it stop at exactly 2.0 m?
+1. **Right-side conversions.** In `Robot.java`, convert `rightMeters` and `rightMetersPerSecond` the
+   way the left side is already done.
+2. **Fill the three `TODO` lines in STEP 2:**
+   - `linearSpeed`: the average of the left and right speeds (m/s).
+   - `angularSpeed`: `(right - left) / Constants.TRACK_WIDTH_METERS` (rad/s, positive = turning left).
+   - `distanceMeters`: the average of the left and right distances.
+3. **Check them in AdvantageScope.** Drive forward, then spin in place, and watch the numbers.
+4. **Add a deadband.** In `teleopPeriodic()`, declare the `DEADBAND` constant and use an `if` on
+   `forward` and another on `turn`: if the absolute value is less than `DEADBAND`, set it to `0.0`.
+5. **Drive exactly 2 meters.** In `autonomousPeriodic()`, write an `if` / `else` on `distanceMeters`:
+   drive at `0.4` while it is below `2.0`, stop otherwise. Run Auto and see where the robot stops.
 6. **Click Verify** to check your work.
 
-## Think about it
-
-The robot almost certainly stops a little **past** 2.0 m. Why? When you cut the power, the robot is
-still moving. Bang-bang control cannot slow down smoothly. Later you will learn **PID control**,
-which is a smarter way to do the same job.
-
-The simulated encoders are a little imperfect, just like real ones, so your measured 2.0 m is
-not exactly 2.0 m of real driving. Sensors always have some error.
+Stuck on a step? Open **Dozer**: he can explain the idea or walk you through it.
 
 ## Bonus challenges
 
@@ -113,11 +64,3 @@ not exactly 2.0 m of real driving. Sensors always have some error.
 - Drive at `0.2` instead of `0.4`. How far past 2.0 m does it stop now?
 - Log the speed of each side separately (`Robot/LeftSpeed`, `Robot/RightSpeed`).
 
-## Words to know
-
-- **Encoder:** a sensor that counts how far something has turned.
-- **Feedback:** using what a sensor says to decide what to do next.
-- **Bang-bang control:** full power or no power, based on whether you have reached a target.
-- **Condition:** a true-or-false question that an `if` statement checks.
-- **Constant:** a named value that never changes.
-- **Deadband:** a small zone around zero that is treated as zero.

@@ -1,21 +1,14 @@
 # Classes & Objects
 
-:::tip[Read this first: Classes and Objects]
-
-The team docs page for this lesson is the best place to learn the ideas
-before you write any code: [Classes and
-Objects](https://frc-team-4143.github.io/docs/software/java/classes-objs) -
-Classes, Objects, the Example, and Access Modifiers (why `protected`) map
-directly onto this lesson. Come back here when you're ready to apply it. If
-a step below feels unfamiliar, that page is where to look first.
-
-:::
+> **New to an idea here?** Press the **Dozer** button in the top bar. His guides explain each idea this lesson uses, and **I'm so lost → Teach me, step by step** walks you through every job.
 
 This lesson builds a small `BankAccount` class instead of the docs page's
 `MotorController` example - same ideas (fields, a constructor,
 encapsulation), a different object. Fill in `src/BankAccount.java`;
 `src/Main.java` already creates a couple of accounts and moves money
 between them, so click **Run** any time to see it in action.
+
+More depth: the team docs page [Classes & Objects](https://frc-team-4143.github.io/docs/software/java/classes-objs).
 
 ## What you need to do
 

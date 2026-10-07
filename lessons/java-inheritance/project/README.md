@@ -1,36 +1,10 @@
 # Inheritance
 
-:::tip[Read this first: Inheritance]
-
-The team docs cover this in the Inheritance section of [Classes and
-Objects](https://frc-team-4143.github.io/docs/software/java/classes-objs#inheritance).
-Read it first - it explains `extends`, `super`, and overriding with the same
-ideas you'll use here. The [Programming
-Standards](https://frc-team-4143.github.io/docs/software/java/standards)
-page has the naming rules (like `trailing_snake_case_` fields) this lesson
-follows.
-
-:::
+> **New to an idea here?** Press the **Dozer** button in the top bar. His guides explain each idea this lesson uses, and **I'm so lost → Teach me, step by step** walks you through every job.
 
 This lesson extends the `BankAccount` class you built in Classes & Objects
 - it's given to you complete in `src/BankAccount.java` this time, because
 this lesson is about building *on top of* a class, not rewriting it.
-
-## What inheritance is
-
-`class SavingsAccount extends BankAccount` means every `SavingsAccount`
-*is a* `BankAccount` - it automatically has `owner_`, `balance_`,
-`deposit`, `withdraw`, `getBalance`, and `transfer`, without you retyping
-any of it. A subclass can do two things with what it inherits:
-
-- **Add** something new (a field, a method) that the parent didn't have -
-  `SavingsAccount.applyInterest()` below.
-- **Override** a method the parent already has, replacing its behavior for
-  this subclass specifically - `CheckingAccount.withdraw()` below.
-
-A subclass's constructor has to call the parent's constructor first (with
-`super(...)`) to set up the fields it inherited, before touching anything
-of its own.
 
 ## What you need to do
 

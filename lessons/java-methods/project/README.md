@@ -1,21 +1,14 @@
 # Methods
 
-:::tip[Read this first: Methods]
-
-The team docs page for this lesson is the best place to learn the ideas
-before you write any code:
-[Methods](https://frc-team-4143.github.io/docs/software/java/methods) -
-Method Syntax, Parameters, and Return are all in play; the Lambdas section
-is bonus. Come back here when you're ready to apply it. If a step below
-feels unfamiliar, that page is where to look first.
-
-:::
+> **New to an idea here?** Press the **Dozer** button in the top bar. His guides explain each idea this lesson uses, and **I'm so lost → Teach me, step by step** walks you through every job.
 
 All the code lives in `src/Main.java`. Unlike earlier lessons, no method
 bodies are given to fill in - you write the full declaration yourself:
 modifiers, return type, name, and parameter list. `main` is empty too;
 call your methods from there to try them out, the same way you tested code
 directly in `main` in previous lessons.
+
+More depth: the team docs page [Methods](https://frc-team-4143.github.io/docs/software/java/methods).
 
 ## What you need to do
 

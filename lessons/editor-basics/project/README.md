@@ -9,17 +9,6 @@ program.
 walk you through each part below, one step at a time, right on your screen. Pick any guide and
 do what he says. You can't break anything.
 
-## Words you'll hear
-
-- **File**: one saved thing on the computer, like a photo, a song, or a piece of code. Every file
-  has a name, like `notes.txt`.
-- **Folder**: a place that holds files (and other folders), like a drawer. It keeps things
-  organized.
-- **Project**: one folder with everything for a program inside it. The editor opened yours for you.
-- **Explorer**: the list on the left that shows the files and folders in your project.
-- **Terminal**: a place where you give the computer instructions by typing instead of clicking.
-- **Save**: write what you typed into the file so it's kept. Press **Ctrl+S**.
-
 ## Your five jobs
 
 Each one is a **checkpoint**. Open the lesson chip at the top and press **Verify** when you've

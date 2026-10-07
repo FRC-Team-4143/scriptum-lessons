@@ -6,6 +6,8 @@ Make a robot drive. You will read the controller sticks and turn them into motor
 
 Companion docs page: [Motors and Drivetrains](https://docs.marswars.org/docs/software/training/motors-drivetrains)
 
+> **New to an idea here?** Press the **Dozer** button in the top bar. His guides explain each idea this lesson uses, and **I'm so lost → Teach me, step by step** walks you through every job.
+
 ## How this project is set up
 
 Your robot code uses **MWLib**, the MARS/WARS robot library. It already knows how to talk to the
@@ -17,45 +19,6 @@ directly. Instead you tell the drivetrain what you want.
 - The drivetrain is the `drive` object in `Robot.java`. The one thing you need from it is
   `drive.setDutyCycles(left, right)`.
 - The controller is the `controller` object. It can tell you how far each stick is pushed.
-
-## Java you will learn in this lesson
-
-**1. Methods are things you can ask an object to do.** You *call* a method by writing the object's
-name, a dot, the method's name, and parentheses:
-
-```java
-controller.getLeftY()
-```
-
-asks the controller "how far is the left stick pushed up or down?" The answer is a number between
-`-1.0` and `1.0`. Some methods need information, which goes inside the parentheses:
-
-```java
-drive.setDutyCycles(0.5, 0.5)
-```
-
-tells the drive to run both sides at half power. Every statement ends with a semicolon (`;`).
-`//` starts a comment: a note for people that Java ignores.
-
-**2. Variables are named boxes that hold a value.** To make one, write its *type*, a name, `=`, and a
-value:
-
-```java
-double speed = 0.5;
-```
-
-`double` is the type for numbers with a decimal point. After that, you can use `speed` anywhere you
-could use `0.5`. You can store the answer from a method call in a variable too:
-
-```java
-double stickUp = controller.getLeftY();
-```
-
-**3. Operators do math.** `+`, `-`, `*` and `/` add, subtract, multiply and divide. A minus sign in
-front of a value flips its sign: `-speed` is the opposite of `speed`.
-
-`teleopPeriodic()` runs about 50 times a second while the robot is enabled in teleop. Each time, it
-runs your lines from top to bottom.
 
 ## Running it
 
@@ -84,24 +47,20 @@ Go slower on anything that is new. Finishing every bonus is not expected.
 
 Everything here is code **you write** in `teleopPeriodic()`. Run it after each step.
 
-1. **Tank drive.** Declare two `double` variables, `leftSpeed` and `rightSpeed`. Set `leftSpeed` from
-   the left stick (`controller.getLeftY()`) and `rightSpeed` from the right stick
-   (`controller.getRightY()`). Pushing a stick forward gives a **negative** number, so put a minus sign
-   in front to flip it. Finish with `drive.setDutyCycles(leftSpeed, rightSpeed);`.
-   Run it: **W / S** moves the left side and **Arrow Up / Arrow Down** moves the right side.
-   Push one side forward and one back to spin in place.
-2. **Switch to arcade drive.** Tank drive uses two sticks. **Arcade drive** uses one stick to go forward
-   and another to turn, which is how most drivers prefer it. Replace your code so that you:
-   - declare `forward` and set it from the **left stick Y** (still with the minus sign),
-   - declare `turn` and set it from the **right stick X** (`controller.getRightX()`),
-   - declare `leftSpeed` and `rightSpeed` using arithmetic: `leftSpeed = forward + turn` and
-     `rightSpeed = forward - turn`,
+1. **Tank drive.** Declare `double leftSpeed` from the left stick (`controller.getLeftY()`) and
+   `double rightSpeed` from the right stick (`controller.getRightY()`), each with a minus sign in
+   front. Finish with `drive.setDutyCycles(leftSpeed, rightSpeed);`.
+   Run it: **W / S** drives the left side, **Arrow Up / Down** the right side.
+2. **Arcade drive.** Replace your code so that you:
+   - declare `forward` from the **left stick Y** (still with the minus sign),
+   - declare `turn` from the **right stick X** (`controller.getRightX()`),
+   - set `leftSpeed = forward + turn` and `rightSpeed = forward - turn`,
    - call `drive.setDutyCycles(leftSpeed, rightSpeed);`.
 
-   Run it. **W** drives forward, **S** drives backward, and **Arrow Left / Right** spin the robot in
-   place. If it turns the wrong way, check your signs. (The motors cap at `-1.0` to `1.0`, so very big
-   sticks will clip.)
+   Run it: **W / S** drive, **Arrow Left / Right** turn. If it turns the wrong way, check your signs.
 3. **Click Verify** to check your work.
+
+Stuck on a step? Open **Dozer**: he can explain the idea or walk you through it.
 
 ## Bonus challenges
 
@@ -112,9 +71,3 @@ Everything here is code **you write** in `teleopPeriodic()`. Run it after each s
   absolute value: `forward = forward * Math.abs(forward);`. (`Math.abs(x)` is a method that gives the
   size of `x` without its sign.)
 
-## Words to know
-
-- **Differential drive:** a drivetrain with a left side and a right side, steered by running the
-  sides at different speeds.
-- **Duty cycle:** how much of the battery voltage the motor gets, from `-1.0` to `1.0`.
-- **Method / variable / operator:** see the Java section above.
