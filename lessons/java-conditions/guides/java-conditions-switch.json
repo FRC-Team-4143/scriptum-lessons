@@ -6,7 +6,10 @@
 	"steps": [
 		{
 			"title": "switch",
-			"say": "When you're comparing **one** value against a list of exact options, `switch` is cleaner than a long if chain.",
+			"say": {
+				"never": "When you're checking **one** value against a list of exact choices, a `switch` is neater than a long `if` chain. Read it like a menu: \"if the mode is 1, say Tank. If it's 2, say Arcade. For anything else, say Unknown.\" `default` is the \"anything else\" choice.",
+				"bit": "When you're comparing **one** value against a list of exact options, `switch` is cleaner than a long if chain."
+			},
 			"board": {
 				"code": "switch (mode) {\n    case 1:\n        return \"Tank\";\n    case 2:\n        return \"Arcade\";\n    default:\n        return \"Unknown mode\";\n}",
 				"marks": [
@@ -27,7 +30,10 @@
 		},
 		{
 			"title": "break",
-			"say": "With `return` each case leaves the method. Without it, cases fall through into the next one, so you end them with `break`.",
+			"say": {
+				"never": "Here each case uses `return`, which leaves the method right away. If you don't `return`, Java keeps running into the *next* case, which surprises people. So you end each case with `break`, which means \"stop, leave the switch\".",
+				"bit": "With `return` each case leaves the method. Without it, cases fall through into the next one, so you end them with `break`."
+			},
 			"board": {
 				"code": "switch (mode) {\n    case 1:\n        name = \"Tank\";\n        break;\n    case 2:\n        name = \"Arcade\";\n        break;\n}",
 				"marks": [
@@ -40,7 +46,10 @@
 		},
 		{
 			"title": "Open Main.java",
-			"say": "Press **Ctrl+P**, type `Main` and press Enter. Quick Open finds any file by name, so you never have to dig through folders.",
+			"say": {
+				"never": "Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `Main`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "Press **Ctrl+P**, type `Main` and press Enter. Quick Open finds any file by name, so you never have to dig through folders."
+			},
 			"open": [
 				"editor"
 			],
@@ -67,7 +76,10 @@
 		},
 		{
 			"title": "Find it",
-			"say": "It may be further down. Press **Ctrl+F**, type `public static String driveModeName` and press Enter to jump to it.",
+			"say": {
+				"never": "It may be further down. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `public static String driveModeName` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "It may be further down. Press **Ctrl+F**, type `public static String driveModeName` and press Enter to jump to it."
+			},
 			"target": {
 				"pane": "editor"
 			},
@@ -85,7 +97,10 @@
 		},
 		{
 			"title": "Your turn",
-			"say": "Write `driveModeName` with a switch.",
+			"say": {
+				"never": "Your turn! Write `driveModeName` using a `switch`, like the board. Don't forget the `default` at the end.",
+				"bit": "Write `driveModeName` with a switch."
+			},
 			"target": {
 				"pane": "editor",
 				"selector": ".view-lines .view-line",

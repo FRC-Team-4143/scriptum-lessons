@@ -262,10 +262,11 @@ describe("guides only point at things the lesson has", () => {
 	}
 });
 
-// The robot lessons are where most students have never programmed, so every step there is
+// The robot, Java and Hello World lessons are where students have never programmed, so every step there is
 // worded for them: a plain-language "never" version alongside the shorter original.
-describe("robot guides are worded for students who have never coded", () => {
-	for (const guide of index.concepts.filter((g) => g.id.startsWith("robot-") || g.id === "build-and-run")) {
+describe("guides for new programmers are worded for students who have never coded", () => {
+	const forBeginners = (g: Guide) => g.id.startsWith("robot-") || g.id.startsWith("java-") || g.id.startsWith("hello-world-") || g.id === "build-and-run";
+	for (const guide of index.concepts.filter(forBeginners)) {
 		test(guide.id, () => {
 			const { steps } = readJson(guide.path) as { steps: Step[] };
 			steps.forEach((step, i) => {

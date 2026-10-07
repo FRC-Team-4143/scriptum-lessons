@@ -64,7 +64,10 @@
 		},
 		{
 			"title": "Open Constants.java",
-			"say": "Press **Ctrl+P**, type `Constants` and press Enter. Quick Open finds any file by name, so you never have to dig through folders.",
+			"say": {
+				"never": "Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `Constants`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "Press **Ctrl+P**, type `Constants` and press Enter. Quick Open finds any file by name, so you never have to dig through folders."
+			},
 			"open": [
 				"editor"
 			],

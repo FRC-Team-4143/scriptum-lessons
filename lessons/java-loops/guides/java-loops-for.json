@@ -6,7 +6,10 @@
 	"steps": [
 		{
 			"title": "Three parts",
-			"say": "A `for` loop says where to start, when to keep going, and how to step.",
+			"say": {
+				"never": "A `for` loop repeats code, and it has three parts inside its parentheses. First **where to start** (`int i = 1`). Then **when to keep going** (`i <= n`). Then **how to step** (`i++` means add 1 each time). The code between the braces runs once for every value of `i`.",
+				"bit": "A `for` loop says where to start, when to keep going, and how to step."
+			},
 			"board": {
 				"code": "for (int i = 1; i <= n; i++) {\n    // runs with i = 1, 2, 3, ... n\n}",
 				"marks": [
@@ -27,7 +30,10 @@
 		},
 		{
 			"title": "Off by one",
-			"say": "The most common loop bug: `<` vs `<=`.",
+			"say": {
+				"never": "The classic loop mistake is `<` versus `<=`. `i < n` stops *before* n, so it misses the last number. `i <= n` includes n. If your answer is always off by one, check this first.",
+				"bit": "The most common loop bug: `<` vs `<=`."
+			},
 			"board": {
 				"code": "for (int i = 1; i < n; i++)   // 1 .. n-1  (misses n)\nfor (int i = 1; i <= n; i++)  // 1 .. n",
 				"marks": [
@@ -44,7 +50,10 @@
 		},
 		{
 			"title": "No while loops",
-			"say": "Team standard: use `for`, not `while`. A `while` loop that never ends freezes a robot. A `for` loop makes you write the ending up front."
+			"say": {
+				"never": "Our team uses `for` loops and avoids `while` loops. A `while` loop that never ends can freeze a robot. A `for` loop makes you say where it ends right at the start, which keeps you safe.",
+				"bit": "Team standard: use `for`, not `while`. A `while` loop that never ends freezes a robot. A `for` loop makes you write the ending up front."
+			}
 		}
 	],
 	"kind": "concept"

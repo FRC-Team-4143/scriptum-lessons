@@ -6,7 +6,10 @@
 	"steps": [
 		{
 			"title": "Two parts",
-			"say": "A recursive method calls itself on a smaller input until it reaches a case it can answer directly.",
+			"say": {
+				"never": "A **recursive** method is one that calls *itself* on a smaller version of the problem, until it reaches a case so small it can just answer. That small case is the **base case**. For factorial, `factorial(1)` is simply 1. Bigger numbers hand the work to a smaller call.",
+				"bit": "A recursive method calls itself on a smaller input until it reaches a case it can answer directly."
+			},
 			"board": {
 				"code": "public static int factorial(int n) {\n    if (n <= 1) {\n        return 1;\n    }\n    return n * factorial(n - 1);\n}",
 				"marks": [
@@ -27,7 +30,10 @@
 		},
 		{
 			"title": "Trace it",
-			"say": "Each call waits for the smaller one to finish, then multiplies.",
+			"say": {
+				"never": "Trace it like unwrapping nested boxes. `factorial(3)` says \"I'm 3 times whatever `factorial(2)` is\". That one says \"I'm 2 times `factorial(1)`\". `factorial(1)` just answers 1, and now every waiting call can finish, multiplying as the answers come back.",
+				"bit": "Each call waits for the smaller one to finish, then multiplies."
+			},
 			"board": {
 				"code": "factorial(3)\n= 3 * factorial(2)\n= 3 * (2 * factorial(1))\n= 3 * (2 * 1)\n= 6",
 				"marks": [
@@ -40,7 +46,10 @@
 		},
 		{
 			"title": "Splitting a number",
-			"say": "For digits: `% 10` is the last digit, `/ 10` is everything before it.",
+			"say": {
+				"never": "To work with the digits of a number: `% 10` gives you the **last digit**, and `/ 10` gives you **everything before it**. So the sum of the digits of 472 is 2 plus the sum of the digits of 47. Each call peels off one digit.",
+				"bit": "For digits: `% 10` is the last digit, `/ 10` is everything before it."
+			},
 			"board": {
 				"code": "sumDigits(472)\n= 2 + sumDigits(47)\n= 2 + (7 + sumDigits(4))\n= 2 + 7 + 4 = 13",
 				"marks": [
@@ -53,7 +62,10 @@
 		},
 		{
 			"title": "Open Main.java",
-			"say": "Press **Ctrl+P**, type `Main` and press Enter. Quick Open finds any file by name, so you never have to dig through folders.",
+			"say": {
+				"never": "Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `Main`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "Press **Ctrl+P**, type `Main` and press Enter. Quick Open finds any file by name, so you never have to dig through folders."
+			},
 			"open": [
 				"editor"
 			],
@@ -80,7 +92,10 @@
 		},
 		{
 			"title": "Find it",
-			"say": "It may be further down. Press **Ctrl+F**, type `write a method named factorial` and press Enter to jump to it.",
+			"say": {
+				"never": "It may be further down. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `write a method named factorial` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "It may be further down. Press **Ctrl+F**, type `write a method named factorial` and press Enter to jump to it."
+			},
 			"target": {
 				"pane": "editor"
 			},
@@ -98,7 +113,10 @@
 		},
 		{
 			"title": "Your turn",
-			"say": "Write `factorial` here: base case first.",
+			"say": {
+				"never": "Your turn! Write `factorial`. Write the **base case first**: the answer for the smallest input. Then the recursive part, which calls `factorial(n - 1)`.",
+				"bit": "Write `factorial` here: base case first."
+			},
 			"target": {
 				"pane": "editor",
 				"selector": ".view-lines .view-line",

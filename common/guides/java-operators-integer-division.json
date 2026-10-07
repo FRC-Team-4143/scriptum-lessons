@@ -6,7 +6,10 @@
 	"steps": [
 		{
 			"title": "Whole numbers only",
-			"say": "When both sides of `/` are `int`s, Java does **integer division** and throws away the remainder.",
+			"say": {
+				"never": "Careful, this surprises everyone! When *both* numbers in a division are whole numbers (`int`), Java gives a whole-number answer and just throws away the leftover. So `5 / 2` is **2**, not 2.5. To get 2.5, make at least one side a decimal: `5 / 2.0`.",
+				"bit": "When both sides of `/` are `int`s, Java does **integer division** and throws away the remainder."
+			},
 			"board": {
 				"code": "int a = 5 / 2;        // 2, not 2.5\ndouble b = 5 / 2;     // still 2.0!\ndouble c = 5 / 2.0;   // 2.5\ndouble d = (double) 5 / 2;  // 2.5",
 				"marks": [
@@ -31,7 +34,10 @@
 		},
 		{
 			"title": "Where it bites",
-			"say": "Averages are the classic trap: a total of whole numbers divided by a count. Make one side a `double` before dividing."
+			"say": {
+				"never": "This catches people most when finding an **average**: a total of whole numbers divided by a count of whole numbers. Make one side a `double` (a decimal number) before you divide, and the answer keeps its decimals.",
+				"bit": "Averages are the classic trap: a total of whole numbers divided by a count. Make one side a `double` before dividing."
+			}
 		}
 	],
 	"kind": "concept"

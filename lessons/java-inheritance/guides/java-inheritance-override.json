@@ -6,7 +6,10 @@
 	"steps": [
 		{
 			"title": "Replace, don't add",
-			"say": "`@Override` says this method **replaces** the parent's version. Everything else (deposit, transfer) still works as before.",
+			"say": {
+				"never": "`@Override` means \"this method **replaces** the parent's version\". A checking account has different withdrawing rules (it allows an overdraft), so it writes its own `withdraw`. Everything else, like `deposit` and `transfer`, still works exactly as before.",
+				"bit": "`@Override` says this method **replaces** the parent's version. Everything else (deposit, transfer) still works as before."
+			},
 			"board": {
 				"code": "@Override\npublic boolean withdraw(double amount) {\n    if (amount <= 0 || balance_ - amount < -overdraft_limit_) {\n        return false;\n    }\n    balance_ -= amount;\n    return true;\n}",
 				"marks": [
@@ -23,7 +26,10 @@
 		},
 		{
 			"title": "It just works",
-			"say": "`transfer` was written in BankAccount, but on a checking account it calls the **overridden** withdraw. That's the power of inheritance.",
+			"say": {
+				"never": "Here's the clever part. `transfer` was written in `BankAccount`, long before checking accounts existed. But when you call it on a checking account, it uses the **overridden** `withdraw`. Java picks the version that belongs to the real object. That's the power of inheritance.",
+				"bit": "`transfer` was written in BankAccount, but on a checking account it calls the **overridden** withdraw. That's the power of inheritance."
+			},
 			"board": {
 				"code": "checking.transfer(savings, 120.0);  // uses CheckingAccount.withdraw",
 				"marks": [
@@ -36,7 +42,10 @@
 		},
 		{
 			"title": "Open CheckingAccount.java",
-			"say": "Press **Ctrl+P**, type `CheckingAccount` and press Enter. Quick Open finds any file by name, so you never have to dig through folders.",
+			"say": {
+				"never": "Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `CheckingAccount`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "Press **Ctrl+P**, type `CheckingAccount` and press Enter. Quick Open finds any file by name, so you never have to dig through folders."
+			},
 			"open": [
 				"editor"
 			],
@@ -63,7 +72,10 @@
 		},
 		{
 			"title": "Find it",
-			"say": "It may be further down. Press **Ctrl+F**, type `public class CheckingAccount` and press Enter to jump to it.",
+			"say": {
+				"never": "It may be further down. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `public class CheckingAccount` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "It may be further down. Press **Ctrl+F**, type `public class CheckingAccount` and press Enter to jump to it."
+			},
 			"target": {
 				"pane": "editor"
 			},
@@ -81,7 +93,10 @@
 		},
 		{
 			"title": "Same start",
-			"say": "First, `extends BankAccount` on this line, just like SavingsAccount.",
+			"say": {
+				"never": "Start the same way as `SavingsAccount`: add `extends BankAccount` to this line.",
+				"bit": "First, `extends BankAccount` on this line, just like SavingsAccount."
+			},
 			"target": {
 				"pane": "editor",
 				"selector": ".view-lines .view-line",
@@ -92,22 +107,34 @@
 		},
 		{
 			"title": "Your turn",
-			"say": "Write the constructor and the overriding `withdraw`.",
+			"say": {
+				"never": "Your turn! Write the constructor and the replacement `withdraw`. Put `@Override` on the line above `withdraw`.",
+				"bit": "Write the constructor and the overriding `withdraw`."
+			},
 			"waitFor": {
-				"hint": "build CheckingAccount."
+				"hint": {
+					"never": "build CheckingAccount.",
+					"bit": "build CheckingAccount."
+				}
 			},
 			"cardAt": "bottom-right",
 			"assist": true
 		},
 		{
 			"title": "Run it",
-			"say": "Click the **Run** button (▷) at the top right of the file. The output appears in the terminal at the bottom.",
+			"say": {
+				"never": "Click the **Run** button, the little triangle (▷) at the top right of the file. What your program prints appears in the terminal at the bottom.",
+				"bit": "Click the **Run** button (▷) at the top right of the file. The output appears in the terminal at the bottom."
+			},
 			"target": {
 				"pane": "editor"
 			},
 			"cardAt": "top-right",
 			"waitFor": {
-				"hint": "run the program and read the output."
+				"hint": {
+					"never": "run the program and read what it prints.",
+					"bit": "run the program and read the output."
+				}
 			},
 			"assist": true
 		}

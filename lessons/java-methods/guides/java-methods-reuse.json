@@ -6,7 +6,10 @@
 	"steps": [
 		{
 			"title": "Don't repeat yourself",
-			"say": "`scaleJoystick` needs the same range check `clamp` already does, so it **calls** clamp instead of copying it.",
+			"say": {
+				"never": "`scaleJoystick` needs the same range check that `clamp` already does. Instead of copying it, we **call** `clamp` from inside. Methods can use other methods, just like you can ask a friend for help instead of redoing their job.",
+				"bit": "`scaleJoystick` needs the same range check `clamp` already does, so it **calls** clamp instead of copying it."
+			},
 			"board": {
 				"code": "public static double scaleJoystick(double rawInput, double sensitivity) {\n    return clamp(rawInput * sensitivity, -1.0, 1.0);\n}",
 				"marks": [
@@ -23,7 +26,10 @@
 		},
 		{
 			"title": "Build on what you have",
-			"say": "A palindrome reads the same backwards, so: does it equal its own reverse?",
+			"say": {
+				"never": "A palindrome reads the same forwards and backwards, like \"racecar\". So the test is: *is the word equal to its own reverse?* We already wrote `reverseString`, so we just call it.",
+				"bit": "A palindrome reads the same backwards, so: does it equal its own reverse?"
+			},
 			"board": {
 				"code": "public static boolean isPalindrome(String s) {\n    return s.equals(reverseString(s));\n}",
 				"marks": [
@@ -40,7 +46,10 @@
 		},
 		{
 			"title": "Why it matters",
-			"say": "If the range check ever changes, you fix it in **one** place, and every caller gets the fix. That's the whole point of methods."
+			"say": {
+				"never": "If the range check ever needs to change, you fix it in **one** place and everything that calls it gets the fix. That's the big reason methods exist.",
+				"bit": "If the range check ever changes, you fix it in **one** place, and every caller gets the fix. That's the whole point of methods."
+			}
 		}
 	],
 	"kind": "concept"

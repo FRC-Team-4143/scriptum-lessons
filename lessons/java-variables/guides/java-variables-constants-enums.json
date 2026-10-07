@@ -6,7 +6,10 @@
 	"steps": [
 		{
 			"title": "A constant",
-			"say": "A constant is a value that never changes. `static` makes it belong to the class, so it's declared **outside** `main`.",
+			"say": {
+				"never": "A **constant** is a value that never changes, so it's marked `final`. `static` puts it on the class itself, so it must be written *outside* `main`, up near the top of the file. Capital letters with underscores tell every reader \"this one never changes\".",
+				"bit": "A constant is a value that never changes. `static` makes it belong to the class, so it's declared **outside** `main`."
+			},
 			"board": {
 				"code": "public static final double MAX_SPEED = 5.0;",
 				"marks": [
@@ -27,7 +30,10 @@
 		},
 		{
 			"title": "An enum",
-			"say": "An **enum** is a type you invent with a fixed list of values. A variable of that type can only hold one of them, so typos are impossible.",
+			"say": {
+				"never": "An **enum** is a type you invent yourself with a short, fixed list of allowed values. An `ALLIANCE` can only be `RED` or `BLUE`, and nothing else. If you misspell one, Java stops you right away, so typos can't sneak in.",
+				"bit": "An **enum** is a type you invent with a fixed list of values. A variable of that type can only hold one of them, so typos are impossible."
+			},
 			"board": {
 				"code": "enum ALLIANCE {\n    RED,\n    BLUE\n}\n\nALLIANCE ours = ALLIANCE.RED;",
 				"marks": [
@@ -48,7 +54,10 @@
 		},
 		{
 			"title": "Where they go",
-			"say": "Both enums go **inside** `Main`, next to the constants, because only `Main` uses them.",
+			"say": {
+				"never": "Put both enums **inside** `Main`, near the constants, because only `Main` uses them. Careful with the curly braces: each `{` needs its own `}`.",
+				"bit": "Both enums go **inside** `Main`, next to the constants, because only `Main` uses them."
+			},
 			"board": {
 				"code": "public class Main {\n    public static final String TEAM_NAME = \"Team 4143\";\n    enum ALLIANCE { RED, BLUE }\n\n    public static void main(String[] args) { ... }\n}",
 				"marks": [
@@ -65,7 +74,10 @@
 		},
 		{
 			"title": "Open Main.java",
-			"say": "Press **Ctrl+P**, type `Main` and press Enter. Quick Open finds any file by name, so you never have to dig through folders.",
+			"say": {
+				"never": "Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `Main`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "Press **Ctrl+P**, type `Main` and press Enter. Quick Open finds any file by name, so you never have to dig through folders."
+			},
 			"open": [
 				"editor"
 			],
@@ -92,7 +104,10 @@
 		},
 		{
 			"title": "Find it",
-			"say": "It may be further down. Press **Ctrl+F**, type `TEAM_NAME =` and press Enter to jump to it.",
+			"say": {
+				"never": "It may be further down. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `TEAM_NAME =` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "It may be further down. Press **Ctrl+F**, type `TEAM_NAME =` and press Enter to jump to it."
+			},
 			"target": {
 				"pane": "editor"
 			},
@@ -110,7 +125,10 @@
 		},
 		{
 			"title": "Your first TODO",
-			"say": "This line is waiting for its value. Put `\"Team 4143\"` between the quotes.",
+			"say": {
+				"never": "This line has a blank waiting to be filled. Put `\"Team 4143\"` between the double quotes. Don't forget the quotes, because it's text.",
+				"bit": "This line is waiting for its value. Put `\"Team 4143\"` between the quotes."
+			},
 			"target": {
 				"pane": "editor",
 				"selector": ".view-lines .view-line",
@@ -121,7 +139,10 @@
 		},
 		{
 			"title": "Find it",
-			"say": "It may be further down. Press **Ctrl+F**, type `define an enum named ALLIANCE` and press Enter to jump to it.",
+			"say": {
+				"never": "It may be further down. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `define an enum named ALLIANCE` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "It may be further down. Press **Ctrl+F**, type `define an enum named ALLIANCE` and press Enter to jump to it."
+			},
 			"target": {
 				"pane": "editor"
 			},
@@ -139,7 +160,10 @@
 		},
 		{
 			"title": "Your enum goes here",
-			"say": "Write `enum ALLIANCE { RED, BLUE }` under this comment.",
+			"say": {
+				"never": "Write the enum under this comment: `enum ALLIANCE { RED, BLUE }`. It's the same shape as the one on the board.",
+				"bit": "Write `enum ALLIANCE { RED, BLUE }` under this comment."
+			},
 			"target": {
 				"pane": "editor",
 				"selector": ".view-lines .view-line",

@@ -6,7 +6,10 @@
 	"steps": [
 		{
 			"title": "Combining",
-			"say": "`&&` is **and** (both true), `||` is **or** (at least one), `!` is **not** (flip it).",
+			"say": {
+				"never": "You can combine true/false questions. `&&` means **and** (both must be true). `||` means **or** (at least one is true). `!` means **not** and flips true to false. For example `hasComms && !eStopped` reads: \"we have comms AND we're not e-stopped\".",
+				"bit": "`&&` is **and** (both true), `||` is **or** (at least one), `!` is **not** (flip it)."
+			},
 			"board": {
 				"code": "hasComms && !eStopped    // comms AND not e-stopped\nday.equals(\"Saturday\") || day.equals(\"Sunday\")",
 				"marks": [
@@ -27,7 +30,10 @@
 		},
 		{
 			"title": "Comparing Strings",
-			"say": "Use `.equals(...)` for Strings, not `==`. `==` asks \"same object?\", which is usually not what you mean.",
+			"say": {
+				"never": "To check if two pieces of text match, use `.equals(...)`. The `==` sign doesn't compare the letters. It asks \"are these the very same object?\", which usually gives the wrong answer for text. So always write `day.equals(\"Sunday\")`.",
+				"bit": "Use `.equals(...)` for Strings, not `==`. `==` asks \"same object?\", which is usually not what you mean."
+			},
 			"board": {
 				"code": "day.equals(\"Sunday\")   // compares the text\nday == \"Sunday\"        // compares objects: unreliable",
 				"marks": [
@@ -40,7 +46,10 @@
 		},
 		{
 			"title": "Ternary",
-			"say": "`condition ? a : b` is a one-line if/else that **gives back a value**.",
+			"say": {
+				"never": "The **ternary** is a one-line shortcut for if/else that hands back a value. Read `isReversed ? \"REVERSED\" : \"FORWARD\"` as: \"if isReversed is true, give me REVERSED, otherwise give me FORWARD\".",
+				"bit": "`condition ? a : b` is a one-line if/else that **gives back a value**."
+			},
 			"board": {
 				"code": "return isReversed ? \"REVERSED\" : \"FORWARD\";",
 				"marks": [
@@ -61,7 +70,10 @@
 		},
 		{
 			"title": "Open Main.java",
-			"say": "Press **Ctrl+P**, type `Main` and press Enter. Quick Open finds any file by name, so you never have to dig through folders.",
+			"say": {
+				"never": "Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `Main`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "Press **Ctrl+P**, type `Main` and press Enter. Quick Open finds any file by name, so you never have to dig through folders."
+			},
 			"open": [
 				"editor"
 			],
@@ -88,7 +100,10 @@
 		},
 		{
 			"title": "Find it",
-			"say": "It may be further down. Press **Ctrl+F**, type `public static boolean canEnable` and press Enter to jump to it.",
+			"say": {
+				"never": "It may be further down. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `public static boolean canEnable` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "It may be further down. Press **Ctrl+F**, type `public static boolean canEnable` and press Enter to jump to it."
+			},
 			"target": {
 				"pane": "editor"
 			},
@@ -106,7 +121,10 @@
 		},
 		{
 			"title": "Your turn",
-			"say": "Each of these is one `return` line.",
+			"say": {
+				"never": "Your turn! Each of these is a single `return` line. Use `&&`, `||`, `!` or the ternary from the board.",
+				"bit": "Each of these is one `return` line."
+			},
 			"target": {
 				"pane": "editor",
 				"selector": ".view-lines .view-line",

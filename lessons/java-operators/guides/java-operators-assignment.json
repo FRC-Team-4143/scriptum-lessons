@@ -6,7 +6,10 @@
 	"steps": [
 		{
 			"title": "A shortcut",
-			"say": "`x += 1` means `x = x + 1`: take what's in x, add 1, store it back. The others work the same way.",
+			"say": {
+				"never": "`x += 1` is a shortcut for `x = x + 1`. It means: take what's in the box `x`, add 1, and put it back. The other three work the same way: `-=` subtracts, `*=` multiplies and `/=` divides.",
+				"bit": "`x += 1` means `x = x + 1`: take what's in x, add 1, store it back. The others work the same way."
+			},
 			"board": {
 				"code": "x += 1;   // x = x + 1\nx -= 0.14; // x = x - 0.14\nx *= 6;   // x = x * 6\nx /= 3;   // x = x / 3",
 				"marks": [
@@ -23,7 +26,10 @@
 		},
 		{
 			"title": "Trace it",
-			"say": "Follow x through applyAssignments(1.0), one line at a time.",
+			"say": {
+				"never": "Trace it like a detective: follow `x` one line at a time and write down what's in the box after each step. It starts at 1.0, grows to 2.0, shrinks to 1.86, then gets multiplied and divided. The comments show the box after every line.",
+				"bit": "Follow x through applyAssignments(1.0), one line at a time."
+			},
 			"board": {
 				"code": "double x = start;  // 1.0\nx += 1;            // 2.0\nx -= 0.14;         // 1.86\nx *= 6;            // 11.16\nx /= 3;            // 3.72\nreturn x;",
 				"marks": [
@@ -40,7 +46,10 @@
 		},
 		{
 			"title": "Open Main.java",
-			"say": "Press **Ctrl+P**, type `Main` and press Enter. Quick Open finds any file by name, so you never have to dig through folders.",
+			"say": {
+				"never": "Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `Main`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "Press **Ctrl+P**, type `Main` and press Enter. Quick Open finds any file by name, so you never have to dig through folders."
+			},
 			"open": [
 				"editor"
 			],
@@ -67,7 +76,10 @@
 		},
 		{
 			"title": "Find applyAssignments",
-			"say": "It's near the bottom of the file. Press **Ctrl+F**, type `applyAssignments` and press Enter to jump to it.",
+			"say": {
+				"never": "It's near the bottom of the file. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `applyAssignments` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "It's near the bottom of the file. Press **Ctrl+F**, type `applyAssignments` and press Enter to jump to it."
+			},
 			"target": {
 				"pane": "editor"
 			},
@@ -85,7 +97,10 @@
 		},
 		{
 			"title": "Your turn",
-			"say": "Write the five lines in `applyAssignments`, one operator each.",
+			"say": {
+				"never": "Your turn! Write the five lines inside `applyAssignments`, one operator per line, in the order shown on the board.",
+				"bit": "Write the five lines in `applyAssignments`, one operator each."
+			},
 			"target": {
 				"pane": "editor",
 				"selector": ".view-lines .view-line",

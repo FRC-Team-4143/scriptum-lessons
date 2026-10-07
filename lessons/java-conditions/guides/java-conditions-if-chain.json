@@ -6,7 +6,10 @@
 	"steps": [
 		{
 			"title": "A chain",
-			"say": "Java checks each condition top to bottom and runs the **first** one that's true. The rest are skipped.",
+			"say": {
+				"never": "An `if ... else if ... else` chain is a list of questions. Java asks them from top to bottom and stops at the **first** one that's true, then skips all the rest. The final `else` catches everything that didn't match.",
+				"bit": "Java checks each condition top to bottom and runs the **first** one that's true. The rest are skipped."
+			},
 			"board": {
 				"code": "if (percent == 0) {\n    return \"EMPTY\";\n} else if (percent < 50) {\n    return \"LOW\";\n} else if (percent < 90) {\n    return \"MEDIUM\";\n} else {\n    return \"FULL\";\n}",
 				"marks": [
@@ -27,7 +30,10 @@
 		},
 		{
 			"title": "Order matters",
-			"say": "Swap the first two and `EMPTY` can never happen: 0 is already less than 50.",
+			"say": {
+				"never": "The order of the questions matters! If you ask \"is it less than 50?\" first, then 0 gets caught there (0 *is* less than 50), and the `EMPTY` question never gets asked. Always put the most specific question first.",
+				"bit": "Swap the first two and `EMPTY` can never happen: 0 is already less than 50."
+			},
 			"board": {
 				"code": "if (percent < 50) {\n    return \"LOW\";        // 0 lands here\n} else if (percent == 0) {\n    return \"EMPTY\";      // never reached\n}",
 				"marks": [
@@ -40,7 +46,10 @@
 		},
 		{
 			"title": "Boundaries",
-			"say": "Test exactly at the edges: is 50 LOW or MEDIUM? `< 50` means 50 is MEDIUM. `<= 50` would make it LOW.",
+			"say": {
+				"never": "Always test the edges, the exact numbers where the answer changes. Is 50 LOW or MEDIUM? With `< 50`, the number 50 is *not* less than 50, so it's MEDIUM. If you wrote `<= 50`, 50 would be LOW. The board lists the answers we expect.",
+				"bit": "Test exactly at the edges: is 50 LOW or MEDIUM? `< 50` means 50 is MEDIUM. `<= 50` would make it LOW."
+			},
 			"board": {
 				"code": "batteryStatus(0)   // EMPTY\nbatteryStatus(49)  // LOW\nbatteryStatus(50)  // MEDIUM\nbatteryStatus(90)  // FULL",
 				"marks": [
@@ -53,7 +62,10 @@
 		},
 		{
 			"title": "Open Main.java",
-			"say": "Press **Ctrl+P**, type `Main` and press Enter. Quick Open finds any file by name, so you never have to dig through folders.",
+			"say": {
+				"never": "Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `Main`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "Press **Ctrl+P**, type `Main` and press Enter. Quick Open finds any file by name, so you never have to dig through folders."
+			},
 			"open": [
 				"editor"
 			],
@@ -80,7 +92,10 @@
 		},
 		{
 			"title": "Find it",
-			"say": "It may be further down. Press **Ctrl+F**, type `public static String batteryStatus` and press Enter to jump to it.",
+			"say": {
+				"never": "It may be further down. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `public static String batteryStatus` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "It may be further down. Press **Ctrl+F**, type `public static String batteryStatus` and press Enter to jump to it."
+			},
 			"target": {
 				"pane": "editor"
 			},
@@ -98,7 +113,10 @@
 		},
 		{
 			"title": "Your turn",
-			"say": "Write the chain in `batteryStatus`.",
+			"say": {
+				"never": "Your turn! Write the chain inside `batteryStatus`. Ask the most specific question first, just like the board.",
+				"bit": "Write the chain in `batteryStatus`."
+			},
 			"target": {
 				"pane": "editor",
 				"selector": ".view-lines .view-line",
