@@ -55,6 +55,27 @@
 		{
 			"title": "Where they go",
 			"say": {
+				"never": "Put an enum **inside the class** that uses it, near the constants at the top. Careful with the curly braces: each `{` needs its own `}`. In this garage program, the `Light` enum sits next to the constant, above the methods.",
+				"bit": "Declare enums inside the class that uses them, next to the constants. Match every `{` with a `}`."
+			},
+			"board": {
+				"code": "public class Garage {\n    public static final int SPOTS = 12;\n    enum Light { GREEN, RED }\n\n    public static void main(String[] args) { ... }\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "enum Light { GREEN, RED }",
+						"label": "inside the class, next to constants"
+					},
+					{
+						"text": "public static void main",
+						"label": "the program starts here"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Where they go",
+			"say": {
 				"never": "Put both enums **inside** `Main`, near the constants, because only `Main` uses them. Careful with the curly braces: each `{` needs its own `}`.",
 				"bit": "Both enums go **inside** `Main`, next to the constants, because only `Main` uses them."
 			},
@@ -70,7 +91,8 @@
 						"label": "not inside main"
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Open Main.java",

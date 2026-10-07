@@ -7,6 +7,23 @@
 		{
 			"title": "One place for the controls",
 			"say": {
+				"never": "`OI` stands for **Operator Interface**, which is just a fancy name for \"the controls\". This class is the only place that knows about the gamepad. The rest of the robot asks it questions like \"how far forward is the driver pushing?\" and never cares which stick that comes from. Nobody ever makes a new OI, and its methods are `static`, so you call them on the class itself.",
+				"bit": "OI (Operator Interface) is the one class that knows about the gamepad. The rest of the robot asks it questions through static methods."
+			},
+			"board": {
+				"code": "robot code  ->  \"how hard is the driver pushing forward?\"  ->  OI  ->  reads the gamepad\n\nOnly OI knows which stick that is.",
+				"language": "text",
+				"marks": [
+					{
+						"text": "OI",
+						"label": "the only class that touches the gamepad"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: One place for the controls",
+			"say": {
 				"never": "`OI` stands for **Operator Interface**, which is just a fancy name for \"the controls\". This class is the only place that knows about the gamepad. The rest of the robot asks it questions like \"how far forward is the driver pushing?\" and never cares which stick that comes from. `static` means you call it on the class itself, as `OI.getForward()`. Nobody ever makes a new OI.",
 				"bit": "`OI` (Operator Interface) owns the controller and answers questions about it. The rest of the robot never cares which stick is which."
 			},
@@ -26,8 +43,9 @@
 						"label": "the minus lives here now"
 					}
 				]
-			}
+			},
+			"assist": true
 		}
 	],
-	"kind": "concept"
+	"kind": "mixed"
 }

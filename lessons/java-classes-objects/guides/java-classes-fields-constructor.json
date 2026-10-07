@@ -7,6 +7,27 @@
 		{
 			"title": "Fields",
 			"say": {
+				"never": "**Fields** are the variables that belong to an object, the facts it remembers. A playlist remembers its name and how many songs it has. Each object gets its own copy, so two playlists never share a song count. On our team, field names end with an underscore `_` so you can tell them from ordinary variables.",
+				"bit": "Fields are an object's own variables (each object gets its own copy). Team style: end field names with `_`."
+			},
+			"board": {
+				"code": "public class Playlist {\n    protected String name_;\n    protected int songCount_;\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "protected",
+						"label": "fields belong to the object"
+					},
+					{
+						"text": "songCount_",
+						"label": "its own count, not shared"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Fields",
+			"say": {
 				"never": "**Fields** are the variables that belong to an object, the facts it remembers, like an account's owner and balance. Each object gets its own copy. On our team, field names end with an underscore `_` so you can tell them from ordinary variables.",
 				"bit": "Fields are an object's own variables. Team standard: field names end in `_`."
 			},
@@ -22,10 +43,32 @@
 						"label": "trailing underscore: it's a field"
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "The constructor",
+			"say": {
+				"never": "The **constructor** is a special method that runs when you write `new`. It has the same name as the class and no return type. Its job is to give every field a starting value. Here, a negative starting count is replaced by 0, so a playlist can never begin broken.",
+				"bit": "The constructor runs on `new`, has the class's name and no return type, and sets every field to a valid start."
+			},
+			"board": {
+				"code": "public Playlist(String name, int starting_songs) {\n    name_ = name;\n    songCount_ = starting_songs < 0 ? 0 : starting_songs;\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "public Playlist(",
+						"label": "same name as the class"
+					},
+					{
+						"text": "starting_songs < 0 ? 0",
+						"label": "never starts broken"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: The constructor",
 			"say": {
 				"never": "The **constructor** is a special method that runs when you write `new`. It has the same name as the class and no return type. Its job is to give every field a starting value. Here, a negative starting balance is replaced by 0, so an account can never begin broken.",
 				"bit": "The constructor runs on `new`. It has the class's name and no return type, and it sets every field."
@@ -42,7 +85,8 @@
 						"label": "never start negative"
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Open BankAccount.java",

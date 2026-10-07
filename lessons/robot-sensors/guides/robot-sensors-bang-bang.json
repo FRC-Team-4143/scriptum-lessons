@@ -7,6 +7,27 @@
 		{
 			"title": "Bang-bang",
 			"say": {
+				"never": "**Bang-bang** is the simplest way to reach a target: full effort until you're there, then stop completely. It's like a thermostat: the heater is either on or off, nothing in between. In code that's an `if` that checks the measurement, and an `else` for stopping.",
+				"bit": "Bang-bang control: full power below the target, none at or above it (a thermostat)."
+			},
+			"board": {
+				"code": "if (roomTemp < 20.0) {\n    heater.turnOn();\n} else {\n    heater.turnOff();\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "roomTemp < 20.0",
+						"label": "compare to the target"
+					},
+					{
+						"text": "heater.turnOff()",
+						"label": "nothing in between"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Bang-bang",
+			"say": {
 				"never": "**Bang-bang** is the simplest way to drive a set distance: go at one speed until you've arrived, then stop completely. It's like a light switch, only on or off, nothing in between. In code that's an `if` that checks the distance, and an `else` for stopping.",
 				"bit": "Full power until you're there, then nothing. That's **bang-bang control**."
 			},
@@ -22,7 +43,8 @@
 						"label": "there: stop"
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Open Robot.java",

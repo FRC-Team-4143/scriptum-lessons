@@ -7,6 +7,27 @@
 		{
 			"title": "Don't repeat yourself",
 			"say": {
+				"never": "`cubeOf` needs the same squaring that `squareOf` already does. Instead of copying it, we **call** `squareOf` from inside. Methods can use other methods, just like you can ask a friend for help instead of redoing their job.",
+				"bit": "`cubeOf` calls `squareOf` instead of repeating its code."
+			},
+			"board": {
+				"code": "public static double cubeOf(double side) {\n    return side * squareOf(side);\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "squareOf(side)",
+						"label": "calling another method"
+					},
+					{
+						"text": "side *",
+						"label": "then a little more math"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Don't repeat yourself",
+			"say": {
 				"never": "`scaleJoystick` needs the same range check that `clamp` already does. Instead of copying it, we **call** `clamp` from inside. Methods can use other methods, just like you can ask a friend for help instead of redoing their job.",
 				"bit": "`scaleJoystick` needs the same range check `clamp` already does, so it **calls** clamp instead of copying it."
 			},
@@ -22,10 +43,32 @@
 						"label": "reuse the method you wrote"
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Build on what you have",
+			"say": {
+				"never": "Build on what you have. `greetLoudly` doesn't write its own shouting code. It builds a greeting and hands it to `shout`, which we already wrote. Small methods that do one job become building blocks for bigger ones.",
+				"bit": "Build bigger methods from small ones: `greetLoudly` reuses `shout`."
+			},
+			"board": {
+				"code": "public static String shout(String text) {\n    return text.toUpperCase() + \"!\";\n}\n\npublic static String greetLoudly(String name) {\n    return shout(\"hello \" + name);\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "shout(\"hello \" + name)",
+						"label": "reusing shout"
+					},
+					{
+						"text": "text.toUpperCase()",
+						"label": "one small job"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Build on what you have",
 			"say": {
 				"never": "A palindrome reads the same forwards and backwards, like \"racecar\". So the test is: *is the word equal to its own reverse?* We already wrote `reverseString`, so we just call it.",
 				"bit": "A palindrome reads the same backwards, so: does it equal its own reverse?"
@@ -42,7 +85,8 @@
 						"label": "compare the text"
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Why it matters",
@@ -52,5 +96,5 @@
 			}
 		}
 	],
-	"kind": "concept"
+	"kind": "mixed"
 }

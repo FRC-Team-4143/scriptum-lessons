@@ -8,19 +8,20 @@
 		{
 			"title": "A button is true or false",
 			"say": {
-				"never": "A button can only be two things: held (**true**) or not held (**false**). A method that answers yes or no is written with `boolean`. You don't have to figure out whether the button is held. The controller already knows. You just ask it with `getRightBumperButton()`.",
-				"bit": "Holding a button makes it **true**; letting go makes it **false**. A method that answers a yes/no question returns a `boolean`. The controller already knows the answer. You just ask it."
+				"never": "A button can only be two things: held (**true**) or not held (**false**). A method that answers a yes/no question is written with `boolean`. For example a door sensor can answer \"is the door open?\" with `true` or `false`. A controller button answers the same kind of question.",
+				"bit": "A yes/no question is a `boolean`: true or false, like a door sensor or a button."
 			},
 			"board": {
-				"code": "public static boolean getShootButton() {\n    return driverController.getRightBumperButton();\n}",
+				"code": "boolean doorOpen = sensor.isDoorOpen();   // true or false\nif (doorOpen) {\n    // do something\n}",
+				"language": "java",
 				"marks": [
 					{
 						"text": "boolean",
 						"label": "true or false, nothing in between"
 					},
 					{
-						"text": "getRightBumperButton()",
-						"label": "the controller answers: is it held right now?"
+						"text": "if (doorOpen)",
+						"label": "use the answer"
 					}
 				]
 			}

@@ -27,6 +27,27 @@
 		{
 			"title": "A command",
 			"say": {
+				"never": "`startEnd` builds a command out of two notes. The first lambda runs when the command **starts** (here: turn the lights on). The second runs when it **ends** (turn them off). When you let go of the button, the command ends.",
+				"bit": "`Commands.startEnd(start, end, requirements)` runs one lambda when the command starts and another when it ends."
+			},
+			"board": {
+				"code": "public static Command flashLights() {\n    return Commands.startEnd(\n        () -> lights.setOn(true),\n        () -> lights.setOn(false),\n        lights);\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "() -> lights.setOn(true)",
+						"label": "runs when it starts"
+					},
+					{
+						"text": "() -> lights.setOn(false)",
+						"label": "runs when it ends"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: A command",
+			"say": {
 				"never": "`startEnd` builds a command out of two notes. The first lambda runs when the command **starts** (here: tell the shooter to SHOOT). The second runs when it **ends** (here: tell it to go back to IDLE). When you let go of the button, the command ends.",
 				"bit": "`startEnd` runs one lambda when the command starts and another when it ends."
 			},
@@ -42,8 +63,9 @@
 						"label": "when the button's released"
 					}
 				]
-			}
+			},
+			"assist": true
 		}
 	],
-	"kind": "concept"
+	"kind": "mixed"
 }

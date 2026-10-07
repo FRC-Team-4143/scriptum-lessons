@@ -8,6 +8,23 @@
 			"title": "Pose",
 			"say": {
 				"never": "A **pose** is a robot's position on the field (x and y) *and* which way it's facing. The pose estimator works it out by adding up every tiny movement of the wheels, like counting your steps to guess how far you walked.",
+				"bit": "A pose is x, y and heading, built by adding up many small wheel movements."
+			},
+			"board": {
+				"code": "start:                    (x 0, y 0), facing east\ndrive 1 m forward:        (x 1, y 0), facing east\nturn left, drive 1 m:     (x 1, y 1), facing north",
+				"language": "text",
+				"marks": [
+					{
+						"text": "(x 1, y 1), facing north",
+						"label": "position AND direction"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Pose",
+			"say": {
+				"never": "A **pose** is a robot's position on the field (x and y) *and* which way it's facing. The pose estimator works it out by adding up every tiny movement of the wheels, like counting your steps to guess how far you walked.",
 				"bit": "A **pose** is where the robot is (x, y) and which way it faces. The pose estimator adds up every small wheel movement."
 			},
 			"board": {
@@ -22,7 +39,8 @@
 						"label": "where it thinks it is"
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Start the robot",

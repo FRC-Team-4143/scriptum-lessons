@@ -7,6 +7,31 @@
 		{
 			"title": "The declaration",
 			"say": {
+				"never": "This time there is no help: you write the whole first line yourself. It says who can use it (`public static`), what it gives back (`double`), its name (`areaOfCircle`), and what it needs handed in, written in parentheses (`double radius`).",
+				"bit": "A method header says who can call it, what it returns, its name and its parameters."
+			},
+			"board": {
+				"code": "public static double areaOfCircle(double radius) {\n    ...\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "public static",
+						"label": "who can use it"
+					},
+					{
+						"text": "double areaOfCircle",
+						"label": "returns a double, named areaOfCircle"
+					},
+					{
+						"text": "double radius",
+						"label": "what you hand in"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: The declaration",
+			"say": {
 				"never": "This time there is no help: you write the whole first line yourself. It says who can use it (`public static`), what it gives back (`double`), its name (`clamp`), and what it needs handed in, written in parentheses (`double value, double min, double max`).",
 				"bit": "This lesson has no scaffolding: you write the whole first line yourself."
 			},
@@ -26,7 +51,8 @@
 						"label": "parameters: type and name each"
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "The body",

@@ -7,6 +7,23 @@
 		{
 			"title": "Proportional control",
 			"say": {
+				"never": "Bang-bang was all-or-nothing. **Proportional control** is smoother: *the farther away you are, the harder you push, and you ease off as you arrive.* Think of cruise control. The push is `kP x error`, where `error` is how far you are from the target and `kP` is a number you pick. No more overshooting.",
+				"bit": "Proportional control: output = kP x error, so effort shrinks as you arrive."
+			},
+			"board": {
+				"code": "error = targetSpeed - currentSpeed\npower = kP * error     // big gap: big push, small gap: gentle",
+				"language": "text",
+				"marks": [
+					{
+						"text": "kP * error",
+						"label": "effort proportional to the gap"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Proportional control",
+			"say": {
 				"never": "Bang-bang was all-or-nothing. **Proportional control** is smoother: *the farther away you are, the faster you go, and you slow down as you arrive.* The speed is `kP x error`, where `error` is how far you still have to go and `kP` is a number you pick. No more overshooting.",
 				"bit": "Drive faster when far away and slower as you arrive: speed = kP x error. No more overshoot like bang-bang."
 			},
@@ -26,7 +43,8 @@
 						"label": "never faster than the max"
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "When to stop",

@@ -5,7 +5,109 @@
 	"order": 509,
 	"steps": [
 		{
-			"title": "The machine",
+			"title": "What a state machine is",
+			"say": {
+				"never": "A **state machine** is a way of thinking about a mechanism: it is **always in exactly one state**, and there are clear rules for which state it can move to next. A traffic light is one: it is red, green or yellow, never two at once, and it can't jump from red straight to yellow. Writing mechanisms this way stops the robot from doing things like running a motor in a way that breaks it.",
+				"bit": "A state machine means a mechanism is always in exactly one state and only certain moves between states are allowed (a traffic light: red, green, yellow, never two, never red to yellow)."
+			},
+			"board": {
+				"code": "enum IntakeStates {\n    IDLE,       // motors stopped\n    INTAKING,   // rollers pull a game piece in\n    HOLDING,    // we have one: stop pulling, keep it\n    EJECTING    // rollers push it back out\n}",
+				"language": "java",
+				"marks": []
+			}
+		},
+		{
+			"title": "Draw it as a diagram",
+			"say": {
+				"never": "Before writing any code, draw the machine: a circle for each **state** and an arrow for each move you allow. Each arrow is a **transition**, and it has a **reason**, which we call the condition. Here an intake goes from IDLE to INTAKING when the driver asks for it, and from INTAKING to HOLDING *only when the sensor sees a game piece*. Notice there is no arrow from IDLE straight to HOLDING. That's on purpose.",
+				"bit": "Draw a circle per state and an arrow per allowed move, each with its condition. There is deliberately no IDLE to HOLDING arrow."
+			},
+			"board": {
+				"code": "                 driver wants intake        sensor sees a piece\n      IDLE ------------------------> INTAKING ----------------------> HOLDING\n       ^                                |                                |\n       |         driver lets go         |                                |\n       +--------------------------------+        driver wants eject     |\n       |                                                                 v\n       +------------------------------------------------------------ EJECTING",
+				"language": "text",
+				"marks": []
+			}
+		},
+		{
+			"title": "Wanted state vs. real state",
+			"say": {
+				"never": "There are **two** states to keep apart. The **wanted** state is what the driver or a command *asks for*. The **real** state is where the mechanism *actually is* right now. They aren't always equal, because the mechanism may need a moment, or may not be allowed to jump there. Each loop, the subsystem looks at what's wanted, looks at the rules, and picks the real state it is allowed to be in. A driver mashing buttons can't break anything, because the rules decide.",
+				"bit": "The **wanted** state is the request; the **real** state is what the rules allow right now. Each loop the subsystem picks the real state from the wanted one."
+			},
+			"board": {
+				"code": "// driver:    intake.setWantedState(EJECTING);\n// subsystem: asks \"am I allowed to go there from here?\"\n\nprotected void handleStateTransition(IntakeStates wanted) {\n    // look at: wanted, the current state, and the sensors\n    // then SET system_state_ to the state we are allowed to be in\n}",
+				"language": "java",
+				"marks": []
+			}
+		},
+		{
+			"title": "Writing the rules",
+			"say": {
+				"never": "The rules go in **one method** that runs every loop. Look at what's wanted and what the sensors say, and set the real state. Read it like a list of sentences: \"If they want idle, go idle. If they want to intake and we already have a piece, hold. If they want to intake and we don't, intake.\" Put the *safe* answer last, as the `else`, so anything unexpected leaves the mechanism safe.",
+				"bit": "One method sets the real state from the wanted state and sensors. Read it as sentences, and make the final `else` the safe answer."
+			},
+			"board": {
+				"code": "protected void handleStateTransition(IntakeStates wanted) {\n    if (wanted == IntakeStates.IDLE) {\n        system_state_ = IntakeStates.IDLE;\n    } else if (wanted == IntakeStates.INTAKING) {\n        system_state_ = hasPiece() ? IntakeStates.HOLDING : IntakeStates.INTAKING;\n    } else if (wanted == IntakeStates.EJECTING) {\n        system_state_ = IntakeStates.EJECTING;\n    } else {\n        system_state_ = IntakeStates.IDLE;   // anything else: be safe\n    }\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "hasPiece()",
+						"label": "the sensor decides this move"
+					},
+					{
+						"text": "else {",
+						"label": "the safe default"
+					}
+				]
+			}
+		},
+		{
+			"title": "What each state does",
+			"say": {
+				"never": "Rules choose the state; a second method decides what the **motors do in each state**. That's the `switch` you met earlier: one `case` per state, one clear job each. Keep the two jobs separate: *transition rules* pick the state, and the *switch* acts on it. If you mix them, the code gets hard to read and hard to fix.",
+				"bit": "Transition rules pick the state; a `switch` decides what each state does. Keep those two jobs separate."
+			},
+			"board": {
+				"code": "@Override\npublic void updateLogic(double timestamp) {\n    switch (system_state_) {\n        case INTAKING:\n            rollers.setTargetDutyCycle(0.8);\n            break;\n        case HOLDING:\n            rollers.setTargetDutyCycle(0.1);   // just enough to keep it\n            break;\n        case EJECTING:\n            rollers.setTargetDutyCycle(-0.6);\n            break;\n        case IDLE:\n        default:\n            rollers.setTargetDutyCycle(0.0);\n            break;\n    }\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "case HOLDING:",
+						"label": "one job per state"
+					},
+					{
+						"text": "default:",
+						"label": "unknown state: stop"
+					}
+				]
+			}
+		},
+		{
+			"title": "Following one trip through",
+			"say": {
+				"never": "Trace it like a detective. The robot starts in IDLE. The driver presses intake: the rules say \"no piece yet\", so the state becomes INTAKING and the rollers spin. A game piece rolls in and the sensor trips, so on the next loop the rules say HOLDING and the rollers ease off. The driver presses eject: EJECTING, rollers reverse. Driver lets go: back to IDLE. At every moment you can say exactly which state the robot is in.",
+				"bit": "Trace: IDLE, intake pressed (no piece) goes INTAKING, sensor trips goes HOLDING, eject goes EJECTING, release goes IDLE."
+			},
+			"board": {
+				"code": "loop 1   wanted INTAKING, no piece   -> state INTAKING   rollers on\nloop 40  wanted INTAKING, piece seen -> state HOLDING    rollers ease off\nloop 90  wanted EJECTING             -> state EJECTING   rollers reverse\nloop 120 wanted IDLE                 -> state IDLE       rollers stop",
+				"language": "text",
+				"marks": [
+					{
+						"text": "piece seen -> state HOLDING",
+						"label": "the sensor changed the answer"
+					}
+				]
+			}
+		},
+		{
+			"title": "Common mistakes",
+			"say": {
+				"never": "Four mistakes to watch for. **A state with no way out:** you can get in but there's no rule to leave, so the mechanism is stuck. **A missing `default`:** an unexpected state leaves the motors running. **Mixing rules and actions:** moving the motors inside the transition method. **Forgetting `break`:** one case runs into the next. When a mechanism behaves strangely, first ask: *which state am I in?* The logged state tells you.",
+				"bit": "Watch for: a state with no exit, no safe default, rules mixed with actions, and forgotten `break`s. When confused, ask which state it is in."
+			}
+		},
+		{
+			"title": "In your lesson: the shooter's machine",
 			"say": {
 				"never": "The shooter is in exactly one **state** at a time: `IDLE`, `SPIN_UP` or `SHOOT`. The arrows show which moves are allowed. It can't leap straight from IDLE to SHOOT, because the flywheel has to get up to speed first, like a car can't start at 60 mph.",
 				"bit": "The shooter is always in exactly one state. It can't jump straight to SHOOT: it has to spin up first."
@@ -22,10 +124,11 @@
 						"label": "a launch drops it back"
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
-			"title": "Transitions",
+			"title": "In your lesson: the shooter's transitions",
 			"say": {
 				"never": "The driver only says what they **want**, such as \"shoot\". The subsystem is the one that decides where it's actually allowed to go, using the rules on the board. That keeps the robot safe even if the driver mashes buttons.",
 				"bit": "The driver only says what they **want**. The subsystem decides where it's allowed to be."
@@ -42,8 +145,9 @@
 						"label": "a yes/no method reads like English"
 					}
 				]
-			}
+			},
+			"assist": true
 		}
 	],
-	"kind": "concept"
+	"kind": "mixed"
 }

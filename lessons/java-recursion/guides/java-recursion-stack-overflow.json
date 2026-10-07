@@ -7,6 +7,23 @@
 		{
 			"title": "No way out",
 			"say": {
+				"never": "This version forgot to stop. With no base case, `triangle(3)` calls `triangle(2)`, then `triangle(1)`, then 0, then -1, and so on forever. Each call waits in memory for the next, until Java runs out of room and stops with a **StackOverflowError**.",
+				"bit": "No base case means endless calls and a StackOverflowError."
+			},
+			"board": {
+				"code": "public static int triangle(int rows) {\n    return rows + triangle(rows - 1);   // no base case!\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "triangle(rows - 1)",
+						"label": "never stops"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: No way out",
+			"say": {
 				"never": "This version forgot to stop. With no base case, `factorial(3)` calls `factorial(2)`, then `factorial(1)`, then 0, then -1, then -2, and so on forever. Each call waits in memory for the next, until Java runs out of room and stops with a **StackOverflowError**.",
 				"bit": "This version forgot to stop at 0, so it keeps calling `factorial(-1)`, `factorial(-2)`... forever."
 			},
@@ -19,10 +36,32 @@
 					}
 				],
 				"caption": "Exception: java.lang.StackOverflowError"
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "The fix",
+			"say": {
+				"never": "The fix has two rules. Every path must reach a base case, so there's a place to stop. And every call must move *toward* it, so you actually get there. Here, `rows - 1` moves toward 1, and `rows <= 1` is where it stops.",
+				"bit": "Every path needs a base case, and each call must move toward it."
+			},
+			"board": {
+				"code": "if (rows <= 1) {\n    return rows;\n}\nreturn rows + triangle(rows - 1);",
+				"language": "java",
+				"marks": [
+					{
+						"text": "rows <= 1",
+						"label": "where it stops"
+					},
+					{
+						"text": "rows - 1",
+						"label": "moves toward the stop"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: The fix",
 			"say": {
 				"never": "The fix has two rules. Every path must reach a base case, so there's a place to stop. And every call must move *toward* it, so you actually get there. Here, `n - 1` moves toward 1, and `n <= 1` is where it stops.",
 				"bit": "Every path must reach a base case, and every step must move **toward** it."
@@ -39,7 +78,8 @@
 						"label": "smaller every time"
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Strings too",
@@ -49,5 +89,5 @@
 			}
 		}
 	],
-	"kind": "concept"
+	"kind": "mixed"
 }

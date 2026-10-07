@@ -7,6 +7,31 @@
 		{
 			"title": "switch",
 			"say": {
+				"never": "When you're checking **one** value against a list of exact choices, a `switch` is neater than a long `if` chain. Read it like a menu: \"if the day is 1, say Monday. If it's 2, say Tuesday. For anything else, say it's some other day.\" `default` is the \"anything else\" choice.",
+				"bit": "A `switch` compares one value against exact choices. `default` is the catch-all."
+			},
+			"board": {
+				"code": "switch (day) {\n    case 1:\n        return \"Monday\";\n    case 2:\n        return \"Tuesday\";\n    default:\n        return \"Some other day\";\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "switch (day)",
+						"label": "the one value we look at"
+					},
+					{
+						"text": "case 1:",
+						"label": "an exact choice"
+					},
+					{
+						"text": "default:",
+						"label": "anything else"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: switch",
+			"say": {
 				"never": "When you're checking **one** value against a list of exact choices, a `switch` is neater than a long `if` chain. Read it like a menu: \"if the mode is 1, say Tank. If it's 2, say Arcade. For anything else, say Unknown.\" `default` is the \"anything else\" choice.",
 				"bit": "When you're comparing **one** value against a list of exact options, `switch` is cleaner than a long if chain."
 			},
@@ -26,10 +51,28 @@
 						"label": "anything not listed"
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "break",
+			"say": {
+				"never": "Here each case uses `return`, which leaves the method right away. If you use a variable instead, Java keeps running into the *next* case, which surprises people. So you end each case with `break`, which means \"stop, leave the switch\".",
+				"bit": "Without `return`, cases fall through into the next one, so end each with `break`."
+			},
+			"board": {
+				"code": "switch (grade) {\n    case 1:\n        label = \"Freshman\";\n        break;\n    case 2:\n        label = \"Sophomore\";\n        break;\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "break;",
+						"label": "stop here, leave the switch"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: break",
 			"say": {
 				"never": "Here each case uses `return`, which leaves the method right away. If you don't `return`, Java keeps running into the *next* case, which surprises people. So you end each case with `break`, which means \"stop, leave the switch\".",
 				"bit": "With `return` each case leaves the method. Without it, cases fall through into the next one, so you end them with `break`."
@@ -42,7 +85,8 @@
 						"label": "stop here, don't run the next case"
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Open Main.java",

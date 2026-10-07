@@ -34,6 +34,27 @@
 		{
 			"title": "The if",
 			"say": {
+				"never": "The `if` asks: *is the dial pushed less than the deadband?* `Math.abs` throws away the minus sign, so one check covers pushing both ways. If it's tiny, we set it to 0.0, as if it had never moved.",
+				"bit": "An `if` with `Math.abs(x) < DEADBAND` treats small values in either direction as zero."
+			},
+			"board": {
+				"code": "double dial = readDial();\nif (Math.abs(dial) < 0.05) {\n    dial = 0.0;   // too small to mean anything\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "Math.abs(dial) < 0.05",
+						"label": "small in either direction"
+					},
+					{
+						"text": "dial = 0.0;",
+						"label": "pretend it didn't move"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: The if",
+			"say": {
 				"never": "The `if` asks: *is the stick pushed less than the deadband?* `Math.abs` throws away the minus sign, so one check covers pushing forward and pushing back. If it's tiny, we set it to 0.0. The same pattern repeats for the turn stick.",
 				"bit": "`Math.abs` ignores the sign, so one check covers both directions."
 			},
@@ -49,7 +70,8 @@
 						"label": "close enough to zero: stop"
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Open Robot.java",

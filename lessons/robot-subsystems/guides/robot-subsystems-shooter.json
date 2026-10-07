@@ -137,6 +137,23 @@
 		{
 			"title": "getIos",
 			"say": {
+				"never": "The library only runs the mechanisms you put in this list. If you forget one, it just sits there and never moves. For a subsystem with an arm and a claw you'd return **both** of them.",
+				"bit": "`getIos` must list every mechanism the subsystem owns, or it never runs."
+			},
+			"board": {
+				"code": "@Override\npublic List<SubsystemIoBase> getIos() {\n    return List.of(arm, claw);\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "List.of(arm, claw)",
+						"label": "every mechanism you own"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: getIos",
+			"say": {
 				"never": "The library only runs the mechanisms you put in this list. If you forget one, it just sits there and never moves. Return **both** the flywheel and the roller.",
 				"bit": "MWLib only runs the mechanisms you list here. Forget one and it never moves."
 			},
@@ -148,7 +165,8 @@
 						"label": "both mechanisms"
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Open RobotContainer.java",

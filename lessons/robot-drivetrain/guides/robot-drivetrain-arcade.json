@@ -8,6 +8,27 @@
 			"title": "Two sticks, two jobs",
 			"say": {
 				"never": "In **arcade drive** you steer with two jobs. One stick says *how fast to go forward or back*. The other says *how much to turn*. It feels like driving a car, which is why many drivers like it.",
+				"bit": "Arcade drive splits the sticks into two jobs: forward/back speed and turning."
+			},
+			"board": {
+				"code": "one stick, up and down     ->  how fast to go forward or back\nthe other, left and right  ->  how much to turn",
+				"language": "text",
+				"marks": [
+					{
+						"text": "how fast to go",
+						"label": "job one"
+					},
+					{
+						"text": "how much to turn",
+						"label": "job two"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Two sticks, two jobs",
+			"say": {
+				"never": "In **arcade drive** you steer with two jobs. One stick says *how fast to go forward or back*. The other says *how much to turn*. It feels like driving a car, which is why many drivers like it.",
 				"bit": "Arcade drive: one stick goes forward and back, the other turns. Most drivers prefer it."
 			},
 			"board": {
@@ -22,10 +43,28 @@
 						"label": "left and right: no minus sign"
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "The math",
+			"say": {
+				"never": "Here's the trick. To turn right, the left wheels must go faster than the right wheels, so the robot curves around to the right. To turn left, it's the other way round. Your code starts from the forward speed and nudges the two sides in opposite directions. Try it with numbers on the next step.",
+				"bit": "To curve right the left side speeds up and the right side slows down; to curve left, the reverse. Start from forward speed and nudge the sides oppositely."
+			},
+			"board": {
+				"code": "turning right:   left side FASTER, right side SLOWER\nturning left:    left side SLOWER, right side FASTER\nspinning:        sides go OPPOSITE ways",
+				"language": "text",
+				"marks": [
+					{
+						"text": "left side FASTER",
+						"label": "wheels on the outside of a turn speed up"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: The math",
 			"say": {
 				"never": "Here's the trick. To turn right, the left wheels must go faster than the right wheels, so the robot curves around to the right. Adding `turn` to one side and subtracting it from the other does exactly that. Try it with numbers on the next step.",
 				"bit": "To turn right, the left side goes faster than the right. Adding and subtracting `turn` does exactly that."
@@ -42,7 +81,8 @@
 						"label": "right side"
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Try some numbers",
@@ -119,5 +159,5 @@
 			"cardAt": "top-right"
 		}
 	],
-	"kind": "concept"
+	"kind": "mixed"
 }

@@ -27,6 +27,23 @@
 		{
 			"title": "Bang-bang",
 			"say": {
+				"never": "Bang-bang control is the simplest answer. Too slow? Full power. Fast enough? Power off. Like a thermostat that is either heating or not, with nothing in between. Here it runs a fan.",
+				"bit": "Bang-bang: full power while below the target, off once at it."
+			},
+			"board": {
+				"code": "if (fan.getSpeed() < TARGET_SPEED) {\n    power = 1.0;\n} else {\n    power = 0.0;\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "fan.getSpeed() < TARGET_SPEED",
+						"label": "compare to the target"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Bang-bang",
+			"say": {
 				"never": "Bang-bang control is the simplest answer. Too slow? Full power. Fast enough? Power off. Like a thermostat that is either heating or not, with nothing in between.",
 				"bit": "Too slow? Full power. Fast enough? Nothing."
 			},
@@ -43,7 +60,8 @@
 					}
 				],
 				"caption": "Fast to spin up, but it slams the motor on and off."
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Open ShooterSubsystem.java",

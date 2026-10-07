@@ -47,6 +47,27 @@
 		{
 			"title": "Average",
 			"say": {
+				"never": "An average is the total divided by how many there are. Careful: if both are whole numbers, Java throws away the decimals. Writing `(double) sum` first turns the total into a decimal number, so the answer keeps its decimals.",
+				"bit": "Average is total divided by count. Cast to `double` first so integer division doesn't drop the decimals."
+			},
+			"board": {
+				"code": "int sum = 0;\nfor (int t : temps) { sum += t; }\nreturn (double) sum / temps.length;",
+				"language": "java",
+				"marks": [
+					{
+						"text": "for (int t : temps)",
+						"label": "visit every temperature"
+					},
+					{
+						"text": "(double) sum",
+						"label": "decimals are kept"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Average",
+			"say": {
 				"never": "An average is the total divided by how many there are. Careful: if both are whole numbers, Java throws away the decimals. Writing `(double) total` first turns the total into a decimal number, so the answer keeps its decimals.",
 				"bit": "Total the values, then divide. Watch out for integer division!"
 			},
@@ -62,7 +83,8 @@
 						"label": "decimal division"
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Open Main.java",

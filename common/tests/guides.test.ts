@@ -275,3 +275,52 @@ describe("guides for new programmers are worded for students who have never code
 		});
 	}
 });
+
+// An explaining step must not hand over the checkpoint's answer. Its code board uses its own
+// example (a playlist, a lamp, a thermostat), and the lesson's real code goes in walk-through
+// steps, which Dozer only shows when he is guiding or the student asks. So: no code board in an
+// explaining step may share two lines with what the student is asked to write (the lines in
+// solution/ that aren't already in the starter), nor be a one- or two-line board that is
+// entirely such lines.
+const trimLine = (l: string) => l.replace(/\s+/g, " ").trim();
+function textLines(dir: string): string[] {
+	return filesUnder(dir).flatMap((f) => {
+		try {
+			return readFileSync(f, "utf8").split("\n").map(trimLine);
+		} catch {
+			return [];
+		}
+	});
+}
+function answerLines(lessonId: string): Set<string> {
+	const starter = new Set(textLines(resolve(repoRoot, "lessons", lessonId, "project")));
+	return new Set(
+		textLines(resolve(repoRoot, "lessons", lessonId, "solution")).filter(
+			(l) => l.length >= 14 && !starter.has(l) && !/^(\/\/|\*|\/\*|import|package)/.test(l),
+		),
+	);
+}
+
+describe("explaining steps don't give away the checkpoint's answer", () => {
+	for (const guide of index.concepts) {
+		const { steps } = readJson(guide.path) as { steps: Step[] };
+		test(guide.id, () => {
+			steps.forEach((step, i) => {
+				if (step.assist || !step.board) return;
+				const code = step.board.code
+					.split("\n")
+					.map(trimLine)
+					.filter((l) => l.length >= 14 && !l.startsWith("//") && !l.startsWith("*"));
+				for (const moduleId of guide.modules ?? []) {
+					const answer = answerLines(moduleId);
+					const shared = code.filter((l) => answer.has(l));
+					const title = wordings(step.title)[0];
+					expect(shared.length, `step ${i + 1} "${title}" shows ${shared.length} lines of ${moduleId}'s answer: ${shared.join(" | ")}`).toBeLessThan(2);
+					if (code.length <= 2) {
+						expect(shared.length === code.length && code.length > 0, `step ${i + 1} "${title}" IS ${moduleId}'s answer`).toBe(false);
+					}
+				}
+			});
+		});
+	}
+});

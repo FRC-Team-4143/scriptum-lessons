@@ -1694,6 +1694,7 @@
 			"needs": [
 				"driverStation"
 			],
+			"kind": "concept",
 			"path": "common/guides/build-and-run.json"
 		},
 		{
@@ -2097,7 +2098,7 @@
 			"modules": [
 				"java-arrays"
 			],
-			"kind": "concept",
+			"kind": "mixed",
 			"path": "lessons/java-arrays/guides/java-arrays-new-arrays.json"
 		},
 		{
@@ -2121,7 +2122,7 @@
 			"modules": [
 				"java-methods"
 			],
-			"kind": "concept",
+			"kind": "mixed",
 			"path": "lessons/java-methods/guides/java-methods-reuse.json"
 		},
 		{
@@ -2194,7 +2195,7 @@
 			"modules": [
 				"java-recursion"
 			],
-			"kind": "concept",
+			"kind": "mixed",
 			"path": "lessons/java-recursion/guides/java-recursion-stack-overflow.json"
 		},
 		{
@@ -2254,7 +2255,7 @@
 			"modules": [
 				"robot-drivetrain"
 			],
-			"kind": "concept",
+			"kind": "mixed",
 			"path": "lessons/robot-drivetrain/guides/robot-drivetrain-arcade.json"
 		},
 		{
@@ -2338,7 +2339,7 @@
 			"modules": [
 				"robot-drive-math"
 			],
-			"kind": "concept",
+			"kind": "mixed",
 			"path": "lessons/robot-drive-math/guides/robot-drive-math-average.json"
 		},
 		{
@@ -2400,7 +2401,7 @@
 				"robot-odometry",
 				"robot-subsystems"
 			],
-			"kind": "concept",
+			"kind": "mixed",
 			"path": "common/guides/robot-odometry-oi.json"
 		},
 		{
@@ -2449,7 +2450,7 @@
 				"robot-subsystems",
 				"robot-state-machines"
 			],
-			"kind": "concept",
+			"kind": "mixed",
 			"path": "common/guides/robot-subsystems-states.json"
 		},
 		{
@@ -2533,7 +2534,7 @@
 			"modules": [
 				"robot-state-machines"
 			],
-			"kind": "concept",
+			"kind": "mixed",
 			"path": "lessons/robot-state-machines/guides/robot-state-machines-states.json"
 		},
 		{
@@ -2546,7 +2547,7 @@
 				"robot-state-machines",
 				"robot-autonomous"
 			],
-			"kind": "concept",
+			"kind": "mixed",
 			"path": "common/guides/robot-state-machines-commands.json"
 		},
 		{

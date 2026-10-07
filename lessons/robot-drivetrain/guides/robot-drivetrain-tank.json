@@ -7,6 +7,27 @@
 		{
 			"title": "Tank drive",
 			"say": {
+				"never": "In **tank drive** each stick runs one side of the robot, just like a real tank has two tracks. The left stick runs the left wheels and the right stick runs the right wheels. Push both forward and the robot drives forward. Push one forward and pull the other back and it spins on the spot.",
+				"bit": "Tank drive: one stick per side. Both forward drives; opposite sticks spin in place."
+			},
+			"board": {
+				"code": "left stick   ->  left side wheels\nright stick  ->  right side wheels\n\nboth forward         ->  drives forward\none forward, one back ->  spins in place",
+				"language": "text",
+				"marks": [
+					{
+						"text": "left stick",
+						"label": "each stick has one side"
+					},
+					{
+						"text": "spins in place",
+						"label": "opposite sides turn the robot"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Tank drive",
+			"say": {
 				"never": "In **tank drive** each stick runs one side of the robot, just like a real tank has two tracks. Left stick runs the left wheels, right stick runs the right wheels.",
 				"bit": "Like a tank: the left stick runs the left side, the right stick runs the right side."
 			},
@@ -26,7 +47,8 @@
 						"label": "send both to the motors"
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Open Robot.java",

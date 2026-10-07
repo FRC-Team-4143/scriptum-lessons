@@ -7,6 +7,23 @@
 		{
 			"title": "Add them up",
 			"say": {
+				"never": "To find an **average**, add up all the numbers, then divide by how many there are. A `for` loop visits each box in the array one at a time and adds it to a running total, like keeping a tally on paper. For the numbers 2, 4 and 6 the total is 12, and 12 divided by 3 is 4.",
+				"bit": "Average = total / count; a loop keeps a running total."
+			},
+			"board": {
+				"code": "numbers:  2, 4, 6\nadd up:   2 + 4 + 6 = 12\ndivide:   12 / 3 = 4   <- the average",
+				"language": "text",
+				"marks": [
+					{
+						"text": "12 / 3 = 4",
+						"label": "the average"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Add them up",
+			"say": {
 				"never": "To find an **average**, add up all the numbers, then divide by how many there are. A `for` loop visits each box in the array one at a time, and `total +=` adds it to a running total, like keeping a tally on paper.",
 				"bit": "A `for` loop visits every slot. Keep a running total, then divide by how many."
 			},
@@ -22,7 +39,8 @@
 						"label": "add this one"
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Why average?",
@@ -132,5 +150,5 @@
 			}
 		}
 	],
-	"kind": "concept"
+	"kind": "mixed"
 }

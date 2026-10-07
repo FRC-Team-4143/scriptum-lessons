@@ -7,6 +7,27 @@
 		{
 			"title": "Is a",
 			"say": {
+				"never": "`Truck extends Vehicle` means \"a truck **is a** vehicle, plus some extras\". It gets all the fields and methods of `Vehicle` for free, so you only write what's new, like a cargo limit.",
+				"bit": "`extends` makes the child an \"is a\" of the parent: it inherits everything and adds only what's new."
+			},
+			"board": {
+				"code": "public class Truck extends Vehicle {\n    protected double cargo_limit_;\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "extends Vehicle",
+						"label": "a truck is a vehicle"
+					},
+					{
+						"text": "cargo_limit_",
+						"label": "what's new"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Is a",
+			"say": {
 				"never": "`SavingsAccount extends BankAccount` means \"a savings account **is a** bank account, plus some extras\". It gets all the fields and methods of `BankAccount` for free, so you only write what's new, like an interest rate.",
 				"bit": "`SavingsAccount extends BankAccount` means a savings account **is a** bank account, plus more. It gets every field and method for free."
 			},
@@ -22,10 +43,32 @@
 						"label": "its own extra field"
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "super first",
+			"say": {
+				"never": "The parent class sets up its own fields, so your constructor's very first line must hand it the values it needs. `super(name, wheels)` means \"parent, please set yourself up with these.\" Then you set up the new field yourself.",
+				"bit": "The constructor's first line calls `super(...)` so the parent can initialise itself; then set your own fields."
+			},
+			"board": {
+				"code": "public Truck(String name, int wheels, double cargo_limit) {\n    super(name, wheels);\n    cargo_limit_ = cargo_limit;\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "super(name, wheels);",
+						"label": "parent sets itself up first"
+					},
+					{
+						"text": "cargo_limit_ =",
+						"label": "then our own field"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: super first",
 			"say": {
 				"never": "The parent class sets up its own fields, so your constructor's very first line must hand it the values it needs. `super(owner, initial_balance)` means \"parent, please set yourself up with these.\" Then you set up the new field yourself.",
 				"bit": "The parent sets up its own fields. Your constructor's first line hands it the values it needs."
@@ -42,10 +85,28 @@
 						"label": "then your own field"
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "New behavior, reused pieces",
+			"say": {
+				"never": "`loadFully` is the new behavior. It doesn't touch the weight directly. It reuses the `addWeight` and `getWeight` methods it inherited from the parent. That way the parent's rules still apply.",
+				"bit": "New methods should reuse inherited ones so the parent's rules still apply."
+			},
+			"board": {
+				"code": "public void loadFully() {\n    addWeight(cargo_limit_ - getWeight());\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "addWeight(",
+						"label": "an inherited method"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: New behavior, reused pieces",
 			"say": {
 				"never": "`applyInterest` is the new behavior. It doesn't touch the balance directly. It reuses the `deposit` and `getBalance` methods it inherited from the parent. That way the parent's rules still apply.",
 				"bit": "`applyInterest` uses the inherited `deposit` and `getBalance` instead of changing `balance_` itself."
@@ -58,7 +119,8 @@
 						"label": "inherited from BankAccount"
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Open SavingsAccount.java",

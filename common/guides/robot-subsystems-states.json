@@ -27,6 +27,27 @@
 		{
 			"title": "One switch",
 			"say": {
+				"never": "A `switch` is like a menu: *look at the current state and run the matching block.* `updateLogic` runs every 20 thousandths of a second, so each time it checks the state and does the right thing. `break` means \"done with this one, leave the menu\". This one runs a lamp.",
+				"bit": "A switch on the current state picks what to do each loop; `break` leaves it."
+			},
+			"board": {
+				"code": "switch (system_state_) {\n    case ON:\n        lamp.setBrightness(1.0);\n        break;\n    case DIM:\n        lamp.setBrightness(0.3);\n        break;\n    case OFF:\n    default:\n        lamp.setBrightness(0.0);\n        break;\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "switch (system_state_)",
+						"label": "look at the state"
+					},
+					{
+						"text": "lamp.setBrightness(0.3)",
+						"label": "do that state's job"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: One switch",
+			"say": {
 				"never": "A `switch` is like a menu: *look at the current state and run the matching block.* `updateLogic` runs every 20 thousandths of a second, so each time it checks the state and does the right thing. `break` means \"done with this one, leave the menu\".",
 				"bit": "`updateLogic` runs every 20 ms and does what the current state says."
 			},
@@ -46,8 +67,9 @@
 						"label": "anything else"
 					}
 				]
-			}
+			},
+			"assist": true
 		}
 	],
-	"kind": "concept"
+	"kind": "mixed"
 }

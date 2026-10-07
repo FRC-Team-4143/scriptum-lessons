@@ -43,6 +43,23 @@
 		{
 			"title": "In code",
 			"say": {
+				"never": "Here is the plan in plain steps, no code yet. First find which of the two numbers is bigger (ignoring minus signs). If that number is over 1, divide **both** numbers by it. Then hand both back together. Each step does one small job.",
+				"bit": "Plan: find the bigger size (ignoring signs); if over 1, divide both by it; return both."
+			},
+			"board": {
+				"code": "1. find the bigger of the two sizes (ignore minus signs)\n2. if it is more than 1: divide BOTH numbers by it\n3. hand both back together",
+				"language": "text",
+				"marks": [
+					{
+						"text": "divide BOTH",
+						"label": "keeps their ratio"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: In code",
+			"say": {
 				"never": "In code: first find which side has the bigger number (ignoring minus signs with `Math.abs`). If that number is over 1, divide both sides by it. Read the code one line at a time. Each line does one small job.",
 				"bit": "Find the bigger magnitude; if it's over 1, divide both."
 			},
@@ -58,7 +75,8 @@
 						"label": "scale down"
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Open DriveMath.java",

@@ -7,6 +7,27 @@
 		{
 			"title": "A method",
 			"say": {
+				"never": "A **method** is a named job. This one is called `toFahrenheit`. You hand it a number, it does a little math, and it hands back one answer. `return` is how it hands the answer back.",
+				"bit": "A method takes inputs, computes, and returns one result."
+			},
+			"board": {
+				"code": "public static double toFahrenheit(double celsius) {\n    return celsius * 9.0 / 5.0 + 32.0;\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "double celsius",
+						"label": "what you hand in"
+					},
+					{
+						"text": "return",
+						"label": "what comes back"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: A method",
+			"say": {
 				"never": "A **method** is a named job. This one is called `linearSpeed`. You hand it two numbers (the left and right speeds), it does a little math, and it hands back one answer. `return` is how it hands the answer back.",
 				"bit": "A method names a job. This one takes two numbers and returns their average."
 			},
@@ -26,7 +47,8 @@
 						"label": "hands the answer back"
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Why bother",

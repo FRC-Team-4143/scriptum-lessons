@@ -7,6 +7,31 @@
 		{
 			"title": "A chain",
 			"say": {
+				"never": "An `if ... else if ... else` chain is a list of questions. Java asks them from top to bottom and stops at the **first** one that's true, then skips all the rest. The final `else` catches everything that didn't match. This one describes the weather from the temperature.",
+				"bit": "Java tests an if/else-if chain top to bottom and runs only the first true branch. The final `else` catches everything else."
+			},
+			"board": {
+				"code": "if (temp < 0) {\n    return \"FREEZING\";\n} else if (temp < 15) {\n    return \"COLD\";\n} else if (temp < 28) {\n    return \"WARM\";\n} else {\n    return \"HOT\";\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "temp < 0",
+						"label": "asked first"
+					},
+					{
+						"text": "temp < 15",
+						"label": "only asked if the first was false"
+					},
+					{
+						"text": "else {",
+						"label": "everything left over"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: A chain",
+			"say": {
 				"never": "An `if ... else if ... else` chain is a list of questions. Java asks them from top to bottom and stops at the **first** one that's true, then skips all the rest. The final `else` catches everything that didn't match.",
 				"bit": "Java checks each condition top to bottom and runs the **first** one that's true. The rest are skipped."
 			},
@@ -26,7 +51,8 @@
 						"label": "everything left over"
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Order matters",

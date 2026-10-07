@@ -7,6 +7,23 @@
 		{
 			"title": "Forward speed",
 			"say": {
+				"never": "Your robot has two sides, but we want **one** speed for the whole robot. The robot's forward speed is the **average** of the two sides: add them and divide by 2. If the left side does 3 and the right does 5, the middle of the robot moves at 4. If both sides do 4, the robot does 4.",
+				"bit": "The robot's forward speed is the average of the two sides."
+			},
+			"board": {
+				"code": "left side 3.0 m/s,  right side 5.0 m/s   ->  middle of the robot: 4.0 m/s\nboth sides 4.0 m/s                        ->  4.0 m/s, straight ahead",
+				"language": "text",
+				"marks": [
+					{
+						"text": "4.0 m/s",
+						"label": "the middle of the two"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Forward speed",
+			"say": {
 				"never": "Your robot has two sides, but we want **one** speed for the whole robot. The robot's forward speed is just the **average** of the two sides: add them and divide by 2. If both sides do 4 meters per second, the robot does 4.",
 				"bit": "The robot's speed is the **average** of the two sides."
 			},
@@ -18,7 +35,8 @@
 						"label": "the average"
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Turning speed",

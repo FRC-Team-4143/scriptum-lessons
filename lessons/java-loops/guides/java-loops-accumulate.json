@@ -7,6 +7,31 @@
 		{
 			"title": "An accumulator",
 			"say": {
+				"never": "To add up numbers, keep a **running total**, like a tally on paper. The total box must be made *before* the loop. If you made it inside, it would reset to 0 on every pass and you'd lose your tally. Here someone reads 10 pages a day for a week, and `pages += 10` adds to the tally each day.",
+				"bit": "An accumulator lives outside the loop so it isn't reset each pass; the loop adds to it."
+			},
+			"board": {
+				"code": "int pages = 0;\nfor (int day = 1; day <= 7; day++) {\n    pages += 10;\n}\nreturn pages;",
+				"language": "java",
+				"marks": [
+					{
+						"text": "int pages = 0;",
+						"label": "made before the loop"
+					},
+					{
+						"text": "pages += 10;",
+						"label": "added to every pass"
+					},
+					{
+						"text": "return pages;",
+						"label": "the answer, after the loop"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: An accumulator",
+			"say": {
 				"never": "To add up numbers, keep a **running total**, like a tally on paper. The total box must be made *before* the loop. If you made it inside, it would reset to 0 on every pass and you'd lose your tally. Inside the loop, `total += i` adds each number.",
 				"bit": "To add up numbers, keep a running total. It has to live **outside** the loop, or it would restart at 0 every pass."
 			},
@@ -27,10 +52,32 @@
 					}
 				],
 				"caption": "sumTo(5) = 1 + 2 + 3 + 4 + 5 = 15"
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Counting matches",
+			"say": {
+				"never": "Counting works the same way, but you only add 1 when a test passes. Here `i % 2 == 1` asks \"is i odd?\". If yes, `odds++` adds 1 to the count.",
+				"bit": "Counting is an accumulator that adds 1 only when a test passes."
+			},
+			"board": {
+				"code": "int odds = 0;\nfor (int i = 1; i <= n; i++) {\n    if (i % 2 == 1) {\n        odds++;\n    }\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "i % 2 == 1",
+						"label": "the test: is it odd?"
+					},
+					{
+						"text": "odds++;",
+						"label": "add one to the count"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Counting matches",
 			"say": {
 				"never": "Counting works the same way, but you only add 1 when a test passes. Here `i % 3 == 0` asks \"is i divisible by 3?\". If yes, `count++` adds 1 to the count.",
 				"bit": "Counting is the same shape, but you only add 1 when a test passes."
@@ -47,7 +94,8 @@
 						"label": "add one only then"
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Open Main.java",

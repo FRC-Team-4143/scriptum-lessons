@@ -25,7 +25,28 @@
 			}
 		},
 		{
-			"title": "Checking divisors",
+			"title": "Searching, and the empty case",
+			"say": {
+				"never": "To find something in a word or a list, check one item at a time and `return true` the moment you find it. If you finish the loop without finding it, `return false`. Edge case: an empty word has no letters, so the loop never runs, and the answer is `false`. That's right, and it's why you test the edges.",
+				"bit": "Search by checking each item and returning true as soon as one matches; false after the loop. An empty input skips the loop and returns false."
+			},
+			"board": {
+				"code": "for (int i = 0; i < word.length(); i++) {\n    char c = word.charAt(i);\n    if (c == 'a' || c == 'e') return true;\n}\nreturn false;",
+				"language": "java",
+				"marks": [
+					{
+						"text": "return true",
+						"label": "stop early on a match"
+					},
+					{
+						"text": "return false;",
+						"label": "nothing matched, including an empty word"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Checking divisors",
 			"say": {
 				"never": "To test whether `n` is prime, try dividing by every number from 2 up to just below n. If any of them divides evenly (no remainder), it's not prime. Numbers below 2 are never prime, so the first line handles those.",
 				"bit": "To test a prime, try every divisor from 2 up to n - 1. One that divides evenly means it isn't prime."
@@ -42,7 +63,8 @@
 						"label": "d divides n"
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Open Main.java",

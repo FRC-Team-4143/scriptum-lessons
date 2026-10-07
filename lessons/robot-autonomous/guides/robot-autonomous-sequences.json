@@ -7,6 +7,23 @@
 		{
 			"title": "A sequence",
 			"say": {
+				"never": "A **sequence** runs commands one after another, like a recipe. Each command runs until it finishes, and then the next one starts. For example: walk to the door, open it, walk through, close it.",
+				"bit": "A sequence runs commands one after another, each starting when the last finishes."
+			},
+			"board": {
+				"code": "Commands.sequence(\n    new WalkToDoor(),\n    new OpenDoor(),\n    new WalkThrough(),\n    new CloseDoor())",
+				"language": "java",
+				"marks": [
+					{
+						"text": "Commands.sequence(",
+						"label": "one after another"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: A sequence",
+			"say": {
 				"never": "A **sequence** runs commands one after another, like a recipe. Each command runs until it finishes, and then the next one starts. For example: drive 5 meters, turn 45 degrees, drive 2 more, then shoot for 2 seconds.",
 				"bit": "Each command runs until it finishes, then the next starts."
 			},
@@ -22,10 +39,32 @@
 						"label": "shoot for two seconds, then stop"
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Don't write it eight times",
+			"say": {
+				"never": "Doing the same two steps three times? Don't write six commands. A `for` loop adds the pair to a group as many times as you ask, so you write the two steps once.",
+				"bit": "Repeat a pattern by adding it in a `for` loop instead of writing it out."
+			},
+			"board": {
+				"code": "SequentialCommandGroup routine = new SequentialCommandGroup();\nfor (int i = 1; i <= 3; i++) {\n    routine.addCommands(\n        new WalkToDoor(),\n        new Wave());\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "for (int i = 1; i <= 3; i++)",
+						"label": "three repeats"
+					},
+					{
+						"text": "routine.addCommands(",
+						"label": "the same pair each time"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Don't write it eight times",
 			"say": {
 				"never": "A square is the same two steps four times: drive, then turn. Writing eight commands by hand is boring and easy to get wrong. A `for` loop repeats `addCommands` four times for you, so you write the two steps once.",
 				"bit": "A square is the same two steps, four times. A loop adds them."
@@ -42,7 +81,8 @@
 						"label": "90, 180, 270, 360"
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Open Autos.java",

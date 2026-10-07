@@ -7,6 +7,31 @@
 		{
 			"title": "Two parts",
 			"say": {
+				"never": "A **recursive** method is one that calls *itself* on a smaller version of the problem, until it reaches a case so small it can just answer. That small case is the **base case**. Counting the dots in a triangle of dots: one row has 1 dot (the base case). More rows are just the bottom row plus a smaller triangle.",
+				"bit": "A recursive method calls itself on a smaller problem until a base case answers directly."
+			},
+			"board": {
+				"code": "public static int triangle(int rows) {\n    if (rows <= 1) {\n        return rows;\n    }\n    return rows + triangle(rows - 1);\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "if (rows <= 1)",
+						"label": "the base case"
+					},
+					{
+						"text": "triangle(rows - 1)",
+						"label": "a smaller version"
+					},
+					{
+						"text": "rows +",
+						"label": "combine the answers"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Two parts",
+			"say": {
 				"never": "A **recursive** method is one that calls *itself* on a smaller version of the problem, until it reaches a case so small it can just answer. That small case is the **base case**. For factorial, `factorial(1)` is simply 1. Bigger numbers hand the work to a smaller call.",
 				"bit": "A recursive method calls itself on a smaller input until it reaches a case it can answer directly."
 			},
@@ -26,7 +51,8 @@
 						"label": "combine with what's left"
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Trace it",

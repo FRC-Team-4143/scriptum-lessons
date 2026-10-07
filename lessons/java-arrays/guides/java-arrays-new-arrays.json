@@ -8,6 +8,27 @@
 			"title": "Don't change theirs",
 			"say": {
 				"never": "When someone hands you an array, you're both looking at the *same* boxes. If you change them, you change the original too, which might surprise them. To be safe, make a **new** array the same length, fill it with your answers, and give that back instead.",
+				"bit": "Arrays are shared, so editing `points[i]` edits the caller's array. Build and return a new one."
+			},
+			"board": {
+				"code": "int[] shifted = new int[points.length];\nfor (int i = 0; i < points.length; i++) {\n    shifted[i] = points[i] + 10;\n}\nreturn shifted;",
+				"language": "java",
+				"marks": [
+					{
+						"text": "new int[points.length]",
+						"label": "a fresh array, same length"
+					},
+					{
+						"text": "shifted[i] =",
+						"label": "write into the new one only"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Don't change theirs",
+			"say": {
+				"never": "When someone hands you an array, you're both looking at the *same* boxes. If you change them, you change the original too, which might surprise them. To be safe, make a **new** array the same length, fill it with your answers, and give that back instead.",
 				"bit": "Changing `values[i]` changes the caller's array too: they share it. Make a new one the same length and fill that."
 			},
 			"board": {
@@ -22,7 +43,8 @@
 						"label": "fill the new one"
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Sorting a copy",
@@ -65,5 +87,5 @@
 			}
 		}
 	],
-	"kind": "concept"
+	"kind": "mixed"
 }
