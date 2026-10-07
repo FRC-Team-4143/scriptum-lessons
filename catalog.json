@@ -1,0 +1,2413 @@
+{
+	"schemaVersion": 3,
+	"lessons": [
+		{
+			"id": "editor-basics",
+			"order": 1,
+			"track": "Tools",
+			"title": "Meet the Editor",
+			"description": "Your first steps in the code editor: files, folders, saving, the terminal, and running a program. No experience needed.",
+			"kind": "plain-java",
+			"subdir": "lessons/editor-basics/project",
+			"checkpoints": [
+				{
+					"id": "make-folder",
+					"title": "Make a folder",
+					"description": "Make a new folder called my-team.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/editor-basics/checkpoints/verify/make-folder.sh"
+					}
+				},
+				{
+					"id": "make-file",
+					"title": "Make a file",
+					"description": "Make a file called about.txt inside my-team, with a sentence in it.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/editor-basics/checkpoints/verify/make-file.sh"
+					}
+				},
+				{
+					"id": "rename-file",
+					"title": "Rename a file",
+					"description": "Rename untitled.txt to team.txt.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/editor-basics/checkpoints/verify/rename-file.sh"
+					}
+				},
+				{
+					"id": "delete-file",
+					"title": "Delete a file",
+					"description": "Delete delete-me.txt.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/editor-basics/checkpoints/verify/delete-file.sh"
+					}
+				},
+				{
+					"id": "edit-and-run",
+					"title": "Run a program",
+					"description": "Put your name in Main.java and run it.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/editor-basics/checkpoints/verify/edit-and-run.sh"
+					}
+				}
+			]
+		},
+		{
+			"id": "git-basics",
+			"order": 5,
+			"track": "Tools",
+			"title": "Git Basics",
+			"description": "Commit, branch, merge, resolve a conflict, and rebase across five small scenario repos.",
+			"kind": "git",
+			"subdir": "lessons/git-basics/project",
+			"setupScript": "lessons/git-basics/checkpoints/setup.sh",
+			"checkpoints": [
+				{
+					"id": "first-commit",
+					"title": "First commit",
+					"description": "Add your name to roster.txt and commit it with a real message.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/git-basics/checkpoints/verify/first-commit.sh"
+					}
+				},
+				{
+					"id": "feature-branch",
+					"title": "Feature branch",
+					"description": "Branch off develop as issue-12-<description> and make at least two commits.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/git-basics/checkpoints/verify/feature-branch.sh"
+					}
+				},
+				{
+					"id": "merge",
+					"title": "Merge",
+					"description": "Merge the finished issue-7-auto-distance branch into develop.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/git-basics/checkpoints/verify/merge.sh"
+					}
+				},
+				{
+					"id": "merge-conflict",
+					"title": "Merge conflict",
+					"description": "Merge issue-9-max-speed into develop and resolve the conflict.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/git-basics/checkpoints/verify/merge-conflict.sh"
+					}
+				},
+				{
+					"id": "rebase",
+					"title": "Rebase",
+					"description": "Rebase issue-15-led-colors onto the latest develop.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/git-basics/checkpoints/verify/rebase.sh"
+					}
+				}
+			]
+		},
+		{
+			"id": "advantagescope-intro",
+			"order": 7,
+			"track": "Tools",
+			"title": "AdvantageScope",
+			"description": "Configure AdvantageScope's layout to display already-published robot telemetry.",
+			"kind": "robot",
+			"subdir": "lessons/advantagescope-intro/project",
+			"restrictTools": [
+				"scope"
+			],
+			"checkpoints": [
+				{
+					"id": "flywheel-graph",
+					"title": "Flywheel line graph",
+					"description": "A Line Graph tab plots FlywheelRPM on its left axis.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/advantagescope-intro/checkpoints/verify/flywheel-graph.sh"
+					}
+				},
+				{
+					"id": "flywheel-axis-scale",
+					"title": "Locked axis scale",
+					"description": "The Line Graph's left Y axis is locked to roughly 0-3000.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/advantagescope-intro/checkpoints/verify/flywheel-axis-scale.sh"
+					}
+				},
+				{
+					"id": "flywheel-rpm-differentiated",
+					"title": "Differentiated flywheel RPM",
+					"description": "FlywheelRPM also plots on the right axis with the Differentiate filter applied.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/advantagescope-intro/checkpoints/verify/flywheel-rpm-differentiated.sh"
+					}
+				},
+				{
+					"id": "game-piece-discrete",
+					"title": "Game piece discrete field",
+					"description": "GamePieceLoaded is added to the Line Graph's discrete field.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/advantagescope-intro/checkpoints/verify/game-piece-discrete.sh"
+					}
+				},
+				{
+					"id": "field2d-figure-eight",
+					"title": "2D field pose",
+					"description": "A 2D Field tab plots RobotPose2d on the Evergreen field.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/advantagescope-intro/checkpoints/verify/field2d-figure-eight.sh"
+					}
+				},
+				{
+					"id": "field3d-figure-eight",
+					"title": "3D field pose",
+					"description": "A 3D Field tab plots RobotPose3d on the Evergreen field, camera set to Orbit Robot.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/advantagescope-intro/checkpoints/verify/field3d-figure-eight.sh"
+					}
+				},
+				{
+					"id": "swerve-tab",
+					"title": "Swerve tab",
+					"description": "A Swerve tab plots module states, chassis speeds, and chassis rotation.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/advantagescope-intro/checkpoints/verify/swerve-tab.sh"
+					}
+				},
+				{
+					"id": "flywheel-target-rpm-tunable",
+					"title": "Tuned flywheel target",
+					"description": "FlywheelTargetRPM was written from AdvantageScope's Tuning Mode.",
+					"verifier": {
+						"type": "nt4-value",
+						"topic": "/AdvantageKit/RealOutputs/FlywheelTargetRPM",
+						"check": "differs-from-default",
+						"expected": 3000
+					}
+				}
+			]
+		},
+		{
+			"id": "elastic-intro",
+			"order": 8,
+			"track": "Tools",
+			"title": "Elastic",
+			"description": "Configure Elastic's dashboard layout to display already-published robot telemetry.",
+			"kind": "robot",
+			"subdir": "lessons/elastic-intro/project",
+			"restrictTools": [
+				"elastic"
+			],
+			"checkpoints": [
+				{
+					"id": "text-display-counter",
+					"title": "Counter text display",
+					"description": "A Text Display widget is bound to Counter.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/elastic-intro/checkpoints/verify/text-display-counter.sh"
+					}
+				},
+				{
+					"id": "large-text-display-status",
+					"title": "Status large text display",
+					"description": "A Large Text Display widget is bound to StatusMessage.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/elastic-intro/checkpoints/verify/large-text-display-status.sh"
+					}
+				},
+				{
+					"id": "number-slider-shooter-angle",
+					"title": "Shooter angle number slider",
+					"description": "A Number Slider widget writes ShooterAngleDegrees.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/elastic-intro/checkpoints/verify/number-slider-shooter-angle.sh"
+					}
+				},
+				{
+					"id": "shooter-angle-live",
+					"title": "Shooter angle live write",
+					"description": "ShooterAngleDegrees was dragged live from Elastic's Number Slider.",
+					"verifier": {
+						"type": "nt4-value",
+						"topic": "/ShooterAngleDegrees",
+						"check": "differs-from-default",
+						"expected": 0
+					}
+				},
+				{
+					"id": "number-bar-climber",
+					"title": "Climber speed number bar",
+					"description": "A Number Bar widget is bound to ClimberSpeed.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/elastic-intro/checkpoints/verify/number-bar-climber.sh"
+					}
+				},
+				{
+					"id": "voltage-view-battery",
+					"title": "Battery voltage view",
+					"description": "A Voltage View widget is bound to BatteryVoltage.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/elastic-intro/checkpoints/verify/voltage-view-battery.sh"
+					}
+				},
+				{
+					"id": "radial-gauge-gyro",
+					"title": "Gyro heading radial gauge",
+					"description": "A Radial Gauge widget is bound to GyroHeadingDegrees.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/elastic-intro/checkpoints/verify/radial-gauge-gyro.sh"
+					}
+				},
+				{
+					"id": "graph-intake-current",
+					"title": "Intake current graph",
+					"description": "A Graph widget is bound to IntakeCurrentAmps.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/elastic-intro/checkpoints/verify/graph-intake-current.sh"
+					}
+				},
+				{
+					"id": "match-time-remaining",
+					"title": "Match time widget",
+					"description": "A Match Time widget is bound to MatchTimeRemaining.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/elastic-intro/checkpoints/verify/match-time-remaining.sh"
+					}
+				},
+				{
+					"id": "boolean-box-game-piece",
+					"title": "Game piece boolean box",
+					"description": "A Boolean Box widget is bound to GamePieceLoaded.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/elastic-intro/checkpoints/verify/boolean-box-game-piece.sh"
+					}
+				},
+				{
+					"id": "combo-box-chooser-auto-routine",
+					"title": "Auto routine combo box chooser",
+					"description": "A ComboBox Chooser widget is bound to AutoRoutine.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/elastic-intro/checkpoints/verify/combo-box-chooser-auto-routine.sh"
+					}
+				},
+				{
+					"id": "split-button-chooser-auto-routine",
+					"title": "Auto routine split button chooser",
+					"description": "A Split Button Chooser widget is bound to AutoRoutine.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/elastic-intro/checkpoints/verify/split-button-chooser-auto-routine.sh"
+					}
+				},
+				{
+					"id": "auto-routine-live",
+					"title": "Auto routine live pick",
+					"description": "AutoRoutine was picked live from Elastic's chooser.",
+					"verifier": {
+						"type": "nt4-value",
+						"topic": "/SmartDashboard/AutoRoutine/selected",
+						"check": "differs-from-default",
+						"expected": "Do nothing"
+					}
+				},
+				{
+					"id": "text-display-auto-delay",
+					"title": "Auto delay text display",
+					"description": "A Text Display widget bound to AutoDelaySeconds has Show Submit Button on.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/elastic-intro/checkpoints/verify/text-display-auto-delay.sh"
+					}
+				},
+				{
+					"id": "auto-delay-live",
+					"title": "Auto delay live submit",
+					"description": "AutoDelaySeconds was submitted live from Elastic's Text Display.",
+					"verifier": {
+						"type": "nt4-value",
+						"topic": "/AutoDelaySeconds",
+						"check": "differs-from-default",
+						"expected": 0
+					}
+				},
+				{
+					"id": "toggle-button-brake-mode",
+					"title": "Brake mode toggle button",
+					"description": "BrakeModeEnabledButton was toggled live from Elastic's Toggle Button.",
+					"verifier": {
+						"type": "nt4-value",
+						"topic": "/BrakeModeEnabledButton",
+						"check": "differs-from-default",
+						"expected": false
+					}
+				},
+				{
+					"id": "toggle-switch-brake-mode",
+					"title": "Brake mode toggle switch",
+					"description": "BrakeModeEnabledSwitch was toggled live from Elastic's Toggle Switch.",
+					"verifier": {
+						"type": "nt4-value",
+						"topic": "/BrakeModeEnabledSwitch",
+						"check": "differs-from-default",
+						"expected": false
+					}
+				},
+				{
+					"id": "single-color-view-status",
+					"title": "Status single color view",
+					"description": "A Single Color View widget is bound to StatusColorHex.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/elastic-intro/checkpoints/verify/single-color-view-status.sh"
+					}
+				},
+				{
+					"id": "multi-color-view-led-strip",
+					"title": "LED strip multi color view",
+					"description": "A Multi Color View widget is bound to LedStripColorsHex.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/elastic-intro/checkpoints/verify/multi-color-view-led-strip.sh"
+					}
+				}
+			]
+		},
+		{
+			"id": "choreo-intro",
+			"order": 9,
+			"track": "Tools",
+			"title": "Choreo",
+			"description": "Build two different autonomous paths with real constraints and confirm they generate correctly.",
+			"kind": "robot",
+			"subdir": "lessons/choreo-intro/project",
+			"restrictTools": [
+				"choreo"
+			],
+			"checkpoints": [
+				{
+					"id": "has-waypoints",
+					"title": "Paths have waypoints",
+					"description": "Every path has at least four waypoints.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/choreo-intro/checkpoints/verify/has-waypoints.sh"
+					}
+				},
+				{
+					"id": "has-two-distinct-paths",
+					"title": "Two different paths",
+					"description": "At least two paths exist, and they aren't just copies of each other.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/choreo-intro/checkpoints/verify/has-two-distinct-paths.sh"
+					}
+				},
+				{
+					"id": "has-constraint",
+					"title": "Path has a constraint",
+					"description": "The path has at least one enabled constraint (Max Velocity, Max Angular Velocity, or Keep In Rectangle).",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/choreo-intro/checkpoints/verify/has-constraint.sh"
+					}
+				},
+				{
+					"id": "generates-successfully",
+					"title": "Path generates",
+					"description": "Choreo successfully solves the path into a trajectory.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/choreo-intro/checkpoints/verify/generates-successfully.sh"
+					}
+				}
+			]
+		},
+		{
+			"id": "hello-world",
+			"order": 10,
+			"track": "Java Programming",
+			"title": "Hello, World",
+			"description": "Basic java hello world project",
+			"kind": "plain-java",
+			"subdir": "lessons/hello-world/project",
+			"checkpoints": [
+				{
+					"id": "prints-hello-world",
+					"title": "Prints Hello, World!",
+					"description": "Running Main prints \"Hello, World!\" to standard out.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/hello-world/checkpoints/verify/prints-hello-world.sh"
+					}
+				}
+			]
+		},
+		{
+			"id": "java-variables",
+			"order": 11,
+			"track": "Java Programming",
+			"title": "Variables",
+			"description": "Declare variables, define a constant, and define your first enum.",
+			"kind": "plain-java",
+			"subdir": "lessons/java-variables/project",
+			"requires": [
+				"hello-world"
+			],
+			"checkpoints": [
+				{
+					"id": "local-variables",
+					"title": "Local variables",
+					"description": "main() declares and prints an int, double, boolean, and String local variable.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-variables/checkpoints/verify/local-variables.sh"
+					}
+				},
+				{
+					"id": "team-name-constant",
+					"title": "Team name constant",
+					"description": "A public static final TEAM_NAME constant equal to \"Team 4143\" (team standard: SCREAMING_SNAKE_CASE).",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-variables/checkpoints/verify/team-name-constant.sh"
+					}
+				},
+				{
+					"id": "alliance-enum",
+					"title": "Alliance enum",
+					"description": "An ALLIANCE enum with RED and BLUE values (team standard: SCREAMING_SNAKE_CASE).",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-variables/checkpoints/verify/alliance-enum.sh"
+					}
+				},
+				{
+					"id": "match-period-enum",
+					"title": "Match period enum",
+					"description": "A MATCH_PERIOD enum with AUTONOMOUS, TELEOP, and ENDGAME values (team standard: SCREAMING_SNAKE_CASE).",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-variables/checkpoints/verify/match-period-enum.sh"
+					}
+				},
+				{
+					"id": "max-speed-constant",
+					"title": "Max speed constant",
+					"description": "A public static final MAX_SPEED constant equal to 5.0 (team standard: SCREAMING_SNAKE_CASE).",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-variables/checkpoints/verify/max-speed-constant.sh"
+					}
+				}
+			]
+		},
+		{
+			"id": "java-operators",
+			"order": 12,
+			"track": "Java Programming",
+			"title": "Operators",
+			"description": "Do arithmetic, conversions, and comparisons with Java's operators.",
+			"kind": "plain-java",
+			"subdir": "lessons/java-operators/project",
+			"requires": [
+				"java-variables"
+			],
+			"checkpoints": [
+				{
+					"id": "add-ints",
+					"title": "Add two ints",
+					"description": "addInts(a, b) returns a + b.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-operators/checkpoints/verify/add-ints.sh"
+					}
+				},
+				{
+					"id": "inches-to-meters",
+					"title": "Inches to meters",
+					"description": "inchesToMeters(inches) converts using 1 inch = 0.0254 meters.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-operators/checkpoints/verify/inches-to-meters.sh"
+					}
+				},
+				{
+					"id": "is-even",
+					"title": "Is even",
+					"description": "isEven(value) uses the modulo operator to detect even numbers.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-operators/checkpoints/verify/is-even.sh"
+					}
+				},
+				{
+					"id": "subtract-ints",
+					"title": "Subtract two ints",
+					"description": "subtractInts(a, b) returns a - b.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-operators/checkpoints/verify/subtract-ints.sh"
+					}
+				},
+				{
+					"id": "meters-to-inches",
+					"title": "Meters to inches",
+					"description": "metersToInches(meters) converts using 1 inch = 0.0254 meters.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-operators/checkpoints/verify/meters-to-inches.sh"
+					}
+				},
+				{
+					"id": "apply-assignments",
+					"title": "Assignment operators",
+					"description": "applyAssignments(start) chains =, +=, -=, *=, and /= in order.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-operators/checkpoints/verify/apply-assignments.sh"
+					}
+				}
+			]
+		},
+		{
+			"id": "java-conditions",
+			"order": 13,
+			"track": "Java Programming",
+			"title": "Conditions",
+			"description": "Write if/else chains and switch statements.",
+			"kind": "plain-java",
+			"subdir": "lessons/java-conditions/project",
+			"requires": [
+				"java-operators"
+			],
+			"checkpoints": [
+				{
+					"id": "battery-status",
+					"title": "Battery status",
+					"description": "batteryStatus(percent) maps a percentage to EMPTY/LOW/MEDIUM/FULL.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-conditions/checkpoints/verify/battery-status.sh"
+					}
+				},
+				{
+					"id": "drive-mode-name",
+					"title": "Drive mode name",
+					"description": "driveModeName(mode) uses a switch statement to name a drive mode.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-conditions/checkpoints/verify/drive-mode-name.sh"
+					}
+				},
+				{
+					"id": "can-enable",
+					"title": "Can enable",
+					"description": "canEnable(hasComms, eStopped) combines conditions with && and !.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-conditions/checkpoints/verify/can-enable.sh"
+					}
+				},
+				{
+					"id": "is-weekend",
+					"title": "Is weekend",
+					"description": "isWeekend(day) uses || to check for Saturday or Sunday.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-conditions/checkpoints/verify/is-weekend.sh"
+					}
+				},
+				{
+					"id": "motor-direction",
+					"title": "Motor direction",
+					"description": "motorDirection(isReversed) uses the ternary operator.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-conditions/checkpoints/verify/motor-direction.sh"
+					}
+				}
+			]
+		},
+		{
+			"id": "java-loops",
+			"order": 14,
+			"track": "Java Programming",
+			"title": "Loops",
+			"description": "Write for loops instead of the dangerous while loop.",
+			"kind": "plain-java",
+			"subdir": "lessons/java-loops/project",
+			"requires": [
+				"java-conditions"
+			],
+			"checkpoints": [
+				{
+					"id": "sum-loop",
+					"title": "Sum with a loop",
+					"description": "sumTo(n) adds up 1..n using a for loop.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-loops/checkpoints/verify/sum-loop.sh"
+					}
+				},
+				{
+					"id": "count-divisible-by-three",
+					"title": "Count divisible by three",
+					"description": "countDivisibleByThree(n) counts multiples of 3 from 1..n.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-loops/checkpoints/verify/count-divisible-by-three.sh"
+					}
+				},
+				{
+					"id": "fizz-buzz",
+					"title": "FizzBuzz",
+					"description": "fizzBuzz(n) is the classic FizzBuzz exercise, built with a for loop.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-loops/checkpoints/verify/fizz-buzz.sh"
+					}
+				}
+			]
+		},
+		{
+			"id": "java-arrays",
+			"order": 15,
+			"track": "Java Programming",
+			"title": "Arrays",
+			"description": "Write methods that take and return arrays.",
+			"kind": "plain-java",
+			"subdir": "lessons/java-arrays/project",
+			"requires": [
+				"java-loops"
+			],
+			"checkpoints": [
+				{
+					"id": "array-max",
+					"title": "Array max",
+					"description": "max(values) returns the largest element.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-arrays/checkpoints/verify/array-max.sh"
+					}
+				},
+				{
+					"id": "array-average",
+					"title": "Array average",
+					"description": "average(values) returns the mean as a double.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-arrays/checkpoints/verify/array-average.sh"
+					}
+				},
+				{
+					"id": "array-double-all",
+					"title": "Double every element",
+					"description": "doubleAll(values) returns a new array without mutating the input.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-arrays/checkpoints/verify/array-double-all.sh"
+					}
+				},
+				{
+					"id": "array-contains",
+					"title": "Array contains",
+					"description": "contains(values, target) searches the array for a value.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-arrays/checkpoints/verify/array-contains.sh"
+					}
+				},
+				{
+					"id": "array-sort",
+					"title": "Sort an array",
+					"description": "sort(values) returns a new ascending-sorted array without mutating the input.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-arrays/checkpoints/verify/array-sort.sh"
+					}
+				},
+				{
+					"id": "array-fibonacci",
+					"title": "Fibonacci sequence",
+					"description": "fibonacci(n) builds the first n Fibonacci numbers into a new array.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-arrays/checkpoints/verify/array-fibonacci.sh"
+					}
+				}
+			]
+		},
+		{
+			"id": "java-methods",
+			"order": 16,
+			"track": "Java Programming",
+			"title": "Methods",
+			"description": "Write reusable methods, build new methods on top of them instead of copy-pasting, and practice on a few programming-course classics.",
+			"kind": "plain-java",
+			"subdir": "lessons/java-methods/project",
+			"requires": [
+				"java-arrays"
+			],
+			"checkpoints": [
+				{
+					"id": "clamp",
+					"title": "Clamp",
+					"description": "clamp(value, min, max) squeezes value into the [min, max] range.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-methods/checkpoints/verify/clamp.sh"
+					}
+				},
+				{
+					"id": "scale-joystick",
+					"title": "Scale joystick",
+					"description": "scaleJoystick(rawInput, sensitivity) scales and clamps, reusing clamp.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-methods/checkpoints/verify/scale-joystick.sh"
+					}
+				},
+				{
+					"id": "is-prime",
+					"title": "Is prime",
+					"description": "isPrime(n) returns whether n is a prime number.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-methods/checkpoints/verify/is-prime.sh"
+					}
+				},
+				{
+					"id": "factorial",
+					"title": "Factorial",
+					"description": "factorial(n) returns n!.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-methods/checkpoints/verify/factorial.sh"
+					}
+				},
+				{
+					"id": "reverse-string",
+					"title": "Reverse a string",
+					"description": "reverseString(s) returns a new String with s reversed.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-methods/checkpoints/verify/reverse-string.sh"
+					}
+				},
+				{
+					"id": "is-palindrome",
+					"title": "Is palindrome",
+					"description": "isPalindrome(s) returns whether s reads the same backwards, reusing reverseString.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-methods/checkpoints/verify/is-palindrome.sh"
+					}
+				}
+			]
+		},
+		{
+			"id": "java-classes-objects",
+			"order": 17,
+			"track": "Java Programming",
+			"title": "Classes & Objects",
+			"description": "Build a small BankAccount class: fields, a constructor, and encapsulation - objects that protect their own state instead of exposing raw data to be mutated directly.",
+			"kind": "plain-java",
+			"subdir": "lessons/java-classes-objects/project",
+			"requires": [
+				"java-methods"
+			],
+			"checkpoints": [
+				{
+					"id": "deposit",
+					"title": "Deposit",
+					"description": "deposit(amount) adds to the balance (and a negative initial balance is clamped to 0).",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-classes-objects/checkpoints/verify/deposit.sh"
+					}
+				},
+				{
+					"id": "withdraw",
+					"title": "Withdraw",
+					"description": "withdraw(amount) subtracts and returns true on success, or leaves the balance untouched and returns false.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-classes-objects/checkpoints/verify/withdraw.sh"
+					}
+				},
+				{
+					"id": "transfer",
+					"title": "Transfer",
+					"description": "transfer(recipient, amount) moves money between two accounts, reusing withdraw and deposit.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-classes-objects/checkpoints/verify/transfer.sh"
+					}
+				},
+				{
+					"id": "independent-objects",
+					"title": "Independent objects",
+					"description": "Two BankAccount objects keep their own, separate state.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-classes-objects/checkpoints/verify/independent-objects.sh"
+					}
+				}
+			]
+		},
+		{
+			"id": "java-recursion",
+			"order": 18,
+			"track": "Java Programming",
+			"title": "Recursion",
+			"description": "Solve a few problems you already solved with loops, using recursion instead - methods that call themselves down to a base case.",
+			"kind": "plain-java",
+			"subdir": "lessons/java-recursion/project",
+			"requires": [
+				"java-methods"
+			],
+			"checkpoints": [
+				{
+					"id": "factorial-recursive",
+					"title": "Factorial (recursive)",
+					"description": "factorial(n) returns n!, computed recursively.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-recursion/checkpoints/verify/factorial-recursive.sh"
+					}
+				},
+				{
+					"id": "fibonacci-recursive",
+					"title": "Fibonacci (recursive)",
+					"description": "fibonacci(n) returns the nth Fibonacci number, computed recursively.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-recursion/checkpoints/verify/fibonacci-recursive.sh"
+					}
+				},
+				{
+					"id": "sum-digits",
+					"title": "Sum of digits",
+					"description": "sumDigits(n) returns the sum of n's digits, computed recursively.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-recursion/checkpoints/verify/sum-digits.sh"
+					}
+				},
+				{
+					"id": "reverse-string-recursive",
+					"title": "Reverse a string (recursive)",
+					"description": "reverseString(s) returns s reversed, computed recursively.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-recursion/checkpoints/verify/reverse-string-recursive.sh"
+					}
+				}
+			]
+		},
+		{
+			"id": "java-inheritance",
+			"order": 19,
+			"track": "Java Programming",
+			"title": "Inheritance",
+			"description": "Extend the BankAccount class from Classes & Objects with two subclasses - one that adds a new method, one that overrides an existing one.",
+			"kind": "plain-java",
+			"subdir": "lessons/java-inheritance/project",
+			"requires": [
+				"java-classes-objects"
+			],
+			"checkpoints": [
+				{
+					"id": "savings-interest",
+					"title": "Savings interest",
+					"description": "SavingsAccount.applyInterest() deposits balance * interest_rate.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-inheritance/checkpoints/verify/savings-interest.sh"
+					}
+				},
+				{
+					"id": "checking-overdraft",
+					"title": "Checking overdraft",
+					"description": "CheckingAccount's overridden withdraw allows going negative up to the overdraft limit.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-inheritance/checkpoints/verify/checking-overdraft.sh"
+					}
+				},
+				{
+					"id": "checking-normal-withdraw",
+					"title": "Checking normal withdraw",
+					"description": "A withdrawal that never touches the overdraft still behaves like a normal withdraw.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-inheritance/checkpoints/verify/checking-normal-withdraw.sh"
+					}
+				},
+				{
+					"id": "inherited-deposit",
+					"title": "Inherited methods",
+					"description": "deposit, getBalance, and transfer still work as inherited, with no extra code.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-inheritance/checkpoints/verify/inherited-deposit.sh"
+					}
+				}
+			]
+		},
+		{
+			"id": "robot-drivetrain",
+			"order": 20,
+			"track": "FRC Robot",
+			"title": "Motors and Drivetrains",
+			"description": "Drive a differential drive robot in simulation with MWLib. Learn your first Java (methods, variables, operators) while writing tank drive and arcade drive.",
+			"kind": "robot",
+			"subdir": "lessons/robot-drivetrain/project",
+			"requires": [
+				"git-basics"
+			],
+			"checkpoints": [
+				{
+					"id": "teleop-code",
+					"title": "Your drive code",
+					"description": "Robot.java declares its own variables and uses arithmetic for arcade drive from the left stick Y and right stick X.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/robot-drivetrain/checkpoints/verify/teleop-code.sh"
+					}
+				},
+				{
+					"id": "drives-forward",
+					"title": "Drives forward",
+					"description": "Push the left stick forward (W) until both sides hit full speed.",
+					"verifier": {
+						"type": "nt4-value",
+						"topic": "/AdvantageKit/RealOutputs/Check/Drive/LeftOutput/Max",
+						"check": "range",
+						"min": 0.9,
+						"max": 1
+					}
+				},
+				{
+					"id": "drives-backward",
+					"title": "Drives backward",
+					"description": "Pull the left stick back (S) until the right side hits full reverse.",
+					"verifier": {
+						"type": "nt4-value",
+						"topic": "/AdvantageKit/RealOutputs/Check/Drive/RightOutput/Min",
+						"check": "range",
+						"min": -1,
+						"max": -0.9
+					}
+				},
+				{
+					"id": "turns-in-place",
+					"title": "Turns in place",
+					"description": "Push the right stick left or right (Arrow Left / Right) so one side drives forward and the other backward.",
+					"verifier": {
+						"type": "nt4-value",
+						"topic": "/AdvantageKit/RealOutputs/Check/Drive/Turn/Max",
+						"check": "range",
+						"min": 1.5,
+						"max": 2
+					}
+				}
+			]
+		},
+		{
+			"id": "robot-sensors",
+			"order": 21,
+			"track": "FRC Robot",
+			"title": "Sensors and Feedback",
+			"description": "Turn encoder readings into speed and distance, ignore stick drift with an if statement, then drive exactly 2 meters with bang-bang control.",
+			"kind": "robot",
+			"subdir": "lessons/robot-sensors/project",
+			"requires": [
+				"robot-drivetrain"
+			],
+			"checkpoints": [
+				{
+					"id": "deadband-and-ifs",
+					"title": "Deadband and if statements",
+					"description": "Robot.java has a DEADBAND constant used in an if statement on each stick, and an if / else in autonomousPeriodic().",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/robot-sensors/checkpoints/verify/deadband.sh"
+					}
+				},
+				{
+					"id": "linear-speed",
+					"title": "Linear speed",
+					"description": "Drive both sides forward at full speed. Robot/LinearSpeed should read about 5 m/s.",
+					"verifier": {
+						"type": "nt4-value",
+						"topic": "/AdvantageKit/RealOutputs/Check/Robot/LinearSpeed/Max",
+						"check": "range",
+						"min": 3,
+						"max": 6.5
+					}
+				},
+				{
+					"id": "angular-speed",
+					"title": "Angular speed",
+					"description": "Spin in place at full speed (one stick forward, one back, left side backward). Robot/AngularSpeed should be positive.",
+					"verifier": {
+						"type": "nt4-value",
+						"topic": "/AdvantageKit/RealOutputs/Check/Robot/AngularSpeed/Max",
+						"check": "range",
+						"min": 10,
+						"max": 25
+					}
+				},
+				{
+					"id": "drive-two-meters",
+					"title": "Drive 2 meters",
+					"description": "Run Auto and let the robot stop. Robot/Distance should read about 2 meters (it may coast a little past).",
+					"verifier": {
+						"type": "nt4-value",
+						"topic": "/AdvantageKit/RealOutputs/Robot/Distance",
+						"check": "range",
+						"min": 1.95,
+						"max": 2.8
+					}
+				}
+			]
+		},
+		{
+			"id": "robot-drive-math",
+			"order": 22,
+			"track": "FRC Robot",
+			"title": "Drive Math and Methods",
+			"description": "Move the drivetrain math into reusable methods: unit conversion, speeds, arcade drive, and an average built with an array and a for loop.",
+			"kind": "robot",
+			"subdir": "lessons/robot-drive-math/project",
+			"requires": [
+				"robot-sensors"
+			],
+			"checkpoints": [
+				{
+					"id": "rotations-to-meters",
+					"title": "rotationsToMeters",
+					"description": "DriveMath.rotationsToMeters(rotations, radius) converts wheel rotations to meters.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/robot-drive-math/checkpoints/verify/rotations-to-meters.sh"
+					}
+				},
+				{
+					"id": "linear-speed",
+					"title": "linearSpeed",
+					"description": "DriveMath.linearSpeed(left, right) is the robot's forward speed.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/robot-drive-math/checkpoints/verify/linear-speed.sh"
+					}
+				},
+				{
+					"id": "angular-speed",
+					"title": "angularSpeed",
+					"description": "DriveMath.angularSpeed(left, right, trackWidth) is the robot's turning speed.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/robot-drive-math/checkpoints/verify/angular-speed.sh"
+					}
+				},
+				{
+					"id": "arcade-math",
+					"title": "arcadeToWheelSpeeds",
+					"description": "DriveMath.arcadeToWheelSpeeds(forward, turn) returns {left, right} and never goes past 1.0.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/robot-drive-math/checkpoints/verify/arcade-math.sh"
+					}
+				},
+				{
+					"id": "average",
+					"title": "average",
+					"description": "DriveMath.average(values) adds up an array with a for loop and divides by its length.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/robot-drive-math/checkpoints/verify/average.sh"
+					}
+				},
+				{
+					"id": "arcade-forward",
+					"title": "Arcade forward",
+					"description": "In Teleop, push the left stick forward. The drivetrain should drive forward through arcadeDrive.",
+					"verifier": {
+						"type": "nt4-value",
+						"topic": "/AdvantageKit/RealOutputs/Check/Drive/LeftOutput/Max",
+						"check": "range",
+						"min": 0.9,
+						"max": 1
+					}
+				},
+				{
+					"id": "arcade-turn",
+					"title": "Arcade turn",
+					"description": "In Teleop, push the right stick to the right. The right side should reverse.",
+					"verifier": {
+						"type": "nt4-value",
+						"topic": "/AdvantageKit/RealOutputs/Check/Drive/RightOutput/Min",
+						"check": "range",
+						"min": -1,
+						"max": -0.5
+					}
+				},
+				{
+					"id": "smoothed-speed",
+					"title": "Smoothed speed",
+					"description": "Drive forward at full speed in Teleop. Robot/SmoothedSpeed should read about 5 m/s.",
+					"verifier": {
+						"type": "nt4-value",
+						"topic": "/AdvantageKit/RealOutputs/Check/Robot/SmoothedSpeed/Max",
+						"check": "range",
+						"min": 3,
+						"max": 6.5
+					}
+				}
+			]
+		},
+		{
+			"id": "robot-odometry",
+			"order": 23,
+			"track": "FRC Robot",
+			"title": "Objects and Odometry",
+			"description": "Write an abstract OI class, then use WPILib kinematics and a pose estimator to track where the robot is.",
+			"kind": "robot",
+			"subdir": "lessons/robot-odometry/project",
+			"requires": [
+				"robot-drive-math"
+			],
+			"checkpoints": [
+				{
+					"id": "oi-class",
+					"title": "OI class",
+					"description": "OI has static getForward() and getTurn() methods, and Robot.java uses them instead of XboxController.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/robot-odometry/checkpoints/verify/oi-class.sh"
+					}
+				},
+				{
+					"id": "chassis-speeds",
+					"title": "Chassis speeds",
+					"description": "Drive forward at full speed. Drive/LinearSpeed (from kinematics) should read about 5 m/s.",
+					"verifier": {
+						"type": "nt4-value",
+						"topic": "/AdvantageKit/RealOutputs/Check/Drive/LinearSpeed/Max",
+						"check": "range",
+						"min": 3,
+						"max": 6.5
+					}
+				},
+				{
+					"id": "yaw",
+					"title": "Yaw",
+					"description": "Spin the robot counterclockwise (left). Drive/PoseYawDeg should become clearly positive.",
+					"verifier": {
+						"type": "nt4-value",
+						"topic": "/AdvantageKit/RealOutputs/Check/Drive/PoseYawDeg/Max",
+						"check": "range",
+						"min": 20,
+						"max": 180
+					}
+				},
+				{
+					"id": "pose-auto",
+					"title": "Drive to x = 3 m",
+					"description": "Run Auto and let the robot stop. Drive/PoseX should read about 3 meters.",
+					"verifier": {
+						"type": "nt4-value",
+						"topic": "/AdvantageKit/RealOutputs/Drive/PoseX",
+						"check": "range",
+						"min": 2.95,
+						"max": 3.9
+					}
+				}
+			]
+		},
+		{
+			"id": "robot-subsystems",
+			"order": 24,
+			"track": "FRC Robot",
+			"title": "Mechanisms and Subsystems",
+			"description": "Move the drivetrain into a subsystem, then build a shooter subsystem from a flywheel and a roller mechanism.",
+			"kind": "robot",
+			"subdir": "lessons/robot-subsystems/project",
+			"requires": [
+				"robot-odometry"
+			],
+			"checkpoints": [
+				{
+					"id": "shooter-registered",
+					"title": "Shooter registered",
+					"description": "RobotContainer registers the ShooterSubsystem so it runs.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/robot-subsystems/checkpoints/verify/shooter-registered.sh"
+					}
+				},
+				{
+					"id": "oi-buttons",
+					"title": "Shooter buttons",
+					"description": "OI reads the right bumper (shoot) and left bumper (index).",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/robot-subsystems/checkpoints/verify/oi-buttons.sh"
+					}
+				},
+				{
+					"id": "drive-from-subsystem",
+					"title": "Drive from the subsystem",
+					"description": "In Teleop, push the left stick forward. The drivetrain subsystem should drive the robot.",
+					"verifier": {
+						"type": "nt4-value",
+						"topic": "/AdvantageKit/RealOutputs/Check/Drive/LeftOutput/Max",
+						"check": "range",
+						"min": 0.9,
+						"max": 1
+					}
+				},
+				{
+					"id": "flywheel-spins",
+					"title": "Flywheel spins up",
+					"description": "Hold the shoot button until the flywheel reaches its speed.",
+					"verifier": {
+						"type": "nt4-value",
+						"topic": "/AdvantageKit/RealOutputs/Check/Subsystem/Shooter/FlywheelVelocity/Max",
+						"check": "range",
+						"min": 270,
+						"max": 340
+					}
+				},
+				{
+					"id": "roller-runs",
+					"title": "Roller runs",
+					"description": "Hold the index button. The roller should run at INDEX_DUTY_CYCLE.",
+					"verifier": {
+						"type": "nt4-value",
+						"topic": "/AdvantageKit/RealOutputs/Check/Subsystem/Shooter/RollerDuty/Max",
+						"check": "range",
+						"min": 0.3,
+						"max": 1
+					}
+				}
+			]
+		},
+		{
+			"id": "robot-control-theory",
+			"order": 25,
+			"track": "FRC Robot",
+			"title": "Control Theory",
+			"description": "Hold the flywheel at speed three ways: bang-bang, feedforward and PID. Then tune the gains and compare how each handles a disturbance.",
+			"kind": "robot",
+			"subdir": "lessons/robot-control-theory/project",
+			"requires": [
+				"robot-subsystems"
+			],
+			"checkpoints": [
+				{
+					"id": "bang-bang-written",
+					"title": "Bang-bang",
+					"description": "bangBang() runs the flywheel at full power while it is too slow and stops it once it is fast enough.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/robot-control-theory/checkpoints/verify/bang-bang-written.sh"
+					}
+				},
+				{
+					"id": "feedforward-written",
+					"title": "Feedforward",
+					"description": "feedforward() works out the power for the target speed from FLYWHEEL_KV.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/robot-control-theory/checkpoints/verify/feedforward-written.sh"
+					}
+				},
+				{
+					"id": "pid-selected",
+					"title": "PID selected and tuned",
+					"description": "FLYWHEEL_CONTROL is PID with a feedforward (kV) and some feedback (kP).",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/robot-control-theory/checkpoints/verify/pid-selected.sh"
+					}
+				},
+				{
+					"id": "spin-up-time",
+					"title": "Fast spin-up",
+					"description": "With your final settings, hold the right bumper. The flywheel should reach its speed in under about 1.5 seconds.",
+					"verifier": {
+						"type": "nt4-value",
+						"topic": "/AdvantageKit/RealOutputs/Subsystem/Shooter/SpinUpSeconds",
+						"check": "range",
+						"min": 0.05,
+						"max": 1.6
+					}
+				},
+				{
+					"id": "no-overshoot",
+					"title": "No big overshoot",
+					"description": "Start the robot fresh with your final settings. The flywheel should peak near its target speed, not far above it.",
+					"verifier": {
+						"type": "nt4-value",
+						"topic": "/AdvantageKit/RealOutputs/Check/Subsystem/Shooter/FlywheelVelocity/Max",
+						"check": "range",
+						"min": 290,
+						"max": 330
+					}
+				},
+				{
+					"id": "recovers-from-launch",
+					"title": "Recovers after a launch",
+					"description": "Hold the right bumper until the flywheel is at speed, then tap A. It should get back to speed in under about 0.8 seconds.",
+					"verifier": {
+						"type": "nt4-value",
+						"topic": "/AdvantageKit/RealOutputs/Subsystem/Shooter/RecoverySeconds",
+						"check": "range",
+						"min": 0.01,
+						"max": 0.8
+					}
+				}
+			]
+		},
+		{
+			"id": "robot-state-machines",
+			"order": 26,
+			"track": "FRC Robot",
+			"title": "State Machines and Commands",
+			"description": "Give the shooter a state machine and control it with commands bound to buttons.",
+			"kind": "robot",
+			"subdir": "lessons/robot-state-machines/project",
+			"requires": [
+				"robot-control-theory"
+			],
+			"checkpoints": [
+				{
+					"id": "bindings",
+					"title": "Button bindings",
+					"description": "OI binds the right bumper to ShooterCommands.shoot() and A to simulateBallLaunch().",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/robot-state-machines/checkpoints/verify/bindings.sh"
+					}
+				},
+				{
+					"id": "spin-up-first",
+					"title": "Spins up before shooting",
+					"description": "Hold the right bumper until the shooter reaches SHOOT. It must pass through SPIN_UP first (IDLE cannot jump to SHOOT).",
+					"verifier": {
+						"type": "nt4-value",
+						"topic": "/AdvantageKit/RealOutputs/Subsystem/Shooter/SpinUpSeconds",
+						"check": "range",
+						"min": 0.05,
+						"max": 1.6
+					}
+				},
+				{
+					"id": "recovers-from-launch",
+					"title": "Recovers after a launch",
+					"description": "Hold the right bumper, then tap A. The shooter should fall back to SPIN_UP and return to SHOOT, so the shot count reaches 2.",
+					"verifier": {
+						"type": "nt4-value",
+						"topic": "/AdvantageKit/RealOutputs/Check/Subsystem/Shooter/ShotCount/Max",
+						"check": "range",
+						"min": 2,
+						"max": 50
+					}
+				}
+			]
+		},
+		{
+			"id": "robot-autonomous",
+			"order": 27,
+			"track": "FRC Robot",
+			"title": "Autonomous",
+			"description": "Build Left and Right autonomous routines from drive, turn and shoot commands, and pick them from a chooser.",
+			"kind": "robot",
+			"subdir": "lessons/robot-autonomous/project",
+			"requires": [
+				"robot-state-machines"
+			],
+			"checkpoints": [
+				{
+					"id": "autos-in-chooser",
+					"title": "Autos in the chooser",
+					"description": "RobotContainer adds the Left Auto, Right Auto and Square Auto to the chooser.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/robot-autonomous/checkpoints/verify/autos-in-chooser.sh"
+					}
+				},
+				{
+					"id": "square-loop",
+					"title": "Square auto uses a loop",
+					"description": "squareAuto() builds the square with a for loop and a command group.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/robot-autonomous/checkpoints/verify/square-loop.sh"
+					}
+				},
+				{
+					"id": "left-forward",
+					"title": "Left auto drives forward",
+					"description": "Run Left Auto. The robot should travel more than 6 meters in x.",
+					"verifier": {
+						"type": "nt4-value",
+						"topic": "/AdvantageKit/RealOutputs/Check/Drive/PoseX/Max",
+						"check": "range",
+						"min": 6
+					}
+				},
+				{
+					"id": "left-sideways",
+					"title": "Left auto ends to the left",
+					"description": "Run Left Auto. After turning 45 degrees, the robot should be more than 1 meter to the left (positive y).",
+					"verifier": {
+						"type": "nt4-value",
+						"topic": "/AdvantageKit/RealOutputs/Check/Drive/PoseY/Max",
+						"check": "range",
+						"min": 1
+					}
+				},
+				{
+					"id": "right-sideways",
+					"title": "Right auto ends to the right",
+					"description": "Run Right Auto. After turning -45 degrees, the robot should be more than 1 meter to the right (negative y).",
+					"verifier": {
+						"type": "nt4-value",
+						"topic": "/AdvantageKit/RealOutputs/Check/Drive/PoseY/Min",
+						"check": "range",
+						"max": -1
+					}
+				},
+				{
+					"id": "autos-shoot",
+					"title": "Autos shoot",
+					"description": "Both routines should end by shooting at least once.",
+					"verifier": {
+						"type": "nt4-value",
+						"topic": "/AdvantageKit/RealOutputs/Check/Subsystem/Shooter/ShotCount/Max",
+						"check": "range",
+						"min": 1
+					}
+				}
+			]
+		}
+	],
+	"guides": [
+		{
+			"id": "editor-tour",
+			"title": "Tour of the editor",
+			"summary": "Where everything is, in five minutes. No experience needed.",
+			"topic": "Editor",
+			"order": 1,
+			"modules": [
+				"editor-basics"
+			],
+			"path": "lessons/editor-basics/guides/editor-tour.json"
+		},
+		{
+			"id": "files-and-folders",
+			"title": "What are files and folders?",
+			"summary": "The two things everything on a computer is made of, and what a path is.",
+			"topic": "Editor",
+			"order": 2,
+			"modules": [
+				"editor-basics"
+			],
+			"path": "lessons/editor-basics/guides/files-and-folders.json"
+		},
+		{
+			"id": "files-make",
+			"title": "Make a folder and a file",
+			"summary": "Make my-team, put about.txt inside it, and type your first words.",
+			"topic": "Editor",
+			"order": 3,
+			"modules": [
+				"editor-basics"
+			],
+			"path": "lessons/editor-basics/guides/files-make.json"
+		},
+		{
+			"id": "editor-typing",
+			"title": "Typing and fixing mistakes",
+			"summary": "Undo, copy and paste, selecting words, and saving.",
+			"topic": "Editor",
+			"order": 4,
+			"modules": [
+				"editor-basics"
+			],
+			"path": "lessons/editor-basics/guides/editor-typing.json"
+		},
+		{
+			"id": "files-rename-delete",
+			"title": "Rename and delete",
+			"summary": "Fix a name, and get rid of a file you don't need.",
+			"topic": "Editor",
+			"order": 5,
+			"modules": [
+				"editor-basics"
+			],
+			"path": "lessons/editor-basics/guides/files-rename-delete.json"
+		},
+		{
+			"id": "terminal-basics",
+			"title": "The terminal",
+			"summary": "Give the computer instructions by typing. Five commands.",
+			"topic": "Editor",
+			"order": 6,
+			"modules": [
+				"editor-basics"
+			],
+			"path": "lessons/editor-basics/guides/terminal-basics.json"
+		},
+		{
+			"id": "find-things-fast",
+			"title": "Find things fast",
+			"summary": "Quick Open, searching, and the command palette.",
+			"topic": "Editor",
+			"order": 7,
+			"modules": [
+				"editor-basics"
+			],
+			"path": "lessons/editor-basics/guides/find-things-fast.json"
+		},
+		{
+			"id": "editor-first-run",
+			"title": "Run your first program",
+			"summary": "Put your name in some Java and run it.",
+			"topic": "Editor",
+			"order": 8,
+			"modules": [
+				"editor-basics"
+			],
+			"path": "lessons/editor-basics/guides/editor-first-run.json"
+		},
+		{
+			"id": "git-source-control",
+			"title": "Git in the editor",
+			"summary": "Where your changes show up, how to commit them, and which branch you're on.",
+			"topic": "Git",
+			"order": 10,
+			"modules": [
+				"git-basics"
+			],
+			"needs": [
+				"editor"
+			],
+			"path": "lessons/git-basics/guides/git-source-control.json"
+		},
+		{
+			"id": "git-commands",
+			"title": "The git commands you'll type",
+			"summary": "status, add, commit and switch, one at a time on the board.",
+			"topic": "Git",
+			"order": 11,
+			"modules": [
+				"git-basics"
+			],
+			"path": "lessons/git-basics/guides/git-commands.json"
+		},
+		{
+			"id": "build-and-run",
+			"title": "Building and running your code",
+			"summary": "Start, watch it build, read the console, then enable the robot.",
+			"topic": "Building & running",
+			"order": 20,
+			"modules": [
+				"robot-drivetrain",
+				"robot-sensors",
+				"robot-drive-math",
+				"robot-odometry",
+				"robot-subsystems",
+				"robot-control-theory",
+				"robot-state-machines",
+				"robot-autonomous"
+			],
+			"needs": [
+				"driverStation"
+			],
+			"path": "common/guides/build-and-run.json"
+		},
+		{
+			"id": "advantagescope-basics",
+			"title": "AdvantageScope basics",
+			"summary": "The field list, tabs, and plotting a value on a line graph and the field.",
+			"topic": "Tools",
+			"order": 30,
+			"modules": [
+				"advantagescope-intro"
+			],
+			"needs": [
+				"scope"
+			],
+			"path": "lessons/advantagescope-intro/guides/advantagescope-basics.json"
+		},
+		{
+			"id": "elastic-basics",
+			"title": "Elastic basics",
+			"summary": "Dashboard tabs, adding widgets, and the connection status.",
+			"topic": "Tools",
+			"order": 31,
+			"modules": [
+				"elastic-intro"
+			],
+			"needs": [
+				"elastic"
+			],
+			"path": "lessons/elastic-intro/guides/elastic-basics.json"
+		},
+		{
+			"id": "choreo-basics",
+			"title": "Choreo basics",
+			"summary": "Paths, waypoints, constraints, and generating a trajectory.",
+			"topic": "Tools",
+			"order": 32,
+			"modules": [
+				"choreo-intro"
+			],
+			"needs": [
+				"choreo"
+			],
+			"path": "lessons/choreo-intro/guides/choreo-basics.json"
+		},
+		{
+			"id": "java-variables",
+			"title": "What is a variable?",
+			"summary": "Type, name and value, the four types you'll use most, and constants.",
+			"topic": "Java",
+			"order": 40,
+			"modules": [
+				"java-variables",
+				"robot-drivetrain"
+			],
+			"path": "common/guides/java-variables.json"
+		},
+		{
+			"id": "git-branches",
+			"title": "Feature branches",
+			"summary": "Exercise 2: branch off develop, name it right, commit twice.",
+			"topic": "Git",
+			"order": 115,
+			"modules": [
+				"git-basics"
+			],
+			"path": "lessons/git-basics/guides/git-branches.json"
+		},
+		{
+			"id": "git-merging",
+			"title": "Merging a finished feature",
+			"summary": "Exercise 3: bring issue-7 into develop.",
+			"topic": "Git",
+			"order": 116,
+			"modules": [
+				"git-basics"
+			],
+			"path": "lessons/git-basics/guides/git-merging.json"
+		},
+		{
+			"id": "git-merge-conflicts",
+			"title": "Resolving a merge conflict",
+			"summary": "Exercise 4: when two branches changed the same line.",
+			"topic": "Git",
+			"order": 117,
+			"modules": [
+				"git-basics"
+			],
+			"path": "lessons/git-basics/guides/git-merge-conflicts.json"
+		},
+		{
+			"id": "git-rebase",
+			"title": "Rebase instead of merge",
+			"summary": "Exercise 5: replay your commit on top of the new develop.",
+			"topic": "Git",
+			"order": 118,
+			"modules": [
+				"git-basics"
+			],
+			"path": "lessons/git-basics/guides/git-rebase.json"
+		},
+		{
+			"id": "advantagescope-3d-swerve",
+			"title": "3D field and swerve",
+			"summary": "Lesson steps 6 to 8: RobotPose3d, Orbit Robot, the Swerve tab.",
+			"topic": "Tools",
+			"order": 139,
+			"modules": [
+				"advantagescope-intro"
+			],
+			"path": "lessons/advantagescope-intro/guides/advantagescope-3d-swerve.json"
+		},
+		{
+			"id": "elastic-writing-values",
+			"title": "Widgets that send values",
+			"summary": "Sliders, choosers and toggles that the robot reads.",
+			"topic": "Tools",
+			"order": 140,
+			"modules": [
+				"elastic-intro"
+			],
+			"path": "lessons/elastic-intro/guides/elastic-writing-values.json"
+		},
+		{
+			"id": "elastic-layouts",
+			"title": "Saving and opening layouts",
+			"summary": "File → Save, and getting back to a clean slate.",
+			"topic": "Tools",
+			"order": 141,
+			"modules": [
+				"elastic-intro"
+			],
+			"path": "lessons/elastic-intro/guides/elastic-layouts.json"
+		},
+		{
+			"id": "choreo-why-not-generate",
+			"title": "When a path won't generate",
+			"summary": "Constraints the robot can't meet, and the starter ones.",
+			"topic": "Tools",
+			"order": 162,
+			"modules": [
+				"choreo-intro"
+			],
+			"path": "lessons/choreo-intro/guides/choreo-why-not-generate.json"
+		},
+		{
+			"id": "hello-world-first-program",
+			"title": "Your first Java program",
+			"summary": "What every line of Main.java does, then run it.",
+			"topic": "Java",
+			"order": 180,
+			"modules": [
+				"hello-world"
+			],
+			"path": "lessons/hello-world/guides/hello-world-first-program.json"
+		},
+		{
+			"id": "hello-world-errors",
+			"title": "Reading an error",
+			"summary": "Break your program on purpose and learn to read what Java tells you.",
+			"topic": "Java",
+			"order": 181,
+			"modules": [
+				"hello-world"
+			],
+			"path": "lessons/hello-world/guides/hello-world-errors.json"
+		},
+		{
+			"id": "java-variables-printing",
+			"title": "Printing a variable",
+			"summary": "Join text and values with + so the output says what it means.",
+			"topic": "Java",
+			"order": 202,
+			"modules": [
+				"java-variables"
+			],
+			"path": "lessons/java-variables/guides/java-variables-printing.json"
+		},
+		{
+			"id": "java-variables-constants-enums",
+			"title": "Constants and enums",
+			"summary": "final, SCREAMING_SNAKE_CASE, and enums nested in Main.",
+			"topic": "Java",
+			"order": 203,
+			"modules": [
+				"java-variables"
+			],
+			"path": "lessons/java-variables/guides/java-variables-constants-enums.json"
+		},
+		{
+			"id": "java-operators-arithmetic",
+			"title": "Arithmetic and return",
+			"summary": "Turning a stub into a real answer with + - * /.",
+			"topic": "Java",
+			"order": 224,
+			"modules": [
+				"java-operators"
+			],
+			"path": "lessons/java-operators/guides/java-operators-arithmetic.json"
+		},
+		{
+			"id": "java-operators-remainder",
+			"title": "Remainder and even numbers",
+			"summary": "What % does, and returning a comparison directly.",
+			"topic": "Java",
+			"order": 225,
+			"modules": [
+				"java-operators"
+			],
+			"path": "lessons/java-operators/guides/java-operators-remainder.json"
+		},
+		{
+			"id": "java-operators-assignment",
+			"title": "Assignment operators",
+			"summary": "+=, -=, *= and /=, traced one line at a time.",
+			"topic": "Java",
+			"order": 226,
+			"modules": [
+				"java-operators"
+			],
+			"path": "lessons/java-operators/guides/java-operators-assignment.json"
+		},
+		{
+			"id": "java-operators-integer-division",
+			"title": "Integer division",
+			"summary": "Why 5 / 2 is 2, and how to get 2.5.",
+			"topic": "Java",
+			"order": 227,
+			"modules": [
+				"java-operators",
+				"java-arrays"
+			],
+			"path": "common/guides/java-operators-integer-division.json"
+		},
+		{
+			"id": "java-conditions-if-chain",
+			"title": "if, else if, else",
+			"summary": "Sorting a value into ranges, and why order matters.",
+			"topic": "Java",
+			"order": 248,
+			"modules": [
+				"java-conditions"
+			],
+			"path": "lessons/java-conditions/guides/java-conditions-if-chain.json"
+		},
+		{
+			"id": "java-conditions-switch",
+			"title": "switch",
+			"summary": "One value, many cases, and a default.",
+			"topic": "Java",
+			"order": 249,
+			"modules": [
+				"java-conditions"
+			],
+			"path": "lessons/java-conditions/guides/java-conditions-switch.json"
+		},
+		{
+			"id": "java-conditions-logic",
+			"title": "&&, || and !",
+			"summary": "Combining true/false values, and the ternary shortcut.",
+			"topic": "Java",
+			"order": 250,
+			"modules": [
+				"java-conditions"
+			],
+			"path": "lessons/java-conditions/guides/java-conditions-logic.json"
+		},
+		{
+			"id": "java-loops-for",
+			"title": "The for loop",
+			"summary": "Its three parts, and counting from 1 to n.",
+			"topic": "Java",
+			"order": 271,
+			"modules": [
+				"java-loops"
+			],
+			"path": "lessons/java-loops/guides/java-loops-for.json"
+		},
+		{
+			"id": "java-loops-accumulate",
+			"title": "Adding things up in a loop",
+			"summary": "Declare the total before the loop, update it inside.",
+			"topic": "Java",
+			"order": 272,
+			"modules": [
+				"java-loops"
+			],
+			"path": "lessons/java-loops/guides/java-loops-accumulate.json"
+		},
+		{
+			"id": "java-loops-fizzbuzz",
+			"title": "FizzBuzz",
+			"summary": "Checking the combined case first, and joining with commas.",
+			"topic": "Java",
+			"order": 273,
+			"modules": [
+				"java-loops"
+			],
+			"path": "lessons/java-loops/guides/java-loops-fizzbuzz.json"
+		},
+		{
+			"id": "java-arrays-basics",
+			"title": "Arrays and indexes",
+			"summary": "Making, reading and measuring an array.",
+			"topic": "Java",
+			"order": 294,
+			"modules": [
+				"java-arrays"
+			],
+			"path": "lessons/java-arrays/guides/java-arrays-basics.json"
+		},
+		{
+			"id": "java-arrays-summaries",
+			"title": "Summarizing an array",
+			"summary": "Largest so far, totals, and stopping early.",
+			"topic": "Java",
+			"order": 295,
+			"modules": [
+				"java-arrays"
+			],
+			"path": "lessons/java-arrays/guides/java-arrays-summaries.json"
+		},
+		{
+			"id": "java-arrays-new-arrays",
+			"title": "Building a new array",
+			"summary": "Leaving the caller's array alone, and filling Fibonacci.",
+			"topic": "Java",
+			"order": 296,
+			"modules": [
+				"java-arrays"
+			],
+			"path": "lessons/java-arrays/guides/java-arrays-new-arrays.json"
+		},
+		{
+			"id": "java-methods-anatomy",
+			"title": "Writing a method",
+			"summary": "Every part of a method declaration, using clamp.",
+			"topic": "Java",
+			"order": 317,
+			"modules": [
+				"java-methods"
+			],
+			"path": "lessons/java-methods/guides/java-methods-anatomy.json"
+		},
+		{
+			"id": "java-methods-reuse",
+			"title": "Methods that use methods",
+			"summary": "scaleJoystick calls clamp; isPalindrome calls reverseString.",
+			"topic": "Java",
+			"order": 318,
+			"modules": [
+				"java-methods"
+			],
+			"path": "lessons/java-methods/guides/java-methods-reuse.json"
+		},
+		{
+			"id": "java-methods-edge-cases",
+			"title": "Edge cases",
+			"summary": "0, 1, negatives and empty strings: where methods usually break.",
+			"topic": "Java",
+			"order": 319,
+			"modules": [
+				"java-methods",
+				"java-recursion"
+			],
+			"path": "common/guides/java-methods-edge-cases.json"
+		},
+		{
+			"id": "java-classes-blueprint",
+			"title": "Classes and objects",
+			"summary": "A class is a blueprint; new makes an object from it.",
+			"topic": "Java",
+			"order": 320,
+			"modules": [
+				"java-classes-objects"
+			],
+			"path": "lessons/java-classes-objects/guides/java-classes-blueprint.json"
+		},
+		{
+			"id": "java-classes-fields-constructor",
+			"title": "Fields and constructors",
+			"summary": "What each account remembers, and starting it in a valid state.",
+			"topic": "Java",
+			"order": 321,
+			"modules": [
+				"java-classes-objects"
+			],
+			"path": "lessons/java-classes-objects/guides/java-classes-fields-constructor.json"
+		},
+		{
+			"id": "java-classes-encapsulation",
+			"title": "Protecting the data",
+			"summary": "Rules in methods, a getter, and transfer built from them.",
+			"topic": "Java",
+			"order": 322,
+			"modules": [
+				"java-classes-objects"
+			],
+			"path": "lessons/java-classes-objects/guides/java-classes-encapsulation.json"
+		},
+		{
+			"id": "java-recursion-recipe",
+			"title": "Base case and recursive step",
+			"summary": "The two-part recipe every recursive method follows.",
+			"topic": "Java",
+			"order": 343,
+			"modules": [
+				"java-recursion"
+			],
+			"path": "lessons/java-recursion/guides/java-recursion-recipe.json"
+		},
+		{
+			"id": "java-recursion-stack-overflow",
+			"title": "When recursion never stops",
+			"summary": "What StackOverflowError means and how to fix it.",
+			"topic": "Java",
+			"order": 344,
+			"modules": [
+				"java-recursion"
+			],
+			"path": "lessons/java-recursion/guides/java-recursion-stack-overflow.json"
+		},
+		{
+			"id": "java-inheritance-extends",
+			"title": "extends and super",
+			"summary": "Building SavingsAccount on top of BankAccount.",
+			"topic": "Java",
+			"order": 365,
+			"modules": [
+				"java-inheritance"
+			],
+			"path": "lessons/java-inheritance/guides/java-inheritance-extends.json"
+		},
+		{
+			"id": "java-inheritance-override",
+			"title": "Overriding a method",
+			"summary": "CheckingAccount replaces withdraw with its own rules.",
+			"topic": "Java",
+			"order": 366,
+			"modules": [
+				"java-inheritance"
+			],
+			"path": "lessons/java-inheritance/guides/java-inheritance-override.json"
+		},
+		{
+			"id": "robot-drivetrain-where-code-goes",
+			"title": "Where your robot code goes",
+			"summary": "Robot.java, teleopPeriodic, and how often it runs.",
+			"topic": "Robot",
+			"order": 387,
+			"modules": [
+				"robot-drivetrain"
+			],
+			"path": "lessons/robot-drivetrain/guides/robot-drivetrain-where-code-goes.json"
+		},
+		{
+			"id": "robot-drivetrain-tank",
+			"title": "Tank drive",
+			"summary": "One stick per side: your first driving code.",
+			"topic": "Robot",
+			"order": 388,
+			"modules": [
+				"robot-drivetrain"
+			],
+			"path": "lessons/robot-drivetrain/guides/robot-drivetrain-tank.json"
+		},
+		{
+			"id": "robot-drivetrain-arcade",
+			"title": "Arcade drive math",
+			"summary": "forward + turn and forward - turn, and why it turns.",
+			"topic": "Robot",
+			"order": 389,
+			"modules": [
+				"robot-drivetrain"
+			],
+			"path": "lessons/robot-drivetrain/guides/robot-drivetrain-arcade.json"
+		},
+		{
+			"id": "robot-sensors-encoders",
+			"title": "Encoders and meters",
+			"summary": "Wheel rotations to distance and speed.",
+			"topic": "Robot",
+			"order": 410,
+			"modules": [
+				"robot-sensors"
+			],
+			"path": "lessons/robot-sensors/guides/robot-sensors-encoders.json"
+		},
+		{
+			"id": "robot-sensors-robot-speed",
+			"title": "From two wheels to one robot",
+			"summary": "Linear speed, angular speed and distance.",
+			"topic": "Robot",
+			"order": 411,
+			"modules": [
+				"robot-sensors"
+			],
+			"path": "lessons/robot-sensors/guides/robot-sensors-robot-speed.json"
+		},
+		{
+			"id": "robot-sensors-deadband",
+			"title": "Deadbands and constants",
+			"summary": "Stopping a drifting stick from creeping the robot.",
+			"topic": "Robot",
+			"order": 412,
+			"modules": [
+				"robot-sensors"
+			],
+			"path": "lessons/robot-sensors/guides/robot-sensors-deadband.json"
+		},
+		{
+			"id": "robot-sensors-bang-bang",
+			"title": "Driving 2 meters by itself",
+			"summary": "Bang-bang control, and why it overshoots.",
+			"topic": "Robot",
+			"order": 413,
+			"modules": [
+				"robot-sensors"
+			],
+			"path": "lessons/robot-sensors/guides/robot-sensors-bang-bang.json"
+		},
+		{
+			"id": "robot-drive-math-methods",
+			"title": "Moving math into methods",
+			"summary": "DriveMath: numbers in, a number out.",
+			"topic": "Robot",
+			"order": 434,
+			"modules": [
+				"robot-drive-math"
+			],
+			"path": "lessons/robot-drive-math/guides/robot-drive-math-methods.json"
+		},
+		{
+			"id": "robot-drive-math-arrays",
+			"title": "Returning two numbers",
+			"summary": "arcadeToWheelSpeeds returns {left, right} in an array.",
+			"topic": "Robot",
+			"order": 435,
+			"modules": [
+				"robot-drive-math"
+			],
+			"path": "lessons/robot-drive-math/guides/robot-drive-math-arrays.json"
+		},
+		{
+			"id": "robot-drive-math-average",
+			"title": "Smoothing with a loop",
+			"summary": "average() over an array, and the SmoothedSpeed graph.",
+			"topic": "Robot",
+			"order": 436,
+			"modules": [
+				"robot-drive-math"
+			],
+			"path": "lessons/robot-drive-math/guides/robot-drive-math-average.json"
+		},
+		{
+			"id": "robot-drive-math-io-loop",
+			"title": "The robot loop",
+			"summary": "readInputs, your code, writeOutputs: every 20 ms.",
+			"topic": "Robot",
+			"order": 437,
+			"modules": [
+				"robot-drive-math",
+				"robot-odometry"
+			],
+			"path": "common/guides/robot-drive-math-io-loop.json"
+		},
+		{
+			"id": "robot-odometry-kinematics",
+			"title": "Kinematics",
+			"summary": "Wheel speeds to robot speeds, the WPILib way.",
+			"topic": "Robot",
+			"order": 440,
+			"modules": [
+				"robot-odometry"
+			],
+			"path": "lessons/robot-odometry/guides/robot-odometry-kinematics.json"
+		},
+		{
+			"id": "robot-odometry-pose",
+			"title": "Where is the robot?",
+			"summary": "Pose estimation, and why it drifts from the truth.",
+			"topic": "Robot",
+			"order": 441,
+			"modules": [
+				"robot-odometry"
+			],
+			"path": "lessons/robot-odometry/guides/robot-odometry-pose.json"
+		},
+		{
+			"id": "robot-odometry-objects",
+			"title": "Objects from WPILib",
+			"summary": "new, fields, methods, and import.",
+			"topic": "Robot",
+			"order": 458,
+			"modules": [
+				"robot-odometry"
+			],
+			"path": "lessons/robot-odometry/guides/robot-odometry-objects.json"
+		},
+		{
+			"id": "robot-odometry-oi",
+			"title": "The OI class",
+			"summary": "static methods on an abstract class that owns the controller.",
+			"topic": "Robot",
+			"order": 459,
+			"modules": [
+				"robot-odometry",
+				"robot-subsystems"
+			],
+			"path": "common/guides/robot-odometry-oi.json"
+		},
+		{
+			"id": "robot-subsystems-big-idea",
+			"title": "Mechanisms, subsystems, container",
+			"summary": "How a real robot's code is organized.",
+			"topic": "Robot",
+			"order": 462,
+			"modules": [
+				"robot-subsystems"
+			],
+			"path": "lessons/robot-subsystems/guides/robot-subsystems-big-idea.json"
+		},
+		{
+			"id": "robot-subsystems-states",
+			"title": "Enums and switch",
+			"summary": "A subsystem's states, and doing something different in each.",
+			"topic": "Robot",
+			"order": 463,
+			"modules": [
+				"robot-subsystems",
+				"robot-state-machines"
+			],
+			"path": "common/guides/robot-subsystems-states.json"
+		},
+		{
+			"id": "robot-subsystems-singleton",
+			"title": "One shared subsystem",
+			"summary": "private constructor, getInstance(), and inheritance.",
+			"topic": "Robot",
+			"order": 464,
+			"modules": [
+				"robot-subsystems"
+			],
+			"path": "lessons/robot-subsystems/guides/robot-subsystems-singleton.json"
+		},
+		{
+			"id": "robot-subsystems-shooter",
+			"title": "Building the shooter",
+			"summary": "Constants, the roller, getIos, and registering it.",
+			"topic": "Robot",
+			"order": 465,
+			"modules": [
+				"robot-subsystems"
+			],
+			"path": "lessons/robot-subsystems/guides/robot-subsystems-shooter.json"
+		},
+		{
+			"id": "robot-control-error",
+			"title": "Error and bang-bang",
+			"summary": "The difference between want and have, and on/off control.",
+			"topic": "Robot",
+			"order": 486,
+			"modules": [
+				"robot-control-theory"
+			],
+			"path": "lessons/robot-control-theory/guides/robot-control-error.json"
+		},
+		{
+			"id": "robot-control-units",
+			"title": "Getting the units right",
+			"summary": "rad/s to rotations per second to volts to duty cycle.",
+			"topic": "Robot",
+			"order": 487,
+			"modules": [
+				"robot-control-theory"
+			],
+			"path": "lessons/robot-control-theory/guides/robot-control-units.json"
+		},
+		{
+			"id": "robot-control-tuning",
+			"title": "Tuning kV and kP",
+			"summary": "Feedforward first, then add feedback, watching the graph.",
+			"topic": "Robot",
+			"order": 488,
+			"modules": [
+				"robot-control-theory"
+			],
+			"path": "lessons/robot-control-theory/guides/robot-control-tuning.json"
+		},
+		{
+			"id": "robot-state-machines-states",
+			"title": "States and transitions",
+			"summary": "IDLE, SPIN_UP, SHOOT, and the rules between them.",
+			"topic": "Robot",
+			"order": 509,
+			"modules": [
+				"robot-state-machines"
+			],
+			"path": "lessons/robot-state-machines/guides/robot-state-machines-states.json"
+		},
+		{
+			"id": "robot-state-machines-commands",
+			"title": "Commands and lambdas",
+			"summary": "startEnd, runOnce, and handing over code to run later.",
+			"topic": "Robot",
+			"order": 510,
+			"modules": [
+				"robot-state-machines",
+				"robot-autonomous"
+			],
+			"path": "common/guides/robot-state-machines-commands.json"
+		},
+		{
+			"id": "robot-state-machines-bindings",
+			"title": "Buttons to commands",
+			"summary": "whileTrue vs onTrue, then watch the state change.",
+			"topic": "Robot",
+			"order": 511,
+			"modules": [
+				"robot-state-machines"
+			],
+			"path": "lessons/robot-state-machines/guides/robot-state-machines-bindings.json"
+		},
+		{
+			"id": "robot-autonomous-command-lifecycle",
+			"title": "Inside a command",
+			"summary": "initialize, execute, isFinished, end.",
+			"topic": "Robot",
+			"order": 532,
+			"modules": [
+				"robot-autonomous"
+			],
+			"path": "lessons/robot-autonomous/guides/robot-autonomous-command-lifecycle.json"
+		},
+		{
+			"id": "robot-autonomous-drive-distance",
+			"title": "Driving to a distance",
+			"summary": "Proportional control: speed that shrinks as you arrive.",
+			"topic": "Robot",
+			"order": 533,
+			"modules": [
+				"robot-autonomous"
+			],
+			"path": "lessons/robot-autonomous/guides/robot-autonomous-drive-distance.json"
+		},
+		{
+			"id": "robot-autonomous-sequences",
+			"title": "Building routines",
+			"summary": "Commands.sequence, and a for loop for the square.",
+			"topic": "Robot",
+			"order": 534,
+			"modules": [
+				"robot-autonomous"
+			],
+			"path": "lessons/robot-autonomous/guides/robot-autonomous-sequences.json"
+		}
+	]
+}

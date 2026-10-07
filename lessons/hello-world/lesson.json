@@ -1,0 +1,18 @@
+{
+	"title": "Hello, World",
+	"description": "Basic java hello world project",
+	"kind": "plain-java",
+	"track": "Java Programming",
+	"order": 10,
+	"checkpoints": [
+		{
+			"id": "prints-hello-world",
+			"title": "Prints Hello, World!",
+			"description": "Running Main prints \"Hello, World!\" to standard out.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/prints-hello-world.sh"
+			}
+		}
+	]
+}

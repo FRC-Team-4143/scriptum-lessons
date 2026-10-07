@@ -1,0 +1,105 @@
+{
+	"title": "Smoothing with a loop",
+	"summary": "average() over an array, and the SmoothedSpeed graph.",
+	"topic": "Robot",
+	"order": 436,
+	"steps": [
+		{
+			"title": "Add them up",
+			"say": "A `for` loop visits every slot. Keep a running total, then divide by how many.",
+			"board": {
+				"code": "double total = 0.0;\nfor (int i = 0; i < values.length; i++) {\n    total += values[i];\n}\nreturn total / values.length;",
+				"marks": [
+					{
+						"text": "i < values.length",
+						"label": "every index, starting at 0"
+					},
+					{
+						"text": "total += values[i];",
+						"label": "add this one"
+					}
+				]
+			}
+		},
+		{
+			"title": "Why average?",
+			"say": "Robot.java keeps the last 5 speeds and logs their average as `Robot/SmoothedSpeed`. Averaging hides the jitter, at the cost of reacting a little later."
+		},
+		{
+			"title": "Start the robot",
+			"say": "Your code only runs once it's built and started.",
+			"target": {
+				"selector": "[data-tour='sim-controls']"
+			},
+			"waitFor": {
+				"target": {
+					"selector": "[data-tour='code-status']",
+					"text": "Running"
+				},
+				"hint": "press Start and wait for Running."
+			}
+		},
+		{
+			"title": "Enable in Teleop",
+			"say": "Pick **Teleop** and press **Enable**. Robot code runs only while it's enabled.",
+			"target": {
+				"selector": "[data-tour='enable']"
+			},
+			"waitFor": {
+				"target": {
+					"selector": "[data-tour='enable'] button",
+					"text": "Enabled"
+				},
+				"hint": "choose Teleop, then Enable."
+			}
+		},
+		{
+			"title": "Raw speed",
+			"say": "Drive around a bit. In AdvantageScope, search for `LinearSpeed`, then drag **Robot/LinearSpeed** onto the **Left Axis**.",
+			"close": [
+				"editor",
+				"preview",
+				"elastic"
+			],
+			"open": [
+				"scope"
+			],
+			"target": {
+				"pane": "scope",
+				"selector": ".line-graph-left.source-list"
+			},
+			"waitFor": {
+				"target": {
+					"pane": "scope",
+					"selector": ".line-graph-left.source-list .key-container",
+					"text": "Robot/LinearSpeed"
+				},
+				"hint": "drag Robot/LinearSpeed onto the graph."
+			}
+		},
+		{
+			"title": "Smoothed speed",
+			"say": "Now compare the averaged one. Which line is calmer? In AdvantageScope, search for `SmoothedSpeed`, then drag **Robot/SmoothedSpeed** onto the **Right Axis**.",
+			"close": [
+				"editor",
+				"preview",
+				"elastic"
+			],
+			"open": [
+				"scope"
+			],
+			"target": {
+				"pane": "scope",
+				"selector": ".line-graph-right.source-list"
+			},
+			"waitFor": {
+				"target": {
+					"pane": "scope",
+					"selector": ".line-graph-right.source-list .key-container",
+					"text": "Robot/SmoothedSpeed"
+				},
+				"hint": "drag Robot/SmoothedSpeed onto the graph."
+			}
+		}
+	]
+}

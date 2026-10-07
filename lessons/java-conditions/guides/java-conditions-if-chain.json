@@ -1,0 +1,108 @@
+{
+	"title": "if, else if, else",
+	"summary": "Sorting a value into ranges, and why order matters.",
+	"topic": "Java",
+	"order": 248,
+	"steps": [
+		{
+			"title": "A chain",
+			"say": "Java checks each condition top to bottom and runs the **first** one that's true. The rest are skipped.",
+			"board": {
+				"code": "if (percent == 0) {\n    return \"EMPTY\";\n} else if (percent < 50) {\n    return \"LOW\";\n} else if (percent < 90) {\n    return \"MEDIUM\";\n} else {\n    return \"FULL\";\n}",
+				"marks": [
+					{
+						"text": "percent == 0",
+						"label": "most specific case first"
+					},
+					{
+						"text": "percent < 50",
+						"label": "only checked if it wasn't 0"
+					},
+					{
+						"text": "else {",
+						"label": "everything left over"
+					}
+				]
+			}
+		},
+		{
+			"title": "Order matters",
+			"say": "Swap the first two and `EMPTY` can never happen: 0 is already less than 50.",
+			"board": {
+				"code": "if (percent < 50) {\n    return \"LOW\";        // 0 lands here\n} else if (percent == 0) {\n    return \"EMPTY\";      // never reached\n}",
+				"marks": [
+					{
+						"text": "percent < 50",
+						"label": "catches 0 first"
+					}
+				]
+			}
+		},
+		{
+			"title": "Boundaries",
+			"say": "Test exactly at the edges: is 50 LOW or MEDIUM? `< 50` means 50 is MEDIUM. `<= 50` would make it LOW.",
+			"board": {
+				"code": "batteryStatus(0)   // EMPTY\nbatteryStatus(49)  // LOW\nbatteryStatus(50)  // MEDIUM\nbatteryStatus(90)  // FULL",
+				"marks": [
+					{
+						"text": "batteryStatus(50)",
+						"label": "the edge case to check"
+					}
+				]
+			}
+		},
+		{
+			"title": "Open Main.java",
+			"say": "Press **Ctrl+P**, type `Main` and press Enter. Quick Open finds any file by name, so you never have to dig through folders.",
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "Main.java"
+				},
+				"hint": "open Main.java with Ctrl+P.",
+				"skipIfDone": true
+			}
+		},
+		{
+			"title": "Find it",
+			"say": "It may be further down. Press **Ctrl+F**, type `public static String batteryStatus` and press Enter to jump to it.",
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "public static String batteryStatus"
+				},
+				"hint": "find public static String batteryStatus with Ctrl+F.",
+				"skipIfDone": true
+			}
+		},
+		{
+			"title": "Your turn",
+			"say": "Write the chain in `batteryStatus`.",
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "public static String batteryStatus"
+			},
+			"cardAt": "bottom-right"
+		}
+	]
+}

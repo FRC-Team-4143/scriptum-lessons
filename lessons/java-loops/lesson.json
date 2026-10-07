@@ -1,0 +1,39 @@
+{
+	"title": "Loops",
+	"description": "Write for loops instead of the dangerous while loop.",
+	"kind": "plain-java",
+	"track": "Java Programming",
+	"order": 14,
+	"requires": [
+		"java-conditions"
+	],
+	"checkpoints": [
+		{
+			"id": "sum-loop",
+			"title": "Sum with a loop",
+			"description": "sumTo(n) adds up 1..n using a for loop.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/sum-loop.sh"
+			}
+		},
+		{
+			"id": "count-divisible-by-three",
+			"title": "Count divisible by three",
+			"description": "countDivisibleByThree(n) counts multiples of 3 from 1..n.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/count-divisible-by-three.sh"
+			}
+		},
+		{
+			"id": "fizz-buzz",
+			"title": "FizzBuzz",
+			"description": "fizzBuzz(n) is the classic FizzBuzz exercise, built with a for loop.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/fizz-buzz.sh"
+			}
+		}
+	]
+}

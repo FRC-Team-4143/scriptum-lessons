@@ -1,0 +1,147 @@
+{
+	"title": "Encoders and meters",
+	"summary": "Wheel rotations to distance and speed.",
+	"topic": "Robot",
+	"order": 410,
+	"steps": [
+		{
+			"title": "What an encoder says",
+			"say": "Each drive motor has an **encoder** that counts how far the wheel has turned, in rotations.",
+			"board": {
+				"code": "drive.getLeftPositionRotations()  // how far, in rotations\ndrive.getLeftVelocityRps()        // how fast, in rotations per second",
+				"marks": [
+					{
+						"text": "PositionRotations",
+						"label": "distance"
+					},
+					{
+						"text": "VelocityRps",
+						"label": "speed"
+					}
+				]
+			}
+		},
+		{
+			"title": "Rotations to meters",
+			"say": "One rotation moves the robot one wheel **circumference**: 2 x pi x radius.",
+			"board": {
+				"code": "double metersPerRotation = 2.0 * Math.PI * Constants.WHEEL_RADIUS_METERS;\ndouble leftMeters = drive.getLeftPositionRotations() * metersPerRotation;",
+				"marks": [
+					{
+						"text": "2.0 * Math.PI * Constants.WHEEL_RADIUS_METERS",
+						"label": "the circumference"
+					},
+					{
+						"text": "* metersPerRotation",
+						"label": "rotations become meters"
+					}
+				]
+			}
+		},
+		{
+			"title": "Open Robot.java",
+			"say": "Press **Ctrl+P**, type `Robot` and press Enter. Quick Open finds any file by name, so you never have to dig through folders.",
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "Robot.java"
+				},
+				"hint": "open Robot.java with Ctrl+P.",
+				"skipIfDone": true
+			}
+		},
+		{
+			"title": "Find STEP 1",
+			"say": "It's in robotPeriodic(). Press **Ctrl+F**, type `STEP 1` and press Enter to jump to it.",
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "STEP 1: change the readings"
+				},
+				"hint": "find STEP 1 with Ctrl+F.",
+				"skipIfDone": true
+			}
+		},
+		{
+			"title": "STEP 1",
+			"say": "Fill in the right side the same way the left is done.",
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "STEP 1: change the readings"
+			},
+			"cardAt": "bottom-right"
+		},
+		{
+			"title": "Start the robot",
+			"say": "Your code only runs once it's built and started.",
+			"target": {
+				"selector": "[data-tour='sim-controls']"
+			},
+			"waitFor": {
+				"target": {
+					"selector": "[data-tour='code-status']",
+					"text": "Running"
+				},
+				"hint": "press Start and wait for Running."
+			}
+		},
+		{
+			"title": "Enable in Teleop",
+			"say": "Pick **Teleop** and press **Enable**. Robot code runs only while it's enabled.",
+			"target": {
+				"selector": "[data-tour='enable']"
+			},
+			"waitFor": {
+				"target": {
+					"selector": "[data-tour='enable'] button",
+					"text": "Enabled"
+				},
+				"hint": "choose Teleop, then Enable."
+			}
+		},
+		{
+			"title": "Watch it count",
+			"say": "Drive forward and watch the distance grow. In AdvantageScope, search for `Distance`, then drag **Robot/Distance** onto the **Left Axis**.",
+			"close": [
+				"editor",
+				"preview",
+				"elastic"
+			],
+			"open": [
+				"scope"
+			],
+			"target": {
+				"pane": "scope",
+				"selector": ".line-graph-left.source-list"
+			},
+			"waitFor": {
+				"target": {
+					"pane": "scope",
+					"selector": ".line-graph-left.source-list .key-container",
+					"text": "Robot/Distance"
+				},
+				"hint": "drag Robot/Distance onto the graph."
+			}
+		}
+	]
+}

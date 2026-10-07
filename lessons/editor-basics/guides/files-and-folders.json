@@ -1,0 +1,107 @@
+{
+	"title": "What are files and folders?",
+	"summary": "The two things everything on a computer is made of, and what a path is.",
+	"topic": "Editor",
+	"order": 2,
+	"steps": [
+		{
+			"title": "Files",
+			"say": "A **file** is one saved thing on a computer: a photo, a song, a school paper, or a piece of code. Every file has a **name**, so you can find it again.",
+			"board": {
+				"code": "robot.png      a picture\nsong.mp3       a song\nnotes.txt      some plain words\nMain.java      a piece of code",
+				"language": "text",
+				"marks": [
+					{
+						"text": "robot.png",
+						"label": "a picture file"
+					},
+					{
+						"text": "notes.txt",
+						"label": "a file with just words"
+					},
+					{
+						"text": "Main.java",
+						"label": "a file with code in it"
+					}
+				]
+			}
+		},
+		{
+			"title": "Names have endings",
+			"say": "The part after the dot is the **extension**. It tells you (and the computer) what kind of file it is. The part before the dot is whatever name you choose.",
+			"board": {
+				"code": "Main.java",
+				"language": "text",
+				"marks": [
+					{
+						"text": "Main",
+						"label": "the name you choose"
+					},
+					{
+						"text": ".java",
+						"label": "the extension: what kind of file"
+					}
+				],
+				"caption": "`.txt` is text, `.java` is Java code, `.png` is a picture."
+			}
+		},
+		{
+			"title": "Folders",
+			"say": "A **folder** holds files, like a drawer or a binder. Folders keep things organized. And a folder can hold other folders, as many levels deep as you like.",
+			"board": {
+				"code": "my-robot/\n  notes.txt\n  code/\n    Main.java\n    Robot.java",
+				"language": "text",
+				"marks": [
+					{
+						"text": "my-robot/",
+						"label": "a folder"
+					},
+					{
+						"text": "code/",
+						"label": "a folder inside a folder"
+					},
+					{
+						"text": "Main.java",
+						"label": "a file inside code"
+					}
+				],
+				"caption": "Folders are written with a / after the name here."
+			}
+		},
+		{
+			"title": "A project",
+			"say": "A **project** is one folder with everything for a program inside it. When the editor opened, it opened your project folder. Everything you see in the Explorer is inside it.",
+			"target": {
+				"pane": "editor",
+				"selector": ".explorer-viewlet"
+			},
+			"cardAt": "bottom-right"
+		},
+		{
+			"title": "Paths",
+			"say": "A **path** is a file's address: the folders you walk through to reach it, separated by slashes.",
+			"board": {
+				"code": "my-robot/code/Main.java",
+				"language": "text",
+				"marks": [
+					{
+						"text": "my-robot",
+						"label": "start in this folder"
+					},
+					{
+						"text": "code",
+						"label": "go into this one"
+					},
+					{
+						"text": "Main.java",
+						"label": "and here's the file"
+					}
+				]
+			}
+		},
+		{
+			"title": "Why this matters",
+			"say": "Code isn't magic: it's words typed into files. Programmers spend a lot of time making, naming, moving and finding files. So let's practice. Try **Make a folder and a file** next."
+		}
+	]
+}

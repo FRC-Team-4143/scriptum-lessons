@@ -1,0 +1,116 @@
+{
+	"title": "extends and super",
+	"summary": "Building SavingsAccount on top of BankAccount.",
+	"topic": "Java",
+	"order": 365,
+	"steps": [
+		{
+			"title": "Is a",
+			"say": "`SavingsAccount extends BankAccount` means a savings account **is a** bank account, plus more. It gets every field and method for free.",
+			"board": {
+				"code": "public class SavingsAccount extends BankAccount {\n    protected double interest_rate_;\n}",
+				"marks": [
+					{
+						"text": "extends BankAccount",
+						"label": "inherit everything"
+					},
+					{
+						"text": "interest_rate_",
+						"label": "its own extra field"
+					}
+				]
+			}
+		},
+		{
+			"title": "super first",
+			"say": "The parent sets up its own fields. Your constructor's first line hands it the values it needs.",
+			"board": {
+				"code": "public SavingsAccount(String owner, double initial_balance, double interest_rate) {\n    super(owner, initial_balance);\n    interest_rate_ = interest_rate;\n}",
+				"marks": [
+					{
+						"text": "super(owner, initial_balance);",
+						"label": "must be the first line"
+					},
+					{
+						"text": "interest_rate_ =",
+						"label": "then your own field"
+					}
+				]
+			}
+		},
+		{
+			"title": "New behavior, reused pieces",
+			"say": "`applyInterest` uses the inherited `deposit` and `getBalance` instead of changing `balance_` itself.",
+			"board": {
+				"code": "public void applyInterest() {\n    deposit(getBalance() * interest_rate_);\n}",
+				"marks": [
+					{
+						"text": "deposit(",
+						"label": "inherited from BankAccount"
+					}
+				]
+			}
+		},
+		{
+			"title": "Open SavingsAccount.java",
+			"say": "Press **Ctrl+P**, type `SavingsAccount` and press Enter. Quick Open finds any file by name, so you never have to dig through folders.",
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "SavingsAccount.java"
+				},
+				"hint": "open SavingsAccount.java with Ctrl+P.",
+				"skipIfDone": true
+			}
+		},
+		{
+			"title": "Find it",
+			"say": "It may be further down. Press **Ctrl+F**, type `public class SavingsAccount` and press Enter to jump to it.",
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "public class SavingsAccount"
+				},
+				"hint": "find public class SavingsAccount with Ctrl+F.",
+				"skipIfDone": true
+			}
+		},
+		{
+			"title": "Add extends here",
+			"say": "Change this line to `public class SavingsAccount extends BankAccount {`.",
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "public class SavingsAccount"
+			},
+			"cardAt": "bottom-right"
+		},
+		{
+			"title": "Your turn",
+			"say": "Add the field and the constructor, with `super(...)` on its first line.",
+			"waitFor": {
+				"hint": "build SavingsAccount."
+			},
+			"cardAt": "bottom-right"
+		}
+	]
+}

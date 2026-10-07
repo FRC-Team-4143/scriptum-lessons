@@ -1,0 +1,69 @@
+{
+	"title": "Operators",
+	"description": "Do arithmetic, conversions, and comparisons with Java's operators.",
+	"kind": "plain-java",
+	"track": "Java Programming",
+	"order": 12,
+	"requires": [
+		"java-variables"
+	],
+	"guides": [
+		"java-operators-integer-division"
+	],
+	"checkpoints": [
+		{
+			"id": "add-ints",
+			"title": "Add two ints",
+			"description": "addInts(a, b) returns a + b.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/add-ints.sh"
+			}
+		},
+		{
+			"id": "inches-to-meters",
+			"title": "Inches to meters",
+			"description": "inchesToMeters(inches) converts using 1 inch = 0.0254 meters.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/inches-to-meters.sh"
+			}
+		},
+		{
+			"id": "is-even",
+			"title": "Is even",
+			"description": "isEven(value) uses the modulo operator to detect even numbers.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/is-even.sh"
+			}
+		},
+		{
+			"id": "subtract-ints",
+			"title": "Subtract two ints",
+			"description": "subtractInts(a, b) returns a - b.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/subtract-ints.sh"
+			}
+		},
+		{
+			"id": "meters-to-inches",
+			"title": "Meters to inches",
+			"description": "metersToInches(meters) converts using 1 inch = 0.0254 meters.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/meters-to-inches.sh"
+			}
+		},
+		{
+			"id": "apply-assignments",
+			"title": "Assignment operators",
+			"description": "applyAssignments(start) chains =, +=, -=, *=, and /= in order.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/apply-assignments.sh"
+			}
+		}
+	]
+}

@@ -1,0 +1,228 @@
+{
+	"title": "AdvantageScope basics",
+	"summary": "The field list, tabs, and plotting a value on a line graph and the field.",
+	"topic": "Tools",
+	"order": 30,
+	"needs": [
+		"scope"
+	],
+	"steps": [
+		{
+			"title": "This is AdvantageScope",
+			"say": "AdvantageScope shows you what your robot is doing: every value it publishes, graphed over time or drawn on the field. I'll sit right here while you try it, and nothing's locked. Drag my card out of the way whenever you need to.",
+			"close": [
+				"editor",
+				"preview",
+				"elastic"
+			],
+			"open": [
+				"scope"
+			],
+			"target": {
+				"pane": "scope"
+			}
+		},
+		{
+			"title": "Start the robot",
+			"say": "AdvantageScope reads **live** data, so the robot code has to be running first.",
+			"target": {
+				"selector": "[data-tour='sim-controls']"
+			},
+			"waitFor": {
+				"target": {
+					"selector": "[data-tour='code-status']",
+					"text": "Running"
+				},
+				"hint": "press Start and wait for it to say Running."
+			}
+		},
+		{
+			"title": "The field list",
+			"say": "Every value the robot publishes shows up here as a **field**, in folders like `AdvantageKit/RealOutputs`. The numbers beside them are live.",
+			"target": {
+				"pane": "scope",
+				"selector": ".side-bar"
+			}
+		},
+		{
+			"title": "Find a field",
+			"say": "There are a lot of fields, so search instead of digging through folders.",
+			"target": {
+				"pane": "scope",
+				"selector": ".side-bar-search"
+			},
+			"waitFor": {
+				"target": {
+					"pane": "scope",
+					"selector": ".search-results-item",
+					"text": "FlywheelRPM"
+				},
+				"hint": "type FlywheelRPM in the search box."
+			}
+		},
+		{
+			"title": "Jump to it",
+			"say": "Click the result and AdvantageScope opens the folders down to that field.",
+			"target": {
+				"pane": "scope",
+				"selector": ".search-results-item",
+				"text": "RealOutputs/FlywheelRPM"
+			},
+			"waitFor": {
+				"target": {
+					"pane": "scope",
+					"selector": ".field-item-label",
+					"text": "FlywheelRPM"
+				},
+				"hint": "click the RealOutputs/FlywheelRPM result."
+			}
+		},
+		{
+			"title": "A line graph",
+			"say": "The Line Graph tab plots values over time.",
+			"target": {
+				"pane": "scope",
+				"selector": ".tab",
+				"text": "Line Graph"
+			},
+			"waitFor": {
+				"target": {
+					"pane": "scope",
+					"selector": ".tab.tab-selected",
+					"text": "Line Graph"
+				},
+				"hint": "click the Line Graph tab."
+			}
+		},
+		{
+			"title": "Drag it onto the graph",
+			"say": "Now grab **FlywheelRPM** in the field list and drop it on **Left Axis**. That's how every graph gets its data: drag a field onto it.",
+			"target": {
+				"pane": "scope",
+				"selector": ".line-graph-left.source-list"
+			},
+			"waitFor": {
+				"target": {
+					"pane": "scope",
+					"selector": ".line-graph-left.source-list .key-container",
+					"text": "FlywheelRPM"
+				},
+				"hint": "drag FlywheelRPM from the field list onto Left Axis."
+			}
+		},
+		{
+			"title": "Read the graph",
+			"say": "That line is the flywheel's speed, live. Hover over it to read exact values at any moment. Scroll on the graph to zoom in and out in time.",
+			"target": {
+				"pane": "scope",
+				"selector": ".renderer-content"
+			}
+		},
+		{
+			"title": "Lock the scale",
+			"say": "The scale jumps around as the speed changes. Open the **⋯** menu for Left Axis, choose **Lock Axis**, then **Edit Range** and set it to about 0 to 3000.",
+			"target": {
+				"pane": "scope",
+				"selector": ".line-graph-left.source-list .edit"
+			},
+			"waitFor": {
+				"hint": "lock the left axis to roughly 0-3000."
+			}
+		},
+		{
+			"title": "A second scale",
+			"say": "Drop **FlywheelRPM** on **Right Axis** too. Anything on the right axis gets its own scale, which is handy when two values are in very different units.",
+			"target": {
+				"pane": "scope",
+				"selector": ".line-graph-right.source-list"
+			},
+			"waitFor": {
+				"target": {
+					"pane": "scope",
+					"selector": ".line-graph-right.source-list .key-container",
+					"text": "FlywheelRPM"
+				},
+				"hint": "drag FlywheelRPM onto Right Axis."
+			}
+		},
+		{
+			"title": "How fast is it changing?",
+			"say": "In the **⋯** menu for Right Axis, choose **Differentiate**. Now the right line shows how fast the speed is *changing*: big when the flywheel spins up, zero when it holds steady.",
+			"target": {
+				"pane": "scope",
+				"selector": ".line-graph-right.source-list .edit"
+			},
+			"waitFor": {
+				"hint": "set the right axis to Differentiate."
+			}
+		},
+		{
+			"title": "True or false values",
+			"say": "Some values are just on or off. Drop **GamePieceLoaded** on **Discrete Fields** and it draws coloured bands under the graph instead of a line.",
+			"target": {
+				"pane": "scope",
+				"selector": ".line-graph-discrete.source-list"
+			},
+			"waitFor": {
+				"target": {
+					"pane": "scope",
+					"selector": ".line-graph-discrete.source-list .key-container",
+					"text": "GamePieceLoaded"
+				},
+				"hint": "find GamePieceLoaded and drag it onto Discrete Fields."
+			}
+		},
+		{
+			"title": "Where is the robot?",
+			"say": "Switch to the 2D Field tab to see the robot on the field.",
+			"target": {
+				"pane": "scope",
+				"selector": ".tab",
+				"text": "2D Field"
+			},
+			"waitFor": {
+				"target": {
+					"pane": "scope",
+					"selector": ".tab.tab-selected",
+					"text": "2D Field"
+				},
+				"hint": "click the 2D Field tab."
+			}
+		},
+		{
+			"title": "Put the robot on the field",
+			"say": "Search for **RobotPose2d** and drop it on **Poses**. A pose is where the robot is and which way it faces.",
+			"target": {
+				"pane": "scope",
+				"selector": ".field-2d-sources.source-list"
+			},
+			"waitFor": {
+				"target": {
+					"pane": "scope",
+					"selector": ".field-2d-sources.source-list .key-container",
+					"text": "RobotPose2d"
+				},
+				"hint": "drag RobotPose2d onto Poses."
+			}
+		},
+		{
+			"title": "Pick the field",
+			"say": "Set **Field** to **Evergreen** and you'll see the robot tracing a figure 8 from above.",
+			"target": {
+				"pane": "scope",
+				"selector": ".field-2d-settings"
+			},
+			"waitFor": {
+				"hint": "set the field to Evergreen."
+			}
+		},
+		{
+			"title": "Keep going",
+			"say": "The **+** adds more kinds of tab: a 3D field, swerve, joysticks and more. The rest of the lesson works the same way: add a tab, drag fields onto it. Check your progress in the lesson chip at the top.",
+			"target": {
+				"pane": "scope",
+				"selector": ".add-tab"
+			}
+		}
+	]
+}

@@ -1,0 +1,112 @@
+{
+	"title": "Printing a variable",
+	"summary": "Join text and values with + so the output says what it means.",
+	"topic": "Java",
+	"order": 202,
+	"steps": [
+		{
+			"title": "Text plus a value",
+			"say": "`+` between a String and a value **joins** them into one String. That's how you label what you print.",
+			"board": {
+				"code": "int teamNumber = 4143;\nSystem.out.println(\"Team number: \" + teamNumber);",
+				"marks": [
+					{
+						"text": "\"Team number: \"",
+						"label": "the label, including its space"
+					},
+					{
+						"text": "+",
+						"label": "joins the text and the value"
+					},
+					{
+						"text": "teamNumber",
+						"label": "the variable's value goes here"
+					}
+				],
+				"caption": "Prints: Team number: 4143"
+			}
+		},
+		{
+			"title": "Exact output matters",
+			"say": "The checkpoints read your output, so it must match exactly: capital letters, the colon, the one space.",
+			"board": {
+				"code": "System.out.println(\"Team number: \" + teamNumber);  // Team number: 4143\nSystem.out.println(\"Team number:\" + teamNumber);   // Team number:4143\nSystem.out.println(\"team number: \" + teamNumber);  // team number: 4143",
+				"marks": [
+					{
+						"text": "\"Team number:\"",
+						"label": "missing the space"
+					},
+					{
+						"text": "\"team number: \"",
+						"label": "wrong capital"
+					}
+				],
+				"caption": "Only the first line matches the table."
+			}
+		},
+		{
+			"title": "Open Main.java",
+			"say": "Press **Ctrl+P**, type `Main` and press Enter. Quick Open finds any file by name, so you never have to dig through folders.",
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "Main.java"
+				},
+				"hint": "open Main.java with Ctrl+P.",
+				"skipIfDone": true
+			}
+		},
+		{
+			"title": "Find it",
+			"say": "It may be further down. Press **Ctrl+F**, type `Team name:` and press Enter to jump to it.",
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "Team name:"
+				},
+				"hint": "find Team name: with Ctrl+F.",
+				"skipIfDone": true
+			}
+		},
+		{
+			"title": "Already in your code",
+			"say": "The starter already prints two values this way. Your four variables get printed the same way, above it.",
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "Team name:"
+			},
+			"cardAt": "bottom-right"
+		},
+		{
+			"title": "Run it",
+			"say": "Click the **Run** button (▷) at the top right of the file. The output appears in the terminal at the bottom.",
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "top-right",
+			"waitFor": {
+				"hint": "run the program and read the output."
+			}
+		}
+	]
+}

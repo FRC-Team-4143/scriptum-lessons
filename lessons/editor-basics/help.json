@@ -1,0 +1,135 @@
+{
+	"about": {
+		"never": "This lesson is about the **editor**: the program you'll write all your code in. Before writing any code, you need to be comfortable making, naming and finding files. That's all this lesson is, and nothing here can break.",
+		"bit": "This lesson covers the editor itself: files, folders, saving, the terminal and running a program.",
+		"lot": "Editor basics. If you already know VS Code, verify each job quickly and move on to Git Basics."
+	},
+	"checkpoints": {
+		"make-folder": {
+			"why": {
+				"never": "Folders keep a project tidy, like drawers keep a desk tidy. Real robot code has dozens of folders.",
+				"lot": "The checker wants a folder named exactly `my-team` in the project's top level."
+			},
+			"guide": "files-make",
+			"concept": {
+				"guide": "files-and-folders",
+				"label": "What's a folder?"
+			},
+			"hints": [
+				{
+					"never": "Look at the list on the left: that's the **Explorer**. Move your mouse over the dark bar that says **PROJECT**. Little icons appear on its right.",
+					"bit": "Hover over the **PROJECT** bar in the Explorer to see its icons.",
+					"lot": "Explorer title bar, New Folder icon."
+				},
+				{
+					"never": "Click the **second** icon (a folder with a plus). A box appears where you can type a name. If nothing happens, click it again.",
+					"bit": "Click the **New Folder** icon (the second one).",
+					"lot": "Or `mkdir my-team` in the terminal."
+				},
+				{
+					"never": "Type `my-team` (small letters, with a dash, no spaces) and press **Enter**. Then press **Verify**.",
+					"bit": "Name it exactly `my-team` and press Enter."
+				}
+			]
+		},
+		"make-file": {
+			"why": {
+				"never": "Everything you write in Scriptum lives in a file, so making one is the first real step.",
+				"lot": "The checker wants `my-team/about.txt` with some text in it."
+			},
+			"guide": "files-make",
+			"concept": {
+				"guide": "files-and-folders",
+				"label": "What's a file?"
+			},
+			"hints": [
+				{
+					"never": "New files go inside whichever folder is highlighted. Click **my-team** once so it turns blue.",
+					"bit": "Select **my-team** first, so the new file goes inside it.",
+					"lot": "Select `my-team`, then New File."
+				},
+				{
+					"never": "Hover over the **PROJECT** bar and click the **first** icon (a page with a plus). Type `about.txt` and press **Enter**.",
+					"bit": "Click **New File**, name it `about.txt`, press Enter.",
+					"lot": "Or `echo \"We build robots.\" > my-team/about.txt` in the terminal."
+				},
+				{
+					"never": "The file opens in a tab. Click in the big empty area, type a sentence about our team, then press **Ctrl+S** to save. Then **Verify**.",
+					"bit": "Type a sentence in it and press **Ctrl+S**."
+				}
+			]
+		},
+		"rename-file": {
+			"why": {
+				"never": "Programs find files by their exact name. A file called untitled.txt can't be found by a program looking for team.txt, so names matter.",
+				"bit": "Programs find files by their exact name, so names matter.",
+				"lot": "The checker wants the original file renamed, with its contents intact."
+			},
+			"guide": "files-rename-delete",
+			"hints": [
+				{
+					"never": "Look at the list on the left. That's the **Explorer**, and it shows your files. Find the one called `untitled.txt`. We're going to give it a new name, like renaming a file on any computer.",
+					"bit": "Rename `untitled.txt` in the Explorer on the left.",
+					"lot": "Rename it, don't recreate it: the checker compares the contents."
+				},
+				{
+					"never": "Click `untitled.txt` **once** so it turns blue. Then press the **F2** key, on the top row of your keyboard. The name turns into a box you can type in.",
+					"bit": "Select it and press **F2** (or right-click it and choose **Rename**).",
+					"lot": "**F2** in the Explorer, or `mv untitled.txt team.txt` in the terminal."
+				},
+				{
+					"never": "Only the part before the dot is highlighted. Type `team` and press **Enter**, so it becomes `team.txt`. Then press **Verify** again.",
+					"bit": "Only the name before the dot is selected. Type `team`, press Enter, then Verify.",
+					"lot": "Check for `team.txt.txt`: F2 only selects the stem."
+				}
+			]
+		},
+		"delete-file": {
+			"why": {
+				"never": "Old files you don't need make a project confusing. Deleting them keeps it tidy.",
+				"lot": "The checker wants `delete-me.txt` gone, and nothing else."
+			},
+			"guide": "files-rename-delete",
+			"hints": [
+				{
+					"never": "Find `delete-me.txt` in the Explorer on the left and click it **once**.",
+					"bit": "Select `delete-me.txt` in the Explorer.",
+					"lot": "Select it in the Explorer."
+				},
+				{
+					"never": "Press the **Delete** key on your keyboard (or right-click the file and choose **Delete**).",
+					"bit": "Press **Delete**, or right-click and choose **Delete**.",
+					"lot": "Delete key, or `rm delete-me.txt`."
+				},
+				{
+					"never": "A box asks if you're sure. Click **Delete**. Then press **Verify**.",
+					"bit": "Confirm in the box that pops up, then Verify."
+				}
+			]
+		},
+		"edit-and-run": {
+			"why": {
+				"never": "This is your first real program! The words inside the quote marks are what it prints.",
+				"bit": "`System.out.println` prints whatever is inside the quotes.",
+				"lot": "Edit the string literal and run `Main`."
+			},
+			"guide": "editor-first-run",
+			"hints": [
+				{
+					"never": "Open `src/Main.java`: press **Ctrl+P**, type `Main` and press **Enter**. (Click in the editor first, so it hears your keys.)",
+					"bit": "Open `src/Main.java` (Ctrl+P, type Main).",
+					"lot": "Change the `...` in `Main.java`."
+				},
+				{
+					"never": "Find the three dots `...` between the quote marks and replace them with your name. Keep the quote marks and the `;` at the end. Press **Ctrl+S** to save.",
+					"bit": "Replace the `...` with your name, keeping the quotes and the `;`. Save.",
+					"lot": "Keep the quotes and the semicolon."
+				},
+				{
+					"never": "Click the **Run** button (a triangle ▷) at the top right of the file. Your words appear in the terminal at the bottom. Then **Verify**.",
+					"bit": "Click **Run** (▷, top right), then Verify."
+				}
+			]
+		}
+	}
+}

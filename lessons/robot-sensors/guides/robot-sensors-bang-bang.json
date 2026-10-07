@@ -1,0 +1,134 @@
+{
+	"title": "Driving 2 meters by itself",
+	"summary": "Bang-bang control, and why it overshoots.",
+	"topic": "Robot",
+	"order": 413,
+	"steps": [
+		{
+			"title": "Bang-bang",
+			"say": "Full power until you're there, then nothing. That's **bang-bang control**.",
+			"board": {
+				"code": "if (distanceMeters < 2.0) {\n    drive.setDutyCycles(0.4, 0.4);\n} else {\n    drive.setDutyCycles(0.0, 0.0);\n}",
+				"marks": [
+					{
+						"text": "distanceMeters < 2.0",
+						"label": "not there yet?"
+					},
+					{
+						"text": "0.0, 0.0",
+						"label": "there: stop"
+					}
+				]
+			}
+		},
+		{
+			"title": "Open Robot.java",
+			"say": "Press **Ctrl+P**, type `Robot` and press Enter. Quick Open finds any file by name, so you never have to dig through folders.",
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "Robot.java"
+				},
+				"hint": "open Robot.java with Ctrl+P.",
+				"skipIfDone": true
+			}
+		},
+		{
+			"title": "Find autonomousPeriodic",
+			"say": "Autonomous code has its own method. Press **Ctrl+F**, type `autonomousPeriodic` and press Enter to jump to it.",
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "public void autonomousPeriodic"
+				},
+				"hint": "find autonomousPeriodic with Ctrl+F.",
+				"skipIfDone": true
+			}
+		},
+		{
+			"title": "autonomousPeriodic",
+			"say": "Write the if/else inside `autonomousPeriodic()`. It runs on its own in Auto mode, no sticks needed.",
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "public void autonomousPeriodic"
+			},
+			"cardAt": "bottom-right"
+		},
+		{
+			"title": "Start the robot",
+			"say": "Your code only runs once it's built and started.",
+			"target": {
+				"selector": "[data-tour='sim-controls']"
+			},
+			"waitFor": {
+				"target": {
+					"selector": "[data-tour='code-status']",
+					"text": "Running"
+				},
+				"hint": "press Start and wait for Running."
+			}
+		},
+		{
+			"title": "Enable in Auto",
+			"say": "Pick **Auto** and press **Enable**. Robot code runs only while it's enabled.",
+			"target": {
+				"selector": "[data-tour='enable']"
+			},
+			"waitFor": {
+				"target": {
+					"selector": "[data-tour='enable'] button",
+					"text": "Enabled"
+				},
+				"hint": "choose Auto, then Enable."
+			}
+		},
+		{
+			"title": "Where did it stop?",
+			"say": "Watch the distance as it drives. In AdvantageScope, search for `Distance`, then drag **Robot/Distance** onto the **Left Axis**.",
+			"close": [
+				"editor",
+				"preview",
+				"elastic"
+			],
+			"open": [
+				"scope"
+			],
+			"target": {
+				"pane": "scope",
+				"selector": ".line-graph-left.source-list"
+			},
+			"waitFor": {
+				"target": {
+					"pane": "scope",
+					"selector": ".line-graph-left.source-list .key-container",
+					"text": "Robot/Distance"
+				},
+				"hint": "drag Robot/Distance onto the graph."
+			}
+		},
+		{
+			"title": "Past 2.0",
+			"say": "It almost certainly stopped a little **past** 2.0 m: when the power cuts, the robot is still moving. Bang-bang can't slow down smoothly. The Control Theory lesson fixes that with PID."
+		}
+	]
+}

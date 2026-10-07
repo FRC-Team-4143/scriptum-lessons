@@ -1,0 +1,394 @@
+{
+	"errors": [
+		{
+			"id": "semicolon",
+			"match": "error: ';' expected",
+			"title": "Missing semicolon",
+			"explain": {
+				"never": "Java needs a **semicolon** `;` at the end of each instruction, the way a sentence ends with a period. Without it, Java can't tell where one instruction stops.",
+				"bit": "Every Java statement ends with a semicolon. One is missing.",
+				"lot": "Missing statement terminator."
+			},
+			"hints": [
+				{
+					"never": "The error says which file and line, like `Main.java:7`. Open that file and find that line (the numbers on the left).",
+					"bit": "Go to the file and line number in the error.",
+					"lot": "Line number is in the message."
+				},
+				{
+					"never": "Look at the very end of that line, or the line just above it. The lines around it end with `;`. This one doesn't.",
+					"bit": "Check the end of that line, and the line above.",
+					"lot": "Usually the previous line."
+				},
+				{
+					"never": "Type a `;` at the end of the line, press **Ctrl+S**, and run it again.",
+					"bit": "Add the `;`, save and rerun."
+				}
+			]
+		},
+		{
+			"id": "paren",
+			"match": "error: '\\)' expected",
+			"title": "Missing )",
+			"explain": {
+				"never": "Every `(` needs a matching `)`. Java reached a spot where it expected the closing `)`.",
+				"bit": "An opening `(` has no matching `)`.",
+				"lot": "Unbalanced parentheses."
+			},
+			"hints": [
+				{
+					"never": "Go to the line in the error. Count the `(` and the `)` on it: there should be the same number of each.",
+					"bit": "Count `(` and `)` on that line.",
+					"lot": "Check the call's argument list."
+				},
+				{
+					"never": "The editor highlights a `(` and its partner when you put your cursor next to one. A `(` with no partner is your problem.",
+					"bit": "Put the cursor next to a bracket to see its partner.",
+					"lot": "Bracket matching highlights the pair."
+				},
+				{
+					"never": "Add the missing `)` (usually just before the `;`), save, and run again.",
+					"bit": "Add the `)`, save, rerun."
+				}
+			]
+		},
+		{
+			"id": "end-of-file",
+			"match": "reached end of file while parsing",
+			"title": "Missing }",
+			"explain": {
+				"never": "Every `{` needs a matching `}`. Java got to the end of the file and a `{` was never closed.",
+				"bit": "A `{` is missing its `}`.",
+				"lot": "Unbalanced braces."
+			},
+			"hints": [
+				{
+					"never": "Look at the very end of your file. A class and each method open with `{` and close with `}`.",
+					"bit": "Check the end of the file for missing `}`.",
+					"lot": "Count braces per block."
+				},
+				{
+					"never": "Click next to each `{`: the editor highlights its matching `}`. Find the one with no partner.",
+					"bit": "Use bracket highlighting to find the unmatched `{`.",
+					"lot": "Format the document (Shift+Alt+F) to see the nesting."
+				},
+				{
+					"never": "Add the missing `}` where that block should end, save, and run again.",
+					"bit": "Add the `}`, save, rerun."
+				}
+			]
+		},
+		{
+			"id": "cannot-find-symbol",
+			"match": "error: cannot find symbol",
+			"title": "Java doesn't know that name",
+			"explain": {
+				"never": "Java found a name it doesn't recognize: a variable, method or class that doesn't exist yet, or is spelled differently. Java cares about capital letters, so `Speed` and `speed` are different names.",
+				"bit": "A name isn't defined, or is spelled differently (capitals count).",
+				"lot": "Undefined identifier, missing import, or wrong scope."
+			},
+			"hints": [
+				{
+					"never": "The lines under the error say `symbol:` and then the name Java couldn't find. Look for that name in your code.",
+					"bit": "The `symbol:` line names the culprit.",
+					"lot": "Read the `symbol:` and `location:` lines."
+				},
+				{
+					"never": "Check the spelling and the capital letters, and compare with where you made it (for example `int speed = 5;`). Did you make it at all, and above the line that uses it?",
+					"bit": "Check spelling, capitals, and that it's declared before use.",
+					"lot": "Declared in an inner block? Missing import?"
+				},
+				{
+					"never": "Fix the name so it matches exactly, or add the line that makes it, then save and run again.",
+					"bit": "Make the names match, save, rerun."
+				}
+			]
+		},
+		{
+			"id": "lossy-conversion",
+			"match": "possible lossy conversion",
+			"title": "Decimal into a whole number",
+			"explain": {
+				"never": "You put a decimal number (a `double`) into a whole-number variable (an `int`). Java won't throw away the decimal part unless you say so.",
+				"bit": "A `double` is going into an `int`.",
+				"lot": "Narrowing conversion needs a cast."
+			},
+			"hints": [
+				{
+					"never": "Find the line in the error. Which variable is an `int` but gets a decimal?",
+					"bit": "Find the int receiving a double.",
+					"lot": "Cast or widen."
+				},
+				{
+					"never": "Make that variable a `double` instead, if it should hold decimals.",
+					"bit": "Change it to `double`, or cast with `(int)`.",
+					"lot": "`(int)` truncates, `Math.round` rounds."
+				},
+				{
+					"never": "Save and run again.",
+					"bit": "Save and rerun."
+				}
+			]
+		},
+		{
+			"id": "incompatible-types",
+			"match": "error: incompatible types",
+			"title": "Wrong kind of value",
+			"explain": {
+				"never": "Every Java variable holds one kind of value: `int` holds whole numbers, `double` holds decimals, `String` holds text, `boolean` holds true or false. Something is being put where it doesn't fit.",
+				"bit": "A value's type doesn't match the variable or parameter.",
+				"lot": "Type mismatch."
+			},
+			"hints": [
+				{
+					"never": "The error says what it found and what it wanted, like `String cannot be converted to int`.",
+					"bit": "Read which type was found and which was required.",
+					"lot": "found X, required Y."
+				},
+				{
+					"never": "Text needs quote marks (`\"4\"` is text, `4` is a number). Decimals like `3.5` need a `double`, not an `int`.",
+					"bit": "Quotes make text; decimals need `double`.",
+					"lot": "Cast, parse, or change the declared type."
+				},
+				{
+					"never": "Change the variable's kind to match the value (or the value to match the variable), then save and run.",
+					"bit": "Make the types agree, save, rerun."
+				}
+			]
+		},
+		{
+			"id": "missing-return",
+			"match": "error: missing return statement",
+			"title": "Missing return",
+			"explain": {
+				"never": "A method that says it gives back a value (like `int` or `double` before its name) must end with `return` and a value, on every path through it.",
+				"bit": "A non-void method can end without returning a value.",
+				"lot": "Not all code paths return."
+			},
+			"hints": [
+				{
+					"never": "Find the method the error points at. What kind of value does it promise, before its name?",
+					"bit": "Check the method's return type.",
+					"lot": "Check every branch."
+				},
+				{
+					"never": "Follow each `if`/`else`: every way through the method must reach a `return`.",
+					"bit": "Each `if`/`else` branch needs a `return`.",
+					"lot": "Add a final return or an else."
+				},
+				{
+					"never": "Add `return` with a value at the end of the method, save, and run.",
+					"bit": "Add the missing `return`, save, rerun."
+				}
+			]
+		},
+		{
+			"id": "not-initialized",
+			"match": "might not have been initialized",
+			"title": "Variable has no value yet",
+			"explain": {
+				"never": "You made a variable but never gave it a value before using it. Java won't guess what's inside an empty box.",
+				"bit": "A variable is used before it's given a value.",
+				"lot": "Definite assignment failure."
+			},
+			"hints": [
+				{
+					"never": "The error names the variable. Find where you made it, like `int total;`.",
+					"bit": "Find its declaration.",
+					"lot": "Some branch skips the assignment."
+				},
+				{
+					"never": "Give it a starting value where you make it, like `int total = 0;`.",
+					"bit": "Initialize it, e.g. `= 0`.",
+					"lot": "Initialize at declaration."
+				},
+				{
+					"never": "Save and run again.",
+					"bit": "Save and rerun."
+				}
+			]
+		},
+		{
+			"id": "unclosed-string",
+			"match": "unclosed string literal",
+			"title": "Missing quote mark",
+			"explain": {
+				"never": "Text in Java goes between two quote marks, like `\"hello\"`. One of them is missing, so Java can't tell where the text ends.",
+				"bit": "A string is missing its closing quote.",
+				"lot": "Unterminated string literal."
+			},
+			"hints": [
+				{
+					"never": "Go to the line in the error and find the text in quotes.",
+					"bit": "Find the string on that line.",
+					"lot": "Check for a stray quote."
+				},
+				{
+					"never": "Make sure it starts **and** ends with `\"`, before the `)` and `;`.",
+					"bit": "Add the closing `\"` before the `)`.",
+					"lot": "Escape inner quotes with `\\\"`."
+				},
+				{
+					"never": "Fix it, save, and run again.",
+					"bit": "Save and rerun."
+				}
+			]
+		},
+		{
+			"id": "public-class-file",
+			"match": "is public, should be declared in a file named",
+			"title": "Class name doesn't match the file",
+			"explain": {
+				"never": "In Java, a `public class` must live in a file with exactly the same name. `public class Robot` has to be in `Robot.java`.",
+				"bit": "The public class name and the file name must match.",
+				"lot": "Public class / file name mismatch."
+			},
+			"hints": [
+				{
+					"never": "Compare the name after `public class` with the file's name in the tab at the top.",
+					"bit": "Compare the class name and file name.",
+					"lot": "Case matters."
+				},
+				{
+					"never": "Rename one so they match exactly, capital letters included.",
+					"bit": "Rename the class or the file.",
+					"lot": "F2 on the class renames it everywhere."
+				},
+				{
+					"never": "Save and run again.",
+					"bit": "Save and rerun."
+				}
+			]
+		},
+		{
+			"id": "illegal-start",
+			"match": "illegal start of (expression|type)",
+			"title": "Something out of place",
+			"explain": {
+				"never": "Java found code somewhere it can't go, often because a `}` closed a block too early, or a line got typed outside a method.",
+				"bit": "Code is in a place Java doesn't allow, often a misplaced `}`.",
+				"lot": "Usually brace nesting."
+			},
+			"hints": [
+				{
+					"never": "Look at the line in the error and the few lines above it.",
+					"bit": "Check the lines just above.",
+					"lot": "Check brace balance above."
+				},
+				{
+					"never": "Check that every `{` has its `}` in the right place, and that your code is inside a method.",
+					"bit": "Is the code inside a method? Are braces balanced?",
+					"lot": "Format the document to see the nesting."
+				},
+				{
+					"never": "Move the misplaced line or brace, save, and run again.",
+					"bit": "Fix it, save, rerun."
+				}
+			]
+		},
+		{
+			"id": "already-defined",
+			"match": "is already defined in",
+			"title": "Same name used twice",
+			"explain": {
+				"never": "Two variables (or methods) have the same name in the same place. Java needs each name to mean just one thing.",
+				"bit": "A name is declared twice in the same scope.",
+				"lot": "Duplicate declaration."
+			},
+			"hints": [
+				{
+					"never": "The error names it. Search for it with **Ctrl+F**.",
+					"bit": "Find both declarations.",
+					"lot": "Remove the second type keyword."
+				},
+				{
+					"never": "If you meant to change the value, remove the type word the second time: write `speed = 2;` instead of `int speed = 2;`.",
+					"bit": "Reassign without the type, or rename one.",
+					"lot": "Reassign, don't redeclare."
+				},
+				{
+					"never": "Save and run again.",
+					"bit": "Save and rerun."
+				}
+			]
+		},
+		{
+			"id": "null-pointer",
+			"match": "NullPointerException",
+			"title": "Something was empty (null)",
+			"explain": {
+				"never": "Your program used something that was still **null**: an empty slot, like a motor that was never created. This happens while the program runs, not when it's built.",
+				"bit": "An object was used before it was created (it's null).",
+				"lot": "Dereferenced null."
+			},
+			"hints": [
+				{
+					"never": "Read the lines starting with `at` under the error. The first one in **your** code (like `Robot.java:42`) shows where it happened.",
+					"bit": "Find the first stack frame in your code.",
+					"lot": "Top frame in your package."
+				},
+				{
+					"never": "On that line, something hasn't been made with `new` yet. Make sure it's created before it's used, for example in the constructor or `robotInit`.",
+					"bit": "Make sure it's created (`new ...`) before use.",
+					"lot": "Initialization order."
+				},
+				{
+					"never": "Fix it, save, and start the robot again.",
+					"bit": "Fix, save, restart."
+				}
+			]
+		},
+		{
+			"id": "index-out-of-bounds",
+			"match": "IndexOutOfBoundsException",
+			"title": "Past the end of a list",
+			"explain": {
+				"never": "Your program asked for an item a list or array doesn't have. Counting starts at 0, so a list of 3 things has positions 0, 1 and 2, and no position 3.",
+				"bit": "An index went past the end (indexes start at 0).",
+				"lot": "Index out of range."
+			},
+			"hints": [
+				{
+					"never": "The error says which position and how long the list was, like `Index 3 out of bounds for length 3`.",
+					"bit": "Read the index and the length in the message.",
+					"lot": "Off-by-one?"
+				},
+				{
+					"never": "In a loop, use `i < list.length` (less than), not `<=`.",
+					"bit": "Use `<`, not `<=`, against the length.",
+					"lot": "Loop bound."
+				},
+				{
+					"never": "Fix it, save, and run again.",
+					"bit": "Fix, save, rerun."
+				}
+			]
+		},
+		{
+			"id": "divide-by-zero",
+			"match": "ArithmeticException: / by zero",
+			"title": "Divided by zero",
+			"explain": {
+				"never": "Your program divided a whole number by zero, which has no answer, so Java stopped.",
+				"bit": "Integer division by zero.",
+				"lot": "Integer / 0."
+			},
+			"hints": [
+				{
+					"never": "Find the line in your code from the `at` lines under the error.",
+					"bit": "Find the division in your code.",
+					"lot": "Top frame in your code."
+				},
+				{
+					"never": "Check what you divide by. Before dividing, make sure it isn't 0, for example with an `if`.",
+					"bit": "Guard the divisor with an `if`.",
+					"lot": "Guard, or use doubles."
+				},
+				{
+					"never": "Fix it, save, and run again.",
+					"bit": "Fix, save, rerun."
+				}
+			]
+		}
+	]
+}

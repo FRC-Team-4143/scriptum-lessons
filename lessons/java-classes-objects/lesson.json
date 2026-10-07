@@ -1,0 +1,48 @@
+{
+	"title": "Classes & Objects",
+	"description": "Build a small BankAccount class: fields, a constructor, and encapsulation - objects that protect their own state instead of exposing raw data to be mutated directly.",
+	"kind": "plain-java",
+	"track": "Java Programming",
+	"order": 17,
+	"requires": [
+		"java-methods"
+	],
+	"checkpoints": [
+		{
+			"id": "deposit",
+			"title": "Deposit",
+			"description": "deposit(amount) adds to the balance (and a negative initial balance is clamped to 0).",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/deposit.sh"
+			}
+		},
+		{
+			"id": "withdraw",
+			"title": "Withdraw",
+			"description": "withdraw(amount) subtracts and returns true on success, or leaves the balance untouched and returns false.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/withdraw.sh"
+			}
+		},
+		{
+			"id": "transfer",
+			"title": "Transfer",
+			"description": "transfer(recipient, amount) moves money between two accounts, reusing withdraw and deposit.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/transfer.sh"
+			}
+		},
+		{
+			"id": "independent-objects",
+			"title": "Independent objects",
+			"description": "Two BankAccount objects keep their own, separate state.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/independent-objects.sh"
+			}
+		}
+	]
+}

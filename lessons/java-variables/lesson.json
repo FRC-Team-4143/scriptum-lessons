@@ -1,0 +1,60 @@
+{
+	"title": "Variables",
+	"description": "Declare variables, define a constant, and define your first enum.",
+	"kind": "plain-java",
+	"track": "Java Programming",
+	"order": 11,
+	"requires": [
+		"hello-world"
+	],
+	"guides": [
+		"java-variables"
+	],
+	"checkpoints": [
+		{
+			"id": "local-variables",
+			"title": "Local variables",
+			"description": "main() declares and prints an int, double, boolean, and String local variable.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/local-variables.sh"
+			}
+		},
+		{
+			"id": "team-name-constant",
+			"title": "Team name constant",
+			"description": "A public static final TEAM_NAME constant equal to \"Team 4143\" (team standard: SCREAMING_SNAKE_CASE).",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/team-name-constant.sh"
+			}
+		},
+		{
+			"id": "alliance-enum",
+			"title": "Alliance enum",
+			"description": "An ALLIANCE enum with RED and BLUE values (team standard: SCREAMING_SNAKE_CASE).",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/alliance-enum.sh"
+			}
+		},
+		{
+			"id": "match-period-enum",
+			"title": "Match period enum",
+			"description": "A MATCH_PERIOD enum with AUTONOMOUS, TELEOP, and ENDGAME values (team standard: SCREAMING_SNAKE_CASE).",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/match-period-enum.sh"
+			}
+		},
+		{
+			"id": "max-speed-constant",
+			"title": "Max speed constant",
+			"description": "A public static final MAX_SPEED constant equal to 5.0 (team standard: SCREAMING_SNAKE_CASE).",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/max-speed-constant.sh"
+			}
+		}
+	]
+}

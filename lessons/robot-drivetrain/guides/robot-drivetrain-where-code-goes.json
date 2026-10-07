@@ -1,0 +1,95 @@
+{
+	"title": "Where your robot code goes",
+	"summary": "Robot.java, teleopPeriodic, and how often it runs.",
+	"topic": "Robot",
+	"order": 387,
+	"steps": [
+		{
+			"title": "Open Robot.java",
+			"say": "Everything you write this lesson lives in one file. Press **Ctrl+P**, type `Robot` and press Enter. Quick Open finds any file by name, so you never have to dig through folders.",
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "Robot.java"
+				},
+				"hint": "open Robot.java with Ctrl+P.",
+				"skipIfDone": true
+			}
+		},
+		{
+			"title": "Find teleopPeriodic",
+			"say": "Your code goes inside one method. Press **Ctrl+F**, type `teleopPeriodic` and press Enter to jump to it.",
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "public void teleopPeriodic"
+				},
+				"hint": "find teleopPeriodic with Ctrl+F.",
+				"skipIfDone": true
+			}
+		},
+		{
+			"title": "teleopPeriodic",
+			"say": "`teleopPeriodic()` runs about **50 times a second** while the robot is enabled in teleop. Each time, it runs your lines top to bottom, so the robot keeps reacting to the sticks.",
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "public void teleopPeriodic"
+			},
+			"cardAt": "bottom-right"
+		},
+		{
+			"title": "The two objects",
+			"say": "Two objects are already made for you. You call methods on them.",
+			"board": {
+				"code": "controller.getLeftY()          // how far the left stick is pushed\ndrive.setDutyCycles(0.5, 0.5)  // run both sides at half power",
+				"marks": [
+					{
+						"text": "controller",
+						"label": "the gamepad"
+					},
+					{
+						"text": "drive",
+						"label": "the drivetrain"
+					},
+					{
+						"text": "0.5, 0.5",
+						"label": "left, then right"
+					}
+				]
+			}
+		},
+		{
+			"title": "Forward is negative",
+			"say": "Pushing a stick **forward** gives a negative number (that's how gamepads work), so you flip it with a minus sign.",
+			"board": {
+				"code": "double leftSpeed = -controller.getLeftY();",
+				"marks": [
+					{
+						"text": "-controller",
+						"label": "flip: forward becomes positive"
+					}
+				]
+			}
+		}
+	]
+}

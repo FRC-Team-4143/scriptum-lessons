@@ -1,0 +1,62 @@
+{
+	"title": "Objects and Odometry",
+	"description": "Write an abstract OI class, then use WPILib kinematics and a pose estimator to track where the robot is.",
+	"kind": "robot",
+	"track": "FRC Robot",
+	"order": 23,
+	"requires": [
+		"robot-drive-math"
+	],
+	"guides": [
+		"build-and-run",
+		"robot-drive-math-io-loop",
+		"robot-odometry-oi"
+	],
+	"checkpoints": [
+		{
+			"id": "oi-class",
+			"title": "OI class",
+			"description": "OI has static getForward() and getTurn() methods, and Robot.java uses them instead of XboxController.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/oi-class.sh"
+			}
+		},
+		{
+			"id": "chassis-speeds",
+			"title": "Chassis speeds",
+			"description": "Drive forward at full speed. Drive/LinearSpeed (from kinematics) should read about 5 m/s.",
+			"verifier": {
+				"type": "nt4-value",
+				"topic": "/AdvantageKit/RealOutputs/Check/Drive/LinearSpeed/Max",
+				"check": "range",
+				"min": 3.0,
+				"max": 6.5
+			}
+		},
+		{
+			"id": "yaw",
+			"title": "Yaw",
+			"description": "Spin the robot counterclockwise (left). Drive/PoseYawDeg should become clearly positive.",
+			"verifier": {
+				"type": "nt4-value",
+				"topic": "/AdvantageKit/RealOutputs/Check/Drive/PoseYawDeg/Max",
+				"check": "range",
+				"min": 20.0,
+				"max": 180.0
+			}
+		},
+		{
+			"id": "pose-auto",
+			"title": "Drive to x = 3 m",
+			"description": "Run Auto and let the robot stop. Drive/PoseX should read about 3 meters.",
+			"verifier": {
+				"type": "nt4-value",
+				"topic": "/AdvantageKit/RealOutputs/Drive/PoseX",
+				"check": "range",
+				"min": 2.95,
+				"max": 3.9
+			}
+		}
+	]
+}

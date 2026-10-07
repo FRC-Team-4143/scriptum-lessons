@@ -1,0 +1,107 @@
+{
+	"title": "3D field and swerve",
+	"summary": "Lesson steps 6 to 8: RobotPose3d, Orbit Robot, the Swerve tab.",
+	"topic": "Tools",
+	"order": 139,
+	"steps": [
+		{
+			"title": "Same path, in 3D",
+			"say": "Field2d wants a `Pose2d` and Field3d wants a `Pose3d`, so the robot publishes the figure 8 twice.",
+			"target": {
+				"pane": "scope"
+			},
+			"close": [
+				"editor",
+				"preview",
+				"elastic"
+			],
+			"open": [
+				"scope"
+			]
+		},
+		{
+			"title": "Start the robot",
+			"say": "Your code only runs once it's built and started.",
+			"target": {
+				"selector": "[data-tour='sim-controls']"
+			},
+			"waitFor": {
+				"target": {
+					"selector": "[data-tour='code-status']",
+					"text": "Running"
+				},
+				"hint": "press Start and wait for Running."
+			}
+		},
+		{
+			"title": "3D Field",
+			"say": "Switch to the 3D Field tab.",
+			"target": {
+				"pane": "scope",
+				"selector": ".tab",
+				"text": "3D Field"
+			},
+			"waitFor": {
+				"target": {
+					"pane": "scope",
+					"selector": ".tab.tab-selected",
+					"text": "3D Field"
+				},
+				"hint": "click the 3D Field tab."
+			}
+		},
+		{
+			"title": "A 3D robot",
+			"say": "Search for `RobotPose3d` and drag it onto **Poses**.",
+			"target": {
+				"pane": "scope",
+				"selector": ".field-3d-sources.source-list"
+			},
+			"waitFor": {
+				"target": {
+					"pane": "scope",
+					"selector": ".field-3d-sources.source-list .key-container",
+					"text": "RobotPose3d"
+				},
+				"hint": "drag RobotPose3d onto Poses."
+			}
+		},
+		{
+			"title": "Field and camera",
+			"say": "Set **Field** to **Evergreen**. Then right-click the 3D view and choose the **Orbit Robot** camera, so it follows the robot around.",
+			"target": {
+				"pane": "scope",
+				"selector": ".field-3d-settings"
+			},
+			"waitFor": {
+				"hint": "set Evergreen and the Orbit Robot camera."
+			}
+		},
+		{
+			"title": "A Swerve tab",
+			"say": "Press **+** and add a **Swerve** tab.",
+			"target": {
+				"pane": "scope",
+				"selector": ".add-tab"
+			},
+			"waitFor": {
+				"target": {
+					"pane": "scope",
+					"selector": ".tab",
+					"text": "Swerve"
+				},
+				"hint": "add a Swerve tab."
+			}
+		},
+		{
+			"title": "Three sources",
+			"say": "Drag on **SwerveModuleStates** (each wheel's speed and angle), **ChassisSpeeds** (the whole robot's motion) and **ChassisRotation** (its heading).",
+			"waitFor": {
+				"hint": "drag the three swerve sources on."
+			},
+			"target": {
+				"pane": "scope"
+			}
+		}
+	]
+}
