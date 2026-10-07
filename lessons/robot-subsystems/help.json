@@ -1,0 +1,25 @@
+{
+	"plan": [
+		{
+			"checkpoint": "shooter-registered",
+			"guides": [
+				"robot-subsystems-big-idea",
+				"robot-subsystems-singleton",
+				"robot-subsystems-shooter"
+			]
+		},
+		{
+			"checkpoint": "oi-buttons",
+			"guides": [
+				"robot-subsystems-oi-assist"
+			]
+		},
+		{
+			"checkpoint": "drive-from-subsystem",
+			"guides": [
+				"robot-subsystems-states",
+				"robot-subsystems-drive-states-assist"
+			]
+		}
+	]
+}

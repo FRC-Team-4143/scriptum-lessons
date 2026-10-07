@@ -1,0 +1,130 @@
+{
+	"title": "Shooter buttons in OI",
+	"summary": "A button is just true or false: write getShootButton() and getIndexButton().",
+	"topic": "Robot",
+	"order": 461,
+	"kind": "mixed",
+	"steps": [
+		{
+			"title": "A button is true or false",
+			"say": {
+				"never": "A button can only be two things: held (**true**) or not held (**false**). A method that answers a yes/no question is written with `boolean`. For example a door sensor can answer \"is the door open?\" with `true` or `false`. A controller button answers the same kind of question.",
+				"bit": "A yes/no question is a `boolean`: true or false, like a door sensor or a button."
+			},
+			"board": {
+				"code": "boolean doorOpen = sensor.isDoorOpen();   // true or false\nif (doorOpen) {\n    // do something\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "boolean",
+						"label": "true or false, nothing in between"
+					},
+					{
+						"text": "if (doorOpen)",
+						"label": "use the answer"
+					}
+				]
+			}
+		},
+		{
+			"title": "Open OI.java",
+			"say": {
+				"never": "The buttons live in the same class as the sticks. Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `OI`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "The buttons live in the same class as the sticks. Press **Ctrl+P**, type `OI` and press Enter. Quick Open finds any file by name, so you never have to dig through folders."
+			},
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "OI.java"
+				},
+				"hint": "open OI.java with Ctrl+P.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Find it",
+			"say": {
+				"never": "The first one is the shoot button. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `right bumper is held` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "The first one is the shoot button. Press **Ctrl+F**, type `right bumper is held` and press Enter to jump to it."
+			},
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "return true while the right bumper is held"
+				},
+				"hint": "find right bumper is held with Ctrl+F.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Shoot button",
+			"say": {
+				"never": "Find the line that says `return false;` right under that comment. Change it to `return driverController.getRightBumperButton();`. Now this method returns true while the right bumper is held.",
+				"bit": "Replace `return false;` with `return driverController.getRightBumperButton();`."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "return true while the right bumper is held"
+			},
+			"cardAt": "bottom-right",
+			"assist": true
+		},
+		{
+			"title": "Find it",
+			"say": {
+				"never": "Now the index button, just below. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `left bumper is held` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "Now the index button, just below. Press **Ctrl+F**, type `left bumper is held` and press Enter to jump to it."
+			},
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "return true while the left bumper is held"
+				},
+				"hint": "find left bumper is held with Ctrl+F.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Index button",
+			"say": {
+				"never": "Same idea for the other bumper. Change `return false;` to `return driverController.getLeftBumperButton();`.",
+				"bit": "Same idea with the other bumper: `return driverController.getLeftBumperButton();`."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "return true while the left bumper is held"
+			},
+			"cardAt": "bottom-right",
+			"assist": true
+		}
+	]
+}

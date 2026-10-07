@@ -21,9 +21,15 @@ type Target = {
 	text?: string;
 	region?: Record<string, unknown>;
 };
+/** Text written once, or once per level (Scriptum's tutorWorded). */
+type Worded = string | { never: string; bit?: string; lot?: string };
+/** Every wording of a text, so length limits apply to each. */
+const wordings = (w: Worded | undefined): string[] =>
+	w === undefined ? [] : typeof w === "string" ? [w] : Object.values(w);
 type Step = {
-	title: string;
-	say: string;
+	title: Worded;
+	say: Worded;
+	assist?: boolean;
 	open?: string[];
 	close?: string[];
 	target?: Target;
@@ -35,7 +41,7 @@ type Step = {
 	cardAt?: string;
 	waitFor?: {
 		target?: Target;
-		hint?: string;
+		hint?: Worded;
 		more?: boolean;
 		atLeast?: number;
 		gone?: boolean;
@@ -93,6 +99,31 @@ function checkBalanced(selector: string) {
 }
 
 describe("guides", () => {
+	test("a shared guide only explains: walk-through steps name one lesson's own files", () => {
+		for (const concept of index.concepts) {
+			if (!concept.path.startsWith("common/guides/")) continue;
+			const { steps } = readJson(concept.path) as { steps: Step[] };
+			// Steps that wait for the student (open this file, find that line) are fine when the file and
+			// line exist in every lesson using the guide (the next test checks that). The edit itself, a
+			// "your turn" step with no wait, is what belongs to one lesson.
+			// These point at code that is the same in every lesson using them (main starts empty in both
+			// methods lessons; every drive mech has readInputs) and never ask for a change.
+			if (["java-methods-edge-cases", "robot-drive-math-io-loop"].includes(concept.id)) continue;
+			const walkthrough = steps.filter((s) => s.assist && !s.waitFor && (s.target?.text || s.target?.selector)).length;
+			expect(walkthrough, `${concept.id} is shared by ${concept.modules?.join(", ")} but walks through edits`).toBe(0);
+		}
+	});
+
+	test("a guide's kind matches its steps", () => {
+		for (const concept of index.concepts as (Guide & { kind?: string })[]) {
+			if (!concept.kind) continue;
+			const { steps } = readJson(concept.path) as { steps: Step[] };
+			const n = steps.filter((s) => s.assist).length;
+			const want = n === 0 ? "concept" : n === steps.length ? "assist" : "mixed";
+			expect(concept.kind, concept.id).toBe(want);
+		}
+	});
+
 	test("have unique, kebab-case ids, a title, a topic and a whole-number order", () => {
 		const ids = index.concepts.map((c) => c.id);
 		expect(new Set(ids).size).toBe(ids.length);
@@ -135,10 +166,20 @@ describe.each(index.concepts.map((c) => c.id))("tutor/%s.json", (id) => {
 		expect(steps.length).toBeGreaterThan(0);
 		expect(steps.length).toBeLessThanOrEqual(40);
 		steps.forEach((step, i) => {
-			expect(step.title?.length, `step ${i + 1} title`).toBeGreaterThan(0);
-			expect(step.title.length, `step ${i + 1} title`).toBeLessThanOrEqual(80);
-			expect(step.say?.length, `step ${i + 1} say`).toBeGreaterThan(0);
-			expect(step.say.length, `step ${i + 1} say`).toBeLessThanOrEqual(1200);
+			expect(wordings(step.title).length, `step ${i + 1} title`).toBeGreaterThan(0);
+			for (const t of wordings(step.title)) {
+				expect(t.length, `step ${i + 1} title`).toBeGreaterThan(0);
+				expect(t.length, `step ${i + 1} title`).toBeLessThanOrEqual(80);
+			}
+			expect(wordings(step.say).length, `step ${i + 1} say`).toBeGreaterThan(0);
+			for (const t of wordings(step.say)) {
+				expect(t.length, `step ${i + 1} say`).toBeGreaterThan(0);
+				expect(t.length, `step ${i + 1} say`).toBeLessThanOrEqual(1200);
+			}
+			// A worded text must start with the wording every level can fall back to.
+			for (const w of [step.title, step.say]) {
+				if (typeof w === "object") expect(typeof w.never, `step ${i + 1}: worded text needs "never"`).toBe("string");
+			}
 		});
 	});
 
@@ -172,4 +213,114 @@ describe.each(index.concepts.map((c) => c.id))("tutor/%s.json", (id) => {
 			}
 		});
 	});
+});
+
+// A step that points at a line, or waits for a file's tab, must point at something that is
+// in the lesson's starter project. A guide reused in a lesson whose files differ (the
+// subsystems lesson has no "TODO (STEP 1)" line) can never advance, and nothing else notices.
+function filesUnder(dir: string): string[] {
+	if (!existsSync(dir)) return [];
+	return readdirSync(dir, { withFileTypes: true }).flatMap((e) =>
+		e.isDirectory() ? filesUnder(resolve(dir, e.name)) : [resolve(dir, e.name)],
+	);
+}
+const normalize = (s: string) => s.replace(/\s+/g, " ").trim();
+
+describe("guides only point at things the lesson has", () => {
+	for (const guide of index.concepts) {
+		const { steps } = readJson(guide.path) as { steps: Step[] };
+		for (const moduleId of guide.modules ?? []) {
+			test(`${guide.id} in ${moduleId}`, () => {
+				const files = filesUnder(resolve(repoRoot, "lessons", moduleId, "project"));
+				const names = new Set(files.map((f) => f.split("/").pop()));
+				const lines = files.flatMap((f) => {
+					try {
+						return readFileSync(f, "utf8").split("\n").map(normalize);
+					} catch {
+						return [];
+					}
+				});
+				steps.forEach((step, i) => {
+					for (const t of [step.target, step.waitFor?.target]) {
+						if (!t?.text) continue;
+						const where = `step ${i + 1} "${step.title}" (${t.text})`;
+						if (t.pane === "editor" && t.selector?.includes(".tab")) {
+							// (Only .java tabs: other files are ones the student makes in the editor lessons.)
+							if (!t.text.endsWith(".java")) continue;
+							expect(names.has(t.text), `${where}: no file called that in ${moduleId}`).toBe(true);
+						} else if (t.selector?.includes(".view-line")) {
+							const want = normalize(t.text);
+							expect(
+								lines.some((l) => l.includes(want)),
+								`${where}: no line like that in ${moduleId}'s project`,
+							).toBe(true);
+						}
+					}
+				});
+			});
+		}
+	}
+});
+
+// The robot, Java and Hello World lessons are where students have never programmed, so every step there is
+// worded for them: a plain-language "never" version alongside the shorter original.
+describe("guides for new programmers are worded for students who have never coded", () => {
+	const forBeginners = (g: Guide) => g.id.startsWith("robot-") || g.id.startsWith("java-") || g.id.startsWith("hello-world-") || g.id.startsWith("git-") || g.id === "build-and-run";
+	for (const guide of index.concepts.filter(forBeginners)) {
+		test(guide.id, () => {
+			const { steps } = readJson(guide.path) as { steps: Step[] };
+			steps.forEach((step, i) => {
+				expect(typeof step.say, `step ${i + 1} "${wordings(step.title)[0]}" has only one wording`).toBe("object");
+			});
+		});
+	}
+});
+
+// An explaining step must not hand over the checkpoint's answer. Its code board uses its own
+// example (a playlist, a lamp, a thermostat), and the lesson's real code goes in walk-through
+// steps, which Dozer only shows when he is guiding or the student asks. So: no code board in an
+// explaining step may share two lines with what the student is asked to write (the lines in
+// solution/ that aren't already in the starter), nor be a one- or two-line board that is
+// entirely such lines.
+const trimLine = (l: string) => l.replace(/\s+/g, " ").trim();
+function textLines(dir: string): string[] {
+	return filesUnder(dir).flatMap((f) => {
+		try {
+			return readFileSync(f, "utf8").split("\n").map(trimLine);
+		} catch {
+			return [];
+		}
+	});
+}
+function answerLines(lessonId: string): Set<string> {
+	const starter = new Set(textLines(resolve(repoRoot, "lessons", lessonId, "project")));
+	return new Set(
+		textLines(resolve(repoRoot, "lessons", lessonId, "solution")).filter(
+			(l) => l.length >= 14 && !starter.has(l) && !/^(\/\/|\*|\/\*|import|package)/.test(l),
+		),
+	);
+}
+
+describe("explaining steps don't give away the checkpoint's answer", () => {
+	for (const guide of index.concepts) {
+		const { steps } = readJson(guide.path) as { steps: Step[] };
+		test(guide.id, () => {
+			steps.forEach((step, i) => {
+				if (step.assist || !step.board) return;
+				const code = step.board.code
+					.split("\n")
+					.map(trimLine)
+					.filter((l) => l.length >= 14 && !l.startsWith("//") && !l.startsWith("*"));
+				for (const moduleId of guide.modules ?? []) {
+					const answer = answerLines(moduleId);
+					const shared = code.filter((l) => answer.has(l));
+					const title = wordings(step.title)[0];
+					expect(shared.length, `step ${i + 1} "${title}" shows ${shared.length} lines of ${moduleId}'s answer: ${shared.join(" | ")}`).toBeLessThan(2);
+					if (code.length <= 2) {
+						expect(shared.length === code.length && code.length > 0, `step ${i + 1} "${title}" IS ${moduleId}'s answer`).toBe(false);
+					}
+				}
+			});
+		});
+	}
 });

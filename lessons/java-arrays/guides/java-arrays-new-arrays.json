@@ -6,7 +6,31 @@
 	"steps": [
 		{
 			"title": "Don't change theirs",
-			"say": "Changing `values[i]` changes the caller's array too: they share it. Make a new one the same length and fill that.",
+			"say": {
+				"never": "When someone hands you an array, you're both looking at the *same* boxes. If you change them, you change the original too, which might surprise them. To be safe, make a **new** array the same length, fill it with your answers, and give that back instead.",
+				"bit": "Arrays are shared, so editing `points[i]` edits the caller's array. Build and return a new one."
+			},
+			"board": {
+				"code": "int[] shifted = new int[points.length];\nfor (int i = 0; i < points.length; i++) {\n    shifted[i] = points[i] + 10;\n}\nreturn shifted;",
+				"language": "java",
+				"marks": [
+					{
+						"text": "new int[points.length]",
+						"label": "a fresh array, same length"
+					},
+					{
+						"text": "shifted[i] =",
+						"label": "write into the new one only"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Don't change theirs",
+			"say": {
+				"never": "When someone hands you an array, you're both looking at the *same* boxes. If you change them, you change the original too, which might surprise them. To be safe, make a **new** array the same length, fill it with your answers, and give that back instead.",
+				"bit": "Changing `values[i]` changes the caller's array too: they share it. Make a new one the same length and fill that."
+			},
 			"board": {
 				"code": "int[] result = new int[values.length];\nfor (int i = 0; i < values.length; i++) {\n    result[i] = values[i] * 2;\n}\nreturn result;",
 				"marks": [
@@ -19,11 +43,15 @@
 						"label": "fill the new one"
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Sorting a copy",
-			"say": "`Arrays.copyOf` makes a copy you can sort without touching the original.",
+			"say": {
+				"never": "`Arrays.copyOf` makes a copy of an array. Sort the copy and the original stays untouched. That's useful when you want a sorted version but the caller still needs the original order.",
+				"bit": "`Arrays.copyOf` makes a copy you can sort without touching the original."
+			},
 			"board": {
 				"code": "int[] copy = java.util.Arrays.copyOf(values, values.length);\njava.util.Arrays.sort(copy);\nreturn copy;",
 				"marks": [
@@ -40,7 +68,10 @@
 		},
 		{
 			"title": "Fibonacci",
-			"say": "Each slot depends on the two before it. Fill the first two, then loop from slot 2.",
+			"say": {
+				"never": "In the Fibonacci sequence each number is the sum of the two before it: 0, 1, 1, 2, 3, 5... So fill in the first two boxes by hand (0 and 1), then use a loop starting at box 2 where each box is the sum of the previous two.",
+				"bit": "Each slot depends on the two before it. Fill the first two, then loop from slot 2."
+			},
 			"board": {
 				"code": "int[] fib = new int[n];\nif (n > 0) fib[0] = 0;\nif (n > 1) fib[1] = 1;\nfor (int i = 2; i < n; i++) {\n    fib[i] = fib[i - 1] + fib[i - 2];\n}",
 				"marks": [
@@ -55,5 +86,6 @@
 				]
 			}
 		}
-	]
+	],
+	"kind": "mixed"
 }

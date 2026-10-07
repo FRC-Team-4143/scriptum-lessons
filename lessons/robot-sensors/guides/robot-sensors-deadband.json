@@ -6,11 +6,38 @@
 	"steps": [
 		{
 			"title": "Sticks drift",
-			"say": "Real sticks never rest at exactly 0.0. A tiny 0.03 would make the robot creep. A **deadband** treats small values as zero."
+			"say": {
+				"never": "Gamepad sticks are never perfectly still. At rest they might read 0.03 instead of 0.0, and that tiny number would make the robot slowly creep. A **deadband** fixes it: *if the stick is pushed only a tiny bit, pretend it's zero.*",
+				"bit": "Real sticks never rest at exactly 0.0. A tiny 0.03 would make the robot creep. A **deadband** treats small values as zero."
+			}
 		},
 		{
 			"title": "A constant",
-			"say": "Give the number a name, at the top of the class. `final` means it never changes.",
+			"say": {
+				"never": "Give a number a name, at the top of the class, so it's easy to find and change. `final` means it never changes. Naming numbers like this is how programmers avoid mysterious `0.1`s scattered everywhere.",
+				"bit": "Name important numbers once, as `private static final` constants."
+			},
+			"board": {
+				"code": "private static final double SPEED_LIMIT = 0.8;",
+				"language": "java",
+				"marks": [
+					{
+						"text": "private static final",
+						"label": "a named, unchanging number"
+					},
+					{
+						"text": "SPEED_LIMIT",
+						"label": "say what it means"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: A constant",
+			"say": {
+				"never": "Give the number a name, up at the top of the class, so it's easy to find and change. `final` means \"this never changes\". Naming numbers like this is how programmers avoid mysterious `0.1`s scattered everywhere.",
+				"bit": "Give the number a name, at the top of the class. `final` means it never changes."
+			},
 			"board": {
 				"code": "private static final double DEADBAND = 0.1;",
 				"marks": [
@@ -23,11 +50,36 @@
 						"label": "a name instead of a mystery 0.1"
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "The if",
-			"say": "`Math.abs` ignores the sign, so one check covers both directions.",
+			"say": {
+				"never": "The `if` asks: *is the dial pushed less than the deadband?* `Math.abs` throws away the minus sign, so one check covers pushing both ways. If it's tiny, we set it to 0.0, as if it had never moved.",
+				"bit": "An `if` with `Math.abs(x) < DEADBAND` treats small values in either direction as zero."
+			},
+			"board": {
+				"code": "double dial = readDial();\nif (Math.abs(dial) < 0.05) {\n    dial = 0.0;   // too small to mean anything\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "Math.abs(dial) < 0.05",
+						"label": "small in either direction"
+					},
+					{
+						"text": "dial = 0.0;",
+						"label": "pretend it didn't move"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: The if",
+			"say": {
+				"never": "The `if` asks: *is the stick pushed less than the deadband?* `Math.abs` throws away the minus sign, so one check covers pushing forward and pushing back. If it's tiny, we set it to 0.0. The same pattern repeats for the turn stick.",
+				"bit": "`Math.abs` ignores the sign, so one check covers both directions."
+			},
 			"board": {
 				"code": "if (Math.abs(forward) < DEADBAND) {\n    forward = 0.0;\n}\nif (Math.abs(turn) < DEADBAND) {\n    turn = 0.0;\n}",
 				"marks": [
@@ -40,11 +92,15 @@
 						"label": "close enough to zero: stop"
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Open Robot.java",
-			"say": "Press **Ctrl+P**, type `Robot` and press Enter. Quick Open finds any file by name, so you never have to dig through folders.",
+			"say": {
+				"never": "Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `Robot`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "Press **Ctrl+P**, type `Robot` and press Enter. Quick Open finds any file by name, so you never have to dig through folders."
+			},
 			"open": [
 				"editor"
 			],
@@ -66,11 +122,15 @@
 				},
 				"hint": "open Robot.java with Ctrl+P.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Find DEADBAND",
-			"say": "It's in teleopPeriodic. Press **Ctrl+F**, type `DEADBAND` and press Enter to jump to it.",
+			"say": {
+				"never": "It's in teleopPeriodic. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `DEADBAND` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "It's in teleopPeriodic. Press **Ctrl+F**, type `DEADBAND` and press Enter to jump to it."
+			},
 			"target": {
 				"pane": "editor"
 			},
@@ -83,17 +143,23 @@
 				},
 				"hint": "find DEADBAND with Ctrl+F.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "STEP 4",
-			"say": "Add the constant at the top of the class, then the two `if`s here.",
+			"say": {
+				"never": "Two jobs here. First, add the constant at the top of the class. Then add the two `if` checks below this line. Use the board to copy the pattern.",
+				"bit": "Add the constant at the top of the class, then the two `if`s here."
+			},
 			"target": {
 				"pane": "editor",
 				"selector": ".view-lines .view-line",
 				"text": "STEP 4: DEADBAND"
 			},
-			"cardAt": "bottom-right"
+			"cardAt": "bottom-right",
+			"assist": true
 		}
-	]
+	],
+	"kind": "mixed"
 }

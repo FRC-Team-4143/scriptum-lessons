@@ -5,8 +5,127 @@
 	"order": 462,
 	"steps": [
 		{
-			"title": "Three layers",
-			"say": "Each layer has one job.",
+			"title": "Why layers?",
+			"say": {
+				"never": "A robot has a huge number of jobs: driving, shooting, lifting, reading sensors. If one giant file did all of them, finding one mistake would be like finding one sock in a messy house. So teams split the code into **three layers**, and each layer has exactly one job. When something breaks, you know which layer to look in.",
+				"bit": "A robot has too many jobs for one file, so code is split into three layers with one job each: **mechanism**, **subsystem**, **container**. Bugs become easier to place."
+			},
+			"board": {
+				"code": "Container      // keeps the list of every subsystem on the robot\n  Subsystem    // decides WHAT to do and WHEN\n    Mechanism  // knows HOW to run one device\n      motor, sensor",
+				"language": "text",
+				"marks": [
+					{
+						"text": "Container",
+						"label": "the one list of everything"
+					},
+					{
+						"text": "WHAT to do and WHEN",
+						"label": "decisions live here"
+					},
+					{
+						"text": "HOW to run one device",
+						"label": "no decisions, just skills"
+					}
+				]
+			}
+		},
+		{
+			"title": "Mechanism: the how",
+			"say": {
+				"never": "A **mechanism** looks after **one device**, like an elevator's motor and its height sensor. It knows *how* to do things, and it has no opinions about *when*. You give it orders (\"go to 0.6 meters\") and ask it questions (\"how high are you?\"). Think of it like a very good employee who only follows instructions. Mechanisms also follow the **read, think, write** loop: sensors are read before your code runs, and the motor order is sent after.",
+				"bit": "A **mechanism** wraps one device (a motor and its sensor). It exposes orders and readings and makes no decisions. Sensors are read before your code runs and outputs are written after."
+			},
+			"board": {
+				"code": "public class ElevatorMech {\n    public void setTargetHeight(double meters) { /* sends the order */ }\n    public double getHeight()                  { /* reads the sensor */ return 0.0; }\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "setTargetHeight",
+						"label": "an order: how to move"
+					},
+					{
+						"text": "getHeight",
+						"label": "a reading: what is true now"
+					}
+				]
+			}
+		},
+		{
+			"title": "Subsystem: the when",
+			"say": {
+				"never": "A **subsystem** is the manager. It owns one or more mechanisms and decides *what they should do right now*. It keeps track of a **state**, such as LOW or HIGH, and every 20 thousandths of a second it looks at the state and gives its mechanisms their orders. Anything that asks the elevator to move goes through the subsystem, so there is only ever one boss.",
+				"bit": "A **subsystem** owns mechanisms and decides what they do, using a **state** and a `switch` that runs every loop. Everything else asks the subsystem instead of touching the mechanism."
+			},
+			"board": {
+				"code": "public class ElevatorSubsystem extends MwSubsystem<ElevatorStates, ElevatorConstants> {\n    private final ElevatorMech elevator = new ElevatorMech();\n\n    @Override\n    public void updateLogic(double timestamp) {\n        switch (system_state_) {\n            case LOW:\n                elevator.setTargetHeight(0.0);\n                break;\n            case HIGH:\n                elevator.setTargetHeight(1.2);\n                break;\n        }\n    }\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "private final ElevatorMech elevator",
+						"label": "it owns the mechanism"
+					},
+					{
+						"text": "switch (system_state_)",
+						"label": "decide from the current state"
+					},
+					{
+						"text": "elevator.setTargetHeight(1.2)",
+						"label": "order the mechanism"
+					}
+				]
+			}
+		},
+		{
+			"title": "Container: the one list",
+			"say": {
+				"never": "The **robot container** is the front desk. It keeps the list of every subsystem on the robot, and **a subsystem that isn't on the list never runs**. That's a common beginner mistake: you write a whole subsystem, forget to add it to the list, and nothing happens. Every loop, the container tells each subsystem on its list to read its sensors, run its logic, and write its outputs.",
+				"bit": "The **container** holds the list of subsystems. A subsystem that is not registered there never runs. Each loop it has every subsystem read, think and write."
+			},
+			"board": {
+				"code": "public class RobotContainer extends SubsystemManager {\n    public RobotContainer() {\n        super(BuildConstants.class);\n        registerSubsystem(ElevatorSubsystem.getInstance());\n        registerSubsystem(IntakeSubsystem.getInstance());\n    }\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "registerSubsystem(ElevatorSubsystem.getInstance())",
+						"label": "on the list, so it runs"
+					}
+				]
+			}
+		},
+		{
+			"title": "How a button press travels",
+			"say": {
+				"never": "Follow one press of a button down through the layers. A button asks the subsystem for something. The subsystem decides what that means in its current state. The subsystem gives an order to its mechanism. The mechanism turns the order into motor power. Meanwhile the sensor's reading travels back up the other way. Every layer only talks to its neighbour, which keeps things tidy.",
+				"bit": "A button asks a subsystem for a state; the subsystem's logic turns the state into mechanism orders; the mechanism drives the motor. Sensor readings flow back up the same way."
+			},
+			"board": {
+				"code": "button  ->  subsystem.setWantedState(HIGH)\nsubsystem  ->  elevator.setTargetHeight(1.2)\nmechanism  ->  motor power\n\nsensor  ->  elevator.getHeight()  ->  subsystem checks it",
+				"language": "text",
+				"marks": [
+					{
+						"text": "setWantedState(HIGH)",
+						"label": "ask, never command the motor"
+					},
+					{
+						"text": "elevator.getHeight()",
+						"label": "readings travel back up"
+					}
+				]
+			}
+		},
+		{
+			"title": "Why bother?",
+			"say": {
+				"never": "Three good reasons. **Swap hardware:** if the team changes the elevator motor, only the mechanism changes, and the subsystem doesn't notice. **Reuse:** the same mechanism class can be used on two robots. **Teamwork:** one person can write the mechanism while another writes the subsystem, because they agree on the orders and readings between them. Your lesson's shooter is built exactly this way.",
+				"bit": "Swap hardware without touching decisions, reuse mechanisms on other robots, and let teammates work on different layers in parallel."
+			}
+		},
+		{
+			"title": "In your lesson: the three layers",
+			"say": {
+				"never": "A real robot's code is organized in three layers, and each has one job. At the bottom, a **mechanism** knows how to run one device (spin a wheel at a speed). In the middle, a **subsystem** decides *when* (\"the button is held, so spin up\"). At the top, the **container** keeps a list of all the subsystems.",
+				"bit": "Each layer has one job."
+			},
 			"board": {
 				"code": "RobotContainer        // lists every subsystem\n  ShooterSubsystem     // decides: when the button's held, spin up\n    FlywheelMech       // knows how to spin a wheel at a speed\n    RollerMech         // knows how to run a roller",
 				"marks": [
@@ -23,15 +142,23 @@
 						"label": "a reusable motor job"
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
-			"title": "You've used one",
-			"say": "The drivetrain was a mechanism all along. This lesson wraps it in a subsystem and builds a shooter next to it."
+			"title": "In your lesson: you've used one",
+			"say": {
+				"never": "You've already used one! The drivetrain was a mechanism the whole time. In this lesson we wrap it in a subsystem, then build a brand-new shooter next to it.",
+				"bit": "The drivetrain was a mechanism all along. This lesson wraps it in a subsystem and builds a shooter next to it."
+			},
+			"assist": true
 		},
 		{
 			"title": "Open DrivetrainSubsystem.java",
-			"say": "Read the drivetrain subsystem first. Press **Ctrl+P**, type `DrivetrainSubsystem` and press Enter. Quick Open finds any file by name, so you never have to dig through folders.",
+			"say": {
+				"never": "Read the drivetrain subsystem first. Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `DrivetrainSubsystem`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "Read the drivetrain subsystem first. Press **Ctrl+P**, type `DrivetrainSubsystem` and press Enter. Quick Open finds any file by name, so you never have to dig through folders."
+			},
 			"open": [
 				"editor"
 			],
@@ -53,11 +180,15 @@
 				},
 				"hint": "open DrivetrainSubsystem.java with Ctrl+P.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Find case ARCADE",
-			"say": "Find the teleop state. Press **Ctrl+F**, type `case ARCADE` and press Enter to jump to it.",
+			"say": {
+				"never": "Find the teleop state. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `case ARCADE` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "Find the teleop state. Press **Ctrl+F**, type `case ARCADE` and press Enter to jump to it."
+			},
 			"target": {
 				"pane": "editor"
 			},
@@ -70,17 +201,23 @@
 				},
 				"hint": "find case ARCADE with Ctrl+F.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "ARCADE",
-			"say": "In the ARCADE state, drive with `drive.arcadeDrive(OI.getForward(), OI.getTurn());`.",
+			"say": {
+				"never": "When the drivetrain is in the `ARCADE` state, it drives using the sticks. The line is `drive.arcadeDrive(OI.getForward(), OI.getTurn());`. You'll write it in a moment.",
+				"bit": "In the ARCADE state, drive with `drive.arcadeDrive(OI.getForward(), OI.getTurn());`."
+			},
 			"target": {
 				"pane": "editor",
 				"selector": ".view-lines .view-line",
 				"text": "case ARCADE:"
 			},
-			"cardAt": "bottom-right"
+			"cardAt": "bottom-right",
+			"assist": true
 		}
-	]
+	],
+	"kind": "mixed"
 }

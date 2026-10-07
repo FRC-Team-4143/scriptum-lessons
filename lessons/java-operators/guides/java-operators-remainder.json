@@ -6,7 +6,10 @@
 	"steps": [
 		{
 			"title": "Remainder",
-			"say": "`%` gives what's **left over** after dividing.",
+			"say": {
+				"never": "The `%` symbol gives you what's **left over** after dividing. 7 divided by 2 is 3 with 1 left over, so `7 % 2` is 1. If nothing is left over, the answer is 0. Like sharing 7 cookies between 2 people: one cookie is left.",
+				"bit": "`%` gives what's **left over** after dividing."
+			},
 			"board": {
 				"code": "7 % 2   // 1  (7 = 3*2 + 1)\n8 % 2   // 0  (8 = 4*2 + 0)\n10 % 3  // 1",
 				"marks": [
@@ -23,7 +26,31 @@
 		},
 		{
 			"title": "Even, in one line",
-			"say": "`==` compares two values and gives back `true` or `false`. So the whole test is one expression, and you can return it directly.",
+			"say": {
+				"never": "A number is a multiple of 5 if dividing by 5 leaves nothing, so `value % 5 == 0`. The `==` asks \"are these equal?\" and answers `true` or `false`. Because the whole test is one question, you can `return` it directly in one line.",
+				"bit": "`value % 5 == 0` is true for multiples of 5; return the comparison directly."
+			},
+			"board": {
+				"code": "public static boolean isMultipleOfFive(int value) {\n    return value % 5 == 0;\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "value % 5",
+						"label": "the remainder"
+					},
+					{
+						"text": "== 0",
+						"label": "a yes/no question, returned directly"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Even, in one line",
+			"say": {
+				"never": "A number is even if dividing by 2 leaves nothing, so `value % 2 == 0`. The `==` asks \"are these equal?\" and answers `true` or `false`. Because the whole test is one question, you can `return` it directly in one line.",
+				"bit": "`==` compares two values and gives back `true` or `false`. So the whole test is one expression, and you can return it directly."
+			},
 			"board": {
 				"code": "public static boolean isEven(int value) {\n    return value % 2 == 0;\n}",
 				"marks": [
@@ -36,11 +63,15 @@
 						"label": "true when nothing's left over"
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Open Main.java",
-			"say": "Press **Ctrl+P**, type `Main` and press Enter. Quick Open finds any file by name, so you never have to dig through folders.",
+			"say": {
+				"never": "Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `Main`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "Press **Ctrl+P**, type `Main` and press Enter. Quick Open finds any file by name, so you never have to dig through folders."
+			},
 			"open": [
 				"editor"
 			],
@@ -62,11 +93,15 @@
 				},
 				"hint": "open Main.java with Ctrl+P.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Find it",
-			"say": "It may be further down. Press **Ctrl+F**, type `public static boolean isEven` and press Enter to jump to it.",
+			"say": {
+				"never": "It may be further down. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `public static boolean isEven` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "It may be further down. Press **Ctrl+F**, type `public static boolean isEven` and press Enter to jump to it."
+			},
 			"target": {
 				"pane": "editor"
 			},
@@ -79,17 +114,23 @@
 				},
 				"hint": "find public static boolean isEven with Ctrl+F.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Your turn",
-			"say": "Write `isEven` with one `return`.",
+			"say": {
+				"never": "Your turn! Write `isEven` as a single `return` line, using `%` and `==` like the board.",
+				"bit": "Write `isEven` with one `return`."
+			},
 			"target": {
 				"pane": "editor",
 				"selector": ".view-lines .view-line",
 				"text": "public static boolean isEven"
 			},
-			"cardAt": "bottom-right"
+			"cardAt": "bottom-right",
+			"assist": true
 		}
-	]
+	],
+	"kind": "mixed"
 }

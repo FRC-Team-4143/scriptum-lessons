@@ -21,7 +21,8 @@
 				},
 				"hint": "press Ctrl+` (the key above Tab).",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Commands",
@@ -63,7 +64,8 @@
 			"cardAt": "top-right",
 			"waitFor": {
 				"hint": "type pwd and press Enter."
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "What's here?",
@@ -75,7 +77,8 @@
 			"cardAt": "top-right",
 			"waitFor": {
 				"hint": "type ls and press Enter."
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Look inside a folder",
@@ -87,7 +90,8 @@
 			"cardAt": "top-right",
 			"waitFor": {
 				"hint": "type ls my-team and press Enter."
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Read a file",
@@ -99,7 +103,8 @@
 			"cardAt": "top-right",
 			"waitFor": {
 				"hint": "type cat my-team/about.txt and press Enter."
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Make a folder",
@@ -115,7 +120,8 @@
 					"selector": ".explorer-viewlet .monaco-list-row[aria-label='practice']"
 				},
 				"hint": "type mkdir practice and press Enter."
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Tidy up",
@@ -132,7 +138,8 @@
 				},
 				"hint": "type rmdir practice and press Enter.",
 				"gone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Two handy tricks",
@@ -141,7 +148,9 @@
 				"pane": "editor",
 				"selector": "[id='workbench.parts.panel']"
 			},
-			"cardAt": "top-right"
+			"cardAt": "top-right",
+			"assist": true
 		}
-	]
+	],
+	"kind": "mixed"
 }

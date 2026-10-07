@@ -6,7 +6,10 @@
 	"steps": [
 		{
 			"title": "Largest so far",
-			"say": "Start with the first value, then replace it whenever you find a bigger one.",
+			"say": {
+				"never": "To find the biggest number: start by assuming the first one is the biggest. Then look at each of the others in turn, and whenever you find a bigger one, swap it in. When you've looked at them all, `best` holds the winner.",
+				"bit": "Start with the first value, then replace it whenever you find a bigger one."
+			},
 			"board": {
 				"code": "int best = values[0];\nfor (int i = 1; i < values.length; i++) {\n    if (values[i] > best) {\n        best = values[i];\n    }\n}\nreturn best;",
 				"marks": [
@@ -23,7 +26,31 @@
 		},
 		{
 			"title": "Stop as soon as you know",
-			"say": "`contains` can `return true` the moment it finds the target. It only returns false after checking everything.",
+			"say": {
+				"never": "When you're searching for something, you can stop the moment you find it: `return true` right away. Only after checking *every* box without a match do you return `false`. That's why the `return false` is after the loop.",
+				"bit": "Return true as soon as one item matches; return false only after checking them all."
+			},
+			"board": {
+				"code": "for (int i = 0; i < scores.length; i++) {\n    if (scores[i] < 0) {\n        return true;   // found a negative one\n    }\n}\nreturn false;",
+				"language": "java",
+				"marks": [
+					{
+						"text": "return true;",
+						"label": "stop early"
+					},
+					{
+						"text": "return false;",
+						"label": "after the whole loop"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Stop as soon as you know",
+			"say": {
+				"never": "When you're searching for something, you can stop the moment you find it: `return true` right away. Only after checking *every* box without a match do you return `false`. That's why the `return false` is after the loop.",
+				"bit": "`contains` can `return true` the moment it finds the target. It only returns false after checking everything."
+			},
 			"board": {
 				"code": "for (int i = 0; i < values.length; i++) {\n    if (values[i] == target) {\n        return true;\n    }\n}\nreturn false;",
 				"marks": [
@@ -36,11 +63,36 @@
 						"label": "checked them all"
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Average",
-			"say": "Total the values, then divide. Watch out for integer division!",
+			"say": {
+				"never": "An average is the total divided by how many there are. Careful: if both are whole numbers, Java throws away the decimals. Writing `(double) sum` first turns the total into a decimal number, so the answer keeps its decimals.",
+				"bit": "Average is total divided by count. Cast to `double` first so integer division doesn't drop the decimals."
+			},
+			"board": {
+				"code": "int sum = 0;\nfor (int t : temps) { sum += t; }\nreturn (double) sum / temps.length;",
+				"language": "java",
+				"marks": [
+					{
+						"text": "for (int t : temps)",
+						"label": "visit every temperature"
+					},
+					{
+						"text": "(double) sum",
+						"label": "decimals are kept"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Average",
+			"say": {
+				"never": "An average is the total divided by how many there are. Careful: if both are whole numbers, Java throws away the decimals. Writing `(double) total` first turns the total into a decimal number, so the answer keeps its decimals.",
+				"bit": "Total the values, then divide. Watch out for integer division!"
+			},
 			"board": {
 				"code": "int total = 0;\nfor (int v : values) { total += v; }\nreturn (double) total / values.length;",
 				"marks": [
@@ -53,11 +105,15 @@
 						"label": "decimal division"
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Open Main.java",
-			"say": "Press **Ctrl+P**, type `Main` and press Enter. Quick Open finds any file by name, so you never have to dig through folders.",
+			"say": {
+				"never": "Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `Main`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "Press **Ctrl+P**, type `Main` and press Enter. Quick Open finds any file by name, so you never have to dig through folders."
+			},
 			"open": [
 				"editor"
 			],
@@ -79,11 +135,15 @@
 				},
 				"hint": "open Main.java with Ctrl+P.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Find it",
-			"say": "It may be further down. Press **Ctrl+F**, type `public static int max` and press Enter to jump to it.",
+			"say": {
+				"never": "It may be further down. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `public static int max` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "It may be further down. Press **Ctrl+F**, type `public static int max` and press Enter to jump to it."
+			},
 			"target": {
 				"pane": "editor"
 			},
@@ -96,17 +156,23 @@
 				},
 				"hint": "find public static int max with Ctrl+F.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Your turn",
-			"say": "Start with `max`.",
+			"say": {
+				"never": "Your turn! Start with `max`, the method that finds the biggest number. Copy the pattern from the board.",
+				"bit": "Start with `max`."
+			},
 			"target": {
 				"pane": "editor",
 				"selector": ".view-lines .view-line",
 				"text": "public static int max"
 			},
-			"cardAt": "bottom-right"
+			"cardAt": "bottom-right",
+			"assist": true
 		}
-	]
+	],
+	"kind": "mixed"
 }

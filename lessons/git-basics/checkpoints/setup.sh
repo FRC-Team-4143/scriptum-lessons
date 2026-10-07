@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Builds the git-basics lesson's five scenario repos. Runs once, right after
+# Builds the git-basics lesson's eight scenario repos. Runs once, right after
 # the lesson's files are copied into /workspace/project (see
 # ImportManager.executeCatalogLoad in apps/control/src/imports.ts) — real
 # .git directories can't ship as static catalog files, so this script builds
@@ -135,6 +135,82 @@ insert_before_last_brace() {
 	bot_commit "Add left follower CAN ID"
 	git tag -f lesson-develop-tip >/dev/null
 	git checkout -q issue-15-led-colors
+)
+
+# --- 6, 7. Push and pull: a hidden local "origin" -----------------------------
+# The shared copy students push to is a bare repository kept outside the
+# project (in a hidden folder), so it doesn't clutter the file tree and
+# behaves like GitHub without needing an account.
+ORIGINS="${SCRIPTUM_ORIGINS:-$HOME/.cache/scriptum-git-origins}"
+mkdir -p "$ORIGINS"
+
+teammate_commit() {
+	local msg="$1" d
+	d="$(next_date)"
+	GIT_AUTHOR_NAME="Riley Teammate" GIT_AUTHOR_EMAIL="riley@frc4143.local" \
+	GIT_COMMITTER_NAME="Riley Teammate" GIT_COMMITTER_EMAIL="riley@frc4143.local" \
+	GIT_AUTHOR_DATE="$d" GIT_COMMITTER_DATE="$d" \
+		git commit -q -m "$msg"
+}
+
+(
+	cd "$ROOT/06-push"
+	git init -q -b main
+	git add -A
+	bot_commit "Initial team colors"
+	git branch develop
+	rm -rf "$ORIGINS/06-push.git"
+	git init -q --bare -b main "$ORIGINS/06-push.git"
+	git remote add origin "$ORIGINS/06-push.git"
+	git push -q -u origin main develop
+	git checkout -q -b issue-18-team-colors develop
+	printf 'Secondary: gold\n' >> TeamColors.txt
+	git add -A
+	bot_commit "Add secondary team color"
+	git tag -f lesson-push-tip >/dev/null
+)
+
+(
+	cd "$ROOT/07-pull"
+	git init -q -b main
+	git add -A
+	bot_commit "Initial practice schedule"
+	git branch develop
+	rm -rf "$ORIGINS/07-pull.git"
+	git init -q --bare -b main "$ORIGINS/07-pull.git"
+	git remote add origin "$ORIGINS/07-pull.git"
+	git push -q -u origin main develop
+	git tag -f lesson-develop-before >/dev/null
+	# A teammate pushes to develop on origin. Our copy doesn't know yet.
+	tmp="$(mktemp -d)"
+	git clone -q "$ORIGINS/07-pull.git" "$tmp"
+	(
+		cd "$tmp"
+		git checkout -q develop
+		printf 'Saturday 10am\n' >> Schedule.txt
+		git add -A
+		teammate_commit "Add Saturday practice"
+		git push -q origin develop
+	)
+	rm -rf "$tmp"
+	git checkout -q develop
+)
+
+# --- 8. Stash ---------------------------------------------------------------
+(
+	cd "$ROOT/08-stash"
+	git init -q -b main
+	git add -A
+	bot_commit "Initial pit notes"
+	git branch develop
+	git tag -f lesson-main-start >/dev/null
+	git checkout -q -b issue-21-new-motor develop
+	sed -i 's/The new motor is not ordered yet\./The new motor is a Kraken X60./' Notes.md
+	git add -A
+	bot_commit "Note the new motor"
+	git tag -f lesson-issue-tip >/dev/null
+	# The student's unfinished work: modified, not committed.
+	printf 'WIP: compare Kraken and Falcon prices\n' >> Notes.md
 )
 
 echo "git-basics: scenario repos ready."

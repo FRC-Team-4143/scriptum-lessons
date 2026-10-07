@@ -1,0 +1,22 @@
+{
+	"plan": [
+		{
+			"checkpoint": "clamp",
+			"guides": [
+				"java-methods-anatomy"
+			]
+		},
+		{
+			"checkpoint": "scale-joystick",
+			"guides": [
+				"java-methods-reuse"
+			]
+		},
+		{
+			"checkpoint": "is-prime",
+			"guides": [
+				"java-methods-edge-cases"
+			]
+		}
+	]
+}

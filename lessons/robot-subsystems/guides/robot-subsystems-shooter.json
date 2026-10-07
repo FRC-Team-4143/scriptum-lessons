@@ -6,7 +6,10 @@
 	"steps": [
 		{
 			"title": "Open ShooterConstants.java",
-			"say": "Numbers first. Press **Ctrl+P**, type `ShooterConstants` and press Enter. Quick Open finds any file by name, so you never have to dig through folders.",
+			"say": {
+				"never": "Numbers first. Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `ShooterConstants`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "Numbers first. Press **Ctrl+P**, type `ShooterConstants` and press Enter. Quick Open finds any file by name, so you never have to dig through folders."
+			},
 			"open": [
 				"editor"
 			],
@@ -28,11 +31,15 @@
 				},
 				"hint": "open ShooterConstants.java with Ctrl+P.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Find ROLLER_MOTOR_CONFIG",
-			"say": "Every number about the shooter lives in one file. Press **Ctrl+F**, type `ROLLER_MOTOR_CONFIG` and press Enter to jump to it.",
+			"say": {
+				"never": "Every number about the shooter lives in one file. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `ROLLER_MOTOR_CONFIG` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "Every number about the shooter lives in one file. Press **Ctrl+F**, type `ROLLER_MOTOR_CONFIG` and press Enter to jump to it."
+			},
 			"target": {
 				"pane": "editor"
 			},
@@ -45,21 +52,29 @@
 				},
 				"hint": "find ROLLER_MOTOR_CONFIG with Ctrl+F.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Constants",
-			"say": "Add `ROLLER_MOTOR_CONFIG` like the flywheel's, and `INDEX_DUTY_CYCLE = 0.5`.",
+			"say": {
+				"never": "Add two things in the constants file. First `ROLLER_MOTOR_CONFIG`, a copy of the flywheel's settings just above it. Then `INDEX_DUTY_CYCLE = 0.5`, a number that says how hard the roller pushes (0.5 is half power).",
+				"bit": "Add `ROLLER_MOTOR_CONFIG` like the flywheel's, and `INDEX_DUTY_CYCLE = 0.5`."
+			},
 			"target": {
 				"pane": "editor",
 				"selector": ".view-lines .view-line",
 				"text": "create ROLLER_MOTOR_CONFIG"
 			},
-			"cardAt": "bottom-right"
+			"cardAt": "bottom-right",
+			"assist": true
 		},
 		{
 			"title": "Open ShooterSubsystem.java",
-			"say": "Press **Ctrl+P**, type `ShooterSubsystem` and press Enter. Quick Open finds any file by name, so you never have to dig through folders.",
+			"say": {
+				"never": "Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `ShooterSubsystem`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "Press **Ctrl+P**, type `ShooterSubsystem` and press Enter. Quick Open finds any file by name, so you never have to dig through folders."
+			},
 			"open": [
 				"editor"
 			],
@@ -81,11 +96,15 @@
 				},
 				"hint": "open ShooterSubsystem.java with Ctrl+P.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Find RollerMech",
-			"say": "Build the second mechanism. Press **Ctrl+F**, type `RollerMech` and press Enter to jump to it.",
+			"say": {
+				"never": "Build the second mechanism. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `RollerMech` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "Build the second mechanism. Press **Ctrl+F**, type `RollerMech` and press Enter to jump to it."
+			},
 			"target": {
 				"pane": "editor"
 			},
@@ -98,21 +117,46 @@
 				},
 				"hint": "find RollerMech with Ctrl+F.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "The roller",
-			"say": "Create the roller like the flywheel just above it.",
+			"say": {
+				"never": "Make the roller the same way the flywheel is made just above it. Copy that pattern and change the names. Don't worry about every detail: the comment lists what goes in each spot.",
+				"bit": "Create the roller like the flywheel just above it."
+			},
 			"target": {
 				"pane": "editor",
 				"selector": ".view-lines .view-line",
 				"text": "create the roller the same way"
 			},
-			"cardAt": "bottom-right"
+			"cardAt": "bottom-right",
+			"assist": true
 		},
 		{
 			"title": "getIos",
-			"say": "MWLib only runs the mechanisms you list here. Forget one and it never moves.",
+			"say": {
+				"never": "The library only runs the mechanisms you put in this list. If you forget one, it just sits there and never moves. For a subsystem with an arm and a claw you'd return **both** of them.",
+				"bit": "`getIos` must list every mechanism the subsystem owns, or it never runs."
+			},
+			"board": {
+				"code": "@Override\npublic List<SubsystemIoBase> getIos() {\n    return List.of(arm, claw);\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "List.of(arm, claw)",
+						"label": "every mechanism you own"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: getIos",
+			"say": {
+				"never": "The library only runs the mechanisms you put in this list. If you forget one, it just sits there and never moves. Return **both** the flywheel and the roller.",
+				"bit": "MWLib only runs the mechanisms you list here. Forget one and it never moves."
+			},
 			"board": {
 				"code": "@Override\npublic List<SubsystemIoBase> getIos() {\n    return List.of(flywheel, roller);\n}",
 				"marks": [
@@ -121,11 +165,15 @@
 						"label": "both mechanisms"
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Open RobotContainer.java",
-			"say": "The step everyone forgets. Press **Ctrl+P**, type `RobotContainer` and press Enter. Quick Open finds any file by name, so you never have to dig through folders.",
+			"say": {
+				"never": "The step everyone forgets. Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `RobotContainer`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "The step everyone forgets. Press **Ctrl+P**, type `RobotContainer` and press Enter. Quick Open finds any file by name, so you never have to dig through folders."
+			},
 			"open": [
 				"editor"
 			],
@@ -147,11 +195,15 @@
 				},
 				"hint": "open RobotContainer.java with Ctrl+P.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Find it",
-			"say": "It may be further down. Press **Ctrl+F**, type `register the ShooterSubsystem` and press Enter to jump to it.",
+			"say": {
+				"never": "It may be further down. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `register the ShooterSubsystem` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "It may be further down. Press **Ctrl+F**, type `register the ShooterSubsystem` and press Enter to jump to it."
+			},
 			"target": {
 				"pane": "editor"
 			},
@@ -164,21 +216,29 @@
 				},
 				"hint": "find register the ShooterSubsystem with Ctrl+F.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Register it",
-			"say": "Add the shooter here, like the drivetrain above. Without this, the shooter never runs.",
+			"say": {
+				"never": "Add the shooter to this list, the same way the drivetrain is added above it. If you skip this, the robot never even starts the shooter.",
+				"bit": "Add the shooter here, like the drivetrain above. Without this, the shooter never runs."
+			},
 			"target": {
 				"pane": "editor",
 				"selector": ".view-lines .view-line",
 				"text": "register the ShooterSubsystem"
 			},
-			"cardAt": "bottom-right"
+			"cardAt": "bottom-right",
+			"assist": true
 		},
 		{
 			"title": "Start the robot",
-			"say": "Your code only runs once it's built and started.",
+			"say": {
+				"never": "Your code only works once it's started. Press **Start** and wait until the status says **Running**.",
+				"bit": "Your code only runs once it's built and started."
+			},
 			"target": {
 				"selector": "[data-tour='sim-controls']"
 			},
@@ -187,12 +247,19 @@
 					"selector": "[data-tour='code-status']",
 					"text": "Running"
 				},
-				"hint": "press Start and wait for Running."
-			}
+				"hint": {
+					"never": "press Start, then wait for Running.",
+					"bit": "press Start and wait for Running."
+				}
+			},
+			"assist": true
 		},
 		{
 			"title": "Enable in Teleop",
-			"say": "Pick **Teleop** and press **Enable**. Robot code runs only while it's enabled.",
+			"say": {
+				"never": "Choose **Teleop**, then press **Enable**. The robot stays frozen until it's enabled.",
+				"bit": "Pick **Teleop** and press **Enable**. Robot code runs only while it's enabled."
+			},
 			"target": {
 				"selector": "[data-tour='enable']"
 			},
@@ -201,12 +268,19 @@
 					"selector": "[data-tour='enable'] button",
 					"text": "Enabled"
 				},
-				"hint": "choose Teleop, then Enable."
-			}
+				"hint": {
+					"never": "choose Teleop, then press Enable.",
+					"bit": "choose Teleop, then Enable."
+				}
+			},
+			"assist": true
 		},
 		{
 			"title": "Spin it up",
-			"say": "Hold **U** (right bumper). In AdvantageScope, search for `FlywheelVelocity`, then drag **Subsystem/Shooter/FlywheelVelocity** onto the **Left Axis**.",
+			"say": {
+				"never": "Hold **U** (right bumper). Look at **AdvantageScope**, the graphing tool. Type `FlywheelVelocity` in its search box. Find **Subsystem/Shooter/FlywheelVelocity** in the list and drag it with your mouse onto the **Left Axis** of the graph. Then move the robot and watch the line change.",
+				"bit": "Hold **U** (right bumper). In AdvantageScope, search for `FlywheelVelocity`, then drag **Subsystem/Shooter/FlywheelVelocity** onto the **Left Axis**."
+			},
 			"close": [
 				"editor",
 				"preview",
@@ -226,7 +300,9 @@
 					"text": "Subsystem/Shooter/FlywheelVelocity"
 				},
 				"hint": "drag Subsystem/Shooter/FlywheelVelocity onto the graph."
-			}
+			},
+			"assist": true
 		}
-	]
+	],
+	"kind": "mixed"
 }

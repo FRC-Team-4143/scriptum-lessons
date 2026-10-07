@@ -6,7 +6,10 @@
 	"steps": [
 		{
 			"title": "Why branches",
-			"say": "A branch is your own line of work. `main` stays production-ready, `develop` collects finished features, and each feature gets its own branch.",
+			"say": {
+				"never": "A **branch** is your own line of work that doesn't disturb anyone else's. `main` always holds the finished, tested robot code. `develop` collects finished features. Each new feature gets its own branch, and when it's done it joins `develop`.",
+				"bit": "A branch is your own line of work. `main` stays production-ready, `develop` collects finished features, and each feature gets its own branch."
+			},
 			"board": {
 				"code": "main      o----------------------o   (only finished, tested work)\ndevelop   o-------o--------o-----o   (features merge in here)\nissue-12       \\--o--o--/          (your work, off develop)",
 				"language": "text",
@@ -20,7 +23,10 @@
 		},
 		{
 			"title": "Make one",
-			"say": "Start from `develop`, then create and switch to your branch in one command.",
+			"say": {
+				"never": "Start from `develop`, then create your branch and move onto it in one command. `-b` means \"make a new branch\". Name it after what you're working on, like `issue-12-turbo-boost`.",
+				"bit": "Start from `develop`, then create and switch to your branch in one command."
+			},
 			"board": {
 				"code": "git checkout develop\ngit checkout -b issue-12-turbo-boost",
 				"language": "shell",
@@ -42,7 +48,10 @@
 		},
 		{
 			"title": "Open a terminal",
-			"say": "These exercises are easiest in the terminal.",
+			"say": {
+				"never": "Open the **terminal**: the typing area at the bottom of the screen where you give the computer instructions. Hold **Ctrl** and tap the backtick key, the one above **Tab**. Most of these exercises are easier there.",
+				"bit": "These exercises are easiest in the terminal."
+			},
 			"open": [
 				"editor"
 			],
@@ -55,32 +64,50 @@
 					"pane": "editor",
 					"selector": ".terminal-wrapper"
 				},
-				"hint": "press Ctrl+` (the key above Tab)."
-			}
+				"hint": {
+					"never": "press Ctrl and the backtick key (above Tab).",
+					"bit": "press Ctrl+` (the key above Tab)."
+				}
+			},
+			"assist": true
 		},
 		{
 			"title": "Your turn",
-			"say": "`cd 02-feature-branch`, then run the two commands above.",
+			"say": {
+				"never": "Type `cd 02-feature-branch` and press **Enter** to move into the folder. Then run the two commands from the board, one at a time, pressing **Enter** after each. Choose your own name that starts with `issue-12-`.",
+				"bit": "`cd 02-feature-branch`, then run the two commands above."
+			},
 			"target": {
 				"pane": "editor",
 				"selector": "[id='workbench.parts.panel']"
 			},
 			"cardAt": "top-right",
 			"waitFor": {
-				"hint": "create issue-12-<something> off develop."
-			}
+				"hint": {
+					"never": "create a branch starting with issue-12- off develop.",
+					"bit": "create issue-12-<something> off develop."
+				}
+			},
+			"assist": true
 		},
 		{
 			"title": "Which branch am I on?",
-			"say": "The bottom-left corner shows the branch the editor is looking at. It's the quickest check before you commit.",
+			"say": {
+				"never": "Look at the bottom-left corner. It shows which branch you're on right now. It's the fastest way to check before you save work, so you don't commit to the wrong branch.",
+				"bit": "The bottom-left corner shows the branch the editor is looking at. It's the quickest check before you commit."
+			},
 			"target": {
 				"pane": "editor",
 				"selector": "[id='status.scm.0']"
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Two commits",
-			"say": "The exercise wants **two separate** commits: small commits, each with a clear message, tell the story of the work.",
+			"say": {
+				"never": "This exercise wants **two separate** commits. Small commits with clear messages tell the story of your work, one step at a time, like chapters in a book. Make a change, add and commit it. Then make another change and do it again.",
+				"bit": "The exercise wants **two separate** commits: small commits, each with a clear message, tell the story of the work."
+			},
 			"board": {
 				"code": "git add FEATURES.md\ngit commit -m \"Describe the turbo boost button\"\n# edit again...\ngit add FEATURES.md\ngit commit -m \"Add the turbo boost speed limit\"",
 				"language": "shell",
@@ -94,15 +121,23 @@
 		},
 		{
 			"title": "Check it",
-			"say": "Run `git log --oneline` to see your two commits on top of the starting one.",
+			"say": {
+				"never": "Type `git log --oneline` and press **Enter**. You should see your two commits on top of the starting one, newest first.",
+				"bit": "Run `git log --oneline` to see your two commits on top of the starting one."
+			},
 			"target": {
 				"pane": "editor",
 				"selector": "[id='workbench.parts.panel']"
 			},
 			"cardAt": "top-right",
 			"waitFor": {
-				"hint": "check git log --oneline."
-			}
+				"hint": {
+					"never": "run git log --oneline.",
+					"bit": "check git log --oneline."
+				}
+			},
+			"assist": true
 		}
-	]
+	],
+	"kind": "mixed"
 }

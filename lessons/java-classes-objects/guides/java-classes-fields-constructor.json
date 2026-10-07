@@ -6,7 +6,31 @@
 	"steps": [
 		{
 			"title": "Fields",
-			"say": "Fields are an object's own variables. Team standard: field names end in `_`.",
+			"say": {
+				"never": "**Fields** are the variables that belong to an object, the facts it remembers. A playlist remembers its name and how many songs it has. Each object gets its own copy, so two playlists never share a song count. On our team, field names end with an underscore `_` so you can tell them from ordinary variables.",
+				"bit": "Fields are an object's own variables (each object gets its own copy). Team style: end field names with `_`."
+			},
+			"board": {
+				"code": "public class Playlist {\n    protected String name_;\n    protected int songCount_;\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "protected",
+						"label": "fields belong to the object"
+					},
+					{
+						"text": "songCount_",
+						"label": "its own count, not shared"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Fields",
+			"say": {
+				"never": "**Fields** are the variables that belong to an object, the facts it remembers, like an account's owner and balance. Each object gets its own copy. On our team, field names end with an underscore `_` so you can tell them from ordinary variables.",
+				"bit": "Fields are an object's own variables. Team standard: field names end in `_`."
+			},
 			"board": {
 				"code": "public class BankAccount {\n    protected String owner_;\n    protected double balance_;\n}",
 				"marks": [
@@ -19,11 +43,36 @@
 						"label": "trailing underscore: it's a field"
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "The constructor",
-			"say": "The constructor runs on `new`. It has the class's name and no return type, and it sets every field.",
+			"say": {
+				"never": "The **constructor** is a special method that runs when you write `new`. It has the same name as the class and no return type. Its job is to give every field a starting value. Here, a negative starting count is replaced by 0, so a playlist can never begin broken.",
+				"bit": "The constructor runs on `new`, has the class's name and no return type, and sets every field to a valid start."
+			},
+			"board": {
+				"code": "public Playlist(String name, int starting_songs) {\n    name_ = name;\n    songCount_ = starting_songs < 0 ? 0 : starting_songs;\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "public Playlist(",
+						"label": "same name as the class"
+					},
+					{
+						"text": "starting_songs < 0 ? 0",
+						"label": "never starts broken"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: The constructor",
+			"say": {
+				"never": "The **constructor** is a special method that runs when you write `new`. It has the same name as the class and no return type. Its job is to give every field a starting value. Here, a negative starting balance is replaced by 0, so an account can never begin broken.",
+				"bit": "The constructor runs on `new`. It has the class's name and no return type, and it sets every field."
+			},
 			"board": {
 				"code": "public BankAccount(String owner, double initial_balance) {\n    owner_ = owner;\n    balance_ = initial_balance < 0 ? 0.0 : initial_balance;\n}",
 				"marks": [
@@ -36,11 +85,15 @@
 						"label": "never start negative"
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Open BankAccount.java",
-			"say": "Press **Ctrl+P**, type `BankAccount` and press Enter. Quick Open finds any file by name, so you never have to dig through folders.",
+			"say": {
+				"never": "Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `BankAccount`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "Press **Ctrl+P**, type `BankAccount` and press Enter. Quick Open finds any file by name, so you never have to dig through folders."
+			},
 			"open": [
 				"editor"
 			],
@@ -62,15 +115,24 @@
 				},
 				"hint": "open BankAccount.java with Ctrl+P.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Your turn",
-			"say": "Add the two fields and the constructor inside the class.",
-			"waitFor": {
-				"hint": "add the fields and constructor."
+			"say": {
+				"never": "Your turn! Inside the class, add the two fields and the constructor. Copy the shape from the board, and make sure the constructor sets *both* fields.",
+				"bit": "Add the two fields and the constructor inside the class."
 			},
-			"cardAt": "bottom-right"
+			"waitFor": {
+				"hint": {
+					"never": "add the fields and the constructor.",
+					"bit": "add the fields and constructor."
+				}
+			},
+			"cardAt": "bottom-right",
+			"assist": true
 		}
-	]
+	],
+	"kind": "mixed"
 }

@@ -14,8 +14,8 @@ robot's geometry is already loaded.
 1. Create a new path (the **+** button in the path list) and drag out at
    least four waypoints on the field.
 2. Add at least one constraint from the constraints panel - **Max
-   Velocity**, **Max Angular Velocity**, and **Keep In Rectangle** (a field
-   boundary) are all good choices for a first path.
+   Velocity** or **Max Angular Velocity**. (**Keep In Rectangle** is the
+   field boundary a whole path usually has, so it doesn't count here.)
 3. Generate the path. Choreo saves your `.traj` file automatically once it
    solves.
 4. Create a **second** path (again with at least four waypoints) that's

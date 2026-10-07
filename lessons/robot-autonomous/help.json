@@ -1,0 +1,18 @@
+{
+	"plan": [
+		{
+			"checkpoint": "autos-in-chooser",
+			"guides": [
+				"robot-state-machines-commands",
+				"robot-autonomous-command-lifecycle",
+				"robot-autonomous-sequences"
+			]
+		},
+		{
+			"checkpoint": "left-forward",
+			"guides": [
+				"robot-autonomous-drive-distance"
+			]
+		}
+	]
+}

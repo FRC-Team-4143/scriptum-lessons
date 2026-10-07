@@ -1,0 +1,74 @@
+{
+	"title": "Write the shooter commands",
+	"summary": "Write shoot() with startEnd and simulateBallLaunch() with runOnce.",
+	"topic": "Robot",
+	"order": 511,
+	"kind": "assist",
+	"steps": [
+		{
+			"title": "Open ShooterCommands.java",
+			"say": {
+				"never": "Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `ShooterCommands`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "Press **Ctrl+P**, type `ShooterCommands` and press Enter. Quick Open finds any file by name, so you never have to dig through folders."
+			},
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "ShooterCommands.java"
+				},
+				"hint": "open ShooterCommands.java with Ctrl+P.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Find Command shoot",
+			"say": {
+				"never": "Below the comment that describes it. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `Command shoot` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "Below the comment that describes it. Press **Ctrl+F**, type `Command shoot` and press Enter to jump to it."
+			},
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "public static Command shoot"
+				},
+				"hint": "find Command shoot with Ctrl+F.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Your turn",
+			"say": {
+				"never": "Your turn! Write `shoot()` first using `Commands.startEnd`, the way the board showed. Then write `simulateBallLaunch()` using `Commands.runOnce`, which runs its note one time and finishes.",
+				"bit": "Write `shoot()`, then `simulateBallLaunch()` with `Commands.runOnce`."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "public static Command shoot"
+			},
+			"cardAt": "bottom-right",
+			"assist": true
+		}
+	]
+}

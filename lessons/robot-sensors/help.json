@@ -1,0 +1,61 @@
+{
+	"plan": [
+		{
+			"checkpoint": "deadband-and-ifs",
+			"guides": [
+				"robot-sensors-deadband"
+			]
+		},
+		{
+			"checkpoint": "linear-speed",
+			"guides": [
+				"robot-sensors-encoders",
+				"robot-sensors-robot-speed"
+			]
+		},
+		{
+			"checkpoint": "drive-two-meters",
+			"guides": [
+				"robot-sensors-bang-bang"
+			]
+		}
+	],
+	"checkpoints": {
+		"linear-speed": {
+			"hints": [
+				{
+					"never": "Both sides drive at the same speed. What single number describes the whole robot?",
+					"bit": "Linear speed is the average of the two sides."
+				},
+				"`linearSpeed = (leftMetersPerSecond + rightMetersPerSecond) / 2.0;`"
+			]
+		},
+		"angular-speed": {
+			"hints": [
+				{
+					"never": "Spin in place: one side forward, one back. Which side should be subtracted from which?",
+					"bit": "Angular speed is (right - left) divided by the track width."
+				},
+				"`angularSpeed = (rightMetersPerSecond - leftMetersPerSecond) / Constants.TRACK_WIDTH_METERS;`"
+			]
+		},
+		"deadband-and-ifs": {
+			"hints": [
+				{
+					"never": "A deadband is a constant plus an `if` for each stick. Which of those do you have?",
+					"bit": "Constant at the top of the class, then an `if` on `forward` and one on `turn`."
+				},
+				"`private static final double DEADBAND = 0.1;` then `if (Math.abs(forward) < DEADBAND) { forward = 0.0; }`"
+			]
+		},
+		"drive-two-meters": {
+			"hints": [
+				{
+					"never": "The robot should drive while it's short of 2 meters and stop otherwise. Which keyword says \"otherwise\"?",
+					"bit": "An `if` / `else` on `distanceMeters`."
+				},
+				"`if (distanceMeters < 2.0) { drive.setDutyCycles(0.4, 0.4); } else { drive.setDutyCycles(0.0, 0.0); }`"
+			]
+		}
+	}
+}

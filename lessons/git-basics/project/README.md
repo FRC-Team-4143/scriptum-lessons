@@ -1,12 +1,13 @@
 # Git Basics
 
-Five small git exercises, each in its own numbered folder. Every folder is
+Eight small git exercises, each in its own numbered folder. Every folder is
 its own real git repository — look for the Source Control icon in the
 sidebar and switch between them with the repository picker at the top of
 that panel, or just `cd` into a folder in the terminal.
 
-There's no GitHub account or login here. This lesson is entirely about the
-`git` commands themselves. For background on why we use git the way we do,
+There's no GitHub account or login here. The shared copy (`origin`) in
+exercises 6 and 7 is kept out of sight on this machine and behaves like
+GitHub would. This lesson is entirely about the `git` commands themselves. For background on why we use git the way we do,
 see the team's [GitHub docs page](https://frc-team-4143.github.io/docs/software/tools/github).
 
 ## Our conventions
@@ -31,6 +32,9 @@ ones build on the same ideas.
    changed, and resolve the conflict.
 5. **`05-rebase/`** — rebase a feature branch onto a `develop` that moved on
    without it.
+6. **`06-push/`** — send your branch to the shared copy (`origin`).
+7. **`07-pull/`** — bring a teammate's new commit into your copy.
+8. **`08-stash/`** — shelve unfinished work so you can switch branches.
 
 ## Checking your work
 

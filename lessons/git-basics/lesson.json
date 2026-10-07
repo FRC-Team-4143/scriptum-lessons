@@ -1,6 +1,6 @@
 {
 	"title": "Git Basics",
-	"description": "Commit, branch, merge, resolve a conflict, and rebase across five small scenario repos.",
+	"description": "Commit, branch, merge, resolve a conflict, rebase, then push, pull and stash across eight small scenario repos.",
 	"kind": "git",
 	"track": "Tools",
 	"order": 5,
@@ -49,6 +49,33 @@
 			"verifier": {
 				"type": "script",
 				"path": "checkpoints/verify/rebase.sh"
+			}
+		},
+		{
+			"id": "push",
+			"title": "Push",
+			"description": "Push the issue-18-team-colors branch to origin.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/push.sh"
+			}
+		},
+		{
+			"id": "pull",
+			"title": "Pull",
+			"description": "Pull your teammate's new commit from origin into develop.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/pull.sh"
+			}
+		},
+		{
+			"id": "stash",
+			"title": "Stash",
+			"description": "Stash unfinished work, fix a typo on develop, then pop the stash back.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/stash.sh"
 			}
 		}
 	]

@@ -29,7 +29,8 @@
 			},
 			"waitFor": {
 				"hint": "save with File, Save."
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "An old dashboard?",
@@ -53,5 +54,6 @@
 				}
 			}
 		}
-	]
+	],
+	"kind": "mixed"
 }

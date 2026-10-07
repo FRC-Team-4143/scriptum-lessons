@@ -9,48 +9,7 @@ Companion docs pages: [State Machines and Commands](https://docs.marswars.org/do
 [State Machines](https://docs.marswars.org/docs/software/controls/state-machines),
 [Commands](https://docs.marswars.org/docs/software/robot_dev/commands)
 
-## The big idea
-
-A **state machine** says: the shooter is always in exactly one **state**, and there are rules for
-moving between states.
-
-```text
-        driver wants SHOOT                 flywheel at speed
-  IDLE ---------------------> SPIN_UP ------------------------> SHOOT
-   ^                            ^                                 |
-   |       driver lets go       |      flywheel slows down        |
-   +----------(any state)-------+---------------------------------+
-```
-
-The driver can only say what they **want** (`IDLE` or `SHOOT`). The subsystem decides what state it
-is actually in. You cannot jump from `IDLE` straight to `SHOOT`: the flywheel has to spin up first.
-
-A **command** is a small action. The driver's button starts a command, and the command tells the
-subsystem what state is wanted.
-
-## Java you will learn in this lesson
-
-**Combining conditions.** `&&` means **and**, `||` means **or**, and `!` means **not**:
-
-```java
-if (velocity > low && velocity < high) { ... }   // both must be true
-```
-
-**A method that answers yes or no.** A method that returns a `boolean` (true or false) turns a messy
-condition into a readable name: `if (isAtSpeed())` reads like English. `isAtSpeed()` and `hasDipped()` are
-already written for you in `ShooterSubsystem.java`. Read them, then use them in your state transitions.
-
-**Lambdas: a tiny method you hand to another method.** A command needs to be told *what to do*. The arrow
-syntax writes a method with no name:
-
-```java
-() -> shooter.setWantedState(ShooterStates.SHOOT)
-```
-
-Read it as "a method that takes nothing (`()`) and does this." You are not running it yet, only handing it
-over so the command can run it later.
-
-You also use `enum` and `switch` again, this time for the shooter's states.
+> **New to an idea here?** Press the **Dozer** button in the top bar. His guides explain each idea this lesson uses, and **I'm so lost → Teach me, step by step** walks you through every job.
 
 ## Where the code lives
 
@@ -82,33 +41,26 @@ Go slower on anything that is new. Finishing every bonus is not expected.
 
 **Part 1: the state machine**
 
-1. **Write the transitions.** In `ShooterSubsystem.java`, fill in `handleStateTransition()`. MWLib
-   calls it every loop with the state the driver wants. Set `system_state_` to the state the shooter
-   is *allowed* to be in. The rules are written in the comment above the method.
-2. **Write what each state does.** In `updateLogic()`, write a `switch` with a case for each state:
-   `IDLE` stops everything, `SPIN_UP` runs only the flywheel, and `SHOOT` runs the flywheel and the
-   roller.
+1. **`handleStateTransition()`** in `ShooterSubsystem.java`. Set `system_state_` to the state the shooter
+   is allowed to be in. The rules are in the comment above the method.
+2. **`updateLogic()`.** Write a `switch` with a case for each state: `IDLE` stops everything,
+   `SPIN_UP` runs only the flywheel, `SHOOT` runs the flywheel and the roller.
 
 **Part 2: commands**
 
-3. **Write the shoot command.** In `ShooterCommands.java`, `shoot()` returns a command that sets
-   the wanted state to `SHOOT` when it starts and back to `IDLE` when it ends.
-4. **Write the launch command.** `simulateBallLaunch()` is already in `ShooterSubsystem.java` (you
-   used it last lesson, when the subsystem read the A button itself). Write the matching instant
-   command in `ShooterCommands.java`.
-5. **Bind them to buttons.** In `OI.java`, hold the **right bumper** to shoot
-   (`whileTrue(...)`) and press **A** to simulate a launch (`onTrue(...)`).
-6. **Try it.** Start the robot, enable Teleop, and hold the right bumper (**U** on the keyboard). Watch the `State` in
-   AdvantageScope go `SPIN_UP` and then `SHOOT`. Tap **A** (**K**): the flywheel slows, the state falls
-   back to `SPIN_UP`, then returns to `SHOOT` once it recovers.
+3. **`shoot()`** in `ShooterCommands.java`: sets the wanted state to `SHOOT` when it starts and `IDLE`
+   when it ends.
+4. **`simulateBallLaunch()`** in `ShooterCommands.java`: an instant command that calls the
+   subsystem's `simulateBallLaunch()`.
+5. **Bind them** in `OI.java`: right bumper `whileTrue(...)` shoot, **A** `onTrue(...)` simulate a launch.
+6. **Try it.** Start, enable Teleop, hold **U**. Watch `State` in AdvantageScope go `SPIN_UP` then
+   `SHOOT`. Tap **K**: it falls back to `SPIN_UP`, then returns to `SHOOT`.
 7. **Click Verify.**
+
+Stuck on a step? Open **Dozer**: he can explain the idea or walk you through it.
 
 ## Bonus challenges
 
 - Add a `READY` light: log a boolean `Shooter/ReadyToShoot` that is true while the state is `SHOOT`.
 - Make the driver's trigger spin the flywheel to a *different* speed for a close shot.
 
-## Words to know
-
-- **State machine:** a system that is always in one state, with rules for changing states.
-- **Command:** a small, reusable action, started by a button or by other commands.

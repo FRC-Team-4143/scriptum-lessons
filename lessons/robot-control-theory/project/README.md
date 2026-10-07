@@ -11,29 +11,7 @@ Companion docs pages: [Control Theory](https://docs.marswars.org/docs/software/t
 [Feed Forward](https://docs.marswars.org/docs/software/controls/system-control/feed-fwd) and
 [PID](https://docs.marswars.org/docs/software/controls/system-control/pid)
 
-## The big idea
-
-The flywheel should spin at `SHOOT_VELOCITY`. The difference between where it *should* be and where it
-*is* is the **error**. Three ways to use that idea:
-
-| Style | The idea | Good at | Bad at |
-| --- | --- | --- | --- |
-| **Bang-bang** | Full power when too slow, zero power when fast enough. | Simple, spins up very fast. | Wobbles around the target and slams the motor on and off. |
-| **Feedforward** | Never measure anything: work out the power the target needs and apply it. | Smooth. Gets close right away. | Cannot notice or fix a mistake or a disturbance. |
-| **PID** | Feedforward as the starting guess **plus** a correction that grows with the error. | Accurate *and* it recovers when something slows the wheel. | Needs its numbers (the **gains**) tuned. |
-
-PID has up to three parts. This lesson uses the two that matter most:
-**`kV`** (the feedforward gain) and **`kP`** (the "proportional" feedback gain).
-
-## Java you will learn in this lesson
-
-This lesson adds no new Java syntax. It is practice with what you have learned, plus one useful skill:
-
-- **Unit conversion with operators.** The target speed is in radians per second but the motor wants
-  rotations per second. One rotation is `2 * Math.PI` radians, so `rotationsPerSecond = radiansPerSecond / (2 *
-  Math.PI)`. Volts to a duty cycle is `volts / 12.0`. Getting units right is half of robot programming.
-- **`switch` on an enum** picks which control style runs.
-- **Small methods** (`bangBang()`, `feedforward()`) each do one job, so the `switch` stays easy to read.
+> **New to an idea here?** Press the **Dozer** button in the top bar. His guides explain each idea this lesson uses, and **I'm so lost → Teach me, step by step** walks you through every job.
 
 ## Where the code lives
 
@@ -63,39 +41,24 @@ Go slower on anything that is new. Finishing every bonus is not expected.
 
 ## What you need to do
 
-Hold the **right bumper** (**U**) to spin the flywheel and tap **A** (**K**) to simulate a launched game piece. Run the robot
-after each change and watch `Subsystem/Shooter/FlywheelVelocity` and `FlywheelError` in
+Hold **U** (right bumper) to spin the flywheel and tap **K** (A) to simulate a launched game piece.
+After each change, run the robot and watch `Subsystem/Shooter/FlywheelVelocity` and `FlywheelError` in
 AdvantageScope. Each run starts the simulation fresh.
 
-1. **Bang-bang.** Write `bangBang()` in `ShooterSubsystem.java`. If the flywheel is slower than
-   `SHOOT_VELOCITY`, set the duty cycle to `1.0`. Otherwise set it to `0.0`. Run with
-   `FLYWHEEL_CONTROL = BANG_BANG`. Look at the graph around the target: it overshoots a little and the
-   output flips on and off constantly. That is hard on a real motor and on the battery.
-2. **Feedforward.** Write `feedforward()`. The voltage needed to hold a speed is
-   `FLYWHEEL_KV` times the speed in *rotations per second* (`SHOOT_VELOCITY` is in radians per second,
-   so divide by `2 * Math.PI`). A duty cycle is a fraction of 12 volts, so divide the voltage by 12.
-3. **Find `kV`.** Set `FLYWHEEL_CONTROL = FEEDFORWARD`. With `FLYWHEEL_KV = 0.0` the flywheel does
-   not even start. Try `0.05`, then `0.10`, then `0.12`. A good first guess is `12 volts` divided by the
-   flywheel's top speed in rotations per second (a Kraken X60 does about 100 with no load).
-   Watch what happens to the final speed. Then tap **A**: feedforward never notices the dip, so it
-   does not fight back.
-4. **Add feedback.** Set `FLYWHEEL_CONTROL = PID`, keep your `kV`, and raise `FLYWHEEL_KP` from `0.0`
-   upward (`0.05`, `0.2`, `1.0`, `3.0`). Watch the spin-up and the recovery after tapping **A**. A bigger
-   `kP` fights error harder. Too big and a real robot starts to buzz or oscillate.
-5. **Pick your final settings.** Choose `PID` with a `kV` and `kP` that reach full speed in under about
-   1.5 seconds and get back to speed within about 0.8 seconds after a launch. The robot logs both
-   times as `Subsystem/Shooter/SpinUpSeconds` and `Subsystem/Shooter/RecoverySeconds`. Run the robot fresh one more time with those
-   settings, hold the bumper, and tap **A** once.
+1. **Bang-bang.** Write `bangBang()` in `ShooterSubsystem.java`: duty cycle `1.0` while the flywheel is
+   slower than `SHOOT_VELOCITY`, `0.0` otherwise. Run with `FLYWHEEL_CONTROL = BANG_BANG`.
+2. **Feedforward.** Write `feedforward()`: volts = `FLYWHEEL_KV` x speed in rotations per second
+   (`SHOOT_VELOCITY` is in rad/s, so divide by `2 * Math.PI`), then divide by 12 for a duty cycle.
+3. **Find `kV`.** Set `FLYWHEEL_CONTROL = FEEDFORWARD` and try `FLYWHEEL_KV` = `0.05`, `0.10`, `0.12`.
+   Tap **K** and watch the dip.
+4. **Add feedback.** Set `FLYWHEEL_CONTROL = PID`, keep your `kV`, and try `FLYWHEEL_KP` = `0.05`, `0.2`,
+   `1.0`, `3.0`.
+5. **Pick your final settings.** Reach full speed in under about 1.5 s and recover within about 0.8 s
+   after a launch (logged as `Subsystem/Shooter/SpinUpSeconds` and `RecoverySeconds`). Run once more
+   with those settings, hold the bumper, and tap **K** once.
 6. **Click Verify.** It checks your latest run.
 
-## Think about it
-
-- Bang-bang and PID with a big `kP` spin up about equally fast. Why? (Look at the motor output while
-  spinning up.) Then why do we still prefer PID?
-- If the flywheel were twice as heavy, which gain would you have to change, `kV` or `kP`? (Hint: which
-  one is "the power to hold a speed"?)
-- The `DriveDistance` and turn commands in the Autonomous lesson use the same idea: an output that
-  grows with the error. That is proportional control, `kP`, for position instead of speed.
+Stuck on a step? Open **Dozer**: he can explain the idea or walk you through it.
 
 ## Bonus challenges
 
@@ -108,10 +71,3 @@ AdvantageScope. Each run starts the simulation fresh.
   `Tuning/Subsystem/Shooter/Flywheel/VelocityGains`, then copy the best values into the constants file.
 - Change `SHOOT_VELOCITY` to `400`. Which of your gains still work?
 
-## Words to know
-
-- **Error:** the target minus the measurement.
-- **Feedforward (`kV`):** a guess made *before* measuring, from knowing the system.
-- **Feedback (`kP`):** a correction made *after* measuring, proportional to the error.
-- **Gain:** a number that scales part of a controller. Tuning means choosing good gains.
-- **Overshoot:** going past the target before settling.

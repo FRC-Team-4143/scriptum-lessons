@@ -1,0 +1,17 @@
+{
+	"plan": [
+		{
+			"checkpoint": "array-max",
+			"guides": [
+				"java-arrays-basics",
+				"java-arrays-summaries"
+			]
+		},
+		{
+			"checkpoint": "array-double-all",
+			"guides": [
+				"java-arrays-new-arrays"
+			]
+		}
+	]
+}

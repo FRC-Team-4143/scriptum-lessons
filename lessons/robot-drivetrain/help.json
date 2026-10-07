@@ -1,0 +1,47 @@
+{
+	"plan": [
+		{
+			"checkpoint": "teleop-code",
+			"guides": [
+				"robot-drivetrain-where-code-goes",
+				"java-variables",
+				"robot-drivetrain-tank"
+			]
+		},
+		{
+			"checkpoint": "turns-in-place",
+			"guides": [
+				"robot-drivetrain-arcade"
+			]
+		}
+	],
+	"checkpoints": {
+		"teleop-code": {
+			"hints": [
+				{
+					"never": "Look at `teleopPeriodic()` in Robot.java. What are your two speeds, and where do they go?",
+					"bit": "Check that both speeds reach `drive.setDutyCycles`."
+				},
+				"Declare `leftSpeed` and `rightSpeed` from the sticks, then pass both to `drive.setDutyCycles(leftSpeed, rightSpeed);`."
+			]
+		},
+		"drives-backward": {
+			"hints": [
+				{
+					"never": "Pull a stick back and watch the robot. Which way does the number go?",
+					"bit": "Check the sign on the stick values."
+				},
+				"Pushing a stick forward gives a negative number, so `-controller.getLeftY()` is forward."
+			]
+		},
+		"turns-in-place": {
+			"hints": [
+				{
+					"never": "To spin in place, the two sides must go opposite ways. Think about `forward + turn` and `forward - turn`.",
+					"bit": "Left is forward + turn, right is forward - turn."
+				},
+				"`leftSpeed = forward + turn;` and `rightSpeed = forward - turn;`."
+			]
+		}
+	}
+}

@@ -6,7 +6,27 @@
 	"steps": [
 		{
 			"title": "A sequence",
-			"say": "Each command runs until it finishes, then the next starts.",
+			"say": {
+				"never": "A **sequence** runs commands one after another, like a recipe. Each command runs until it finishes, and then the next one starts. For example: walk to the door, open it, walk through, close it.",
+				"bit": "A sequence runs commands one after another, each starting when the last finishes."
+			},
+			"board": {
+				"code": "Commands.sequence(\n    new WalkToDoor(),\n    new OpenDoor(),\n    new WalkThrough(),\n    new CloseDoor())",
+				"language": "java",
+				"marks": [
+					{
+						"text": "Commands.sequence(",
+						"label": "one after another"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: A sequence",
+			"say": {
+				"never": "A **sequence** runs commands one after another, like a recipe. Each command runs until it finishes, and then the next one starts. For example: drive 5 meters, turn 45 degrees, drive 2 more, then shoot for 2 seconds.",
+				"bit": "Each command runs until it finishes, then the next starts."
+			},
 			"board": {
 				"code": "Commands.sequence(\n    new DriveDistanceCommand(5.0),\n    new TurnToAngleCommand(45.0),\n    new DriveDistanceCommand(2.0),\n    ShooterCommands.shoot().withTimeout(2.0))",
 				"marks": [
@@ -19,11 +39,36 @@
 						"label": "shoot for two seconds, then stop"
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Don't write it eight times",
-			"say": "A square is the same two steps, four times. A loop adds them.",
+			"say": {
+				"never": "Doing the same two steps three times? Don't write six commands. A `for` loop adds the pair to a group as many times as you ask, so you write the two steps once.",
+				"bit": "Repeat a pattern by adding it in a `for` loop instead of writing it out."
+			},
+			"board": {
+				"code": "SequentialCommandGroup routine = new SequentialCommandGroup();\nfor (int i = 1; i <= 3; i++) {\n    routine.addCommands(\n        new WalkToDoor(),\n        new Wave());\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "for (int i = 1; i <= 3; i++)",
+						"label": "three repeats"
+					},
+					{
+						"text": "routine.addCommands(",
+						"label": "the same pair each time"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Don't write it eight times",
+			"say": {
+				"never": "A square is the same two steps four times: drive, then turn. Writing eight commands by hand is boring and easy to get wrong. A `for` loop repeats `addCommands` four times for you, so you write the two steps once.",
+				"bit": "A square is the same two steps, four times. A loop adds them."
+			},
 			"board": {
 				"code": "SequentialCommandGroup square = new SequentialCommandGroup();\nfor (int i = 1; i <= 4; i++) {\n    square.addCommands(\n        new DriveDistanceCommand(1.0),\n        new TurnToAngleCommand(90.0 * i));\n}\nreturn square;",
 				"marks": [
@@ -36,11 +81,15 @@
 						"label": "90, 180, 270, 360"
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Open Autos.java",
-			"say": "Press **Ctrl+P**, type `Autos` and press Enter. Quick Open finds any file by name, so you never have to dig through folders.",
+			"say": {
+				"never": "Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `Autos`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "Press **Ctrl+P**, type `Autos` and press Enter. Quick Open finds any file by name, so you never have to dig through folders."
+			},
 			"open": [
 				"editor"
 			],
@@ -62,11 +111,15 @@
 				},
 				"hint": "open Autos.java with Ctrl+P.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Find leftAuto",
-			"say": "Find the first routine. Press **Ctrl+F**, type `leftAuto` and press Enter to jump to it.",
+			"say": {
+				"never": "Find the first routine. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `leftAuto` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "Find the first routine. Press **Ctrl+F**, type `leftAuto` and press Enter to jump to it."
+			},
 			"target": {
 				"pane": "editor"
 			},
@@ -79,21 +132,29 @@
 				},
 				"hint": "find leftAuto with Ctrl+F.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Your turn",
-			"say": "Build `leftAuto()` first.",
+			"say": {
+				"never": "Your turn! Build `leftAuto()` first. It's one `Commands.sequence(...)` listing the commands in order, like the example on the board.",
+				"bit": "Build `leftAuto()` first."
+			},
 			"target": {
 				"pane": "editor",
 				"selector": ".view-lines .view-line",
 				"text": "public static Command leftAuto"
 			},
-			"cardAt": "bottom-right"
+			"cardAt": "bottom-right",
+			"assist": true
 		},
 		{
 			"title": "Open RobotContainer.java",
-			"say": "Then let the drive team pick it. Press **Ctrl+P**, type `RobotContainer` and press Enter. Quick Open finds any file by name, so you never have to dig through folders.",
+			"say": {
+				"never": "Then let the drive team pick it. Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `RobotContainer`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "Then let the drive team pick it. Press **Ctrl+P**, type `RobotContainer` and press Enter. Quick Open finds any file by name, so you never have to dig through folders."
+			},
 			"open": [
 				"editor"
 			],
@@ -115,11 +176,15 @@
 				},
 				"hint": "open RobotContainer.java with Ctrl+P.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Find addOption",
-			"say": "Find the chooser. Press **Ctrl+F**, type `addOption` and press Enter to jump to it.",
+			"say": {
+				"never": "Find the chooser. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `addOption` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "Find the chooser. Press **Ctrl+F**, type `addOption` and press Enter to jump to it."
+			},
 			"target": {
 				"pane": "editor"
 			},
@@ -132,21 +197,29 @@
 				},
 				"hint": "find addOption with Ctrl+F.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "The chooser",
-			"say": "Add each routine with `autoChooser.addOption(\"Left Auto\", Autos.leftAuto());`.",
+			"say": {
+				"never": "Add each routine to the chooser so the drive team can pick it. The line looks like `autoChooser.addOption(\"Left Auto\", Autos.leftAuto());`: first the name people see, then the routine.",
+				"bit": "Add each routine with `autoChooser.addOption(\"Left Auto\", Autos.leftAuto());`."
+			},
 			"target": {
 				"pane": "editor",
 				"selector": ".view-lines .view-line",
 				"text": "add the autos to the chooser"
 			},
-			"cardAt": "bottom-right"
+			"cardAt": "bottom-right",
+			"assist": true
 		},
 		{
 			"title": "Start the robot",
-			"say": "Your code only runs once it's built and started.",
+			"say": {
+				"never": "Your code only works once it's started. Press **Start** and wait until the status says **Running**.",
+				"bit": "Your code only runs once it's built and started."
+			},
 			"target": {
 				"selector": "[data-tour='sim-controls']"
 			},
@@ -155,16 +228,25 @@
 					"selector": "[data-tour='code-status']",
 					"text": "Running"
 				},
-				"hint": "press Start and wait for Running."
-			}
+				"hint": {
+					"never": "press Start, then wait for Running.",
+					"bit": "press Start and wait for Running."
+				}
+			},
+			"assist": true
 		},
 		{
 			"title": "Pick and run",
-			"say": "Pick **Left Auto** from the autonomous chooser in the Driver Station, choose **Auto**, and Enable. Watch `Drive/Pose` on AdvantageScope's 2D Field.",
+			"say": {
+				"never": "Pick **Left Auto** from the autonomous chooser in the Driver Station, choose **Auto**, and press **Enable**. Then open **AdvantageScope's** 2D Field tab and watch `Drive/Pose` to see the robot drive the route.",
+				"bit": "Pick **Left Auto** from the autonomous chooser in the Driver Station, choose **Auto**, and Enable. Watch `Drive/Pose` on AdvantageScope's 2D Field."
+			},
 			"target": {
 				"pane": "driverStation"
 			},
-			"cardAt": "top-right"
+			"cardAt": "top-right",
+			"assist": true
 		}
-	]
+	],
+	"kind": "mixed"
 }

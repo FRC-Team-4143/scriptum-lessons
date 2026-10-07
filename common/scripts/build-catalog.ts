@@ -150,7 +150,7 @@ export function buildCatalog(root: string): Built {
 			id: g.id,
 			...pick(g.file, ["title", "summary", "topic", "order"]),
 			modules: [...g.owners].sort((a, b) => (orderOf.get(a) ?? 0) - (orderOf.get(b) ?? 0) || a.localeCompare(b)),
-			...pick(g.file, ["needs"]),
+			...pick(g.file, ["needs", "kind"]),
 			path: g.path,
 		}))
 		.sort((a, b) => Number(a.order) - Number(b.order) || a.id.localeCompare(b.id));

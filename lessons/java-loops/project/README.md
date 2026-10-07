@@ -1,43 +1,10 @@
 # Loops
 
-:::tip[Read this first: Loops]
+> **New to an idea here?** Press the **Dozer** button in the top bar. His guides explain each idea this lesson uses, and **I'm so lost → Teach me, step by step** walks you through every job.
 
-The team docs page for this lesson is the best place to learn the ideas
-before you write any code:
-[Loops](https://frc-team-4143.github.io/docs/software/java/loops) - focus on
-For Loops and Increment Operators. The page also covers While Loops - read
-why we avoid them before you're tempted to use one. Come back here when
-you're ready to apply it. If a step below feels unfamiliar, that page is
-where to look first.
+All the code lives in `src/Main.java`. Fill in each method and click **Run** any time to see its output in the terminal. Use `for` loops (team standard: no `while`).
 
-:::
-
-All the code lives in `src/Main.java`. Click **Run** any time to see your
-methods' output printed to the terminal.
-
-Team standard: avoid `while` loops (they're dangerous in robot code — one
-missed exit condition and the robot stops responding). Use `for` loops
-instead, which force you to think about the exit condition up front.
-
-:::note[Just enough about methods for now]
-
-You haven't learned methods yet - that's its own lesson later. For now, all
-you need is this: a method is a small box with a name. The words in its
-parentheses are **parameters** - values handed to you, which you can use
-like any other variable. `return` is how the method sends its answer back
-out. For example:
-
-```java
-public static int square(int n) {
-    return n * n;
-}
-```
-
-Calling `square(5)` runs that code with `n` set to `5`, and hands back
-`25`. That's it - fill in the methods below the same way. You'll get the
-full picture in the **Methods** lesson later.
-
-:::
+More depth: the team docs page [Loops](https://frc-team-4143.github.io/docs/software/java/loops).
 
 ## What you need to do
 

@@ -6,7 +6,10 @@
 	"steps": [
 		{
 			"title": "Order of checks",
-			"say": "15 is divisible by 3 **and** 5. If you test 3 first, it says Fizz and never reaches FizzBuzz.",
+			"say": {
+				"never": "15 can be divided by 3 *and* by 5. If you test for 3 first, 15 says \"Fizz\" and never reaches \"FizzBuzz\". So always check the **combined** case (15) first, then the single ones.",
+				"bit": "15 is divisible by 3 **and** 5. If you test 3 first, it says Fizz and never reaches FizzBuzz."
+			},
 			"board": {
 				"code": "if (i % 15 == 0) {\n    word = \"FizzBuzz\";\n} else if (i % 3 == 0) {\n    word = \"Fizz\";\n} else if (i % 5 == 0) {\n    word = \"Buzz\";\n} else {\n    word = \"\" + i;\n}",
 				"marks": [
@@ -23,7 +26,10 @@
 		},
 		{
 			"title": "Commas between",
-			"say": "Add `\", \"` **before** every item except the first, so nothing trails at the end.",
+			"say": {
+				"never": "You want commas *between* items but not after the last one. The trick: add `\", \"` before every item *except the first* (`if (i > 1)`). Then nothing is left dangling at the end.",
+				"bit": "Add `\", \"` **before** every item except the first, so nothing trails at the end."
+			},
 			"board": {
 				"code": "String result = \"\";\nfor (int i = 1; i <= n; i++) {\n    if (i > 1) {\n        result += \", \";\n    }\n    result += word;\n}",
 				"marks": [
@@ -39,5 +45,6 @@
 				"caption": "fizzBuzz(5) is \"1, 2, Fizz, 4, Buzz\""
 			}
 		}
-	]
+	],
+	"kind": "concept"
 }

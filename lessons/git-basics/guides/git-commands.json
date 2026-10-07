@@ -1,126 +1,208 @@
 {
-	"title": "The git commands you'll type",
-	"summary": "status, add, commit and switch, one at a time on the board.",
-	"topic": "Git",
+	"title": "Git commands and their buttons",
+	"summary": "status, add, commit, checkout, merge, push, pull and stash, each next to its Source Control button.",
+	"topic": "Tools",
 	"order": 11,
+	"kind": "concept",
+	"needs": [
+		"editor"
+	],
 	"steps": [
 		{
-			"title": "Four commands",
-			"say": "Most days you only need four git commands. Let's go through them one at a time.",
-			"board": {
-				"language": "shell",
-				"code": "git status\ngit add roster.txt\ngit commit -m \"Add my name to the roster\"\ngit switch -c issue-12-add-turbo-boost"
+			"title": "Commands and buttons",
+			"say": {
+				"never": "Everything git can do, you can do two ways: by **typing a command** in the terminal, or by **clicking a button** in the **Source Control** panel on the left. They do exactly the same thing. We'll learn each command next to its button, so you can use whichever you like.",
+				"bit": "Every git command here has a matching button in Source Control. Same result either way."
+			},
+			"open": [
+				"editor"
+			],
+			"target": {
+				"pane": "editor",
+				"selector": ".activitybar .action-label[aria-label^='Source Control']"
 			}
 		},
 		{
 			"title": "status",
-			"say": "**What's changed?** Run it whenever you're unsure. It lists changed files and tells you which branch you're on.",
+			"say": {
+				"never": "`git status` asks: **what has changed?** It lists the files you've edited and tells you which branch you're on. **The button:** you don't need one, because the Source Control panel *is* the status. Edited files show up in the list under **Changes**, and a number appears on the icon.",
+				"bit": "`git status` lists changed files and your branch. In Source Control the **Changes** list is the same information."
+			},
 			"board": {
+				"code": "git status",
 				"language": "shell",
-				"code": "git status\ngit add roster.txt\ngit commit -m \"Add my name to the roster\"\ngit switch -c issue-12-add-turbo-boost",
 				"marks": [
 					{
 						"text": "git status",
-						"label": "what changed, and which branch am I on?"
+						"label": "changed files and current branch"
 					}
 				]
+			},
+			"open": [
+				"editor"
+			],
+			"target": {
+				"pane": "editor",
+				"selector": ".scm-view"
 			}
 		},
 		{
 			"title": "add",
-			"say": "**Stage** a file: put it in the next snapshot. You choose what goes in, so half-finished work can wait.",
+			"say": {
+				"never": "`git add` **stages** a file, which means \"put it in the next save point\". Typing it looks like the board. **The button:** hover over a file in the **Changes** list and click the **+**.",
+				"bit": "`git add` stages a file for the next commit. **Button:** hover a file under Changes and press **+**."
+			},
 			"board": {
+				"code": "git add notes.txt",
 				"language": "shell",
-				"code": "git status\ngit add roster.txt\ngit commit -m \"Add my name to the roster\"\ngit switch -c issue-12-add-turbo-boost",
 				"marks": [
 					{
-						"text": "git status",
-						"label": "what changed, and which branch am I on?"
-					},
-					{
-						"text": "git add roster.txt",
-						"label": "put this file in the next commit"
+						"text": "notes.txt",
+						"label": "the file to stage"
 					}
 				]
+			},
+			"open": [
+				"editor"
+			],
+			"target": {
+				"pane": "editor",
+				"selector": ".scm-view"
 			}
 		},
 		{
 			"title": "commit",
-			"say": "**Save the snapshot** with a message. `-m` means \"here's the message\". Write it for a teammate reading the history next month.",
+			"say": {
+				"never": "`git commit` **saves the snapshot** of everything you staged, with a message. The `-m` means \"here comes my message\". **The button:** type your message in the box at the top of Source Control and press the blue **Commit** button.",
+				"bit": "`git commit -m` saves the staged snapshot with a message. **Button:** write the message in the box and press **Commit**."
+			},
 			"board": {
+				"code": "git commit -m \"Add pit notes\"",
 				"language": "shell",
-				"code": "git status\ngit add roster.txt\ngit commit -m \"Add my name to the roster\"\ngit switch -c issue-12-add-turbo-boost",
 				"marks": [
 					{
-						"text": "git status",
-						"label": "what changed, and which branch am I on?"
-					},
-					{
-						"text": "git add roster.txt",
-						"label": "put this file in the next commit"
-					},
-					{
-						"text": "git commit -m",
-						"label": "save a snapshot of what's staged"
-					},
-					{
-						"text": "\"Add my name to the roster\"",
-						"label": "the message: what changed and why"
+						"text": "-m",
+						"label": "the message follows"
 					}
 				]
+			},
+			"open": [
+				"editor"
+			],
+			"target": {
+				"pane": "editor",
+				"selector": ".scm-input"
 			}
 		},
 		{
-			"title": "switch",
-			"say": "**Move to another branch.** `-c` creates it first. New work goes on a feature branch off `develop`, never straight onto `main`.",
+			"title": "checkout",
+			"say": {
+				"never": "`git checkout` **moves you to another branch**. Add `-b` to make a new one first. **The button:** click the **branch name** in the bottom-left corner of the window. A menu opens where you can pick a branch or choose **Create new branch**.",
+				"bit": "`git checkout` switches branch (`-b` creates it). **Button:** the branch name in the bottom-left corner opens the branch menu."
+			},
 			"board": {
+				"code": "git checkout develop\ngit checkout -b issue-30-add-intake-sensor",
 				"language": "shell",
-				"code": "git status\ngit add roster.txt\ngit commit -m \"Add my name to the roster\"\ngit switch -c issue-12-add-turbo-boost",
 				"marks": [
 					{
-						"text": "git status",
-						"label": "what changed, and which branch am I on?"
-					},
-					{
-						"text": "git add roster.txt",
-						"label": "put this file in the next commit"
-					},
-					{
-						"text": "git commit -m",
-						"label": "save a snapshot of what's staged"
-					},
-					{
-						"text": "\"Add my name to the roster\"",
-						"label": "the message: what changed and why"
-					},
-					{
-						"text": "git switch -c",
-						"label": "make a new branch and move onto it"
-					},
-					{
-						"text": "issue-12-add-turbo-boost",
-						"label": "team naming: issue-<number>-<what it does>"
+						"text": "-b",
+						"label": "create it first"
 					}
 				]
+			},
+			"open": [
+				"editor"
+			],
+			"target": {
+				"pane": "editor",
+				"selector": "[id='status.scm.0']"
+			}
+		},
+		{
+			"title": "merge",
+			"say": {
+				"never": "`git merge` **brings another branch's work into the one you're on**. First move to the branch that should receive the work. **The button:** in Source Control, click the **...** (more actions) menu, then **Branch**, then **Merge...**, and pick the branch to bring in.",
+				"bit": "`git merge` brings another branch's commits into your current branch. **Button:** Source Control **...** menu, then Branch, then Merge."
+			},
+			"board": {
+				"code": "git checkout develop\ngit merge issue-30-add-intake-sensor",
+				"language": "shell",
+				"marks": [
+					{
+						"text": "git merge issue-30-add-intake-sensor",
+						"label": "into the branch you are on"
+					}
+				]
+			},
+			"open": [
+				"editor"
+			],
+			"target": {
+				"pane": "editor",
+				"selector": ".scm-view"
+			}
+		},
+		{
+			"title": "push and pull",
+			"say": {
+				"never": "The **remote** is the shared copy of the project (on GitHub). `git push` **sends** your commits there so teammates can see them. `git pull` **fetches** their new commits and brings them into your branch. **The button:** the little **sync** arrows next to the branch name in the bottom-left corner do both. If the branch is new, the button says **Publish Branch** instead.",
+				"bit": "`git push` uploads your commits to the remote (`origin`); `git pull` downloads and merges others'. **Button:** the sync arrows by the branch name (or **Publish Branch** for a new branch)."
+			},
+			"board": {
+				"code": "git push origin issue-30-add-intake-sensor\ngit pull",
+				"language": "shell",
+				"marks": [
+					{
+						"text": "origin",
+						"label": "the shared copy's usual name"
+					},
+					{
+						"text": "git pull",
+						"label": "get teammates' commits"
+					}
+				]
+			},
+			"open": [
+				"editor"
+			],
+			"target": {
+				"pane": "editor",
+				"selector": "[id='status.scm.1']"
+			}
+		},
+		{
+			"title": "stash",
+			"say": {
+				"never": "`git stash` puts your **unfinished** changes on a shelf and gives you a clean folder, so you can switch branches. `git stash pop` takes them back off the shelf. **The button:** in Source Control, click **...**, then **Stash**, then **Stash**. To get them back, **...**, **Stash**, **Pop Latest Stash**.",
+				"bit": "`git stash` shelves uncommitted changes so you can switch branches; `git stash pop` restores them. **Button:** Source Control **...** menu, then Stash."
+			},
+			"board": {
+				"code": "git stash\ngit checkout develop\n# ...fix something, commit...\ngit checkout issue-30-add-intake-sensor\ngit stash pop",
+				"language": "shell",
+				"marks": [
+					{
+						"text": "git stash pop",
+						"label": "get your unfinished work back"
+					}
+				]
+			},
+			"open": [
+				"editor"
+			],
+			"target": {
+				"pane": "editor",
+				"selector": ".scm-view"
 			}
 		},
 		{
 			"title": "Bringing work together",
-			"say": "When a feature is done, you **merge** it into `develop`. If two branches changed the same line, git stops and asks you to choose. That's a merge conflict, and the git lesson walks you through one.",
-			"board": {
-				"language": "shell",
-				"code": "git switch develop\ngit merge issue-12-add-turbo-boost",
-				"marks": [
-					{
-						"text": "git switch develop",
-						"label": "go to the branch you're merging into"
-					},
-					{
-						"text": "git merge issue-12-add-turbo-boost",
-						"label": "bring the feature branch's commits in"
-					}
-				]
-			}
+			"say": {
+				"never": "When a feature is done, you **merge** it into `develop`. If two branches changed the *same line*, git doesn't know which to keep, so it stops and asks you. That's a **merge conflict**. Don't panic: the exercises walk you through one. The commands and buttons above are everything you need for the whole lesson.",
+				"bit": "Finished features merge into `develop`. Two branches changing the same line is a merge conflict, and git asks you to choose; the exercises cover it."
+			},
+			"open": [
+				"editor"
+			]
 		}
 	]
 }

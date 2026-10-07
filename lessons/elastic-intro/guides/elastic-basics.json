@@ -34,7 +34,8 @@
 					"text": "Running"
 				},
 				"hint": "press Start and wait for it to say Running."
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Connected?",
@@ -63,7 +64,8 @@
 					"selector": "flt-semantics[aria-label='Add Widget']"
 				},
 				"hint": "click Add Widget."
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Every topic",
@@ -88,7 +90,8 @@
 			},
 			"waitFor": {
 				"hint": "drag Counter onto the grid, then press I did it."
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Open its menu",
@@ -110,7 +113,8 @@
 					"text": "Edit Properties"
 				},
 				"hint": "right-click the widget."
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Edit Properties",
@@ -126,7 +130,8 @@
 					"selector": "flt-semantics[aria-label='Alert']"
 				},
 				"hint": "click Edit Properties."
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Its title",
@@ -193,7 +198,8 @@
 				},
 				"gone": true,
 				"hint": "press Close."
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Move and resize",
@@ -210,7 +216,8 @@
 			},
 			"waitFor": {
 				"hint": "move or resize your widget."
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Keep going",
@@ -221,5 +228,6 @@
 				"text": "File"
 			}
 		}
-	]
+	],
+	"kind": "mixed"
 }

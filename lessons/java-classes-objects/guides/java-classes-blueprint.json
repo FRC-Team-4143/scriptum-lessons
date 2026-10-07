@@ -6,7 +6,31 @@
 	"steps": [
 		{
 			"title": "Blueprint and object",
-			"say": "`BankAccount` is the blueprint. Each `new BankAccount(...)` builds a separate account with its own balance.",
+			"say": {
+				"never": "A **class** is a blueprint, and an **object** is a thing built from it. `Playlist` is the blueprint for playlists. Each `new Playlist(...)` builds a separate real playlist with its own songs. Adding a song to `workout` changes only `workout`, not `study`.",
+				"bit": "A class is the blueprint; each `new` makes a separate object with its own state."
+			},
+			"board": {
+				"code": "Playlist workout = new Playlist(\"Workout\", 12);\nPlaylist study = new Playlist(\"Study\", 30);\nworkout.addSong();   // only workout changes",
+				"language": "java",
+				"marks": [
+					{
+						"text": "new Playlist(",
+						"label": "build an object from the blueprint"
+					},
+					{
+						"text": "workout.addSong()",
+						"label": "only that object changes"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Blueprint and object",
+			"say": {
+				"never": "A **class** is a blueprint, and an **object** is a thing built from it. `BankAccount` is the blueprint for accounts. Each `new BankAccount(...)` builds a separate real account with its own balance. Depositing into `checking` changes only `checking`, not `savings`.",
+				"bit": "`BankAccount` is the blueprint. Each `new BankAccount(...)` builds a separate account with its own balance."
+			},
 			"board": {
 				"code": "BankAccount checking = new BankAccount(\"Ada\", 100.0);\nBankAccount savings = new BankAccount(\"Ada\", 50.0);\nchecking.deposit(25.0);   // only checking changes",
 				"marks": [
@@ -19,11 +43,15 @@
 						"label": "call a method on one object"
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Open Main.java",
-			"say": "Main is already written: it uses your class. Press **Ctrl+P**, type `Main` and press Enter. Quick Open finds any file by name, so you never have to dig through folders.",
+			"say": {
+				"never": "Main is already written: it uses your class. Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `Main`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "Main is already written: it uses your class. Press **Ctrl+P**, type `Main` and press Enter. Quick Open finds any file by name, so you never have to dig through folders."
+			},
 			"open": [
 				"editor"
 			],
@@ -45,11 +73,15 @@
 				},
 				"hint": "open Main.java with Ctrl+P.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Find it",
-			"say": "It may be further down. Press **Ctrl+F**, type `new BankAccount` and press Enter to jump to it.",
+			"say": {
+				"never": "It may be further down. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `new BankAccount` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "It may be further down. Press **Ctrl+F**, type `new BankAccount` and press Enter to jump to it."
+			},
 			"target": {
 				"pane": "editor"
 			},
@@ -62,17 +94,23 @@
 				},
 				"hint": "find new BankAccount with Ctrl+F.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Main uses it",
-			"say": "Main makes two accounts like this. Once your class works, it prints real balances.",
+			"say": {
+				"never": "The `Main` file builds two accounts this way. Once your class works, it will print real balances, so you can see that your code does what you want.",
+				"bit": "Main makes two accounts like this. Once your class works, it prints real balances."
+			},
 			"target": {
 				"pane": "editor",
 				"selector": ".view-lines .view-line",
 				"text": "new BankAccount"
 			},
-			"cardAt": "bottom-right"
+			"cardAt": "bottom-right",
+			"assist": true
 		}
-	]
+	],
+	"kind": "mixed"
 }

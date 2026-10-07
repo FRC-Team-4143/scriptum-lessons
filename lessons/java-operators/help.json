@@ -1,0 +1,34 @@
+{
+	"plan": [
+		{
+			"checkpoint": "add-ints",
+			"guides": [
+				"java-operators-arithmetic",
+				"java-operators-integer-division"
+			]
+		},
+		{
+			"checkpoint": "is-even",
+			"guides": [
+				"java-operators-remainder"
+			]
+		},
+		{
+			"checkpoint": "apply-assignments",
+			"guides": [
+				"java-operators-assignment"
+			]
+		}
+	],
+	"checkpoints": {
+		"is-even": {
+			"hints": [
+				{
+					"never": "A number is even if dividing by 2 leaves nothing over. Which operator gives what's left over?",
+					"bit": "Use `%` and compare the remainder to 0."
+				},
+				"`return value % 2 == 0;`"
+			]
+		}
+	}
+}

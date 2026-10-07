@@ -1,0 +1,24 @@
+{
+	"plan": [
+		{
+			"checkpoint": "oi-class",
+			"guides": [
+				"robot-odometry-oi",
+				"robot-odometry-oi-assist"
+			]
+		},
+		{
+			"checkpoint": "chassis-speeds",
+			"guides": [
+				"robot-odometry-objects",
+				"robot-odometry-kinematics"
+			]
+		},
+		{
+			"checkpoint": "pose-auto",
+			"guides": [
+				"robot-odometry-pose"
+			]
+		}
+	]
+}

@@ -9,7 +9,10 @@
 	"steps": [
 		{
 			"title": "Source Control",
-			"say": "The editor has git built in. Let's make your first commit together: I'll point, you do it. The editor and terminal work normally while I'm here.",
+			"say": {
+				"never": "**Git** is a tool that remembers every version of your work, like unlimited save points in a game. The editor has it built in, under the **Source Control** icon. We'll make your first save point together: I'll point, you click. You can still use the editor and terminal normally while I'm here.",
+				"bit": "The editor has git built in. Let's make your first commit together: I'll point, you do it. The editor and terminal work normally while I'm here."
+			},
 			"open": [
 				"editor"
 			],
@@ -22,21 +25,32 @@
 					"pane": "editor",
 					"selector": ".scm-viewlet"
 				},
-				"hint": "click the Source Control icon."
-			}
+				"hint": {
+					"never": "click the Source Control icon.",
+					"bit": "click the Source Control icon."
+				}
+			},
+			"assist": true
 		},
 		{
 			"title": "One repository per folder",
-			"say": "Each numbered folder in this lesson is its own repository, so each one gets its own section here. Start with **01-first-commit**.",
+			"say": {
+				"never": "Each numbered folder in this lesson is its own **repository**, which is just a project folder that git is watching. Each one gets its own section in Source Control. Start with **01-first-commit**.",
+				"bit": "Each numbered folder in this lesson is its own repository, so each one gets its own section here. Start with **01-first-commit**."
+			},
 			"target": {
 				"pane": "editor",
 				"selector": ".scm-view"
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Open the file",
 			"cardAt": "bottom-right",
-			"say": "Go to the **Explorer** (the top icon) and open `01-first-commit/roster.txt`.",
+			"say": {
+				"never": "Click the **Explorer**, the top icon on the left, and open the file `01-first-commit/roster.txt`. Click the folder name to open it, then click the file.",
+				"bit": "Go to the **Explorer** (the top icon) and open `01-first-commit/roster.txt`."
+			},
 			"target": {
 				"pane": "editor",
 				"selector": ".activitybar .action-label[aria-label^='Explorer']"
@@ -47,13 +61,20 @@
 					"selector": ".tabs-container .tab",
 					"text": "roster.txt"
 				},
-				"hint": "open 01-first-commit/roster.txt."
-			}
+				"hint": {
+					"never": "open 01-first-commit/roster.txt.",
+					"bit": "open 01-first-commit/roster.txt."
+				}
+			},
+			"assist": true
 		},
 		{
 			"title": "Make a change",
 			"cardAt": "bottom-right",
-			"say": "Add your name on a new line, then press **Ctrl+S** to save. The Source Control icon will show a number: that's how many files you've changed.",
+			"say": {
+				"never": "Add your name on a new line, then save with **Ctrl+S**. The Source Control icon now shows a number. That's how many files you've changed since your last save point.",
+				"bit": "Add your name on a new line, then press **Ctrl+S** to save. The Source Control icon will show a number: that's how many files you've changed."
+			},
 			"target": {
 				"pane": "editor",
 				"selector": "[id='workbench.parts.editor']"
@@ -63,12 +84,19 @@
 					"pane": "editor",
 					"selector": ".activitybar .action-label[aria-label*='pending change']"
 				},
-				"hint": "add your name and press Ctrl+S."
-			}
+				"hint": {
+					"never": "add your name and press Ctrl+S.",
+					"bit": "add your name and press Ctrl+S."
+				}
+			},
+			"assist": true
 		},
 		{
 			"title": "Back to Source Control",
-			"say": "Open Source Control again to see your change.",
+			"say": {
+				"never": "Click the **Source Control** icon again to look at your change.",
+				"bit": "Open Source Control again to see your change."
+			},
 			"target": {
 				"pane": "editor",
 				"selector": ".activitybar .action-label[aria-label^='Source Control']"
@@ -78,22 +106,33 @@
 					"pane": "editor",
 					"selector": ".scm-viewlet"
 				},
-				"hint": "click the Source Control icon."
-			}
+				"hint": {
+					"never": "click the Source Control icon.",
+					"bit": "click the Source Control icon."
+				}
+			},
+			"assist": true
 		},
 		{
 			"title": "Your change",
 			"cardAt": "bottom-right",
-			"say": "There it is. **M** means modified. Click it to see exactly what changed, side by side.",
+			"say": {
+				"never": "There's your file. The letter **M** means *modified*: it's different from the last save point. Click it to see exactly what changed, old on the left and new on the right.",
+				"bit": "There it is. **M** means modified. Click it to see exactly what changed, side by side."
+			},
 			"target": {
 				"pane": "editor",
 				"selector": ".monaco-list-row[aria-label^='roster.txt']"
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Stage it",
 			"cardAt": "bottom-right",
-			"say": "**Staging** picks what goes into the next commit. Hover over `roster.txt` and press the **+**.",
+			"say": {
+				"never": "**Staging** means choosing which changes go into the next save point. It's like putting items in a box before you seal it. Hover over `roster.txt` and press the **+** to put it in the box.",
+				"bit": "**Staging** picks what goes into the next commit. Hover over `roster.txt` and press the **+**."
+			},
 			"target": {
 				"pane": "editor",
 				"selector": ".monaco-list-row[aria-label^='roster.txt']"
@@ -103,13 +142,20 @@
 					"pane": "editor",
 					"selector": ".monaco-list-row[aria-label='Staged Changes']"
 				},
-				"hint": "hover over roster.txt and press +."
-			}
+				"hint": {
+					"never": "hover over roster.txt and press +.",
+					"bit": "hover over roster.txt and press +."
+				}
+			},
+			"assist": true
 		},
 		{
 			"title": "Commit it",
 			"cardAt": "bottom-right",
-			"say": "Type a message saying what you changed, like `Add my name to the roster`, then press **Commit**. A commit is a saved snapshot of your work.",
+			"say": {
+				"never": "Type a short message saying what you changed, like `Add my name to the roster`, then press **Commit**. A **commit** is a saved snapshot of your work, plus your note about it. Write the note for a teammate who'll read it next month.",
+				"bit": "Type a message saying what you changed, like `Add my name to the roster`, then press **Commit**. A commit is a saved snapshot of your work."
+			},
 			"target": {
 				"pane": "editor",
 				"selector": ".scm-input"
@@ -120,30 +166,45 @@
 					"selector": ".monaco-list-row[aria-label='Staged Changes']"
 				},
 				"gone": true,
-				"hint": "write a message and press Commit."
-			}
+				"hint": {
+					"never": "write a message and press Commit.",
+					"bit": "write a message and press Commit."
+				}
+			},
+			"assist": true
 		},
 		{
 			"title": "In the history",
 			"cardAt": "bottom-right",
-			"say": "Your commit is now at the top of the **Graph**: who made it, when, and your message.",
+			"say": {
+				"never": "Your commit is now at the top of the **Graph**, which is the history. It shows who made the commit, when, and the message you wrote. Every commit stays there forever, so you can always go back.",
+				"bit": "Your commit is now at the top of the **Graph**: who made it, when, and your message."
+			},
 			"target": {
 				"pane": "editor",
 				"selector": ".pane-header[aria-label='Graph Section']"
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Which branch am I on?",
-			"say": "The bottom-left corner always shows your current branch. Click it to switch branches or make a new one. Our feature branches are named like `issue-12-add-turbo-boost`.",
+			"say": {
+				"never": "A **branch** is your own separate line of work. The bottom-left corner shows which branch you're on. Click it to switch branches or make a new one. Our branches are named like `issue-12-add-turbo-boost`, which says what the work is for.",
+				"bit": "The bottom-left corner always shows your current branch. Click it to switch branches or make a new one. Our feature branches are named like `issue-12-add-turbo-boost`."
+			},
 			"target": {
 				"pane": "editor",
 				"selector": "[id='status.scm.0']"
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "The terminal",
 			"cardAt": "top-right",
-			"say": "Everything here can be done by typing git commands too.",
+			"say": {
+				"never": "Everything you just clicked can also be done by typing commands in the **terminal**. Open it with **Ctrl** and the backtick key (above **Tab**).",
+				"bit": "Everything here can be done by typing git commands too."
+			},
 			"target": {
 				"pane": "editor"
 			},
@@ -152,24 +213,39 @@
 					"pane": "editor",
 					"selector": ".terminal-wrapper"
 				},
-				"hint": "press Ctrl+` (the key above Tab)."
-			}
+				"hint": {
+					"never": "press Ctrl and the backtick key (above Tab).",
+					"bit": "press Ctrl+` (the key above Tab)."
+				}
+			},
+			"assist": true
 		},
 		{
 			"title": "Try it",
 			"cardAt": "top-right",
-			"say": "Type `cd 01-first-commit`, press Enter, then `git log --oneline`. Your commit is the first line.",
+			"say": {
+				"never": "Type `cd 01-first-commit` and press **Enter**. That moves into the folder. Then type `git log --oneline` and press **Enter**. It lists your commits, and yours is the first line.",
+				"bit": "Type `cd 01-first-commit`, press Enter, then `git log --oneline`. Your commit is the first line."
+			},
 			"target": {
 				"pane": "editor",
 				"selector": "[id='workbench.parts.panel']"
 			},
 			"waitFor": {
-				"hint": "run git log --oneline in 01-first-commit."
-			}
+				"hint": {
+					"never": "run git log --oneline in 01-first-commit.",
+					"bit": "run git log --oneline in 01-first-commit."
+				}
+			},
+			"assist": true
 		},
 		{
 			"title": "Next exercises",
-			"say": "Each numbered folder's `README.md` has the next task: a feature branch, a merge, a conflict and a rebase. Check your progress in the lesson chip at the top."
+			"say": {
+				"never": "Each numbered folder has a `README.md` with the next task: a feature branch, a merge, a conflict and a rebase. Check your progress by clicking the lesson chip at the top of the screen.",
+				"bit": "Each numbered folder's `README.md` has the next task: a feature branch, a merge, a conflict and a rebase. Check your progress in the lesson chip at the top."
+			}
 		}
-	]
+	],
+	"kind": "mixed"
 }

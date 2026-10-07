@@ -6,7 +6,27 @@
 	"steps": [
 		{
 			"title": "One place for the controls",
-			"say": "`OI` (Operator Interface) owns the controller and answers questions about it. The rest of the robot never cares which stick is which.",
+			"say": {
+				"never": "`OI` stands for **Operator Interface**, which is just a fancy name for \"the controls\". This class is the only place that knows about the gamepad. The rest of the robot asks it questions like \"how far forward is the driver pushing?\" and never cares which stick that comes from. Nobody ever makes a new OI, and its methods are `static`, so you call them on the class itself.",
+				"bit": "OI (Operator Interface) is the one class that knows about the gamepad. The rest of the robot asks it questions through static methods."
+			},
+			"board": {
+				"code": "robot code  ->  \"how hard is the driver pushing forward?\"  ->  OI  ->  reads the gamepad\n\nOnly OI knows which stick that is.",
+				"language": "text",
+				"marks": [
+					{
+						"text": "OI",
+						"label": "the only class that touches the gamepad"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: One place for the controls",
+			"say": {
+				"never": "`OI` stands for **Operator Interface**, which is just a fancy name for \"the controls\". This class is the only place that knows about the gamepad. The rest of the robot asks it questions like \"how far forward is the driver pushing?\" and never cares which stick that comes from. `static` means you call it on the class itself, as `OI.getForward()`. Nobody ever makes a new OI.",
+				"bit": "`OI` (Operator Interface) owns the controller and answers questions about it. The rest of the robot never cares which stick is which."
+			},
 			"board": {
 				"code": "public abstract class OI {\n    private static final XboxController driverController = new XboxController(0);\n\n    public static double getForward() {\n        return -driverController.getLeftY();\n    }\n}",
 				"marks": [
@@ -23,113 +43,9 @@
 						"label": "the minus lives here now"
 					}
 				]
-			}
-		},
-		{
-			"title": "Open OI.java",
-			"say": "Press **Ctrl+P**, type `OI` and press Enter. Quick Open finds any file by name, so you never have to dig through folders.",
-			"open": [
-				"editor"
-			],
-			"close": [
-				"scope",
-				"choreo",
-				"elastic",
-				"preview"
-			],
-			"target": {
-				"pane": "editor"
 			},
-			"cardAt": "bottom-right",
-			"waitFor": {
-				"target": {
-					"pane": "editor",
-					"selector": ".tabs-container .tab",
-					"text": "OI.java"
-				},
-				"hint": "open OI.java with Ctrl+P.",
-				"skipIfDone": true
-			}
-		},
-		{
-			"title": "Find it",
-			"say": "It may be further down. Press **Ctrl+F**, type `write  public static double getForward` and press Enter to jump to it.",
-			"target": {
-				"pane": "editor"
-			},
-			"cardAt": "bottom-right",
-			"waitFor": {
-				"target": {
-					"pane": "editor",
-					"selector": ".view-lines .view-line",
-					"text": "write  public static double getForward"
-				},
-				"hint": "find write  public static double getForward with Ctrl+F.",
-				"skipIfDone": true
-			}
-		},
-		{
-			"title": "Your turn",
-			"say": "Write `getForward()` under this comment, then `getTurn()`.",
-			"target": {
-				"pane": "editor",
-				"selector": ".view-lines .view-line",
-				"text": "write  public static double getForward"
-			},
-			"cardAt": "bottom-right"
-		},
-		{
-			"title": "Open Robot.java",
-			"say": "Now use it. Press **Ctrl+P**, type `Robot` and press Enter. Quick Open finds any file by name, so you never have to dig through folders.",
-			"open": [
-				"editor"
-			],
-			"close": [
-				"scope",
-				"choreo",
-				"elastic",
-				"preview"
-			],
-			"target": {
-				"pane": "editor"
-			},
-			"cardAt": "bottom-right",
-			"waitFor": {
-				"target": {
-					"pane": "editor",
-					"selector": ".tabs-container .tab",
-					"text": "Robot.java"
-				},
-				"hint": "open Robot.java with Ctrl+P.",
-				"skipIfDone": true
-			}
-		},
-		{
-			"title": "Find it",
-			"say": "It may be further down. Press **Ctrl+F**, type `TODO (STEP 1): delete this field` and press Enter to jump to it.",
-			"target": {
-				"pane": "editor"
-			},
-			"cardAt": "bottom-right",
-			"waitFor": {
-				"target": {
-					"pane": "editor",
-					"selector": ".view-lines .view-line",
-					"text": "TODO (STEP 1): delete this field"
-				},
-				"hint": "find TODO (STEP 1): delete this field with Ctrl+F.",
-				"skipIfDone": true
-			}
-		},
-		{
-			"title": "Delete this",
-			"say": "Robot.java shouldn't read the controller anymore. Delete the field, then use `OI.getForward()` and `OI.getTurn()`.",
-			"target": {
-				"pane": "editor",
-				"selector": ".view-lines .view-line",
-				"text": "TODO (STEP 1): delete this field"
-			},
-			"cardAt": "bottom-right"
+			"assist": true
 		}
-	]
+	],
+	"kind": "mixed"
 }

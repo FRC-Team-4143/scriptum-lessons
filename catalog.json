@@ -62,7 +62,7 @@
 			"order": 5,
 			"track": "Tools",
 			"title": "Git Basics",
-			"description": "Commit, branch, merge, resolve a conflict, and rebase across five small scenario repos.",
+			"description": "Commit, branch, merge, resolve a conflict, rebase, then push, pull and stash across eight small scenario repos.",
 			"kind": "git",
 			"subdir": "lessons/git-basics/project",
 			"setupScript": "lessons/git-basics/checkpoints/setup.sh",
@@ -110,6 +110,33 @@
 					"verifier": {
 						"type": "script",
 						"path": "lessons/git-basics/checkpoints/verify/rebase.sh"
+					}
+				},
+				{
+					"id": "push",
+					"title": "Push",
+					"description": "Push the issue-18-team-colors branch to origin.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/git-basics/checkpoints/verify/push.sh"
+					}
+				},
+				{
+					"id": "pull",
+					"title": "Pull",
+					"description": "Pull your teammate's new commit from origin into develop.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/git-basics/checkpoints/verify/pull.sh"
+					}
+				},
+				{
+					"id": "stash",
+					"title": "Stash",
+					"description": "Stash unfinished work, fix a typo on develop, then pop the stash back.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/git-basics/checkpoints/verify/stash.sh"
 					}
 				}
 			]
@@ -430,7 +457,7 @@
 				{
 					"id": "has-constraint",
 					"title": "Path has a constraint",
-					"description": "The path has at least one enabled constraint (Max Velocity, Max Angular Velocity, or Keep In Rectangle).",
+					"description": "The path has at least one enabled constraint (Max Velocity or Max Angular Velocity; Keep In Rectangle is the default field boundary and does not count).",
 					"verifier": {
 						"type": "script",
 						"path": "lessons/choreo-intro/checkpoints/verify/has-constraint.sh"
@@ -1531,6 +1558,7 @@
 			"modules": [
 				"editor-basics"
 			],
+			"kind": "mixed",
 			"path": "lessons/editor-basics/guides/editor-tour.json"
 		},
 		{
@@ -1542,6 +1570,7 @@
 			"modules": [
 				"editor-basics"
 			],
+			"kind": "mixed",
 			"path": "lessons/editor-basics/guides/files-and-folders.json"
 		},
 		{
@@ -1553,6 +1582,7 @@
 			"modules": [
 				"editor-basics"
 			],
+			"kind": "mixed",
 			"path": "lessons/editor-basics/guides/files-make.json"
 		},
 		{
@@ -1564,6 +1594,7 @@
 			"modules": [
 				"editor-basics"
 			],
+			"kind": "mixed",
 			"path": "lessons/editor-basics/guides/editor-typing.json"
 		},
 		{
@@ -1575,6 +1606,7 @@
 			"modules": [
 				"editor-basics"
 			],
+			"kind": "mixed",
 			"path": "lessons/editor-basics/guides/files-rename-delete.json"
 		},
 		{
@@ -1586,6 +1618,7 @@
 			"modules": [
 				"editor-basics"
 			],
+			"kind": "mixed",
 			"path": "lessons/editor-basics/guides/terminal-basics.json"
 		},
 		{
@@ -1597,6 +1630,7 @@
 			"modules": [
 				"editor-basics"
 			],
+			"kind": "mixed",
 			"path": "lessons/editor-basics/guides/find-things-fast.json"
 		},
 		{
@@ -1608,6 +1642,7 @@
 			"modules": [
 				"editor-basics"
 			],
+			"kind": "mixed",
 			"path": "lessons/editor-basics/guides/editor-first-run.json"
 		},
 		{
@@ -1622,17 +1657,22 @@
 			"needs": [
 				"editor"
 			],
+			"kind": "mixed",
 			"path": "lessons/git-basics/guides/git-source-control.json"
 		},
 		{
 			"id": "git-commands",
-			"title": "The git commands you'll type",
-			"summary": "status, add, commit and switch, one at a time on the board.",
-			"topic": "Git",
+			"title": "Git commands and their buttons",
+			"summary": "status, add, commit, checkout, merge, push, pull and stash, each next to its Source Control button.",
+			"topic": "Tools",
 			"order": 11,
 			"modules": [
 				"git-basics"
 			],
+			"needs": [
+				"editor"
+			],
+			"kind": "concept",
 			"path": "lessons/git-basics/guides/git-commands.json"
 		},
 		{
@@ -1654,6 +1694,7 @@
 			"needs": [
 				"driverStation"
 			],
+			"kind": "concept",
 			"path": "common/guides/build-and-run.json"
 		},
 		{
@@ -1668,6 +1709,7 @@
 			"needs": [
 				"scope"
 			],
+			"kind": "mixed",
 			"path": "lessons/advantagescope-intro/guides/advantagescope-basics.json"
 		},
 		{
@@ -1682,6 +1724,7 @@
 			"needs": [
 				"elastic"
 			],
+			"kind": "mixed",
 			"path": "lessons/elastic-intro/guides/elastic-basics.json"
 		},
 		{
@@ -1696,6 +1739,7 @@
 			"needs": [
 				"choreo"
 			],
+			"kind": "mixed",
 			"path": "lessons/choreo-intro/guides/choreo-basics.json"
 		},
 		{
@@ -1708,6 +1752,7 @@
 				"java-variables",
 				"robot-drivetrain"
 			],
+			"kind": "mixed",
 			"path": "common/guides/java-variables.json"
 		},
 		{
@@ -1719,6 +1764,7 @@
 			"modules": [
 				"git-basics"
 			],
+			"kind": "mixed",
 			"path": "lessons/git-basics/guides/git-branches.json"
 		},
 		{
@@ -1730,6 +1776,7 @@
 			"modules": [
 				"git-basics"
 			],
+			"kind": "mixed",
 			"path": "lessons/git-basics/guides/git-merging.json"
 		},
 		{
@@ -1741,6 +1788,7 @@
 			"modules": [
 				"git-basics"
 			],
+			"kind": "mixed",
 			"path": "lessons/git-basics/guides/git-merge-conflicts.json"
 		},
 		{
@@ -1752,7 +1800,38 @@
 			"modules": [
 				"git-basics"
 			],
+			"kind": "mixed",
 			"path": "lessons/git-basics/guides/git-rebase.json"
+		},
+		{
+			"id": "git-remotes",
+			"title": "Sharing your work",
+			"summary": "Push a branch to origin, then pull a teammate's commit.",
+			"topic": "Tools",
+			"order": 119,
+			"modules": [
+				"git-basics"
+			],
+			"needs": [
+				"editor"
+			],
+			"kind": "mixed",
+			"path": "lessons/git-basics/guides/git-remotes.json"
+		},
+		{
+			"id": "git-stash",
+			"title": "Shelving unfinished work",
+			"summary": "git stash: switch branches without committing half-done work.",
+			"topic": "Tools",
+			"order": 120,
+			"modules": [
+				"git-basics"
+			],
+			"needs": [
+				"editor"
+			],
+			"kind": "mixed",
+			"path": "lessons/git-basics/guides/git-stash.json"
 		},
 		{
 			"id": "advantagescope-3d-swerve",
@@ -1763,6 +1842,7 @@
 			"modules": [
 				"advantagescope-intro"
 			],
+			"kind": "mixed",
 			"path": "lessons/advantagescope-intro/guides/advantagescope-3d-swerve.json"
 		},
 		{
@@ -1774,6 +1854,7 @@
 			"modules": [
 				"elastic-intro"
 			],
+			"kind": "mixed",
 			"path": "lessons/elastic-intro/guides/elastic-writing-values.json"
 		},
 		{
@@ -1785,7 +1866,23 @@
 			"modules": [
 				"elastic-intro"
 			],
+			"kind": "mixed",
 			"path": "lessons/elastic-intro/guides/elastic-layouts.json"
+		},
+		{
+			"id": "advantagescope-tuning",
+			"title": "Tuning mode",
+			"summary": "Change a value in the running robot from AdvantageScope, and why only Tuning values can be written.",
+			"topic": "Tools",
+			"order": 142,
+			"modules": [
+				"advantagescope-intro"
+			],
+			"needs": [
+				"scope"
+			],
+			"kind": "mixed",
+			"path": "lessons/advantagescope-intro/guides/advantagescope-tuning.json"
 		},
 		{
 			"id": "choreo-why-not-generate",
@@ -1796,6 +1893,7 @@
 			"modules": [
 				"choreo-intro"
 			],
+			"kind": "concept",
 			"path": "lessons/choreo-intro/guides/choreo-why-not-generate.json"
 		},
 		{
@@ -1807,6 +1905,7 @@
 			"modules": [
 				"hello-world"
 			],
+			"kind": "mixed",
 			"path": "lessons/hello-world/guides/hello-world-first-program.json"
 		},
 		{
@@ -1818,6 +1917,7 @@
 			"modules": [
 				"hello-world"
 			],
+			"kind": "mixed",
 			"path": "lessons/hello-world/guides/hello-world-errors.json"
 		},
 		{
@@ -1829,6 +1929,7 @@
 			"modules": [
 				"java-variables"
 			],
+			"kind": "mixed",
 			"path": "lessons/java-variables/guides/java-variables-printing.json"
 		},
 		{
@@ -1840,6 +1941,7 @@
 			"modules": [
 				"java-variables"
 			],
+			"kind": "mixed",
 			"path": "lessons/java-variables/guides/java-variables-constants-enums.json"
 		},
 		{
@@ -1851,6 +1953,7 @@
 			"modules": [
 				"java-operators"
 			],
+			"kind": "mixed",
 			"path": "lessons/java-operators/guides/java-operators-arithmetic.json"
 		},
 		{
@@ -1862,6 +1965,7 @@
 			"modules": [
 				"java-operators"
 			],
+			"kind": "mixed",
 			"path": "lessons/java-operators/guides/java-operators-remainder.json"
 		},
 		{
@@ -1873,6 +1977,7 @@
 			"modules": [
 				"java-operators"
 			],
+			"kind": "mixed",
 			"path": "lessons/java-operators/guides/java-operators-assignment.json"
 		},
 		{
@@ -1885,6 +1990,7 @@
 				"java-operators",
 				"java-arrays"
 			],
+			"kind": "concept",
 			"path": "common/guides/java-operators-integer-division.json"
 		},
 		{
@@ -1896,6 +2002,7 @@
 			"modules": [
 				"java-conditions"
 			],
+			"kind": "mixed",
 			"path": "lessons/java-conditions/guides/java-conditions-if-chain.json"
 		},
 		{
@@ -1907,6 +2014,7 @@
 			"modules": [
 				"java-conditions"
 			],
+			"kind": "mixed",
 			"path": "lessons/java-conditions/guides/java-conditions-switch.json"
 		},
 		{
@@ -1918,6 +2026,7 @@
 			"modules": [
 				"java-conditions"
 			],
+			"kind": "mixed",
 			"path": "lessons/java-conditions/guides/java-conditions-logic.json"
 		},
 		{
@@ -1929,6 +2038,7 @@
 			"modules": [
 				"java-loops"
 			],
+			"kind": "concept",
 			"path": "lessons/java-loops/guides/java-loops-for.json"
 		},
 		{
@@ -1940,6 +2050,7 @@
 			"modules": [
 				"java-loops"
 			],
+			"kind": "mixed",
 			"path": "lessons/java-loops/guides/java-loops-accumulate.json"
 		},
 		{
@@ -1951,6 +2062,7 @@
 			"modules": [
 				"java-loops"
 			],
+			"kind": "concept",
 			"path": "lessons/java-loops/guides/java-loops-fizzbuzz.json"
 		},
 		{
@@ -1962,6 +2074,7 @@
 			"modules": [
 				"java-arrays"
 			],
+			"kind": "concept",
 			"path": "lessons/java-arrays/guides/java-arrays-basics.json"
 		},
 		{
@@ -1973,6 +2086,7 @@
 			"modules": [
 				"java-arrays"
 			],
+			"kind": "mixed",
 			"path": "lessons/java-arrays/guides/java-arrays-summaries.json"
 		},
 		{
@@ -1984,6 +2098,7 @@
 			"modules": [
 				"java-arrays"
 			],
+			"kind": "mixed",
 			"path": "lessons/java-arrays/guides/java-arrays-new-arrays.json"
 		},
 		{
@@ -1995,6 +2110,7 @@
 			"modules": [
 				"java-methods"
 			],
+			"kind": "mixed",
 			"path": "lessons/java-methods/guides/java-methods-anatomy.json"
 		},
 		{
@@ -2006,6 +2122,7 @@
 			"modules": [
 				"java-methods"
 			],
+			"kind": "mixed",
 			"path": "lessons/java-methods/guides/java-methods-reuse.json"
 		},
 		{
@@ -2018,6 +2135,7 @@
 				"java-methods",
 				"java-recursion"
 			],
+			"kind": "mixed",
 			"path": "common/guides/java-methods-edge-cases.json"
 		},
 		{
@@ -2029,6 +2147,7 @@
 			"modules": [
 				"java-classes-objects"
 			],
+			"kind": "mixed",
 			"path": "lessons/java-classes-objects/guides/java-classes-blueprint.json"
 		},
 		{
@@ -2040,6 +2159,7 @@
 			"modules": [
 				"java-classes-objects"
 			],
+			"kind": "mixed",
 			"path": "lessons/java-classes-objects/guides/java-classes-fields-constructor.json"
 		},
 		{
@@ -2051,6 +2171,7 @@
 			"modules": [
 				"java-classes-objects"
 			],
+			"kind": "mixed",
 			"path": "lessons/java-classes-objects/guides/java-classes-encapsulation.json"
 		},
 		{
@@ -2062,6 +2183,7 @@
 			"modules": [
 				"java-recursion"
 			],
+			"kind": "mixed",
 			"path": "lessons/java-recursion/guides/java-recursion-recipe.json"
 		},
 		{
@@ -2073,6 +2195,7 @@
 			"modules": [
 				"java-recursion"
 			],
+			"kind": "mixed",
 			"path": "lessons/java-recursion/guides/java-recursion-stack-overflow.json"
 		},
 		{
@@ -2084,6 +2207,7 @@
 			"modules": [
 				"java-inheritance"
 			],
+			"kind": "mixed",
 			"path": "lessons/java-inheritance/guides/java-inheritance-extends.json"
 		},
 		{
@@ -2095,6 +2219,7 @@
 			"modules": [
 				"java-inheritance"
 			],
+			"kind": "mixed",
 			"path": "lessons/java-inheritance/guides/java-inheritance-override.json"
 		},
 		{
@@ -2106,6 +2231,7 @@
 			"modules": [
 				"robot-drivetrain"
 			],
+			"kind": "assist",
 			"path": "lessons/robot-drivetrain/guides/robot-drivetrain-where-code-goes.json"
 		},
 		{
@@ -2117,6 +2243,7 @@
 			"modules": [
 				"robot-drivetrain"
 			],
+			"kind": "mixed",
 			"path": "lessons/robot-drivetrain/guides/robot-drivetrain-tank.json"
 		},
 		{
@@ -2128,6 +2255,7 @@
 			"modules": [
 				"robot-drivetrain"
 			],
+			"kind": "mixed",
 			"path": "lessons/robot-drivetrain/guides/robot-drivetrain-arcade.json"
 		},
 		{
@@ -2139,6 +2267,7 @@
 			"modules": [
 				"robot-sensors"
 			],
+			"kind": "mixed",
 			"path": "lessons/robot-sensors/guides/robot-sensors-encoders.json"
 		},
 		{
@@ -2150,6 +2279,7 @@
 			"modules": [
 				"robot-sensors"
 			],
+			"kind": "mixed",
 			"path": "lessons/robot-sensors/guides/robot-sensors-robot-speed.json"
 		},
 		{
@@ -2161,6 +2291,7 @@
 			"modules": [
 				"robot-sensors"
 			],
+			"kind": "mixed",
 			"path": "lessons/robot-sensors/guides/robot-sensors-deadband.json"
 		},
 		{
@@ -2172,6 +2303,7 @@
 			"modules": [
 				"robot-sensors"
 			],
+			"kind": "mixed",
 			"path": "lessons/robot-sensors/guides/robot-sensors-bang-bang.json"
 		},
 		{
@@ -2183,6 +2315,7 @@
 			"modules": [
 				"robot-drive-math"
 			],
+			"kind": "mixed",
 			"path": "lessons/robot-drive-math/guides/robot-drive-math-methods.json"
 		},
 		{
@@ -2194,6 +2327,7 @@
 			"modules": [
 				"robot-drive-math"
 			],
+			"kind": "mixed",
 			"path": "lessons/robot-drive-math/guides/robot-drive-math-arrays.json"
 		},
 		{
@@ -2205,6 +2339,7 @@
 			"modules": [
 				"robot-drive-math"
 			],
+			"kind": "mixed",
 			"path": "lessons/robot-drive-math/guides/robot-drive-math-average.json"
 		},
 		{
@@ -2217,6 +2352,7 @@
 				"robot-drive-math",
 				"robot-odometry"
 			],
+			"kind": "mixed",
 			"path": "common/guides/robot-drive-math-io-loop.json"
 		},
 		{
@@ -2228,6 +2364,7 @@
 			"modules": [
 				"robot-odometry"
 			],
+			"kind": "mixed",
 			"path": "lessons/robot-odometry/guides/robot-odometry-kinematics.json"
 		},
 		{
@@ -2239,6 +2376,7 @@
 			"modules": [
 				"robot-odometry"
 			],
+			"kind": "mixed",
 			"path": "lessons/robot-odometry/guides/robot-odometry-pose.json"
 		},
 		{
@@ -2250,6 +2388,7 @@
 			"modules": [
 				"robot-odometry"
 			],
+			"kind": "concept",
 			"path": "lessons/robot-odometry/guides/robot-odometry-objects.json"
 		},
 		{
@@ -2262,7 +2401,32 @@
 				"robot-odometry",
 				"robot-subsystems"
 			],
+			"kind": "mixed",
 			"path": "common/guides/robot-odometry-oi.json"
+		},
+		{
+			"id": "robot-odometry-oi-assist",
+			"title": "Write the OI class",
+			"summary": "Write getForward() and getTurn(), then use them in Robot.java.",
+			"topic": "Robot",
+			"order": 460,
+			"modules": [
+				"robot-odometry"
+			],
+			"kind": "assist",
+			"path": "lessons/robot-odometry/guides/robot-odometry-oi-assist.json"
+		},
+		{
+			"id": "robot-subsystems-oi-assist",
+			"title": "Shooter buttons in OI",
+			"summary": "A button is just true or false: write getShootButton() and getIndexButton().",
+			"topic": "Robot",
+			"order": 461,
+			"modules": [
+				"robot-subsystems"
+			],
+			"kind": "mixed",
+			"path": "lessons/robot-subsystems/guides/robot-subsystems-oi-assist.json"
 		},
 		{
 			"id": "robot-subsystems-big-idea",
@@ -2273,6 +2437,7 @@
 			"modules": [
 				"robot-subsystems"
 			],
+			"kind": "mixed",
 			"path": "lessons/robot-subsystems/guides/robot-subsystems-big-idea.json"
 		},
 		{
@@ -2285,7 +2450,20 @@
 				"robot-subsystems",
 				"robot-state-machines"
 			],
+			"kind": "mixed",
 			"path": "common/guides/robot-subsystems-states.json"
+		},
+		{
+			"id": "robot-subsystems-drive-states-assist",
+			"title": "Drive from the subsystem",
+			"summary": "Fill in the ARCADE case so the drivetrain subsystem drives with the sticks.",
+			"topic": "Robot",
+			"order": 464,
+			"modules": [
+				"robot-subsystems"
+			],
+			"kind": "assist",
+			"path": "lessons/robot-subsystems/guides/robot-subsystems-drive-states-assist.json"
 		},
 		{
 			"id": "robot-subsystems-singleton",
@@ -2296,6 +2474,7 @@
 			"modules": [
 				"robot-subsystems"
 			],
+			"kind": "mixed",
 			"path": "lessons/robot-subsystems/guides/robot-subsystems-singleton.json"
 		},
 		{
@@ -2307,6 +2486,7 @@
 			"modules": [
 				"robot-subsystems"
 			],
+			"kind": "mixed",
 			"path": "lessons/robot-subsystems/guides/robot-subsystems-shooter.json"
 		},
 		{
@@ -2318,6 +2498,7 @@
 			"modules": [
 				"robot-control-theory"
 			],
+			"kind": "mixed",
 			"path": "lessons/robot-control-theory/guides/robot-control-error.json"
 		},
 		{
@@ -2329,6 +2510,7 @@
 			"modules": [
 				"robot-control-theory"
 			],
+			"kind": "mixed",
 			"path": "lessons/robot-control-theory/guides/robot-control-units.json"
 		},
 		{
@@ -2340,6 +2522,7 @@
 			"modules": [
 				"robot-control-theory"
 			],
+			"kind": "mixed",
 			"path": "lessons/robot-control-theory/guides/robot-control-tuning.json"
 		},
 		{
@@ -2351,6 +2534,7 @@
 			"modules": [
 				"robot-state-machines"
 			],
+			"kind": "mixed",
 			"path": "lessons/robot-state-machines/guides/robot-state-machines-states.json"
 		},
 		{
@@ -2363,6 +2547,7 @@
 				"robot-state-machines",
 				"robot-autonomous"
 			],
+			"kind": "mixed",
 			"path": "common/guides/robot-state-machines-commands.json"
 		},
 		{
@@ -2374,7 +2559,32 @@
 			"modules": [
 				"robot-state-machines"
 			],
+			"kind": "mixed",
 			"path": "lessons/robot-state-machines/guides/robot-state-machines-bindings.json"
+		},
+		{
+			"id": "robot-state-machines-commands-assist",
+			"title": "Write the shooter commands",
+			"summary": "Write shoot() with startEnd and simulateBallLaunch() with runOnce.",
+			"topic": "Robot",
+			"order": 511,
+			"modules": [
+				"robot-state-machines"
+			],
+			"kind": "assist",
+			"path": "lessons/robot-state-machines/guides/robot-state-machines-commands-assist.json"
+		},
+		{
+			"id": "robot-state-machines-shooter-states-assist",
+			"title": "Write the shooter's states",
+			"summary": "Write handleStateTransition and the switch in updateLogic.",
+			"topic": "Robot",
+			"order": 512,
+			"modules": [
+				"robot-state-machines"
+			],
+			"kind": "assist",
+			"path": "lessons/robot-state-machines/guides/robot-state-machines-shooter-states-assist.json"
 		},
 		{
 			"id": "robot-autonomous-command-lifecycle",
@@ -2385,6 +2595,7 @@
 			"modules": [
 				"robot-autonomous"
 			],
+			"kind": "mixed",
 			"path": "lessons/robot-autonomous/guides/robot-autonomous-command-lifecycle.json"
 		},
 		{
@@ -2396,6 +2607,7 @@
 			"modules": [
 				"robot-autonomous"
 			],
+			"kind": "mixed",
 			"path": "lessons/robot-autonomous/guides/robot-autonomous-drive-distance.json"
 		},
 		{
@@ -2407,6 +2619,7 @@
 			"modules": [
 				"robot-autonomous"
 			],
+			"kind": "mixed",
 			"path": "lessons/robot-autonomous/guides/robot-autonomous-sequences.json"
 		}
 	]

@@ -6,7 +6,31 @@
 	"steps": [
 		{
 			"title": "The object guards itself",
-			"say": "Nobody outside can set `balance_` directly. They have to ask, and the methods enforce the rules.",
+			"say": {
+				"never": "The object **guards itself**. Nobody outside can just set `songCount_` to whatever they like. They have to *ask* with a method like `removeSong`, and the method checks the rules first (you can't remove a song from an empty playlist). Hiding the data behind methods like this is called **encapsulation**.",
+				"bit": "Data stays inside; outsiders ask through methods that enforce the rules (encapsulation)."
+			},
+			"board": {
+				"code": "public boolean removeSong() {\n    if (songCount_ <= 0) {\n        return false;\n    }\n    songCount_--;\n    return true;\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "songCount_ <= 0",
+						"label": "the rule"
+					},
+					{
+						"text": "return false;",
+						"label": "refuse politely"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: The object guards itself",
+			"say": {
+				"never": "The object **guards itself**. Nobody outside can just set the balance to whatever they like. They have to *ask* with a method like `withdraw`, and the method checks the rules first (no negative amounts, no taking more than you have). Hiding the data behind methods like this is called **encapsulation**.",
+				"bit": "Nobody outside can set `balance_` directly. They have to ask, and the methods enforce the rules."
+			},
 			"board": {
 				"code": "public boolean withdraw(double amount) {\n    if (amount <= 0 || amount > balance_) {\n        return false;\n    }\n    balance_ -= amount;\n    return true;\n}",
 				"marks": [
@@ -19,11 +43,32 @@
 						"label": "tell the caller it failed"
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "A getter",
-			"say": "Read-only access: other code can see the balance but not change it.",
+			"say": {
+				"never": "A **getter** is a small method that lets other code *read* a value without being able to change it. `getSongCount()` hands back the count, and that's all. It's like a window you can look through but not climb through.",
+				"bit": "A getter exposes a value read-only."
+			},
+			"board": {
+				"code": "public int getSongCount() {\n    return songCount_;\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "getSongCount",
+						"label": "read-only access"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: A getter",
+			"say": {
+				"never": "A **getter** is a small method that lets other code *read* a value without being able to change it. `getBalance()` hands back the balance, and that's all. It's like a window you can look through but not climb through.",
+				"bit": "Read-only access: other code can see the balance but not change it."
+			},
 			"board": {
 				"code": "public double getBalance() {\n    return balance_;\n}",
 				"marks": [
@@ -32,11 +77,36 @@
 						"label": "read, don't write"
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Reuse the rules",
-			"say": "`transfer` uses `withdraw` and the other account's `deposit`, so the rules live in one place.",
+			"say": {
+				"never": "`moveSongTo` doesn't repeat the rules. It uses `removeSong` on this playlist and `addSong` on the other one. Because the rules live in one place, they can never disagree with each other.",
+				"bit": "`moveSongTo` reuses `removeSong` and `addSong` so the rules stay in one place."
+			},
+			"board": {
+				"code": "public boolean moveSongTo(Playlist other) {\n    if (!removeSong()) {\n        return false;\n    }\n    other.addSong();\n    return true;\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "!removeSong()",
+						"label": "reuse this object's rule"
+					},
+					{
+						"text": "other.addSong",
+						"label": "and the other object's"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Reuse the rules",
+			"say": {
+				"never": "`transfer` doesn't repeat the rules. It uses `withdraw` on this account and `deposit` on the other one. Because the rules live in one place, they can never disagree with each other.",
+				"bit": "`transfer` uses `withdraw` and the other account's `deposit`, so the rules live in one place."
+			},
 			"board": {
 				"code": "public boolean transfer(BankAccount recipient, double amount) {\n    if (!withdraw(amount)) {\n        return false;\n    }\n    recipient.deposit(amount);\n    return true;\n}",
 				"marks": [
@@ -49,18 +119,27 @@
 						"label": "never touch their fields"
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Run it",
-			"say": "Click the **Run** button (▷) at the top right of the file. The output appears in the terminal at the bottom.",
+			"say": {
+				"never": "Click the **Run** button, the little triangle (▷) at the top right of the file. What your program prints appears in the terminal at the bottom.",
+				"bit": "Click the **Run** button (▷) at the top right of the file. The output appears in the terminal at the bottom."
+			},
 			"target": {
 				"pane": "editor"
 			},
 			"cardAt": "top-right",
 			"waitFor": {
-				"hint": "run the program and read the output."
-			}
+				"hint": {
+					"never": "run the program and read what it prints.",
+					"bit": "run the program and read the output."
+				}
+			},
+			"assist": true
 		}
-	]
+	],
+	"kind": "mixed"
 }

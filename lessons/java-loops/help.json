@@ -1,0 +1,17 @@
+{
+	"plan": [
+		{
+			"checkpoint": "sum-loop",
+			"guides": [
+				"java-loops-for",
+				"java-loops-accumulate"
+			]
+		},
+		{
+			"checkpoint": "fizz-buzz",
+			"guides": [
+				"java-loops-fizzbuzz"
+			]
+		}
+	]
+}

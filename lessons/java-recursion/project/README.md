@@ -1,38 +1,8 @@
 # Recursion
 
-:::tip[Heads up]
+> **New to an idea here?** Press the **Dozer** button in the top bar. His guides explain each idea this lesson uses, and **I'm so lost → Teach me, step by step** walks you through every job.
 
-The team docs don't have a recursion page - it's a general programming idea
-rather than a team convention - so everything you need is in the explanation
-below. The
-[Methods](https://frc-team-4143.github.io/docs/software/java/methods) page
-is a good refresher on declaring methods, return values, and parameters
-before you start.
-
-:::
-
-Recursion is a fundamental tool worth seeing at least once, even though
-robot code rarely uses it directly.
-
-All the code lives in `src/Main.java`. No method bodies are given - same
-as the Methods lesson, you write the full declaration yourself. `main` is
-empty; call your methods from there to try them out.
-
-## What recursion is
-
-A recursive method calls itself with a smaller version of the same
-problem, until it reaches a **base case** small enough to answer without
-recursing further. Every recursive method needs one, or it calls itself
-forever (and crashes with a `StackOverflowError` once it runs out of
-stack space). For example:
-
-```java
-public static int countDown(int n) {
-    if (n <= 0) return 0;       // base case - stop recursing
-    System.out.println(n);
-    return countDown(n - 1);    // the recursive call
-}
-```
+All the code lives in `src/Main.java`. No method bodies are given: write each full declaration yourself, and call your methods from `main` to try them.
 
 ## What you need to do
 

@@ -9,7 +9,10 @@
 	"steps": [
 		{
 			"title": "The Driver Station",
-			"say": "This strip at the bottom is your **Driver Station**. It's how you build your code, run it in the simulator, and control the robot, just like the laptop at a real match.",
+			"say": {
+				"never": "The strip at the bottom of the screen is your **Driver Station**. Think of it as the remote control for your robot: it's where you start your code and drive the pretend robot on the screen. A real team has one on a laptop at every match.",
+				"bit": "This strip at the bottom is your **Driver Station**. It's how you build your code, run it in the simulator, and control the robot, just like the laptop at a real match."
+			},
 			"open": [
 				"driverStation"
 			],
@@ -19,7 +22,10 @@
 		},
 		{
 			"title": "Before you build",
-			"say": "If the editor finds a mistake, it underlines it in red and counts it down here. Fix those first, because code with errors won't build.",
+			"say": {
+				"never": "Before you start the robot, look for **red squiggly lines** in your code. Those are mistakes, like a spelling error. The editor counts them here. Fix every one first, because code with a mistake can't start.",
+				"bit": "If the editor finds a mistake, it underlines it in red and counts it down here. Fix those first, because code with errors won't build."
+			},
 			"open": [
 				"editor"
 			],
@@ -30,7 +36,10 @@
 		},
 		{
 			"title": "Start",
-			"say": "**Start** does two things: it **builds** your code (turns your Java into something the robot can run), then **runs** it in the simulator.",
+			"say": {
+				"never": "Press **Start**. It does two things for you. First it **builds** your code, which means turning the Java you typed into something the computer can run. Then it **runs** it on the pretend robot.",
+				"bit": "**Start** does two things: it **builds** your code (turns your Java into something the robot can run), then **runs** it in the simulator."
+			},
 			"target": {
 				"selector": "[data-tour='run']"
 			},
@@ -38,33 +47,48 @@
 				"target": {
 					"selector": "[data-tour='run'][disabled]"
 				},
-				"hint": "click Start."
+				"hint": {
+					"never": "click the Start button.",
+					"bit": "click Start."
+				}
 			}
 		},
 		{
 			"title": "Watch the status",
-			"say": "This shows where it's up to: **Building**, then **Running**. The first build takes the longest, and later ones are quicker.",
+			"say": {
+				"never": "This tells you what's happening: **Building**, then **Running**. The very first build is slow, so be patient. After that it's much quicker.",
+				"bit": "This shows where it's up to: **Building**, then **Running**. The first build takes the longest, and later ones are quicker."
+			},
 			"target": {
 				"selector": "[data-tour='code-status']"
 			}
 		},
 		{
 			"title": "The console",
-			"say": "Everything your code prints with `System.out.println` shows up here. So do build errors: if the build fails, look here for the **file name and line number** it's unhappy about.",
+			"say": {
+				"never": "This is the **console**, where your code can write messages for you to read. If something goes wrong when building, the explanation shows up here. Look for a **file name and a line number**. That tells you exactly where to look.",
+				"bit": "Everything your code prints with `System.out.println` shows up here. So do build errors: if the build fails, look here for the **file name and line number** it's unhappy about."
+			},
 			"target": {
 				"selector": "[data-tour='console']"
 			}
 		},
 		{
 			"title": "Mode",
-			"say": "Pick what the robot should do: **Teleop** (you drive), **Auto** (it drives itself), or **Test**.",
+			"say": {
+				"never": "Choose what the robot should do. **Teleop** means *you* drive it with the keyboard. **Auto** means it drives itself with no help. **Test** is for trying things. For now, pick **Teleop**.",
+				"bit": "Pick what the robot should do: **Teleop** (you drive), **Auto** (it drives itself), or **Test**."
+			},
 			"target": {
 				"selector": "[data-tour='mode']"
 			}
 		},
 		{
 			"title": "Enable",
-			"say": "Robot code starts **disabled**, so nothing moves until you say so. Press **Enable** to let it run, and **Disable** to stop it at once. Same as a real robot.",
+			"say": {
+				"never": "Your robot starts **disabled**, which is like a car with the engine off. Nothing moves until you press **Enable**. **Disable** stops everything right away, so it's your safety button. Real robots work the same way.",
+				"bit": "Robot code starts **disabled**, so nothing moves until you say so. Press **Enable** to let it run, and **Disable** to stop it at once. Same as a real robot."
+			},
 			"target": {
 				"selector": "[data-tour='enable']"
 			},
@@ -73,15 +97,22 @@
 					"selector": "[data-tour='enable'] button",
 					"text": "Enabled"
 				},
-				"hint": "press Enable."
+				"hint": {
+					"never": "press the Enable button.",
+					"bit": "press Enable."
+				}
 			}
 		},
 		{
 			"title": "Change, then restart",
-			"say": "After you change your code, press **Restart**. It builds the new version and runs it. **Stop** ends the run.",
+			"say": {
+				"never": "Changed your code? Press **Restart**. It builds your new code and runs it again. **Stop** just ends the run.",
+				"bit": "After you change your code, press **Restart**. It builds the new version and runs it. **Stop** ends the run."
+			},
 			"target": {
 				"selector": "[data-tour='sim-controls']"
 			}
 		}
-	]
+	],
+	"kind": "concept"
 }

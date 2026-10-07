@@ -1,0 +1,22 @@
+{
+	"plan": [
+		{
+			"checkpoint": "bang-bang-written",
+			"guides": [
+				"robot-control-error"
+			]
+		},
+		{
+			"checkpoint": "feedforward-written",
+			"guides": [
+				"robot-control-units"
+			]
+		},
+		{
+			"checkpoint": "pid-selected",
+			"guides": [
+				"robot-control-tuning"
+			]
+		}
+	]
+}

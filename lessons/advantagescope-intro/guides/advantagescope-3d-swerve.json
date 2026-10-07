@@ -21,7 +21,10 @@
 		},
 		{
 			"title": "Start the robot",
-			"say": "Your code only runs once it's built and started.",
+			"say": {
+				"never": "Your code only works once it's started. Press **Start** and wait until the status says **Running**.",
+				"bit": "Your code only runs once it's built and started."
+			},
 			"target": {
 				"selector": "[data-tour='sim-controls']"
 			},
@@ -30,8 +33,12 @@
 					"selector": "[data-tour='code-status']",
 					"text": "Running"
 				},
-				"hint": "press Start and wait for Running."
-			}
+				"hint": {
+					"never": "press Start, then wait for Running.",
+					"bit": "press Start and wait for Running."
+				}
+			},
+			"assist": true
 		},
 		{
 			"title": "3D Field",
@@ -48,7 +55,8 @@
 					"text": "3D Field"
 				},
 				"hint": "click the 3D Field tab."
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "A 3D robot",
@@ -64,7 +72,8 @@
 					"text": "RobotPose3d"
 				},
 				"hint": "drag RobotPose3d onto Poses."
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Field and camera",
@@ -75,7 +84,8 @@
 			},
 			"waitFor": {
 				"hint": "set Evergreen and the Orbit Robot camera."
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "A Swerve tab",
@@ -91,7 +101,8 @@
 					"text": "Swerve"
 				},
 				"hint": "add a Swerve tab."
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Three sources",
@@ -101,7 +112,9 @@
 			},
 			"target": {
 				"pane": "scope"
-			}
+			},
+			"assist": true
 		}
-	]
+	],
+	"kind": "mixed"
 }

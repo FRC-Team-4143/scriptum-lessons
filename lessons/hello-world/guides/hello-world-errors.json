@@ -6,11 +6,17 @@
 	"steps": [
 		{
 			"title": "Mistakes are normal",
-			"say": "Every programmer writes code that doesn't build. The skill is reading the error. Let's make one on purpose."
+			"say": {
+				"never": "Every programmer writes code that doesn't work, every single day. It's normal! The real skill is *reading the error message*, which tells you what to fix. So let's make a mistake on purpose and learn to read it.",
+				"bit": "Every programmer writes code that doesn't build. The skill is reading the error. Let's make one on purpose."
+			}
 		},
 		{
 			"title": "Open Main.java",
-			"say": "Press **Ctrl+P**, type `Main` and press Enter. Quick Open finds any file by name, so you never have to dig through folders.",
+			"say": {
+				"never": "Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `Main`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "Press **Ctrl+P**, type `Main` and press Enter. Quick Open finds any file by name, so you never have to dig through folders."
+			},
 			"open": [
 				"editor"
 			],
@@ -32,32 +38,47 @@
 				},
 				"hint": "open Main.java with Ctrl+P.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Break it",
-			"say": "Delete the `;` at the end of the `println` line. A red squiggle appears right away: the editor checks your code as you type.",
+			"say": {
+				"never": "Delete the `;` at the end of the `println` line. A red wavy line appears right away. The editor is reading your code as you type and spotting mistakes, like a spell checker does.",
+				"bit": "Delete the `;` at the end of the `println` line. A red squiggle appears right away: the editor checks your code as you type."
+			},
 			"waitFor": {
-				"hint": "delete the semicolon."
+				"hint": {
+					"never": "delete the semicolon.",
+					"bit": "delete the semicolon."
+				}
 			},
 			"target": {
 				"pane": "editor",
 				"selector": ".view-lines .view-line",
 				"text": "System.out.println"
 			},
-			"cardAt": "bottom-right"
+			"cardAt": "bottom-right",
+			"assist": true
 		},
 		{
 			"title": "The problem count",
-			"say": "The bottom-left corner counts problems. Click it to open the list: each one says the **file**, the **line**, and what's wrong.",
+			"say": {
+				"never": "Look at the bottom-left corner. It counts the problems in your code. Click it and a list opens. Each problem tells you the **file**, the **line number**, and what is wrong. It's a treasure map to the mistake.",
+				"bit": "The bottom-left corner counts problems. Click it to open the list: each one says the **file**, the **line**, and what's wrong."
+			},
 			"target": {
 				"pane": "editor",
 				"selector": "[id='status.problems']"
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "What the error says",
-			"say": "Java errors look scary but have the same shape every time.",
+			"say": {
+				"never": "Java error messages look scary but always have the same shape. First the file name and line number, then what's wrong (here: a `;` is expected), then the line itself with an arrow `^` pointing at the spot. Read them left to right and the answer is usually right there.",
+				"bit": "Java errors look scary but have the same shape every time."
+			},
 			"board": {
 				"code": "Main.java:3: error: ';' expected\n    System.out.println(\"Hello, World!\")\n                                       ^",
 				"marks": [
@@ -79,16 +100,24 @@
 		},
 		{
 			"title": "Fix it",
-			"say": "Put the `;` back. The squiggle and the problem count disappear.",
+			"say": {
+				"never": "Put the `;` back. The red wavy line goes away and the problem count drops to zero. That's how you know it's fixed.",
+				"bit": "Put the `;` back. The squiggle and the problem count disappear."
+			},
 			"waitFor": {
-				"hint": "put the semicolon back."
+				"hint": {
+					"never": "type the semicolon back.",
+					"bit": "put the semicolon back."
+				}
 			},
 			"target": {
 				"pane": "editor",
 				"selector": ".view-lines .view-line",
 				"text": "System.out.println"
 			},
-			"cardAt": "bottom-right"
+			"cardAt": "bottom-right",
+			"assist": true
 		}
-	]
+	],
+	"kind": "mixed"
 }

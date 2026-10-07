@@ -1,0 +1,17 @@
+{
+	"plan": [
+		{
+			"checkpoint": "local-variables",
+			"guides": [
+				"java-variables",
+				"java-variables-printing"
+			]
+		},
+		{
+			"checkpoint": "team-name-constant",
+			"guides": [
+				"java-variables-constants-enums"
+			]
+		}
+	]
+}

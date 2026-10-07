@@ -6,7 +6,10 @@
 	"steps": [
 		{
 			"title": "Behind",
-			"say": "You branched a while ago, and develop moved on without you.",
+			"say": {
+				"never": "You made your branch a while ago, and since then `develop` moved ahead without you: someone added commit **X**. Your branch is now a little *behind*, and the history has a fork in it.",
+				"bit": "You branched a while ago, and develop moved on without you."
+			},
 			"board": {
 				"code": "develop        o---o---X        (X: a new commit)\nissue-15            \\--R      (your RAINBOW commit)",
 				"language": "text",
@@ -24,7 +27,10 @@
 		},
 		{
 			"title": "Rebase",
-			"say": "Rebasing **replays** your commits on top of develop's newest commit, as if you'd started there. No merge commit, a straight line.",
+			"say": {
+				"never": "**Rebasing** picks up your commits and puts them back down on top of `develop`'s newest commit, as if you had only just started. Instead of a fork there's one straight line. The new copy of your commit is marked `R'`.",
+				"bit": "Rebasing **replays** your commits on top of develop's newest commit, as if you'd started there. No merge commit, a straight line."
+			},
 			"board": {
 				"code": "develop        o---o---X\nissue-15                \\--R'",
 				"language": "text",
@@ -38,7 +44,10 @@
 		},
 		{
 			"title": "The commands",
-			"say": "Stand on **your** branch and rebase it onto develop.",
+			"say": {
+				"never": "Stand on **your** branch, then tell git to rebase it onto `develop`. The last command draws the history as a picture, so you can see the straight line.",
+				"bit": "Stand on **your** branch and rebase it onto develop."
+			},
 			"board": {
 				"code": "git checkout issue-15-led-colors\ngit rebase develop\ngit log --oneline --graph --all",
 				"language": "shell",
@@ -56,7 +65,10 @@
 		},
 		{
 			"title": "Open a terminal",
-			"say": "These exercises are easiest in the terminal.",
+			"say": {
+				"never": "Open the **terminal**: the typing area at the bottom of the screen where you give the computer instructions. Hold **Ctrl** and tap the backtick key, the one above **Tab**. Most of these exercises are easier there.",
+				"bit": "These exercises are easiest in the terminal."
+			},
 			"open": [
 				"editor"
 			],
@@ -69,24 +81,39 @@
 					"pane": "editor",
 					"selector": ".terminal-wrapper"
 				},
-				"hint": "press Ctrl+` (the key above Tab)."
-			}
+				"hint": {
+					"never": "press Ctrl and the backtick key (above Tab).",
+					"bit": "press Ctrl+` (the key above Tab)."
+				}
+			},
+			"assist": true
 		},
 		{
 			"title": "Your turn",
-			"say": "`cd 05-rebase`, then run them. The graph should be one straight line.",
+			"say": {
+				"never": "Type `cd 05-rebase` and press **Enter**. Then run the three commands on the board, one at a time. When you're done, the picture should be one straight line.",
+				"bit": "`cd 05-rebase`, then run them. The graph should be one straight line."
+			},
 			"target": {
 				"pane": "editor",
 				"selector": "[id='workbench.parts.panel']"
 			},
 			"cardAt": "top-right",
 			"waitFor": {
-				"hint": "rebase issue-15-led-colors onto develop."
-			}
+				"hint": {
+					"never": "rebase issue-15-led-colors onto develop.",
+					"bit": "rebase issue-15-led-colors onto develop."
+				}
+			},
+			"assist": true
 		},
 		{
 			"title": "Merge or rebase?",
-			"say": "Rebase keeps history straight, but it **rewrites** your commits. Only rebase branches nobody else has pulled yet. When in doubt, merge."
+			"say": {
+				"never": "Rebase keeps the history tidy, but it **rewrites** your commits, giving them new identities. So only rebase a branch that nobody else has copied yet. If you're not sure, just merge. Merging is always safe.",
+				"bit": "Rebase keeps history straight, but it **rewrites** your commits. Only rebase branches nobody else has pulled yet. When in doubt, merge."
+			}
 		}
-	]
+	],
+	"kind": "mixed"
 }

@@ -28,7 +28,8 @@
 				},
 				"hint": "open about.txt with Ctrl+P.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "The cursor",
@@ -40,7 +41,8 @@
 				"pane": "editor",
 				"selector": "[id='workbench.parts.editor']"
 			},
-			"cardAt": "bottom-right"
+			"cardAt": "bottom-right",
+			"assist": true
 		},
 		{
 			"title": "Erase",
@@ -52,7 +54,8 @@
 				"pane": "editor",
 				"selector": "[id='workbench.parts.editor']"
 			},
-			"cardAt": "bottom-right"
+			"cardAt": "bottom-right",
+			"assist": true
 		},
 		{
 			"title": "Undo!",
@@ -64,7 +67,8 @@
 				"pane": "editor",
 				"selector": "[id='workbench.parts.editor']"
 			},
-			"cardAt": "bottom-right"
+			"cardAt": "bottom-right",
+			"assist": true
 		},
 		{
 			"title": "Select",
@@ -76,7 +80,8 @@
 				"pane": "editor",
 				"selector": "[id='workbench.parts.editor']"
 			},
-			"cardAt": "bottom-right"
+			"cardAt": "bottom-right",
+			"assist": true
 		},
 		{
 			"title": "Copy and paste",
@@ -88,7 +93,8 @@
 				"pane": "editor",
 				"selector": "[id='workbench.parts.editor']"
 			},
-			"cardAt": "bottom-right"
+			"cardAt": "bottom-right",
+			"assist": true
 		},
 		{
 			"title": "Save",
@@ -100,11 +106,13 @@
 				"pane": "editor",
 				"selector": "[id='workbench.parts.editor']"
 			},
-			"cardAt": "bottom-right"
+			"cardAt": "bottom-right",
+			"assist": true
 		},
 		{
 			"title": "Nice work",
 			"say": "Undo, copy, paste and save are the four moves you'll use all day. Next, try **Rename and delete**."
 		}
-	]
+	],
+	"kind": "mixed"
 }

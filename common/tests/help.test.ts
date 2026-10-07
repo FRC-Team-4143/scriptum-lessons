@@ -10,9 +10,10 @@ const repoRoot = resolve(fileURLToPath(new URL("../..", import.meta.url)));
 const readJson = (path: string) => JSON.parse(readFileSync(resolve(repoRoot, path), "utf8"));
 
 type Worded = string | { never: string; bit?: string; lot?: string };
-const catalog = readJson("catalog.json") as { lessons: { id: string }[]; guides: { id: string }[] };
+const catalog = readJson("catalog.json") as { lessons: { id: string }[]; guides: { id: string; modules?: string[] }[] };
 const moduleIds = new Set(catalog.lessons.map((l) => l.id));
 const guideIds = new Set(catalog.guides.map((g) => g.id));
+const guideModules = new Map(catalog.guides.map((g) => [g.id, g.modules ?? []]));
 
 function checkWorded(where: string, text: unknown) {
 	if (typeof text === "string") {
@@ -33,7 +34,30 @@ describe.each(lessonFiles)("lessons/%s/help.json", (id) => {
 	const help = readJson(`lessons/${id}/help.json`) as {
 		about?: Worded;
 		checkpoints?: Record<string, { why?: Worded; guide?: string; concept?: { guide: string; label: string }; hints?: Worded[] }>;
+		plan?: { checkpoint: string; guides: string[]; intro?: Worded }[];
 	};
+
+	// The guided path ("Teach me, step by step"): one stop per checkpoint, in the lesson's order,
+	// running guides this lesson actually offers.
+	test("has a plan that follows the lesson's checkpoints and uses its own guides", () => {
+		const meta = readJson(`lessons/${id}/lesson.json`) as { checkpoints?: { id: string }[] };
+		const order = (meta.checkpoints ?? []).map((c) => c.id);
+		const stops = (help.plan ?? []).map((p) => p.checkpoint);
+		const seen = new Set<string>();
+		for (const stop of help.plan ?? []) {
+			expect(order, `plan: checkpoint ${stop.checkpoint}`).toContain(stop.checkpoint);
+			expect(seen.has(stop.checkpoint), `plan: ${stop.checkpoint} listed twice`).toBe(false);
+			seen.add(stop.checkpoint);
+			expect(stop.guides.length, `plan ${stop.checkpoint}`).toBeGreaterThan(0);
+			expect(stop.guides.length).toBeLessThanOrEqual(8);
+			for (const g of stop.guides) {
+				expect(guideIds, `plan ${stop.checkpoint}: guide ${g}`).toContain(g);
+				expect(guideModules.get(g), `plan ${stop.checkpoint}: ${g} isn't offered in ${id}`).toContain(id);
+			}
+			if (stop.intro) checkWorded(`plan ${stop.checkpoint} intro`, stop.intro);
+		}
+		expect(stops, "plan stops follow the checkpoint order").toEqual(order.filter((c) => seen.has(c)));
+	});
 
 	test("is for a real lesson, and only lists its checkpoints", () => {
 		expect(moduleIds, id).toContain(id);

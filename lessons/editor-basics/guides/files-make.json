@@ -28,7 +28,8 @@
 				},
 				"hint": "click the Explorer icon (the top one).",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "The PROJECT bar",
@@ -37,7 +38,8 @@
 				"pane": "editor",
 				"selector": ".explorer-viewlet .pane-header[aria-label^='Explorer Section']"
 			},
-			"cardAt": "bottom-right"
+			"cardAt": "bottom-right",
+			"assist": true
 		},
 		{
 			"title": "New Folder",
@@ -53,7 +55,8 @@
 					"selector": ".explorer-viewlet .monaco-inputbox input"
 				},
 				"hint": "click the New Folder icon."
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Name it",
@@ -69,7 +72,8 @@
 					"selector": ".explorer-viewlet .monaco-list-row[aria-label='my-team']"
 				},
 				"hint": "type my-team and press Enter."
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Your first folder",
@@ -78,7 +82,8 @@
 				"pane": "editor",
 				"selector": ".explorer-viewlet .monaco-list-row[aria-label='my-team']"
 			},
-			"cardAt": "bottom-right"
+			"cardAt": "bottom-right",
+			"assist": true
 		},
 		{
 			"title": "Which folder?",
@@ -87,7 +92,8 @@
 				"pane": "editor",
 				"selector": ".explorer-viewlet .monaco-list-row[aria-label='my-team']"
 			},
-			"cardAt": "bottom-right"
+			"cardAt": "bottom-right",
+			"assist": true
 		},
 		{
 			"title": "New File",
@@ -103,7 +109,8 @@
 					"selector": ".explorer-viewlet .monaco-inputbox input"
 				},
 				"hint": "click the New File icon."
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Name the file",
@@ -120,7 +127,8 @@
 					"text": "about.txt"
 				},
 				"hint": "type about.txt and press Enter."
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Your first file",
@@ -130,7 +138,8 @@
 				"selector": ".tabs-container .tab",
 				"text": "about.txt"
 			},
-			"cardAt": "bottom-right"
+			"cardAt": "bottom-right",
+			"assist": true
 		},
 		{
 			"title": "Type something",
@@ -142,7 +151,8 @@
 				"pane": "editor",
 				"selector": "[id='workbench.parts.editor']"
 			},
-			"cardAt": "bottom-right"
+			"cardAt": "bottom-right",
+			"assist": true
 		},
 		{
 			"title": "Save it",
@@ -154,7 +164,8 @@
 				"pane": "editor",
 				"selector": "[id='workbench.parts.editor']"
 			},
-			"cardAt": "bottom-right"
+			"cardAt": "bottom-right",
+			"assist": true
 		},
 		{
 			"title": "Check your work",
@@ -163,5 +174,6 @@
 				"selector": "[data-tour='lesson']"
 			}
 		}
-	]
+	],
+	"kind": "mixed"
 }

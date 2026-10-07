@@ -6,7 +6,31 @@
 	"steps": [
 		{
 			"title": "A method",
-			"say": "A method names a job. This one takes two numbers and returns their average.",
+			"say": {
+				"never": "A **method** is a named job. This one is called `toFahrenheit`. You hand it a number, it does a little math, and it hands back one answer. `return` is how it hands the answer back.",
+				"bit": "A method takes inputs, computes, and returns one result."
+			},
+			"board": {
+				"code": "public static double toFahrenheit(double celsius) {\n    return celsius * 9.0 / 5.0 + 32.0;\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "double celsius",
+						"label": "what you hand in"
+					},
+					{
+						"text": "return",
+						"label": "what comes back"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: A method",
+			"say": {
+				"never": "A **method** is a named job. This one is called `linearSpeed`. You hand it two numbers (the left and right speeds), it does a little math, and it hands back one answer. `return` is how it hands the answer back.",
+				"bit": "A method names a job. This one takes two numbers and returns their average."
+			},
 			"board": {
 				"code": "public static double linearSpeed(double leftMetersPerSecond, double rightMetersPerSecond) {\n    return (leftMetersPerSecond + rightMetersPerSecond) / 2.0;\n}",
 				"marks": [
@@ -23,15 +47,30 @@
 						"label": "hands the answer back"
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Why bother",
-			"say": "`DriveMath` never touches a motor or sensor, so each method can be tested on its own. The drivetrain calls them, and `Robot.java` reads almost like a sentence."
+			"say": {
+				"never": "Keeping math in its own methods means each one never touches a motor or sensor, so you can test it on its own with plain numbers. The code that uses it then reads almost like a sentence: \"give me the temperature in Fahrenheit\". If the math has a bug, you know exactly which method to fix.",
+				"bit": "Pure math methods are easy to test and make the calling code read like a sentence."
+			}
+		},
+		{
+			"title": "In your lesson: Why bother",
+			"say": {
+				"never": "These math methods live in a file called `DriveMath` and never touch a motor. That makes each one easy to check on its own, and it makes the robot code read almost like English: \"give me the linear speed\".",
+				"bit": "`DriveMath` never touches a motor or sensor, so each method can be tested on its own. The drivetrain calls them, and `Robot.java` reads almost like a sentence."
+			},
+			"assist": true
 		},
 		{
 			"title": "Open DriveMath.java",
-			"say": "Press **Ctrl+P**, type `DriveMath` and press Enter. Quick Open finds any file by name, so you never have to dig through folders.",
+			"say": {
+				"never": "Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `DriveMath`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "Press **Ctrl+P**, type `DriveMath` and press Enter. Quick Open finds any file by name, so you never have to dig through folders."
+			},
 			"open": [
 				"editor"
 			],
@@ -53,11 +92,15 @@
 				},
 				"hint": "open DriveMath.java with Ctrl+P.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Find it",
-			"say": "It may be further down. Press **Ctrl+F**, type `public static double rotationsToMeters` and press Enter to jump to it.",
+			"say": {
+				"never": "It may be further down. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `public static double rotationsToMeters` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "It may be further down. Press **Ctrl+F**, type `public static double rotationsToMeters` and press Enter to jump to it."
+			},
 			"target": {
 				"pane": "editor"
 			},
@@ -70,21 +113,29 @@
 				},
 				"hint": "find public static double rotationsToMeters with Ctrl+F.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Your first method",
-			"say": "Start with `rotationsToMeters`, then click **Verify**: each method has its own checkpoint.",
+			"say": {
+				"never": "Start with `rotationsToMeters`. Write it, then press **Verify**. Every method has its own check, so you get to celebrate each one.",
+				"bit": "Start with `rotationsToMeters`, then click **Verify**: each method has its own checkpoint."
+			},
 			"target": {
 				"pane": "editor",
 				"selector": ".view-lines .view-line",
 				"text": "public static double rotationsToMeters"
 			},
-			"cardAt": "bottom-right"
+			"cardAt": "bottom-right",
+			"assist": true
 		},
 		{
 			"title": "Find linearSpeed",
-			"say": "The next method down. Press **Ctrl+F**, type `linearSpeed` and press Enter to jump to it.",
+			"say": {
+				"never": "The next method down. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `linearSpeed` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "The next method down. Press **Ctrl+F**, type `linearSpeed` and press Enter to jump to it."
+			},
 			"target": {
 				"pane": "editor"
 			},
@@ -97,17 +148,23 @@
 				},
 				"hint": "find linearSpeed with Ctrl+F.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Then this one",
-			"say": "The average of the two sides.",
+			"say": {
+				"never": "Now this one: the **average** of the two sides. Add them together and divide by 2.",
+				"bit": "The average of the two sides."
+			},
 			"target": {
 				"pane": "editor",
 				"selector": ".view-lines .view-line",
 				"text": "public static double linearSpeed"
 			},
-			"cardAt": "bottom-right"
+			"cardAt": "bottom-right",
+			"assist": true
 		}
-	]
+	],
+	"kind": "mixed"
 }

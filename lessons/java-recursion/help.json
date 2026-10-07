@@ -1,0 +1,16 @@
+{
+	"plan": [
+		{
+			"checkpoint": "factorial-recursive",
+			"guides": [
+				"java-recursion-recipe"
+			]
+		},
+		{
+			"checkpoint": "fibonacci-recursive",
+			"guides": [
+				"java-recursion-stack-overflow"
+			]
+		}
+	]
+}

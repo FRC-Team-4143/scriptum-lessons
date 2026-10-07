@@ -6,7 +6,27 @@
 	"steps": [
 		{
 			"title": "A stub",
-			"say": "Every method starts by returning a placeholder so the program still builds. Your job is to replace it.",
+			"say": {
+				"never": "Exercises often start as a **stub**: a placeholder that returns 0 so the program still runs. Think of it as an empty answer box. Your job is to replace the placeholder with the real answer.",
+				"bit": "A stub is a placeholder body (it returns 0) that you replace with real code."
+			},
+			"board": {
+				"code": "public static int doubleIt(int number) {\n    return 0;   // placeholder\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "return 0;",
+						"label": "the placeholder"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: A stub",
+			"say": {
+				"never": "Each method in this lesson starts as a **stub**: a placeholder that returns 0 so the program still runs. Think of it as an empty answer box. Your job is to replace the placeholder with the real answer.",
+				"bit": "Every method starts by returning a placeholder so the program still builds. Your job is to replace it."
+			},
 			"board": {
 				"code": "public static int addInts(int a, int b) {\n    return 0;\n}",
 				"marks": [
@@ -19,11 +39,32 @@
 						"label": "the placeholder to replace"
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "The real answer",
-			"say": "Replace the placeholder with an **expression**: a bit of math that works out to a value.",
+			"say": {
+				"never": "Replace the placeholder with an **expression**, which is just a bit of math that works out to a value. `number * 2` doubles the number, and `return` hands the answer back to whoever asked.",
+				"bit": "Replace the placeholder with an expression; `return` hands the result back."
+			},
+			"board": {
+				"code": "public static int doubleIt(int number) {\n    return number * 2;\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "number * 2",
+						"label": "an expression: math that works out to a value"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: The real answer",
+			"say": {
+				"never": "Replace the placeholder with an **expression**, which is just a bit of math that works out to a value. `a + b` adds the two numbers, and `return` hands the answer back to whoever asked.",
+				"bit": "Replace the placeholder with an **expression**: a bit of math that works out to a value."
+			},
 			"board": {
 				"code": "public static int addInts(int a, int b) {\n    return a + b;\n}",
 				"marks": [
@@ -33,11 +74,15 @@
 					}
 				],
 				"caption": "addInts(2, 3) gives 5"
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Conversions",
-			"say": "Inches to meters is a multiply. The way back is a divide by the same number, so the two undo each other.",
+			"say": {
+				"never": "To change inches into meters, multiply by 0.0254. To go the other way, divide by the same number. Dividing undoes multiplying, so the two conversions cancel each other out.",
+				"bit": "Inches to meters is a multiply. The way back is a divide by the same number, so the two undo each other."
+			},
 			"board": {
 				"code": "double meters = inches * 0.0254;\ndouble inches = meters / 0.0254;",
 				"marks": [
@@ -54,7 +99,10 @@
 		},
 		{
 			"title": "Open Main.java",
-			"say": "Press **Ctrl+P**, type `Main` and press Enter. Quick Open finds any file by name, so you never have to dig through folders.",
+			"say": {
+				"never": "Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `Main`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "Press **Ctrl+P**, type `Main` and press Enter. Quick Open finds any file by name, so you never have to dig through folders."
+			},
 			"open": [
 				"editor"
 			],
@@ -76,11 +124,15 @@
 				},
 				"hint": "open Main.java with Ctrl+P.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Find it",
-			"say": "It may be further down. Press **Ctrl+F**, type `public static int addInts` and press Enter to jump to it.",
+			"say": {
+				"never": "It may be further down. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `public static int addInts` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "It may be further down. Press **Ctrl+F**, type `public static int addInts` and press Enter to jump to it."
+			},
 			"target": {
 				"pane": "editor"
 			},
@@ -93,28 +145,41 @@
 				},
 				"hint": "find public static int addInts with Ctrl+F.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Start here",
-			"say": "Here's your first stub. Change its `return` line.",
+			"say": {
+				"never": "Here's your first stub. Find its `return` line and change it from the placeholder to the real math. Use the board as your guide.",
+				"bit": "Here's your first stub. Change its `return` line."
+			},
 			"target": {
 				"pane": "editor",
 				"selector": ".view-lines .view-line",
 				"text": "public static int addInts"
 			},
-			"cardAt": "bottom-right"
+			"cardAt": "bottom-right",
+			"assist": true
 		},
 		{
 			"title": "Run it",
-			"say": "Click the **Run** button (▷) at the top right of the file. The output appears in the terminal at the bottom.",
+			"say": {
+				"never": "Click the **Run** button, the little triangle (▷) at the top right of the file. What your program prints appears in the terminal at the bottom.",
+				"bit": "Click the **Run** button (▷) at the top right of the file. The output appears in the terminal at the bottom."
+			},
 			"target": {
 				"pane": "editor"
 			},
 			"cardAt": "top-right",
 			"waitFor": {
-				"hint": "run the program and read the output."
-			}
+				"hint": {
+					"never": "run the program and read what it prints.",
+					"bit": "run the program and read the output."
+				}
+			},
+			"assist": true
 		}
-	]
+	],
+	"kind": "mixed"
 }

@@ -1,0 +1,22 @@
+{
+	"plan": [
+		{
+			"checkpoint": "text-display-counter",
+			"guides": [
+				"elastic-basics"
+			]
+		},
+		{
+			"checkpoint": "number-slider-shooter-angle",
+			"guides": [
+				"elastic-writing-values"
+			]
+		},
+		{
+			"checkpoint": "multi-color-view-led-strip",
+			"guides": [
+				"elastic-layouts"
+			]
+		}
+	]
+}

@@ -1,0 +1,22 @@
+{
+	"plan": [
+		{
+			"checkpoint": "battery-status",
+			"guides": [
+				"java-conditions-if-chain"
+			]
+		},
+		{
+			"checkpoint": "drive-mode-name",
+			"guides": [
+				"java-conditions-switch"
+			]
+		},
+		{
+			"checkpoint": "can-enable",
+			"guides": [
+				"java-conditions-logic"
+			]
+		}
+	]
+}

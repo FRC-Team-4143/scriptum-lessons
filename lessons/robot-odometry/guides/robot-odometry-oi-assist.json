@@ -1,0 +1,139 @@
+{
+	"title": "Write the OI class",
+	"summary": "Write getForward() and getTurn(), then use them in Robot.java.",
+	"topic": "Robot",
+	"order": 460,
+	"kind": "assist",
+	"steps": [
+		{
+			"title": "Open OI.java",
+			"say": {
+				"never": "Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `OI`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "Press **Ctrl+P**, type `OI` and press Enter. Quick Open finds any file by name, so you never have to dig through folders."
+			},
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "OI.java"
+				},
+				"hint": "open OI.java with Ctrl+P.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Find it",
+			"say": {
+				"never": "It may be further down. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `write  public static double getForward` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "It may be further down. Press **Ctrl+F**, type `write  public static double getForward` and press Enter to jump to it."
+			},
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "write  public static double getForward"
+				},
+				"hint": "find write  public static double getForward with Ctrl+F.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Your turn",
+			"say": {
+				"never": "Your turn! Under that comment, write `getForward()`. It's one line that asks the controller for the left stick and flips the sign. Then do the same for `getTurn()` just below it. Use the board on the first step as your guide.",
+				"bit": "Write `getForward()` under this comment, then `getTurn()`."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "write  public static double getForward"
+			},
+			"cardAt": "bottom-right",
+			"assist": true
+		},
+		{
+			"title": "Open Robot.java",
+			"say": {
+				"never": "Now use it. Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `Robot`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "Now use it. Press **Ctrl+P**, type `Robot` and press Enter. Quick Open finds any file by name, so you never have to dig through folders."
+			},
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "Robot.java"
+				},
+				"hint": "open Robot.java with Ctrl+P.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Find it",
+			"say": {
+				"never": "It may be further down. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `TODO (STEP 1): delete this field` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "It may be further down. Press **Ctrl+F**, type `TODO (STEP 1): delete this field` and press Enter to jump to it."
+			},
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "TODO (STEP 1): delete this field"
+				},
+				"hint": "find TODO (STEP 1): delete this field with Ctrl+F.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Delete this",
+			"say": {
+				"never": "Robot.java used to read the controller itself. Now OI does that. Delete the controller line at the top, and where the code used the controller, use `OI.getForward()` and `OI.getTurn()` instead. It's like asking the receptionist instead of walking down the hall.",
+				"bit": "Robot.java shouldn't read the controller anymore. Delete the field, then use `OI.getForward()` and `OI.getTurn()`."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "TODO (STEP 1): delete this field"
+			},
+			"cardAt": "bottom-right",
+			"assist": true
+		}
+	]
+}

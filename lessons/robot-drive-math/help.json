@@ -1,0 +1,28 @@
+{
+	"plan": [
+		{
+			"checkpoint": "rotations-to-meters",
+			"guides": [
+				"robot-drive-math-methods"
+			]
+		},
+		{
+			"checkpoint": "arcade-math",
+			"guides": [
+				"robot-drive-math-arrays"
+			]
+		},
+		{
+			"checkpoint": "average",
+			"guides": [
+				"robot-drive-math-average"
+			]
+		},
+		{
+			"checkpoint": "arcade-forward",
+			"guides": [
+				"robot-drive-math-io-loop"
+			]
+		}
+	]
+}

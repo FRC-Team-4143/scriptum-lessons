@@ -28,7 +28,8 @@
 				},
 				"hint": "open Main.java with Ctrl+P.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "A program",
@@ -69,7 +70,8 @@
 				},
 				"hint": "replace the dots with your name.",
 				"gone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Run it",
@@ -80,7 +82,8 @@
 			"cardAt": "top-right",
 			"waitFor": {
 				"hint": "run the program and read the output."
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Read the output",
@@ -89,7 +92,8 @@
 				"pane": "editor",
 				"selector": "[id='workbench.parts.panel']"
 			},
-			"cardAt": "top-right"
+			"cardAt": "top-right",
+			"assist": true
 		},
 		{
 			"title": "Check your work",
@@ -98,5 +102,6 @@
 				"selector": "[data-tour='lesson']"
 			}
 		}
-	]
+	],
+	"kind": "mixed"
 }

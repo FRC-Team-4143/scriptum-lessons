@@ -1,0 +1,17 @@
+{
+	"plan": [
+		{
+			"checkpoint": "deposit",
+			"guides": [
+				"java-classes-blueprint",
+				"java-classes-fields-constructor"
+			]
+		},
+		{
+			"checkpoint": "withdraw",
+			"guides": [
+				"java-classes-encapsulation"
+			]
+		}
+	]
+}

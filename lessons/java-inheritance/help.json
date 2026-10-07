@@ -1,0 +1,16 @@
+{
+	"plan": [
+		{
+			"checkpoint": "savings-interest",
+			"guides": [
+				"java-inheritance-extends"
+			]
+		},
+		{
+			"checkpoint": "checking-overdraft",
+			"guides": [
+				"java-inheritance-override"
+			]
+		}
+	]
+}

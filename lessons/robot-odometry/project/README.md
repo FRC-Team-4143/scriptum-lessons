@@ -6,26 +6,7 @@ organize the code.
 
 Companion docs page: [Objects and Odometry](https://docs.marswars.org/docs/software/training/objects-odometry)
 
-## Java you will learn in this lesson
-
-**Classes and objects.** A **class** is a blueprint; an **object** is one thing built from it. WPILib has a
-`Pose2d` class (the blueprint for "a position and heading"), and each pose in your robot is an object made
-from it. You make an object with `new`:
-
-```java
-Rotation2d turned = new Rotation2d(0.5);   // an angle object, 0.5 radians
-```
-
-Objects have **methods** you call with a dot: `pose.getX()`. They also remember information in
-**fields** (their own variables). To use a class that lives in another file or library, you write an
-`import` line at the top, such as `import edu.wpi.first.math.MathUtil;`.
-
-**Static: belonging to the class itself.** Most methods belong to an object. A `static` method
-belongs to the class, so you call it on the class name, with no object at all: `Math.abs(-3.0)` or
-`OI.getForward()`. Our competition robot's `OI` class (the human's controls) works this way.
-
-**Abstract classes.** An `abstract` class is one nobody makes objects from. `OI` is abstract because it
-only holds static things: you would never write `new OI()`.
+> **New to an idea here?** Press the **Dozer** button in the top bar. His guides explain each idea this lesson uses, and **I'm so lost → Teach me, step by step** walks you through every job.
 
 ## Where the code lives
 
@@ -56,48 +37,28 @@ Go slower on anything that is new. Finishing every bonus is not expected.
 
 ## What you need to do
 
-1. **Finish the `OI` class.** Right now `Robot.java` reads the Xbox controller directly. A better
-   plan is one class that owns the controller and answers questions about it, so the rest of the
-   code never cares which buttons or sticks are involved. Our competition robot is organized exactly
-   this way. `OI.java` already holds the controller. You write the two methods:
+1. **Finish `OI.java`.** Write two methods:
    - `public static double getForward()` returns the left stick Y, with the minus sign.
    - `public static double getTurn()` returns the right stick X.
 
    Then in `Robot.java`, delete the `XboxController` field and call `OI.getForward()` and
-   `OI.getTurn()` in `teleopPeriodic()`. (`static` means you call the method on the class itself,
-   `OI.getForward()`, rather than on an OI object. `abstract` means nobody ever makes an OI object.)
-2. **Kinematics.** Wheel speeds are not the same as robot speeds. WPILib's
-   `DifferentialDriveKinematics` does the conversion. In `DifferentialDriveMech.java`, finish
-   `getChassisSpeeds()`: create a `DifferentialDriveWheelSpeeds` with the left and right speeds and
-   pass it to `kinematics.toChassisSpeeds(...)`. The result, `ChassisSpeeds`, has
-   `vxMetersPerSecond` (forward) and `omegaRadiansPerSecond` (turning). The mech logs it as
-   `Drive/LinearSpeed` and `Drive/AngularSpeed`, right next to `Drive/LinearSpeedByHand` and
-   `Drive/AngularSpeedByHand`, the numbers from your own `DriveMath` methods. In AdvantageScope the
-   two pairs should match.
-3. **Yaw.** A robot without a gyro can still estimate which way it faces from its wheel
-   distances: `(right - left) / Constants.TRACK_WIDTH_METERS`, in radians. Finish `getYaw()` so it
-   returns that as a `Rotation2d`.
-4. **Pose.** Finish `updatePose()`: call `poseEstimator.update(getYaw(), getLeftMeters(),
-   getRightMeters())`, then store `poseEstimator.getEstimatedPosition()` in `pose`. The mech calls
-   `updatePose()` for you every loop, and logs the result as `Drive/Pose`.
-5. **Watch it move.** Open AdvantageScope's **2D Field** tab and drag `Drive/Pose` onto it. Drive
-   around and watch the robot's position. (A reminder from the AdvantageScope lesson if you need it.)
-6. **Compare with the truth.** The simulator knows where the robot REALLY is, and logs it as
-   `Drive/TruePose`. Drag it onto the same 2D Field as `Drive/Pose`. Your estimate will be close but
-   not identical, and the gap grows the farther you drive. Real encoders are never perfect: wheels
-   are never exactly the size you think, they slip a little, and the readings jitter. This is why
-   real robots add cameras and gyros to correct their pose. Drive a long way, then reset with Auto,
-   and see how far apart they end up.
-7. **Use the pose in autonomous.** Replace the `TODO` in `autonomousPeriodic()`: drive forward at
-   `0.4` until `drive.getPose().getX()` is at least `3.0` meters, then stop.
+   `OI.getTurn()` in `teleopPeriodic()`.
+2. **`getChassisSpeeds()`** in `DifferentialDriveMech.java`. Create a `DifferentialDriveWheelSpeeds`
+   from the left and right speeds and pass it to `kinematics.toChassisSpeeds(...)`. In
+   AdvantageScope, `Drive/LinearSpeed` and `Drive/AngularSpeed` should match
+   `Drive/LinearSpeedByHand` and `Drive/AngularSpeedByHand`.
+3. **`getYaw()`.** Return `(right - left) / Constants.TRACK_WIDTH_METERS` (radians) as a `Rotation2d`.
+4. **`updatePose()`.** Call `poseEstimator.update(getYaw(), getLeftMeters(), getRightMeters())`, then
+   store `poseEstimator.getEstimatedPosition()` in `pose`.
+5. **Watch it move.** In AdvantageScope's **2D Field** tab, drag `Drive/Pose` onto the field, then
+   drive around.
+6. **Compare with the truth.** Drag `Drive/TruePose` onto the same field and drive a long way. See how
+   far the two end up apart.
+7. **Use the pose in autonomous.** Replace the `TODO` in `autonomousPeriodic()`: drive forward at `0.4`
+   until `drive.getPose().getX()` is at least `3.0` meters, then stop.
 8. **Click Verify** to check your work.
 
-## Check your thinking
-
-WPILib also has `DifferentialDrive.arcadeDriveIK(forward, turn, false)`, a ready-made version of
-the arcade math you wrote last lesson. Try calling it with a few numbers and compare its answers
-with your `DriveMath.arcadeToWheelSpeeds`. They should agree. (Notice that WPILib says
-**clockwise** is positive for the turn input, exactly like yours.)
+Stuck on a step? Open **Dozer**: he can explain the idea or walk you through it.
 
 ## Bonus challenges
 
@@ -106,10 +67,3 @@ with your `DriveMath.arcadeToWheelSpeeds`. They should agree. (Notice that WPILi
 - Reset the pose to `new Pose2d(2.0, 4.0, new Rotation2d())` at the start of auto, so the robot
   starts in the middle of the field.
 
-## Words to know
-
-- **Static:** belongs to the class itself, not to any one object.
-- **Abstract class:** a class you can't make objects from. Our `OI` uses it to hold only static members.
-- **Kinematics:** the math that connects wheel speeds to robot movement.
-- **Pose:** the robot's position (x, y) and heading together.
-- **Odometry:** adding up small wheel movements to track where the robot is.

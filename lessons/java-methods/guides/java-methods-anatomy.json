@@ -6,7 +6,35 @@
 	"steps": [
 		{
 			"title": "The declaration",
-			"say": "This lesson has no scaffolding: you write the whole first line yourself.",
+			"say": {
+				"never": "This time there is no help: you write the whole first line yourself. It says who can use it (`public static`), what it gives back (`double`), its name (`areaOfCircle`), and what it needs handed in, written in parentheses (`double radius`).",
+				"bit": "A method header says who can call it, what it returns, its name and its parameters."
+			},
+			"board": {
+				"code": "public static double areaOfCircle(double radius) {\n    ...\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "public static",
+						"label": "who can use it"
+					},
+					{
+						"text": "double areaOfCircle",
+						"label": "returns a double, named areaOfCircle"
+					},
+					{
+						"text": "double radius",
+						"label": "what you hand in"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: The declaration",
+			"say": {
+				"never": "This time there is no help: you write the whole first line yourself. It says who can use it (`public static`), what it gives back (`double`), its name (`clamp`), and what it needs handed in, written in parentheses (`double value, double min, double max`).",
+				"bit": "This lesson has no scaffolding: you write the whole first line yourself."
+			},
 			"board": {
 				"code": "public static double clamp(double value, double min, double max) {\n    ...\n}",
 				"marks": [
@@ -23,11 +51,15 @@
 						"label": "parameters: type and name each"
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "The body",
-			"say": "`return` hands the answer back and ends the method right there.",
+			"say": {
+				"never": "The body is what the method does. `return` hands the answer back and ends the method right there. This one asks: is the value too small? Give back `min`. Too big? Give back `max`. Otherwise it's fine, give it back unchanged.",
+				"bit": "`return` hands the answer back and ends the method right there."
+			},
 			"board": {
 				"code": "if (value < min) {\n    return min;\n}\nif (value > max) {\n    return max;\n}\nreturn value;",
 				"marks": [
@@ -44,7 +76,31 @@
 		},
 		{
 			"title": "Calling it",
-			"say": "The caller passes values in the same order as the parameters.",
+			"say": {
+				"never": "To use a method, you **call** it by name and pass in values in the same order as the parameters. `areaOfCircle(2.0)` hands in 2.0 as the radius, and the answer, about 12.57, comes back so you can store it in a variable.",
+				"bit": "Call a method by name with arguments in parameter order; the result comes back."
+			},
+			"board": {
+				"code": "double area = areaOfCircle(2.0);   // about 12.57",
+				"language": "java",
+				"marks": [
+					{
+						"text": "areaOfCircle(2.0)",
+						"label": "pass in the radius"
+					},
+					{
+						"text": "double area =",
+						"label": "catch the answer"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Calling it",
+			"say": {
+				"never": "To use a method, you **call** it by name and pass in values in the same order as the parameters. `clamp(1.7, -1.0, 1.0)` hands in 1.7 as the value, -1.0 as the minimum and 1.0 as the maximum. The answer comes back as 1.0.",
+				"bit": "The caller passes values in the same order as the parameters."
+			},
 			"board": {
 				"code": "double safe = clamp(1.7, -1.0, 1.0);   // 1.0",
 				"marks": [
@@ -53,11 +109,15 @@
 						"label": "value, min, max"
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Open Main.java",
-			"say": "Press **Ctrl+P**, type `Main` and press Enter. Quick Open finds any file by name, so you never have to dig through folders.",
+			"say": {
+				"never": "Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `Main`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "Press **Ctrl+P**, type `Main` and press Enter. Quick Open finds any file by name, so you never have to dig through folders."
+			},
 			"open": [
 				"editor"
 			],
@@ -79,11 +139,15 @@
 				},
 				"hint": "open Main.java with Ctrl+P.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Find it",
-			"say": "It may be further down. Press **Ctrl+F**, type `write a method named clamp` and press Enter to jump to it.",
+			"say": {
+				"never": "It may be further down. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `write a method named clamp` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "It may be further down. Press **Ctrl+F**, type `write a method named clamp` and press Enter to jump to it."
+			},
 			"target": {
 				"pane": "editor"
 			},
@@ -96,17 +160,23 @@
 				},
 				"hint": "find write a method named clamp with Ctrl+F.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Your turn",
-			"say": "Write `clamp` right under this comment. The names and types must match exactly.",
+			"say": {
+				"never": "Your turn! Write `clamp` right under this comment. The names and types must match exactly what the board shows, or Java won't recognise it.",
+				"bit": "Write `clamp` right under this comment. The names and types must match exactly."
+			},
 			"target": {
 				"pane": "editor",
 				"selector": ".view-lines .view-line",
 				"text": "write a method named clamp"
 			},
-			"cardAt": "bottom-right"
+			"cardAt": "bottom-right",
+			"assist": true
 		}
-	]
+	],
+	"kind": "mixed"
 }

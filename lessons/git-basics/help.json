@@ -1,0 +1,91 @@
+{
+	"plan": [
+		{
+			"checkpoint": "first-commit",
+			"guides": [
+				"git-source-control",
+				"git-commands"
+			]
+		},
+		{
+			"checkpoint": "feature-branch",
+			"guides": [
+				"git-branches"
+			]
+		},
+		{
+			"checkpoint": "merge",
+			"guides": [
+				"git-merging"
+			]
+		},
+		{
+			"checkpoint": "merge-conflict",
+			"guides": [
+				"git-merge-conflicts"
+			]
+		},
+		{
+			"checkpoint": "rebase",
+			"guides": [
+				"git-rebase"
+			]
+		},
+		{
+			"checkpoint": "push",
+			"guides": [
+				"git-remotes"
+			]
+		},
+		{
+			"checkpoint": "stash",
+			"guides": [
+				"git-stash"
+			]
+		}
+	],
+	"checkpoints": {
+		"push": {
+			"why": {
+				"never": "Pushing is how your work reaches your teammates. Until you push, only your computer has it.",
+				"bit": "Push uploads your commits to `origin`."
+			},
+			"hints": [
+				{
+					"never": "Open the terminal, `cd 06-push`, and think about where you want to send the branch.",
+					"bit": "Push the branch to origin."
+				},
+				"The command is `git push origin issue-18-team-colors`.",
+				"Copy it exactly, including the branch name, then Verify."
+			]
+		},
+		"pull": {
+			"why": {
+				"never": "Pulling is how you get your teammates' work into your copy.",
+				"bit": "Pull downloads and merges new commits from `origin`."
+			},
+			"hints": [
+				{
+					"never": "You must be on `develop`. `cd 07-pull`, then ask git to get the new commits.",
+					"bit": "Be on develop, then pull."
+				},
+				"The command is `git pull`.",
+				"If it says you have no tracking information, try `git pull origin develop`."
+			]
+		},
+		"stash": {
+			"why": {
+				"never": "A stash lets you switch branches without committing half-done work.",
+				"bit": "Stash shelves uncommitted changes."
+			},
+			"hints": [
+				{
+					"never": "The order is: shelve your work, fix the typo on develop, come back, take your work off the shelf.",
+					"bit": "Stash, fix on develop, return, pop."
+				},
+				"Commands in order: `git stash`, `git checkout develop`, edit and `git commit -am \"Fix typo\"`, `git checkout issue-21-new-motor`, `git stash pop`.",
+				"Don't commit your unfinished work on issue-21-new-motor. If you did, undo it with `git reset HEAD~1` and start again."
+			]
+		}
+	}
+}

@@ -6,7 +6,31 @@
 	"steps": [
 		{
 			"title": "A lambda",
-			"say": "`() -> ...` is a tiny method with no name. You're not running it now: you're handing it over to run later.",
+			"say": {
+				"never": "A **lambda** is a tiny method with no name, written `() -> ...`. The key idea: you're *not running it now*. You're handing it over so something else can run it later, like giving someone a note that says \"when I press this button, turn the lights on\".",
+				"bit": "A lambda `() -> ...` is a nameless method you hand over to run later."
+			},
+			"board": {
+				"code": "() -> lights.setOn(true)",
+				"language": "java",
+				"marks": [
+					{
+						"text": "() ->",
+						"label": "a note: no name, no parameters"
+					},
+					{
+						"text": "lights.setOn(true)",
+						"label": "what the note says to do"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: A lambda",
+			"say": {
+				"never": "A **lambda** is a tiny method with no name, written `() -> ...`. The key idea: you're *not running it now*. You're handing it over so something else can run it later, like giving someone a note that says \"when I press this button, do this\".",
+				"bit": "`() -> ...` is a tiny method with no name. You're not running it now: you're handing it over to run later."
+			},
 			"board": {
 				"code": "() -> shooter.setWantedState(ShooterStates.SHOOT)",
 				"marks": [
@@ -19,11 +43,36 @@
 						"label": "does this:"
 					}
 				]
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "A command",
-			"say": "`startEnd` runs one lambda when the command starts and another when it ends.",
+			"say": {
+				"never": "`startEnd` builds a command out of two notes. The first lambda runs when the command **starts** (here: turn the lights on). The second runs when it **ends** (turn them off). When you let go of the button, the command ends.",
+				"bit": "`Commands.startEnd(start, end, requirements)` runs one lambda when the command starts and another when it ends."
+			},
+			"board": {
+				"code": "public static Command flashLights() {\n    return Commands.startEnd(\n        () -> lights.setOn(true),\n        () -> lights.setOn(false),\n        lights);\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "() -> lights.setOn(true)",
+						"label": "runs when it starts"
+					},
+					{
+						"text": "() -> lights.setOn(false)",
+						"label": "runs when it ends"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: A command",
+			"say": {
+				"never": "`startEnd` builds a command out of two notes. The first lambda runs when the command **starts** (here: tell the shooter to SHOOT). The second runs when it **ends** (here: tell it to go back to IDLE). When you let go of the button, the command ends.",
+				"bit": "`startEnd` runs one lambda when the command starts and another when it ends."
+			},
 			"board": {
 				"code": "public static Command shoot() {\n    return Commands.startEnd(\n        () -> shooter.setWantedState(ShooterStates.SHOOT),\n        () -> shooter.setWantedState(ShooterStates.IDLE),\n        shooter);\n}",
 				"marks": [
@@ -36,60 +85,9 @@
 						"label": "when the button's released"
 					}
 				]
-			}
-		},
-		{
-			"title": "Open ShooterCommands.java",
-			"say": "Press **Ctrl+P**, type `ShooterCommands` and press Enter. Quick Open finds any file by name, so you never have to dig through folders.",
-			"open": [
-				"editor"
-			],
-			"close": [
-				"scope",
-				"choreo",
-				"elastic",
-				"preview"
-			],
-			"target": {
-				"pane": "editor"
 			},
-			"cardAt": "bottom-right",
-			"waitFor": {
-				"target": {
-					"pane": "editor",
-					"selector": ".tabs-container .tab",
-					"text": "ShooterCommands.java"
-				},
-				"hint": "open ShooterCommands.java with Ctrl+P.",
-				"skipIfDone": true
-			}
-		},
-		{
-			"title": "Find Command shoot",
-			"say": "Below the comment that describes it. Press **Ctrl+F**, type `Command shoot` and press Enter to jump to it.",
-			"target": {
-				"pane": "editor"
-			},
-			"cardAt": "bottom-right",
-			"waitFor": {
-				"target": {
-					"pane": "editor",
-					"selector": ".view-lines .view-line",
-					"text": "public static Command shoot"
-				},
-				"hint": "find Command shoot with Ctrl+F.",
-				"skipIfDone": true
-			}
-		},
-		{
-			"title": "Your turn",
-			"say": "Write `shoot()`, then `simulateBallLaunch()` with `Commands.runOnce`.",
-			"target": {
-				"pane": "editor",
-				"selector": ".view-lines .view-line",
-				"text": "public static Command shoot"
-			},
-			"cardAt": "bottom-right"
+			"assist": true
 		}
-	]
+	],
+	"kind": "mixed"
 }
