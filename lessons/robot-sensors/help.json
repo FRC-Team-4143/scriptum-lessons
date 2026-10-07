@@ -28,20 +28,6 @@
 					"bit": "Linear speed is the average of the two sides."
 				},
 				"`linearSpeed = (leftMetersPerSecond + rightMetersPerSecond) / 2.0;`"
-			],
-			"mistakes": [
-				{
-					"id": "not-averaged",
-					"file": "Robot.java",
-					"inMethod": "robotPeriodic",
-					"find": "linearSpeed\\s*=\\s*\\(?\\s*leftMetersPerSecond\\s*\\+\\s*rightMetersPerSecond\\s*\\)?\\s*;",
-					"when": "found",
-					"say": {
-						"never": "Line {line} adds the two speeds but doesn't divide by 2. The robot's speed is the **average** of the two sides.",
-						"bit": "Line {line}: divide the sum by 2.0 to average.",
-						"lot": "L{line}: add /2.0."
-					}
-				}
 			]
 		},
 		"angular-speed": {
@@ -51,31 +37,6 @@
 					"bit": "Angular speed is (right - left) divided by the track width."
 				},
 				"`angularSpeed = (rightMetersPerSecond - leftMetersPerSecond) / Constants.TRACK_WIDTH_METERS;`"
-			],
-			"mistakes": [
-				{
-					"id": "backwards-sign",
-					"file": "Robot.java",
-					"inMethod": "robotPeriodic",
-					"find": "angularSpeed\\s*=\\s*\\(\\s*leftMetersPerSecond\\s*-\\s*rightMetersPerSecond",
-					"when": "found",
-					"say": {
-						"never": "Line {line} subtracts right from left, which is backwards. Turning left is the **right** side going faster, so use right minus left.",
-						"bit": "Line {line}: it's right - left.",
-						"lot": "L{line}: right - left."
-					}
-				},
-				{
-					"id": "no-width",
-					"file": "Robot.java",
-					"inMethod": "robotPeriodic",
-					"find": "angularSpeed\\s*=[^;]*TRACK_WIDTH_METERS",
-					"when": "missing",
-					"say": {
-						"never": "I don't see the distance between the wheels (`Constants.TRACK_WIDTH_METERS`) in your `angularSpeed`. Divide the difference in speeds by it.",
-						"bit": "angularSpeed should divide by Constants.TRACK_WIDTH_METERS."
-					}
-				}
 			]
 		},
 		"deadband-and-ifs": {
@@ -85,29 +46,6 @@
 					"bit": "Constant at the top of the class, then an `if` on `forward` and one on `turn`."
 				},
 				"`private static final double DEADBAND = 0.1;` then `if (Math.abs(forward) < DEADBAND) { forward = 0.0; }`"
-			],
-			"mistakes": [
-				{
-					"id": "no-deadband-constant",
-					"file": "Robot.java",
-					"find": "static\\s+final\\s+double\\s+DEADBAND",
-					"when": "missing",
-					"say": {
-						"never": "I didn't find the `DEADBAND` constant. Add `private static final double DEADBAND = 0.1;` at the top of the class.",
-						"bit": "No DEADBAND constant found at the top of the class."
-					}
-				},
-				{
-					"id": "no-abs",
-					"file": "Robot.java",
-					"inMethod": "teleopPeriodic",
-					"find": "Math\\.abs\\(",
-					"when": "missing",
-					"say": {
-						"never": "I don't see `Math.abs(...)` in `teleopPeriodic`. Without it your check only works when the stick is pushed one way.",
-						"bit": "Use Math.abs so the deadband works in both directions."
-					}
-				}
 			]
 		},
 		"drive-two-meters": {
@@ -117,19 +55,6 @@
 					"bit": "An `if` / `else` on `distanceMeters`."
 				},
 				"`if (distanceMeters < 2.0) { drive.setDutyCycles(0.4, 0.4); } else { drive.setDutyCycles(0.0, 0.0); }`"
-			],
-			"mistakes": [
-				{
-					"id": "no-else",
-					"file": "Robot.java",
-					"inMethod": "autonomousPeriodic",
-					"find": "\\belse\\b",
-					"when": "missing",
-					"say": {
-						"never": "I didn't find an `else` in `autonomousPeriodic`. Something has to tell the robot to **stop** once it has gone far enough.",
-						"bit": "No `else` in autonomousPeriodic: what stops the robot?"
-					}
-				}
 			]
 		}
 	}

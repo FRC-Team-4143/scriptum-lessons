@@ -23,32 +23,6 @@
 					"bit": "Check that both speeds reach `drive.setDutyCycles`."
 				},
 				"Declare `leftSpeed` and `rightSpeed` from the sticks, then pass both to `drive.setDutyCycles(leftSpeed, rightSpeed);`."
-			],
-			"mistakes": [
-				{
-					"id": "never-sent",
-					"file": "Robot.java",
-					"inMethod": "teleopPeriodic",
-					"find": "drive\\.setDutyCycles\\s*\\(",
-					"when": "missing",
-					"say": {
-						"never": "I didn't find `drive.setDutyCycles(...)` in `teleopPeriodic`. That line is what sends your numbers to the motors, so without it the robot won't move.",
-						"bit": "No `drive.setDutyCycles(...)` in teleopPeriodic, so nothing reaches the motors.",
-						"lot": "No setDutyCycles call in teleopPeriodic."
-					}
-				},
-				{
-					"id": "stick-sign",
-					"file": "Robot.java",
-					"inMethod": "teleopPeriodic",
-					"find": "=\\s*controller\\.get(Left|Right)Y\\(\\)",
-					"when": "found",
-					"say": {
-						"never": "Line {line} reads a stick without a minus sign. Pushing a stick forward gives a **negative** number, so put a `-` in front to flip it.",
-						"bit": "Line {line}: sticks read negative when pushed forward. Negate it.",
-						"lot": "L{line}: negate the stick."
-					}
-				}
 			]
 		},
 		"drives-backward": {
@@ -58,20 +32,6 @@
 					"bit": "Check the sign on the stick values."
 				},
 				"Pushing a stick forward gives a negative number, so `-controller.getLeftY()` is forward."
-			],
-			"mistakes": [
-				{
-					"id": "stick-sign",
-					"file": "Robot.java",
-					"inMethod": "teleopPeriodic",
-					"find": "=\\s*controller\\.get(Left|Right)Y\\(\\)",
-					"when": "found",
-					"say": {
-						"never": "Line {line} reads a stick without a minus sign. Pushing a stick forward gives a **negative** number, so put a `-` in front to flip it.",
-						"bit": "Line {line}: sticks read negative when pushed forward. Negate it.",
-						"lot": "L{line}: negate the stick."
-					}
-				}
 			]
 		},
 		"turns-in-place": {
@@ -81,43 +41,6 @@
 					"bit": "Left is forward + turn, right is forward - turn."
 				},
 				"`leftSpeed = forward + turn;` and `rightSpeed = forward - turn;`."
-			],
-			"mistakes": [
-				{
-					"id": "sides-swapped",
-					"file": "Robot.java",
-					"inMethod": "teleopPeriodic",
-					"find": "(leftSpeed\\s*=\\s*forward\\s*-\\s*turn|rightSpeed\\s*=\\s*forward\\s*\\+\\s*turn)",
-					"when": "found",
-					"say": {
-						"never": "Line {line} has the two sides the wrong way round. The **left** side is `forward + turn` and the **right** side is `forward - turn`.",
-						"bit": "Line {line}: swap the + and -. Left is forward + turn.",
-						"lot": "L{line}: sides swapped."
-					}
-				},
-				{
-					"id": "turn-not-read",
-					"file": "Robot.java",
-					"inMethod": "teleopPeriodic",
-					"find": "controller\\.getRightX\\(\\)",
-					"when": "missing",
-					"say": {
-						"never": "I don't see the right stick's left-and-right (`controller.getRightX()`) being read in `teleopPeriodic`. That's the stick that turns the robot.",
-						"bit": "`controller.getRightX()` isn't read in teleopPeriodic."
-					}
-				},
-				{
-					"id": "never-sent",
-					"file": "Robot.java",
-					"inMethod": "teleopPeriodic",
-					"find": "drive\\.setDutyCycles\\s*\\(",
-					"when": "missing",
-					"say": {
-						"never": "I didn't find `drive.setDutyCycles(...)` in `teleopPeriodic`. That line is what sends your numbers to the motors, so without it the robot won't move.",
-						"bit": "No `drive.setDutyCycles(...)` in teleopPeriodic, so nothing reaches the motors.",
-						"lot": "No setDutyCycles call in teleopPeriodic."
-					}
-				}
 			]
 		}
 	}
