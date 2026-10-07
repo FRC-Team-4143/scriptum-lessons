@@ -2,7 +2,7 @@
 // common/help/errors.json) the way Scriptum reads them (decision 059 in Scriptum), so a
 // typo fails here instead of Dozer quietly having no hints.
 import { describe, expect, test } from "bun:test";
-import { existsSync, readdirSync, readFileSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
 import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -78,6 +78,107 @@ describe.each(lessonFiles)("lessons/%s/help.json", (id) => {
 			if (h.guide) expect(guideIds, `${checkpoint}: guide`).toContain(h.guide);
 			if (h.concept) expect(guideIds, `${checkpoint}: concept guide`).toContain(h.concept.guide);
 		}
+	});
+});
+
+// --- "mistakes": slips Dozer looks for in the student's code (Scriptum: control/src/inspect.ts) ---
+
+/** Comments become spaces, keeping offsets and line breaks (same as Scriptum's). */
+function blankComments(src: string): string {
+	let out = "";
+	let i = 0;
+	while (i < src.length) {
+		const c = src[i] as string;
+		const next = src[i + 1];
+		if (c === "/" && next === "/") {
+			while (i < src.length && src[i] !== "\n") {
+				out += " ";
+				i++;
+			}
+		} else if (c === "/" && next === "*") {
+			out += "  ";
+			i += 2;
+			while (i < src.length && !(src[i] === "*" && src[i + 1] === "/")) {
+				out += src[i] === "\n" ? "\n" : " ";
+				i++;
+			}
+			if (i < src.length) {
+				out += "  ";
+				i += 2;
+			}
+		} else if (c === '"') {
+			out += c;
+			i++;
+			while (i < src.length && src[i] !== '"' && src[i] !== "\n") {
+				if (src[i] === "\\") {
+					out += src[i] as string;
+					i++;
+				}
+				if (i < src.length) out += src[i] as string;
+				i++;
+			}
+			if (i < src.length) {
+				out += src[i] as string;
+				i++;
+			}
+		} else {
+			out += c;
+			i++;
+		}
+	}
+	return out;
+}
+function methodBody(src: string, name: string): string | null {
+	const m = new RegExp(`\\b${name}\\s*\\([^)]*\\)\\s*(?:throws[^{]*)?\\{`).exec(src);
+	if (!m) return null;
+	const start = m.index + m[0].length;
+	let depth = 1;
+	for (let i = start; i < src.length; i++) {
+		if (src[i] === "{") depth++;
+		else if (src[i] === "}" && --depth === 0) return src.slice(start, i);
+	}
+	return null;
+}
+function filesUnder(dir: string): string[] {
+	if (!existsSync(dir)) return [];
+	return readdirSync(dir).flatMap((n) => {
+		const f = resolve(dir, n);
+		return statSync(f).isDirectory() ? filesUnder(f) : [f];
+	});
+}
+
+type Mistake = { id: string; file: string; inMethod?: string; find: string; when: "found" | "missing"; say: Worded };
+const withMistakes = lessonFiles
+	.map((id) => ({ id, help: readJson(`lessons/${id}/help.json`) as { checkpoints?: Record<string, { mistakes?: Mistake[] }> } }))
+	.flatMap(({ id, help }) => Object.entries(help.checkpoints ?? {}).flatMap(([cp, h]) => (h.mistakes ?? []).map((m) => ({ lesson: id, cp, m }))));
+
+describe("mistakes Dozer looks for in the student's code", () => {
+	test("there are some", () => {
+		expect(withMistakes.length).toBeGreaterThan(0);
+	});
+
+	test.each(withMistakes.map((x) => [`${x.lesson} / ${x.cp} / ${x.m.id}`, x] as const))("%s is well formed", (_name, { lesson, m }) => {
+		expect(m.id).toMatch(/^[a-z0-9-]+$/);
+		expect(["found", "missing"]).toContain(m.when);
+		expect(() => new RegExp(m.find, "m"), "find compiles").not.toThrow();
+		checkWorded(`${m.id} say`, m.say);
+		// The file it searches exists in the lesson (its solution, or its starter).
+		const files = [...filesUnder(resolve(repoRoot, "lessons", lesson, "solution")), ...filesUnder(resolve(repoRoot, "lessons", lesson, "project"))];
+		expect(files.some((f) => f.endsWith(`/${m.file}`)), `${m.file} isn't in ${lesson}`).toBe(true);
+	});
+
+	// A correct solution must never be told it has made a mistake.
+	test.each(withMistakes.map((x) => [`${x.lesson} / ${x.cp} / ${x.m.id}`, x] as const))("%s doesn't fire on the lesson's own solution", (_name, { lesson, m }) => {
+		const solution = filesUnder(resolve(repoRoot, "lessons", lesson, "solution")).find((f) => f.endsWith(`/${m.file}`));
+		if (!solution) return; // nothing to compare against
+		let text = blankComments(readFileSync(solution, "utf8"));
+		if (m.inMethod) {
+			const body = methodBody(text, m.inMethod);
+			expect(body, `${m.inMethod} isn't in the solution's ${m.file}`).not.toBeNull();
+			text = body as string;
+		}
+		const hit = new RegExp(m.find, "m").test(text);
+		expect(m.when === "found" ? hit : !hit, `${m.id} would tell a correct solution it has a mistake`).toBe(false);
 	});
 });
 

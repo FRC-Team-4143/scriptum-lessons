@@ -19,5 +19,29 @@
 				"java-operators-assignment"
 			]
 		}
-	]
+	],
+	"checkpoints": {
+		"is-even": {
+			"hints": [
+				{
+					"never": "A number is even if dividing by 2 leaves nothing over. Which operator gives what's left over?",
+					"bit": "Use `%` and compare the remainder to 0."
+				},
+				"`return value % 2 == 0;`"
+			],
+			"mistakes": [
+				{
+					"id": "assign-not-compare",
+					"file": "Main.java",
+					"find": "%\\s*2\\s*=(?!=)",
+					"when": "found",
+					"say": {
+						"never": "Line {line} uses a single `=`, which **stores** a value. To ask a question (\"is it equal?\") you need two: `==`.",
+						"bit": "Line {line}: `=` assigns; use `==` to compare.",
+						"lot": "L{line}: = vs ==."
+					}
+				}
+			]
+		}
+	}
 }
