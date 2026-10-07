@@ -63,7 +63,8 @@
 				},
 				"hint": "open ShooterSubsystem.java with Ctrl+P.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Find bangBang",
@@ -125,5 +126,6 @@
 				"hint": "drag Subsystem/Shooter/FlywheelVelocity onto the graph."
 			}
 		}
-	]
+	],
+	"kind": "mixed"
 }

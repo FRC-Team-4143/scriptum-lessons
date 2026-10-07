@@ -2106,6 +2106,7 @@
 			"modules": [
 				"robot-drivetrain"
 			],
+			"kind": "mixed",
 			"path": "lessons/robot-drivetrain/guides/robot-drivetrain-where-code-goes.json"
 		},
 		{
@@ -2117,6 +2118,7 @@
 			"modules": [
 				"robot-drivetrain"
 			],
+			"kind": "mixed",
 			"path": "lessons/robot-drivetrain/guides/robot-drivetrain-tank.json"
 		},
 		{
@@ -2128,6 +2130,7 @@
 			"modules": [
 				"robot-drivetrain"
 			],
+			"kind": "concept",
 			"path": "lessons/robot-drivetrain/guides/robot-drivetrain-arcade.json"
 		},
 		{
@@ -2139,6 +2142,7 @@
 			"modules": [
 				"robot-sensors"
 			],
+			"kind": "mixed",
 			"path": "lessons/robot-sensors/guides/robot-sensors-encoders.json"
 		},
 		{
@@ -2150,6 +2154,7 @@
 			"modules": [
 				"robot-sensors"
 			],
+			"kind": "mixed",
 			"path": "lessons/robot-sensors/guides/robot-sensors-robot-speed.json"
 		},
 		{
@@ -2161,6 +2166,7 @@
 			"modules": [
 				"robot-sensors"
 			],
+			"kind": "mixed",
 			"path": "lessons/robot-sensors/guides/robot-sensors-deadband.json"
 		},
 		{
@@ -2172,6 +2178,7 @@
 			"modules": [
 				"robot-sensors"
 			],
+			"kind": "mixed",
 			"path": "lessons/robot-sensors/guides/robot-sensors-bang-bang.json"
 		},
 		{
@@ -2183,6 +2190,7 @@
 			"modules": [
 				"robot-drive-math"
 			],
+			"kind": "mixed",
 			"path": "lessons/robot-drive-math/guides/robot-drive-math-methods.json"
 		},
 		{
@@ -2194,6 +2202,7 @@
 			"modules": [
 				"robot-drive-math"
 			],
+			"kind": "mixed",
 			"path": "lessons/robot-drive-math/guides/robot-drive-math-arrays.json"
 		},
 		{
@@ -2205,6 +2214,7 @@
 			"modules": [
 				"robot-drive-math"
 			],
+			"kind": "concept",
 			"path": "lessons/robot-drive-math/guides/robot-drive-math-average.json"
 		},
 		{
@@ -2217,6 +2227,7 @@
 				"robot-drive-math",
 				"robot-odometry"
 			],
+			"kind": "mixed",
 			"path": "common/guides/robot-drive-math-io-loop.json"
 		},
 		{
@@ -2228,6 +2239,7 @@
 			"modules": [
 				"robot-odometry"
 			],
+			"kind": "mixed",
 			"path": "lessons/robot-odometry/guides/robot-odometry-kinematics.json"
 		},
 		{
@@ -2239,6 +2251,7 @@
 			"modules": [
 				"robot-odometry"
 			],
+			"kind": "mixed",
 			"path": "lessons/robot-odometry/guides/robot-odometry-pose.json"
 		},
 		{
@@ -2250,6 +2263,7 @@
 			"modules": [
 				"robot-odometry"
 			],
+			"kind": "concept",
 			"path": "lessons/robot-odometry/guides/robot-odometry-objects.json"
 		},
 		{
@@ -2262,7 +2276,32 @@
 				"robot-odometry",
 				"robot-subsystems"
 			],
+			"kind": "concept",
 			"path": "common/guides/robot-odometry-oi.json"
+		},
+		{
+			"id": "robot-odometry-oi-assist",
+			"title": "Write the OI class",
+			"summary": "Write getForward() and getTurn(), then use them in Robot.java.",
+			"topic": "Robot",
+			"order": 460,
+			"modules": [
+				"robot-odometry"
+			],
+			"kind": "assist",
+			"path": "lessons/robot-odometry/guides/robot-odometry-oi-assist.json"
+		},
+		{
+			"id": "robot-subsystems-oi-assist",
+			"title": "Shooter buttons in OI",
+			"summary": "A button is just true or false: write getShootButton() and getIndexButton().",
+			"topic": "Robot",
+			"order": 461,
+			"modules": [
+				"robot-subsystems"
+			],
+			"kind": "mixed",
+			"path": "lessons/robot-subsystems/guides/robot-subsystems-oi-assist.json"
 		},
 		{
 			"id": "robot-subsystems-big-idea",
@@ -2273,6 +2312,7 @@
 			"modules": [
 				"robot-subsystems"
 			],
+			"kind": "mixed",
 			"path": "lessons/robot-subsystems/guides/robot-subsystems-big-idea.json"
 		},
 		{
@@ -2285,7 +2325,20 @@
 				"robot-subsystems",
 				"robot-state-machines"
 			],
+			"kind": "concept",
 			"path": "common/guides/robot-subsystems-states.json"
+		},
+		{
+			"id": "robot-subsystems-drive-states-assist",
+			"title": "Drive from the subsystem",
+			"summary": "Fill in the ARCADE case so the drivetrain subsystem drives with the sticks.",
+			"topic": "Robot",
+			"order": 464,
+			"modules": [
+				"robot-subsystems"
+			],
+			"kind": "assist",
+			"path": "lessons/robot-subsystems/guides/robot-subsystems-drive-states-assist.json"
 		},
 		{
 			"id": "robot-subsystems-singleton",
@@ -2296,6 +2349,7 @@
 			"modules": [
 				"robot-subsystems"
 			],
+			"kind": "concept",
 			"path": "lessons/robot-subsystems/guides/robot-subsystems-singleton.json"
 		},
 		{
@@ -2307,6 +2361,7 @@
 			"modules": [
 				"robot-subsystems"
 			],
+			"kind": "mixed",
 			"path": "lessons/robot-subsystems/guides/robot-subsystems-shooter.json"
 		},
 		{
@@ -2318,6 +2373,7 @@
 			"modules": [
 				"robot-control-theory"
 			],
+			"kind": "mixed",
 			"path": "lessons/robot-control-theory/guides/robot-control-error.json"
 		},
 		{
@@ -2329,6 +2385,7 @@
 			"modules": [
 				"robot-control-theory"
 			],
+			"kind": "concept",
 			"path": "lessons/robot-control-theory/guides/robot-control-units.json"
 		},
 		{
@@ -2340,6 +2397,7 @@
 			"modules": [
 				"robot-control-theory"
 			],
+			"kind": "mixed",
 			"path": "lessons/robot-control-theory/guides/robot-control-tuning.json"
 		},
 		{
@@ -2351,6 +2409,7 @@
 			"modules": [
 				"robot-state-machines"
 			],
+			"kind": "concept",
 			"path": "lessons/robot-state-machines/guides/robot-state-machines-states.json"
 		},
 		{
@@ -2363,6 +2422,7 @@
 				"robot-state-machines",
 				"robot-autonomous"
 			],
+			"kind": "concept",
 			"path": "common/guides/robot-state-machines-commands.json"
 		},
 		{
@@ -2374,7 +2434,32 @@
 			"modules": [
 				"robot-state-machines"
 			],
+			"kind": "mixed",
 			"path": "lessons/robot-state-machines/guides/robot-state-machines-bindings.json"
+		},
+		{
+			"id": "robot-state-machines-commands-assist",
+			"title": "Write the shooter commands",
+			"summary": "Write shoot() with startEnd and simulateBallLaunch() with runOnce.",
+			"topic": "Robot",
+			"order": 511,
+			"modules": [
+				"robot-state-machines"
+			],
+			"kind": "assist",
+			"path": "lessons/robot-state-machines/guides/robot-state-machines-commands-assist.json"
+		},
+		{
+			"id": "robot-state-machines-shooter-states-assist",
+			"title": "Write the shooter's states",
+			"summary": "Write handleStateTransition and the switch in updateLogic.",
+			"topic": "Robot",
+			"order": 512,
+			"modules": [
+				"robot-state-machines"
+			],
+			"kind": "assist",
+			"path": "lessons/robot-state-machines/guides/robot-state-machines-shooter-states-assist.json"
 		},
 		{
 			"id": "robot-autonomous-command-lifecycle",
@@ -2385,6 +2470,7 @@
 			"modules": [
 				"robot-autonomous"
 			],
+			"kind": "mixed",
 			"path": "lessons/robot-autonomous/guides/robot-autonomous-command-lifecycle.json"
 		},
 		{
@@ -2396,6 +2482,7 @@
 			"modules": [
 				"robot-autonomous"
 			],
+			"kind": "mixed",
 			"path": "lessons/robot-autonomous/guides/robot-autonomous-drive-distance.json"
 		},
 		{
@@ -2407,6 +2494,7 @@
 			"modules": [
 				"robot-autonomous"
 			],
+			"kind": "mixed",
 			"path": "lessons/robot-autonomous/guides/robot-autonomous-sequences.json"
 		}
 	]

@@ -49,7 +49,8 @@
 				},
 				"hint": "open TurnToAngleCommand.java with Ctrl+P.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Find the error",
@@ -59,5 +60,6 @@
 			},
 			"cardAt": "bottom-right"
 		}
-	]
+	],
+	"kind": "mixed"
 }

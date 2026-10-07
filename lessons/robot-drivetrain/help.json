@@ -1,0 +1,18 @@
+{
+	"plan": [
+		{
+			"checkpoint": "teleop-code",
+			"guides": [
+				"robot-drivetrain-where-code-goes",
+				"java-variables",
+				"robot-drivetrain-tank"
+			]
+		},
+		{
+			"checkpoint": "turns-in-place",
+			"guides": [
+				"robot-drivetrain-arcade"
+			]
+		}
+	]
+}

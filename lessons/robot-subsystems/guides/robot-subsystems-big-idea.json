@@ -53,7 +53,8 @@
 				},
 				"hint": "open DrivetrainSubsystem.java with Ctrl+P.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Find case ARCADE",
@@ -70,7 +71,8 @@
 				},
 				"hint": "find case ARCADE with Ctrl+F.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "ARCADE",
@@ -80,7 +82,9 @@
 				"selector": ".view-lines .view-line",
 				"text": "case ARCADE:"
 			},
-			"cardAt": "bottom-right"
+			"cardAt": "bottom-right",
+			"assist": true
 		}
-	]
+	],
+	"kind": "mixed"
 }

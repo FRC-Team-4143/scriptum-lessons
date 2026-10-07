@@ -1,0 +1,23 @@
+{
+	"plan": [
+		{
+			"checkpoint": "deadband-and-ifs",
+			"guides": [
+				"robot-sensors-deadband"
+			]
+		},
+		{
+			"checkpoint": "linear-speed",
+			"guides": [
+				"robot-sensors-encoders",
+				"robot-sensors-robot-speed"
+			]
+		},
+		{
+			"checkpoint": "drive-two-meters",
+			"guides": [
+				"robot-sensors-bang-bang"
+			]
+		}
+	]
+}

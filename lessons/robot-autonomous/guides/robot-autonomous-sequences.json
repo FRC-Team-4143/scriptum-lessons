@@ -62,7 +62,8 @@
 				},
 				"hint": "open Autos.java with Ctrl+P.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Find leftAuto",
@@ -79,7 +80,8 @@
 				},
 				"hint": "find leftAuto with Ctrl+F.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Your turn",
@@ -89,7 +91,8 @@
 				"selector": ".view-lines .view-line",
 				"text": "public static Command leftAuto"
 			},
-			"cardAt": "bottom-right"
+			"cardAt": "bottom-right",
+			"assist": true
 		},
 		{
 			"title": "Open RobotContainer.java",
@@ -115,7 +118,8 @@
 				},
 				"hint": "open RobotContainer.java with Ctrl+P.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Find addOption",
@@ -132,7 +136,8 @@
 				},
 				"hint": "find addOption with Ctrl+F.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "The chooser",
@@ -142,7 +147,8 @@
 				"selector": ".view-lines .view-line",
 				"text": "add the autos to the chooser"
 			},
-			"cardAt": "bottom-right"
+			"cardAt": "bottom-right",
+			"assist": true
 		},
 		{
 			"title": "Start the robot",
@@ -166,5 +172,6 @@
 			},
 			"cardAt": "top-right"
 		}
-	]
+	],
+	"kind": "mixed"
 }

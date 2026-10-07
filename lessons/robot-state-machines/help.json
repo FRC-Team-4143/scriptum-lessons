@@ -1,0 +1,19 @@
+{
+	"plan": [
+		{
+			"checkpoint": "bindings",
+			"guides": [
+				"robot-state-machines-commands",
+				"robot-state-machines-commands-assist",
+				"robot-state-machines-bindings"
+			]
+		},
+		{
+			"checkpoint": "spin-up-first",
+			"guides": [
+				"robot-state-machines-states",
+				"robot-state-machines-shooter-states-assist"
+			]
+		}
+	]
+}

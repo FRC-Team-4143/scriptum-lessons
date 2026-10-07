@@ -101,5 +101,6 @@
 				"hint": "drag Robot/SmoothedSpeed onto the graph."
 			}
 		}
-	]
+	],
+	"kind": "concept"
 }

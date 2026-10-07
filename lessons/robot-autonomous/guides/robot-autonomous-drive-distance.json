@@ -62,7 +62,8 @@
 				},
 				"hint": "open DriveDistanceCommand.java with Ctrl+P.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Find initialize",
@@ -79,7 +80,8 @@
 				},
 				"hint": "find initialize with Ctrl+F.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Start here",
@@ -89,7 +91,9 @@
 				"selector": ".view-lines .view-line",
 				"text": "remember where the robot is right now"
 			},
-			"cardAt": "bottom-right"
+			"cardAt": "bottom-right",
+			"assist": true
 		}
-	]
+	],
+	"kind": "mixed"
 }

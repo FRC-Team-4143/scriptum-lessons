@@ -91,5 +91,6 @@
 			},
 			"cardAt": "top-right"
 		}
-	]
+	],
+	"kind": "concept"
 }

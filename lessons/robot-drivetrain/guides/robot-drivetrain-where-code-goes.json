@@ -28,7 +28,8 @@
 				},
 				"hint": "open Robot.java with Ctrl+P.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Find teleopPeriodic",
@@ -45,7 +46,8 @@
 				},
 				"hint": "find teleopPeriodic with Ctrl+F.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "teleopPeriodic",
@@ -55,7 +57,8 @@
 				"selector": ".view-lines .view-line",
 				"text": "public void teleopPeriodic"
 			},
-			"cardAt": "bottom-right"
+			"cardAt": "bottom-right",
+			"assist": true
 		},
 		{
 			"title": "The two objects",
@@ -91,5 +94,6 @@
 				]
 			}
 		}
-	]
+	],
+	"kind": "mixed"
 }

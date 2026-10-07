@@ -66,7 +66,8 @@
 				},
 				"hint": "open Robot.java with Ctrl+P.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Find DEADBAND",
@@ -83,7 +84,8 @@
 				},
 				"hint": "find DEADBAND with Ctrl+F.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "STEP 4",
@@ -93,7 +95,9 @@
 				"selector": ".view-lines .view-line",
 				"text": "STEP 4: DEADBAND"
 			},
-			"cardAt": "bottom-right"
+			"cardAt": "bottom-right",
+			"assist": true
 		}
-	]
+	],
+	"kind": "mixed"
 }

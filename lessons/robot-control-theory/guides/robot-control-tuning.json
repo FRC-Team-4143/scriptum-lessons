@@ -45,7 +45,8 @@
 				},
 				"hint": "open ShooterConstants.java with Ctrl+P.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Find kV",
@@ -146,5 +147,6 @@
 				"selector": "[data-tour='lesson']"
 			}
 		}
-	]
+	],
+	"kind": "mixed"
 }

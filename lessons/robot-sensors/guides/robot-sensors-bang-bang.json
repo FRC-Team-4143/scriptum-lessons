@@ -45,7 +45,8 @@
 				},
 				"hint": "open Robot.java with Ctrl+P.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Find autonomousPeriodic",
@@ -62,7 +63,8 @@
 				},
 				"hint": "find autonomousPeriodic with Ctrl+F.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "autonomousPeriodic",
@@ -72,7 +74,8 @@
 				"selector": ".view-lines .view-line",
 				"text": "public void autonomousPeriodic"
 			},
-			"cardAt": "bottom-right"
+			"cardAt": "bottom-right",
+			"assist": true
 		},
 		{
 			"title": "Start the robot",
@@ -130,5 +133,6 @@
 			"title": "Past 2.0",
 			"say": "It almost certainly stopped a little **past** 2.0 m: when the power cuts, the robot is still moving. Bang-bang can't slow down smoothly. The Control Theory lesson fixes that with PID."
 		}
-	]
+	],
+	"kind": "mixed"
 }

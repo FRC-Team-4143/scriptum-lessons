@@ -28,7 +28,8 @@
 				},
 				"hint": "open ShooterConstants.java with Ctrl+P.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Find ROLLER_MOTOR_CONFIG",
@@ -45,7 +46,8 @@
 				},
 				"hint": "find ROLLER_MOTOR_CONFIG with Ctrl+F.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Constants",
@@ -55,7 +57,8 @@
 				"selector": ".view-lines .view-line",
 				"text": "create ROLLER_MOTOR_CONFIG"
 			},
-			"cardAt": "bottom-right"
+			"cardAt": "bottom-right",
+			"assist": true
 		},
 		{
 			"title": "Open ShooterSubsystem.java",
@@ -81,7 +84,8 @@
 				},
 				"hint": "open ShooterSubsystem.java with Ctrl+P.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Find RollerMech",
@@ -98,7 +102,8 @@
 				},
 				"hint": "find RollerMech with Ctrl+F.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "The roller",
@@ -108,7 +113,8 @@
 				"selector": ".view-lines .view-line",
 				"text": "create the roller the same way"
 			},
-			"cardAt": "bottom-right"
+			"cardAt": "bottom-right",
+			"assist": true
 		},
 		{
 			"title": "getIos",
@@ -147,7 +153,8 @@
 				},
 				"hint": "open RobotContainer.java with Ctrl+P.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Find it",
@@ -164,7 +171,8 @@
 				},
 				"hint": "find register the ShooterSubsystem with Ctrl+F.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Register it",
@@ -174,7 +182,8 @@
 				"selector": ".view-lines .view-line",
 				"text": "register the ShooterSubsystem"
 			},
-			"cardAt": "bottom-right"
+			"cardAt": "bottom-right",
+			"assist": true
 		},
 		{
 			"title": "Start the robot",
@@ -228,5 +237,6 @@
 				"hint": "drag Subsystem/Shooter/FlywheelVelocity onto the graph."
 			}
 		}
-	]
+	],
+	"kind": "mixed"
 }

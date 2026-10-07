@@ -59,7 +59,8 @@
 				},
 				"hint": "open Robot.java with Ctrl+P.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Find STEP 2",
@@ -76,7 +77,8 @@
 				},
 				"hint": "find STEP 2 with Ctrl+F.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "STEP 2",
@@ -86,7 +88,8 @@
 				"selector": ".view-lines .view-line",
 				"text": "STEP 2: describe the whole robot"
 			},
-			"cardAt": "bottom-right"
+			"cardAt": "bottom-right",
+			"assist": true
 		},
 		{
 			"title": "Start the robot",
@@ -164,5 +167,6 @@
 				"hint": "drag Robot/AngularSpeed onto the graph."
 			}
 		}
-	]
+	],
+	"kind": "mixed"
 }

@@ -53,7 +53,8 @@
 				},
 				"hint": "open DriveMath.java with Ctrl+P.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Find it",
@@ -70,7 +71,8 @@
 				},
 				"hint": "find public static double rotationsToMeters with Ctrl+F.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Your first method",
@@ -80,7 +82,8 @@
 				"selector": ".view-lines .view-line",
 				"text": "public static double rotationsToMeters"
 			},
-			"cardAt": "bottom-right"
+			"cardAt": "bottom-right",
+			"assist": true
 		},
 		{
 			"title": "Find linearSpeed",
@@ -97,7 +100,8 @@
 				},
 				"hint": "find linearSpeed with Ctrl+F.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Then this one",
@@ -107,7 +111,9 @@
 				"selector": ".view-lines .view-line",
 				"text": "public static double linearSpeed"
 			},
-			"cardAt": "bottom-right"
+			"cardAt": "bottom-right",
+			"assist": true
 		}
-	]
+	],
+	"kind": "mixed"
 }

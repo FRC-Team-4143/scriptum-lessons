@@ -45,7 +45,8 @@
 				},
 				"hint": "open OI.java with Ctrl+P.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Find configureBindings",
@@ -62,7 +63,8 @@
 				},
 				"hint": "find configureBindings with Ctrl+F.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Bind them",
@@ -72,7 +74,8 @@
 				"selector": ".view-lines .view-line",
 				"text": "bind the right bumper"
 			},
-			"cardAt": "bottom-right"
+			"cardAt": "bottom-right",
+			"assist": true
 		},
 		{
 			"title": "Start the robot",
@@ -110,5 +113,6 @@
 			},
 			"cardAt": "top-right"
 		}
-	]
+	],
+	"kind": "mixed"
 }

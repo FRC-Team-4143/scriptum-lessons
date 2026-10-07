@@ -37,59 +37,7 @@
 					}
 				]
 			}
-		},
-		{
-			"title": "Open ShooterCommands.java",
-			"say": "Press **Ctrl+P**, type `ShooterCommands` and press Enter. Quick Open finds any file by name, so you never have to dig through folders.",
-			"open": [
-				"editor"
-			],
-			"close": [
-				"scope",
-				"choreo",
-				"elastic",
-				"preview"
-			],
-			"target": {
-				"pane": "editor"
-			},
-			"cardAt": "bottom-right",
-			"waitFor": {
-				"target": {
-					"pane": "editor",
-					"selector": ".tabs-container .tab",
-					"text": "ShooterCommands.java"
-				},
-				"hint": "open ShooterCommands.java with Ctrl+P.",
-				"skipIfDone": true
-			}
-		},
-		{
-			"title": "Find Command shoot",
-			"say": "Below the comment that describes it. Press **Ctrl+F**, type `Command shoot` and press Enter to jump to it.",
-			"target": {
-				"pane": "editor"
-			},
-			"cardAt": "bottom-right",
-			"waitFor": {
-				"target": {
-					"pane": "editor",
-					"selector": ".view-lines .view-line",
-					"text": "public static Command shoot"
-				},
-				"hint": "find Command shoot with Ctrl+F.",
-				"skipIfDone": true
-			}
-		},
-		{
-			"title": "Your turn",
-			"say": "Write `shoot()`, then `simulateBallLaunch()` with `Commands.runOnce`.",
-			"target": {
-				"pane": "editor",
-				"selector": ".view-lines .view-line",
-				"text": "public static Command shoot"
-			},
-			"cardAt": "bottom-right"
 		}
-	]
+	],
+	"kind": "concept"
 }

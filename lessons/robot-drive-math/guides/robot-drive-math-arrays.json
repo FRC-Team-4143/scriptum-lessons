@@ -75,7 +75,8 @@
 				},
 				"hint": "open DriveMath.java with Ctrl+P.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Find arcadeToWheelSpeeds",
@@ -92,7 +93,8 @@
 				},
 				"hint": "find arcadeToWheelSpeeds with Ctrl+F.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Your turn",
@@ -102,7 +104,9 @@
 				"selector": ".view-lines .view-line",
 				"text": "public static double[] arcadeToWheelSpeeds"
 			},
-			"cardAt": "bottom-right"
+			"cardAt": "bottom-right",
+			"assist": true
 		}
-	]
+	],
+	"kind": "mixed"
 }

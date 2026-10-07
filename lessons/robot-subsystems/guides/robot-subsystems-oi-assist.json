@@ -1,0 +1,111 @@
+{
+	"title": "Shooter buttons in OI",
+	"summary": "A button is just true or false: write getShootButton() and getIndexButton().",
+	"topic": "Robot",
+	"order": 461,
+	"kind": "mixed",
+	"steps": [
+		{
+			"title": "A button is true or false",
+			"say": "Holding a button makes it **true**; letting go makes it **false**. A method that answers a yes/no question returns a `boolean`. The controller already knows the answer. You just ask it.",
+			"board": {
+				"code": "public static boolean getShootButton() {\n    return driverController.getRightBumperButton();\n}",
+				"marks": [
+					{
+						"text": "boolean",
+						"label": "true or false, nothing in between"
+					},
+					{
+						"text": "getRightBumperButton()",
+						"label": "the controller answers: is it held right now?"
+					}
+				]
+			}
+		},
+		{
+			"title": "Open OI.java",
+			"say": "The buttons live in the same class as the sticks. Press **Ctrl+P**, type `OI` and press Enter. Quick Open finds any file by name, so you never have to dig through folders.",
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "OI.java"
+				},
+				"hint": "open OI.java with Ctrl+P.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Find it",
+			"say": "The first one is the shoot button. Press **Ctrl+F**, type `right bumper is held` and press Enter to jump to it.",
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "return true while the right bumper is held"
+				},
+				"hint": "find right bumper is held with Ctrl+F.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Shoot button",
+			"say": "Replace `return false;` with `return driverController.getRightBumperButton();`.",
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "return true while the right bumper is held"
+			},
+			"cardAt": "bottom-right",
+			"assist": true
+		},
+		{
+			"title": "Find it",
+			"say": "Now the index button, just below. Press **Ctrl+F**, type `left bumper is held` and press Enter to jump to it.",
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "return true while the left bumper is held"
+				},
+				"hint": "find left bumper is held with Ctrl+F.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Index button",
+			"say": "Same idea with the other bumper: `return driverController.getLeftBumperButton();`.",
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "return true while the left bumper is held"
+			},
+			"cardAt": "bottom-right",
+			"assist": true
+		}
+	]
+}

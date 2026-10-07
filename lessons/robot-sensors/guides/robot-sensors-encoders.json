@@ -62,7 +62,8 @@
 				},
 				"hint": "open Robot.java with Ctrl+P.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "Find STEP 1",
@@ -79,7 +80,8 @@
 				},
 				"hint": "find STEP 1 with Ctrl+F.",
 				"skipIfDone": true
-			}
+			},
+			"assist": true
 		},
 		{
 			"title": "STEP 1",
@@ -89,7 +91,8 @@
 				"selector": ".view-lines .view-line",
 				"text": "STEP 1: change the readings"
 			},
-			"cardAt": "bottom-right"
+			"cardAt": "bottom-right",
+			"assist": true
 		},
 		{
 			"title": "Start the robot",
@@ -143,5 +146,6 @@
 				"hint": "drag Robot/Distance onto the graph."
 			}
 		}
-	]
+	],
+	"kind": "mixed"
 }

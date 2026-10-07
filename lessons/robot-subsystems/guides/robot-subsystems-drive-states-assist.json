@@ -1,0 +1,78 @@
+{
+	"title": "Drive from the subsystem",
+	"summary": "Fill in the ARCADE case so the drivetrain subsystem drives with the sticks.",
+	"topic": "Robot",
+	"order": 464,
+	"kind": "assist",
+	"steps": [
+		{
+			"title": "Open DrivetrainSubsystem.java",
+			"say": "The drive code moves out of Robot.java and into the subsystem. Press **Ctrl+P**, type `DrivetrainSubsystem` and press Enter. Quick Open finds any file by name, so you never have to dig through folders.",
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "DrivetrainSubsystem.java"
+				},
+				"hint": "open DrivetrainSubsystem.java with Ctrl+P.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Find it",
+			"say": "Press **Ctrl+F**, type `drive with arcade drive` and press Enter to jump to it.",
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "drive with arcade drive using the driver's sticks"
+				},
+				"hint": "find drive with arcade drive with Ctrl+F.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "The ARCADE case",
+			"say": "Write the line the comment describes: `drive.arcadeDrive(OI.getForward(), OI.getTurn());`. Robot.java already asks for the ARCADE state in teleop, so this is the code that runs.",
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "drive with arcade drive using the driver's sticks"
+			},
+			"cardAt": "bottom-right",
+			"assist": true,
+			"board": {
+				"code": "case ARCADE:\n    drive.arcadeDrive(OI.getForward(), OI.getTurn());\n    break;",
+				"marks": [
+					{
+						"text": "case ARCADE:",
+						"label": "runs while the state is ARCADE"
+					},
+					{
+						"text": "OI.getForward()",
+						"label": "ask OI, not the controller"
+					}
+				]
+			}
+		}
+	]
+}

@@ -29,5 +29,6 @@
 			"title": "Half of robot programming",
 			"say": "A wrong unit doesn't crash: it just makes the robot do the wrong thing. Write the unit next to every number you can."
 		}
-	]
+	],
+	"kind": "concept"
 }
