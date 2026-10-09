@@ -5,7 +5,6 @@ import com.marswars.mechanisms.FlywheelMech;
 import com.marswars.mechanisms.RollerMech;
 import com.marswars.subsystem.MwSubsystem;
 import com.marswars.subsystem.SubsystemIoBase;
-import frc.robot.OI;
 import frc.robot.subsystems.shooter.ShooterConstants.ShooterStates;
 import java.util.List;
 
@@ -59,12 +58,9 @@ public class ShooterSubsystem extends MwSubsystem<ShooterStates, ShooterConstant
   /** Runs every 20 ms. */
   @Override
   public void updateLogic(double timestamp) {
-    // Shoot button: spin the flywheel up to speed. Otherwise let it coast to a stop.
-    if (OI.getShootButton()) {
-      flywheel.setTargetVelocity(CONSTANTS.SHOOT_VELOCITY);
-    } else {
-      flywheel.setTargetDutyCycle(0.0);
-    }
+    // TODO: write the shoot button logic. While OI.getShootButton() is true, run the flywheel at
+    // CONSTANTS.SHOOT_DUTY_CYCLE with flywheel.setTargetDutyCycle(...). Otherwise (else), set its
+    // duty cycle to 0.0 so it coasts to a stop.
 
     // The roller feeds game pieces into the flywheel while the index button is held.
     double rollerDuty = 0.0; // TODO: use CONSTANTS.INDEX_DUTY_CYCLE while OI.getIndexButton()
@@ -72,7 +68,6 @@ public class ShooterSubsystem extends MwSubsystem<ShooterStates, ShooterConstant
 
     // Send numbers to AdvantageScope.
     MwLog.log(getSubsystemKey() + "FlywheelVelocity", flywheel.getCurrentVelocity());
-    MwLog.log(getSubsystemKey() + "FlywheelTarget", CONSTANTS.SHOOT_VELOCITY);
     MwLog.log(getSubsystemKey() + "RollerDuty", rollerDuty);
   }
 }
