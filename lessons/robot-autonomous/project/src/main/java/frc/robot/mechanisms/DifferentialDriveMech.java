@@ -397,7 +397,9 @@ public class DifferentialDriveMech extends MechBase {
   /** Keeps the current through one motor under the limit, like the TalonFX's stator limit. */
   private static double limitCurrent(double volts, double wheelMetersPerSecond) {
     double motorRadPerSec =
-        wheelMetersPerSecond / Constants.WHEEL_RADIUS_METERS * Constants.GEAR_RATIO;
+        wheelMetersPerSecond
+            / DrivetrainConstants.WHEEL_RADIUS_METERS
+            * DrivetrainConstants.GEAR_RATIO;
     double backEmf = motorRadPerSec / DRIVE_MOTOR.KvRadPerSecPerVolt;
     double window = CURRENT_LIMIT_AMPS * DRIVE_MOTOR.rOhms;
     return Math.max(backEmf - window, Math.min(backEmf + window, volts));

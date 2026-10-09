@@ -70,4 +70,3 @@ Stuck on a step? Open **Dozer**: he can explain the idea or walk you through it.
 - Add a **slow mode** to `teleopPeriodic()`: multiply forward by `0.5` while a bumper is held.
 - Make the arcade turn gentler near the middle of the stick by **squaring** the stick value but
   keeping its sign. Hint: `Math.copySign(x * x, x)`.
-
