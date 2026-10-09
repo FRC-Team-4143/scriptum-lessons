@@ -10,20 +10,30 @@ import { hasJdk, lessonKit, ROBOT_SRC } from "../../common/tests/lesson-kit";
 const L = lessonKit(import.meta.url);
 
 describe.skipIf(!hasJdk)("robot-sensors script checkpoints", () => {
-	test("robot-sensors: deadband fails fresh, passes once the constant and ifs are written", async () => {
-		await L.roundTrip(["deadband"], ["Robot.java"]);
+	test("robot-sensors: deadband fails fresh, passes once the constant (in Constants.java) and ifs are written", async () => {
+		await L.roundTrip(["deadband"], ["Robot.java", "Constants.java"]);
 	}, 30_000);
 
 	test("robot-sensors: the deadband check needs an if on both sticks", async () => {
 		const project = await L.makeProject();
 		try {
-			await L.applySolution(project, ["Robot.java"]);
+			await L.applySolution(project, ["Robot.java", "Constants.java"]);
 			const file = join(project, ROBOT_SRC, "Robot.java");
 			const text = (await readFile(file, "utf8")).replace(
-				/if \(Math\.abs\(turn\) < DEADBAND\) \{\s*turn = 0\.0;\s*\}/,
+				/if \(Math\.abs\(turn\) < Constants\.DEADBAND\) \{\s*turn = 0\.0;\s*\}/,
 				"",
 			);
 			await writeFile(file, text, "utf8");
+			expect(L.verify(project, "deadband").exitCode).not.toBe(0);
+		} finally {
+			await rm(project, { recursive: true, force: true });
+		}
+	}, 30_000);
+
+	test("robot-sensors: the deadband check needs the constant in Constants.java", async () => {
+		const project = await L.makeProject();
+		try {
+			await L.applySolution(project, ["Robot.java"]);
 			expect(L.verify(project, "deadband").exitCode).not.toBe(0);
 		} finally {
 			await rm(project, { recursive: true, force: true });

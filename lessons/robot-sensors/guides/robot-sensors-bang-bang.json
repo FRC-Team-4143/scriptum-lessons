@@ -32,14 +32,15 @@
 				"bit": "Full power until you're there, then nothing. That's **bang-bang control**."
 			},
 			"board": {
-				"code": "if (distanceMeters < 2.0) {\n    drive.setDutyCycles(0.4, 0.4);\n} else {\n    drive.setDutyCycles(0.0, 0.0);\n}",
+				"code": "if the robot has driven less than 2.0 meters:\n    drive forward at 0.4\notherwise:\n    stop (0.0)",
+				"language": "text",
 				"marks": [
 					{
-						"text": "distanceMeters < 2.0",
-						"label": "not there yet?"
+						"text": "less than 2.0 meters",
+						"label": "not there yet? (distanceMeters)"
 					},
 					{
-						"text": "0.0, 0.0",
+						"text": "stop (0.0)",
 						"label": "there: stop"
 					}
 				]
@@ -100,8 +101,8 @@
 		{
 			"title": "autonomousPeriodic",
 			"say": {
-				"never": "Write the `if` and `else` inside `autonomousPeriodic()`, between its curly braces. This one runs by itself in **Auto** mode, so nobody has to touch the keys.",
-				"bit": "Write the if/else inside `autonomousPeriodic()`. It runs on its own in Auto mode, no sticks needed."
+				"never": "Write an `if` / `else` inside `autonomousPeriodic()`, between its curly braces, using the plan from the card: drive at `0.4` while `distanceMeters` is below `2.0`, otherwise stop. This one runs by itself in **Auto** mode, so nobody has to touch the keys.",
+				"bit": "Write the if/else inside `autonomousPeriodic()`: drive at 0.4 below 2.0 m, otherwise stop."
 			},
 			"target": {
 				"pane": "editor",
@@ -181,6 +182,25 @@
 					"never": "drag Robot/Distance onto the graph.",
 					"bit": "drag Robot/Distance onto the graph."
 				}
+			},
+			"assist": true
+		},
+		{
+			"title": "What reset means",
+			"say": {
+				"never": "Look at `autonomousInit()`: it calls `drive.resetEncoders()`. **Reset** means *forget everything driven so far and start counting from zero again.* Auto begins with the distance at 0 and the robot back at its starting spot. Without a reset, the distance would still say 2.0 from the last run, and the robot would never move.",
+				"bit": "`resetEncoders()` starts the distance over at 0. Without it, each run would begin where the last one stopped."
+			},
+			"assist": true
+		},
+		{
+			"title": "Run it again",
+			"say": {
+				"never": "Press **Disable**, then **Enable** in Auto again. The robot starts from the beginning and drives about 2 meters again. Watch **Robot/Distance** in AdvantageScope: it jumps back to 0 and climbs to 2.0 each time. It should never go negative. That is what a reset does.",
+				"bit": "Disable, then Enable in Auto again. The distance should go back to 0 and climb to 2.0 again, never negative."
+			},
+			"target": {
+				"selector": "[data-tour='enable']"
 			},
 			"assist": true
 		},

@@ -14,8 +14,8 @@
 		{
 			"title": "A constant",
 			"say": {
-				"never": "Give a number a name, at the top of the class, so it's easy to find and change. `final` means it never changes. Naming numbers like this is how programmers avoid mysterious `0.1`s scattered everywhere.",
-				"bit": "Name important numbers once, as `private static final` constants."
+				"never": "Give a number a name so it's easy to find and change. `final` means it never changes. Naming numbers like this is how programmers avoid mysterious `0.1`s scattered everywhere. A constant goes in a class; `public` lets other files use it, and `private` keeps it to its own file.",
+				"bit": "Name important numbers once, as `static final` constants."
 			},
 			"board": {
 				"code": "private static final double SPEED_LIMIT = 0.8;",
@@ -35,16 +35,13 @@
 		{
 			"title": "In your lesson: A constant",
 			"say": {
-				"never": "Give the number a name, up at the top of the class, so it's easy to find and change. `final` means \"this never changes\". Naming numbers like this is how programmers avoid mysterious `0.1`s scattered everywhere.",
-				"bit": "Give the number a name, at the top of the class. `final` means it never changes."
+				"never": "Your deadband number needs a name: `DEADBAND`. It's a team-wide number about the robot's controls, so it goes with the other constants in `Constants.java`, and the code in `Robot.java` reads it as `Constants.DEADBAND`. Pick a size of 0.1: sticks pushed less than 10% count as zero.",
+				"bit": "`DEADBAND` = 0.1 goes in `Constants.java`. Other files read it as `Constants.DEADBAND`."
 			},
 			"board": {
-				"code": "private static final double DEADBAND = 0.1;",
+				"code": "Constants.java:  a public static final double named DEADBAND, set to 0.1\nRobot.java:      reads it as  Constants.DEADBAND",
+				"language": "text",
 				"marks": [
-					{
-						"text": "final",
-						"label": "can't change"
-					},
 					{
 						"text": "DEADBAND",
 						"label": "a name instead of a mystery 0.1"
@@ -81,14 +78,15 @@
 				"bit": "`Math.abs` ignores the sign, so one check covers both directions."
 			},
 			"board": {
-				"code": "if (Math.abs(forward) < DEADBAND) {\n    forward = 0.0;\n}\nif (Math.abs(turn) < DEADBAND) {\n    turn = 0.0;\n}",
+				"code": "if the forward stick is smaller than DEADBAND (ignore its sign):\n    set forward to 0.0\n\nsame for the turn stick",
+				"language": "text",
 				"marks": [
 					{
-						"text": "Math.abs(forward)",
-						"label": "size without sign"
+						"text": "ignore its sign",
+						"label": "Math.abs(...) throws the minus sign away"
 					},
 					{
-						"text": "forward = 0.0;",
+						"text": "set forward to 0.0",
 						"label": "close enough to zero: stop"
 					}
 				]
@@ -96,10 +94,54 @@
 			"assist": true
 		},
 		{
-			"title": "Open Robot.java",
+			"title": "Open Constants.java",
 			"say": {
-				"never": "Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `Robot`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
-				"bit": "Press **Ctrl+P**, type `Robot` and press Enter. Quick Open finds any file by name, so you never have to dig through folders."
+				"never": "Hold down **Ctrl** and tap **P**. Type `Constants`, then press **Enter**. This is where the robot's numbers live.",
+				"bit": "Press **Ctrl+P**, type `Constants` and press Enter."
+			},
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "Constants.java"
+				},
+				"hint": "open Constants.java with Ctrl+P.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Add DEADBAND",
+			"say": {
+				"never": "Near the bottom, under the comment about the driver's sticks, add the constant: a `public static final double` named `DEADBAND`, equal to `0.1`. Don't forget the semicolon, and save with **Ctrl+S**.",
+				"bit": "Add a `public static final double DEADBAND = 0.1;` under the sticks comment."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "driver's sticks"
+			},
+			"cardAt": "bottom-right",
+			"assist": true
+		},
+		{
+			"title": "Back to Robot.java",
+			"say": {
+				"never": "Hold down **Ctrl** and tap **P**. Type `Robot`, then press **Enter**.",
+				"bit": "Press **Ctrl+P**, type `Robot` and press Enter."
 			},
 			"open": [
 				"editor"
@@ -126,10 +168,10 @@
 			"assist": true
 		},
 		{
-			"title": "Find DEADBAND",
+			"title": "Find STEP 4",
 			"say": {
-				"never": "It's in teleopPeriodic. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `DEADBAND` and press **Enter**. The editor scrolls to the right spot and highlights it.",
-				"bit": "It's in teleopPeriodic. Press **Ctrl+F**, type `DEADBAND` and press Enter to jump to it."
+				"never": "It's in teleopPeriodic. Click in the code, then hold **Ctrl** and tap **F**. Type `STEP 4` and press **Enter**.",
+				"bit": "It's in teleopPeriodic. Press **Ctrl+F**, type `STEP 4` and press Enter."
 			},
 			"target": {
 				"pane": "editor"
@@ -141,16 +183,30 @@
 					"selector": ".view-lines .view-line",
 					"text": "STEP 4: DEADBAND"
 				},
-				"hint": "find DEADBAND with Ctrl+F.",
+				"hint": "find STEP 4 with Ctrl+F.",
 				"skipIfDone": true
 			},
 			"assist": true
 		},
 		{
-			"title": "STEP 4",
+			"title": "Deadband the forward stick",
 			"say": {
-				"never": "Two jobs here. First, add the constant at the top of the class. Then add the two `if` checks below this line. Use the board to copy the pattern.",
-				"bit": "Add the constant at the top of the class, then the two `if`s here."
+				"never": "Under the STEP 4 comment, write an `if` that checks the size of `forward` with `Math.abs(forward)`. When it is less than `Constants.DEADBAND`, set `forward` to `0.0`.",
+				"bit": "`if (Math.abs(forward) < Constants.DEADBAND)`, then set `forward` to 0.0."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "STEP 4: DEADBAND"
+			},
+			"cardAt": "bottom-right",
+			"assist": true
+		},
+		{
+			"title": "Deadband the turn stick",
+			"say": {
+				"never": "Now the same thing for `turn`: a second `if`, below the first. Then save with **Ctrl+S**.",
+				"bit": "Same again for `turn`, in a second `if`."
 			},
 			"target": {
 				"pane": "editor",
