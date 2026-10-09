@@ -14,24 +14,24 @@ import java.util.List;
  * mechanism does something.
  */
 public class ShooterSubsystem extends MwSubsystem<ShooterStates, ShooterConstants> {
-  private static ShooterSubsystem instance = null;
+  private static ShooterSubsystem instance_ = null;
 
   public static ShooterSubsystem getInstance() {
-    if (instance == null) {
-      instance = new ShooterSubsystem();
+    if (instance_ == null) {
+      instance_ = new ShooterSubsystem();
     }
-    return instance;
+    return instance_;
   }
 
-  private final FlywheelMech flywheel;
-  private final RollerMech roller;
+  private final FlywheelMech flywheel_;
+  private final RollerMech roller_;
 
   private ShooterSubsystem() {
     super(ShooterStates.MANUAL, new ShooterConstants());
 
     // CONSTANTS is this subsystem's ShooterConstants. getSubsystemKey() gives the mechanism a name
     // to log under.
-    flywheel =
+    flywheel_ =
         new FlywheelMech(
             getSubsystemKey(),
             "Flywheel",
@@ -42,7 +42,7 @@ public class ShooterSubsystem extends MwSubsystem<ShooterStates, ShooterConstant
 
     // TODO: create the roller the same way with a RollerMech. Its arguments are:
     //   (getSubsystemKey(), "Roller", List.of(<motor config>), <gear ratio>, <inertia>)
-    roller = null;
+    roller_ = null;
   }
 
   /** The mechanisms this subsystem owns. MWLib reads and writes them for us every loop. */
@@ -59,15 +59,15 @@ public class ShooterSubsystem extends MwSubsystem<ShooterStates, ShooterConstant
   @Override
   public void updateLogic(double timestamp) {
     // TODO: write the shoot button logic. While OI.getShootButton() is true, run the flywheel at
-    // CONSTANTS.SHOOT_DUTY_CYCLE with flywheel.setTargetDutyCycle(...). Otherwise (else), set its
+    // CONSTANTS.SHOOT_DUTY_CYCLE with flywheel_.setTargetDutyCycle(...). Otherwise (else), set its
     // duty cycle to 0.0 so it coasts to a stop.
 
     // The roller feeds game pieces into the flywheel while the index button is held.
-    double rollerDuty = 0.0; // TODO: use CONSTANTS.INDEX_DUTY_CYCLE while OI.getIndexButton()
-    roller.setTargetDutyCycle(rollerDuty);
+    double roller_duty = 0.0; // TODO: use CONSTANTS.INDEX_DUTY_CYCLE while OI.getIndexButton()
+    roller_.setTargetDutyCycle(roller_duty);
 
     // Send numbers to AdvantageScope.
-    MwLog.log(getSubsystemKey() + "FlywheelVelocity", flywheel.getCurrentVelocity());
-    MwLog.log(getSubsystemKey() + "RollerDuty", rollerDuty);
+    MwLog.log(getSubsystemKey() + "FlywheelVelocity", flywheel_.getCurrentVelocity());
+    MwLog.log(getSubsystemKey() + "RollerDuty", roller_duty);
   }
 }

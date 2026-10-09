@@ -207,8 +207,8 @@
 		{
 			"title": "Drive from the sticks",
 			"say": {
-				"never": "Every loop, the drivetrain drives using the sticks. The line is `drive.arcadeDrive(OI.getForward(), OI.getTurn());`. You'll write it in a moment.",
-				"bit": "Every loop, drive with `drive.arcadeDrive(OI.getForward(), OI.getTurn());`."
+				"never": "Every loop, the drivetrain drives using the sticks. The line is `drive_.arcadeDrive(OI.getForward(), OI.getTurn());`. You'll write it in a moment.",
+				"bit": "Every loop, drive with `drive_.arcadeDrive(OI.getForward(), OI.getTurn());`."
 			},
 			"target": {
 				"pane": "editor",

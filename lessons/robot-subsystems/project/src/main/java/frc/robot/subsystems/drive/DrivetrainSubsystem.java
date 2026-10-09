@@ -14,20 +14,20 @@ import java.util.List;
  */
 public class DrivetrainSubsystem extends MwSubsystem<DriveStates, DrivetrainConstants> {
   // There is only ever one drivetrain, so everyone shares it through getInstance().
-  private static DrivetrainSubsystem instance = null;
+  private static DrivetrainSubsystem instance_ = null;
 
   public static DrivetrainSubsystem getInstance() {
-    if (instance == null) {
-      instance = new DrivetrainSubsystem();
+    if (instance_ == null) {
+      instance_ = new DrivetrainSubsystem();
     }
-    return instance;
+    return instance_;
   }
 
-  private final DifferentialDriveMech drive;
+  private final DifferentialDriveMech drive_;
 
   private DrivetrainSubsystem() {
     super(DriveStates.ARCADE, new DrivetrainConstants());
-    drive =
+    drive_ =
         new DifferentialDriveMech(
             DrivetrainConstants.LEFT_MOTORS, DrivetrainConstants.RIGHT_MOTORS);
   }
@@ -35,7 +35,7 @@ public class DrivetrainSubsystem extends MwSubsystem<DriveStates, DrivetrainCons
   /** The mechanisms this subsystem owns. MWLib reads and writes them for us every loop. */
   @Override
   public List<SubsystemIoBase> getIos() {
-    return List.of(drive);
+    return List.of(drive_);
   }
 
   @Override
@@ -46,12 +46,12 @@ public class DrivetrainSubsystem extends MwSubsystem<DriveStates, DrivetrainCons
   /** Runs every 20 ms. Drive from the driver's sticks. */
   @Override
   public void updateLogic(double timestamp) {
-    // TODO: drive with arcade drive using the driver's sticks: drive.arcadeDrive(forward, turn)
+    // TODO: drive with arcade drive using the driver's sticks: drive_.arcadeDrive(forward, turn)
     // Get the sticks from the OI class.
   }
 
   /** Where the robot thinks it is (the drive mechanism works this out). */
   public Pose2d getPose() {
-    return drive.getPose();
+    return drive_.getPose();
   }
 }

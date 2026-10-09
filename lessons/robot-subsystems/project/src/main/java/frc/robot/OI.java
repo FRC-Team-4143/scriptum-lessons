@@ -8,22 +8,22 @@ import edu.wpi.first.wpilibj.XboxController;
  * questions and never touches the controller directly.
  */
 public abstract class OI {
-  private static final XboxController driverController = new XboxController(0);
+  private static final XboxController driver_controller_ = new XboxController(0);
 
   /** How far forward the driver is pushing, -1.0 to 1.0. */
   public static double getForward() {
-    return MathUtil.applyDeadband(-driverController.getLeftY(), 0.1);
+    return MathUtil.applyDeadband(-driver_controller_.getLeftY(), 0.1);
   }
 
   /** How much the driver wants to turn, -1.0 to 1.0. */
   public static double getTurn() {
-    return MathUtil.applyDeadband(driverController.getLeftX(), 0.1);
+    return MathUtil.applyDeadband(driver_controller_.getLeftX(), 0.1);
   }
 
   /** True while the driver holds the shoot button. */
   public static boolean getShootButton() {
     // TODO: return true while the right bumper is held. XboxController has a method for it:
-    // driverController.getRightBumperButton()
+    // driver_controller_.getRightBumperButton()
     return false;
   }
 

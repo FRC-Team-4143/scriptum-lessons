@@ -70,7 +70,7 @@
 			"cardAt": "bottom-right",
 			"assist": true,
 			"board": {
-				"code": "if (OI.getShootButton()) {\n    flywheel.setTargetDutyCycle(CONSTANTS.SHOOT_DUTY_CYCLE);\n} else {\n    flywheel.setTargetDutyCycle(0.0);\n}",
+				"code": "if (OI.getShootButton()) {\n    flywheel_.setTargetDutyCycle(CONSTANTS.SHOOT_DUTY_CYCLE);\n} else {\n    flywheel_.setTargetDutyCycle(0.0);\n}",
 				"language": "java",
 				"marks": [
 					{

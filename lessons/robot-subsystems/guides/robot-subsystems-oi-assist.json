@@ -80,8 +80,8 @@
 		{
 			"title": "Shoot button",
 			"say": {
-				"never": "Find the line that says `return false;` right under that comment. Change it to `return driverController.getRightBumperButton();`. Now this method returns true while the right bumper is held.",
-				"bit": "Replace `return false;` with `return driverController.getRightBumperButton();`."
+				"never": "Find the line that says `return false;` right under that comment. Change it to `return driver_controller_.getRightBumperButton();`. Now this method returns true while the right bumper is held.",
+				"bit": "Replace `return false;` with `return driver_controller_.getRightBumperButton();`."
 			},
 			"target": {
 				"pane": "editor",
@@ -115,8 +115,8 @@
 		{
 			"title": "Index button",
 			"say": {
-				"never": "Same idea for the other bumper. Change `return false;` to `return driverController.getLeftBumperButton();`.",
-				"bit": "Same idea with the other bumper: `return driverController.getLeftBumperButton();`."
+				"never": "Same idea for the other bumper. Change `return false;` to `return driver_controller_.getLeftBumperButton();`.",
+				"bit": "Same idea with the other bumper: `return driver_controller_.getLeftBumperButton();`."
 			},
 			"target": {
 				"pane": "editor",

@@ -158,10 +158,10 @@
 				"bit": "MWLib only runs the mechanisms you list here. Forget one and it never moves."
 			},
 			"board": {
-				"code": "@Override\npublic List<SubsystemIoBase> getIos() {\n    return List.of(flywheel, roller);\n}",
+				"code": "@Override\npublic List<SubsystemIoBase> getIos() {\n    return List.of(flywheel_, roller_);\n}",
 				"marks": [
 					{
-						"text": "List.of(flywheel, roller)",
+						"text": "List.of(flywheel_, roller_)",
 						"label": "both mechanisms"
 					}
 				]

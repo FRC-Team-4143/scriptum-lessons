@@ -22,7 +22,7 @@ describe.skipIf(!hasJdk)("robot-subsystems script checkpoints", () => {
 			await L.applySolution(project, ["subsystems/shooter/ShooterSubsystem.java"]);
 			const file = join(project, ROBOT_SRC, "subsystems/shooter/ShooterSubsystem.java");
 			const text = await readFile(file, "utf8");
-			await writeFile(file, text.replace(/ else \{\s*flywheel\.setTargetDutyCycle\(0\.0\);\s*\}/, ""), "utf8");
+			await writeFile(file, text.replace(/ else \{\s*flywheel_\.setTargetDutyCycle\(0\.0\);\s*\}/, ""), "utf8");
 			expect(L.verify(project, "shoot-logic").exitCode).not.toBe(0);
 		} finally {
 			await rm(project, { recursive: true, force: true });
