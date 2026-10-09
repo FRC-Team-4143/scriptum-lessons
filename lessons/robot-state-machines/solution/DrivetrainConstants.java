@@ -63,8 +63,8 @@ public class DrivetrainConstants extends MwConstants {
     /** Not moving. */
     IDLE,
     /** Driving from the controller sticks. */
-    ARCADE
-    // TODO (aim): add a third state, AIM: turn in place to face the goal. Don't forget the comma
-    // after ARCADE.
+    ARCADE,
+    /** Turning in place to face the goal. */
+    AIM
   }
 }

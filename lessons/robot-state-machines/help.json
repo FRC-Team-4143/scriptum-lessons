@@ -14,6 +14,25 @@
 				"robot-state-machines-states",
 				"robot-state-machines-shooter-states-assist"
 			]
+		},
+		{
+			"checkpoint": "aim-state-written",
+			"guides": [
+				"robot-state-machines-aim",
+				"robot-state-machines-aim-assist"
+			]
+		},
+		{
+			"checkpoint": "aim-converges",
+			"guides": [
+				"robot-state-machines-aim-tuning"
+			]
+		},
+		{
+			"checkpoint": "aim-no-overshoot",
+			"guides": [
+				"robot-state-machines-aim-damping"
+			]
 		}
 	]
 }

@@ -1438,7 +1438,7 @@
 			"order": 26,
 			"track": "FRC Robot",
 			"title": "State Machines and Commands",
-			"description": "Give the shooter a state machine and control it with commands bound to buttons.",
+			"description": "Give the shooter a state machine and control it with commands bound to buttons, then build an aim state that turns the robot to face the goal and tune its PID by hand.",
 			"kind": "robot",
 			"subdir": "lessons/robot-state-machines/project",
 			"requires": [
@@ -1476,6 +1476,39 @@
 						"check": "range",
 						"min": 2,
 						"max": 50
+					}
+				},
+				{
+					"id": "aim-state-written",
+					"title": "Aim state written",
+					"description": "DriveStates has AIM, the switch handles it with a PIDController (continuous input), getAngleToGoal() and isAimed() are written, and DrivetrainCommands.aim() starts and ends the state.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/robot-state-machines/checkpoints/verify/aim-state-written.sh"
+					}
+				},
+				{
+					"id": "aim-converges",
+					"title": "Aims within 2 degrees",
+					"description": "Start fresh, enable Teleop and hold the left bumper (E). The robot should turn to face the goal and stay within 2 degrees of it for half a second, within 4 seconds. Raise AIM_KP if it stops short.",
+					"verifier": {
+						"type": "nt4-value",
+						"topic": "/AdvantageKit/RealOutputs/Check/Aim/Settled",
+						"check": "range",
+						"min": 1,
+						"max": 1
+					}
+				},
+				{
+					"id": "aim-no-overshoot",
+					"title": "No wild overshoot",
+					"description": "On that same aim, the robot must not swing more than 10 degrees past the goal. Lower AIM_KP or add AIM_KD to damp it.",
+					"verifier": {
+						"type": "nt4-value",
+						"topic": "/AdvantageKit/RealOutputs/Check/Aim/OvershootDegrees",
+						"check": "range",
+						"min": 0,
+						"max": 10
 					}
 				}
 			]
@@ -2629,6 +2662,54 @@
 			],
 			"kind": "assist",
 			"path": "lessons/robot-state-machines/guides/robot-state-machines-shooter-states-assist.json"
+		},
+		{
+			"id": "robot-state-machines-aim",
+			"title": "Aiming at a spot",
+			"summary": "How a robot works out which way to turn to face a point.",
+			"topic": "Robot",
+			"order": 513,
+			"modules": [
+				"robot-state-machines"
+			],
+			"kind": "concept",
+			"path": "lessons/robot-state-machines/guides/robot-state-machines-aim.json"
+		},
+		{
+			"id": "robot-state-machines-aim-assist",
+			"title": "Write the aim state",
+			"summary": "Add AIM, the PID, the angle to the goal, isAimed and the command.",
+			"topic": "Robot",
+			"order": 514,
+			"modules": [
+				"robot-state-machines"
+			],
+			"kind": "mixed",
+			"path": "lessons/robot-state-machines/guides/robot-state-machines-aim-assist.json"
+		},
+		{
+			"id": "robot-state-machines-aim-tuning",
+			"title": "Tune kP to reach the goal",
+			"summary": "Raise kP until the robot settles within 2 degrees.",
+			"topic": "Robot",
+			"order": 515,
+			"modules": [
+				"robot-state-machines"
+			],
+			"kind": "mixed",
+			"path": "lessons/robot-state-machines/guides/robot-state-machines-aim-tuning.json"
+		},
+		{
+			"id": "robot-state-machines-aim-damping",
+			"title": "Damp the overshoot with kD",
+			"summary": "Use kD to stop the robot swinging past the goal.",
+			"topic": "Robot",
+			"order": 516,
+			"modules": [
+				"robot-state-machines"
+			],
+			"kind": "mixed",
+			"path": "lessons/robot-state-machines/guides/robot-state-machines-aim-damping.json"
 		},
 		{
 			"id": "robot-autonomous-command-lifecycle",

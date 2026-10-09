@@ -4,6 +4,7 @@ import com.marswars.logging.MwLog;
 import com.marswars.subsystem.MwSubsystem;
 import com.marswars.subsystem.SubsystemIoBase;
 import edu.wpi.first.math.MathUtil;
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import frc.robot.OI;
@@ -29,9 +30,11 @@ public class DrivetrainSubsystem extends MwSubsystem<DriveStates, DrivetrainCons
 
   private final DifferentialDriveMech drive;
 
-  // TODO (aim, part 1): create the PIDController that turns the robot to face the goal. Build it
-  // from DrivetrainConstants.AIM_KP, AIM_KI and AIM_KD, so you can tune the gains there.
-  // private final PIDController aimPid = ...
+  // The PID controller that turns the robot to face the goal. Its gains come from
+  // DrivetrainConstants, so you can tune them there.
+  private final PIDController aimPid =
+      new PIDController(
+          DrivetrainConstants.AIM_KP, DrivetrainConstants.AIM_KI, DrivetrainConstants.AIM_KD);
 
   // The turn command the aim state last sent to the drive (logged so you can plot it).
   private double aimTurn = 0.0;
@@ -42,10 +45,10 @@ public class DrivetrainSubsystem extends MwSubsystem<DriveStates, DrivetrainCons
         new DifferentialDriveMech(
             DrivetrainConstants.LEFT_MOTORS, DrivetrainConstants.RIGHT_MOTORS);
 
-    // TODO (aim, part 1): configure the PID here. Headings wrap around (179 degrees and -179
-    // degrees are only 2 degrees apart), so call enableContinuousInput(-Math.PI, Math.PI), and
-    // set its tolerance with setTolerance(...) from DrivetrainConstants.AIM_TOLERANCE_DEGREES
-    // (in radians).
+    // Headings wrap around: 179 degrees and -179 degrees are only 2 degrees apart. Continuous
+    // input tells the PID to take the short way around.
+    aimPid.enableContinuousInput(-Math.PI, Math.PI);
+    aimPid.setTolerance(Math.toRadians(DrivetrainConstants.AIM_TOLERANCE_DEGREES));
   }
 
   /** The mechanisms this subsystem owns. MWLib reads and writes them for us every loop. */
@@ -62,19 +65,23 @@ public class DrivetrainSubsystem extends MwSubsystem<DriveStates, DrivetrainCons
   /** Runs every 20 ms. Decide what the drivetrain does based on its current state. */
   @Override
   public void updateLogic(double timestamp) {
-    // TODO (aim, part 2): add a case for your new AIM state to this switch (below).
-    //   - Ask the PID for a turn: aimPid.calculate(measurement, setpoint), where the measurement
-    //     is the robot's heading in radians and the setpoint is the angle to the goal.
-    //   - Send it to drive.arcadeDrive(0.0, turn) so the robot spins in place. Save the turn in
-    //     aimTurn so it is logged. Check the sign: a positive error means the goal is to the LEFT,
-    //     but a positive turn command turns the robot RIGHT.
-    //   - In ARCADE and IDLE call aimPid.reset() so old error does not carry into the next aim.
     switch (system_state_) {
+      case AIM:
+        // The PID's error is (goal - measurement). A positive error means the goal is to our left,
+        // but a positive turn command turns the robot RIGHT, so the sign is flipped.
+        aimTurn =
+            -aimPid.calculate(getPose().getRotation().getRadians(), getAngleToGoal().getRadians());
+        drive.arcadeDrive(0.0, aimTurn);
+        break;
       case ARCADE:
+        aimPid.reset();
+        aimTurn = 0.0;
         drive.arcadeDrive(OI.getForward(), OI.getTurn());
         break;
       case IDLE:
       default:
+        aimPid.reset();
+        aimTurn = 0.0;
         drive.arcadeDrive(0.0, 0.0);
         break;
     }
@@ -90,15 +97,9 @@ public class DrivetrainSubsystem extends MwSubsystem<DriveStates, DrivetrainCons
     return drive.getPose();
   }
 
-  /**
-   * The direction from the robot to the goal, as a field heading (0 = along +x, left is +).
-   *
-   * <p>TODO (aim, part 3): subtract the robot's position from DrivetrainConstants.GOAL (both are
-   * Translation2d: pose.getTranslation()). The result is an arrow from the robot to the goal, and
-   * its getAngle() is the direction you want.
-   */
+  /** The direction from the robot to the goal, as a field heading (0 = along +x, left is +). */
   public Rotation2d getAngleToGoal() {
-    return new Rotation2d();
+    return DrivetrainConstants.GOAL.getTranslation().minus(getPose().getTranslation()).getAngle();
   }
 
   /**
@@ -109,15 +110,10 @@ public class DrivetrainSubsystem extends MwSubsystem<DriveStates, DrivetrainCons
     return MathUtil.angleModulus(getAngleToGoal().minus(getPose().getRotation()).getRadians());
   }
 
-  /**
-   * True when the robot is facing the goal (within AIM_TOLERANCE_DEGREES) and has stopped turning.
-   * A later autonomous routine waits on this before it shoots.
-   *
-   * <p>TODO (aim, part 4): return true only when BOTH are true: the heading error (use
-   * getAimErrorRadians(), in degrees) is smaller than DrivetrainConstants.AIM_TOLERANCE_DEGREES,
-   * AND the robot is no longer spinning: Math.abs(drive.getAngularSpeed()) is under 0.15.
-   */
+  /** True when the robot is facing the goal (within the tolerance) and has stopped turning. */
   public boolean isAimed() {
-    return false;
+    return Math.abs(Math.toDegrees(getAimErrorRadians()))
+            < DrivetrainConstants.AIM_TOLERANCE_DEGREES
+        && Math.abs(drive.getAngularSpeed()) < 0.15;
   }
 }

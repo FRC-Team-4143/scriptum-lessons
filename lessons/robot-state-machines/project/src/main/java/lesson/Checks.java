@@ -9,9 +9,12 @@ public final class Checks {
       new LessonChecks(
           "Drive/LeftOutput", "Subsystem/Shooter/FlywheelVelocity", "Subsystem/Shooter/ShotCount");
 
+  private static final AimChecks aim = new AimChecks();
+
   private Checks() {}
 
   public static void update() {
     checks.update();
+    aim.update();
   }
 }
