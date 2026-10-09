@@ -15,24 +15,24 @@ import java.util.List;
  * mechanism does something.
  */
 public class ShooterSubsystem extends MwSubsystem<ShooterStates, ShooterConstants> {
-  private static ShooterSubsystem instance = null;
+  private static ShooterSubsystem instance_ = null;
 
   public static ShooterSubsystem getInstance() {
-    if (instance == null) {
-      instance = new ShooterSubsystem();
+    if (instance_ == null) {
+      instance_ = new ShooterSubsystem();
     }
-    return instance;
+    return instance_;
   }
 
-  private final FlywheelMech flywheel;
-  private final RollerMech roller;
+  private final FlywheelMech flywheel_;
+  private final RollerMech roller_;
 
   private ShooterSubsystem() {
     super(ShooterStates.MANUAL, new ShooterConstants());
 
     // CONSTANTS is this subsystem's ShooterConstants. getSubsystemKey() gives the mechanism a name
     // to log under.
-    flywheel =
+    flywheel_ =
         new FlywheelMech(
             getSubsystemKey(),
             "Flywheel",
@@ -41,7 +41,7 @@ public class ShooterSubsystem extends MwSubsystem<ShooterStates, ShooterConstant
             CONSTANTS.FLYWHEEL_INERTIA,
             CONSTANTS.FLYWHEEL_RADIUS);
 
-    roller =
+    roller_ =
         new RollerMech(
             getSubsystemKey(),
             "Roller",
@@ -53,7 +53,7 @@ public class ShooterSubsystem extends MwSubsystem<ShooterStates, ShooterConstant
   /** The mechanisms this subsystem owns. MWLib reads and writes them for us every loop. */
   @Override
   public List<SubsystemIoBase> getIos() {
-    return List.of(flywheel, roller);
+    return List.of(flywheel_, roller_);
   }
 
   @Override
@@ -64,17 +64,17 @@ public class ShooterSubsystem extends MwSubsystem<ShooterStates, ShooterConstant
   public void updateLogic(double timestamp) {
     // Shoot button: run the flywheel at its shooting power. Otherwise let it coast to a stop.
     if (OI.getShootButton()) {
-      flywheel.setTargetDutyCycle(CONSTANTS.SHOOT_DUTY_CYCLE);
+      flywheel_.setTargetDutyCycle(CONSTANTS.SHOOT_DUTY_CYCLE);
     } else {
-      flywheel.setTargetDutyCycle(0.0);
+      flywheel_.setTargetDutyCycle(0.0);
     }
 
     // The roller feeds game pieces into the flywheel while the index button is held.
-    double rollerDuty = OI.getIndexButton() ? CONSTANTS.INDEX_DUTY_CYCLE : 0.0;
-    roller.setTargetDutyCycle(rollerDuty);
+    double roller_duty = OI.getIndexButton() ? CONSTANTS.INDEX_DUTY_CYCLE : 0.0;
+    roller_.setTargetDutyCycle(roller_duty);
 
     // Send numbers to AdvantageScope.
-    MwLog.log(getSubsystemKey() + "FlywheelVelocity", flywheel.getCurrentVelocity());
-    MwLog.log(getSubsystemKey() + "RollerDuty", rollerDuty);
+    MwLog.log(getSubsystemKey() + "FlywheelVelocity", flywheel_.getCurrentVelocity());
+    MwLog.log(getSubsystemKey() + "RollerDuty", roller_duty);
   }
 }

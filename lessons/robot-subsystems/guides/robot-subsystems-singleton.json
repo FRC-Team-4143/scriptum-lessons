@@ -11,15 +11,15 @@
 				"bit": "A singleton: private constructor plus `getInstance()` that builds the single copy on first use."
 			},
 			"board": {
-				"code": "private static ClawSubsystem instance;\n\npublic static ClawSubsystem getInstance() {\n    if (instance == null) {\n        instance = new ClawSubsystem();\n    }\n    return instance;\n}",
+				"code": "private static ClawSubsystem instance_;\n\npublic static ClawSubsystem getInstance() {\n    if (instance_ == null) {\n        instance_ = new ClawSubsystem();\n    }\n    return instance_;\n}",
 				"language": "java",
 				"marks": [
 					{
-						"text": "if (instance == null)",
+						"text": "if (instance_ == null)",
 						"label": "first time only"
 					},
 					{
-						"text": "return instance;",
+						"text": "return instance_;",
 						"label": "everyone shares one"
 					}
 				]
@@ -32,14 +32,14 @@
 				"bit": "The whole robot must share **one** shooter. A private constructor stops anyone writing `new`, and `getInstance()` hands out the single copy."
 			},
 			"board": {
-				"code": "private static ShooterSubsystem instance;\n\npublic static ShooterSubsystem getInstance() {\n    if (instance == null) {\n        instance = new ShooterSubsystem();\n    }\n    return instance;\n}",
+				"code": "private static ShooterSubsystem instance_;\n\npublic static ShooterSubsystem getInstance() {\n    if (instance_ == null) {\n        instance_ = new ShooterSubsystem();\n    }\n    return instance_;\n}",
 				"marks": [
 					{
-						"text": "private static ShooterSubsystem instance;",
+						"text": "private static ShooterSubsystem instance_;",
 						"label": "the one copy"
 					},
 					{
-						"text": "instance == null",
+						"text": "instance_ == null",
 						"label": "first time? make it"
 					}
 				]

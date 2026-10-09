@@ -11,7 +11,7 @@
 				"bit": "A **variable** is a box with a name on it. You put a value in, and later you use the name to get the value back out. Here's one:"
 			},
 			"board": {
-				"code": "int wheelCount = 4;"
+				"code": "int wheel_count = 4;"
 			}
 		},
 		{
@@ -21,7 +21,7 @@
 				"bit": "First comes the **type**: what kind of value fits in the box. `int` holds whole numbers."
 			},
 			"board": {
-				"code": "int wheelCount = 4;",
+				"code": "int wheel_count = 4;",
 				"marks": [
 					{
 						"text": "int",
@@ -33,18 +33,18 @@
 		{
 			"title": "The name",
 			"say": {
-				"never": "Next comes the **name**. It's how you'll ask for the box later, so pick a name that says what's inside. Java names start with a small letter, and each new word starts with a capital, like `wheelCount`. People call that camel case because of the humps.",
-				"bit": "Next, the **name**: how you'll refer to the box later. Pick one that says what it holds. Java names start lowercase, and each new word starts with a capital (`wheelCount`)."
+				"never": "Next comes the **name**. It's how you'll ask for the box later, so pick a name that says what's inside. Our team writes variable names in all lowercase, with an underscore between the words, like `wheel_count`. People call that snake case, because the underscores sit low like a snake. Java would accept other styles, but we all use the same one so everyone can read everyone's code.",
+				"bit": "Next, the **name**: how you'll refer to the box later. Pick one that says what it holds. Team style: lowercase words joined by underscores (`wheel_count`)."
 			},
 			"board": {
-				"code": "int wheelCount = 4;",
+				"code": "int wheel_count = 4;",
 				"marks": [
 					{
 						"text": "int",
 						"label": "type: whole numbers only"
 					},
 					{
-						"text": "wheelCount",
+						"text": "wheel_count",
 						"label": "name: how you use it later"
 					}
 				]
@@ -53,18 +53,18 @@
 		{
 			"title": "The value",
 			"say": {
-				"never": "The `=` sign means **put this value into the box**. It does *not* mean \"equals\" the way it does in math. It's an order: \"store 4 in `wheelCount`\".",
+				"never": "The `=` sign means **put this value into the box**. It does *not* mean \"equals\" the way it does in math. It's an order: \"store 4 in `wheel_count`\".",
 				"bit": "`=` means **put this value in the box**. It isn't \"equals\" like in math. It's an instruction."
 			},
 			"board": {
-				"code": "int wheelCount = 4;",
+				"code": "int wheel_count = 4;",
 				"marks": [
 					{
 						"text": "int",
 						"label": "type: whole numbers only"
 					},
 					{
-						"text": "wheelCount",
+						"text": "wheel_count",
 						"label": "name: how you use it later"
 					},
 					{
@@ -81,14 +81,14 @@
 				"bit": "Every Java statement ends with a **semicolon**. Forgetting one is the most common build error, and the console will point right at it."
 			},
 			"board": {
-				"code": "int wheelCount = 4;",
+				"code": "int wheel_count = 4;",
 				"marks": [
 					{
 						"text": "int",
 						"label": "type: whole numbers only"
 					},
 					{
-						"text": "wheelCount",
+						"text": "wheel_count",
 						"label": "name: how you use it later"
 					},
 					{
@@ -109,7 +109,7 @@
 				"bit": "Different values need different types. These four cover almost everything at first."
 			},
 			"board": {
-				"code": "int wheelCount = 4;\ndouble speed = 0.5;\nboolean enabled = false;\nString teamName = \"MARS/WARS\";",
+				"code": "int wheel_count = 4;\ndouble speed = 0.5;\nboolean enabled = false;\nString team_name = \"MARS/WARS\";",
 				"marks": [
 					{
 						"text": "int",

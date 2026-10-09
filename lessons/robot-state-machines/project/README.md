@@ -68,13 +68,13 @@ Go slower on anything that is new. Finishing every bonus is not expected.
 **Part 3: aim at the goal**
 
 7. **Add the `AIM` state** to `DriveStates` in `DrivetrainConstants.java`.
-8. **Build the PID.** In `DrivetrainSubsystem.java` make a `PIDController` called `aimPid` from the three
+8. **Build the PID.** In `DrivetrainSubsystem.java` make a `PIDController` called `aim_pid_` from the three
    `AIM_` gains, with `enableContinuousInput(-Math.PI, Math.PI)` (headings wrap around) and a tolerance.
 9. **Find the direction to the goal.** Write `getAngleToGoal()`: the goal's position minus the robot's
    position is an arrow, and `getAngle()` is its heading. (`getAimErrorRadians()` is given to you.)
 10. **Write the `AIM` case** in the `switch`: ask the PID for a turn and send it with
-    `drive.arcadeDrive(0.0, turn)`. A positive error means the goal is on the left, but a positive turn
-    command turns the robot right, so flip the sign. Call `aimPid.reset()` in the other cases.
+    `drive_.arcadeDrive(0.0, turn)`. A positive error means the goal is on the left, but a positive turn
+    command turns the robot right, so flip the sign. Call `aim_pid_.reset()` in the other cases.
 11. **Write `isAimed()`**: true when the error is smaller than `AIM_TOLERANCE_DEGREES` **and** the robot
     has stopped turning. The autonomous lesson waits on this before it shoots.
 12. **Write `DrivetrainCommands.aim()`**: a `startEnd` command that wants `AIM`, then `ARCADE` when it

@@ -7,11 +7,11 @@
 		{
 			"title": "Text plus a value",
 			"say": {
-				"never": "Put a `+` between some text and a variable and Java **joins** them into one piece of text. That's how you add a label to a number, so the output says what it means. For example `\"Team number: \" + teamNumber` prints `Team number: 4143`.",
+				"never": "Put a `+` between some text and a variable and Java **joins** them into one piece of text. That's how you add a label to a number, so the output says what it means. For example `\"Team number: \" + team_num` prints `Team number: 4143`.",
 				"bit": "`+` between a String and a value **joins** them into one String. That's how you label what you print."
 			},
 			"board": {
-				"code": "int teamNumber = 4143;\nSystem.out.println(\"Team number: \" + teamNumber);",
+				"code": "int team_num = 4143;\nSystem.out.println(\"Team number: \" + team_num);",
 				"marks": [
 					{
 						"text": "\"Team number: \"",
@@ -22,7 +22,7 @@
 						"label": "joins the text and the value"
 					},
 					{
-						"text": "teamNumber",
+						"text": "team_num",
 						"label": "the variable's value goes here"
 					}
 				],
@@ -36,7 +36,7 @@
 				"bit": "The checkpoints read your output, so it must match exactly: capital letters, the colon, the one space."
 			},
 			"board": {
-				"code": "System.out.println(\"Team number: \" + teamNumber);  // Team number: 4143\nSystem.out.println(\"Team number:\" + teamNumber);   // Team number:4143\nSystem.out.println(\"team number: \" + teamNumber);  // team number: 4143",
+				"code": "System.out.println(\"Team number: \" + team_num);  // Team number: 4143\nSystem.out.println(\"Team number:\" + team_num);   // Team number:4143\nSystem.out.println(\"team number: \" + team_num);  // team number: 4143",
 				"marks": [
 					{
 						"text": "\"Team number:\"",

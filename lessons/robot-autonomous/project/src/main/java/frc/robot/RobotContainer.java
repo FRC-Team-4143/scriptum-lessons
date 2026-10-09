@@ -14,7 +14,7 @@ import frc.robot.subsystems.shooter.ShooterSubsystem;
  * the drive team uses to pick an autonomous routine before the match.
  */
 public class RobotContainer extends SubsystemManager {
-  private final SendableChooser<Command> autoChooser = new SendableChooser<>();
+  private final SendableChooser<Command> auto_chooser_ = new SendableChooser<>();
 
   public RobotContainer() {
     super(BuildConstants.class);
@@ -23,14 +23,14 @@ public class RobotContainer extends SubsystemManager {
     registerSubsystem(ShooterSubsystem.getInstance());
 
     // The default choice does nothing at all.
-    autoChooser.setDefaultOption("Do Nothing", Commands.none());
+    auto_chooser_.setDefaultOption("Do Nothing", Commands.none());
     // The routines you can pick from. Pickup And Score is the one you build in Autos.java.
-    autoChooser.addOption("Pickup And Score", Autos.pickupAndScore());
-    SmartDashboard.putData("Auto Choices", autoChooser);
+    auto_chooser_.addOption("Pickup And Score", Autos.pickupAndScore());
+    SmartDashboard.putData("Auto Choices", auto_chooser_);
   }
 
   /** The routine currently picked in the chooser. */
   public Command getSelectedAuto() {
-    return autoChooser.getSelected();
+    return auto_chooser_.getSelected();
   }
 }

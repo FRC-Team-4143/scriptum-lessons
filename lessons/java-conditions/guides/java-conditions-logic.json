@@ -7,18 +7,18 @@
 		{
 			"title": "Combining",
 			"say": {
-				"never": "You can combine true/false questions. `&&` means **and** (both must be true). `||` means **or** (at least one is true). `!` means **not** and flips true to false. For example `hasComms && !eStopped` reads: \"we have comms AND we're not e-stopped\".",
+				"never": "You can combine true/false questions. `&&` means **and** (both must be true). `||` means **or** (at least one is true). `!` means **not** and flips true to false. For example `has_comms && !e_stopped` reads: \"we have comms AND we're not e-stopped\".",
 				"bit": "`&&` is **and** (both true), `||` is **or** (at least one), `!` is **not** (flip it)."
 			},
 			"board": {
-				"code": "hasComms && !eStopped    // comms AND not e-stopped\nday.equals(\"Saturday\") || day.equals(\"Sunday\")",
+				"code": "has_comms && !e_stopped    // comms AND not e-stopped\nday.equals(\"Saturday\") || day.equals(\"Sunday\")",
 				"marks": [
 					{
 						"text": "&&",
 						"label": "both must be true"
 					},
 					{
-						"text": "!eStopped",
+						"text": "!e_stopped",
 						"label": "true when NOT e-stopped"
 					},
 					{
@@ -47,14 +47,14 @@
 		{
 			"title": "Ternary",
 			"say": {
-				"never": "The **ternary** is a one-line shortcut for if/else that hands back a value. Read `isReversed ? \"REVERSED\" : \"FORWARD\"` as: \"if isReversed is true, give me REVERSED, otherwise give me FORWARD\".",
+				"never": "The **ternary** is a one-line shortcut for if/else that hands back a value. Read `is_reversed ? \"REVERSED\" : \"FORWARD\"` as: \"if is_reversed is true, give me REVERSED, otherwise give me FORWARD\".",
 				"bit": "`condition ? a : b` is a one-line if/else that **gives back a value**."
 			},
 			"board": {
-				"code": "return isReversed ? \"REVERSED\" : \"FORWARD\";",
+				"code": "return is_reversed ? \"REVERSED\" : \"FORWARD\";",
 				"marks": [
 					{
-						"text": "isReversed ?",
+						"text": "is_reversed ?",
 						"label": "the question"
 					},
 					{

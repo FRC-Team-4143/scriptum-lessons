@@ -13,41 +13,41 @@ import org.littletonrobotics.junction.LoggedRobot;
  */
 public class Robot extends LoggedRobot {
   // TODO (STEP 1): delete this field. The OI class will read the controller for you.
-  private final XboxController controller = new XboxController(0);
+  private final XboxController controller_ = new XboxController(0);
 
-  private final DifferentialDriveMech drive =
+  private final DifferentialDriveMech drive_ =
       new DifferentialDriveMech(Constants.LEFT_MOTORS, Constants.RIGHT_MOTORS);
-  private final LessonLoop loop = new LessonLoop(drive);
+  private final LessonLoop loop_ = new LessonLoop(drive_);
 
   @Override
   public void robotPeriodic() {
     // The loop reads the sensors, updates the drivetrain's pose, and sends the motor commands.
-    loop.doControlLoop();
+    loop_.doControlLoop();
   }
 
   @Override
   public void disabledPeriodic() {
-    drive.arcadeDrive(0.0, 0.0);
+    drive_.arcadeDrive(0.0, 0.0);
   }
 
   @Override
   public void teleopPeriodic() {
     // TODO (STEP 1): use OI.getForward() and OI.getTurn() instead of the controller.
-    drive.arcadeDrive(
-        MathUtil.applyDeadband(-controller.getLeftY(), 0.1),
-        MathUtil.applyDeadband(controller.getLeftX(), 0.1));
+    drive_.arcadeDrive(
+        MathUtil.applyDeadband(-controller_.getLeftY(), 0.1),
+        MathUtil.applyDeadband(controller_.getLeftX(), 0.1));
   }
 
   @Override
   public void autonomousInit() {
     // Start from the origin.
-    drive.resetPose();
+    drive_.resetPose();
   }
 
   @Override
   public void autonomousPeriodic() {
     // STEP 5: Last lesson the robot counted its own distance. Now drive forward at 0.4 until the
-    // pose says x is at least 3.0 meters, then stop. Use drive.getPose().getX().
-    drive.arcadeDrive(0.0, 0.0); // TODO
+    // pose says x is at least 3.0 meters, then stop. Use drive_.getPose().getX().
+    drive_.arcadeDrive(0.0, 0.0); // TODO
   }
 }

@@ -32,7 +32,7 @@
 				"bit": "Arcade drive: the left stick goes forward and back and also turns. Most drivers prefer it."
 			},
 			"board": {
-				"code": "double forward = -controller.getLeftY();\ndouble turn = controller.getLeftX();",
+				"code": "double forward = -controller_.getLeftY();\ndouble turn = controller_.getLeftX();",
 				"marks": [
 					{
 						"text": "getLeftY",
@@ -70,7 +70,7 @@
 				"bit": "To turn right, the left side goes faster than the right. Adding and subtracting `turn` does exactly that."
 			},
 			"board": {
-				"code": "double leftSpeed = forward + turn;\ndouble rightSpeed = forward - turn;\ndrive.setDutyCycles(leftSpeed, rightSpeed);",
+				"code": "double left_speed = forward + turn;\ndouble right_speed = forward - turn;\ndrive_.setDutyCycles(left_speed, right_speed);",
 				"marks": [
 					{
 						"text": "forward + turn",

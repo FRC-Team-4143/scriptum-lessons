@@ -14,50 +14,50 @@ import frc.robot.subsystems.drive.DrivetrainSubsystem;
  * every 20 ms, isFinished() says when it is done, and end() runs once when it stops.
  */
 public class TurnToAngleCommand extends Command {
-  private final DrivetrainSubsystem drive = DrivetrainSubsystem.getInstance();
-  private final DrivetrainConstants constants = drive.getConstants();
-  private final Rotation2d goal;
+  private final DrivetrainSubsystem drive_ = DrivetrainSubsystem.getInstance();
+  private final DrivetrainConstants CONSTANTS = drive_.getConstants();
+  private final Rotation2d goal_;
 
   /**
    * @param degrees the heading to face. 0 is the starting direction, positive is left
    *     (counterclockwise).
    */
   public TurnToAngleCommand(double degrees) {
-    goal = Rotation2d.fromDegrees(degrees);
+    goal_ = Rotation2d.fromDegrees(degrees);
   }
 
   /** How far we still have to turn, in radians, between -pi and pi. */
   private double errorRadians() {
-    return MathUtil.angleModulus(goal.minus(drive.getPose().getRotation()).getRadians());
+    return MathUtil.angleModulus(goal_.minus(drive_.getPose().getRotation()).getRadians());
   }
 
   @Override
   public void execute() {
-    if (Math.abs(Math.toDegrees(errorRadians())) < constants.TURN_TOLERANCE_DEGREES) {
+    if (Math.abs(Math.toDegrees(errorRadians())) < CONSTANTS.TURN_TOLERANCE_DEGREES) {
       // Close enough: stop pushing and let the robot settle.
-      drive.setCommandedSpeeds(0.0, 0.0);
+      drive_.setCommandedSpeeds(0.0, 0.0);
       return;
     }
     // Turn faster the farther we are from the goal (this is "proportional" control). A positive
     // error means we need to turn left, but a positive turn command turns RIGHT, so flip the sign.
-    double turn = -constants.TURN_KP * errorRadians();
-    turn = MathUtil.clamp(turn, -constants.MAX_TURN_SPEED, constants.MAX_TURN_SPEED);
+    double turn = -CONSTANTS.TURN_KP * errorRadians();
+    turn = MathUtil.clamp(turn, -CONSTANTS.MAX_TURN_SPEED, CONSTANTS.MAX_TURN_SPEED);
     // Never go slower than the minimum, or the robot would stall just short of the goal.
-    if (Math.abs(turn) < constants.MIN_TURN_SPEED) {
-      turn = Math.copySign(constants.MIN_TURN_SPEED, turn);
+    if (Math.abs(turn) < CONSTANTS.MIN_TURN_SPEED) {
+      turn = Math.copySign(CONSTANTS.MIN_TURN_SPEED, turn);
     }
-    drive.setCommandedSpeeds(0.0, turn);
+    drive_.setCommandedSpeeds(0.0, turn);
   }
 
   @Override
   public boolean isFinished() {
     // On target AND no longer spinning. Without the second check the robot would coast past it.
-    boolean onTarget = Math.abs(Math.toDegrees(errorRadians())) < constants.TURN_TOLERANCE_DEGREES;
-    return onTarget && Math.abs(drive.getAngularSpeed()) < 0.15;
+    boolean on_target = Math.abs(Math.toDegrees(errorRadians())) < CONSTANTS.TURN_TOLERANCE_DEGREES;
+    return on_target && Math.abs(drive_.getAngularSpeed()) < 0.15;
   }
 
   @Override
   public void end(boolean interrupted) {
-    drive.setCommandedSpeeds(0.0, 0.0);
+    drive_.setCommandedSpeeds(0.0, 0.0);
   }
 }

@@ -19,42 +19,42 @@ import java.util.List;
  */
 public class DrivetrainSubsystem extends MwSubsystem<DriveStates, DrivetrainConstants> {
   // There is only ever one drivetrain, so everyone shares it through getInstance().
-  private static DrivetrainSubsystem instance = null;
+  private static DrivetrainSubsystem instance_ = null;
 
   public static DrivetrainSubsystem getInstance() {
-    if (instance == null) {
-      instance = new DrivetrainSubsystem();
+    if (instance_ == null) {
+      instance_ = new DrivetrainSubsystem();
     }
-    return instance;
+    return instance_;
   }
 
-  private final DifferentialDriveMech drive;
+  private final DifferentialDriveMech drive_;
 
   // The PID controller that turns the robot to face the goal. Its gains come from
   // DrivetrainConstants, so you can tune them there.
-  private final PIDController aimPid =
+  private final PIDController aim_pid_ =
       new PIDController(
           DrivetrainConstants.AIM_KP, DrivetrainConstants.AIM_KI, DrivetrainConstants.AIM_KD);
 
   // The turn command the aim state last sent to the drive (logged so you can plot it).
-  private double aimTurn = 0.0;
+  private double aim_turn_ = 0.0;
 
   private DrivetrainSubsystem() {
     super(DriveStates.IDLE, new DrivetrainConstants());
-    drive =
+    drive_ =
         new DifferentialDriveMech(
             DrivetrainConstants.LEFT_MOTORS, DrivetrainConstants.RIGHT_MOTORS);
 
     // Headings wrap around: 179 degrees and -179 degrees are only 2 degrees apart. Continuous
     // input tells the PID to take the short way around.
-    aimPid.enableContinuousInput(-Math.PI, Math.PI);
-    aimPid.setTolerance(Math.toRadians(DrivetrainConstants.AIM_TOLERANCE_DEGREES));
+    aim_pid_.enableContinuousInput(-Math.PI, Math.PI);
+    aim_pid_.setTolerance(Math.toRadians(DrivetrainConstants.AIM_TOLERANCE_DEGREES));
   }
 
   /** The mechanisms this subsystem owns. MWLib reads and writes them for us every loop. */
   @Override
   public List<SubsystemIoBase> getIos() {
-    return List.of(drive);
+    return List.of(drive_);
   }
 
   @Override
@@ -69,32 +69,33 @@ public class DrivetrainSubsystem extends MwSubsystem<DriveStates, DrivetrainCons
       case AIM:
         // The PID's error is (goal - measurement). A positive error means the goal is to our left,
         // but a positive turn command turns the robot RIGHT, so the sign is flipped.
-        aimTurn =
-            -aimPid.calculate(getPose().getRotation().getRadians(), getAngleToGoal().getRadians());
-        drive.arcadeDrive(0.0, aimTurn);
+        aim_turn_ =
+            -aim_pid_.calculate(
+                getPose().getRotation().getRadians(), getAngleToGoal().getRadians());
+        drive_.arcadeDrive(0.0, aim_turn_);
         break;
       case ARCADE:
-        aimPid.reset();
-        aimTurn = 0.0;
-        drive.arcadeDrive(OI.getForward(), OI.getTurn());
+        aim_pid_.reset();
+        aim_turn_ = 0.0;
+        drive_.arcadeDrive(OI.getForward(), OI.getTurn());
         break;
       case IDLE:
       default:
-        aimPid.reset();
-        aimTurn = 0.0;
-        drive.arcadeDrive(0.0, 0.0);
+        aim_pid_.reset();
+        aim_turn_ = 0.0;
+        drive_.arcadeDrive(0.0, 0.0);
         break;
     }
 
     // Logged every loop (in every state) so you can plot them in AdvantageScope.
     MwLog.log(getSubsystemKey() + "AimErrorDegrees", Math.toDegrees(getAimErrorRadians()));
-    MwLog.log(getSubsystemKey() + "AimOutput", aimTurn);
+    MwLog.log(getSubsystemKey() + "AimOutput", aim_turn_);
     MwLog.log(getSubsystemKey() + "IsAimed", isAimed());
   }
 
   /** Where the robot thinks it is (the drive mechanism works this out). */
   public Pose2d getPose() {
-    return drive.getPose();
+    return drive_.getPose();
   }
 
   /** The direction from the robot to the goal, as a field heading (0 = along +x, left is +). */
@@ -114,6 +115,6 @@ public class DrivetrainSubsystem extends MwSubsystem<DriveStates, DrivetrainCons
   public boolean isAimed() {
     return Math.abs(Math.toDegrees(getAimErrorRadians()))
             < DrivetrainConstants.AIM_TOLERANCE_DEGREES
-        && Math.abs(drive.getAngularSpeed()) < 0.15;
+        && Math.abs(drive_.getAngularSpeed()) < 0.15;
   }
 }

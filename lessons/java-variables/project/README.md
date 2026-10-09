@@ -10,8 +10,9 @@ More depth: the team docs page [Variables](https://frc-team-4143.github.io/docs/
 
 1. **Store four facts in local variables.** Inside `main`, declare one
    variable for each row below, choosing the datatype shown, and declare and
-   assign on the same line. Name them whatever you like - the checkpoint
-   reads what gets printed, not your variable names.
+   assign on the same line. Team standard: local variables are
+   `snake_case` (lowercase words joined by underscores, like `team_number`).
+   The checkpoint reads what gets printed, not your variable names.
 
    | Datatype | Value | Printed key |
    | --- | --- | --- |
@@ -22,7 +23,7 @@ More depth: the team docs page [Variables](https://frc-team-4143.github.io/docs/
 
 2. **Print each one** with `System.out.println`, as the key, a colon, one
    space, then the value - e.g.
-   `System.out.println("Team number: " + yourVariableName);`.
+   `System.out.println("Team number: " + your_variable_name);`.
 
    :::warning[Match the printed format exactly]
 

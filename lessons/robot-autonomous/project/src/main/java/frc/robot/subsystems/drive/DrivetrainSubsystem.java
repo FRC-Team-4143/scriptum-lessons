@@ -29,54 +29,54 @@ import java.util.function.Supplier;
  */
 public class DrivetrainSubsystem extends MwSubsystem<DriveStates, DrivetrainConstants> {
   // There is only ever one drivetrain, so everyone shares it through getInstance().
-  private static DrivetrainSubsystem instance = null;
+  private static DrivetrainSubsystem instance_ = null;
 
   public static DrivetrainSubsystem getInstance() {
-    if (instance == null) {
-      instance = new DrivetrainSubsystem();
+    if (instance_ == null) {
+      instance_ = new DrivetrainSubsystem();
     }
-    return instance;
+    return instance_;
   }
 
-  private final DifferentialDriveMech drive;
+  private final DifferentialDriveMech drive_;
 
   // The speeds autonomous commands ask for. Only used in the COMMANDED state.
-  private double commandedForward = 0.0;
-  private double commandedTurn = 0.0;
+  private double commanded_forward_ = 0.0;
+  private double commanded_turn_ = 0.0;
 
   // The PID that turns the robot to face the goal (state AIM). You built and tuned this in the
   // State Machines lesson; here it is finished, and the autonomous routine just uses it.
-  private final PIDController aimPid =
+  private final PIDController aim_pid_ =
       new PIDController(
           DrivetrainConstants.AIM_KP, DrivetrainConstants.AIM_KI, DrivetrainConstants.AIM_KD);
-  private double aimTurn = 0.0; // the turn the aim state last sent to the drive
+  private double aim_turn_ = 0.0; // the turn the aim state last sent to the drive
 
   // Choreo path following (state CHOREO_PATH). Provided: you do not need to change any of this.
-  private final DifferentialPathFollower pathFollower;
-  private final ChoreoEventTracker eventTracker;
-  private final Timer pathTimer = new Timer(); // how far along the path we are, in seconds
-  private Trajectory<DifferentialSample> path = null;
+  private final DifferentialPathFollower path_follower_;
+  private final ChoreoEventTracker event_tracker_;
+  private final Timer path_timer_ = new Timer(); // how far along the path we are, in seconds
+  private Trajectory<DifferentialSample> path_ = null;
 
   private DrivetrainSubsystem() {
     super(DriveStates.IDLE, new DrivetrainConstants());
-    drive =
+    drive_ =
         new DifferentialDriveMech(
             DrivetrainConstants.LEFT_MOTORS, DrivetrainConstants.RIGHT_MOTORS);
-    pathFollower = new DifferentialPathFollower(CONSTANTS, drive.getKinematics());
+    path_follower_ = new DifferentialPathFollower(CONSTANTS, drive_.getKinematics());
     // The event tracker watches the clock and says when each marker you put on the path in Choreo
     // has been passed. It also knows the robot's pose, for markers that trigger by position.
-    eventTracker = new ChoreoEventTracker(getSubsystemKey() + "Choreo/Events/", this::getPose);
+    event_tracker_ = new ChoreoEventTracker(getSubsystemKey() + "Choreo/Events/", this::getPose);
 
     // Headings wrap around: 179 degrees and -179 degrees are only 2 degrees apart. Continuous
     // input tells the PID to take the short way around.
-    aimPid.enableContinuousInput(-Math.PI, Math.PI);
-    aimPid.setTolerance(Math.toRadians(DrivetrainConstants.AIM_TOLERANCE_DEGREES));
+    aim_pid_.enableContinuousInput(-Math.PI, Math.PI);
+    aim_pid_.setTolerance(Math.toRadians(DrivetrainConstants.AIM_TOLERANCE_DEGREES));
   }
 
   /** The mechanisms this subsystem owns. MWLib reads and writes them for us every loop. */
   @Override
   public List<SubsystemIoBase> getIos() {
-    return List.of(drive);
+    return List.of(drive_);
   }
 
   @Override
@@ -91,17 +91,18 @@ public class DrivetrainSubsystem extends MwSubsystem<DriveStates, DrivetrainCons
       case AIM:
         // The PID's error is (goal - measurement). A positive error means the goal is to our left,
         // but a positive turn command turns the robot RIGHT, so the sign is flipped.
-        aimTurn =
-            -aimPid.calculate(getPose().getRotation().getRadians(), getAngleToGoal().getRadians());
-        drive.arcadeDrive(0.0, aimTurn);
+        aim_turn_ =
+            -aim_pid_.calculate(
+                getPose().getRotation().getRadians(), getAngleToGoal().getRadians());
+        drive_.arcadeDrive(0.0, aim_turn_);
         break;
       case ARCADE:
         resetAim();
-        drive.arcadeDrive(OI.getForward(), OI.getTurn());
+        drive_.arcadeDrive(OI.getForward(), OI.getTurn());
         break;
       case COMMANDED:
         resetAim();
-        drive.arcadeDrive(commandedForward, commandedTurn);
+        drive_.arcadeDrive(commanded_forward_, commanded_turn_);
         break;
       case CHOREO_PATH:
         resetAim();
@@ -110,20 +111,20 @@ public class DrivetrainSubsystem extends MwSubsystem<DriveStates, DrivetrainCons
       case IDLE:
       default:
         resetAim();
-        drive.arcadeDrive(0.0, 0.0);
+        drive_.arcadeDrive(0.0, 0.0);
         break;
     }
 
     // Logged every loop (in every state) so you can plot them in AdvantageScope.
     MwLog.log(getSubsystemKey() + "AimErrorDegrees", Math.toDegrees(getAimErrorRadians()));
-    MwLog.log(getSubsystemKey() + "AimOutput", aimTurn);
+    MwLog.log(getSubsystemKey() + "AimOutput", aim_turn_);
     MwLog.log(getSubsystemKey() + "IsAimed", isAimed());
   }
 
   /** Forget the aim PID's old error so it does not carry into the next aim. */
   private void resetAim() {
-    aimPid.reset();
-    aimTurn = 0.0;
+    aim_pid_.reset();
+    aim_turn_ = 0.0;
   }
 
   /**
@@ -134,23 +135,23 @@ public class DrivetrainSubsystem extends MwSubsystem<DriveStates, DrivetrainCons
    * @param turn -1.0 (turn left) to 1.0 (turn right)
    */
   public void setCommandedSpeeds(double forward, double turn) {
-    commandedForward = forward;
-    commandedTurn = turn;
+    commanded_forward_ = forward;
+    commanded_turn_ = turn;
   }
 
   /** Puts the robot back at the origin facing forward, with fresh encoders. */
   public void resetPose() {
-    drive.resetPose();
+    drive_.resetPose();
   }
 
   /** Tells the robot where it is on the field (autonomous uses this to start on the path). */
   public void resetPose(Pose2d pose) {
-    drive.resetPose(pose);
+    drive_.resetPose(pose);
   }
 
   /** Where the robot REALLY is (the simulation knows; on a real robot it is just the estimate). */
   public Pose2d getTruePose() {
-    return drive.getTruePose();
+    return drive_.getTruePose();
   }
 
   /** The constants for this subsystem (autonomous commands read their gains from here). */
@@ -160,12 +161,12 @@ public class DrivetrainSubsystem extends MwSubsystem<DriveStates, DrivetrainCons
 
   /** How fast the robot is turning in radians per second. Positive is turning left. */
   public double getAngularSpeed() {
-    return drive.getChassisSpeeds().omegaRadiansPerSecond;
+    return drive_.getChassisSpeeds().omegaRadiansPerSecond;
   }
 
   /** Where the robot thinks it is (the drive mechanism works this out). */
   public Pose2d getPose() {
-    return drive.getPose();
+    return drive_.getPose();
   }
 
   /** The direction from the robot to the goal, as a field heading (0 = along +x, left is +). */
@@ -185,7 +186,7 @@ public class DrivetrainSubsystem extends MwSubsystem<DriveStates, DrivetrainCons
   public boolean isAimed() {
     return Math.abs(Math.toDegrees(getAimErrorRadians()))
             < DrivetrainConstants.AIM_TOLERANCE_DEGREES
-        && Math.abs(drive.getAngularSpeed()) < 0.15;
+        && Math.abs(drive_.getAngularSpeed()) < 0.15;
   }
 
   /**
@@ -195,8 +196,9 @@ public class DrivetrainSubsystem extends MwSubsystem<DriveStates, DrivetrainCons
    */
   public double getTrueAimErrorDegrees() {
     Pose2d truth = getTruePose();
-    Rotation2d toGoal = FieldTargets.GOAL.getTranslation().minus(truth.getTranslation()).getAngle();
-    return toGoal.minus(truth.getRotation()).getDegrees();
+    Rotation2d to_goal =
+        FieldTargets.GOAL.getTranslation().minus(truth.getTranslation()).getAngle();
+    return to_goal.minus(truth.getRotation()).getDegrees();
   }
 
   // ---------------------------------------------------------------------------------------------
@@ -209,14 +211,14 @@ public class DrivetrainSubsystem extends MwSubsystem<DriveStates, DrivetrainCons
    * reset.
    */
   public void setDesiredChoreoTrajectory(ChoreoTrajectory trajectory) {
-    path = trajectory.getDifferentialTrajectory();
-    eventTracker.setEvents(trajectory);
-    eventTracker.start();
-    pathTimer.stop();
-    pathTimer.reset();
-    MwLog.log(getSubsystemKey() + "Choreo/Trajectory", path.getPoses());
-    MwLog.log(getSubsystemKey() + "Choreo/TrajName", path.name());
-    MwLog.log(getSubsystemKey() + "Choreo/TotalTime", path.getTotalTime());
+    path_ = trajectory.getDifferentialTrajectory();
+    event_tracker_.setEvents(trajectory);
+    event_tracker_.start();
+    path_timer_.stop();
+    path_timer_.reset();
+    MwLog.log(getSubsystemKey() + "Choreo/Trajectory", path_.getPoses());
+    MwLog.log(getSubsystemKey() + "Choreo/TrajName", path_.name());
+    MwLog.log(getSubsystemKey() + "Choreo/TotalTime", path_.getTotalTime());
   }
 
   /** A command that picks the path to follow next (see {@link #setDesiredChoreoTrajectory}). */
@@ -226,39 +228,39 @@ public class DrivetrainSubsystem extends MwSubsystem<DriveStates, DrivetrainCons
 
   /** Runs every loop in the CHOREO_PATH state: drive the part of the path for "right now". */
   private void followPath() {
-    if (path == null) {
-      drive.setDutyCycles(0.0, 0.0);
+    if (path_ == null) {
+      drive_.setDutyCycles(0.0, 0.0);
       return;
     }
     Pose2d robot = getPose();
-    DifferentialSample ref = DifferentialPathFollower.sampleAt(path, pathTimer.get());
+    DifferentialSample ref = DifferentialPathFollower.sampleAt(path_, path_timer_.get());
     // Wait for the robot if it has fallen far behind the path, instead of leaving it behind.
-    boolean tooFarBehind =
+    boolean too_far_behind =
         ref.getPose().getTranslation().getDistance(robot.getTranslation())
             > CONSTANTS.CHOREO_LOOK_AHEAD_METERS;
-    if (tooFarBehind) {
-      pathTimer.stop();
+    if (too_far_behind) {
+      path_timer_.stop();
     } else {
-      pathTimer.start();
+      path_timer_.start();
     }
-    eventTracker.update(pathTimer.get());
+    event_tracker_.update(path_timer_.get());
 
     // Follow the path while its clock is running; after that, settle onto the end point.
-    boolean pathOver = pathTimer.get() >= path.getTotalTime();
+    boolean path_over = path_timer_.get() >= path_.getTotalTime();
     double[] duty =
-        pathOver
-            ? pathFollower.settle(robot, path.getFinalPose(false).get())
-            : pathFollower.calculate(robot, ref);
-    drive.setDutyCycles(duty[0], duty[1]);
-    MwLog.log(getSubsystemKey() + "Choreo/TimerValue", pathTimer.get());
+        path_over
+            ? path_follower_.settle(robot, path_.getFinalPose(false).get())
+            : path_follower_.calculate(robot, ref);
+    drive_.setDutyCycles(duty[0], duty[1]);
+    MwLog.log(getSubsystemKey() + "Choreo/TimerValue", path_timer_.get());
     MwLog.log(getSubsystemKey() + "Choreo/DesiredPose", ref.getPose());
   }
 
   /** True once the path's clock has run to the end of the path. */
   public boolean hasChoreoTimeElapsed() {
     return system_state_ == DriveStates.CHOREO_PATH
-        && path != null
-        && pathTimer.get() >= path.getTotalTime();
+        && path_ != null
+        && path_timer_.get() >= path_.getTotalTime();
   }
 
   /** True when the path has finished, the robot is at its end point, and it has stopped moving. */
@@ -266,31 +268,31 @@ public class DrivetrainSubsystem extends MwSubsystem<DriveStates, DrivetrainCons
     if (!hasChoreoTimeElapsed()) {
       return false;
     }
-    Pose2d end = path.getFinalPose(false).get();
-    boolean closeEnough =
+    Pose2d end = path_.getFinalPose(false).get();
+    boolean close_enough =
         getPose().getTranslation().getDistance(end.getTranslation())
             < CONSTANTS.CHOREO_TRANSLATION_TOLERANCE_METERS;
     boolean stopped =
-        Math.abs(drive.getChassisSpeeds().vxMetersPerSecond)
+        Math.abs(drive_.getChassisSpeeds().vxMetersPerSecond)
             < CONSTANTS.CHOREO_STOPPED_SPEED_METERS_PER_SECOND;
-    return closeEnough && stopped;
+    return close_enough && stopped;
   }
 
   /** Stops watching for event markers (the path is over). */
   public void stopChoreoEvents() {
-    eventTracker.stop();
+    event_tracker_.stop();
   }
 
   /**
    * A trigger that turns true once the path's clock passes the event marker with this name, which
    * you place on the path in Choreo. Use it like a button: {@code .onTrue(command)}.
    */
-  public Trigger getChoreoEventTimeTrigger(String eventName) {
-    return eventTracker.getTimeTrigger(eventName);
+  public Trigger getChoreoEventTimeTrigger(String event_name) {
+    return event_tracker_.getTimeTrigger(event_name);
   }
 
   /** How long the current path takes, in seconds. */
   public double getChoreoTotalTime() {
-    return path == null ? 0.0 : path.getTotalTime();
+    return path_ == null ? 0.0 : path_.getTotalTime();
   }
 }

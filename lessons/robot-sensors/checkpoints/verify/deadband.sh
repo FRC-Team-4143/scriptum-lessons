@@ -22,8 +22,8 @@ if [[ "$(grep -Eo "if[[:space:]]*\\([[:space:]]*Math\\.abs\\([^)]*\\)[[:space:]]
 	echo "Use the deadband on both sticks: if (Math.abs(forward) < Constants.DEADBAND) { forward = 0.0; } and the same for turn."
 	exit 1
 fi
-if ! grep -Eq 'if[[:space:]]*\([^)]*(distanceMeters|getDistance)[^)]*<' <<<"$CODE"; then
-	echo "In autonomousPeriodic() use an if / else on distanceMeters for bang-bang control."
+if ! grep -Eq 'if[[:space:]]*\([^)]*(distance_meters_|getDistance)[^)]*<' <<<"$CODE"; then
+	echo "In autonomousPeriodic() use an if / else on distance_meters_ for bang-bang control."
 	exit 1
 fi
 echo "The DEADBAND constant in Constants.java, both if statements and the bang-bang if/else are in place."

@@ -59,8 +59,8 @@
 		{
 			"title": "Drive with the sticks",
 			"say": {
-				"never": "Now write the line the comment asks for: `drive.arcadeDrive(OI.getForward(), OI.getTurn());`. It goes right under the comment, inside `updateLogic`. `updateLogic` runs every 20 thousandths of a second, so this line re-reads the sticks and drives the robot over and over while you drive. Ask `OI` for the sticks; never talk to the controller directly.",
-				"bit": "Write the line the comment describes: `drive.arcadeDrive(OI.getForward(), OI.getTurn());`. `updateLogic` runs every 20 ms, so it keeps re-reading the sticks."
+				"never": "Now write the line the comment asks for: `drive_.arcadeDrive(OI.getForward(), OI.getTurn());`. It goes right under the comment, inside `updateLogic`. `updateLogic` runs every 20 thousandths of a second, so this line re-reads the sticks and drives the robot over and over while you drive. Ask `OI` for the sticks; never talk to the controller directly.",
+				"bit": "Write the line the comment describes: `drive_.arcadeDrive(OI.getForward(), OI.getTurn());`. `updateLogic` runs every 20 ms, so it keeps re-reading the sticks."
 			},
 			"target": {
 				"pane": "editor",
@@ -70,7 +70,7 @@
 			"cardAt": "bottom-right",
 			"assist": true,
 			"board": {
-				"code": "public void updateLogic(double timestamp) {\n    drive.arcadeDrive(OI.getForward(), OI.getTurn());\n}",
+				"code": "public void updateLogic(double timestamp) {\n    drive_.arcadeDrive(OI.getForward(), OI.getTurn());\n}",
 				"marks": [
 					{
 						"text": "updateLogic",

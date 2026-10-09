@@ -16,9 +16,9 @@ directly. Instead you tell the drivetrain what you want.
 
 - `Robot.java` is **your code**. Everything you write goes in `teleopPeriodic()`.
 - `Constants.java` lists the robot's motors (one on each side) and measurements.
-- The drivetrain is the `drive` object in `Robot.java`. The one thing you need from it is
-  `drive.setDutyCycles(left, right)`.
-- The controller is the `controller` object. It can tell you how far each stick is pushed.
+- The drivetrain is the `drive_` object in `Robot.java`. The one thing you need from it is
+  `drive_.setDutyCycles(left, right)`.
+- The controller is the `controller_` object. It can tell you how far each stick is pushed.
 
 ## Running it
 
@@ -47,15 +47,15 @@ Go slower on anything that is new. Finishing every bonus is not expected.
 
 Everything here is code **you write** in `teleopPeriodic()`. Run it after each step.
 
-1. **Tank drive.** Declare `double leftSpeed` from the left stick (`controller.getLeftY()`) and
-   `double rightSpeed` from the right stick (`controller.getRightY()`), each with a minus sign in
-   front. Finish with `drive.setDutyCycles(leftSpeed, rightSpeed);`.
+1. **Tank drive.** Declare `double left_speed` from the left stick (`controller_.getLeftY()`) and
+   `double right_speed` from the right stick (`controller_.getRightY()`), each with a minus sign in
+   front. Finish with `drive_.setDutyCycles(left_speed, right_speed);`.
    Run it: **W / S** drives the left side, **Arrow Up / Down** the right side.
 2. **Arcade drive.** Replace your code so that you:
    - declare `forward` from the **left stick Y** (still with the minus sign),
-   - declare `turn` from the **left stick X** (`controller.getLeftX()`),
-   - set `leftSpeed = forward + turn` and `rightSpeed = forward - turn`,
-   - call `drive.setDutyCycles(leftSpeed, rightSpeed);`.
+   - declare `turn` from the **left stick X** (`controller_.getLeftX()`),
+   - set `left_speed = forward + turn` and `right_speed = forward - turn`,
+   - call `drive_.setDutyCycles(left_speed, right_speed);`.
 
    Run it: **W / S** drive, **A / D** turn (all on the left stick). If it turns the wrong way, check your signs.
 3. **Click Verify** to check your work.

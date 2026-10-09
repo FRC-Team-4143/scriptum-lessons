@@ -5,8 +5,8 @@ public class Main {
         return value;
     }
 
-    public static double scaleJoystick(double rawInput, double sensitivity) {
-        return clamp(rawInput * sensitivity, -1.0, 1.0);
+    public static double scaleJoystick(double raw_input, double sensitivity) {
+        return clamp(raw_input * sensitivity, -1.0, 1.0);
     }
 
     public static boolean isPrime(int n) {

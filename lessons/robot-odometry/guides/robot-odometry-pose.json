@@ -14,8 +14,8 @@
 		{
 			"title": "In your lesson: Pose",
 			"say": {
-				"never": "The pose estimator needs two moves every loop. First feed it the latest movement, then ask where it thinks the robot is and keep the answer:\n\n`poseEstimator.update(getYaw(), getLeftMeters(), getRightMeters());`\n\n`pose = poseEstimator.getEstimatedPosition();`",
-				"bit": "Feed it the latest movement with `poseEstimator.update(getYaw(), getLeftMeters(), getRightMeters());`, then store `poseEstimator.getEstimatedPosition()` in `pose`."
+				"never": "The pose estimator needs two moves every loop. First feed it the latest movement, then ask where it thinks the robot is and keep the answer:\n\n`pose_estimator_.update(getYaw(), getLeftMeters(), getRightMeters());`\n\n`pose_ = pose_estimator_.getEstimatedPosition();`",
+				"bit": "Feed it the latest movement with `pose_estimator_.update(getYaw(), getLeftMeters(), getRightMeters());`, then store `pose_estimator_.getEstimatedPosition()` in `pose_`."
 			},
 			"assist": true
 		},
@@ -73,8 +73,8 @@
 		{
 			"title": "Feed the estimator",
 			"say": {
-				"never": "Inside `updatePose()` the TODO comment shows what to write. Add this line below it (you can delete the comment lines when you are done):\n\n`poseEstimator.update(getYaw(), getLeftMeters(), getRightMeters());`\n\nThis hands the estimator the heading from `getYaw()` and how far each side has driven. It runs every loop, so the estimator keeps adding up the movement.",
-				"bit": "Under the TODO, write `poseEstimator.update(getYaw(), getLeftMeters(), getRightMeters());`."
+				"never": "Inside `updatePose()` the TODO comment shows what to write. Add this line below it (you can delete the comment lines when you are done):\n\n`pose_estimator_.update(getYaw(), getLeftMeters(), getRightMeters());`\n\nThis hands the estimator the heading from `getYaw()` and how far each side has driven. It runs every loop, so the estimator keeps adding up the movement.",
+				"bit": "Under the TODO, write `pose_estimator_.update(getYaw(), getLeftMeters(), getRightMeters());`."
 			},
 			"target": {
 				"pane": "editor",
@@ -84,14 +84,14 @@
 			"cardAt": "bottom-right",
 			"assist": true,
 			"waitFor": {
-				"hint": "write the poseEstimator.update(...) line."
+				"hint": "write the pose_estimator_.update(...) line."
 			}
 		},
 		{
 			"title": "Store the answer",
 			"say": {
-				"never": "Now ask the estimator where the robot is and keep the answer in the `pose` variable. Add this line under the first one:\n\n`pose = poseEstimator.getEstimatedPosition();`\n\n`getPose()` hands this variable to the rest of the robot and to the logs.",
-				"bit": "Add `pose = poseEstimator.getEstimatedPosition();` under the update line."
+				"never": "Now ask the estimator where the robot is and keep the answer in the `pose_` variable. Add this line under the first one:\n\n`pose_ = pose_estimator_.getEstimatedPosition();`\n\n`getPose()` hands this variable to the rest of the robot and to the logs.",
+				"bit": "Add `pose_ = pose_estimator_.getEstimatedPosition();` under the update line."
 			},
 			"target": {
 				"pane": "editor",
@@ -101,7 +101,7 @@
 			"cardAt": "bottom-right",
 			"assist": true,
 			"waitFor": {
-				"hint": "store the estimator's answer in pose."
+				"hint": "store the estimator's answer in pose_."
 			}
 		},
 		{

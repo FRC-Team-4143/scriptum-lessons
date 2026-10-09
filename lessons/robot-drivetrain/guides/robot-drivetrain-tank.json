@@ -32,18 +32,18 @@
 				"bit": "Like a tank: the left stick runs the left side, the right stick runs the right side."
 			},
 			"board": {
-				"code": "double leftSpeed = -controller.getLeftY();\ndouble rightSpeed = -controller.getRightY();\ndrive.setDutyCycles(leftSpeed, rightSpeed);",
+				"code": "double left_speed = -controller_.getLeftY();\ndouble right_speed = -controller_.getRightY();\ndrive_.setDutyCycles(left_speed, right_speed);",
 				"marks": [
 					{
-						"text": "double leftSpeed",
+						"text": "double left_speed",
 						"label": "a variable for each side"
 					},
 					{
-						"text": "-controller.getRightY()",
+						"text": "-controller_.getRightY()",
 						"label": "right stick, flipped"
 					},
 					{
-						"text": "drive.setDutyCycles(leftSpeed, rightSpeed);",
+						"text": "drive_.setDutyCycles(left_speed, right_speed);",
 						"label": "send both to the motors"
 					}
 				]
@@ -118,19 +118,19 @@
 		{
 			"title": "Line 1: the left speed",
 			"say": {
-				"never": "Type this line first. `double leftSpeed` makes a box named `leftSpeed` that holds a number with a decimal. `controller.getLeftY()` asks the gamepad how far the left stick is pushed up or down. The **minus sign** flips it, because pushing a stick *forward* gives a negative number and we want forward to be positive. Don't forget the `;` at the end. The lesson README has more on `double` and the sticks.",
-				"bit": "Type `double leftSpeed = -controller.getLeftY();`. It stores the left stick position in a box, flipped so forward is positive."
+				"never": "Type this line first. `double left_speed` makes a box named `left_speed` that holds a number with a decimal. `controller_.getLeftY()` asks the gamepad how far the left stick is pushed up or down. The **minus sign** flips it, because pushing a stick *forward* gives a negative number and we want forward to be positive. Don't forget the `;` at the end. The lesson README has more on `double` and the sticks.",
+				"bit": "Type `double left_speed = -controller_.getLeftY();`. It stores the left stick position in a box, flipped so forward is positive."
 			},
 			"board": {
-				"code": "double leftSpeed = -controller.getLeftY();",
+				"code": "double left_speed = -controller_.getLeftY();",
 				"language": "java",
 				"marks": [
 					{
-						"text": "double leftSpeed",
+						"text": "double left_speed",
 						"label": "a box for the left side's speed"
 					},
 					{
-						"text": "controller.getLeftY()",
+						"text": "controller_.getLeftY()",
 						"label": "ask: how far is the left stick pushed?"
 					},
 					{
@@ -147,7 +147,7 @@
 				"target": {
 					"pane": "editor",
 					"selector": ".view-lines .view-line",
-					"text": "double leftSpeed"
+					"text": "double left_speed"
 				},
 				"hint": "type the left speed line inside the braces.",
 				"skipIfDone": true
@@ -157,19 +157,19 @@
 		{
 			"title": "Line 2: the right speed",
 			"say": {
-				"never": "Press Enter for a new line and type this one. It does the same job for the other side: a box named `rightSpeed`, filled from the **right** stick with `controller.getRightY()`, flipped with a minus sign for the same reason. Two sides, two boxes.",
-				"bit": "On a new line, type `double rightSpeed = -controller.getRightY();`. Same idea, for the right stick."
+				"never": "Press Enter for a new line and type this one. It does the same job for the other side: a box named `right_speed`, filled from the **right** stick with `controller_.getRightY()`, flipped with a minus sign for the same reason. Two sides, two boxes.",
+				"bit": "On a new line, type `double right_speed = -controller_.getRightY();`. Same idea, for the right stick."
 			},
 			"board": {
-				"code": "double rightSpeed = -controller.getRightY();",
+				"code": "double right_speed = -controller_.getRightY();",
 				"language": "java",
 				"marks": [
 					{
-						"text": "double rightSpeed",
+						"text": "double right_speed",
 						"label": "a box for the right side's speed"
 					},
 					{
-						"text": "controller.getRightY()",
+						"text": "controller_.getRightY()",
 						"label": "ask: how far is the right stick pushed?"
 					},
 					{
@@ -186,7 +186,7 @@
 				"target": {
 					"pane": "editor",
 					"selector": ".view-lines .view-line",
-					"text": "double rightSpeed"
+					"text": "double right_speed"
 				},
 				"hint": "type the right speed line under the first.",
 				"skipIfDone": true
@@ -196,23 +196,23 @@
 		{
 			"title": "Line 3: send them to the motors",
 			"say": {
-				"never": "Last line. The two boxes only *hold* numbers, so nothing moves yet. `drive.setDutyCycles(leftSpeed, rightSpeed);` hands both numbers to the drivetrain, and the motors run at that power. The order matters: **left first, then right**. Each number goes from -1.0 (full backward) to 1.0 (full forward). Because it is inside `teleopPeriodic()`, it repeats about 50 times a second, so the robot follows your sticks.",
-				"bit": "Type `drive.setDutyCycles(leftSpeed, rightSpeed);`. It sends both boxes to the motors, left first, then right."
+				"never": "Last line. The two boxes only *hold* numbers, so nothing moves yet. `drive_.setDutyCycles(left_speed, right_speed);` hands both numbers to the drivetrain, and the motors run at that power. The order matters: **left first, then right**. Each number goes from -1.0 (full backward) to 1.0 (full forward). Because it is inside `teleopPeriodic()`, it repeats about 50 times a second, so the robot follows your sticks.",
+				"bit": "Type `drive_.setDutyCycles(left_speed, right_speed);`. It sends both boxes to the motors, left first, then right."
 			},
 			"board": {
-				"code": "drive.setDutyCycles(leftSpeed, rightSpeed);",
+				"code": "drive_.setDutyCycles(left_speed, right_speed);",
 				"language": "java",
 				"marks": [
 					{
-						"text": "drive.setDutyCycles",
+						"text": "drive_.setDutyCycles",
 						"label": "tell the motors how hard to run"
 					},
 					{
-						"text": "leftSpeed",
+						"text": "left_speed",
 						"label": "first: the left side"
 					},
 					{
-						"text": "rightSpeed",
+						"text": "right_speed",
 						"label": "second: the right side"
 					}
 				]
@@ -225,7 +225,7 @@
 				"target": {
 					"pane": "editor",
 					"selector": ".view-lines .view-line",
-					"text": "drive.setDutyCycles(leftSpeed"
+					"text": "drive_.setDutyCycles(left_speed"
 				},
 				"hint": "type the setDutyCycles line under the other two.",
 				"skipIfDone": true

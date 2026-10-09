@@ -32,18 +32,18 @@
 				"bit": "`rotationsToMeters` takes two numbers and returns one. The first line is its signature."
 			},
 			"board": {
-				"code": "public static double rotationsToMeters(\n    double wheelRotations,\n    double wheelRadiusMeters) {\n  // the math goes here\n}",
+				"code": "public static double rotationsToMeters(\n    double wheel_rotations,\n    double wheel_radius_meters) {\n  // the math goes here\n}",
 				"marks": [
 					{
 						"text": "rotationsToMeters",
 						"label": "its name"
 					},
 					{
-						"text": "double wheelRotations",
+						"text": "double wheel_rotations",
 						"label": "input one"
 					},
 					{
-						"text": "double wheelRadiusMeters",
+						"text": "double wheel_radius_meters",
 						"label": "input two"
 					},
 					{
@@ -180,7 +180,7 @@
 		{
 			"title": "Write linearSpeed",
 			"say": {
-				"never": "Under the comment, write `linearSpeed` yourself. Inputs: the left speed and the right speed, both `double`. Answer: a `double`, the average of the two sides. Call the inputs `leftMetersPerSecond` and `rightMetersPerSecond`. Save, then press **Verify**.",
+				"never": "Under the comment, write `linearSpeed` yourself. Inputs: the left speed and the right speed, both `double`. Answer: a `double`, the average of the two sides. Call the inputs `left_meters_per_second` and `right_meters_per_second`. Save, then press **Verify**.",
 				"bit": "Write `linearSpeed(left, right)`: two doubles in, the average out. Then **Verify**."
 			},
 			"target": {
@@ -198,7 +198,7 @@
 			"title": "Write angularSpeed",
 			"say": {
 				"never": "Now `angularSpeed`, with **three** inputs, all `double`: the left speed, the right speed and the track width. The answer is `(right - left)` divided by the track width. Once both methods exist, the red errors in the robot code go away. Press **Verify**.",
-				"bit": "Write `angularSpeed(left, right, trackWidth)`: three doubles in, `(right - left) / trackWidth` out."
+				"bit": "Write `angularSpeed(left, right, track_width_meters)`: three doubles in, `(right - left) / track_width_meters` out."
 			},
 			"target": {
 				"pane": "editor",

@@ -13,11 +13,11 @@ if ! grep -Eq 'if[[:space:]]*\([[:space:]]*OI\.getShootButton[[:space:]]*\([[:sp
 	exit 1
 fi
 if ! grep -Eq 'setTargetDutyCycle[[:space:]]*\([[:space:]]*CONSTANTS\.SHOOT_DUTY_CYCLE[[:space:]]*\)' <<<"$CODE"; then
-	echo "While the shoot button is held, call flywheel.setTargetDutyCycle(CONSTANTS.SHOOT_DUTY_CYCLE)."
+	echo "While the shoot button is held, call flywheel_.setTargetDutyCycle(CONSTANTS.SHOOT_DUTY_CYCLE)."
 	exit 1
 fi
-if ! grep -Eq 'else[[:space:]]*\{[^}]*flywheel\.setTargetDutyCycle[[:space:]]*\([[:space:]]*0(\.0)?[[:space:]]*\)' <<<"$CODE"; then
-	echo "Add an else that calls flywheel.setTargetDutyCycle(0.0) so the flywheel stops when the button is released."
+if ! grep -Eq 'else[[:space:]]*\{[^}]*flywheel_\.setTargetDutyCycle[[:space:]]*\([[:space:]]*0(\.0)?[[:space:]]*\)' <<<"$CODE"; then
+	echo "Add an else that calls flywheel_.setTargetDutyCycle(0.0) so the flywheel stops when the button is released."
 	exit 1
 fi
 echo "The shoot button logic is written."

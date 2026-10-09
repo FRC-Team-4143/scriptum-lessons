@@ -17,8 +17,8 @@ import org.littletonrobotics.junction.LoggedRobot;
  * not need to change it.
  */
 public class Robot extends LoggedRobot {
-  private final RobotContainer container = new RobotContainer();
-  private Command autoCommand = null;
+  private final RobotContainer container_ = new RobotContainer();
+  private Command auto_command_ = null;
 
   public Robot() {
     OI.configureBindings();
@@ -26,7 +26,7 @@ public class Robot extends LoggedRobot {
 
   @Override
   public void robotPeriodic() {
-    container.doControlLoop();
+    container_.doControlLoop();
     CommandScheduler.getInstance().run();
     Checks.update(); // lesson helper, used by the Verify button
   }
@@ -39,14 +39,14 @@ public class Robot extends LoggedRobot {
   @Override
   public void autonomousInit() {
     // Run the routine picked in the chooser, starting from where its first path starts.
-    autoCommand = container.getSelectedAuto();
-    Pose2d startPose = new Pose2d(); // routines without a path start at the origin
-    if (autoCommand instanceof Auto auto) {
+    auto_command_ = container_.getSelectedAuto();
+    Pose2d start_pose = new Pose2d(); // routines without a path start at the origin
+    if (auto_command_ instanceof Auto auto) {
       try {
         // Load the paths the routine named with loadTrajectory(...). false = we are the blue
         // alliance, so the paths are used as drawn, not mirrored to the other side of the field.
         auto.cacheTrajetories(false);
-        startPose = auto.getStartPose();
+        start_pose = auto.getStartPose();
       } catch (RuntimeException e) {
         DriverStation.reportError(
             "Could not load a path for "
@@ -55,20 +55,20 @@ public class Robot extends LoggedRobot {
                 + "generate it? "
                 + e,
             false);
-        autoCommand = Commands.none();
+        auto_command_ = Commands.none();
       }
     }
-    DrivetrainSubsystem.getInstance().resetPose(startPose);
+    DrivetrainSubsystem.getInstance().resetPose(start_pose);
     DrivetrainSubsystem.getInstance().setWantedState(DriveStates.COMMANDED);
     ShooterSubsystem.getInstance().resetShotCount();
-    CommandScheduler.getInstance().schedule(autoCommand);
+    CommandScheduler.getInstance().schedule(auto_command_);
   }
 
   @Override
   public void teleopInit() {
     // Stop the autonomous routine if it is still running, then give the driver control.
-    if (autoCommand != null) {
-      autoCommand.cancel();
+    if (auto_command_ != null) {
+      auto_command_.cancel();
     }
     DrivetrainSubsystem.getInstance().setWantedState(DriveStates.ARCADE);
   }

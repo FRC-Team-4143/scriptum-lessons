@@ -15,35 +15,35 @@ import java.util.List;
  * about HOW the flywheel holds its speed: see runFlywheel() and the methods below it.
  */
 public class ShooterSubsystem extends MwSubsystem<ShooterStates, ShooterConstants> {
-  private static ShooterSubsystem instance = null;
+  private static ShooterSubsystem instance_ = null;
 
   public static ShooterSubsystem getInstance() {
-    if (instance == null) {
-      instance = new ShooterSubsystem();
+    if (instance_ == null) {
+      instance_ = new ShooterSubsystem();
     }
-    return instance;
+    return instance_;
   }
 
-  private final FlywheelMech flywheel;
-  private final RollerMech roller;
+  private final FlywheelMech flywheel_;
+  private final RollerMech roller_;
 
   // Bookkeeping for the lesson's checks and the launch button. You do not need to change it.
-  private final Timer spinUpTimer = new Timer();
-  private final Timer recoveryTimer = new Timer();
-  private boolean wasShooting = false;
-  private boolean waitingForSpeed = false;
-  private boolean waitingForRecovery = false;
-  private boolean dippedAfterLaunch = false;
-  private boolean launchWasPressed = false;
-  private double spinUpSeconds = 0.0;
-  private double recoverySeconds = 0.0;
+  private final Timer spin_up_timer_ = new Timer();
+  private final Timer recovery_timer_ = new Timer();
+  private boolean was_shooting_ = false;
+  private boolean waiting_for_speed_ = false;
+  private boolean waiting_for_recovery_ = false;
+  private boolean dipped_after_launch_ = false;
+  private boolean launch_was_pressed_ = false;
+  private double spin_up_seconds_ = 0.0;
+  private double recovery_seconds_ = 0.0;
 
   private ShooterSubsystem() {
     super(ShooterStates.MANUAL, new ShooterConstants());
 
     // CONSTANTS is this subsystem's ShooterConstants. getSubsystemKey() gives the mechanism a name
     // to log under.
-    flywheel =
+    flywheel_ =
         new FlywheelMech(
             getSubsystemKey(),
             "Flywheel",
@@ -52,7 +52,7 @@ public class ShooterSubsystem extends MwSubsystem<ShooterStates, ShooterConstant
             CONSTANTS.FLYWHEEL_INERTIA,
             CONSTANTS.FLYWHEEL_RADIUS);
 
-    roller =
+    roller_ =
         new RollerMech(
             getSubsystemKey(),
             "Roller",
@@ -64,7 +64,7 @@ public class ShooterSubsystem extends MwSubsystem<ShooterStates, ShooterConstant
   /** The mechanisms this subsystem owns. MWLib reads and writes them for us every loop. */
   @Override
   public List<SubsystemIoBase> getIos() {
-    return List.of(flywheel, roller);
+    return List.of(flywheel_, roller_);
   }
 
   @Override
@@ -77,32 +77,32 @@ public class ShooterSubsystem extends MwSubsystem<ShooterStates, ShooterConstant
     if (OI.getShootButton()) {
       runFlywheel();
     } else {
-      flywheel.setTargetDutyCycle(0.0);
+      flywheel_.setTargetDutyCycle(0.0);
     }
 
     // The roller feeds game pieces into the flywheel while the index button is held.
-    double rollerDuty = OI.getIndexButton() ? CONSTANTS.INDEX_DUTY_CYCLE : 0.0;
-    roller.setTargetDutyCycle(rollerDuty);
+    double roller_duty = OI.getIndexButton() ? CONSTANTS.INDEX_DUTY_CYCLE : 0.0;
+    roller_.setTargetDutyCycle(roller_duty);
 
     // Tap the launch button to pretend a game piece was just fired (once per tap).
-    boolean launchPressed = OI.getLaunchButton();
-    if (launchPressed && !launchWasPressed) {
+    boolean launch_pressed = OI.getLaunchButton();
+    if (launch_pressed && !launch_was_pressed_) {
       simulateBallLaunch();
     }
-    launchWasPressed = launchPressed;
+    launch_was_pressed_ = launch_pressed;
 
     trackTiming();
 
     // Send numbers to AdvantageScope.
-    MwLog.log(getSubsystemKey() + "FlywheelVelocity", flywheel.getCurrentVelocity());
+    MwLog.log(getSubsystemKey() + "FlywheelVelocity", flywheel_.getCurrentVelocity());
     MwLog.log(getSubsystemKey() + "FlywheelTarget", CONSTANTS.SHOOT_VELOCITY);
     MwLog.log(
         getSubsystemKey() + "FlywheelError",
-        CONSTANTS.SHOOT_VELOCITY - flywheel.getCurrentVelocity());
+        CONSTANTS.SHOOT_VELOCITY - flywheel_.getCurrentVelocity());
     MwLog.log(getSubsystemKey() + "FlywheelStyle", CONSTANTS.FLYWHEEL_CONTROL);
-    MwLog.log(getSubsystemKey() + "RollerDuty", rollerDuty);
-    MwLog.log(getSubsystemKey() + "SpinUpSeconds", spinUpSeconds);
-    MwLog.log(getSubsystemKey() + "RecoverySeconds", recoverySeconds);
+    MwLog.log(getSubsystemKey() + "RollerDuty", roller_duty);
+    MwLog.log(getSubsystemKey() + "SpinUpSeconds", spin_up_seconds_);
+    MwLog.log(getSubsystemKey() + "RecoverySeconds", recovery_seconds_);
   }
 
   /** Holds the flywheel at its target speed using whichever control style the constants choose. */
@@ -117,7 +117,7 @@ public class ShooterSubsystem extends MwSubsystem<ShooterStates, ShooterConstant
       case PID:
       default:
         // The motor controller runs feedforward (kV) plus feedback (kP) for us.
-        flywheel.setTargetVelocity(CONSTANTS.SHOOT_VELOCITY);
+        flywheel_.setTargetVelocity(CONSTANTS.SHOOT_VELOCITY);
         break;
     }
   }
@@ -125,11 +125,11 @@ public class ShooterSubsystem extends MwSubsystem<ShooterStates, ShooterConstant
   /**
    * Bang-bang control: full power while the flywheel is too slow, no power once it is fast enough.
    *
-   * <p>TODO: if flywheel.getCurrentVelocity() is below CONSTANTS.SHOOT_VELOCITY, call
-   * flywheel.setTargetDutyCycle(1.0). Otherwise call flywheel.setTargetDutyCycle(0.0).
+   * <p>TODO: if flywheel_.getCurrentVelocity() is below CONSTANTS.SHOOT_VELOCITY, call
+   * flywheel_.setTargetDutyCycle(1.0). Otherwise call flywheel_.setTargetDutyCycle(0.0).
    */
   private void bangBang() {
-    flywheel.setTargetDutyCycle(0.0);
+    flywheel_.setTargetDutyCycle(0.0);
   }
 
   /**
@@ -139,51 +139,51 @@ public class ShooterSubsystem extends MwSubsystem<ShooterStates, ShooterConstant
    * <p>TODO: the voltage needed is FLYWHEEL_KV times the target speed in rotations per second.
    * (SHOOT_VELOCITY is in radians per second, so divide it by 2 * Math.PI.) A duty cycle is a
    * fraction of 12 volts, so divide the voltage by 12.0 and pass it to
-   * flywheel.setTargetDutyCycle(...).
+   * flywheel_.setTargetDutyCycle(...).
    */
   private void feedforward() {
-    flywheel.setTargetDutyCycle(0.0);
+    flywheel_.setTargetDutyCycle(0.0);
   }
 
   /** True when the flywheel is close enough to the target speed. */
   public boolean isAtSpeed() {
-    return flywheel.getCurrentVelocity()
+    return flywheel_.getCurrentVelocity()
         >= CONSTANTS.SHOOT_VELOCITY * (1.0 - CONSTANTS.AT_SPEED_TOLERANCE);
   }
 
   /** Pretends a game piece was just launched, which pushes back on the flywheel. */
   public void simulateBallLaunch() {
-    flywheel.applyLoadTorque(CONSTANTS.BALL_LOAD_TORQUE);
+    flywheel_.applyLoadTorque(CONSTANTS.BALL_LOAD_TORQUE);
     if (OI.getShootButton()) {
-      recoveryTimer.restart();
-      waitingForRecovery = true;
-      dippedAfterLaunch = false;
+      recovery_timer_.restart();
+      waiting_for_recovery_ = true;
+      dipped_after_launch_ = false;
     }
   }
 
   /** Times each spin-up and each recovery after a launch. Used by the lesson checks. */
   private void trackTiming() {
     boolean shooting = OI.getShootButton();
-    if (shooting && !wasShooting) {
-      spinUpTimer.restart();
-      waitingForSpeed = true;
+    if (shooting && !was_shooting_) {
+      spin_up_timer_.restart();
+      waiting_for_speed_ = true;
     }
     if (!shooting) {
-      waitingForSpeed = false;
-      waitingForRecovery = false;
+      waiting_for_speed_ = false;
+      waiting_for_recovery_ = false;
     }
-    wasShooting = shooting;
+    was_shooting_ = shooting;
 
-    if (waitingForSpeed && isAtSpeed()) {
-      spinUpSeconds = spinUpTimer.get();
-      waitingForSpeed = false;
+    if (waiting_for_speed_ && isAtSpeed()) {
+      spin_up_seconds_ = spin_up_timer_.get();
+      waiting_for_speed_ = false;
     }
-    if (waitingForRecovery) {
+    if (waiting_for_recovery_) {
       if (!isAtSpeed()) {
-        dippedAfterLaunch = true;
-      } else if (dippedAfterLaunch) {
-        recoverySeconds = recoveryTimer.get();
-        waitingForRecovery = false;
+        dipped_after_launch_ = true;
+      } else if (dipped_after_launch_) {
+        recovery_seconds_ = recovery_timer_.get();
+        waiting_for_recovery_ = false;
       }
     }
   }

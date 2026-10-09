@@ -39,7 +39,7 @@
 				"bit": "`initialize()` runs once, when the command starts. Use it to remember the starting situation."
 			},
 			"board": {
-				"code": "@Override\npublic void initialize() {\n    startPose = drive.getPose();\n}",
+				"code": "@Override\npublic void initialize() {\n    start_pose_ = drive_.getPose();\n}",
 				"language": "java",
 				"marks": [
 					{
@@ -47,7 +47,7 @@
 						"label": "once, at the start"
 					},
 					{
-						"text": "startPose = drive.getPose();",
+						"text": "start_pose_ = drive_.getPose();",
 						"label": "remember where we began"
 					}
 				]
@@ -60,7 +60,7 @@
 				"bit": "`execute()` runs every 20 ms while the command is running. It's the working part."
 			},
 			"board": {
-				"code": "@Override\npublic void execute() {\n    double turn = -constants.TURN_KP * errorRadians();\n    drive.setCommandedSpeeds(0.0, turn);\n}",
+				"code": "@Override\npublic void execute() {\n    double turn = -CONSTANTS.TURN_KP * errorRadians();\n    drive_.setCommandedSpeeds(0.0, turn);\n}",
 				"language": "java",
 				"marks": [
 					{
@@ -81,7 +81,7 @@
 				"bit": "After every `execute()`, WPILib asks `isFinished()`. `false` means keep going. `true` means stop."
 			},
 			"board": {
-				"code": "@Override\npublic boolean isFinished() {\n    boolean onTarget = Math.abs(Math.toDegrees(errorRadians()))\n        < constants.TURN_TOLERANCE_DEGREES;\n    return onTarget && Math.abs(drive.getAngularSpeed()) < 0.15;\n}",
+				"code": "@Override\npublic boolean isFinished() {\n    boolean on_target = Math.abs(Math.toDegrees(errorRadians()))\n        < CONSTANTS.TURN_TOLERANCE_DEGREES;\n    return on_target && Math.abs(drive_.getAngularSpeed()) < 0.15;\n}",
 				"language": "java",
 				"marks": [
 					{
@@ -89,7 +89,7 @@
 						"label": "the yes/no condition"
 					},
 					{
-						"text": "onTarget &&",
+						"text": "on_target &&",
 						"label": "close enough AND"
 					},
 					{
@@ -106,7 +106,7 @@
 				"bit": "`end(interrupted)` runs once at the finish. Stop the motors here. `interrupted` is true if it was cut short."
 			},
 			"board": {
-				"code": "@Override\npublic void end(boolean interrupted) {\n    drive.setCommandedSpeeds(0.0, 0.0);\n}",
+				"code": "@Override\npublic void end(boolean interrupted) {\n    drive_.setCommandedSpeeds(0.0, 0.0);\n}",
 				"language": "java",
 				"marks": [
 					{

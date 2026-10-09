@@ -13,10 +13,10 @@ Companion docs page: [Sensors and Feedback](https://docs.marswars.org/docs/softw
 - `Robot.java` is **your code**. `robotPeriodic()` runs all the time, even when disabled, so it is
   the right place to measure things. `autonomousPeriodic()` runs on its own during autonomous.
 - The drivetrain now has sensor methods you can call:
-  - `drive.getLeftPositionRotations()` / `drive.getRightPositionRotations()`: how far each side's
+  - `drive_.getLeftPositionRotations()` / `drive_.getRightPositionRotations()`: how far each side's
     wheels have turned, in wheel rotations. Forward is positive.
-  - `drive.getLeftVelocityRps()` / `drive.getRightVelocityRps()`: how fast, in rotations per second.
-  - `drive.resetEncoders()`: reset: set both positions back to zero, so the distance starts over.
+  - `drive_.getLeftVelocityRps()` / `drive_.getRightVelocityRps()`: how fast, in rotations per second.
+  - `drive_.resetEncoders()`: reset: set both positions back to zero, so the distance starts over.
 
 ## Running it
 
@@ -43,8 +43,8 @@ Go slower on anything that is new. Finishing every bonus is not expected.
 
 ## What you need to do
 
-1. **STEP 1: meters.** In `Robot.java`, fill in `leftMeters`, `rightMeters`, `leftMetersPerSecond` and
-   `rightMetersPerSecond`. One wheel rotation moves the robot one wheel circumference:
+1. **STEP 1: meters.** In `Robot.java`, fill in `left_meters`, `right_meters`, `left_meters_per_second` and
+   `right_meters_per_second`. One wheel rotation moves the robot one wheel circumference:
 
    ```text
    meters            = rotations         x (2 x pi x wheel radius)
@@ -65,7 +65,7 @@ Go slower on anything that is new. Finishing every bonus is not expected.
 4. **STEP 4: add a deadband.** Add a `DEADBAND` constant of `0.1` to `Constants.java`. Then, in
    `teleopPeriodic()`, use an `if` on `forward` and another on `turn`: if the absolute value
    (`Math.abs(...)`) is less than `Constants.DEADBAND`, set it to `0.0`.
-5. **STEP 3: drive exactly 2 meters.** In `autonomousPeriodic()`, write an `if` / `else` on `distanceMeters`:
+5. **STEP 3: drive exactly 2 meters.** In `autonomousPeriodic()`, write an `if` / `else` on `distance_meters_`:
    drive at `0.4` while it is below `2.0`, stop otherwise. Run Auto and see where the robot stops.
 6. **Run Auto again.** Disable, then Enable in Auto a second time. The robot starts over and drives
    the same distance again. That is thanks to the **reset** in `autonomousInit()` (see below).
@@ -73,7 +73,7 @@ Go slower on anything that is new. Finishing every bonus is not expected.
 
 ### What "reset" means
 
-`drive.resetEncoders()` means: *forget everything driven so far and start counting from zero again.*
+`drive_.resetEncoders()` means: *forget everything driven so far and start counting from zero again.*
 The encoders only ever count up (or down) from where they started, so after one run of Auto the
 distance reads about 2.0. If Auto did not reset, the next run would start at 2.0, think it had already
 arrived, and never move. With the reset, `Robot/Distance` goes back to **0** at the start of every run

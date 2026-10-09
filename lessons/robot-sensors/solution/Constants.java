@@ -28,9 +28,9 @@ public final class Constants {
   public static final List<MotorConfig> RIGHT_MOTORS = List.of(motor(2, true));
 
   /** Builds the settings for one drive motor: its CAN id and whether it spins backwards. */
-  private static MotorConfig motor(int canId, boolean inverted) {
+  private static MotorConfig motor(int can_id, boolean inverted) {
     MotorConfig config = new MotorConfig();
-    config.can_id = canId;
+    config.can_id = can_id;
     config.motor_type = TalonMotorType.X60;
     config.getAsFXConfig().MotorOutput.Inverted =
         inverted ? InvertedValue.Clockwise_Positive : InvertedValue.CounterClockwise_Positive;

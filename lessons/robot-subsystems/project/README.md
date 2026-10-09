@@ -47,7 +47,7 @@ Go slower on anything that is new. Finishing every bonus is not expected.
 ## What you need to do
 
 1. **`DrivetrainSubsystem.java`.** In `updateLogic()`, call
-   `drive.arcadeDrive(OI.getForward(), OI.getTurn())`. `updateLogic()` runs every 20 ms, so the robot
+   `drive_.arcadeDrive(OI.getForward(), OI.getTurn())`. `updateLogic()` runs every 20 ms, so the robot
    keeps following the sticks.
 2. **`ShooterConstants.java`.** Add `ROLLER_MOTOR_CONFIG` (copy the flywheel's line as a pattern) and
    `INDEX_DUTY_CYCLE = 0.5`.
@@ -55,9 +55,9 @@ Go slower on anything that is new. Finishing every bonus is not expected.
    - Create the roller as a `RollerMech`, the same way the flywheel is created.
    - Make `getIos()` return both mechanisms.
    - In `updateLogic()`, write the shoot button logic yourself with an `if` / `else`: while
-     `OI.getShootButton()` is true, call `flywheel.setTargetDutyCycle(CONSTANTS.SHOOT_DUTY_CYCLE)`;
+     `OI.getShootButton()` is true, call `flywheel_.setTargetDutyCycle(CONSTANTS.SHOOT_DUTY_CYCLE)`;
      otherwise set the flywheel's duty cycle to `0.0` so it coasts to a stop.
-   - Set `rollerDuty` to `CONSTANTS.INDEX_DUTY_CYCLE` while the index button is held, `0.0`
+   - Set `roller_duty` to `CONSTANTS.INDEX_DUTY_CYCLE` while the index button is held, `0.0`
      otherwise.
 4. **`OI.java`.** Finish `getShootButton()` (right bumper) and `getIndexButton()` (left bumper).
 5. **`RobotContainer.java`.** Register the shooter next to the drivetrain.

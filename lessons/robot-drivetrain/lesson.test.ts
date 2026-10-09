@@ -20,8 +20,8 @@ describe.skipIf(!hasJdk)("robot-drivetrain script checkpoints", () => {
 			await L.applySolution(project, ["Robot.java"]);
 			const file = join(project, ROBOT_SRC, "Robot.java");
 			const text = (await readFile(file, "utf8")).replace(
-				"double rightSpeed = forward - turn;",
-				"double rightSpeed = forward;",
+				"double right_speed = forward - turn;",
+				"double right_speed = forward;",
 			);
 			await writeFile(file, text, "utf8");
 			const result = L.verify(project, "teleop-code");

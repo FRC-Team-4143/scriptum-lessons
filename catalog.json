@@ -654,7 +654,7 @@
 				{
 					"id": "can-enable",
 					"title": "Can enable",
-					"description": "canEnable(hasComms, eStopped) combines conditions with && and !.",
+					"description": "canEnable(has_comms, e_stopped) combines conditions with && and !.",
 					"verifier": {
 						"type": "script",
 						"path": "lessons/java-conditions/checkpoints/verify/can-enable.sh"
@@ -672,7 +672,7 @@
 				{
 					"id": "motor-direction",
 					"title": "Motor direction",
-					"description": "motorDirection(isReversed) uses the ternary operator.",
+					"description": "motorDirection(is_reversed) uses the ternary operator.",
 					"verifier": {
 						"type": "script",
 						"path": "lessons/java-conditions/checkpoints/verify/motor-direction.sh"
@@ -813,7 +813,7 @@
 				{
 					"id": "scale-joystick",
 					"title": "Scale joystick",
-					"description": "scaleJoystick(rawInput, sensitivity) scales and clamps, reusing clamp.",
+					"description": "scaleJoystick(raw_input, sensitivity) scales and clamps, reusing clamp.",
 					"verifier": {
 						"type": "script",
 						"path": "lessons/java-methods/checkpoints/verify/scale-joystick.sh"

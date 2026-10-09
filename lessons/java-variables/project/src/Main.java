@@ -17,7 +17,8 @@ public class Main {
     public static final double MAX_SPEED = 0.0;
 
     public static void main(String[] args) {
-        // TODO: declare four local variables (name them whatever you like)
+        // TODO: declare four local variables (team standard: snake_case names,
+        // like team_number)
         // and print each on its own line with System.out.println, matching
         // these datatypes/values/printed keys - see the README's table:
         //   int, 4143         -> "Team number: " + <your variable>
