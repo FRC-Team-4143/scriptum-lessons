@@ -35,6 +35,11 @@ public class ShooterSubsystem extends MwSubsystem<ShooterStates, ShooterConstant
   private long shotCount = 0;
   private double spinUpSeconds = 0.0;
   private double shotDistanceFromScoreSpot = 0.0; // how far from the scoring spot the last shot was
+  // How far from facing the goal (in degrees) the last shot was, and the worst of all the shots so
+  // far. The worst starts at 180 so that "no shot yet" can never look like "aimed well".
+  private double aimErrorAtShot = 0.0;
+  private double worstAimErrorAtShot = NO_SHOT_YET_DEGREES;
+  private static final double NO_SHOT_YET_DEGREES = 180.0;
 
   private ShooterSubsystem() {
     super(ShooterStates.IDLE, new ShooterConstants());
@@ -70,6 +75,8 @@ public class ShooterSubsystem extends MwSubsystem<ShooterStates, ShooterConstant
   public void resetShotCount() {
     shotCount = 0;
     shotDistanceFromScoreSpot = 0.0;
+    aimErrorAtShot = 0.0;
+    worstAimErrorAtShot = NO_SHOT_YET_DEGREES;
   }
 
   /** True when the flywheel is close enough to the target speed. */
@@ -150,6 +157,9 @@ public class ShooterSubsystem extends MwSubsystem<ShooterStates, ShooterConstant
     MwLog.log(getSubsystemKey() + "ShotCount", shotCount);
     MwLog.log(getSubsystemKey() + "SpinUpSeconds", spinUpSeconds);
     MwLog.log(getSubsystemKey() + "ShotDistanceFromScoreSpot", shotDistanceFromScoreSpot);
+    MwLog.log(getSubsystemKey() + "AimErrorAtShotDegrees", aimErrorAtShot);
+    // The lesson's check reads this one: the worst aim of any shot, 180 until the first shot.
+    MwLog.log("Check/" + getSubsystemKey() + "AimErrorAtShotDegrees/Max", worstAimErrorAtShot);
   }
 
   /** Holds the flywheel at its target speed using whichever control style the constants choose. */
@@ -204,6 +214,10 @@ public class ShooterSubsystem extends MwSubsystem<ShooterStates, ShooterConstant
                 .getTruePose()
                 .getTranslation()
                 .getDistance(FieldTargets.SCORE_SPOT.getTranslation());
+        // How far from facing the goal the robot REALLY was when this shot started.
+        aimErrorAtShot = Math.abs(DrivetrainSubsystem.getInstance().getTrueAimErrorDegrees());
+        worstAimErrorAtShot =
+            shotCount == 1 ? aimErrorAtShot : Math.max(worstAimErrorAtShot, aimErrorAtShot);
         spinUpSeconds = spinUpTimer.get();
       }
       lastState = system_state_;

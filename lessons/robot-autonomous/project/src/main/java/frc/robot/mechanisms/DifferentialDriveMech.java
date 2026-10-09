@@ -340,6 +340,13 @@ public class DifferentialDriveMech extends MechBase {
       MwLog.log(
           getLoggingKey() + "DistanceToScoreSpot",
           sim.getPose().getTranslation().getDistance(FieldTargets.SCORE_SPOT.getTranslation()));
+      // How far the simulated robot REALLY is from facing the goal. Positive: the goal is to the
+      // left.
+      Pose2d truth = sim.getPose();
+      Rotation2d toGoal =
+          FieldTargets.GOAL.getTranslation().minus(truth.getTranslation()).getAngle();
+      MwLog.log(
+          getLoggingKey() + "TrueAimErrorDegrees", toGoal.minus(truth.getRotation()).getDegrees());
     }
   }
 

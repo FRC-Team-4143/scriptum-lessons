@@ -11,6 +11,18 @@ public final class DrivetrainCommands {
   private DrivetrainCommands() {}
 
   /**
+   * Aims at the goal for as long as the command runs, then goes back to driving. You wrote this in
+   * the State Machines lesson. In an autonomous routine, end it with {@code .until(...)} (see
+   * {@link DrivetrainSubsystem#isAimed()}).
+   */
+  public static Command aim() {
+    DrivetrainSubsystem drive = DrivetrainSubsystem.getInstance();
+    return Commands.startEnd(
+        () -> drive.setWantedState(DriveStates.AIM),
+        () -> drive.setWantedState(DriveStates.ARCADE));
+  }
+
+  /**
    * Drives a Choreo path from start to finish, then stops. It finishes when the robot has arrived
    * at the end of the path, or after 10 seconds (so a robot that gets stuck cannot hold up the rest
    * of the autonomous routine forever).

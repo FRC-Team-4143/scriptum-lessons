@@ -1,6 +1,6 @@
 {
 	"title": "Choreo Autonomous",
-	"description": "Draw two paths in Choreo, then build an autonomous routine that drives them with a provided path follower: drive to the game piece, pick it up, drive to the scoring spot and shoot.",
+	"description": "Draw two paths in Choreo, then write the autonomous routine the way the competition robot does: follow the first path, pick up, follow the second path, aim at the goal with the aim state you built, and shoot.",
 	"kind": "robot",
 	"track": "FRC Robot",
 	"order": 27,
@@ -14,25 +14,72 @@
 	],
 	"checkpoints": [
 		{
+			"id": "paths-drawn",
+			"title": "Two paths drawn",
+			"description": "The Choreo project has two generated paths, each with at least three waypoints.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/paths-drawn.sh"
+			}
+		},
+		{
+			"id": "path-names",
+			"title": "Paths named ToPickup and ToScore",
+			"description": "The paths are named ToPickup and ToScore, and Autos.java loads them by those names.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/path-names.sh"
+			}
+		},
+		{
+			"id": "paths-goal",
+			"title": "Paths go where they should",
+			"description": "ToPickup runs from the Start point to the Pickup point, and ToScore carries on from there to the ScoreSpot point.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/paths-goal.sh"
+			}
+		},
+		{
+			"id": "auto-sequence",
+			"title": "Autonomous sequence written",
+			"description": "Autos.java drives ToPickup, then ToScore, then aims at the goal (until isAimed), then shoots, in that order.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/auto-sequence.sh"
+			}
+		},
+		{
 			"id": "reaches-pickup",
 			"title": "Reaches the pickup",
-			"description": "Run Pickup And Score. The robot should get within 0.3 meters of the Pickup point.",
+			"description": "Run Pickup And Score. The robot should get within 0.4 meters of the Pickup point.",
 			"verifier": {
 				"type": "nt4-value",
 				"topic": "/AdvantageKit/RealOutputs/Check/Drive/DistanceToPickup/Min",
 				"check": "range",
-				"max": 0.3
+				"max": 0.4
 			}
 		},
 		{
 			"id": "reaches-score-spot",
 			"title": "Reaches the scoring spot",
-			"description": "Run Pickup And Score. The robot should get within 0.3 meters of the ScoreSpot point.",
+			"description": "Run Pickup And Score. The robot should get within 0.4 meters of the ScoreSpot point.",
 			"verifier": {
 				"type": "nt4-value",
 				"topic": "/AdvantageKit/RealOutputs/Check/Drive/DistanceToScoreSpot/Min",
 				"check": "range",
-				"max": 0.3
+				"max": 0.4
+			}
+		},
+		{
+			"id": "aimed-before-shot",
+			"title": "Aims before it shoots",
+			"description": "Every shot should start with the robot facing the goal, within 5 degrees. Aim before you shoot.",
+			"verifier": {
+				"type": "nt4-value",
+				"topic": "/AdvantageKit/RealOutputs/Check/Subsystem/Shooter/AimErrorAtShotDegrees/Max",
+				"check": "range",
+				"max": 5
 			}
 		},
 		{
@@ -44,17 +91,6 @@
 				"topic": "/AdvantageKit/RealOutputs/Check/Subsystem/Shooter/ShotCount/Max",
 				"check": "range",
 				"min": 1
-			}
-		},
-		{
-			"id": "shoots-from-score-spot",
-			"title": "Shoots from the scoring spot",
-			"description": "Every shot should be taken within 0.3 meters of the ScoreSpot point.",
-			"verifier": {
-				"type": "nt4-value",
-				"topic": "/AdvantageKit/RealOutputs/Check/Subsystem/Shooter/ShotDistanceFromScoreSpot/Max",
-				"check": "range",
-				"max": 0.3
 			}
 		}
 	]

@@ -5,8 +5,6 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import frc.robot.subsystems.drive.DrivetrainCommands;
 import frc.robot.subsystems.drive.DrivetrainSubsystem;
 import frc.robot.subsystems.shooter.ShooterCommands;
-import frc.robot.subsystems.shooter.ShooterConstants.ShooterStates;
-import frc.robot.subsystems.shooter.ShooterSubsystem;
 
 /**
  * The robot's autonomous routines. An {@link Auto} is a list of commands that run one after
@@ -15,7 +13,7 @@ import frc.robot.subsystems.shooter.ShooterSubsystem;
 public final class Autos {
   private Autos() {}
 
-  /** Drive to the game piece, pick it up, drive to the scoring spot, and shoot. */
+  /** Drive to the game piece, pick it up, drive to the scoring spot, aim at the goal, and shoot. */
   public static Auto pickupAndScore() {
     return new PickupAndScore();
   }
@@ -27,13 +25,6 @@ public final class Autos {
       loadTrajectory("ToPickup");
       loadTrajectory("ToScore");
 
-      // The "Shoot" marker on the ToScore path: when the robot gets there, start spinning up.
-      DrivetrainSubsystem.getInstance()
-          .getChoreoEventTimeTrigger("Shoot")
-          .onTrue(
-              Commands.runOnce(
-                  () -> ShooterSubsystem.getInstance().setWantedState(ShooterStates.SHOOT)));
-
       addCommands(
           // Drive the first path.
           DrivetrainCommands.followPath(getTrajectory("ToPickup")),
@@ -41,6 +32,11 @@ public final class Autos {
           Commands.waitSeconds(0.5),
           // Drive the second path.
           DrivetrainCommands.followPath(getTrajectory("ToScore")),
+          // Turn to face the goal. Stop as soon as the robot is aimed (and give up after 3 seconds
+          // so a robot that cannot aim does not hold up the routine forever).
+          DrivetrainCommands.aim()
+              .until(DrivetrainSubsystem.getInstance()::isAimed)
+              .withTimeout(3.0),
           // Shoot for 2 seconds, then stop.
           ShooterCommands.shoot().withTimeout(2.0));
     }

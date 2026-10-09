@@ -113,6 +113,5 @@
     {"t":2.23389, "x":6.5, "y":5.0, "heading":1.5708, "vl":0.0, "vr":0.0, "omega":0.0, "al":0.02964, "ar":0.01515, "alpha":107.75455, "fl":-110.82996, "fr":0.0}],
   "splits":[0]
  },
- "events":[
-   {"name":"Shoot", "from":{"target":2, "targetTimestamp":2.23389, "offset":{"exp":"0.0 s", "val":0.0}}, "event":null}]
+ "events":[]
 }

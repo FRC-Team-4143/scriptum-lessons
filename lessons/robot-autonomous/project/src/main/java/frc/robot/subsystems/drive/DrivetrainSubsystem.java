@@ -7,11 +7,15 @@ import com.marswars.auto.ChoreoTrajectory;
 import com.marswars.logging.MwLog;
 import com.marswars.subsystem.MwSubsystem;
 import com.marswars.subsystem.SubsystemIoBase;
+import edu.wpi.first.math.MathUtil;
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+import frc.robot.FieldTargets;
 import frc.robot.OI;
 import frc.robot.mechanisms.DifferentialDriveMech;
 import frc.robot.subsystems.drive.DrivetrainConstants.DriveStates;
@@ -40,6 +44,13 @@ public class DrivetrainSubsystem extends MwSubsystem<DriveStates, DrivetrainCons
   private double commandedForward = 0.0;
   private double commandedTurn = 0.0;
 
+  // The PID that turns the robot to face the goal (state AIM). You built and tuned this in the
+  // State Machines lesson; here it is finished, and the autonomous routine just uses it.
+  private final PIDController aimPid =
+      new PIDController(
+          DrivetrainConstants.AIM_KP, DrivetrainConstants.AIM_KI, DrivetrainConstants.AIM_KD);
+  private double aimTurn = 0.0; // the turn the aim state last sent to the drive
+
   // Choreo path following (state CHOREO_PATH). Provided: you do not need to change any of this.
   private final DifferentialPathFollower pathFollower;
   private final ChoreoEventTracker eventTracker;
@@ -55,6 +66,11 @@ public class DrivetrainSubsystem extends MwSubsystem<DriveStates, DrivetrainCons
     // The event tracker watches the clock and says when each marker you put on the path in Choreo
     // has been passed. It also knows the robot's pose, for markers that trigger by position.
     eventTracker = new ChoreoEventTracker(getSubsystemKey() + "Choreo/Events/", this::getPose);
+
+    // Headings wrap around: 179 degrees and -179 degrees are only 2 degrees apart. Continuous
+    // input tells the PID to take the short way around.
+    aimPid.enableContinuousInput(-Math.PI, Math.PI);
+    aimPid.setTolerance(Math.toRadians(DrivetrainConstants.AIM_TOLERANCE_DEGREES));
   }
 
   /** The mechanisms this subsystem owns. MWLib reads and writes them for us every loop. */
@@ -72,20 +88,42 @@ public class DrivetrainSubsystem extends MwSubsystem<DriveStates, DrivetrainCons
   @Override
   public void updateLogic(double timestamp) {
     switch (system_state_) {
+      case AIM:
+        // The PID's error is (goal - measurement). A positive error means the goal is to our left,
+        // but a positive turn command turns the robot RIGHT, so the sign is flipped.
+        aimTurn =
+            -aimPid.calculate(getPose().getRotation().getRadians(), getAngleToGoal().getRadians());
+        drive.arcadeDrive(0.0, aimTurn);
+        break;
       case ARCADE:
+        resetAim();
         drive.arcadeDrive(OI.getForward(), OI.getTurn());
         break;
       case COMMANDED:
+        resetAim();
         drive.arcadeDrive(commandedForward, commandedTurn);
         break;
       case CHOREO_PATH:
+        resetAim();
         followPath();
         break;
       case IDLE:
       default:
+        resetAim();
         drive.arcadeDrive(0.0, 0.0);
         break;
     }
+
+    // Logged every loop (in every state) so you can plot them in AdvantageScope.
+    MwLog.log(getSubsystemKey() + "AimErrorDegrees", Math.toDegrees(getAimErrorRadians()));
+    MwLog.log(getSubsystemKey() + "AimOutput", aimTurn);
+    MwLog.log(getSubsystemKey() + "IsAimed", isAimed());
+  }
+
+  /** Forget the aim PID's old error so it does not carry into the next aim. */
+  private void resetAim() {
+    aimPid.reset();
+    aimTurn = 0.0;
   }
 
   /**
@@ -128,6 +166,37 @@ public class DrivetrainSubsystem extends MwSubsystem<DriveStates, DrivetrainCons
   /** Where the robot thinks it is (the drive mechanism works this out). */
   public Pose2d getPose() {
     return drive.getPose();
+  }
+
+  /** The direction from the robot to the goal, as a field heading (0 = along +x, left is +). */
+  public Rotation2d getAngleToGoal() {
+    return FieldTargets.GOAL.getTranslation().minus(getPose().getTranslation()).getAngle();
+  }
+
+  /**
+   * How far the robot still has to turn to face the goal, in radians from -pi to pi. Positive means
+   * the goal is to the robot's left.
+   */
+  public double getAimErrorRadians() {
+    return MathUtil.angleModulus(getAngleToGoal().minus(getPose().getRotation()).getRadians());
+  }
+
+  /** True when the robot is facing the goal (within the tolerance) and has stopped turning. */
+  public boolean isAimed() {
+    return Math.abs(Math.toDegrees(getAimErrorRadians()))
+            < DrivetrainConstants.AIM_TOLERANCE_DEGREES
+        && Math.abs(drive.getAngularSpeed()) < 0.15;
+  }
+
+  /**
+   * How far the robot REALLY is from facing the goal, in degrees (the simulation knows; positive
+   * means the goal is to the left). Used by the lesson's checks, so a drifting pose estimate cannot
+   * fool them.
+   */
+  public double getTrueAimErrorDegrees() {
+    Pose2d truth = getTruePose();
+    Rotation2d toGoal = FieldTargets.GOAL.getTranslation().minus(truth.getTranslation()).getAngle();
+    return toGoal.minus(truth.getRotation()).getDegrees();
   }
 
   // ---------------------------------------------------------------------------------------------
