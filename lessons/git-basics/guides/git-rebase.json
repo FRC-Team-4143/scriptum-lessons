@@ -43,62 +43,50 @@
 			}
 		},
 		{
-			"title": "The commands",
+			"title": "The steps",
 			"say": {
-				"never": "Stand on **your** branch, then tell git to rebase it onto `develop`. The last command draws the history as a picture, so you can see the straight line.",
-				"bit": "Stand on **your** branch and rebase it onto develop."
+				"never": "Stand on **your** branch, then rebase it onto develop. Afterwards the Graph in Source Control should show one straight line.",
+				"bit": "Be on **your** branch, then rebase it onto develop."
 			},
 			"board": {
-				"code": "git checkout issue-15-led-colors\ngit rebase develop\ngit log --oneline --graph --all",
-				"language": "shell",
+				"code": "be on:      issue-15-led-colors   (your branch)\nrebase onto: develop",
+				"language": "text",
 				"marks": [
 					{
-						"text": "git rebase develop",
-						"label": "replay onto develop"
+						"text": "issue-15-led-colors",
+						"label": "the branch that moves"
 					},
 					{
-						"text": "--graph --all",
-						"label": "draw every branch"
+						"text": "develop",
+						"label": "the new starting point"
 					}
 				]
 			}
 		},
 		{
-			"title": "Open a terminal",
+			"title": "Pick the repository",
 			"say": {
-				"never": "Open the **terminal**: the typing area at the bottom of the screen where you give the computer instructions. Hold **Ctrl** and tap the backtick key, the one above **Tab**. Most of these exercises are easier there.",
-				"bit": "These exercises are easiest in the terminal."
+				"never": "Open **Source Control** (the branch icon on the left). Each exercise folder has its own section there. Click **05-rebase** so the buttons and menus work on that folder.",
+				"bit": "In Source Control, click **05-rebase** so the buttons act on it."
 			},
-			"open": [
-				"editor"
-			],
 			"target": {
-				"pane": "editor"
+				"pane": "editor",
+				"selector": ".scm-view"
 			},
 			"cardAt": "top-right",
-			"waitFor": {
-				"target": {
-					"pane": "editor",
-					"selector": ".terminal-wrapper"
-				},
-				"hint": {
-					"never": "press Ctrl and the backtick key (above Tab).",
-					"bit": "press Ctrl+` (the key above Tab)."
-				}
-			},
 			"assist": true
 		},
 		{
 			"title": "Your turn",
 			"say": {
-				"never": "Type `cd 05-rebase` and press **Enter**. Then run the three commands on the board, one at a time. When you're done, the picture should be one straight line.",
-				"bit": "`cd 05-rebase`, then run them. The graph should be one straight line."
-			},
-			"target": {
-				"pane": "editor",
-				"selector": "[id='workbench.parts.panel']"
+				"never": "Check the branch name in the bottom-left says `issue-15-led-colors`. Then open the **...** menu in Source Control, choose **Branch**, then **Rebase Branch...**, and pick `develop`. Look at the Graph: it should be one straight line.",
+				"bit": "On `issue-15-led-colors`: **...** menu, Branch, Rebase Branch..., `develop`. The Graph should be one straight line."
 			},
 			"cardAt": "top-right",
+			"target": {
+				"pane": "editor",
+				"selector": ".scm-view"
+			},
 			"waitFor": {
 				"hint": {
 					"never": "rebase issue-15-led-colors onto develop.",

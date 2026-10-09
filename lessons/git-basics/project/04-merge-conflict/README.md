@@ -6,28 +6,22 @@ conflict.
 
 ## Task
 
-1. Merge the feature branch into `develop`:
-   ```
-   git checkout develop
-   git merge issue-9-max-speed
-   ```
+1. Make sure the branch name in the bottom-left says `develop`. Then, in
+   Source Control, open the **...** menu, choose **Branch**, then
+   **Merge...**, and pick `issue-9-max-speed`.
 2. Git will stop and mark the conflict in `Constants.java`. Open the file —
    VSCodium shows the two versions with **Accept Current**, **Accept
    Incoming**, and **Accept Both** buttons right above the conflict. Pick
    one value for `MAX_SPEED` (either is fine) and remove the
    `<<<<<<<`/`=======`/`>>>>>>>` markers.
-3. Stage the resolved file and finish the merge:
-   ```
-   git add Constants.java
-   git commit
-   ```
-   (A commit with no `-m` opens the editor with a pre-filled merge message —
-   just save and close it.)
+3. Save, then stage the resolved file with the **+** next to it (under
+   **Merge Changes**) and press **Commit**. The message box is already filled
+   in with a merge message; just accept it.
 
 Run **Verify** when you're done.
 
 ## You're done when
 
-`git status` reports no merge in progress, `Constants.java` has a single
-`MAX_SPEED` with no conflict markers left in it, and `git log` on `develop`
-shows a merge commit with both parents.
+Source Control shows no merge in progress, `Constants.java` has a single
+`MAX_SPEED` with no conflict markers left in it, and the **Graph** shows a
+merge commit on `develop` with both parents.
