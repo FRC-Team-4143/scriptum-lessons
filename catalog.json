@@ -1022,7 +1022,7 @@
 				{
 					"id": "teleop-code",
 					"title": "Your drive code",
-					"description": "Robot.java declares its own variables and uses arithmetic for arcade drive from the left stick Y and right stick X.",
+					"description": "Robot.java declares its own variables and uses arithmetic for arcade drive from the left stick Y and left stick X.",
 					"verifier": {
 						"type": "script",
 						"path": "lessons/robot-drivetrain/checkpoints/verify/teleop-code.sh"
@@ -1055,7 +1055,7 @@
 				{
 					"id": "turns-in-place",
 					"title": "Turns in place",
-					"description": "Push the right stick left or right (Arrow Left / Right) so one side drives forward and the other backward.",
+					"description": "Push the left stick left or right (A / D) so one side drives forward and the other backward.",
 					"verifier": {
 						"type": "nt4-value",
 						"topic": "/AdvantageKit/RealOutputs/Check/Drive/Turn/Max",
@@ -1102,7 +1102,7 @@
 				{
 					"id": "angular-speed",
 					"title": "Angular speed",
-					"description": "Spin in place at full speed (one stick forward, one back, left side backward). Robot/AngularSpeed should be positive.",
+					"description": "Spin in place at full speed (hold A, the left stick pushed left). Robot/AngularSpeed should be positive.",
 					"verifier": {
 						"type": "nt4-value",
 						"topic": "/AdvantageKit/RealOutputs/Check/Robot/AngularSpeed/Max",
@@ -1197,7 +1197,7 @@
 				{
 					"id": "arcade-turn",
 					"title": "Arcade turn",
-					"description": "In Teleop, push the right stick to the right. The right side should reverse.",
+					"description": "In Teleop, push the left stick to the right (D). The right side should reverse.",
 					"verifier": {
 						"type": "nt4-value",
 						"topic": "/AdvantageKit/RealOutputs/Check/Drive/RightOutput/Min",

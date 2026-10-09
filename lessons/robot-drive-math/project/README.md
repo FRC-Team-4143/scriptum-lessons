@@ -53,7 +53,7 @@ Work through the methods one at a time. After each, click **Verify** to test it.
 7. **`arcadeDrive`** in the drivetrain. Call `DriveMath.arcadeToWheelSpeeds` and pass the result to
    `setDutyCycles`.
 
-Then **Start**, enable Teleop and drive (left stick forward/back, right stick turns). Run Auto to
+Then **Start**, enable Teleop and drive (left stick: W / S forward/back, A / D turns). Run Auto to
 see the robot drive 2 meters, built from your methods.
 
 Stuck on a step? Open **Dozer**: he can explain the idea or walk you through it.

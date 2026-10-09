@@ -21,7 +21,7 @@ Companion docs page: [Sensors and Feedback](https://docs.marswars.org/docs/softw
 ## Running it
 
 **Start**, then **Enable** in Teleop mode and drive around with the keyboard (**W / S** to go
-forward and back, **Arrow Left / Right** to turn). In AdvantageScope, graph `Robot/LinearSpeed`,
+forward and back, **A / D** to turn). In AdvantageScope, graph `Robot/LinearSpeed`,
 `Robot/AngularSpeed` and `Robot/Distance` as they come to life. For autonomous, choose **Auto** mode and
 click **Enable**.
 
@@ -63,4 +63,3 @@ Stuck on a step? Open **Dozer**: he can explain the idea or walk you through it.
 - Drive **backward** 2 meters.
 - Drive at `0.2` instead of `0.4`. How far past 2.0 m does it stop now?
 - Log the speed of each side separately (`Robot/LeftSpeed`, `Robot/RightSpeed`).
-

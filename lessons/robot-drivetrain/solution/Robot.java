@@ -24,7 +24,7 @@ public class Robot extends LoggedRobot {
   @Override
   public void teleopPeriodic() {
     double forward = -controller.getLeftY();
-    double turn = controller.getRightX();
+    double turn = controller.getLeftX();
 
     double leftSpeed = forward + turn;
     double rightSpeed = forward - turn;

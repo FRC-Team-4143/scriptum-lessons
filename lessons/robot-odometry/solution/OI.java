@@ -11,6 +11,6 @@ public abstract class OI {
   }
 
   public static double getTurn() {
-    return MathUtil.applyDeadband(driverController.getRightX(), 0.1);
+    return MathUtil.applyDeadband(driverController.getLeftX(), 0.1);
   }
 }

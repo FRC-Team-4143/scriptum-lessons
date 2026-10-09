@@ -35,7 +35,7 @@
 		{
 			"id": "angular-speed",
 			"title": "Angular speed",
-			"description": "Spin in place at full speed (one stick forward, one back, left side backward). Robot/AngularSpeed should be positive.",
+			"description": "Spin in place at full speed (hold A, the left stick pushed left). Robot/AngularSpeed should be positive.",
 			"verifier": {
 				"type": "nt4-value",
 				"topic": "/AdvantageKit/RealOutputs/Check/Robot/AngularSpeed/Max",

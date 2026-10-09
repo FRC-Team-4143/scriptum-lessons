@@ -17,7 +17,7 @@ public abstract class OI {
 
   /** How much the driver wants to turn, -1.0 to 1.0. */
   public static double getTurn() {
-    return MathUtil.applyDeadband(driverController.getRightX(), 0.1);
+    return MathUtil.applyDeadband(driverController.getLeftX(), 0.1);
   }
 
   public static boolean getShootButton() {

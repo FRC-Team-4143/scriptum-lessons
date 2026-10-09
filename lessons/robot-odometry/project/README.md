@@ -39,7 +39,7 @@ Go slower on anything that is new. Finishing every bonus is not expected.
 
 1. **Finish `OI.java`.** Write two methods:
    - `public static double getForward()` returns the left stick Y, with the minus sign.
-   - `public static double getTurn()` returns the right stick X.
+   - `public static double getTurn()` returns the left stick X.
 
    Then in `Robot.java`, delete the `XboxController` field and call `OI.getForward()` and
    `OI.getTurn()` in `teleopPeriodic()`.
@@ -66,4 +66,3 @@ Stuck on a step? Open **Dozer**: he can explain the idea or walk you through it.
   `Robot` while it is. All the controller knowledge stays inside `OI`.
 - Reset the pose to `new Pose2d(2.0, 4.0, new Rotation2d())` at the start of auto, so the robot
   starts in the middle of the field.
-
