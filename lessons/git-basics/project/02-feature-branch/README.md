@@ -7,20 +7,19 @@ commit. There's an imaginary issue #12: "Add a turbo boost feature."
 
 1. Create a branch off `develop` named `issue-12-<short-description>`
    (e.g. `issue-12-turbo-boost`) — the number has to be 12, the words after
-   it are up to you.
-   ```
-   git checkout develop
-   git checkout -b issue-12-turbo-boost
-   ```
+   it are up to you. Click the branch name in the bottom-left corner,
+   choose **Create new branch from...**, type the name and pick `develop` as
+   the starting point.
 2. Add at least two lines to `FEATURES.md` describing the feature.
 3. Make **at least two separate commits** on your branch (not one commit
    with everything in it).
 4. Leave `main` and `develop` alone — don't commit directly to either.
 
+Each commit: save, stage with **+**, write a message, press **Commit**.
 Run **Verify** from the Checkpoints panel when you're done.
 
 ## You're done when
 
-`git branch` shows `issue-12-...` checked out, `git log --oneline` shows at
-least two new commits on it, and `main` and `develop` still point at the
+The branch name in the bottom-left says `issue-12-...`, the **Graph** shows
+at least two new commits on it, and `main` and `develop` still point at the
 original commit.

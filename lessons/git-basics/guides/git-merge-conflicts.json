@@ -30,41 +30,29 @@
 			"assist": true
 		},
 		{
-			"title": "Open a terminal",
+			"title": "Pick the repository",
 			"say": {
-				"never": "Open the **terminal**: the typing area at the bottom of the screen where you give the computer instructions. Hold **Ctrl** and tap the backtick key, the one above **Tab**. Most of these exercises are easier there.",
-				"bit": "These exercises are easiest in the terminal."
+				"never": "Open **Source Control** (the branch icon on the left). Each exercise folder has its own section there. Click **04-merge-conflict** so the buttons and menus work on that folder.",
+				"bit": "In Source Control, click **04-merge-conflict** so the buttons act on it."
 			},
-			"open": [
-				"editor"
-			],
 			"target": {
-				"pane": "editor"
+				"pane": "editor",
+				"selector": ".scm-view"
 			},
 			"cardAt": "top-right",
-			"waitFor": {
-				"target": {
-					"pane": "editor",
-					"selector": ".terminal-wrapper"
-				},
-				"hint": {
-					"never": "press Ctrl and the backtick key (above Tab).",
-					"bit": "press Ctrl+` (the key above Tab)."
-				}
-			},
 			"assist": true
 		},
 		{
 			"title": "Start the merge",
 			"say": {
-				"never": "Type `cd 04-merge-conflict`, press **Enter**. Then `git checkout develop`, **Enter**. Then `git merge issue-9-max-speed`, **Enter**. Git will say **CONFLICT**. That's what we wanted!",
-				"bit": "`cd 04-merge-conflict`, `git checkout develop`, then `git merge issue-9-max-speed`. Git says **CONFLICT**."
-			},
-			"target": {
-				"pane": "editor",
-				"selector": "[id='workbench.parts.panel']"
+				"never": "Check the branch name in the bottom-left says `develop`. Then open the **...** menu in Source Control, choose **Branch**, then **Merge...**, and pick `issue-9-max-speed`. Git reports a **conflict**, and `Constants.java` appears under **Merge Changes**.",
+				"bit": "On `develop`: **...** menu, Branch, Merge..., `issue-9-max-speed`. Git reports a conflict in `Constants.java`."
 			},
 			"cardAt": "top-right",
+			"target": {
+				"pane": "editor",
+				"selector": ".scm-view"
+			},
 			"waitFor": {
 				"hint": {
 					"never": "start the merge and see the conflict.",
@@ -183,17 +171,17 @@
 		{
 			"title": "Finish the merge",
 			"say": {
-				"never": "Save the file. Then type `git add Constants.java` and press **Enter** (that says \"I fixed it\"). Then type `git commit` and press **Enter**. A message appears already filled in. Just save and close it, and the merge is finished.",
-				"bit": "Save, then `git add Constants.java` and `git commit`. A commit with no `-m` opens a pre-filled merge message: just save and close it."
-			},
-			"target": {
-				"pane": "editor",
-				"selector": "[id='workbench.parts.panel']"
+				"never": "Save the file. Under **Merge Changes**, hover `Constants.java` and press the **+** to say it's resolved. Then press **Commit**: the message box is already filled in with a merge message, so just accept it.",
+				"bit": "Save, stage `Constants.java` with **+**, then press **Commit** (the merge message is pre-filled)."
 			},
 			"cardAt": "top-right",
+			"target": {
+				"pane": "editor",
+				"selector": ".scm-view"
+			},
 			"waitFor": {
 				"hint": {
-					"never": "stage and commit the fixed file.",
+					"never": "stage and commit the resolved file.",
 					"bit": "stage and commit the resolved file."
 				}
 			},

@@ -3,5 +3,10 @@
 	"git.repositoryScanMaxDepth": 2,
 	"git.openRepositoryInParentFolders": "never",
 	"git.confirmSync": false,
-	"git.suggestSmartCommit": false
+	"git.suggestSmartCommit": false,
+	"git.showActionButton": {
+		"commit": true,
+		"publish": false,
+		"sync": false
+	}
 }

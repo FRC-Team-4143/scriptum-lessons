@@ -153,8 +153,8 @@
 			"title": "Commit it",
 			"cardAt": "bottom-right",
 			"say": {
-				"never": "Type a short message saying what you changed, like `Add my name to the roster`, then press **Commit**. A **commit** is a saved snapshot of your work, plus your note about it. Write the note for a teammate who'll read it next month.",
-				"bit": "Type a message saying what you changed, like `Add my name to the roster`, then press **Commit**. A commit is a saved snapshot of your work."
+				"never": "Type a message saying what you changed, like `Add my name to the roster`, then press the **Commit** button. A commit is a saved snapshot of your work.",
+				"bit": "Type a message like `Add my name to the roster`, then press **Commit**."
 			},
 			"target": {
 				"pane": "editor",
@@ -199,51 +199,23 @@
 			"assist": true
 		},
 		{
-			"title": "The terminal",
-			"cardAt": "top-right",
+			"title": "Just buttons",
 			"say": {
-				"never": "Everything you just clicked can also be done by typing commands in the **terminal**. Open it with **Ctrl** and the backtick key (above **Tab**).",
-				"bit": "Everything here can be done by typing git commands too."
+				"never": "That's the whole routine: edit, save, **+** to stage, message, **Commit**. This lesson uses these buttons and menus from start to finish; git can also be typed as commands in the terminal, but you won't need it here.",
+				"bit": "Edit, save, **+**, message, **Commit**. This lesson is all buttons and menus; no terminal needed."
 			},
-			"target": {
-				"pane": "editor"
-			},
-			"waitFor": {
-				"target": {
-					"pane": "editor",
-					"selector": ".terminal-wrapper"
-				},
-				"hint": {
-					"never": "press Ctrl and the backtick key (above Tab).",
-					"bit": "press Ctrl+` (the key above Tab)."
-				}
-			},
-			"assist": true
-		},
-		{
-			"title": "Try it",
-			"cardAt": "top-right",
-			"say": {
-				"never": "Type `cd 01-first-commit` and press **Enter**. That moves into the folder. Then type `git log --oneline` and press **Enter**. It lists your commits, and yours is the first line.",
-				"bit": "Type `cd 01-first-commit`, press Enter, then `git log --oneline`. Your commit is the first line."
-			},
+			"cardAt": "bottom-right",
 			"target": {
 				"pane": "editor",
-				"selector": "[id='workbench.parts.panel']"
-			},
-			"waitFor": {
-				"hint": {
-					"never": "run git log --oneline in 01-first-commit.",
-					"bit": "run git log --oneline in 01-first-commit."
-				}
+				"selector": ".scm-view"
 			},
 			"assist": true
 		},
 		{
 			"title": "Next exercises",
 			"say": {
-				"never": "Each numbered folder has a `README.md` with the next task: a feature branch, a merge, a conflict and a rebase. Check your progress by clicking the lesson chip at the top of the screen.",
-				"bit": "Each numbered folder's `README.md` has the next task: a feature branch, a merge, a conflict and a rebase. Check your progress in the lesson chip at the top."
+				"never": "Each numbered folder's `README.md` has the next task: a feature branch, a merge, a conflict and a rebase, then pushing, pulling and stashing. Check your progress in the lesson chip at the top.",
+				"bit": "Each numbered folder's `README.md` has the next task. Check progress in the lesson chip at the top."
 			}
 		}
 	],
