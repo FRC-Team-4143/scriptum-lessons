@@ -14,8 +14,8 @@
 		{
 			"title": "What to watch",
 			"say": {
-				"never": "Your eyes can't judge a 2 degree error, so watch a graph. Plot `AimErrorDegrees`. It starts around 56 and should fall to 0 and sit there. Plot `AimOutput` too, the turn command the PID asks for: it should be big at first and shrink to nothing. Each time you tune, press Start for a fresh run, enable Teleop, and hold the left bumper (**E**).",
-				"bit": "Plot AimErrorDegrees (should fall to 0) and AimOutput (the turn command). Fresh Start for every try."
+				"never": "Your eyes can't judge a 2 degree error, so watch a graph. Plot `AimErrorDegrees`. From a fresh start it begins around 45 and should fall to 0 and sit there. Plot `AimOutput` too, the turn command the PID asks for: it should be big at first and shrink to nothing. The aim uses your pose **estimate**, but the checkpoint judges the robot's **true** heading, so a good estimate matters. Each time you tune, press Start for a fresh run, enable Teleop, and hold the left bumper (**E**).",
+				"bit": "Plot AimErrorDegrees (about 45 at first, should fall to 0) and AimOutput (the turn command). Aim uses the estimate; the check uses the truth. Fresh Start for every try."
 			}
 		},
 		{
@@ -119,8 +119,8 @@
 		{
 			"title": "First run: kP is too low",
 			"say": {
-				"never": "Hold **E** (the left bumper) for a few seconds. With the starter `AIM_KP = 0.2`, the error falls and then stops several degrees short of 0 while the output has faded to almost nothing. The motors need a minimum push to get the wheels moving, and a tiny error times a tiny kP isn't enough. That's called steady-state error. Click **I did it** once you've seen it stall.",
-				"bit": "Hold **E**. With kP 0.2 the error stalls a few degrees short. Click I did it when you've seen it."
+				"never": "Hold **E** (the left bumper) for a few seconds. With the starter `AIM_KP = 0.2`, the error falls and then stops about 6 degrees short of 0 while the output has faded to almost nothing. The motors need a minimum push to get the wheels moving, and a tiny error times a tiny kP isn't enough. That's called steady-state error. It never gets inside 2 degrees, so it never settles. Click **I did it** once you've seen it stall.",
+				"bit": "Hold **E**. With kP 0.2 the error stalls about 6 degrees short. Click I did it when you've seen it."
 			},
 			"cardAt": "bottom-right",
 			"waitFor": {
@@ -185,8 +185,8 @@
 		{
 			"title": "Raise kP",
 			"say": {
-				"never": "Raise `AIM_KP` and try again. Stop the robot, change the number, press Start, Enable, and hold **E**. Try 0.5, then 0.7, then 1.0. Watch the error: it should now reach 0 and stay. Pick the value that gets within 2 degrees and stays. Click **I did it** when the robot settles.",
-				"bit": "Try `AIM_KP` = 0.5, 0.7, 1.0, restarting each time. Stop when the error settles within 2 degrees."
+				"never": "Raise `AIM_KP` and try again. Stop the robot, change the number, press Start, Enable, and hold **E**. Try 0.5, then 1.0. The checkpoint wants the robot within 2 degrees for half a second, within 4 seconds of when you press **E**. At about 1.0 it gets there, but it swings past the goal on the way; the next guide fixes that. Click **I did it** when the robot settles.",
+				"bit": "Try `AIM_KP` = 0.5, then 1.0, restarting each time. Inside 2 degrees for 0.5 s, within 4 s. Around 1.0 it settles (with some overshoot)."
 			},
 			"cardAt": "bottom-right",
 			"waitFor": {

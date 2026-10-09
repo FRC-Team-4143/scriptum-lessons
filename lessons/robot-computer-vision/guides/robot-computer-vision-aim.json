@@ -7,7 +7,7 @@
 		{
 			"title": "Facing a spot",
 			"say": {
-				"never": "Imagine you're standing in a gym and someone says \"face the basket\". You don't turn to a number like 90 degrees. You look at where the basket is and turn until you face it, and if you walk somewhere else you turn a different amount. A robot that aims at a goal does the same. It knows where it is (its pose), it knows where the goal is, and it works out the direction from one to the other. So aiming works wherever the robot ended up.",
+				"never": "Imagine you're standing in a gym and someone says \"face the basket\". You don't turn to a number like 90 degrees. You look at where the basket is and turn until you face it, and if you walk somewhere else you turn a different amount. A robot that aims at a goal does the same. It knows where it thinks it is (its pose estimate, from the wheels and the cameras), it knows where the goal is, and it works out the direction from one to the other. So aiming works wherever the robot ended up.",
 				"bit": "Aim at a spot, not a fixed angle: work out the direction from where the robot is to where the goal is."
 			}
 		},
