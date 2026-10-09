@@ -1,6 +1,6 @@
 {
 	"title": "Drive from the subsystem",
-	"summary": "Fill in the ARCADE case so the drivetrain subsystem drives with the sticks.",
+	"summary": "Fill in updateLogic so the drivetrain subsystem drives with the sticks.",
 	"topic": "Robot",
 	"order": 464,
 	"kind": "assist",
@@ -57,10 +57,10 @@
 			"assist": true
 		},
 		{
-			"title": "The ARCADE case",
+			"title": "Drive with the sticks",
 			"say": {
-				"never": "Now write the line the comment asks for: `drive.arcadeDrive(OI.getForward(), OI.getTurn());`. It goes right under the comment, inside `case ARCADE:`. Robot.java already puts the drivetrain in the ARCADE state during teleop, so this is the line that will run while you drive.",
-				"bit": "Write the line the comment describes: `drive.arcadeDrive(OI.getForward(), OI.getTurn());`. Robot.java already asks for the ARCADE state in teleop, so this is the code that runs."
+				"never": "Now write the line the comment asks for: `drive.arcadeDrive(OI.getForward(), OI.getTurn());`. It goes right under the comment, inside `updateLogic`. `updateLogic` runs every 20 thousandths of a second, so this line re-reads the sticks and drives the robot over and over while you drive. Ask `OI` for the sticks; never talk to the controller directly.",
+				"bit": "Write the line the comment describes: `drive.arcadeDrive(OI.getForward(), OI.getTurn());`. `updateLogic` runs every 20 ms, so it keeps re-reading the sticks."
 			},
 			"target": {
 				"pane": "editor",
@@ -70,11 +70,11 @@
 			"cardAt": "bottom-right",
 			"assist": true,
 			"board": {
-				"code": "case ARCADE:\n    drive.arcadeDrive(OI.getForward(), OI.getTurn());\n    break;",
+				"code": "public void updateLogic(double timestamp) {\n    drive.arcadeDrive(OI.getForward(), OI.getTurn());\n}",
 				"marks": [
 					{
-						"text": "case ARCADE:",
-						"label": "runs while the state is ARCADE"
+						"text": "updateLogic",
+						"label": "runs every 20 ms"
 					},
 					{
 						"text": "OI.getForward()",

@@ -10,10 +10,23 @@ import { hasJdk, lessonKit, ROBOT_SRC } from "../../common/tests/lesson-kit";
 const L = lessonKit(import.meta.url);
 
 describe.skipIf(!hasJdk)("robot-subsystems script checkpoints", () => {
-	test("robot-subsystems: registration and OI buttons fail fresh, pass once solved", async () => {
-		await L.roundTrip(["shooter-registered", "oi-buttons"],
-			["RobotContainer.java", "OI.java"],
+	test("robot-subsystems: registration, OI buttons and shoot logic fail fresh, pass once solved", async () => {
+		await L.roundTrip(["shooter-registered", "oi-buttons", "shoot-logic"],
+			["RobotContainer.java", "OI.java", "subsystems/shooter/ShooterSubsystem.java"],
 		);
+	}, 30_000);
+
+	test("robot-subsystems: shoot logic needs the else branch and a commented-out answer does not count", async () => {
+		const project = await L.makeProject();
+		try {
+			await L.applySolution(project, ["subsystems/shooter/ShooterSubsystem.java"]);
+			const file = join(project, ROBOT_SRC, "subsystems/shooter/ShooterSubsystem.java");
+			const text = await readFile(file, "utf8");
+			await writeFile(file, text.replace(/ else \{\s*flywheel\.setTargetDutyCycle\(0\.0\);\s*\}/, ""), "utf8");
+			expect(L.verify(project, "shoot-logic").exitCode).not.toBe(0);
+		} finally {
+			await rm(project, { recursive: true, force: true });
+		}
 	}, 30_000);
 
 	test("robot-subsystems: a commented-out registration does not count", async () => {

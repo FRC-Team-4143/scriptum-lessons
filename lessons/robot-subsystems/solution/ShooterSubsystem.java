@@ -62,9 +62,9 @@ public class ShooterSubsystem extends MwSubsystem<ShooterStates, ShooterConstant
   /** Runs every 20 ms. */
   @Override
   public void updateLogic(double timestamp) {
-    // Shoot button: spin the flywheel up to speed. Otherwise let it coast to a stop.
+    // Shoot button: run the flywheel at its shooting power. Otherwise let it coast to a stop.
     if (OI.getShootButton()) {
-      flywheel.setTargetVelocity(CONSTANTS.SHOOT_VELOCITY);
+      flywheel.setTargetDutyCycle(CONSTANTS.SHOOT_DUTY_CYCLE);
     } else {
       flywheel.setTargetDutyCycle(0.0);
     }
@@ -75,7 +75,6 @@ public class ShooterSubsystem extends MwSubsystem<ShooterStates, ShooterConstant
 
     // Send numbers to AdvantageScope.
     MwLog.log(getSubsystemKey() + "FlywheelVelocity", flywheel.getCurrentVelocity());
-    MwLog.log(getSubsystemKey() + "FlywheelTarget", CONSTANTS.SHOOT_VELOCITY);
     MwLog.log(getSubsystemKey() + "RollerDuty", rollerDuty);
   }
 }

@@ -1310,6 +1310,15 @@
 					}
 				},
 				{
+					"id": "shoot-logic",
+					"title": "Shoot button logic",
+					"description": "ShooterSubsystem runs the flywheel at SHOOT_DUTY_CYCLE while the shoot button is held, and stops it otherwise.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/robot-subsystems/checkpoints/verify/shoot-logic.sh"
+					}
+				},
+				{
 					"id": "drive-from-subsystem",
 					"title": "Drive from the subsystem",
 					"description": "In Teleop, push the left stick forward. The drivetrain subsystem should drive the robot.",
@@ -1324,12 +1333,12 @@
 				{
 					"id": "flywheel-spins",
 					"title": "Flywheel spins up",
-					"description": "Hold the shoot button until the flywheel reaches its speed.",
+					"description": "Hold the shoot button. The flywheel should spin up to speed.",
 					"verifier": {
 						"type": "nt4-value",
 						"topic": "/AdvantageKit/RealOutputs/Check/Subsystem/Shooter/FlywheelVelocity/Max",
 						"check": "range",
-						"min": 270,
+						"min": 250,
 						"max": 340
 					}
 				},
@@ -2441,22 +2450,21 @@
 			"path": "lessons/robot-subsystems/guides/robot-subsystems-big-idea.json"
 		},
 		{
-			"id": "robot-subsystems-states",
+			"id": "robot-state-machines-enums-switch",
 			"title": "Enums and switch",
 			"summary": "A subsystem's states, and doing something different in each.",
 			"topic": "Robot",
 			"order": 463,
 			"modules": [
-				"robot-subsystems",
 				"robot-state-machines"
 			],
 			"kind": "mixed",
-			"path": "common/guides/robot-subsystems-states.json"
+			"path": "lessons/robot-state-machines/guides/robot-state-machines-enums-switch.json"
 		},
 		{
 			"id": "robot-subsystems-drive-states-assist",
 			"title": "Drive from the subsystem",
-			"summary": "Fill in the ARCADE case so the drivetrain subsystem drives with the sticks.",
+			"summary": "Fill in updateLogic so the drivetrain subsystem drives with the sticks.",
 			"topic": "Robot",
 			"order": 464,
 			"modules": [
@@ -2488,6 +2496,18 @@
 			],
 			"kind": "mixed",
 			"path": "lessons/robot-subsystems/guides/robot-subsystems-shooter.json"
+		},
+		{
+			"id": "robot-subsystems-shoot-logic",
+			"title": "Write the shoot button logic",
+			"summary": "Use an if / else so the flywheel runs only while the shoot button is held.",
+			"topic": "Robot",
+			"order": 466,
+			"modules": [
+				"robot-subsystems"
+			],
+			"kind": "assist",
+			"path": "lessons/robot-subsystems/guides/robot-subsystems-shoot-logic.json"
 		},
 		{
 			"id": "robot-control-error",

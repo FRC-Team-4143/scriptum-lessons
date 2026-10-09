@@ -53,11 +53,11 @@
 		{
 			"title": "Subsystem: the when",
 			"say": {
-				"never": "A **subsystem** is the manager. It owns one or more mechanisms and decides *what they should do right now*. It keeps track of a **state**, such as LOW or HIGH, and every 20 thousandths of a second it looks at the state and gives its mechanisms their orders. Anything that asks the elevator to move goes through the subsystem, so there is only ever one boss.",
-				"bit": "A **subsystem** owns mechanisms and decides what they do, using a **state** and a `switch` that runs every loop. Everything else asks the subsystem instead of touching the mechanism."
+				"never": "A **subsystem** is the manager. It owns one or more mechanisms and decides *what they should do right now*. Every 20 thousandths of a second its `updateLogic` method runs, looks at what the driver is doing, and gives its mechanisms their orders. Anything that asks the elevator to move goes through the subsystem, so there is only ever one boss.",
+				"bit": "A **subsystem** owns mechanisms and decides what they do in `updateLogic`, which runs every loop. Everything else asks the subsystem instead of touching the mechanism."
 			},
 			"board": {
-				"code": "public class ElevatorSubsystem extends MwSubsystem<ElevatorStates, ElevatorConstants> {\n    private final ElevatorMech elevator = new ElevatorMech();\n\n    @Override\n    public void updateLogic(double timestamp) {\n        switch (system_state_) {\n            case LOW:\n                elevator.setTargetHeight(0.0);\n                break;\n            case HIGH:\n                elevator.setTargetHeight(1.2);\n                break;\n        }\n    }\n}",
+				"code": "public class ElevatorSubsystem extends MwSubsystem<ElevatorStates, ElevatorConstants> {\n    private final ElevatorMech elevator = new ElevatorMech();\n\n    @Override\n    public void updateLogic(double timestamp) {\n        if (OI.getRaiseButton()) {\n            elevator.setTargetHeight(1.2);\n        } else {\n            elevator.setTargetHeight(0.0);\n        }\n    }\n}",
 				"language": "java",
 				"marks": [
 					{
@@ -65,8 +65,8 @@
 						"label": "it owns the mechanism"
 					},
 					{
-						"text": "switch (system_state_)",
-						"label": "decide from the current state"
+						"text": "if (OI.getRaiseButton())",
+						"label": "decide from what the driver is doing"
 					},
 					{
 						"text": "elevator.setTargetHeight(1.2)",
@@ -95,16 +95,16 @@
 		{
 			"title": "How a button press travels",
 			"say": {
-				"never": "Follow one press of a button down through the layers. A button asks the subsystem for something. The subsystem decides what that means in its current state. The subsystem gives an order to its mechanism. The mechanism turns the order into motor power. Meanwhile the sensor's reading travels back up the other way. Every layer only talks to its neighbour, which keeps things tidy.",
-				"bit": "A button asks a subsystem for a state; the subsystem's logic turns the state into mechanism orders; the mechanism drives the motor. Sensor readings flow back up the same way."
+				"never": "Follow one press of a button down through the layers. A button is read by `OI`. The subsystem checks it and decides what that means. The subsystem gives an order to its mechanism. The mechanism turns the order into motor power. Meanwhile the sensor's reading travels back up the other way. Every layer only talks to its neighbour, which keeps things tidy.",
+				"bit": "OI reads the button; the subsystem's logic turns it into mechanism orders; the mechanism drives the motor. Sensor readings flow back up the same way."
 			},
 			"board": {
-				"code": "button  ->  subsystem.setWantedState(HIGH)\nsubsystem  ->  elevator.setTargetHeight(1.2)\nmechanism  ->  motor power\n\nsensor  ->  elevator.getHeight()  ->  subsystem checks it",
+				"code": "button  ->  OI.getRaiseButton()\nsubsystem  ->  elevator.setTargetHeight(1.2)\nmechanism  ->  motor power\n\nsensor  ->  elevator.getHeight()  ->  subsystem checks it",
 				"language": "text",
 				"marks": [
 					{
-						"text": "setWantedState(HIGH)",
-						"label": "ask, never command the motor"
+						"text": "OI.getRaiseButton()",
+						"label": "ask OI, never the controller"
 					},
 					{
 						"text": "elevator.getHeight()",
@@ -184,10 +184,10 @@
 			"assist": true
 		},
 		{
-			"title": "Find case ARCADE",
+			"title": "Find updateLogic",
 			"say": {
-				"never": "Find the teleop state. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `case ARCADE` and press **Enter**. The editor scrolls to the right spot and highlights it.",
-				"bit": "Find the teleop state. Press **Ctrl+F**, type `case ARCADE` and press Enter to jump to it."
+				"never": "Find where the drivetrain decides what to do. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `Runs every 20 ms` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "Press **Ctrl+F**, type `Runs every 20 ms` and press Enter to jump to updateLogic."
 			},
 			"target": {
 				"pane": "editor"
@@ -197,23 +197,23 @@
 				"target": {
 					"pane": "editor",
 					"selector": ".view-lines .view-line",
-					"text": "case ARCADE:"
+					"text": "Runs every 20 ms"
 				},
-				"hint": "find case ARCADE with Ctrl+F.",
+				"hint": "find Runs every 20 ms with Ctrl+F.",
 				"skipIfDone": true
 			},
 			"assist": true
 		},
 		{
-			"title": "ARCADE",
+			"title": "Drive from the sticks",
 			"say": {
-				"never": "When the drivetrain is in the `ARCADE` state, it drives using the sticks. The line is `drive.arcadeDrive(OI.getForward(), OI.getTurn());`. You'll write it in a moment.",
-				"bit": "In the ARCADE state, drive with `drive.arcadeDrive(OI.getForward(), OI.getTurn());`."
+				"never": "Every loop, the drivetrain drives using the sticks. The line is `drive.arcadeDrive(OI.getForward(), OI.getTurn());`. You'll write it in a moment.",
+				"bit": "Every loop, drive with `drive.arcadeDrive(OI.getForward(), OI.getTurn());`."
 			},
 			"target": {
 				"pane": "editor",
 				"selector": ".view-lines .view-line",
-				"text": "case ARCADE:"
+				"text": "Runs every 20 ms"
 			},
 			"cardAt": "bottom-right",
 			"assist": true

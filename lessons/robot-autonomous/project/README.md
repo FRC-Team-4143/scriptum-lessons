@@ -66,4 +66,3 @@ Stuck on a step? Open **Dozer**: he can explain the idea or walk you through it.
 - Add `Commands.waitSeconds(1.0)` before the shot. Where does the extra second go?
 - Tune `DRIVE_KP` and `TURN_KP` in `DrivetrainConstants.java`. Too low is slow. Too high overshoots and
   wobbles. What does the robot do with `TURN_KP = 1.5`?
-

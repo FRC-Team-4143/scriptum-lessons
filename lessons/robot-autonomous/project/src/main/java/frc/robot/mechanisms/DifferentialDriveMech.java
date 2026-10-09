@@ -17,8 +17,8 @@ import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.wpilibj.simulation.DifferentialDrivetrainSim;
-import frc.robot.Constants;
 import frc.robot.DriveMath;
+import frc.robot.subsystems.drive.DrivetrainConstants;
 import java.util.List;
 import java.util.Random;
 import org.littletonrobotics.junction.Logger;
@@ -59,7 +59,7 @@ public class DifferentialDriveMech extends MechBase {
 
   // Kinematics and the pose estimator live in the mech, just like on the competition robot.
   private final DifferentialDriveKinematics kinematics =
-      new DifferentialDriveKinematics(Constants.TRACK_WIDTH_METERS);
+      new DifferentialDriveKinematics(DrivetrainConstants.TRACK_WIDTH_METERS);
   private final DifferentialDrivePoseEstimator poseEstimator =
       new DifferentialDrivePoseEstimator(kinematics, new Rotation2d(), 0.0, 0.0, new Pose2d());
   private Pose2d pose = new Pose2d();
@@ -68,8 +68,8 @@ public class DifferentialDriveMech extends MechBase {
     super("", "Drive");
 
     // MWLib builds the motors: the first one in each list is the leader, the rest follow it.
-    ConstructedMotors left = configMotors(leftConfigs, Constants.GEAR_RATIO);
-    ConstructedMotors right = configMotors(rightConfigs, Constants.GEAR_RATIO);
+    ConstructedMotors left = configMotors(leftConfigs, DrivetrainConstants.GEAR_RATIO);
+    ConstructedMotors right = configMotors(rightConfigs, DrivetrainConstants.GEAR_RATIO);
     leftMotors = left.motors;
     rightMotors = right.motors;
 
@@ -85,11 +85,11 @@ public class DifferentialDriveMech extends MechBase {
     sim =
         new DifferentialDrivetrainSim(
             DCMotor.getKrakenX60(motorsPerSide),
-            Constants.GEAR_RATIO,
+            DrivetrainConstants.GEAR_RATIO,
             7.5, // how hard the robot is to spin (kg*m^2)
-            Constants.ROBOT_MASS_KG,
-            Constants.WHEEL_RADIUS_METERS,
-            Constants.TRACK_WIDTH_METERS,
+            DrivetrainConstants.ROBOT_MASS_KG,
+            DrivetrainConstants.WHEEL_RADIUS_METERS,
+            DrivetrainConstants.TRACK_WIDTH_METERS,
             null);
   }
 
@@ -140,23 +140,26 @@ public class DifferentialDriveMech extends MechBase {
 
   /** How far the left side has driven, in meters. */
   public double getLeftMeters() {
-    return DriveMath.rotationsToMeters(inputs.leftPositionRotations, Constants.WHEEL_RADIUS_METERS);
+    return DriveMath.rotationsToMeters(
+        inputs.leftPositionRotations, DrivetrainConstants.WHEEL_RADIUS_METERS);
   }
 
   /** How far the right side has driven, in meters. */
   public double getRightMeters() {
     return DriveMath.rotationsToMeters(
-        inputs.rightPositionRotations, Constants.WHEEL_RADIUS_METERS);
+        inputs.rightPositionRotations, DrivetrainConstants.WHEEL_RADIUS_METERS);
   }
 
   /** How fast the left side is moving, in meters per second. */
   public double getLeftMetersPerSecond() {
-    return DriveMath.rotationsToMeters(inputs.leftVelocityRps, Constants.WHEEL_RADIUS_METERS);
+    return DriveMath.rotationsToMeters(
+        inputs.leftVelocityRps, DrivetrainConstants.WHEEL_RADIUS_METERS);
   }
 
   /** How fast the right side is moving, in meters per second. */
   public double getRightMetersPerSecond() {
-    return DriveMath.rotationsToMeters(inputs.rightVelocityRps, Constants.WHEEL_RADIUS_METERS);
+    return DriveMath.rotationsToMeters(
+        inputs.rightVelocityRps, DrivetrainConstants.WHEEL_RADIUS_METERS);
   }
 
   /** How far the whole robot has driven, in meters: the average of the two sides. */
@@ -172,7 +175,9 @@ public class DifferentialDriveMech extends MechBase {
   /** The robot's turning speed, in radians per second. Positive is turning left. */
   public double getAngularSpeed() {
     return DriveMath.angularSpeed(
-        getLeftMetersPerSecond(), getRightMetersPerSecond(), Constants.TRACK_WIDTH_METERS);
+        getLeftMetersPerSecond(),
+        getRightMetersPerSecond(),
+        DrivetrainConstants.TRACK_WIDTH_METERS);
   }
 
   // ---------------------------------------------------------------------------------------------
@@ -188,7 +193,8 @@ public class DifferentialDriveMech extends MechBase {
 
   /** Which way the robot faces, worked out from how far each side has driven. */
   public Rotation2d getYaw() {
-    return new Rotation2d((getRightMeters() - getLeftMeters()) / Constants.TRACK_WIDTH_METERS);
+    return new Rotation2d(
+        (getRightMeters() - getLeftMeters()) / DrivetrainConstants.TRACK_WIDTH_METERS);
   }
 
   /** Feeds the latest wheel readings to the pose estimator. Runs every loop. */
@@ -322,15 +328,15 @@ public class DifferentialDriveMech extends MechBase {
         sim.getRightVelocityMetersPerSecond() * RIGHT_SCALE
             + JITTER_METERS_PER_SECOND * noise.nextGaussian();
 
-    double wheelCircumference = 2.0 * Math.PI * Constants.WHEEL_RADIUS_METERS;
+    double wheelCircumference = 2.0 * Math.PI * DrivetrainConstants.WHEEL_RADIUS_METERS;
     pushSimState(
         leftMotors,
-        leftMeters / wheelCircumference * Constants.GEAR_RATIO,
-        leftSpeed / wheelCircumference * Constants.GEAR_RATIO);
+        leftMeters / wheelCircumference * DrivetrainConstants.GEAR_RATIO,
+        leftSpeed / wheelCircumference * DrivetrainConstants.GEAR_RATIO);
     pushSimState(
         rightMotors,
-        rightMeters / wheelCircumference * Constants.GEAR_RATIO,
-        rightSpeed / wheelCircumference * Constants.GEAR_RATIO);
+        rightMeters / wheelCircumference * DrivetrainConstants.GEAR_RATIO,
+        rightSpeed / wheelCircumference * DrivetrainConstants.GEAR_RATIO);
   }
 
   /** Puts the simulated robot back at the origin with fresh (zeroed) encoders. */

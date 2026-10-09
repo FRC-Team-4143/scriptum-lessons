@@ -8,7 +8,7 @@ import edu.wpi.first.math.util.Units;
 
 /**
  * Every number that describes the shooter, in one place. Subsystem code uses names like
- * CONSTANTS.SHOOT_VELOCITY instead of raw numbers, so changing the robot means editing one file.
+ * CONSTANTS.SHOOT_DUTY_CYCLE instead of raw numbers, so changing the robot means editing one file.
  */
 public class ShooterConstants extends MwConstants {
 
@@ -28,7 +28,9 @@ public class ShooterConstants extends MwConstants {
   public final double FLYWHEEL_MASS = 2.3; // kg, approximate
   // A solid wheel is harder to spin the heavier and wider it is: 1/2 * mass * radius^2 (kg*m^2).
   public final double FLYWHEEL_INERTIA = 0.5 * FLYWHEEL_MASS * FLYWHEEL_RADIUS * FLYWHEEL_RADIUS;
-  public final double SHOOT_VELOCITY = 300.0; // radians per second
+  // How hard the flywheel is driven while shooting, as a duty cycle: a fraction of full power from
+  // -1.0 to 1.0. 0.5 is half power. (A later lesson makes the flywheel hold an exact speed.)
+  public final double SHOOT_DUTY_CYCLE = 0.5;
   public final MotorConfig FLYWHEEL_MOTOR_CONFIG = flywheelConfig(FLYWHEEL_MOTOR_ID);
 
   // =============================================================================
@@ -47,12 +49,7 @@ public class ShooterConstants extends MwConstants {
   // =============================================================================
 
   private static MotorConfig flywheelConfig(int canId) {
-    MotorConfig config = baseConfig(canId, false);
-    // Velocity control gains. kV: volts per (rotation per second) needed just to HOLD a speed.
-    // kP: extra volts for every (rotation per second) of speed error.
-    config.getAsFXConfig().Slot1.kV = 0.12;
-    config.getAsFXConfig().Slot1.kP = 0.1;
-    return config;
+    return baseConfig(canId, false);
   }
 
   private static MotorConfig rollerConfig(int canId) {

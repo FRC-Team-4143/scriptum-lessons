@@ -15,9 +15,14 @@
 			]
 		},
 		{
+			"checkpoint": "shoot-logic",
+			"guides": [
+				"robot-subsystems-shoot-logic"
+			]
+		},
+		{
 			"checkpoint": "drive-from-subsystem",
 			"guides": [
-				"robot-subsystems-states",
 				"robot-subsystems-drive-states-assist"
 			]
 		}
