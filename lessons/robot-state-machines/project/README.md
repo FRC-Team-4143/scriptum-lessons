@@ -19,6 +19,10 @@ Everything is under `src/main/java/frc/robot/`:
 - `subsystems/shooter/ShooterCommands.java`: the commands.
 - `subsystems/shooter/ShooterConstants.java`: the states and thresholds.
 - `OI.java`: connects buttons to commands.
+- `subsystems/drive/DrivetrainSubsystem.java`: already finished, with one new idea. The drivetrain now
+  has two states, `IDLE` and `ARCADE`, and `Robot.java` asks for one or the other as the robot is
+  disabled or enabled. Its `updateLogic()` uses a `switch` on the state; read it first, because you
+  write one just like it for the shooter.
 
 ## Session plan (about 3 hours)
 
@@ -63,4 +67,3 @@ Stuck on a step? Open **Dozer**: he can explain the idea or walk you through it.
 
 - Add a `READY` light: log a boolean `Shooter/ReadyToShoot` that is true while the state is `SHOOT`.
 - Make the driver's trigger spin the flywheel to a *different* speed for a close shot.
-

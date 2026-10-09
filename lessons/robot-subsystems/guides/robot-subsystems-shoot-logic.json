@@ -1,0 +1,117 @@
+{
+	"title": "Write the shoot button logic",
+	"summary": "Use an if / else so the flywheel runs only while the shoot button is held.",
+	"topic": "Robot",
+	"order": 466,
+	"kind": "assist",
+	"steps": [
+		{
+			"title": "Open ShooterSubsystem.java",
+			"say": {
+				"never": "The shooter's brain is in `updateLogic`. Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `ShooterSubsystem`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "Press **Ctrl+P**, type `ShooterSubsystem` and press Enter. Quick Open finds any file by name."
+			},
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "ShooterSubsystem.java"
+				},
+				"hint": "open ShooterSubsystem.java with Ctrl+P.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Find it",
+			"say": {
+				"never": "Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `write the shoot button logic` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "Press **Ctrl+F**, type `write the shoot button logic` and press Enter to jump to it."
+			},
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "write the shoot button logic"
+				},
+				"hint": "find write the shoot button logic with Ctrl+F.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "If the button is held, else stop",
+			"say": {
+				"never": "An `if` runs its block only when the question in the parentheses is true. Here the question is `OI.getShootButton()`: *is the driver holding the button right now?* The `else` block runs the rest of the time. Because `updateLogic` runs every 20 thousandths of a second, the flywheel starts the moment the button goes down and stops the moment it comes up. Write both blocks under the comment.",
+				"bit": "`if (OI.getShootButton())` runs while the button is held; `else` runs the rest of the time. Set the flywheel's duty cycle in each."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "write the shoot button logic"
+			},
+			"cardAt": "bottom-right",
+			"assist": true,
+			"board": {
+				"code": "if (OI.getShootButton()) {\n    flywheel.setTargetDutyCycle(CONSTANTS.SHOOT_DUTY_CYCLE);\n} else {\n    flywheel.setTargetDutyCycle(0.0);\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "OI.getShootButton()",
+						"label": "true while the button is held"
+					},
+					{
+						"text": "CONSTANTS.SHOOT_DUTY_CYCLE",
+						"label": "shooting power (0.5 is half)"
+					},
+					{
+						"text": "else",
+						"label": "every other time"
+					},
+					{
+						"text": "0.0",
+						"label": "off: coast to a stop"
+					}
+				]
+			}
+		},
+		{
+			"title": "Try it",
+			"say": {
+				"never": "Press **Start**, wait for **Running**, choose **Teleop**, press **Enable**, then hold **U** (right bumper). In AdvantageScope graph `Subsystem/Shooter/FlywheelVelocity`. Let go of **U** and watch it coast back down.",
+				"bit": "Start, enable Teleop, hold **U**, and graph `Subsystem/Shooter/FlywheelVelocity`."
+			},
+			"target": {
+				"selector": "[data-tour='sim-controls']"
+			},
+			"waitFor": {
+				"target": {
+					"selector": "[data-tour='code-status']",
+					"text": "Running"
+				},
+				"hint": {
+					"never": "press Start, then wait for Running.",
+					"bit": "press Start and wait for Running."
+				}
+			},
+			"assist": true
+		}
+	]
+}

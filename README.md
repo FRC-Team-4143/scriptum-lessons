@@ -112,10 +112,14 @@ has to be made in every module (`lessons/robot-*/project/`):
   a few logged values under `Check/...`, so the `nt4-value` checkpoints still pass after the student
   lets go of the sticks. Each module's `.vscode/settings.json` hides it, the build files and other
   scaffolding from the Explorer.
-- `Constants.java` holds the chassis numbers. The wheel radius (3 in) and track width (24 in) are the
-  real robot's; the gear ratio and mass are still placeholders.
-- The shooter uses the real flywheel's wheel radius (3 in) and mass (2.3 kg). In
-  `robot-control-theory` the flywheel starts in bang-bang mode with untuned gains on purpose; that
+- Modules 1-4 keep the chassis numbers in `Constants.java`; from `robot-subsystems` on that file is gone
+  and they live in `subsystems/drive/DrivetrainConstants.java` (static fields, read as
+  `DrivetrainConstants.WHEEL_RADIUS_METERS`). The wheel radius (3 in) and track width (24 in) are
+  the real robot's; the gear ratio and mass are still placeholders.
+- The shooter uses the real flywheel's wheel radius (3 in) and mass (2.3 kg). In `robot-subsystems`
+  the flywheel runs at a fixed duty cycle (`SHOOT_DUTY_CYCLE`, 0.5) and the drivetrain has no state
+  switch; velocity control (`SHOOT_VELOCITY`) first appears in `robot-control-theory` and the
+  states-plus-`switch` drivetrain in `robot-state-machines`. In `robot-control-theory` the flywheel starts in bang-bang mode with untuned gains on purpose; that
   lesson's task is to write bang-bang and feedforward, then tune PID (`kV` about 0.12, `kP` about 0.2
   works). `lessons/robot-control-theory/solution/` is the finished version.
 - MWLib comes from jitpack (`com.github.FRC-Team-4143.MW-Lib:mw-lib-java:<tag>`), with no
@@ -135,9 +139,9 @@ and uses them right away. The Java modules remain available as a deeper, standal
 | 2 Sensors and Feedback | `if` / `else`, comparison operators, `static final` constants |
 | 3 Drive Math and Methods | writing methods (parameters, return values), arrays, `for` loops, `%`, `Math` |
 | 4 Objects and Odometry | classes and objects, `new`, `import`, `static`, `abstract` |
-| 5 Mechanisms and Subsystems | enums and `switch`, inheritance (`extends`, `@Override`), constructors, lists |
-| 6 Control Theory | practice: unit conversion, `switch`, small methods |
-| 7 State Machines and Commands | `&&` `\|\|` `!`, boolean methods, lambdas |
+| 5 Mechanisms and Subsystems | inheritance (`extends`, `@Override`), constructors, lists, enums as a list of states, `if` / `else` in subsystem logic |
+| 6 Control Theory | enums and `switch` (picking a control style), unit conversion, small methods |
+| 7 State Machines and Commands | `switch` on a subsystem's state (practice), `&&` `\|\|` `!`, boolean methods, lambdas |
 | 8 Autonomous | extending `Command`, command groups (and a `for` loop used again) |
 
 Recursion is not used on the robot.

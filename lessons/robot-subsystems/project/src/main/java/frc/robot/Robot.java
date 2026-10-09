@@ -1,8 +1,6 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.subsystems.drive.DrivetrainConstants.DriveStates;
-import frc.robot.subsystems.drive.DrivetrainSubsystem;
 import lesson.Checks;
 import org.littletonrobotics.junction.LoggedRobot;
 
@@ -19,15 +17,5 @@ public class Robot extends LoggedRobot {
     container.doControlLoop();
     CommandScheduler.getInstance().run();
     Checks.update(); // lesson helper, used by the Verify button
-  }
-
-  @Override
-  public void disabledInit() {
-    DrivetrainSubsystem.getInstance().setWantedState(DriveStates.IDLE);
-  }
-
-  @Override
-  public void teleopInit() {
-    DrivetrainSubsystem.getInstance().setWantedState(DriveStates.ARCADE);
   }
 }

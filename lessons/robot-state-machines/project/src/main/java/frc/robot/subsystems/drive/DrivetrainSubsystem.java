@@ -3,7 +3,6 @@ package frc.robot.subsystems.drive;
 import com.marswars.subsystem.MwSubsystem;
 import com.marswars.subsystem.SubsystemIoBase;
 import edu.wpi.first.math.geometry.Pose2d;
-import frc.robot.Constants;
 import frc.robot.OI;
 import frc.robot.mechanisms.DifferentialDriveMech;
 import frc.robot.subsystems.drive.DrivetrainConstants.DriveStates;
@@ -29,7 +28,9 @@ public class DrivetrainSubsystem extends MwSubsystem<DriveStates, DrivetrainCons
 
   private DrivetrainSubsystem() {
     super(DriveStates.IDLE, new DrivetrainConstants());
-    drive = new DifferentialDriveMech(Constants.LEFT_MOTORS, Constants.RIGHT_MOTORS);
+    drive =
+        new DifferentialDriveMech(
+            DrivetrainConstants.LEFT_MOTORS, DrivetrainConstants.RIGHT_MOTORS);
   }
 
   /** The mechanisms this subsystem owns. MWLib reads and writes them for us every loop. */
