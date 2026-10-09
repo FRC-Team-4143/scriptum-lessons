@@ -11,6 +11,8 @@ import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
+import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
@@ -19,13 +21,14 @@ import frc.robot.FieldTargets;
 import frc.robot.OI;
 import frc.robot.mechanisms.DifferentialDriveMech;
 import frc.robot.subsystems.drive.DrivetrainConstants.DriveStates;
+import frc.robot.subsystems.localization.LocalizationSubsystem;
 import java.util.List;
 import java.util.function.Supplier;
 
 /**
  * The drivetrain subsystem. It owns the drive mechanism and decides what the drivetrain should do
- * in each state. The mechanism itself works out the robot's speeds and pose (you wrote that in the
- * last lesson), so this class just asks it.
+ * in each state. The mechanism reads the wheels; working out WHERE the robot is on the field is the
+ * LocalizationSubsystem's job (wheels plus cameras), so this class just asks it.
  */
 public class DrivetrainSubsystem extends MwSubsystem<DriveStates, DrivetrainConstants> {
   // There is only ever one drivetrain, so everyone shares it through getInstance().
@@ -45,7 +48,7 @@ public class DrivetrainSubsystem extends MwSubsystem<DriveStates, DrivetrainCons
   private double commanded_turn_ = 0.0;
 
   // The PID that turns the robot to face the goal (state AIM). You built and tuned this in the
-  // State Machines lesson; here it is finished, and the autonomous routine just uses it.
+  // Computer Vision lesson; here it is finished, and the autonomous routine just uses it.
   private final PIDController aim_pid_ =
       new PIDController(
           DrivetrainConstants.AIM_KP, DrivetrainConstants.AIM_KI, DrivetrainConstants.AIM_KD);
@@ -90,7 +93,8 @@ public class DrivetrainSubsystem extends MwSubsystem<DriveStates, DrivetrainCons
     switch (system_state_) {
       case AIM:
         // The PID's error is (goal - measurement). A positive error means the goal is to our left,
-        // but a positive turn command turns the robot RIGHT, so the sign is flipped.
+        // but a positive turn command turns the robot RIGHT, so the sign is flipped. The heading
+        // comes from the pose ESTIMATE, like it would on the real robot.
         aim_turn_ =
             -aim_pid_.calculate(
                 getPose().getRotation().getRadians(), getAngleToGoal().getRadians());
@@ -139,19 +143,23 @@ public class DrivetrainSubsystem extends MwSubsystem<DriveStates, DrivetrainCons
     commanded_turn_ = turn;
   }
 
-  /** Puts the robot back at the origin facing forward, with fresh encoders. */
-  public void resetPose() {
-    drive_.resetPose();
+  /**
+   * Tells the robot where it is on the field (autonomous uses this to start on the path). In
+   * simulation the simulated robot is moved there too, its wheel readings start at zero, and the
+   * pose estimate starts out exactly right.
+   */
+  public void resetPose(Pose2d new_pose) {
+    drive_.resetPose(new_pose);
+    LocalizationSubsystem.getInstance().resetPose(new_pose);
   }
 
-  /** Tells the robot where it is on the field (autonomous uses this to start on the path). */
-  public void resetPose(Pose2d pose) {
-    drive_.resetPose(pose);
-  }
-
-  /** Where the robot REALLY is (the simulation knows; on a real robot it is just the estimate). */
+  /**
+   * Where the robot REALLY is. Only the simulator knows this; the simulated cameras are pointed
+   * from it and the lesson's checks compare it with the targets. On a real robot it falls back to
+   * the estimate.
+   */
   public Pose2d getTruePose() {
-    return drive_.getTruePose();
+    return RobotBase.isSimulation() ? drive_.getTruePose() : getPose();
   }
 
   /** The constants for this subsystem (autonomous commands read their gains from here). */
@@ -159,14 +167,37 @@ public class DrivetrainSubsystem extends MwSubsystem<DriveStates, DrivetrainCons
     return CONSTANTS;
   }
 
-  /** How fast the robot is turning in radians per second. Positive is turning left. */
+  /** The robot's turning speed, in radians per second. Positive is turning left. */
   public double getAngularSpeed() {
-    return drive_.getChassisSpeeds().omegaRadiansPerSecond;
+    return drive_.getAngularSpeed();
   }
 
-  /** Where the robot thinks it is (the drive mechanism works this out). */
+  /**
+   * Where the robot thinks it is on the field: the estimate from the LocalizationSubsystem, which
+   * blends the wheels with the cameras. Following paths and aiming use this.
+   */
   public Pose2d getPose() {
-    return drive_.getPose();
+    return LocalizationSubsystem.getInstance().getPose();
+  }
+
+  /** Which way the robot faces, worked out from the wheels (this plays the part of a gyro). */
+  public Rotation2d getYaw() {
+    return drive_.getYaw();
+  }
+
+  /** How far the left wheels have driven, in meters. */
+  public double getLeftMeters() {
+    return drive_.getLeftMeters();
+  }
+
+  /** How far the right wheels have driven, in meters. */
+  public double getRightMeters() {
+    return drive_.getRightMeters();
+  }
+
+  /** The mech's kinematics (it knows the track width). */
+  public DifferentialDriveKinematics getKinematics() {
+    return drive_.getKinematics();
   }
 
   /** The direction from the robot to the goal, as a field heading (0 = along +x, left is +). */

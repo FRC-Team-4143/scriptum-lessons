@@ -9,7 +9,6 @@ import com.ctre.phoenix6.sim.ChassisReference;
 import com.marswars.logging.MwLog;
 import com.marswars.mechanisms.MechBase;
 import com.marswars.mechanisms.MotorConfig;
-import edu.wpi.first.math.estimator.DifferentialDrivePoseEstimator;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
@@ -65,13 +64,14 @@ public class DifferentialDriveMech extends MechBase {
   private double last_true_right_meters_ = 0.0;
   private double measured_left_meters_ = 0.0;
   private double measured_right_meters_ = 0.0;
+  // True for one loop after a reset. The motors can still report their OLD position on the very
+  // next read, which would make the robot look like it jumped; that one reading is ignored.
+  private boolean just_reset_ = false;
 
-  // Kinematics and the pose estimator live in the mech, just like on the competition robot.
+  // Kinematics turns wheel speeds into robot speeds. The pose estimator that adds up the movements
+  // lives in the LocalizationSubsystem, which asks this mech for the wheel readings.
   private final DifferentialDriveKinematics kinematics_ =
       new DifferentialDriveKinematics(DrivetrainConstants.TRACK_WIDTH_METERS);
-  private final DifferentialDrivePoseEstimator pose_estimator_ =
-      new DifferentialDrivePoseEstimator(kinematics_, new Rotation2d(), 0.0, 0.0, new Pose2d());
-  private Pose2d pose_ = new Pose2d();
 
   public DifferentialDriveMech(List<MotorConfig> left_configs, List<MotorConfig> right_configs) {
     super("", "Drive");
@@ -152,6 +152,7 @@ public class DifferentialDriveMech extends MechBase {
     inputs_.rightPositionRotations = 0.0;
     inputs_.leftVelocityRps = 0.0;
     inputs_.rightVelocityRps = 0.0;
+    just_reset_ = true;
   }
 
   // ---------------------------------------------------------------------------------------------
@@ -202,8 +203,8 @@ public class DifferentialDriveMech extends MechBase {
   }
 
   // ---------------------------------------------------------------------------------------------
-  // Where is the robot? Kinematics turns wheel speeds into robot speeds, and the pose estimator
-  // adds up small movements to track x, y and heading.
+  // Wheel readings for localization. Kinematics turns wheel speeds into robot speeds; the
+  // LocalizationSubsystem adds up the small movements to track x, y and heading.
   // ---------------------------------------------------------------------------------------------
 
   /** The robot's speeds as a ChassisSpeeds: forward (vx) and turning (omega). */
@@ -218,31 +219,15 @@ public class DifferentialDriveMech extends MechBase {
         (getRightMeters() - getLeftMeters()) / DrivetrainConstants.TRACK_WIDTH_METERS);
   }
 
-  /** Feeds the latest wheel readings to the pose estimator. Runs every loop. */
-  private void updatePose() {
-    pose_estimator_.update(getYaw(), getLeftMeters(), getRightMeters());
-    pose_ = pose_estimator_.getEstimatedPosition();
-  }
-
-  /** Where the robot thinks it is on the field. */
-  public Pose2d getPose() {
-    return pose_;
-  }
-
   /** The kinematics object for this chassis (it knows the track width). */
   public DifferentialDriveKinematics getKinematics() {
     return kinematics_;
   }
 
-  /** Puts the robot back at the origin, facing forward, with fresh encoders. */
-  public void resetPose() {
-    resetPose(new Pose2d());
-  }
-
   /**
-   * Tells the robot where it is on the field. Autonomous uses this to start from the first point of
-   * the path: the robot is placed there, its encoders start counting from zero, and the pose
-   * estimate starts out exactly right.
+   * Puts the robot at a pose on the field with fresh encoders. In simulation the simulated robot is
+   * moved there and the wheel readings start counting from zero. The pose ESTIMATE is not kept
+   * here: the DrivetrainSubsystem tells the LocalizationSubsystem to restart from the same pose.
    *
    * @param new_pose where the robot is now, in field coordinates
    */
@@ -258,18 +243,15 @@ public class DifferentialDriveMech extends MechBase {
     inputs_.rightPositionRotations = 0.0;
     inputs_.leftVelocityRps = 0.0;
     inputs_.rightVelocityRps = 0.0;
-    // The wheels read zero now, so the estimator starts from "zero turned, zero driven" at
-    // new_pose.
-    pose_estimator_.resetPosition(getYaw(), 0.0, 0.0, new_pose);
-    pose_ = pose_estimator_.getEstimatedPosition();
+    just_reset_ = true;
   }
 
   /**
    * Where the robot REALLY is. Only the simulation knows this; on a real robot nothing does, so it
-   * falls back to the estimate. Used by the lesson's checks.
+   * returns the origin. Used by the simulated cameras and by the lesson's checks.
    */
   public Pose2d getTruePose() {
-    return IS_SIM ? sim_.getPose() : pose_;
+    return IS_SIM ? sim_.getPose() : new Pose2d();
   }
 
   /** Sets how hard ONLY the left side pushes, from -1.0 to 1.0. */
@@ -297,17 +279,20 @@ public class DifferentialDriveMech extends MechBase {
   public void readInputs(double timestamp) {
     if (!MwLog.isReplay()) {
       BaseStatusSignal.refreshAll(signals_);
-      inputs_.leftPositionRotations = left_motors_[0].getPosition().getValueAsDouble();
-      inputs_.rightPositionRotations = right_motors_[0].getPosition().getValueAsDouble();
-      inputs_.leftVelocityRps = left_motors_[0].getVelocity().getValueAsDouble();
-      inputs_.rightVelocityRps = right_motors_[0].getVelocity().getValueAsDouble();
+      if (just_reset_) {
+        just_reset_ = false;
+      } else {
+        inputs_.leftPositionRotations = left_motors_[0].getPosition().getValueAsDouble();
+        inputs_.rightPositionRotations = right_motors_[0].getPosition().getValueAsDouble();
+        inputs_.leftVelocityRps = left_motors_[0].getVelocity().getValueAsDouble();
+        inputs_.rightVelocityRps = right_motors_[0].getVelocity().getValueAsDouble();
+      }
 
       if (IS_SIM) {
         updateSimulation();
       }
     }
     Logger.processInputs(getLoggingKey() + "Inputs", inputs_);
-    updatePose();
   }
 
   @Override
@@ -320,10 +305,6 @@ public class DifferentialDriveMech extends MechBase {
   public void logData() {
     MwLog.log(getLoggingKey() + "LeftOutput", left_request_.Output);
     MwLog.log(getLoggingKey() + "RightOutput", right_request_.Output);
-    MwLog.log(getLoggingKey() + "Pose", pose_);
-    MwLog.log(getLoggingKey() + "PoseX", pose_.getX());
-    MwLog.log(getLoggingKey() + "PoseY", pose_.getY());
-    MwLog.log(getLoggingKey() + "PoseYawDeg", pose_.getRotation().getDegrees());
     ChassisSpeeds speeds = getChassisSpeeds();
     MwLog.log(getLoggingKey() + "ChassisSpeeds", speeds);
     MwLog.log(getLoggingKey() + "LinearSpeed", speeds.vxMetersPerSecond);
@@ -341,8 +322,8 @@ public class DifferentialDriveMech extends MechBase {
       MwLog.log(
           getLoggingKey() + "DistanceToScoreSpot",
           sim_.getPose().getTranslation().getDistance(FieldTargets.SCORE_SPOT.getTranslation()));
-      // How far the simulated robot REALLY is from facing the goal. Positive: the goal is to the
-      // left.
+      // How far the simulated robot REALLY is from facing the goal (the aim checks use this, so a
+      // drifting pose estimate cannot fool them). Positive: the goal is to the left.
       Pose2d truth = sim_.getPose();
       Rotation2d to_goal =
           FieldTargets.GOAL.getTranslation().minus(truth.getTranslation()).getAngle();

@@ -12,7 +12,7 @@ public final class DrivetrainCommands {
 
   /**
    * Aims at the goal for as long as the command runs, then goes back to driving. You wrote this in
-   * the State Machines lesson. In an autonomous routine, end it with {@code .until(...)} (see
+   * the Computer Vision lesson. In an autonomous routine, end it with {@code .until(...)} (see
    * {@link DrivetrainSubsystem#isAimed()}).
    */
   public static Command aim() {
