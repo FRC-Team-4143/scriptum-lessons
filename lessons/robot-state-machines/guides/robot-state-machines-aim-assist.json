@@ -126,12 +126,12 @@
 		{
 			"title": "Make the PID",
 			"say": {
-				"never": "Under the comment, make a field called `aimPid`: `private final PIDController aimPid = new PIDController(kP, kI, kD);`. Fill in the three gains with `DrivetrainConstants.AIM_KP`, `AIM_KI` and `AIM_KD`, so changing the constants changes the PID. You'll also need to import `PIDController` (hover on the red squiggle to add it). Click **I did it** when it's written.",
-				"bit": "Make `aimPid` from the three `AIM_` gains in `DrivetrainConstants`. Import `PIDController`."
+				"never": "Under the comment, make a field called `aim_pid_`: `private final PIDController aim_pid_ = new PIDController(kP, kI, kD);`. Fill in the three gains with `DrivetrainConstants.AIM_KP`, `AIM_KI` and `AIM_KD`, so changing the constants changes the PID. You'll also need to import `PIDController` (hover on the red squiggle to add it). Click **I did it** when it's written.",
+				"bit": "Make `aim_pid_` from the three `AIM_` gains in `DrivetrainConstants`. Import `PIDController`."
 			},
 			"cardAt": "bottom-right",
 			"waitFor": {
-				"hint": "write the aimPid field, then click I did it."
+				"hint": "write the aim_pid_ field, then click I did it."
 			},
 			"assist": true,
 			"target": {
@@ -164,12 +164,12 @@
 		{
 			"title": "Configure the PID",
 			"say": {
-				"never": "Two calls on `aimPid`, below that comment. `enableContinuousInput(-Math.PI, Math.PI)` makes headings wrap round. `setTolerance(...)` says how close counts as aimed. Give it `Math.toRadians(DrivetrainConstants.AIM_TOLERANCE_DEGREES)`, because the PID works in radians. Click **I did it** when both are written.",
-				"bit": "`aimPid.enableContinuousInput(-Math.PI, Math.PI)` and `aimPid.setTolerance(...)` in radians."
+				"never": "Two calls on `aim_pid_`, below that comment. `enableContinuousInput(-Math.PI, Math.PI)` makes headings wrap round. `setTolerance(...)` says how close counts as aimed. Give it `Math.toRadians(DrivetrainConstants.AIM_TOLERANCE_DEGREES)`, because the PID works in radians. Click **I did it** when both are written.",
+				"bit": "`aim_pid_.enableContinuousInput(-Math.PI, Math.PI)` and `aim_pid_.setTolerance(...)` in radians."
 			},
 			"cardAt": "bottom-right",
 			"waitFor": {
-				"hint": "write both calls on aimPid, then click I did it."
+				"hint": "write both calls on aim_pid_, then click I did it."
 			},
 			"assist": true,
 			"target": {
@@ -240,8 +240,8 @@
 		{
 			"title": "The AIM case",
 			"say": {
-				"never": "Add `case AIM:` to the switch. Set `aimTurn = -aimPid.calculate(heading, angleToGoal);` where the heading is `getPose().getRotation().getRadians()` and the angle is `getAngleToGoal().getRadians()`. The minus sign is the flip from the last guide. Then call `drive.arcadeDrive(0.0, aimTurn);` so the robot spins on the spot, and end the case with `break;`. Click **I did it** when the case is written.",
-				"bit": "`case AIM:` sets `aimTurn = -aimPid.calculate(heading, angleToGoal)`, calls `drive.arcadeDrive(0.0, aimTurn)`, then `break;`."
+				"never": "Add `case AIM:` to the switch. Set `aim_turn_ = -aim_pid_.calculate(heading, angleToGoal);` where the heading is `getPose().getRotation().getRadians()` and the angle is `getAngleToGoal().getRadians()`. The minus sign is the flip from the last guide. Then call `drive_.arcadeDrive(0.0, aim_turn_);` so the robot spins on the spot, and end the case with `break;`. Click **I did it** when the case is written.",
+				"bit": "`case AIM:` sets `aim_turn_ = -aim_pid_.calculate(heading, angleToGoal)`, calls `drive_.arcadeDrive(0.0, aim_turn_)`, then `break;`."
 			},
 			"cardAt": "bottom-right",
 			"waitFor": {
@@ -257,12 +257,12 @@
 		{
 			"title": "Reset in the other states",
 			"say": {
-				"never": "In the `ARCADE` and `IDLE` cases, add `aimPid.reset();` so that old error and old buildup don't carry into the next aim. Click **I did it** when you've added it to both.",
-				"bit": "Add `aimPid.reset();` to the ARCADE and IDLE cases."
+				"never": "In the `ARCADE` and `IDLE` cases, add `aim_pid_.reset();` so that old error and old buildup don't carry into the next aim. Click **I did it** when you've added it to both.",
+				"bit": "Add `aim_pid_.reset();` to the ARCADE and IDLE cases."
 			},
 			"cardAt": "bottom-right",
 			"waitFor": {
-				"hint": "add aimPid.reset() to ARCADE and IDLE, then click I did it."
+				"hint": "add aim_pid_.reset() to ARCADE and IDLE, then click I did it."
 			},
 			"assist": true,
 			"target": {
@@ -295,8 +295,8 @@
 		{
 			"title": "isAimed",
 			"say": {
-				"never": "Replace `return false;` with one `return` that uses `&&`: the heading error in degrees, `Math.toDegrees(getAimErrorRadians())`, has an absolute value (`Math.abs`) smaller than `DrivetrainConstants.AIM_TOLERANCE_DEGREES`, **and** `Math.abs(drive.getAngularSpeed())` is smaller than `0.15`. The second part makes sure it has stopped turning. Click **I did it** when it's written.",
-				"bit": "`Math.abs(error in degrees) < AIM_TOLERANCE_DEGREES && Math.abs(drive.getAngularSpeed()) < 0.15`."
+				"never": "Replace `return false;` with one `return` that uses `&&`: the heading error in degrees, `Math.toDegrees(getAimErrorRadians())`, has an absolute value (`Math.abs`) smaller than `DrivetrainConstants.AIM_TOLERANCE_DEGREES`, **and** `Math.abs(drive_.getAngularSpeed())` is smaller than `0.15`. The second part makes sure it has stopped turning. Click **I did it** when it's written.",
+				"bit": "`Math.abs(error in degrees) < AIM_TOLERANCE_DEGREES && Math.abs(drive_.getAngularSpeed()) < 0.15`."
 			},
 			"cardAt": "bottom-right",
 			"waitFor": {

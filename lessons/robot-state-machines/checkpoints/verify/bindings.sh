@@ -13,11 +13,11 @@ done
 code() { grep -Ev '^[[:space:]]*(//|\*|/\*)' "$1" | tr '\n' ' '; }
 
 if ! code "$OI" | grep -Eq 'rightBumper\(\)[[:space:]]*\.whileTrue\([[:space:]]*ShooterCommands\.shoot\(\)'; then
-	echo "In OI.configureBindings(): driverController.rightBumper().whileTrue(ShooterCommands.shoot());"
+	echo "In OI.configureBindings(): driver_controller_.rightBumper().whileTrue(ShooterCommands.shoot());"
 	exit 1
 fi
 if ! code "$OI" | grep -Eq '\ba\(\)[[:space:]]*\.onTrue\([[:space:]]*ShooterCommands\.simulateBallLaunch\(\)'; then
-	echo "In OI.configureBindings(): driverController.a().onTrue(ShooterCommands.simulateBallLaunch());"
+	echo "In OI.configureBindings(): driver_controller_.a().onTrue(ShooterCommands.simulateBallLaunch());"
 	exit 1
 fi
 if ! code "$CMDS" | grep -q 'startEnd'; then

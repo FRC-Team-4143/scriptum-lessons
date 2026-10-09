@@ -31,11 +31,11 @@ if ! code "$DRIVE" | grep -Eq 'AIM_KP' || ! code "$DRIVE" | grep -Eq 'AIM_KD'; t
 	exit 1
 fi
 if ! code "$DRIVE" | grep -Eq 'enableContinuousInput[[:space:]]*\('; then
-	echo "Headings wrap around: call aimPid.enableContinuousInput(-Math.PI, Math.PI)."
+	echo "Headings wrap around: call aim_pid_.enableContinuousInput(-Math.PI, Math.PI)."
 	exit 1
 fi
 if ! code "$DRIVE" | grep -Eq '\.calculate[[:space:]]*\('; then
-	echo "In the AIM case, ask the PID for a turn with aimPid.calculate(heading, angleToGoal)."
+	echo "In the AIM case, ask the PID for a turn with aim_pid_.calculate(heading, angleToGoal)."
 	exit 1
 fi
 if ! code "$DRIVE" | grep -Eq 'GOAL[^;]*getTranslation[[:space:]]*\(\)[^;]*\.minus[[:space:]]*\(|getTranslation[[:space:]]*\(\)[^;]*\.minus[[:space:]]*\([^;]*GOAL'; then

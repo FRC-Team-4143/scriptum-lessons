@@ -70,7 +70,7 @@
 				"bit": "`updateLogic` runs every 20 ms and does what the current state says."
 			},
 			"board": {
-				"code": "switch (system_state_) {\n    case ARCADE:\n        drive.arcadeDrive(OI.getForward(), OI.getTurn());\n        break;\n    case IDLE:\n    default:\n        drive.arcadeDrive(0.0, 0.0);\n        break;\n}",
+				"code": "switch (system_state_) {\n    case ARCADE:\n        drive_.arcadeDrive(OI.getForward(), OI.getTurn());\n        break;\n    case IDLE:\n    default:\n        drive_.arcadeDrive(0.0, 0.0);\n        break;\n}",
 				"marks": [
 					{
 						"text": "case ARCADE:",
