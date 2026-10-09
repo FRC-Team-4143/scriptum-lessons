@@ -11,13 +11,16 @@ Companion docs page: [Drive Math and Methods](https://docs.marswars.org/docs/sof
 ## Where the code lives
 
 - `DriveMath.java` is **pure math**. Numbers go in, a number comes out. It never touches a motor
-  or a sensor, so it is easy to test. You write five methods here.
+  or a sensor, so it is easy to test. You write five methods here, and **two of them (`linearSpeed`
+  and `angularSpeed`) you create yourself, signature and all**.
 - `mechanisms/DifferentialDriveMech.java` is the drivetrain. You write three more methods in it:
   `setLeftDutyCycle`, `setRightDutyCycle` and `arcadeDrive`. It also now has readings in meters and
   meters per second (`getLeftMeters()`, `getLinearSpeed()` and so on). Those are already written, and
   they call your `DriveMath` methods.
 - `Robot.java` is already finished. It **calls** your methods, so read it to see how they are used.
-  Until you write the methods, the robot sits still and logs zeros.
+  Until `linearSpeed` and `angularSpeed` exist the project shows red errors and will not build, and
+  until the rest are written the robot sits still and logs zeros. **Verify** still works on each
+  `DriveMath` method on its own.
 
 ## Session plan (about 3 hours)
 
@@ -26,7 +29,7 @@ A suggested pace that adds up to the 3 hour session. Take short breaks whenever 
 | Minutes | What to do |
 | --- | --- |
 | 20 | Read about methods, arrays and loops |
-| 30 | DriveMath: rotationsToMeters, linearSpeed, angularSpeed |
+| 30 | DriveMath: rotationsToMeters, then write linearSpeed and angularSpeed yourself |
 | 30 | DriveMath.arcadeToWheelSpeeds |
 | 25 | DriveMath.average |
 | 30 | The mech: setLeft, setRight, arcadeDrive |
@@ -41,8 +44,11 @@ Go slower on anything that is new. Finishing every bonus is not expected.
 Work through the methods one at a time. After each, click **Verify** to test it.
 
 1. **`DriveMath.rotationsToMeters`.** Wheel rotations times `2 * Math.PI * radius`.
-2. **`DriveMath.linearSpeed`.** The average of the left and right speeds.
-3. **`DriveMath.angularSpeed`.** `(right - left) / trackWidth`.
+2. **Write `DriveMath.linearSpeed` yourself.** It is not in the file yet, but the robot code already
+   calls it, so the name must match exactly. It takes the left and right speeds (two `double`s) and
+   returns their average.
+3. **Write `DriveMath.angularSpeed` yourself.** It takes the left speed, the right speed and the
+   track width (three `double`s) and returns `(right - left) / trackWidth`.
 4. **`DriveMath.arcadeToWheelSpeeds`.** Return `{left, right}` with `left = forward + turn` and
    `right = forward - turn`. If either is above `1.0` or below `-1.0`, divide **both** by whichever
    is bigger.

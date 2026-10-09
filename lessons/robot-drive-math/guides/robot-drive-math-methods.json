@@ -28,23 +28,27 @@
 		{
 			"title": "In your lesson: A method",
 			"say": {
-				"never": "A **method** is a named job. This one is called `linearSpeed`. You hand it two numbers (the left and right speeds), it does a little math, and it hands back one answer. `return` is how it hands the answer back.",
-				"bit": "A method names a job. This one takes two numbers and returns their average."
+				"never": "This is `rotationsToMeters`, already in your file. You hand it two numbers and it hands back one answer. The first line is its **signature**: its name and what it takes.",
+				"bit": "`rotationsToMeters` takes two numbers and returns one. The first line is its signature."
 			},
 			"board": {
-				"code": "public static double linearSpeed(double leftMetersPerSecond, double rightMetersPerSecond) {\n    return (leftMetersPerSecond + rightMetersPerSecond) / 2.0;\n}",
+				"code": "public static double rotationsToMeters(\n    double wheelRotations,\n    double wheelRadiusMeters) {\n  // the math goes here\n}",
 				"marks": [
 					{
-						"text": "double linearSpeed",
-						"label": "returns a double, named linearSpeed"
+						"text": "rotationsToMeters",
+						"label": "its name"
 					},
 					{
-						"text": "double leftMetersPerSecond, double rightMetersPerSecond",
-						"label": "what the caller provides"
+						"text": "double wheelRotations",
+						"label": "input one"
 					},
 					{
-						"text": "return",
-						"label": "hands the answer back"
+						"text": "double wheelRadiusMeters",
+						"label": "input two"
+					},
+					{
+						"text": "double",
+						"label": "answer type"
 					}
 				]
 			},
@@ -119,8 +123,8 @@
 		{
 			"title": "Your first method",
 			"say": {
-				"never": "Start with `rotationsToMeters`. Write it, then press **Verify**. Every method has its own check, so you get to celebrate each one.",
-				"bit": "Start with `rotationsToMeters`, then click **Verify**: each method has its own checkpoint."
+				"never": "Its signature is already written. Fill in the body: the math, and a `return` for the answer. Then press **Verify**. Every method has its own check, so you get to celebrate each one.",
+				"bit": "The signature is written: fill in the body, then click **Verify**."
 			},
 			"target": {
 				"pane": "editor",
@@ -131,10 +135,10 @@
 			"assist": true
 		},
 		{
-			"title": "Find linearSpeed",
+			"title": "Now write your own",
 			"say": {
-				"never": "The next method down. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `linearSpeed` and press **Enter**. The editor scrolls to the right spot and highlights it.",
-				"bit": "The next method down. Press **Ctrl+F**, type `linearSpeed` and press Enter to jump to it."
+				"never": "Further down, a comment says **YOUR TURN**. Two methods are missing from this file: `linearSpeed` and `angularSpeed`. The robot code already calls them, so you'll see red errors until you write them. Press **Ctrl+F**, type `YOUR TURN`, and press **Enter**.",
+				"bit": "Two methods are missing, and the robot already calls them. Press **Ctrl+F**, search `YOUR TURN`."
 			},
 			"target": {
 				"pane": "editor"
@@ -144,25 +148,67 @@
 				"target": {
 					"pane": "editor",
 					"selector": ".view-lines .view-line",
-					"text": "public static double linearSpeed"
+					"text": "YOUR TURN: write linearSpeed"
 				},
-				"hint": "find linearSpeed with Ctrl+F.",
+				"hint": "find the YOUR TURN comment with Ctrl+F.",
 				"skipIfDone": true
 			},
 			"assist": true
 		},
 		{
-			"title": "Then this one",
+			"title": "Parts of a signature",
 			"say": {
-				"never": "Now this one: the **average** of the two sides. Add them together and divide by 2.",
-				"bit": "The average of the two sides."
+				"never": "A signature has four parts, in this order: `public static`, the type of the answer, the name, and then the inputs in parentheses, each with its type. The name must match exactly, capital letters and all, because the robot code calls it by that name. Here the answer and every input are `double`.",
+				"bit": "Signature: `public static`, answer type, name, then (type and name for each input). Match the name exactly."
+			},
+			"board": {
+				"code": "public static TYPE name(\n    TYPE input1,\n    TYPE input2) {\n  return ...;\n}",
+				"language": "text",
+				"marks": [
+					{
+						"text": "TYPE name",
+						"label": "answer type, name"
+					},
+					{
+						"text": "TYPE input1",
+						"label": "type, then name"
+					}
+				]
+			},
+			"assist": true
+		},
+		{
+			"title": "Write linearSpeed",
+			"say": {
+				"never": "Under the comment, write `linearSpeed` yourself. Inputs: the left speed and the right speed, both `double`. Answer: a `double`, the average of the two sides. Call the inputs `leftMetersPerSecond` and `rightMetersPerSecond`. Save, then press **Verify**.",
+				"bit": "Write `linearSpeed(left, right)`: two doubles in, the average out. Then **Verify**."
 			},
 			"target": {
 				"pane": "editor",
 				"selector": ".view-lines .view-line",
-				"text": "public static double linearSpeed"
+				"text": "YOUR TURN: write linearSpeed and angularSpeed here."
 			},
 			"cardAt": "bottom-right",
+			"waitFor": {
+				"hint": "write the linearSpeed method under the YOUR TURN comment, then click I did it."
+			},
+			"assist": true
+		},
+		{
+			"title": "Write angularSpeed",
+			"say": {
+				"never": "Now `angularSpeed`, with **three** inputs, all `double`: the left speed, the right speed and the track width. The answer is `(right - left)` divided by the track width. Once both methods exist, the red errors in the robot code go away. Press **Verify**.",
+				"bit": "Write `angularSpeed(left, right, trackWidth)`: three doubles in, `(right - left) / trackWidth` out."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "YOUR TURN: write linearSpeed and angularSpeed here."
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"hint": "write the angularSpeed method, then click I did it."
+			},
 			"assist": true
 		}
 	],
