@@ -2368,16 +2368,40 @@
 			"path": "lessons/robot-odometry/guides/robot-odometry-kinematics.json"
 		},
 		{
-			"id": "robot-odometry-pose",
-			"title": "Where is the robot?",
-			"summary": "Pose estimation, and why it drifts from the truth.",
+			"id": "robot-odometry-yaw",
+			"title": "Which way is it facing?",
+			"summary": "Yaw: working out the robot's heading from the wheels.",
 			"topic": "Robot",
 			"order": 441,
 			"modules": [
 				"robot-odometry"
 			],
 			"kind": "mixed",
+			"path": "lessons/robot-odometry/guides/robot-odometry-yaw.json"
+		},
+		{
+			"id": "robot-odometry-pose",
+			"title": "Where is the robot?",
+			"summary": "Pose estimation, and why it drifts from the truth.",
+			"topic": "Robot",
+			"order": 442,
+			"modules": [
+				"robot-odometry"
+			],
+			"kind": "mixed",
 			"path": "lessons/robot-odometry/guides/robot-odometry-pose.json"
+		},
+		{
+			"id": "robot-odometry-auto",
+			"title": "Drive to a spot",
+			"summary": "Use the pose in autonomous to drive to x = 3 m.",
+			"topic": "Robot",
+			"order": 443,
+			"modules": [
+				"robot-odometry"
+			],
+			"kind": "mixed",
+			"path": "lessons/robot-odometry/guides/robot-odometry-auto.json"
 		},
 		{
 			"id": "robot-odometry-objects",
