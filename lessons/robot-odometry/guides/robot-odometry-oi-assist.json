@@ -58,8 +58,8 @@
 		{
 			"title": "Write getForward",
 			"say": {
-				"never": "Under those comments, write the first method. Type these three lines:\n\n`public static double getForward() {`\n\n`return -driverController.getLeftY();`\n\n`}`\n\n`public` lets any class call it, `static` lets you call it on the class (`OI.getForward()`), and `double` says it hands back a decimal number. The minus sign is there because pushing the stick forward gives a negative number, and we want forward to be positive.",
-				"bit": "Under the comments, write `public static double getForward() {`, then `return -driverController.getLeftY();`, then `}`. The minus makes forward positive."
+				"never": "Under those comments, write the first method. Type these three lines:\n\n`public static double getForward() {`\n\n`return -driver_controller_.getLeftY();`\n\n`}`\n\n`public` lets any class call it, `static` lets you call it on the class (`OI.getForward()`), and `double` says it hands back a decimal number. The minus sign is there because pushing the stick forward gives a negative number, and we want forward to be positive.",
+				"bit": "Under the comments, write `public static double getForward() {`, then `return -driver_controller_.getLeftY();`, then `}`. The minus makes forward positive."
 			},
 			"target": {
 				"pane": "editor",
@@ -75,8 +75,8 @@
 		{
 			"title": "Add the deadband",
 			"say": {
-				"never": "Sticks never rest at exactly zero, so ignore tiny pushes, just like the deadband you wrote by hand in lesson 1. WPILib has one built in. Change the return line to:\n\n`return MathUtil.applyDeadband(-driverController.getLeftY(), 0.1);`\n\nAnything between -0.1 and 0.1 now counts as 0.",
-				"bit": "Wrap it: `return MathUtil.applyDeadband(-driverController.getLeftY(), 0.1);`. Pushes smaller than 0.1 count as 0."
+				"never": "Sticks never rest at exactly zero, so ignore tiny pushes, just like the deadband you wrote by hand in lesson 1. WPILib has one built in. Change the return line to:\n\n`return MathUtil.applyDeadband(-driver_controller_.getLeftY(), 0.1);`\n\nAnything between -0.1 and 0.1 now counts as 0.",
+				"bit": "Wrap it: `return MathUtil.applyDeadband(-driver_controller_.getLeftY(), 0.1);`. Pushes smaller than 0.1 count as 0."
 			},
 			"target": {
 				"pane": "editor",
@@ -109,8 +109,8 @@
 		{
 			"title": "Write getTurn",
 			"say": {
-				"never": "Now the turning method, just below `getForward()`. Type these three lines:\n\n`public static double getTurn() {`\n\n`return MathUtil.applyDeadband(driverController.getLeftX(), 0.1);`\n\n`}`\n\nThere is no minus sign this time: the left stick pushed to the right is already positive.",
-				"bit": "Below `getForward()`, write `public static double getTurn() {`, then `return MathUtil.applyDeadband(driverController.getLeftX(), 0.1);`, then `}`."
+				"never": "Now the turning method, just below `getForward()`. Type these three lines:\n\n`public static double getTurn() {`\n\n`return MathUtil.applyDeadband(driver_controller_.getLeftX(), 0.1);`\n\n`}`\n\nThere is no minus sign this time: the left stick pushed to the right is already positive.",
+				"bit": "Below `getForward()`, write `public static double getTurn() {`, then `return MathUtil.applyDeadband(driver_controller_.getLeftX(), 0.1);`, then `}`."
 			},
 			"target": {
 				"pane": "editor",
@@ -177,8 +177,8 @@
 		{
 			"title": "Delete the controller field",
 			"say": {
-				"never": "Robot.java used to read the controller itself. Now OI does that, so delete the comment line and the line under it:\n\n`private final XboxController controller = new XboxController(0);`\n\nIt's like asking the receptionist instead of walking down the hall.",
-				"bit": "Delete the `XboxController controller` field and the TODO comment above it. OI reads the controller now."
+				"never": "Robot.java used to read the controller itself. Now OI does that, so delete the comment line and the line under it:\n\n`private final XboxController controller_ = new XboxController(0);`\n\nIt's like asking the receptionist instead of walking down the hall.",
+				"bit": "Delete the `XboxController controller_` field and the TODO comment above it. OI reads the controller now."
 			},
 			"target": {
 				"pane": "editor",
@@ -232,8 +232,8 @@
 		{
 			"title": "Ask OI instead",
 			"say": {
-				"never": "Replace the comment and the whole `drive.arcadeDrive(...)` call (it spans three lines) with one line:\n\n`drive.arcadeDrive(OI.getForward(), OI.getTurn());`\n\nThe robot now asks OI for the stick values instead of reading the controller.",
-				"bit": "Replace the whole `drive.arcadeDrive(...)` call with `drive.arcadeDrive(OI.getForward(), OI.getTurn());`."
+				"never": "Replace the comment and the whole `drive_.arcadeDrive(...)` call (it spans three lines) with one line:\n\n`drive_.arcadeDrive(OI.getForward(), OI.getTurn());`\n\nThe robot now asks OI for the stick values instead of reading the controller.",
+				"bit": "Replace the whole `drive_.arcadeDrive(...)` call with `drive_.arcadeDrive(OI.getForward(), OI.getTurn());`."
 			},
 			"target": {
 				"pane": "editor",

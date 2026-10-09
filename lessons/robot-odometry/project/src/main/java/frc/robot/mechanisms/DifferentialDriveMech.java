@@ -32,17 +32,17 @@ import org.littletonrobotics.junction.Logger;
  * so you never have to call them yourself.
  */
 public class DifferentialDriveMech extends MechBase {
-  private final CommonTalon[] leftMotors;
-  private final CommonTalon[] rightMotors;
-  private final BaseStatusSignal[] signals;
-  private final boolean[] leftInverted;
-  private final boolean[] rightInverted;
+  private final CommonTalon[] left_motors_;
+  private final CommonTalon[] right_motors_;
+  private final BaseStatusSignal[] signals_;
+  private final boolean[] left_inverted_;
+  private final boolean[] right_inverted_;
 
-  private final DutyCycleOut leftRequest = new DutyCycleOut(0);
-  private final DutyCycleOut rightRequest = new DutyCycleOut(0);
-  private final DriveInputsAutoLogged inputs = new DriveInputsAutoLogged();
+  private final DutyCycleOut left_request_ = new DutyCycleOut(0);
+  private final DutyCycleOut right_request_ = new DutyCycleOut(0);
+  private final DriveInputsAutoLogged inputs_ = new DriveInputsAutoLogged();
 
-  private final DifferentialDrivetrainSim sim;
+  private final DifferentialDrivetrainSim sim_;
 
   // Simulated sensor imperfections (simulation only). The seed is fixed so every student sees the
   // same robot.
@@ -51,7 +51,7 @@ public class DifferentialDriveMech extends MechBase {
   private static final double SLIP_NOISE = 0.02; // random slip, as a fraction of each movement
   private static final double JITTER_METERS = 0.0005; // encoder position jitter
   private static final double JITTER_METERS_PER_SECOND = 0.01; // encoder velocity jitter
-  private final Random noise = new Random(4143);
+  private final Random noise_ = new Random(4143);
 
   // Simulated friction (simulation only). See updateSimulation().
   private static final double STATIC_FRICTION_VOLTS = 0.25; // volts it takes to get a wheel moving
@@ -59,39 +59,39 @@ public class DifferentialDriveMech extends MechBase {
   private static final double SUPPLY_VOLTS = 12.0; // battery voltage
   private static final double CURRENT_LIMIT_AMPS = 120.0; // per motor, like the TalonFX default
   private static final DCMotor DRIVE_MOTOR = DCMotor.getKrakenX60(1);
-  private double lastTrueLeftMeters = 0.0;
-  private double lastTrueRightMeters = 0.0;
-  private double measuredLeftMeters = 0.0;
-  private double measuredRightMeters = 0.0;
+  private double last_true_left_meters_ = 0.0;
+  private double last_true_right_meters_ = 0.0;
+  private double measured_left_meters_ = 0.0;
+  private double measured_right_meters_ = 0.0;
 
   // Kinematics and the pose estimator live in the mech, just like on the competition robot.
-  private final DifferentialDriveKinematics kinematics =
+  private final DifferentialDriveKinematics kinematics_ =
       new DifferentialDriveKinematics(Constants.TRACK_WIDTH_METERS);
-  private final DifferentialDrivePoseEstimator poseEstimator =
-      new DifferentialDrivePoseEstimator(kinematics, new Rotation2d(), 0.0, 0.0, new Pose2d());
-  private Pose2d pose = new Pose2d();
+  private final DifferentialDrivePoseEstimator pose_estimator_ =
+      new DifferentialDrivePoseEstimator(kinematics_, new Rotation2d(), 0.0, 0.0, new Pose2d());
+  private Pose2d pose_ = new Pose2d();
 
-  public DifferentialDriveMech(List<MotorConfig> leftConfigs, List<MotorConfig> rightConfigs) {
+  public DifferentialDriveMech(List<MotorConfig> left_configs, List<MotorConfig> right_configs) {
     super("", "Drive");
 
     // MWLib builds the motors: the first one in each list is the leader, the rest follow it.
-    ConstructedMotors left = configMotors(leftConfigs, Constants.GEAR_RATIO);
-    ConstructedMotors right = configMotors(rightConfigs, Constants.GEAR_RATIO);
-    leftMotors = left.motors;
-    rightMotors = right.motors;
+    ConstructedMotors left = configMotors(left_configs, Constants.GEAR_RATIO);
+    ConstructedMotors right = configMotors(right_configs, Constants.GEAR_RATIO);
+    left_motors_ = left.motors;
+    right_motors_ = right.motors;
 
-    signals = new BaseStatusSignal[left.signals.length + right.signals.length];
-    System.arraycopy(left.signals, 0, signals, 0, left.signals.length);
-    System.arraycopy(right.signals, 0, signals, left.signals.length, right.signals.length);
+    signals_ = new BaseStatusSignal[left.signals.length + right.signals.length];
+    System.arraycopy(left.signals, 0, signals_, 0, left.signals.length);
+    System.arraycopy(right.signals, 0, signals_, left.signals.length, right.signals.length);
 
-    leftInverted = invertedFlags(leftConfigs);
-    rightInverted = invertedFlags(rightConfigs);
+    left_inverted_ = invertedFlags(left_configs);
+    right_inverted_ = invertedFlags(right_configs);
 
     // Physics model, used only in simulation.
-    int motorsPerSide = Math.max(leftConfigs.size(), rightConfigs.size());
-    sim =
+    int motors_per_side = Math.max(left_configs.size(), right_configs.size());
+    sim_ =
         new DifferentialDrivetrainSim(
-            DCMotor.getKrakenX60(motorsPerSide),
+            DCMotor.getKrakenX60(motors_per_side),
             Constants.GEAR_RATIO,
             7.5, // how hard the robot is to spin (kg*m^2)
             Constants.ROBOT_MASS_KG,
@@ -107,28 +107,28 @@ public class DifferentialDriveMech extends MechBase {
    * @param right -1.0 (full backward) to 1.0 (full forward)
    */
   public void setDutyCycles(double left, double right) {
-    leftRequest.Output = clamp(left);
-    rightRequest.Output = clamp(right);
+    left_request_.Output = clamp(left);
+    right_request_.Output = clamp(right);
   }
 
   /** How far the left wheels have turned, in wheel rotations. Forward is positive. */
   public double getLeftPositionRotations() {
-    return inputs.leftPositionRotations;
+    return inputs_.leftPositionRotations;
   }
 
   /** How far the right wheels have turned, in wheel rotations. Forward is positive. */
   public double getRightPositionRotations() {
-    return inputs.rightPositionRotations;
+    return inputs_.rightPositionRotations;
   }
 
   /** How fast the left wheels are turning, in wheel rotations per second. */
   public double getLeftVelocityRps() {
-    return inputs.leftVelocityRps;
+    return inputs_.leftVelocityRps;
   }
 
   /** How fast the right wheels are turning, in wheel rotations per second. */
   public double getRightVelocityRps() {
-    return inputs.rightVelocityRps;
+    return inputs_.rightVelocityRps;
   }
 
   /**
@@ -142,14 +142,14 @@ public class DifferentialDriveMech extends MechBase {
       // next loop, when the simulation tells them where the wheels really are.
       resetSimulation();
     } else {
-      leftMotors[0].setPosition(0.0);
-      rightMotors[0].setPosition(0.0);
+      left_motors_[0].setPosition(0.0);
+      right_motors_[0].setPosition(0.0);
     }
     // Let the very next reading say zero too, instead of the old number from the last loop.
-    inputs.leftPositionRotations = 0.0;
-    inputs.rightPositionRotations = 0.0;
-    inputs.leftVelocityRps = 0.0;
-    inputs.rightVelocityRps = 0.0;
+    inputs_.leftPositionRotations = 0.0;
+    inputs_.rightPositionRotations = 0.0;
+    inputs_.leftVelocityRps = 0.0;
+    inputs_.rightVelocityRps = 0.0;
   }
 
   // ---------------------------------------------------------------------------------------------
@@ -159,23 +159,24 @@ public class DifferentialDriveMech extends MechBase {
 
   /** How far the left side has driven, in meters. */
   public double getLeftMeters() {
-    return DriveMath.rotationsToMeters(inputs.leftPositionRotations, Constants.WHEEL_RADIUS_METERS);
+    return DriveMath.rotationsToMeters(
+        inputs_.leftPositionRotations, Constants.WHEEL_RADIUS_METERS);
   }
 
   /** How far the right side has driven, in meters. */
   public double getRightMeters() {
     return DriveMath.rotationsToMeters(
-        inputs.rightPositionRotations, Constants.WHEEL_RADIUS_METERS);
+        inputs_.rightPositionRotations, Constants.WHEEL_RADIUS_METERS);
   }
 
   /** How fast the left side is moving, in meters per second. */
   public double getLeftMetersPerSecond() {
-    return DriveMath.rotationsToMeters(inputs.leftVelocityRps, Constants.WHEEL_RADIUS_METERS);
+    return DriveMath.rotationsToMeters(inputs_.leftVelocityRps, Constants.WHEEL_RADIUS_METERS);
   }
 
   /** How fast the right side is moving, in meters per second. */
   public double getRightMetersPerSecond() {
-    return DriveMath.rotationsToMeters(inputs.rightVelocityRps, Constants.WHEEL_RADIUS_METERS);
+    return DriveMath.rotationsToMeters(inputs_.rightVelocityRps, Constants.WHEEL_RADIUS_METERS);
   }
 
   /** How far the whole robot has driven, in meters: the average of the two sides. */
@@ -203,7 +204,7 @@ public class DifferentialDriveMech extends MechBase {
   public ChassisSpeeds getChassisSpeeds() {
     // TODO: turn the two wheel speeds into robot speeds. Make a DifferentialDriveWheelSpeeds from
     // getLeftMetersPerSecond() and getRightMetersPerSecond(), then pass it to
-    // kinematics.toChassisSpeeds(...) and return the result.
+    // kinematics_.toChassisSpeeds(...) and return the result.
     return new ChassisSpeeds();
   }
 
@@ -217,36 +218,36 @@ public class DifferentialDriveMech extends MechBase {
   /** Feeds the latest wheel readings to the pose estimator. Runs every loop. */
   private void updatePose() {
     // TODO: tell the estimator what the sensors say now:
-    //   poseEstimator.update(getYaw(), getLeftMeters(), getRightMeters());
+    //   pose_estimator_.update(getYaw(), getLeftMeters(), getRightMeters());
     // then ask it where the robot is and store the answer in pose:
-    //   pose = poseEstimator.getEstimatedPosition();
+    //   pose = pose_estimator_.getEstimatedPosition();
   }
 
   /** Where the robot thinks it is on the field. */
   public Pose2d getPose() {
-    return pose;
+    return pose_;
   }
 
   /** The kinematics object for this chassis (it knows the track width). */
   public DifferentialDriveKinematics getKinematics() {
-    return kinematics;
+    return kinematics_;
   }
 
   /** Puts the robot back at the origin, facing forward, with fresh encoders. */
   public void resetPose() {
     resetEncoders();
-    poseEstimator.resetPosition(new Rotation2d(), 0.0, 0.0, new Pose2d());
-    pose = new Pose2d();
+    pose_estimator_.resetPosition(new Rotation2d(), 0.0, 0.0, new Pose2d());
+    pose_ = new Pose2d();
   }
 
   /** Sets how hard ONLY the left side pushes, from -1.0 to 1.0. */
   public void setLeftDutyCycle(double left) {
-    leftRequest.Output = clamp(left);
+    left_request_.Output = clamp(left);
   }
 
   /** Sets how hard ONLY the right side pushes, from -1.0 to 1.0. */
   public void setRightDutyCycle(double right) {
-    rightRequest.Output = clamp(right);
+    right_request_.Output = clamp(right);
   }
 
   /**
@@ -263,34 +264,34 @@ public class DifferentialDriveMech extends MechBase {
   @Override
   public void readInputs(double timestamp) {
     if (!MwLog.isReplay()) {
-      BaseStatusSignal.refreshAll(signals);
-      inputs.leftPositionRotations = leftMotors[0].getPosition().getValueAsDouble();
-      inputs.rightPositionRotations = rightMotors[0].getPosition().getValueAsDouble();
-      inputs.leftVelocityRps = leftMotors[0].getVelocity().getValueAsDouble();
-      inputs.rightVelocityRps = rightMotors[0].getVelocity().getValueAsDouble();
+      BaseStatusSignal.refreshAll(signals_);
+      inputs_.leftPositionRotations = left_motors_[0].getPosition().getValueAsDouble();
+      inputs_.rightPositionRotations = right_motors_[0].getPosition().getValueAsDouble();
+      inputs_.leftVelocityRps = left_motors_[0].getVelocity().getValueAsDouble();
+      inputs_.rightVelocityRps = right_motors_[0].getVelocity().getValueAsDouble();
 
       if (IS_SIM) {
         updateSimulation();
       }
     }
-    Logger.processInputs(getLoggingKey() + "Inputs", inputs);
+    Logger.processInputs(getLoggingKey() + "Inputs", inputs_);
     updatePose();
   }
 
   @Override
   public void writeOutputs(double timestamp) {
-    leftMotors[0].setControl(leftRequest);
-    rightMotors[0].setControl(rightRequest);
+    left_motors_[0].setControl(left_request_);
+    right_motors_[0].setControl(right_request_);
   }
 
   @Override
   public void logData() {
-    MwLog.log(getLoggingKey() + "LeftOutput", leftRequest.Output);
-    MwLog.log(getLoggingKey() + "RightOutput", rightRequest.Output);
-    MwLog.log(getLoggingKey() + "Pose", pose);
-    MwLog.log(getLoggingKey() + "PoseX", pose.getX());
-    MwLog.log(getLoggingKey() + "PoseY", pose.getY());
-    MwLog.log(getLoggingKey() + "PoseYawDeg", pose.getRotation().getDegrees());
+    MwLog.log(getLoggingKey() + "LeftOutput", left_request_.Output);
+    MwLog.log(getLoggingKey() + "RightOutput", right_request_.Output);
+    MwLog.log(getLoggingKey() + "Pose", pose_);
+    MwLog.log(getLoggingKey() + "PoseX", pose_.getX());
+    MwLog.log(getLoggingKey() + "PoseY", pose_.getY());
+    MwLog.log(getLoggingKey() + "PoseYawDeg", pose_.getRotation().getDegrees());
     ChassisSpeeds speeds = getChassisSpeeds();
     MwLog.log(getLoggingKey() + "ChassisSpeeds", speeds);
     MwLog.log(getLoggingKey() + "LinearSpeed", speeds.vxMetersPerSecond);
@@ -300,7 +301,7 @@ public class DifferentialDriveMech extends MechBase {
     MwLog.log(getLoggingKey() + "AngularSpeedByHand", getAngularSpeed());
     if (IS_SIM) {
       // Where the simulated robot REALLY is, to compare with the pose your code estimates.
-      MwLog.log(getLoggingKey() + "TruePose", sim.getPose());
+      MwLog.log(getLoggingKey() + "TruePose", sim_.getPose());
     }
   }
 
@@ -314,92 +315,93 @@ public class DifferentialDriveMech extends MechBase {
   // ---------------------------------------------------------------------------------------------
 
   private void updateSimulation() {
-    for (int i = 0; i < leftMotors.length; i++) {
-      prepareSimMotor((TalonFX) leftMotors[i], leftInverted[i]);
+    for (int i = 0; i < left_motors_.length; i++) {
+      prepareSimMotor((TalonFX) left_motors_[i], left_inverted_[i]);
     }
-    for (int i = 0; i < rightMotors.length; i++) {
-      prepareSimMotor((TalonFX) rightMotors[i], rightInverted[i]);
+    for (int i = 0; i < right_motors_.length; i++) {
+      prepareSimMotor((TalonFX) right_motors_[i], right_inverted_[i]);
     }
 
     // The motors are driven straight from the duty cycles rather than from the simulated TalonFX's
     // own voltage. The TalonFX only knows about its own motor, not the carpet dragging on the
     // wheels, so it believes a turning robot is stalled and cuts its output (to about 4 V). The
     // current limit is applied below instead, to the current the physics model really sees.
-    double supplyVolts = DriverStation.isEnabled() ? SUPPLY_VOLTS : 0.0;
-    double leftVolts = leftRequest.Output * supplyVolts;
-    double rightVolts = rightRequest.Output * supplyVolts;
+    double supply_volts = DriverStation.isEnabled() ? SUPPLY_VOLTS : 0.0;
+    double left_volts = left_request_.Output * supply_volts;
+    double right_volts = right_request_.Output * supply_volts;
 
     // Friction, which the physics model leaves out. The first few volts on each side only break
     // the wheels loose, so a stick that rests a hair off center does not creep. And turning drags
     // the wheels sideways across the carpet ("scrub"), so the faster the robot spins the harder
     // the carpet pushes back. Without it the robot spins about 3 times faster than a real one.
-    leftVolts = minusStaticFriction(leftVolts);
-    rightVolts = minusStaticFriction(rightVolts);
-    double spinMetersPerSecond =
-        (sim.getRightVelocityMetersPerSecond() - sim.getLeftVelocityMetersPerSecond()) / 2.0;
-    leftVolts += SCRUB_VOLTS_PER_METER_PER_SECOND * spinMetersPerSecond;
-    rightVolts -= SCRUB_VOLTS_PER_METER_PER_SECOND * spinMetersPerSecond;
-    leftVolts = limitCurrent(leftVolts, sim.getLeftVelocityMetersPerSecond());
-    rightVolts = limitCurrent(rightVolts, sim.getRightVelocityMetersPerSecond());
+    left_volts = minusStaticFriction(left_volts);
+    right_volts = minusStaticFriction(right_volts);
+    double spin_meters_per_second =
+        (sim_.getRightVelocityMetersPerSecond() - sim_.getLeftVelocityMetersPerSecond()) / 2.0;
+    left_volts += SCRUB_VOLTS_PER_METER_PER_SECOND * spin_meters_per_second;
+    right_volts -= SCRUB_VOLTS_PER_METER_PER_SECOND * spin_meters_per_second;
+    left_volts = limitCurrent(left_volts, sim_.getLeftVelocityMetersPerSecond());
+    right_volts = limitCurrent(right_volts, sim_.getRightVelocityMetersPerSecond());
 
-    sim.setInputs(leftVolts, rightVolts);
-    sim.update(0.020);
+    sim_.setInputs(left_volts, right_volts);
+    sim_.update(0.020);
 
     // Real encoders are not perfect, so the simulated ones are not either. Each wheel reads a tiny
     // bit
     // too far or too short (wheels are never exactly the size we think), it slips a little as it
     // rolls, and the reading jitters. That is why the pose your code works out differs a little
     // from where the simulated robot really is (see Drive/TruePose).
-    double leftDelta = sim.getLeftPositionMeters() - lastTrueLeftMeters;
-    double rightDelta = sim.getRightPositionMeters() - lastTrueRightMeters;
-    lastTrueLeftMeters = sim.getLeftPositionMeters();
-    lastTrueRightMeters = sim.getRightPositionMeters();
-    measuredLeftMeters += leftDelta * LEFT_SCALE * (1.0 + SLIP_NOISE * noise.nextGaussian());
-    measuredRightMeters += rightDelta * RIGHT_SCALE * (1.0 + SLIP_NOISE * noise.nextGaussian());
+    double left_delta = sim_.getLeftPositionMeters() - last_true_left_meters_;
+    double right_delta = sim_.getRightPositionMeters() - last_true_right_meters_;
+    last_true_left_meters_ = sim_.getLeftPositionMeters();
+    last_true_right_meters_ = sim_.getRightPositionMeters();
+    measured_left_meters_ += left_delta * LEFT_SCALE * (1.0 + SLIP_NOISE * noise_.nextGaussian());
+    measured_right_meters_ +=
+        right_delta * RIGHT_SCALE * (1.0 + SLIP_NOISE * noise_.nextGaussian());
 
-    double leftMeters = measuredLeftMeters + JITTER_METERS * noise.nextGaussian();
-    double rightMeters = measuredRightMeters + JITTER_METERS * noise.nextGaussian();
-    double leftSpeed =
-        sim.getLeftVelocityMetersPerSecond() * LEFT_SCALE
-            + JITTER_METERS_PER_SECOND * noise.nextGaussian();
-    double rightSpeed =
-        sim.getRightVelocityMetersPerSecond() * RIGHT_SCALE
-            + JITTER_METERS_PER_SECOND * noise.nextGaussian();
+    double left_meters = measured_left_meters_ + JITTER_METERS * noise_.nextGaussian();
+    double right_meters = measured_right_meters_ + JITTER_METERS * noise_.nextGaussian();
+    double left_speed =
+        sim_.getLeftVelocityMetersPerSecond() * LEFT_SCALE
+            + JITTER_METERS_PER_SECOND * noise_.nextGaussian();
+    double right_speed =
+        sim_.getRightVelocityMetersPerSecond() * RIGHT_SCALE
+            + JITTER_METERS_PER_SECOND * noise_.nextGaussian();
 
-    double wheelCircumference = 2.0 * Math.PI * Constants.WHEEL_RADIUS_METERS;
+    double wheel_circumference = 2.0 * Math.PI * Constants.WHEEL_RADIUS_METERS;
     pushSimState(
-        leftMotors,
-        leftMeters / wheelCircumference * Constants.GEAR_RATIO,
-        leftSpeed / wheelCircumference * Constants.GEAR_RATIO);
+        left_motors_,
+        left_meters / wheel_circumference * Constants.GEAR_RATIO,
+        left_speed / wheel_circumference * Constants.GEAR_RATIO);
     pushSimState(
-        rightMotors,
-        rightMeters / wheelCircumference * Constants.GEAR_RATIO,
-        rightSpeed / wheelCircumference * Constants.GEAR_RATIO);
+        right_motors_,
+        right_meters / wheel_circumference * Constants.GEAR_RATIO,
+        right_speed / wheel_circumference * Constants.GEAR_RATIO);
   }
 
   /** Puts the simulated robot back at the origin with fresh (zeroed) encoders. */
   private void resetSimulation() {
-    sim.setPose(new Pose2d());
-    sim.setInputs(0.0, 0.0);
+    sim_.setPose(new Pose2d());
+    sim_.setInputs(0.0, 0.0);
     // Start counting from wherever the simulation says the wheels are now (zero in most versions of
     // WPILib, but this does not depend on it).
-    lastTrueLeftMeters = sim.getLeftPositionMeters();
-    lastTrueRightMeters = sim.getRightPositionMeters();
-    measuredLeftMeters = 0.0;
-    measuredRightMeters = 0.0;
+    last_true_left_meters_ = sim_.getLeftPositionMeters();
+    last_true_right_meters_ = sim_.getRightPositionMeters();
+    measured_left_meters_ = 0.0;
+    measured_right_meters_ = 0.0;
     // Tell the simulated motors right away that the wheels are back at zero. Their position comes
     // from what the simulation pushes, so this is what actually resets the reading.
-    pushSimState(leftMotors, 0.0, 0.0);
-    pushSimState(rightMotors, 0.0, 0.0);
+    pushSimState(left_motors_, 0.0, 0.0);
+    pushSimState(right_motors_, 0.0, 0.0);
   }
 
   /** Keeps the current through one motor under the limit, like the TalonFX's stator limit. */
-  private static double limitCurrent(double volts, double wheelMetersPerSecond) {
-    double motorRadPerSec =
-        wheelMetersPerSecond / Constants.WHEEL_RADIUS_METERS * Constants.GEAR_RATIO;
-    double backEmf = motorRadPerSec / DRIVE_MOTOR.KvRadPerSecPerVolt;
+  private static double limitCurrent(double volts, double wheel_meters_per_second) {
+    double motor_rad_per_sec =
+        wheel_meters_per_second / Constants.WHEEL_RADIUS_METERS * Constants.GEAR_RATIO;
+    double back_emf = motor_rad_per_sec / DRIVE_MOTOR.KvRadPerSecPerVolt;
     double window = CURRENT_LIMIT_AMPS * DRIVE_MOTOR.rOhms;
-    return Math.max(backEmf - window, Math.min(backEmf + window, volts));
+    return Math.max(back_emf - window, Math.min(back_emf + window, volts));
   }
 
   private static double minusStaticFriction(double volts) {
@@ -407,18 +409,18 @@ public class DifferentialDriveMech extends MechBase {
   }
 
   private static void prepareSimMotor(TalonFX motor, boolean inverted) {
-    var simState = motor.getSimState();
-    simState.Orientation =
+    var sim_state = motor.getSimState();
+    sim_state.Orientation =
         inverted ? ChassisReference.Clockwise_Positive : ChassisReference.CounterClockwise_Positive;
-    simState.setSupplyVoltage(12.0);
+    sim_state.setSupplyVoltage(12.0);
   }
 
   private static void pushSimState(
-      CommonTalon[] motors, double motorRotations, double motorRotationsPerSecond) {
+      CommonTalon[] motors, double motor_rotations, double motor_rotations_per_second) {
     for (CommonTalon motor : motors) {
-      var simState = ((TalonFX) motor).getSimState();
-      simState.setRawRotorPosition(motorRotations);
-      simState.setRotorVelocity(motorRotationsPerSecond);
+      var sim_state = ((TalonFX) motor).getSimState();
+      sim_state.setRawRotorPosition(motor_rotations);
+      sim_state.setRotorVelocity(motor_rotations_per_second);
     }
   }
 

@@ -7,15 +7,15 @@
 		{
 			"title": "Deciding with the pose",
 			"say": {
-				"never": "Once the robot knows where it is, it can decide things from its position. The idea is the same `if` and `else` as before: keep driving while you are short of the goal, and stop once you arrive. The pose's x value is how many meters the robot is from where it started, along the field.\n\nFor a goal of 5 meters it reads: `if (pose.getX() < 5.0) {` drive, `} else {` stop.",
+				"never": "Once the robot knows where it is, it can decide things from its position. The idea is the same `if` and `else` as before: keep driving while you are short of the goal, and stop once you arrive. The pose's x value is how many meters the robot is from where it started, along the field.\n\nFor a goal of 5 meters it reads: `if (pose_.getX() < 5.0) {` drive, `} else {` stop.",
 				"bit": "With a pose you can drive until x reaches a goal: an `if` while short of it, an `else` to stop."
 			}
 		},
 		{
 			"title": "In your lesson: Deciding with the pose",
 			"say": {
-				"never": "Your robot's pose comes from `drive.getPose()`, and `.getX()` asks it for the x position in meters. Drive at 0.4 until that reaches 3.0, then stop:\n\n`if (drive.getPose().getX() < 3.0) {`\n\n`    drive.arcadeDrive(0.4, 0.0);`\n\n`} else {`\n\n`    drive.arcadeDrive(0.0, 0.0);`\n\n`}`",
-				"bit": "`if (drive.getPose().getX() < 3.0) {` drive at 0.4 `} else {` stop."
+				"never": "Your robot's pose comes from `drive_.getPose()`, and `.getX()` asks it for the x position in meters. Drive at 0.4 until that reaches 3.0, then stop:\n\n`if (drive_.getPose().getX() < 3.0) {`\n\n`    drive_.arcadeDrive(0.4, 0.0);`\n\n`} else {`\n\n`    drive_.arcadeDrive(0.0, 0.0);`\n\n`}`",
+				"bit": "`if (drive_.getPose().getX() < 3.0) {` drive at 0.4 `} else {` stop."
 			},
 			"assist": true
 		},
@@ -73,8 +73,8 @@
 		{
 			"title": "Remove the placeholder",
 			"say": {
-				"never": "The line `drive.arcadeDrive(0.0, 0.0); // TODO` just keeps the robot still. Delete it so you can write the real thing in its place. It is inside `autonomousPeriodic()`, which runs on its own in Auto mode.",
-				"bit": "Delete the placeholder `drive.arcadeDrive(0.0, 0.0); // TODO` line."
+				"never": "The line `drive_.arcadeDrive(0.0, 0.0); // TODO` just keeps the robot still. Delete it so you can write the real thing in its place. It is inside `autonomousPeriodic()`, which runs on its own in Auto mode.",
+				"bit": "Delete the placeholder `drive_.arcadeDrive(0.0, 0.0); // TODO` line."
 			},
 			"target": {
 				"pane": "editor",
@@ -90,8 +90,8 @@
 		{
 			"title": "Drive while short of 3 m",
 			"say": {
-				"never": "Inside `autonomousPeriodic()`, write the `if`:\n\n`if (drive.getPose().getX() < 3.0) {`\n\n`    drive.arcadeDrive(0.4, 0.0);`\n\n`}`\n\nThe first number of `arcadeDrive` is forward speed (0.4 is gentle) and the second is turning (0.0 means straight).",
-				"bit": "Write `if (drive.getPose().getX() < 3.0) {`, then `drive.arcadeDrive(0.4, 0.0);`, then `}`."
+				"never": "Inside `autonomousPeriodic()`, write the `if`:\n\n`if (drive_.getPose().getX() < 3.0) {`\n\n`    drive_.arcadeDrive(0.4, 0.0);`\n\n`}`\n\nThe first number of `arcadeDrive` is forward speed (0.4 is gentle) and the second is turning (0.0 means straight).",
+				"bit": "Write `if (drive_.getPose().getX() < 3.0) {`, then `drive_.arcadeDrive(0.4, 0.0);`, then `}`."
 			},
 			"target": {
 				"pane": "editor",
@@ -107,8 +107,8 @@
 		{
 			"title": "Stop at the spot",
 			"say": {
-				"never": "Add the `else` right after the closing `}` of the `if`, so the robot stops once x reaches 3.0:\n\n`} else {`\n\n`    drive.arcadeDrive(0.0, 0.0);`\n\n`}`\n\nIn the end it is one `if` / `else` with the two `drive.arcadeDrive` lines inside.",
-				"bit": "Extend it: `} else { drive.arcadeDrive(0.0, 0.0); }`, so the robot stops once x is 3.0 or more."
+				"never": "Add the `else` right after the closing `}` of the `if`, so the robot stops once x reaches 3.0:\n\n`} else {`\n\n`    drive_.arcadeDrive(0.0, 0.0);`\n\n`}`\n\nIn the end it is one `if` / `else` with the two `drive_.arcadeDrive` lines inside.",
+				"bit": "Extend it: `} else { drive_.arcadeDrive(0.0, 0.0); }`, so the robot stops once x is 3.0 or more."
 			},
 			"target": {
 				"pane": "editor",

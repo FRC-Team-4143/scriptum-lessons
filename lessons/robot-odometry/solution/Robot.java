@@ -10,40 +10,40 @@ import org.littletonrobotics.junction.LoggedRobot;
  * controller its own class, OI, and uses the pose in autonomous.
  */
 public class Robot extends LoggedRobot {
-  private final DifferentialDriveMech drive =
+  private final DifferentialDriveMech drive_ =
       new DifferentialDriveMech(Constants.LEFT_MOTORS, Constants.RIGHT_MOTORS);
-  private final LessonLoop loop = new LessonLoop(drive);
+  private final LessonLoop loop_ = new LessonLoop(drive_);
 
   @Override
   public void robotPeriodic() {
     // The loop reads the sensors, updates the drivetrain's pose, and sends the motor commands.
-    loop.doControlLoop();
+    loop_.doControlLoop();
   }
 
   @Override
   public void disabledPeriodic() {
-    drive.arcadeDrive(0.0, 0.0);
+    drive_.arcadeDrive(0.0, 0.0);
   }
 
   @Override
   public void teleopPeriodic() {
-    drive.arcadeDrive(OI.getForward(), OI.getTurn());
+    drive_.arcadeDrive(OI.getForward(), OI.getTurn());
   }
 
   @Override
   public void autonomousInit() {
     // Start from the origin.
-    drive.resetPose();
+    drive_.resetPose();
   }
 
   @Override
   public void autonomousPeriodic() {
     // STEP 5: Last lesson the robot counted its own distance. Now drive forward at 0.4 until the
-    // pose says x is at least 3.0 meters, then stop. Use drive.getPose().getX().
-    if (drive.getPose().getX() < 3.0) {
-      drive.arcadeDrive(0.4, 0.0);
+    // pose says x is at least 3.0 meters, then stop. Use drive_.getPose().getX().
+    if (drive_.getPose().getX() < 3.0) {
+      drive_.arcadeDrive(0.4, 0.0);
     } else {
-      drive.arcadeDrive(0.0, 0.0);
+      drive_.arcadeDrive(0.0, 0.0);
     }
   }
 }

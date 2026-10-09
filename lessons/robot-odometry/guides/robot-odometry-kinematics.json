@@ -14,8 +14,8 @@
 		{
 			"title": "In your lesson: Wheel speeds in, robot speeds out",
 			"say": {
-				"never": "In `getChassisSpeeds()` you will do it in two moves. First bundle the two wheel speeds into one object, then hand it to kinematics:\n\n`DifferentialDriveWheelSpeeds wheels = new DifferentialDriveWheelSpeeds(getLeftMetersPerSecond(), getRightMetersPerSecond());`\n\n`return kinematics.toChassisSpeeds(wheels);`\n\nThe answer has `vxMetersPerSecond` (forward) and `omegaRadiansPerSecond` (turning).",
-				"bit": "Bundle the two speeds as `new DifferentialDriveWheelSpeeds(left, right)`, then `kinematics.toChassisSpeeds(wheels)` returns forward (`vxMetersPerSecond`) and turning (`omegaRadiansPerSecond`)."
+				"never": "In `getChassisSpeeds()` you will do it in two moves. First bundle the two wheel speeds into one object, then hand it to kinematics:\n\n`DifferentialDriveWheelSpeeds wheels = new DifferentialDriveWheelSpeeds(getLeftMetersPerSecond(), getRightMetersPerSecond());`\n\n`return kinematics_.toChassisSpeeds(wheels);`\n\nThe answer has `vxMetersPerSecond` (forward) and `omegaRadiansPerSecond` (turning).",
+				"bit": "Bundle the two speeds as `new DifferentialDriveWheelSpeeds(left, right)`, then `kinematics_.toChassisSpeeds(wheels)` returns forward (`vxMetersPerSecond`) and turning (`omegaRadiansPerSecond`)."
 			},
 			"assist": true
 		},
@@ -107,8 +107,8 @@
 		{
 			"title": "Convert and return",
 			"say": {
-				"never": "Now let kinematics do the math. **Replace** the placeholder line `return new ChassisSpeeds();` with:\n\n`return kinematics.toChassisSpeeds(wheels);`\n\nReplace it rather than adding a second `return`. A method can only return once, and Java complains about code after a `return`.",
-				"bit": "Replace `return new ChassisSpeeds();` with `return kinematics.toChassisSpeeds(wheels);`. Only one `return` allowed."
+				"never": "Now let kinematics do the math. **Replace** the placeholder line `return new ChassisSpeeds();` with:\n\n`return kinematics_.toChassisSpeeds(wheels);`\n\nReplace it rather than adding a second `return`. A method can only return once, and Java complains about code after a `return`.",
+				"bit": "Replace `return new ChassisSpeeds();` with `return kinematics_.toChassisSpeeds(wheels);`. Only one `return` allowed."
 			},
 			"target": {
 				"pane": "editor",
@@ -118,7 +118,7 @@
 			"cardAt": "bottom-right",
 			"assist": true,
 			"waitFor": {
-				"hint": "return kinematics.toChassisSpeeds(wheels)."
+				"hint": "return kinematics_.toChassisSpeeds(wheels)."
 			}
 		},
 		{

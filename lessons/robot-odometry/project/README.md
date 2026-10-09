@@ -44,18 +44,18 @@ Go slower on anything that is new. Finishing every bonus is not expected.
    Then in `Robot.java`, delete the `XboxController` field and call `OI.getForward()` and
    `OI.getTurn()` in `teleopPeriodic()`.
 2. **`getChassisSpeeds()`** in `DifferentialDriveMech.java`. Create a `DifferentialDriveWheelSpeeds`
-   from the left and right speeds and pass it to `kinematics.toChassisSpeeds(...)`. In
+   from the left and right speeds and pass it to `kinematics_.toChassisSpeeds(...)`. In
    AdvantageScope, `Drive/LinearSpeed` and `Drive/AngularSpeed` should match
    `Drive/LinearSpeedByHand` and `Drive/AngularSpeedByHand`.
 3. **`getYaw()`.** Return `(right - left) / Constants.TRACK_WIDTH_METERS` (radians) as a `Rotation2d`.
-4. **`updatePose()`.** Call `poseEstimator.update(getYaw(), getLeftMeters(), getRightMeters())`, then
-   store `poseEstimator.getEstimatedPosition()` in `pose`.
+4. **`updatePose()`.** Call `pose_estimator_.update(getYaw(), getLeftMeters(), getRightMeters())`, then
+   store `pose_estimator_.getEstimatedPosition()` in `pose_`.
 5. **Watch it move.** In AdvantageScope's **2D Field** tab, drag `Drive/Pose` onto the field, then
    drive around.
 6. **Compare with the truth.** Drag `Drive/TruePose` onto the same field and drive a long way. See how
    far the two end up apart.
 7. **Use the pose in autonomous.** Replace the `TODO` in `autonomousPeriodic()`: drive forward at `0.4`
-   until `drive.getPose().getX()` is at least `3.0` meters, then stop.
+   until `drive_.getPose().getX()` is at least `3.0` meters, then stop.
 8. **Click Verify** to check your work.
 
 Stuck on a step? Open **Dozer**: he can explain the idea or walk you through it.
