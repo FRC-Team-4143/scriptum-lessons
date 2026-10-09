@@ -30,17 +30,17 @@ import java.util.List;
  * </ol>
  */
 public class DifferentialPathFollower {
-  private final DrivetrainConstants constants;
-  private final DifferentialDriveKinematics kinematics;
-  private final LTVUnicycleController controller;
+  private final DrivetrainConstants CONSTANTS;
+  private final DifferentialDriveKinematics kinematics_;
+  private final LTVUnicycleController controller_;
 
   private static final double LOOP_SECONDS = 0.020; // the robot code runs every 20 ms
 
   public DifferentialPathFollower(
       DrivetrainConstants constants, DifferentialDriveKinematics kinematics) {
-    this.constants = constants;
-    this.kinematics = kinematics;
-    this.controller =
+    this.CONSTANTS = constants;
+    this.kinematics_ = kinematics;
+    this.controller_ =
         new LTVUnicycleController(LOOP_SECONDS, DrivetrainConstants.FREE_SPEED_METERS_PER_SECOND);
   }
 
@@ -98,11 +98,12 @@ public class DifferentialPathFollower {
   public double[] calculate(Pose2d robot, DifferentialSample sample) {
     // The speeds the path wants: forward speed is the average of the two wheels, and the turning
     // speed is how much faster the right wheel is than the left, spread across the track width.
-    double pathForward = (sample.vl + sample.vr) / 2.0;
-    double pathTurn = sample.omega;
+    double path_forward = (sample.vl + sample.vr) / 2.0;
+    double path_turn = sample.omega;
 
     // Feedback: ask the controller for the speeds that follow the path AND pull back onto it.
-    ChassisSpeeds corrected = controller.calculate(robot, sample.getPose(), pathForward, pathTurn);
+    ChassisSpeeds corrected =
+        controller_.calculate(robot, sample.getPose(), path_forward, path_turn);
     return toDutyCycles(corrected);
   }
 
@@ -117,35 +118,35 @@ public class DifferentialPathFollower {
    * @return {left duty cycle, right duty cycle}, each from -1.0 to 1.0
    */
   public double[] settle(Pose2d robot, Pose2d goal) {
-    Translation2d toGoal = goal.getTranslation().minus(robot.getTranslation());
-    double distance = toGoal.getNorm();
-    if (distance < constants.CHOREO_SETTLE_DEADBAND_METERS) {
+    Translation2d to_goal = goal.getTranslation().minus(robot.getTranslation());
+    double distance = to_goal.getNorm();
+    if (distance < CONSTANTS.CHOREO_SETTLE_DEADBAND_METERS) {
       return new double[] {0.0, 0.0};
     }
     // Angle between where the robot faces and where the goal is, folded into -90..90 degrees (if
     // the goal is behind the robot it simply drives backwards instead of spinning around).
-    double bearing = toGoal.getAngle().minus(robot.getRotation()).getRadians();
+    double bearing = to_goal.getAngle().minus(robot.getRotation()).getRadians();
     boolean backwards = Math.abs(bearing) > Math.PI / 2.0;
     if (backwards) {
       bearing = MathUtil.angleModulus(bearing + Math.PI);
     }
     double speed =
-        Math.min(constants.CHOREO_SETTLE_MAX_SPEED, constants.CHOREO_SETTLE_KP_DISTANCE * distance);
+        Math.min(CONSTANTS.CHOREO_SETTLE_MAX_SPEED, CONSTANTS.CHOREO_SETTLE_KP_DISTANCE * distance);
     // Drive more slowly the less the robot faces the goal, and not at all if it is sideways.
     speed *= Math.max(0.0, Math.cos(bearing));
     double forward = backwards ? -speed : speed;
-    double turn = constants.CHOREO_SETTLE_KP_HEADING * bearing;
+    double turn = CONSTANTS.CHOREO_SETTLE_KP_HEADING * bearing;
     return toDutyCycles(new ChassisSpeeds(forward, 0.0, turn));
   }
 
   /** Turns the speeds the robot should have into motor power. */
   private double[] toDutyCycles(ChassisSpeeds speeds) {
-    DifferentialDriveWheelSpeeds wheels = kinematics.toWheelSpeeds(speeds);
+    DifferentialDriveWheelSpeeds wheels = kinematics_.toWheelSpeeds(speeds);
     // Feedforward: wheel speed -> duty cycle. Turning drags the wheels sideways, which takes extra
     // power on top of rolling. "spin" is how much faster than the middle of the robot the right
     // side is going (negative when the left side is).
     double spin = (wheels.rightMetersPerSecond - wheels.leftMetersPerSecond) / 2.0;
-    double extra = constants.CHOREO_KV_TURN * spin;
+    double extra = CONSTANTS.CHOREO_KV_TURN * spin;
     return new double[] {
       clamp(toDutyCycle(wheels.leftMetersPerSecond) - extra),
       clamp(toDutyCycle(wheels.rightMetersPerSecond) + extra)
@@ -155,9 +156,10 @@ public class DifferentialPathFollower {
   /**
    * The power it takes to hold a wheel at a speed: kS in the direction of travel plus kV * speed.
    */
-  private double toDutyCycle(double wheelMetersPerSecond) {
-    double kS = Math.abs(wheelMetersPerSecond) > 1e-3 ? constants.CHOREO_KS : 0.0;
-    return Math.signum(wheelMetersPerSecond) * kS + constants.CHOREO_KV * wheelMetersPerSecond;
+  private double toDutyCycle(double wheel_meters_per_second) {
+    double k_s = Math.abs(wheel_meters_per_second) > 1e-3 ? CONSTANTS.CHOREO_KS : 0.0;
+    return Math.signum(wheel_meters_per_second) * k_s
+        + CONSTANTS.CHOREO_KV * wheel_meters_per_second;
   }
 
   private static double clamp(double duty) {

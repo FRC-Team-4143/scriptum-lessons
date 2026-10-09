@@ -3,17 +3,17 @@ package frc.robot;
 public final class DriveMath {
   private DriveMath() {}
 
-  public static double rotationsToMeters(double wheelRotations, double wheelRadiusMeters) {
-    return wheelRotations * 2.0 * Math.PI * wheelRadiusMeters;
+  public static double rotationsToMeters(double wheel_rotations, double wheel_radius_meters) {
+    return wheel_rotations * 2.0 * Math.PI * wheel_radius_meters;
   }
 
-  public static double linearSpeed(double leftMetersPerSecond, double rightMetersPerSecond) {
-    return (leftMetersPerSecond + rightMetersPerSecond) / 2.0;
+  public static double linearSpeed(double left_meters_per_second, double right_meters_per_second) {
+    return (left_meters_per_second + right_meters_per_second) / 2.0;
   }
 
   public static double angularSpeed(
-      double leftMetersPerSecond, double rightMetersPerSecond, double trackWidthMeters) {
-    return (rightMetersPerSecond - leftMetersPerSecond) / trackWidthMeters;
+      double left_meters_per_second, double right_meters_per_second, double track_width_meters) {
+    return (right_meters_per_second - left_meters_per_second) / track_width_meters;
   }
 
   public static double[] arcadeToWheelSpeeds(double forward, double turn) {
