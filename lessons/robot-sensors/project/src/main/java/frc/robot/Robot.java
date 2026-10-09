@@ -55,7 +55,7 @@ public class Robot extends LoggedRobot {
   public void teleopPeriodic() {
     // Arcade drive, from last lesson.
     double forward = -controller.getLeftY();
-    double turn = controller.getRightX();
+    double turn = controller.getLeftX();
 
     // STEP 4: DEADBAND. Real sticks never rest at exactly 0.0, so the robot would creep.
     // TODO: declare a constant  private static final double DEADBAND = 0.1;  near the top of this

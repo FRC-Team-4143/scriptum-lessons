@@ -45,11 +45,11 @@ public class Robot extends LoggedRobot {
 
   @Override
   public void teleopPeriodic() {
-    // Arcade drive: the left stick sets forward/backward, the right stick turns. The deadband you
+    // Arcade drive: the left stick sets forward/backward and turns. The deadband you
     // wrote by hand in lesson 1 is built into WPILib as MathUtil.applyDeadband.
     drive.arcadeDrive(
         MathUtil.applyDeadband(-controller.getLeftY(), 0.1),
-        MathUtil.applyDeadband(controller.getRightX(), 0.1));
+        MathUtil.applyDeadband(controller.getLeftX(), 0.1));
   }
 
   @Override

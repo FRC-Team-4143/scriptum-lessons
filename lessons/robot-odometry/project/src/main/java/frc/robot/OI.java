@@ -19,5 +19,5 @@ public abstract class OI {
   //   MathUtil.applyDeadband(value, 0.1)   (import edu.wpi.first.math.MathUtil)
 
   // TODO: write  public static double getTurn()
-  // It returns how much the driver wants to turn: the right stick X (also with a deadband).
+  // It returns how much the driver wants to turn: the left stick X (also with a deadband).
 }
