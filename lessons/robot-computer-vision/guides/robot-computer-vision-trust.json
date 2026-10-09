@@ -1,0 +1,65 @@
+{
+	"title": "How much should I trust the camera?",
+	"summary": "What the standard deviations, the timestamp and the heading do to the estimate.",
+	"topic": "Robot",
+	"order": 512,
+	"steps": [
+		{
+			"title": "Standard deviation: how far off?",
+			"say": {
+				"never": "A standard deviation says how far off a number could be. Smaller means the estimator trusts it more. The estimator holds one for the wheels and takes one with every camera measurement, then leans toward whichever is more trustworthy. The two vision numbers are both yours to choose.",
+				"bit": "Small standard deviation = trust it. Large = barely listen. You choose the camera's."
+			}
+		},
+		{
+			"title": "Too big: the camera is ignored",
+			"say": {
+				"never": "With the starter 5.0 the estimator thinks the camera could be 5 meters off, so it ignores it. You are back to odometry alone, which drifts about 0.1 to 0.5 meters and a few degrees over a 6 to 11 meter drive. That fails the 5 cm limit.",
+				"bit": "At 5.0 the camera is ignored. You get plain odometry: about 0.1 to 0.5 m and a few degrees of drift."
+			}
+		},
+		{
+			"title": "Good numbers: tight and steady",
+			"say": {
+				"never": "With sensible numbers (the reference solution uses 0.3 for both) the estimate follows the camera. Once the robot has stopped it ends within about 3 millimeters and 0.2 degrees of the truth. The check allows 5 centimeters and 1 degree, so you have lots of room.",
+				"bit": "With good numbers the estimate ends about 3 mm and 0.2 degrees from the truth once stopped. The limit is 5 cm and 1 degree."
+			}
+		},
+		{
+			"title": "Too small: every picture is believed",
+			"say": {
+				"never": "A tiny number says \"the camera is perfect\". Then each noisy picture drags the estimate straight to it, and the estimate shakes. That is why the provided helper only passes on the answers made from several tags at once: single-tag answers are too noisy to believe. Watch the estimate on the 2D Field: if it shivers, trust the camera a little less.",
+				"bit": "Too small and every noisy picture yanks the estimate around. A shaking estimate means trust less."
+			}
+		},
+		{
+			"title": "Use the picture's time, not now",
+			"say": {
+				"never": "A camera picture is a little old when it arrives. If you tell the estimator it was taken just now (`Timer.getFPGATimestamp()`), it puts the old position in the present, and the estimate lags behind the truth by about 0.08 to 0.12 meters while the robot moves. Using `measurement.getTimestamp()` lets the estimator slot the picture in at the right moment.",
+				"bit": "Passing \"now\" instead of the picture's time makes the estimate lag about 0.08 to 0.12 m while moving."
+			}
+		},
+		{
+			"title": "Heading: use it, or ignore it",
+			"say": {
+				"never": "A huge heading number (like 99999) tells the estimator to ignore the camera's heading and keep the wheels' heading. Here the wheels' heading is about 2 to 7 degrees off, which fails the 1 degree limit. The camera's heading from several tags is good, so give it a small heading number too.",
+				"bit": "A huge heading number means ignore camera heading. Then heading stays about 2 to 7 degrees off. Trust it."
+			}
+		},
+		{
+			"title": "What the helper already does",
+			"say": {
+				"never": "`TagVision` does some of the safety for you. There are two cameras (front and back). It only passes on multi-tag results. It also drops the camera answers while the robot spins faster than about 180 degrees per second, because a spinning robot blurs the picture. If your estimate is wrong only during fast spins, that is why.",
+				"bit": "Two cameras, multi-tag only, and answers dropped while spinning faster than about 180 deg/s."
+			}
+		},
+		{
+			"title": "How to tune it",
+			"say": {
+				"never": "Change one number, press Start, drive more than 5 meters, stop, and read `PositionErrorMeters` and `HeadingErrorDegrees` once you have stopped. Both under the limits? Done. Still big? Trust the camera more. Shaking? Trust it less.",
+				"bit": "Change one number, drive, stop, read the errors. Large: trust more. Shaky: trust less."
+			}
+		}
+	],
+	"kind": "concept"
+}

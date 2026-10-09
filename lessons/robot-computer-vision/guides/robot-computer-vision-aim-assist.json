@@ -202,7 +202,7 @@
 		{
 			"title": "Direction to the goal",
 			"say": {
-				"never": "Fill in `getAngleToGoal()`. Take the goal's translation, `FieldTargets.GOAL.getTranslation()`, and subtract the robot's: `.minus(getPose().getTranslation())`. That's the arrow from the robot to the goal. Finish with `.getAngle()` and return it. Click **I did it** when it returns the arrow's angle.",
+				"never": "Fill in `getAngleToGoal()`. Take the goal's translation, `FieldTargets.GOAL.getTranslation()`, and subtract the robot's: `.minus(getPose().getTranslation())`. That's the arrow from the robot to the goal. Finish with `.getAngle()` and return it. Click **I did it** when it returns the arrow's angle. Use `getPose()` here, the estimate: a robot can only aim from where it thinks it is, and that is why the vision work matters.",
 				"bit": "Return `GOAL.getTranslation().minus(getPose().getTranslation()).getAngle()`."
 			},
 			"cardAt": "bottom-right",
@@ -422,8 +422,8 @@
 		{
 			"title": "Try it",
 			"say": {
-				"never": "Hold the **left bumper** (**E** on the keyboard). The robot should spin toward the goal, which starts up and to the left. It probably won't stop in the right place yet, and that's fine: next you'll tune it. If it spins the wrong way, check the minus sign. If nothing happens, check the binding and that the state is `AIM` in AdvantageScope.",
-				"bit": "Hold **E** (left bumper). The robot should turn toward the goal. Tuning comes next."
+				"never": "Hold the **left bumper** (**E** on the keyboard). The robot should spin toward the goal, which starts about 45 degrees to its left. It probably won't stop in the right place yet, and that's fine: next you'll tune it. If it spins the wrong way, check the minus sign. If nothing happens, check the binding and that the state is `AIM` in AdvantageScope.",
+				"bit": "Hold **E** (left bumper). The robot should turn toward the goal, about 45 degrees to its left. Tuning comes next."
 			},
 			"target": {
 				"selector": "[data-tour='mode']"

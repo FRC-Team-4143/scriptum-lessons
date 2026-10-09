@@ -1,0 +1,212 @@
+{
+	"about": {
+		"never": "This lesson teaches the robot to see. First you give the camera measurements to the pose estimator and choose how much to trust them, so the robot always knows where it is. Then you use that position to turn and face the goal with a PID. The lesson's README lists each job.",
+		"bit": "Feed the camera measurements to the pose estimator (and pick the trust numbers), then build an AIM state that turns the robot to face the goal and tune its PID."
+	},
+	"plan": [
+		{
+			"checkpoint": "vision-added",
+			"guides": [
+				"robot-computer-vision-where-am-i",
+				"robot-computer-vision-add-vision"
+			],
+			"intro": {
+				"never": "First you hand the camera measurements to the pose estimator.",
+				"bit": "Add the vision measurement call."
+			}
+		},
+		{
+			"checkpoint": "estimate-accurate",
+			"guides": [
+				"robot-computer-vision-trust"
+			],
+			"intro": {
+				"never": "Now choose how much to trust the cameras, and prove the estimate is close to the truth.",
+				"bit": "Pick the trust numbers and check the estimate."
+			}
+		},
+		{
+			"checkpoint": "aim-state-written",
+			"guides": [
+				"robot-computer-vision-aim",
+				"robot-computer-vision-aim-assist"
+			],
+			"intro": {
+				"never": "Next the robot learns to turn and face the goal.",
+				"bit": "Build the AIM state."
+			}
+		},
+		{
+			"checkpoint": "aim-converges",
+			"guides": [
+				"robot-computer-vision-aim-tuning"
+			],
+			"intro": {
+				"never": "Tune the PID so the robot reaches the goal.",
+				"bit": "Tune kP."
+			}
+		},
+		{
+			"checkpoint": "aim-no-overshoot",
+			"guides": [
+				"robot-computer-vision-aim-damping"
+			],
+			"intro": {
+				"never": "Last, stop it swinging past the goal.",
+				"bit": "Damp the overshoot."
+			}
+		}
+	],
+	"checkpoints": {
+		"vision-added": {
+			"why": {
+				"never": "The pose estimator only blends the cameras in when you give it each measurement, with the time of the picture and how much to trust it.",
+				"bit": "The estimator ignores the cameras until you pass each measurement with its time and standard deviations."
+			},
+			"guide": "robot-computer-vision-add-vision",
+			"concept": {
+				"guide": "robot-computer-vision-where-am-i",
+				"label": "Where am I? Odometry vs vision"
+			},
+			"hints": [
+				{
+					"never": "Open LocalizationSubsystem.java and find the TODO inside the loop over `measurements`. What one call goes there?",
+					"bit": "Find the TODO in `updateLogic()`. One call: `pose_estimator_.addVisionMeasurement(...)`."
+				},
+				{
+					"never": "The call takes three things in order: the pose the camera saw, when the picture was taken, and how far off it could be. The loop variable `measurement` knows the first two.",
+					"bit": "Arguments: `measurement.getPose()`, `measurement.getTimestamp()`, then a `VecBuilder.fill(...)`."
+				},
+				{
+					"never": "The time must be the picture's time, `measurement.getTimestamp()`, not the time now. The last argument is `VecBuilder.fill(x meters, y meters, heading radians)` and should use the two numbers in LocalizationConstants.",
+					"bit": "Use `getTimestamp()` (not the time now) and `VecBuilder.fill` with `VISION_XY_STD_METERS` twice and `VISION_HEADING_STD_RADIANS`."
+				},
+				{
+					"never": "Common slip: the call is outside the `for` loop, so `measurement` does not exist, or it is still commented out. Put it inside the loop, under the TODO comment, and end it with a semicolon.",
+					"bit": "Put the call inside the loop and end it with `;`. A commented line does not count."
+				},
+				"`pose_estimator_.addVisionMeasurement(measurement.getPose(), measurement.getTimestamp(), VecBuilder.fill(LocalizationConstants.VISION_XY_STD_METERS, LocalizationConstants.VISION_XY_STD_METERS, LocalizationConstants.VISION_HEADING_STD_RADIANS));`"
+			]
+		},
+		"estimate-accurate": {
+			"why": {
+				"never": "A shot is only as good as the robot's idea of where it is. The estimate has to stay within 5 centimeters and 1 degree even after driving a long way.",
+				"bit": "The estimate must stay within 5 cm and 1 degree of the truth after a long drive."
+			},
+			"guide": "robot-computer-vision-add-vision",
+			"concept": {
+				"guide": "robot-computer-vision-trust",
+				"label": "How much should I trust the camera?"
+			},
+			"hints": [
+				{
+					"never": "This check reads failing until you have driven. Press Start (fresh), enable Teleop, drive with W/A/S/D for more than 5 meters in total, let go, wait 2 seconds, and then click Verify.",
+					"bit": "Start fresh, drive more than 5 m, stop, wait 2 s, then Verify. It fails before that."
+				},
+				{
+					"never": "Plot `Subsystem/Localization/PositionErrorMeters` and `HeadingErrorDegrees` in AdvantageScope once you have stopped. Under 0.05 and under 1.0 is a pass. If they are big, the estimator is ignoring the cameras.",
+					"bit": "Plot PositionErrorMeters and HeadingErrorDegrees after stopping. Need under 0.05 m and 1.0 degree."
+				},
+				{
+					"never": "The starter 5.0 for `VISION_XY_STD_METERS` and `VISION_HEADING_STD_RADIANS` tells the estimator to ignore the cameras, which leaves plain odometry (about 0.1 to 0.5 m and a few degrees of drift). Make both much smaller, around 0.3.",
+					"bit": "5.0 means ignore the camera. Both constants need to be much smaller, around 0.3."
+				},
+				{
+					"never": "If the estimate lags behind while you drive, you probably passed the time now instead of `measurement.getTimestamp()`. If the position is fine but the heading is 2 to 7 degrees off, the heading number is too large and the camera's heading is being ignored.",
+					"bit": "Lagging while moving: use `measurement.getTimestamp()`. Heading a few degrees off: make the heading number small."
+				},
+				"In `LocalizationConstants`: `VISION_XY_STD_METERS = 0.3` and `VISION_HEADING_STD_RADIANS = 0.3`. Press Start, drive more than 5 m, stop, wait 2 s, Verify."
+			]
+		},
+		"aim-state-written": {
+			"why": {
+				"never": "Aiming is a new state for the drivetrain. Each part (the state, the PID, the angle, isAimed and the command) is checked so the button can start it.",
+				"bit": "The drivetrain needs the AIM state, its PID, the angle to the goal, `isAimed()` and the command."
+			},
+			"guide": "robot-computer-vision-aim-assist",
+			"concept": {
+				"guide": "robot-computer-vision-aim",
+				"label": "Aiming at a spot"
+			},
+			"hints": [
+				{
+					"never": "Work down the TODOs in order: the `AIM` state in `DrivetrainConstants`, then the PID, `getAngleToGoal()`, the switch case and `isAimed()` in `DrivetrainSubsystem`, then `aim()` in `DrivetrainCommands`.",
+					"bit": "The TODOs, in order: `AIM` in the enum, the PID, `getAngleToGoal()`, `case AIM`, `isAimed()`, `aim()`."
+				},
+				{
+					"never": "The Verify message tells you which part is missing. Read it: it names the file and the thing to add.",
+					"bit": "Read the Verify message. It names the missing part."
+				},
+				{
+					"never": "The PID needs the three gains from `DrivetrainConstants`, and `enableContinuousInput(-Math.PI, Math.PI)` so it turns the short way. `getAngleToGoal()` subtracts the robot's translation from the goal's: `FieldTargets.GOAL.getTranslation().minus(getPose().getTranslation()).getAngle()`.",
+					"bit": "Build the PID from `AIM_KP/KI/KD`, enable continuous input, and subtract the robot's translation from `GOAL`'s."
+				},
+				{
+					"never": "Use `getPose()` (the estimate), not `getTruePose()`. `isAimed()` must use `&&`: small error AND not spinning. `aim()` is `Commands.startEnd(...)` setting AIM and then ARCADE.",
+					"bit": "Aim from `getPose()`, never `getTruePose()`. `isAimed()` uses `&&`. `aim()` is a `startEnd`."
+				},
+				"Switch case: `case AIM: aim_turn_ = -aim_pid_.calculate(getPose().getRotation().getRadians(), getAngleToGoal().getRadians()); drive_.arcadeDrive(0.0, aim_turn_); break;` and `return Math.abs(Math.toDegrees(getAimErrorRadians())) < DrivetrainConstants.AIM_TOLERANCE_DEGREES && Math.abs(drive_.getAngularSpeed()) < 0.15;`"
+			]
+		},
+		"aim-converges": {
+			"why": {
+				"never": "To shoot, the robot has to end up pointing at the goal and stay there. The check wants it inside 2 degrees for half a second, within 4 seconds of pressing E.",
+				"bit": "The robot must get inside 2 degrees, stay half a second, within 4 seconds of pressing E."
+			},
+			"guide": "robot-computer-vision-aim-tuning",
+			"concept": {
+				"guide": "robot-computer-vision-aim",
+				"label": "Aiming at a spot"
+			},
+			"hints": [
+				{
+					"never": "Press Start for a fresh run, enable Teleop, and hold the left bumper (E) for a few seconds. Does it turn at all? If not, check the AIM state in AdvantageScope.",
+					"bit": "Fresh Start, Teleop, hold E. If nothing moves, check the state is `AIM`."
+				},
+				{
+					"never": "Spinning the wrong way means the minus sign on the PID output is missing. Plot `AimErrorDegrees`: it should start around 45 and fall toward 0.",
+					"bit": "Wrong way: missing minus on the PID output. `AimErrorDegrees` should start near 45 and fall."
+				},
+				{
+					"never": "With the starter `AIM_KP = 0.2` the robot stalls about 6 degrees short and never settles. Raise `AIM_KP` in DrivetrainConstants.",
+					"bit": "kP 0.2 stalls about 6 degrees short. Raise `AIM_KP`."
+				},
+				{
+					"never": "Press Start again after every change, then hold E. Around 1.0 reaches the goal. Make sure E is held the whole time, because the check needs half a second inside 2 degrees within 4 seconds.",
+					"bit": "Fresh Start after every change. About 1.0 reaches the goal. Keep E held."
+				},
+				"Set `AIM_KP = 2.0` and `AIM_KD = 0.2` in DrivetrainConstants, Start, Teleop, hold E."
+			]
+		},
+		"aim-no-overshoot": {
+			"why": {
+				"never": "A robot that swings wildly past the goal and back wastes time and misses shots. It may go at most 10 degrees past.",
+				"bit": "The robot may swing at most 10 degrees past the goal."
+			},
+			"guide": "robot-computer-vision-aim-damping",
+			"concept": {
+				"guide": "robot-computer-vision-aim",
+				"label": "Aiming at a spot"
+			},
+			"hints": [
+				{
+					"never": "The overshoot check remembers the worst swing from every press of E. A bad press stays recorded until you press Start again, so Start fresh and press E once with your final numbers.",
+					"bit": "The worst overshoot is remembered until you press Start again. Start fresh, press E once."
+				},
+				{
+					"never": "Plot `AimErrorDegrees`. It should drop to 0 without going far below it. Overshoot is worse after a long drive, because the robot has farther to turn: a kP of 1.0 with no kD swings about 6 degrees from the start but about 17 after a long turn.",
+					"bit": "Plot `AimErrorDegrees`. kP 1.0 with no kD swings about 17 degrees after a long turn."
+				},
+				{
+					"never": "Add damping: raise `AIM_KD`. It pushes against fast turning, so the robot slows before the goal. Try 0.1, 0.2, 0.3.",
+					"bit": "Raise `AIM_KD` (try 0.1 to 0.3) to damp the swing."
+				},
+				{
+					"never": "A very large kP (around 6) wobbles and never settles, so it will fail the settle check too. Keep kP moderate and let kD do the braking.",
+					"bit": "kP around 6 wobbles forever. Keep kP moderate and use kD."
+				},
+				"`AIM_KP = 2.0`, `AIM_KI = 0.0`, `AIM_KD = 0.2` settles in about half a second with almost no overshoot. Press Start, enable Teleop, hold E once."
+			]
+		}
+	}
+}

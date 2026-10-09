@@ -1,0 +1,65 @@
+{
+	"title": "Where am I? Odometry vs vision",
+	"summary": "Why wheels alone drift, and how cameras fix it.",
+	"topic": "Robot",
+	"order": 510,
+	"steps": [
+		{
+			"title": "Two ways to know where you are",
+			"say": {
+				"never": "A robot has to know where it is on the field before it can aim or drive to a spot. There are two ways to find out. One is to count how far the wheels have turned. The other is to look around and recognise something. People do both: you count steps in the dark, and you glance at a landmark when the lights come on.",
+				"bit": "A robot can count wheel turns, or look at landmarks. Good robots do both."
+			}
+		},
+		{
+			"title": "Odometry: counting wheel turns",
+			"say": {
+				"never": "Counting wheel turns is called **odometry**. Each loop the robot adds up how far each side rolled and how much it turned, and moves its guess a little. It is quick and smooth, and it never needs to see anything. You already built this in the odometry lesson.",
+				"bit": "Odometry adds up wheel movement each loop. Fast and smooth, no sensors that look outside."
+			}
+		},
+		{
+			"title": "But odometry drifts",
+			"say": {
+				"never": "Wheels slip a tiny bit and the wheel size is never exactly right, so every loop adds a tiny mistake and the mistakes pile up. In this simulator the estimate from the wheels alone ends up about 0.1 to 0.5 meters (several inches to a foot and a half) and a few degrees away from the truth after a 6 to 11 meter drive. That is far too much to shoot from.",
+				"bit": "Tiny wheel mistakes pile up. After a 6 to 11 m drive the guess is about 0.1 to 0.5 m and a few degrees off."
+			}
+		},
+		{
+			"title": "A camera that reads AprilTags",
+			"say": {
+				"never": "AprilTags are the black and white square codes stuck on the field walls. Their spots on the field are known exactly. If a camera sees a tag, the computer can work out where the camera must be to see it that way. That answer is tied to the field, so it never drifts, however long the robot has been driving.",
+				"bit": "AprilTags sit at known spots. Seeing one tells the robot where it is on the field, with no drift."
+			}
+		},
+		{
+			"title": "But a camera is noisy and late",
+			"say": {
+				"never": "A single picture is a little wrong each time, and the picture is a little old by the time the computer has worked on it. This lesson's cameras use the answer from **several tags at once**, which is much steadier, and each answer comes stamped with the time the picture was taken. One camera answer is called a **vision measurement**.",
+				"bit": "Each camera answer (a vision measurement) is a bit noisy and a bit old. Several tags at once is steadier."
+			}
+		},
+		{
+			"title": "The pose estimator blends them",
+			"say": {
+				"never": "The **pose estimator** takes the wheel counts every loop and nudges its guess toward each vision measurement. Working out where the robot is on the field is called **localization**, so the class that does it here is the `LocalizationSubsystem`. Your job is to hand it the camera answers.",
+				"bit": "The pose estimator blends wheels and cameras. Localization = knowing where the robot is. You feed it the camera answers."
+			}
+		},
+		{
+			"title": "How much to trust each one",
+			"say": {
+				"never": "Every number you give the estimator comes with a **standard deviation**: how far off it could be. A small number means \"trust me\". A big number means \"barely listen\". Choosing those numbers is the heart of this lesson, and the next guide shows what happens when you get them wrong.",
+				"bit": "A standard deviation is \"how far off could this be?\". Small means trust, big means ignore."
+			}
+		},
+		{
+			"title": "The truth is only in the simulator",
+			"say": {
+				"never": "The simulator secretly knows where the robot really is (`Drive/TruePose`), so you can plot your estimate against it. A real robot has no such thing: that is exactly why we need good estimates. The checks compare against the truth; the robot's own code, including aiming, only ever uses the estimate.",
+				"bit": "The simulator knows the true pose, a real robot does not. Aiming uses your estimate; the checks use the truth."
+			}
+		}
+	],
+	"kind": "concept"
+}

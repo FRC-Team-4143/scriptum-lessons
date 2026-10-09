@@ -7,6 +7,9 @@
 	"requires": [
 		"robot-state-machines"
 	],
+	"guides": [
+		"build-and-run"
+	],
 	"checkpoints": [
 		{
 			"id": "vision-added",

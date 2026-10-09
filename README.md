@@ -58,8 +58,7 @@ Three tracks, in curriculum order (each lesson's `track` and `order` are in its 
   `robot-drivetrain` (Motors and Drivetrains), `robot-sensors` (Sensors and Feedback),
   `robot-drive-math` (Drive Math and Methods), `robot-odometry` (Objects and Odometry),
   `robot-subsystems` (Mechanisms and Subsystems), `robot-control-theory` (Control Theory),
-  `robot-state-machines` (State Machines and Commands), `robot-computer-vision` (Computer Vision, in
-  progress) and `robot-autonomous` (Choreo Autonomous).
+  `robot-state-machines` (State Machines and Commands), `robot-computer-vision` (Computer Vision) and `robot-autonomous` (Choreo Autonomous).
   Each module's `README.md` is the lesson. See [Robot modules](#robot-modules).
 
 ## Tutor (Dozer)
@@ -129,7 +128,7 @@ has to be made in every module (`lessons/robot-*/project/`):
   `Subsystem/Shooter/AimErrorAtShotDegrees`, `ShotCount`) use the simulator's true pose, so the drifting
   estimate cannot fool them. `choreo-intro` is a prerequisite. The `solution/` folder has the finished
   paths and `Autos.java`.
-- `robot-computer-vision` (Computer Vision, in progress) starts from the finished State Machines robot minus
+- `robot-computer-vision` (Computer Vision, about 3 hours) starts from the finished State Machines robot minus
   the aim state. The pose estimator moves out of the drive mech into a provided `LocalizationSubsystem`
   (`DrivetrainSubsystem.getPose()` and `resetPose(Pose2d)` route to it). A provided `SimulationSubsystem`
   (registered only in simulation) owns MWLib's `MwVisionSim` with a front and a back camera on the 2026
@@ -138,7 +137,7 @@ has to be made in every module (`lessons/robot-*/project/`):
   `LocalizationSubsystem.updateLogic()` is the `addVisionMeasurement(...)` call and its standard
   deviations. It needs the PhotonLib vendordep (`vendordeps/photonlib.json`); PhotonLib publishes no
   `linuxarm64` natives, so the vision simulator only runs on x86-64. The `FieldTargets` poses `START` and
-  `GOAL` are the same as `robot-autonomous`'s. The aim material arrives in a later change.
+  `GOAL` are the same as `robot-autonomous`'s. The student also builds the drivetrain's `AIM` state (a PID with continuous input, `getAngleToGoal()`, `isAimed()` and `DrivetrainCommands.aim()`), aiming from the vision-corrected estimate, and tunes `AIM_KP`/`AIM_KD`. The `Check/Localization/Accurate` and `Check/Aim/...` topics judge the estimate and the aim against the true pose. Guides: the concept guides `where-am-i` and `trust`, the vision walkthrough `add-vision`, and the four aim guides.
 - MWLib comes from jitpack (`com.github.FRC-Team-4143.MW-Lib:mw-lib-java:<tag>`), with no
   credentials. Bump the tag in every `build.gradle` together.
 - `lessons/<id>/solution/` holds the reference solution used by that lesson's `lesson.test.ts` to
@@ -159,6 +158,7 @@ and uses them right away. The Java modules remain available as a deeper, standal
 | 5 Mechanisms and Subsystems | inheritance (`extends`, `@Override`), constructors, lists, enums as a list of states, `if` / `else` in subsystem logic |
 | 6 Control Theory | enums and `switch` (picking a control style), unit conversion, small methods |
 | 7 State Machines and Commands | `switch` on a subsystem's state (practice), `&&` `\|\|` `!`, boolean methods, lambdas |
+| 7b Computer Vision (about 3 hours) | passing a timestamp and standard deviations (`VecBuilder.fill`, `double` constants), a `PIDController` object, a new enum case in a `switch`, `&&`, `Math.toRadians` |
 | 8 Choreo Autonomous (about 3 hours) | reading `Command` classes, command lists with `addCommands`, decorators (`until`, `withTimeout`), method references (`::`) |
 
 Recursion is not used on the robot.

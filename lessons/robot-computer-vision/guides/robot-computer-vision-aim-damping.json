@@ -142,12 +142,12 @@
 		{
 			"title": "Make it overshoot",
 			"say": {
-				"never": "Set `AIM_KP = 3.0` and leave `AIM_KD = 0.0`. Start, Enable, hold **E**. The error should swing well past 0 (to about -30) before it comes back. That's too much overshoot. Click **I did it** once you've seen it swing past.",
-				"bit": "`AIM_KP = 3.0`, `AIM_KD = 0.0`: watch the error swing past 0. Click I did it."
+				"never": "Set `AIM_KP = 1.0` and leave `AIM_KD = 0.0`. Start, Enable, hold **E**. The error should swing a few degrees past 0 (about 6) before it comes back. That is allowed, but it is close to the line. Click **I did it** once you've seen it swing past.",
+				"bit": "`AIM_KP = 1.0`, `AIM_KD = 0.0`: watch the error swing a few degrees past 0. Click I did it."
 			},
 			"cardAt": "bottom-right",
 			"waitFor": {
-				"hint": "set kP to 3, watch it overshoot, then click I did it."
+				"hint": "set kP to 1.0, watch it overshoot, then click I did it."
 			},
 			"assist": true,
 			"target": {
@@ -157,10 +157,27 @@
 			}
 		},
 		{
+			"title": "Overshoot after a long drive",
+			"say": {
+				"never": "The farther the robot has to turn, the faster it is going when it arrives, and the more it overshoots. Release **E**, drive away with **W/A/S/D** for several meters, and press **E** again. In testing a turn of about 150 degrees swung about 17 degrees past the goal, more than the 10 degrees allowed. Click **I did it** once you have seen a big swing.",
+				"bit": "A longer turn overshoots more: about 17 degrees after a ~150 degree turn. Drive away, press E, click I did it."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "public static final double AIM_KP"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"hint": "drive away, hold E, watch the bigger swing, then click I did it."
+			},
+			"assist": true
+		},
+		{
 			"title": "Add kD",
 			"say": {
-				"never": "Now raise `AIM_KD`: try 0.1, then 0.2, then 0.3, with a fresh Start each time. Watch the swing past zero shrink. Pick a kD where the robot goes to the goal quickly and the overshoot stays under 10 degrees. Click **I did it** once you've found one.",
-				"bit": "Try `AIM_KD` = 0.1, 0.2, 0.3. Keep the overshoot under 10 degrees."
+				"never": "Now raise `AIM_KP` to 2.0 and `AIM_KD`: try 0.1, then 0.2, then 0.3, with a fresh Start each time. Watch the swing past zero shrink. With kP 2.0 and kD 0.2 the robot settled in about half a second with almost no overshoot. Pick a kD where the robot goes to the goal quickly and the overshoot stays under 10 degrees, even after a long drive. Click **I did it** once you've found one.",
+				"bit": "Set kP 2.0 and try `AIM_KD` = 0.1, 0.2, 0.3. About 0.2 settles in ~0.5 s with almost no overshoot. Keep it under 10 degrees, even after a long drive."
 			},
 			"cardAt": "bottom-right",
 			"waitFor": {
@@ -176,8 +193,15 @@
 		{
 			"title": "Which is best?",
 			"say": {
-				"never": "There's no single right answer. Many combinations settle quickly and stay put. Try for the fastest one: how fast can you get inside 2 degrees without going past the goal at all? Notice also what happens when you push kP up and up (try 8): the robot never settles and just wobbles forever. That's the edge of what a PID can do, and why real teams tune a little under it.",
-				"bit": "Many gains work. Chase the fastest settle with no overshoot. Huge kP wobbles forever."
+				"never": "There's no single right answer. Many combinations settle quickly and stay put. Try for the fastest one: how fast can you get inside 2 degrees without going past the goal at all? Notice also what happens when you push kP up and up (try 6): the robot never settles and just wobbles. That's the edge of what a PID can do, and why real teams tune a little under it.",
+				"bit": "Many gains work. Chase the fastest settle with no overshoot. A huge kP (try 6) wobbles and never settles."
+			}
+		},
+		{
+			"title": "The check remembers",
+			"say": {
+				"never": "The overshoot check keeps the worst swing from **every** press of **E**, so one bad try stays recorded even if later tries are good. Press **Start** again to clear it, then do one clean press of **E** from the start with your final numbers. The same goes for the settle check, which gives you 4 seconds from the moment you press **E**.",
+				"bit": "The overshoot check remembers your worst swing until you press Start again. Do a clean final try after a fresh Start. You have 4 s to settle."
 			}
 		},
 		{

@@ -1,0 +1,390 @@
+{
+	"title": "Add the camera measurement",
+	"summary": "Give each camera measurement to the pose estimator, then see how close the estimate gets.",
+	"topic": "Robot",
+	"order": 511,
+	"steps": [
+		{
+			"title": "The job",
+			"say": {
+				"never": "`LocalizationSubsystem` already collects the camera measurements and loops over them. Nothing hands them to the pose estimator yet, so the estimate is just odometry. You will add one call, `addVisionMeasurement(...)`, and then pick how much to trust the cameras.",
+				"bit": "The measurements are collected but never given to the estimator. Add one call, then choose the trust."
+			}
+		},
+		{
+			"title": "Open LocalizationSubsystem.java",
+			"say": {
+				"never": "The loop over the measurements is in this file. Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `LocalizationSubsystem`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "The measurement loop is in this file. Press **Ctrl+P**, type `LocalizationSubsystem` and press Enter. Quick Open finds any file by name."
+			},
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "LocalizationSubsystem.java"
+				},
+				"hint": "open LocalizationSubsystem.java with Ctrl+P.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Find it",
+			"say": {
+				"never": "The TODO sits inside the loop. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `give this measurement to the pose estimator` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "The TODO is inside the loop. Press **Ctrl+F**, type `give this measurement to the pose estimator` and press Enter to jump to it."
+			},
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "give this measurement to the pose estimator"
+				},
+				"hint": "find give this measurement to the pose estimator with Ctrl+F.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Three things to pass",
+			"say": {
+				"never": "Read the TODO. The call needs three things, in this order: the pose the camera saw, when the picture was taken, and how far off it could be. The loop variable `measurement` holds the first two.",
+				"bit": "The call takes: the pose, the picture's time, and the standard deviations."
+			},
+			"target": {
+				"selector": "[data-tour='mode']"
+			},
+			"cardAt": "top-right",
+			"assist": true
+		},
+		{
+			"title": "Start the call",
+			"say": {
+				"never": "Under the comment write `pose_estimator_.addVisionMeasurement(` and leave it open for now. The editor's pop-up lists what goes inside. Click **I did it** when you have started the line.",
+				"bit": "Start `pose_estimator_.addVisionMeasurement(`."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "give this measurement to the pose estimator"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"hint": "start the addVisionMeasurement line, then click I did it."
+			},
+			"assist": true
+		},
+		{
+			"title": "First: the pose",
+			"say": {
+				"never": "The first thing is the pose the camera saw: `measurement.getPose()`. Add it, then a comma. Click **I did it** when it is in.",
+				"bit": "Pass `measurement.getPose()`, then a comma."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "give this measurement to the pose estimator"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"hint": "add measurement.getPose() and a comma, then click I did it."
+			},
+			"assist": true
+		},
+		{
+			"title": "Second: the picture's time",
+			"say": {
+				"never": "The second is when the picture was taken: `measurement.getTimestamp()`. Do not use the time now: the picture is a little old, and the estimator needs to know how old so it can put it in the right place. Add it and a comma, then click **I did it**.",
+				"bit": "Pass `measurement.getTimestamp()`, not the time now. Then a comma."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "give this measurement to the pose estimator"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"hint": "add measurement.getTimestamp() and a comma, then click I did it."
+			},
+			"assist": true
+		},
+		{
+			"title": "Third: how far off",
+			"say": {
+				"never": "The third is a `VecBuilder.fill(...)` with three numbers: the x error in meters, the y error in meters, and the heading error in radians. Use `LocalizationConstants.VISION_XY_STD_METERS` twice, then `LocalizationConstants.VISION_HEADING_STD_RADIANS`. Close both brackets, end with a semicolon, and click **I did it**.",
+				"bit": "`VecBuilder.fill(XY, XY, HEADING)` from `LocalizationConstants`. Close the brackets and add `;`."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "give this measurement to the pose estimator"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"hint": "finish the call with VecBuilder.fill(...) and a semicolon, then click I did it."
+			},
+			"assist": true
+		},
+		{
+			"title": "Open LocalizationConstants.java",
+			"say": {
+				"never": "Now the trust numbers. Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `LocalizationConstants`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "Now the trust numbers. Press **Ctrl+P**, type `LocalizationConstants` and press Enter. Quick Open finds any file by name."
+			},
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "LocalizationConstants.java"
+				},
+				"hint": "open LocalizationConstants.java with Ctrl+P.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Find it",
+			"say": {
+				"never": "The two vision numbers are here. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `public static final double VISION_XY_STD_METERS` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "The vision numbers are here. Press **Ctrl+F**, type `public static final double VISION_XY_STD_METERS` and press Enter to jump to it."
+			},
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "public static final double VISION_XY_STD_METERS"
+				},
+				"hint": "find public static final double VISION_XY_STD_METERS with Ctrl+F.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Pick better numbers",
+			"say": {
+				"never": "Both numbers start at 5.0, which says \"the camera could be 5 meters off\", so the estimate ignores it. Try `0.3` for both. Click **I did it** when you have changed them.",
+				"bit": "Both start at 5.0 (ignore the camera). Try 0.3 for both."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "public static final double VISION_XY_STD_METERS"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"hint": "change both numbers, then click I did it."
+			},
+			"assist": true
+		},
+		{
+			"title": "Start the robot",
+			"say": {
+				"never": "Your code only works once it's started. Press **Start** and wait until the status says **Running**. Every change to the code or constants needs a fresh Start, so you will do this a few times.",
+				"bit": "Your code only runs once it's built and started. Do it again after every change."
+			},
+			"target": {
+				"selector": "[data-tour='sim-controls']"
+			},
+			"waitFor": {
+				"target": {
+					"selector": "[data-tour='code-status']",
+					"text": "Running"
+				},
+				"hint": {
+					"never": "press Start, then wait for Running.",
+					"bit": "press Start and wait for Running."
+				}
+			},
+			"assist": true
+		},
+		{
+			"title": "Enable in Teleop",
+			"say": {
+				"never": "Choose **Teleop**, then press **Enable**. The robot stays frozen until it's enabled.",
+				"bit": "Pick **Teleop** and press **Enable**. Robot code runs only while it's enabled."
+			},
+			"target": {
+				"selector": "[data-tour='enable']"
+			},
+			"waitFor": {
+				"target": {
+					"selector": "[data-tour='enable'] button",
+					"text": "Enabled"
+				},
+				"hint": {
+					"never": "choose Teleop, then Enable.",
+					"bit": "choose Teleop, then Enable."
+				}
+			},
+			"assist": true
+		},
+		{
+			"title": "Plot PositionErrorMeters",
+			"say": {
+				"never": "This is how far your estimate is from the real position, in meters. The closer to zero, the better. Look at **AdvantageScope**, the graphing tool. Type `PositionErrorMeters` in its search box. Find **Subsystem/Localization/PositionErrorMeters** in the list and drag it with your mouse onto the **Left Axis** of the graph.",
+				"bit": "This is how far your estimate is from the true position, in meters. In AdvantageScope, search for `PositionErrorMeters`, then drag **Subsystem/Localization/PositionErrorMeters** onto the **Left Axis**."
+			},
+			"open": [
+				"scope"
+			],
+			"close": [
+				"editor",
+				"preview",
+				"elastic"
+			],
+			"target": {
+				"pane": "scope",
+				"selector": ".line-graph-left.source-list"
+			},
+			"waitFor": {
+				"target": {
+					"pane": "scope",
+					"selector": ".line-graph-left.source-list .key-container",
+					"text": "Subsystem/Localization/PositionErrorMeters"
+				},
+				"hint": "drag Subsystem/Localization/PositionErrorMeters onto the graph."
+			},
+			"assist": true
+		},
+		{
+			"title": "2D Field",
+			"say": {
+				"never": "Open the **2D Field** tab in **AdvantageScope**. It's a map of the field from above.",
+				"bit": "Open the 2D Field tab in AdvantageScope."
+			},
+			"close": [
+				"editor",
+				"preview",
+				"elastic"
+			],
+			"open": [
+				"scope"
+			],
+			"target": {
+				"pane": "scope",
+				"selector": ".tab",
+				"text": "2D Field"
+			},
+			"waitFor": {
+				"target": {
+					"pane": "scope",
+					"selector": ".tab.tab-selected",
+					"text": "2D Field"
+				},
+				"hint": "click the 2D Field tab."
+			},
+			"assist": true
+		},
+		{
+			"title": "Add Pose",
+			"say": {
+				"never": "Search for `Localization` and drag **Subsystem/Localization/Pose** onto the **Poses** area. That is where your code thinks the robot is.",
+				"bit": "Drag **Subsystem/Localization/Pose** onto **Poses**."
+			},
+			"target": {
+				"pane": "scope",
+				"selector": ".field-2d-sources.source-list"
+			},
+			"waitFor": {
+				"target": {
+					"pane": "scope",
+					"selector": ".field-2d-sources.source-list .key-container",
+					"text": "Subsystem/Localization/Pose"
+				},
+				"hint": "drag Subsystem/Localization/Pose onto Poses."
+			},
+			"assist": true
+		},
+		{
+			"title": "Add TruePose",
+			"say": {
+				"never": "Now drag **Drive/TruePose** on too. That is where the robot really is. Once the vision works the two robots sit on top of each other.",
+				"bit": "Drag **Drive/TruePose** on too. They should end up on top of each other."
+			},
+			"target": {
+				"pane": "scope",
+				"selector": ".field-2d-sources.source-list"
+			},
+			"waitFor": {
+				"target": {
+					"pane": "scope",
+					"selector": ".field-2d-sources.source-list .key-container",
+					"text": "Drive/TruePose"
+				},
+				"hint": "drag Drive/TruePose onto Poses."
+			},
+			"assist": true
+		},
+		{
+			"title": "Drive more than 5 meters",
+			"say": {
+				"never": "Drive around with **W**, **A**, **S** and **D**, for more than 5 meters in total. Then let go and wait 2 seconds without touching anything. The check only judges the estimate after the robot has sat still, because a moving robot is always a little behind. Click **I did it** after you have waited.",
+				"bit": "Drive more than 5 m in total, stop, and wait 2 seconds. Click I did it."
+			},
+			"target": {
+				"selector": "[data-tour='mode']"
+			},
+			"cardAt": "top-right",
+			"assist": true,
+			"waitFor": {
+				"hint": "drive more than 5 meters, stop and wait 2 seconds, then click I did it."
+			}
+		},
+		{
+			"title": "Read the error",
+			"say": {
+				"never": "Look at the error plot. While you drive it jumps around a little. Once you stopped it should settle to just a few centimeters, well under the 5 cm limit. If it stays large, the cameras are being ignored (numbers too big) or something in the call is wrong.",
+				"bit": "The error should settle to a few centimeters once you stop. If not, the trust numbers or the call are off."
+			},
+			"target": {
+				"selector": "[data-tour='mode']"
+			},
+			"cardAt": "top-right"
+		},
+		{
+			"title": "Check your work",
+			"say": {
+				"never": "Click the lesson chip and press **Verify**. The first checkpoint looks at your code. The estimate checkpoint only passes after you have driven more than 5 meters and stopped for 2 seconds, so do that first if it still fails.",
+				"bit": "Press **Verify**. The estimate check needs more than 5 m driven, then 2 s of standing still."
+			},
+			"target": {
+				"selector": "[data-tour='lesson']"
+			}
+		}
+	],
+	"kind": "mixed"
+}
