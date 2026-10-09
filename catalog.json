@@ -2633,14 +2633,38 @@
 		{
 			"id": "robot-autonomous-command-lifecycle",
 			"title": "Inside a command",
-			"summary": "initialize, execute, isFinished, end.",
+			"summary": "Three states, initialize / execute / end, and isFinished as the condition.",
 			"topic": "Robot",
-			"order": 532,
+			"order": 530,
 			"modules": [
 				"robot-autonomous"
 			],
 			"kind": "mixed",
 			"path": "lessons/robot-autonomous/guides/robot-autonomous-command-lifecycle.json"
+		},
+		{
+			"id": "robot-autonomous-command-types",
+			"title": "Kinds of commands",
+			"summary": "runOnce, run, startEnd, waitSeconds and FunctionalCommand, and when to pick each.",
+			"topic": "Robot",
+			"order": 531,
+			"modules": [
+				"robot-autonomous"
+			],
+			"kind": "concept",
+			"path": "lessons/robot-autonomous/guides/robot-autonomous-command-types.json"
+		},
+		{
+			"id": "robot-autonomous-command-decorators",
+			"title": "Dots that change commands",
+			"summary": "withTimeout, until, andThen and alongWith.",
+			"topic": "Robot",
+			"order": 532,
+			"modules": [
+				"robot-autonomous"
+			],
+			"kind": "concept",
+			"path": "lessons/robot-autonomous/guides/robot-autonomous-command-decorators.json"
 		},
 		{
 			"id": "robot-autonomous-drive-distance",
