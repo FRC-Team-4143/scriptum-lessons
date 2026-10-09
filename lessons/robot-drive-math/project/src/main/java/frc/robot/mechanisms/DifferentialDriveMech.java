@@ -47,6 +47,10 @@ public class DifferentialDriveMech extends MechBase {
   private static final double JITTER_METERS = 0.0005; // encoder position jitter
   private static final double JITTER_METERS_PER_SECOND = 0.01; // encoder velocity jitter
   private final Random noise = new Random(4143);
+
+  // Simulated friction (simulation only). See updateSimulation().
+  private static final double STATIC_FRICTION_VOLTS = 0.25; // volts it takes to get a wheel moving
+  private static final double SCRUB_VOLTS_PER_METER_PER_SECOND = 4.5; // how hard turning drags
   private double lastTrueLeftMeters = 0.0;
   private double lastTrueRightMeters = 0.0;
   private double measuredLeftMeters = 0.0;
@@ -234,6 +238,18 @@ public class DifferentialDriveMech extends MechBase {
 
     double leftVolts = ((TalonFX) leftMotors[0]).getSimState().getMotorVoltage();
     double rightVolts = ((TalonFX) rightMotors[0]).getSimState().getMotorVoltage();
+
+    // Friction, which the physics model leaves out. The first few volts on each side only break
+    // the wheels loose, so a stick that rests a hair off center does not creep. And turning drags
+    // the wheels sideways across the carpet ("scrub"), so the faster the robot spins the harder
+    // the carpet pushes back. Without it the robot spins about 3 times faster than a real one.
+    leftVolts = minusStaticFriction(leftVolts);
+    rightVolts = minusStaticFriction(rightVolts);
+    double spinMetersPerSecond =
+        (sim.getRightVelocityMetersPerSecond() - sim.getLeftVelocityMetersPerSecond()) / 2.0;
+    leftVolts += SCRUB_VOLTS_PER_METER_PER_SECOND * spinMetersPerSecond;
+    rightVolts -= SCRUB_VOLTS_PER_METER_PER_SECOND * spinMetersPerSecond;
+
     sim.setInputs(leftVolts, rightVolts);
     sim.update(0.020);
 
@@ -276,6 +292,10 @@ public class DifferentialDriveMech extends MechBase {
     lastTrueRightMeters = 0.0;
     measuredLeftMeters = 0.0;
     measuredRightMeters = 0.0;
+  }
+
+  private static double minusStaticFriction(double volts) {
+    return Math.copySign(Math.max(0.0, Math.abs(volts) - STATIC_FRICTION_VOLTS), volts);
   }
 
   private static void prepareSimMotor(TalonFX motor, boolean inverted) {

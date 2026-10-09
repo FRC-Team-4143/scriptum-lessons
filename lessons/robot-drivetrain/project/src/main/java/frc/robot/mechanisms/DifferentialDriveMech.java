@@ -9,6 +9,7 @@ import com.ctre.phoenix6.sim.ChassisReference;
 import com.marswars.logging.MwLog;
 import com.marswars.mechanisms.MechBase;
 import com.marswars.mechanisms.MotorConfig;
+import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.wpilibj.simulation.DifferentialDrivetrainSim;
@@ -38,6 +39,8 @@ public class DifferentialDriveMech extends MechBase {
 
   private final DifferentialDrivetrainSim sim;
 
+  private static final double DEADBAND = 0.05; // commands smaller than this are treated as 0.0
+
   // Simulated sensor imperfections (simulation only). The seed is fixed so every student sees the
   // same robot.
   private static final double LEFT_SCALE = 1.004; // left wheels read 0.4% too far
@@ -46,6 +49,10 @@ public class DifferentialDriveMech extends MechBase {
   private static final double JITTER_METERS = 0.0005; // encoder position jitter
   private static final double JITTER_METERS_PER_SECOND = 0.01; // encoder velocity jitter
   private final Random noise = new Random(4143);
+
+  // Simulated friction (simulation only). See updateSimulation().
+  private static final double STATIC_FRICTION_VOLTS = 0.25; // volts it takes to get a wheel moving
+  private static final double SCRUB_VOLTS_PER_METER_PER_SECOND = 4.5; // how hard turning drags
   private double lastTrueLeftMeters = 0.0;
   private double lastTrueRightMeters = 0.0;
   private double measuredLeftMeters = 0.0;
@@ -87,8 +94,10 @@ public class DifferentialDriveMech extends MechBase {
    * @param right -1.0 (full backward) to 1.0 (full forward)
    */
   public void setDutyCycles(double left, double right) {
-    leftRequest.Output = clamp(left);
-    rightRequest.Output = clamp(right);
+    // Real sticks never rest at exactly 0.0, so tiny commands are treated as 0.0. Otherwise the
+    // robot would creep or spin on its own. (Later you will learn to do this yourself.)
+    leftRequest.Output = MathUtil.applyDeadband(clamp(left), DEADBAND);
+    rightRequest.Output = MathUtil.applyDeadband(clamp(right), DEADBAND);
   }
 
   @Override
@@ -142,6 +151,18 @@ public class DifferentialDriveMech extends MechBase {
 
     double leftVolts = ((TalonFX) leftMotors[0]).getSimState().getMotorVoltage();
     double rightVolts = ((TalonFX) rightMotors[0]).getSimState().getMotorVoltage();
+
+    // Friction, which the physics model leaves out. The first few volts on each side only break
+    // the wheels loose, so a stick that rests a hair off center does not creep. And turning drags
+    // the wheels sideways across the carpet ("scrub"), so the faster the robot spins the harder
+    // the carpet pushes back. Without it the robot spins about 3 times faster than a real one.
+    leftVolts = minusStaticFriction(leftVolts);
+    rightVolts = minusStaticFriction(rightVolts);
+    double spinMetersPerSecond =
+        (sim.getRightVelocityMetersPerSecond() - sim.getLeftVelocityMetersPerSecond()) / 2.0;
+    leftVolts += SCRUB_VOLTS_PER_METER_PER_SECOND * spinMetersPerSecond;
+    rightVolts -= SCRUB_VOLTS_PER_METER_PER_SECOND * spinMetersPerSecond;
+
     sim.setInputs(leftVolts, rightVolts);
     sim.update(0.020);
 
@@ -185,6 +206,10 @@ public class DifferentialDriveMech extends MechBase {
     lastTrueRightMeters = 0.0;
     measuredLeftMeters = 0.0;
     measuredRightMeters = 0.0;
+  }
+
+  private static double minusStaticFriction(double volts) {
+    return Math.copySign(Math.max(0.0, Math.abs(volts) - STATIC_FRICTION_VOLTS), volts);
   }
 
   private static void prepareSimMotor(TalonFX motor, boolean inverted) {
