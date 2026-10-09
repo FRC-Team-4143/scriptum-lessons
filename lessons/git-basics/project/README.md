@@ -2,12 +2,14 @@
 
 Eight small git exercises, each in its own numbered folder. Every folder is
 its own real git repository — look for the Source Control icon in the
-sidebar and switch between them with the repository picker at the top of
-that panel, or just `cd` into a folder in the terminal.
+sidebar; each folder has its own section there, so click the one you are
+working on. Everything in this lesson is done with Source Control's buttons
+and menus (the **...** menu has Branch, Pull, Push and Stash). You don't
+need the terminal.
 
 There's no GitHub account or login here. The shared copy (`origin`) in
 exercises 6 and 7 is kept out of sight on this machine and behaves like
-GitHub would. This lesson is entirely about the `git` commands themselves. For background on why we use git the way we do,
+GitHub would. This lesson is about how git works, one button at a time. For background on why we use git the way we do,
 see the team's [GitHub docs page](https://frc-team-4143.github.io/docs/software/tools/github).
 
 ## Our conventions
@@ -23,7 +25,11 @@ see the team's [GitHub docs page](https://frc-team-4143.github.io/docs/software/
 ## The exercises
 
 Open each folder's own `README.md` for the task. Do them in order — later
-ones build on the same ideas.
+ones build on the same ideas. Dozer (top bar) walks you through the buttons.
+
+You will not see a blue **Publish Branch** or **Sync Changes** button in this
+lesson. Those are for GitHub repositories, so they are hidden here; the
+exercises use the **...** menu instead.
 
 1. **`01-first-commit/`** — make your first commit.
 2. **`02-feature-branch/`** — branch, commit, follow the naming convention.

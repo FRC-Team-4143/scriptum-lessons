@@ -52,11 +52,12 @@
 			},
 			"hints": [
 				{
-					"never": "Open the terminal, `cd 06-push`, and think about where you want to send the branch.",
-					"bit": "Push the branch to origin."
+					"never": "Open Source Control and click **06-push**. Then use the **...** menu to send the branch to the shared copy.",
+					"bit": "Pick 06-push, then push the branch to origin from the ... menu."
 				},
-				"The command is `git push origin issue-18-team-colors`.",
-				"Copy it exactly, including the branch name, then Verify."
+				"Click **...**, then **Pull, Push**, then **Push to...**, and choose `origin`.",
+				"Make sure the branch name in the bottom-left says `issue-18-team-colors` first, then Verify.",
+				"Stuck? The same thing typed in the terminal (Ctrl+`) is `cd 06-push` then `git push origin issue-18-team-colors`."
 			]
 		},
 		"pull": {
@@ -66,11 +67,12 @@
 			},
 			"hints": [
 				{
-					"never": "You must be on `develop`. `cd 07-pull`, then ask git to get the new commits.",
-					"bit": "Be on develop, then pull."
+					"never": "Click **07-pull** in Source Control. You must be on `develop`. Then use the **...** menu to get the new commits.",
+					"bit": "Pick 07-pull, be on develop, then pull from the ... menu."
 				},
-				"The command is `git pull`.",
-				"If it says you have no tracking information, try `git pull origin develop`."
+				"Click **...**, then **Pull, Push**, then **Pull**.",
+				"If the branch name says something other than `develop`, click it and switch to `develop` first.",
+				"Stuck? In the terminal (Ctrl+`): `cd 07-pull`, then `git pull origin develop`."
 			]
 		},
 		"stash": {
@@ -80,11 +82,11 @@
 			},
 			"hints": [
 				{
-					"never": "The order is: shelve your work, fix the typo on develop, come back, take your work off the shelf.",
+					"never": "The order is: shelve your work, fix the typo on develop, come back, take your work off the shelf. All of it is in the **...** menu and the branch name.",
 					"bit": "Stash, fix on develop, return, pop."
 				},
-				"Commands in order: `git stash`, `git checkout develop`, edit and `git commit -am \"Fix typo\"`, `git checkout issue-21-new-motor`, `git stash pop`.",
-				"Don't commit your unfinished work on issue-21-new-motor. If you did, undo it with `git reset HEAD~1` and start again."
+				"Click **...**, **Stash**, **Stash**. Switch to `develop` with the branch name (bottom-left), fix the typo, save, **+**, **Commit**. Switch back to `issue-21-new-motor`, then **...**, **Stash**, **Pop Latest Stash**.",
+				"Don't commit your unfinished work on issue-21-new-motor. If you did, undo it with **...**, **Commit**, **Undo Last Commit** and start again."
 			]
 		}
 	}

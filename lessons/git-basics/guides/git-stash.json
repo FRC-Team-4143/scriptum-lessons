@@ -19,37 +19,27 @@
 			]
 		},
 		{
-			"title": "Open a terminal",
+			"title": "Pick the repository",
 			"say": {
-				"never": "Open the **terminal**: hold **Ctrl** and tap the backtick key (above **Tab**). Then type `cd 08-stash` and press **Enter**.",
-				"bit": "Open the terminal (Ctrl+`) and `cd 08-stash`."
+				"never": "Open **Source Control** (the branch icon on the left). Each exercise folder has its own section there. Click **08-stash** so the buttons and menus work on that folder.",
+				"bit": "In Source Control, click **08-stash** so the buttons act on it."
 			},
-			"open": [
-				"editor"
-			],
 			"target": {
 				"pane": "editor",
-				"selector": "[id='workbench.parts.panel']"
+				"selector": ".scm-view"
 			},
-			"waitFor": {
-				"target": {
-					"pane": "editor",
-					"selector": ".terminal-wrapper"
-				},
-				"hint": "press Ctrl and the backtick key (above Tab).",
-				"skipIfDone": true
-			},
+			"cardAt": "top-right",
 			"assist": true
 		},
 		{
 			"title": "Try to switch",
 			"say": {
-				"never": "Type `git checkout develop` and press **Enter**. Git refuses and says your local changes would be overwritten. That's exactly the problem a stash solves.",
-				"bit": "Try `git checkout develop`. Git refuses: your changes would be overwritten."
+				"never": "Click the branch name in the bottom-left and pick `develop`. Git refuses and says your local changes would be overwritten. That's exactly the problem a stash solves. Close the message and carry on.",
+				"bit": "Try switching to `develop` from the branch name (bottom-left). Git refuses: your changes would be overwritten."
 			},
 			"board": {
-				"code": "git checkout develop\n# error: Your local changes would be overwritten",
-				"language": "shell",
+				"code": "switch to develop\n-> error: your local changes would be overwritten",
+				"language": "text",
 				"marks": [
 					{
 						"text": "error",
@@ -57,30 +47,34 @@
 					}
 				]
 			},
-			"open": [
-				"editor"
-			],
+			"cardAt": "top-right",
+			"target": {
+				"pane": "editor",
+				"selector": "[id='status.scm.0']"
+			},
 			"assist": true
 		},
 		{
 			"title": "Stash, fix, come back",
 			"say": {
-				"never": "Type `git stash` and press **Enter**. Your changes go on the shelf. Now `git checkout develop` works. Change \"Teh\" to \"The\" in `Notes.md`, save, and commit it. Then `git checkout issue-21-new-motor` to go back, and finally `git stash pop` to take your work off the shelf.",
-				"bit": "`git stash`, switch to develop, fix the typo and commit, switch back, `git stash pop`."
+				"never": "In Source Control, open **...**, then **Stash**, then **Stash**: your changes go on the shelf. Now switch to `develop`. Change \"Teh\" to \"The\" in `Notes.md`, save, stage it with **+** and press **Commit**. Switch back to `issue-21-new-motor`, then open **...**, **Stash**, **Pop Latest Stash** to take your work off the shelf.",
+				"bit": "**...**, Stash, Stash; switch to `develop`, fix the typo and Commit; switch back; **...**, Stash, Pop Latest Stash."
 			},
 			"board": {
-				"code": "git stash\ngit checkout develop\n# fix Teh -> The in Notes.md, then:\ngit commit -am \"Fix typo in pit notes\"\ngit checkout issue-21-new-motor\ngit stash pop",
-				"language": "shell",
+				"code": "1. ... > Stash > Stash\n2. switch to develop, fix Teh -> The, Commit\n3. switch back to issue-21-new-motor\n4. ... > Stash > Pop Latest Stash",
+				"language": "text",
 				"marks": [
 					{
-						"text": "git stash pop",
+						"text": "Pop Latest Stash",
 						"label": "your unfinished work comes back"
 					}
 				]
 			},
-			"open": [
-				"editor"
-			],
+			"cardAt": "top-right",
+			"target": {
+				"pane": "editor",
+				"selector": ".scm-view"
+			},
 			"assist": true
 		},
 		{

@@ -22,66 +22,46 @@
 			}
 		},
 		{
-			"title": "Make one",
+			"title": "Name it",
 			"say": {
-				"never": "Start from `develop`, then create your branch and move onto it in one command. `-b` means \"make a new branch\". Name it after what you're working on, like `issue-12-turbo-boost`.",
-				"bit": "Start from `develop`, then create and switch to your branch in one command."
+				"never": "Your branch starts from `develop`, so it begins with the team's latest finished work. Name it after what you're working on, in the pattern `issue-<number>-<what it does>`, like `issue-12-turbo-boost`.",
+				"bit": "Start from `develop` and name it `issue-<number>-<what it does>`."
 			},
 			"board": {
-				"code": "git checkout develop\ngit checkout -b issue-12-turbo-boost",
-				"language": "shell",
+				"code": "issue-<number>-<what it does>\nissue-12-turbo-boost",
+				"language": "text",
 				"marks": [
 					{
-						"text": "git checkout develop",
-						"label": "go to the starting point"
-					},
-					{
-						"text": "-b",
-						"label": "create the branch, then switch to it"
-					},
-					{
 						"text": "issue-12-turbo-boost",
-						"label": "issue-<number>-<what it does>"
+						"label": "your branch name"
 					}
 				]
 			}
 		},
 		{
-			"title": "Open a terminal",
+			"title": "Pick the repository",
 			"say": {
-				"never": "Open the **terminal**: the typing area at the bottom of the screen where you give the computer instructions. Hold **Ctrl** and tap the backtick key, the one above **Tab**. Most of these exercises are easier there.",
-				"bit": "These exercises are easiest in the terminal."
+				"never": "Open **Source Control** (the branch icon on the left). Each exercise folder has its own section there. Click **02-feature-branch** so the buttons and menus work on that folder.",
+				"bit": "In Source Control, click **02-feature-branch** so the buttons act on it."
 			},
-			"open": [
-				"editor"
-			],
 			"target": {
-				"pane": "editor"
+				"pane": "editor",
+				"selector": ".scm-view"
 			},
 			"cardAt": "top-right",
-			"waitFor": {
-				"target": {
-					"pane": "editor",
-					"selector": ".terminal-wrapper"
-				},
-				"hint": {
-					"never": "press Ctrl and the backtick key (above Tab).",
-					"bit": "press Ctrl+` (the key above Tab)."
-				}
-			},
 			"assist": true
 		},
 		{
 			"title": "Your turn",
 			"say": {
-				"never": "Type `cd 02-feature-branch` and press **Enter** to move into the folder. Then run the two commands from the board, one at a time, pressing **Enter** after each. Choose your own name that starts with `issue-12-`.",
-				"bit": "`cd 02-feature-branch`, then run the two commands above."
-			},
-			"target": {
-				"pane": "editor",
-				"selector": "[id='workbench.parts.panel']"
+				"never": "Click the branch name in the bottom-left corner and choose **Create new branch from...**. Type your branch name (starting with `issue-12-`), press **Enter**, then pick `develop` as the starting point.",
+				"bit": "Click the branch name (bottom-left), **Create new branch from...**, name it `issue-12-...`, start from `develop`."
 			},
 			"cardAt": "top-right",
+			"target": {
+				"pane": "editor",
+				"selector": "[id='status.scm.0']"
+			},
 			"waitFor": {
 				"hint": {
 					"never": "create a branch starting with issue-12- off develop.",
@@ -105,16 +85,16 @@
 		{
 			"title": "Two commits",
 			"say": {
-				"never": "This exercise wants **two separate** commits. Small commits with clear messages tell the story of your work, one step at a time, like chapters in a book. Make a change, add and commit it. Then make another change and do it again.",
-				"bit": "The exercise wants **two separate** commits: small commits, each with a clear message, tell the story of the work."
+				"never": "The exercise wants **two separate** commits: small commits, each with a clear message, tell the story of the work. Edit `FEATURES.md` and save, stage it with the **+**, write a message and press **Commit**. Then change the file again and repeat with a new message.",
+				"bit": "The exercise wants **two separate** commits: edit, save, stage with **+**, message, **Commit**, then do it again."
 			},
 			"board": {
-				"code": "git add FEATURES.md\ngit commit -m \"Describe the turbo boost button\"\n# edit again...\ngit add FEATURES.md\ngit commit -m \"Add the turbo boost speed limit\"",
-				"language": "shell",
+				"code": "1. edit + save FEATURES.md\n2. + (stage)   3. message   4. Commit\nrepeat with a new message",
+				"language": "text",
 				"marks": [
 					{
-						"text": "git commit -m",
-						"label": "one snapshot each time"
+						"text": "Commit",
+						"label": "saves the snapshot"
 					}
 				]
 			}
@@ -122,19 +102,13 @@
 		{
 			"title": "Check it",
 			"say": {
-				"never": "Type `git log --oneline` and press **Enter**. You should see your two commits on top of the starting one, newest first.",
-				"bit": "Run `git log --oneline` to see your two commits on top of the starting one."
+				"never": "Open the **Graph** in Source Control: your two commits sit on top of the starting one, on your `issue-12-...` branch.",
+				"bit": "The Graph in Source Control shows your two commits on `issue-12-...`."
 			},
+			"cardAt": "bottom-right",
 			"target": {
 				"pane": "editor",
-				"selector": "[id='workbench.parts.panel']"
-			},
-			"cardAt": "top-right",
-			"waitFor": {
-				"hint": {
-					"never": "run git log --oneline.",
-					"bit": "check git log --oneline."
-				}
+				"selector": ".pane-header[aria-label='Graph Section']"
 			},
 			"assist": true
 		}

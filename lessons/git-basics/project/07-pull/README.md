@@ -6,14 +6,11 @@ called **pulling**.
 
 ## Task
 
-You are on `develop`. Bring your copy up to date with `origin`:
+You are on `develop`. Bring your copy up to date with `origin`: in Source
+Control, open the **...** menu, choose **Pull, Push**, then **Pull**.
 
-```
-git pull
-```
-
-(`git pull` is a shortcut for `git fetch`, which downloads the new commits, followed
-by `git merge`, which brings them in.) Open `Schedule.txt` afterwards to see
+(Pull is a download of the new commits followed by a merge that brings them
+in.) Open `Schedule.txt` afterwards to see
 what your teammate added. Run **Verify** when you're done.
 
 ## You're done when

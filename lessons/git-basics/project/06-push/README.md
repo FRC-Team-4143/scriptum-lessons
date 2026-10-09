@@ -13,12 +13,11 @@ commit on it. Only your computer knows about it so far.
 
 Send your branch to `origin`:
 
-```
-git push origin issue-18-team-colors
-```
+1. Make sure the branch name in the bottom-left says `issue-18-team-colors`.
+2. In Source Control, open the **...** menu, choose **Pull, Push**, then
+   **Push to...**, and pick `origin`.
 
-(`git push -u origin issue-18-team-colors` also remembers the link, so a later
-plain `git push` knows where to go.) Run **Verify** when you're done.
+Run **Verify** when you're done.
 
 ## You're done when
 
