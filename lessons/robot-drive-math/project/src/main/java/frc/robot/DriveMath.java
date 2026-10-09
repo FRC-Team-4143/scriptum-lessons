@@ -20,28 +20,20 @@ public final class DriveMath {
     return 0.0;
   }
 
-  /**
-   * The robot's forward speed. If both sides move at the same speed, the robot moves at that speed.
-   * If they differ, the robot moves at the average.
-   *
-   * @return forward speed in meters per second
-   */
-  public static double linearSpeed(double leftMetersPerSecond, double rightMetersPerSecond) {
-    // TODO: the average of the two sides
-    return 0.0;
-  }
-
-  /**
-   * How fast the robot is turning, in radians per second. Counterclockwise (left) is positive, so
-   * the robot turns left when the right side is faster than the left side.
-   *
-   * @return turning speed in radians per second
-   */
-  public static double angularSpeed(
-      double leftMetersPerSecond, double rightMetersPerSecond, double trackWidthMeters) {
-    // TODO: (right - left) divided by the track width
-    return 0.0;
-  }
+  // YOUR TURN: write linearSpeed and angularSpeed here.
+  //
+  // Robot.java and DifferentialDriveMech.java already call both of them, so they show red errors
+  // until the names match exactly (capital letters count). Both are public and static, take
+  // doubles and return a double, like rotationsToMeters above.
+  //
+  //   linearSpeed: takes the left and right side speeds (meters per second) and returns the
+  //   robot's forward speed. If both sides move at the same speed, the robot moves at that speed;
+  //   if they differ, it moves at the average.
+  //
+  //   angularSpeed: takes the left and right side speeds (meters per second) and the track width
+  //   (meters, the distance between the wheels) and returns how fast the robot turns, in radians
+  //   per second. Left (counterclockwise) is positive, so the robot turns left when the right side
+  //   is faster. The answer is (right - left) divided by the track width.
 
   /**
    * Arcade drive math. Turns "forward" and "turn" into one speed for each side:
