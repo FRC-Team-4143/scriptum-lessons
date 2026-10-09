@@ -1,6 +1,6 @@
 {
 	"title": "Constants and enums",
-	"summary": "final, SCREAMING_SNAKE_CASE, and enums nested in Main.",
+	"summary": "final, SCREAMING_SNAKE_CASE, and enums (UpperCamelCase types) nested in Main.",
 	"topic": "Java",
 	"order": 203,
 	"steps": [
@@ -74,22 +74,22 @@
 		{
 			"title": "In your lesson: An enum",
 			"say": {
-				"never": "An **enum** is a type you invent yourself with a short, fixed list of allowed values. An `ALLIANCE` can only be `RED` or `BLUE`, and nothing else. If you misspell one, Java stops you right away, so typos can't sneak in.",
+				"never": "An **enum** is a type you invent yourself with a short, fixed list of allowed values. An `Alliance` can only be `RED` or `BLUE`, and nothing else. The type is named like a class (`Alliance`, UpperCamelCase); only the values are in capitals. If you misspell one, Java stops you right away, so typos can't sneak in.",
 				"bit": "An **enum** is a type you invent with a fixed list of values. A variable of that type can only hold one of them, so typos are impossible."
 			},
 			"board": {
-				"code": "enum ALLIANCE {\n    RED,\n    BLUE\n}\n\nALLIANCE ours = ALLIANCE.RED;",
+				"code": "enum Alliance {\n    RED,\n    BLUE\n}\n\nAlliance ours = Alliance.RED;",
 				"marks": [
 					{
-						"text": "enum ALLIANCE",
-						"label": "a new type named ALLIANCE"
+						"text": "enum Alliance",
+						"label": "a new type named Alliance"
 					},
 					{
 						"text": "RED,\n    BLUE",
 						"label": "its only allowed values"
 					},
 					{
-						"text": "ALLIANCE.RED",
+						"text": "Alliance.RED",
 						"label": "using one of them"
 					}
 				]
@@ -124,10 +124,10 @@
 				"bit": "Both enums go **inside** `Main`, next to the constants, because only `Main` uses them."
 			},
 			"board": {
-				"code": "public class Main {\n    public static final String TEAM_NAME = \"Team 4143\";\n    enum ALLIANCE { RED, BLUE }\n\n    public static void main(String[] args) { ... }\n}",
+				"code": "public class Main {\n    public static final String TEAM_NAME = \"Team 4143\";\n    enum Alliance { RED, BLUE }\n\n    public static void main(String[] args) { ... }\n}",
 				"marks": [
 					{
-						"text": "enum ALLIANCE { RED, BLUE }",
+						"text": "enum Alliance { RED, BLUE }",
 						"label": "nested inside Main"
 					},
 					{
@@ -206,8 +206,8 @@
 		{
 			"title": "Find it",
 			"say": {
-				"never": "It may be further down. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `define an enum named ALLIANCE` and press **Enter**. The editor scrolls to the right spot and highlights it.",
-				"bit": "It may be further down. Press **Ctrl+F**, type `define an enum named ALLIANCE` and press Enter to jump to it."
+				"never": "It may be further down. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `define an enum named Alliance` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "It may be further down. Press **Ctrl+F**, type `define an enum named Alliance` and press Enter to jump to it."
 			},
 			"target": {
 				"pane": "editor"
@@ -217,9 +217,9 @@
 				"target": {
 					"pane": "editor",
 					"selector": ".view-lines .view-line",
-					"text": "define an enum named ALLIANCE"
+					"text": "define an enum named Alliance"
 				},
-				"hint": "find define an enum named ALLIANCE with Ctrl+F.",
+				"hint": "find define an enum named Alliance with Ctrl+F.",
 				"skipIfDone": true
 			},
 			"assist": true
@@ -227,13 +227,13 @@
 		{
 			"title": "Your enum goes here",
 			"say": {
-				"never": "Write the enum under this comment: `enum ALLIANCE { RED, BLUE }`. It's the same shape as the one on the board.",
-				"bit": "Write `enum ALLIANCE { RED, BLUE }` under this comment."
+				"never": "Write the enum under this comment: `enum Alliance { RED, BLUE }`. It's the same shape as the one on the board.",
+				"bit": "Write `enum Alliance { RED, BLUE }` under this comment."
 			},
 			"target": {
 				"pane": "editor",
 				"selector": ".view-lines .view-line",
-				"text": "define an enum named ALLIANCE"
+				"text": "define an enum named Alliance"
 			},
 			"cardAt": "bottom-right",
 			"assist": true

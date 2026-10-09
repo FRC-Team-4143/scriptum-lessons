@@ -527,7 +527,7 @@
 				{
 					"id": "alliance-enum",
 					"title": "Alliance enum",
-					"description": "An ALLIANCE enum with RED and BLUE values (team standard: SCREAMING_SNAKE_CASE).",
+					"description": "An Alliance enum with RED and BLUE values (team standard: UpperCamelCase type name, SCREAMING_SNAKE_CASE values).",
 					"verifier": {
 						"type": "script",
 						"path": "lessons/java-variables/checkpoints/verify/alliance-enum.sh"
@@ -536,7 +536,7 @@
 				{
 					"id": "match-period-enum",
 					"title": "Match period enum",
-					"description": "A MATCH_PERIOD enum with AUTONOMOUS, TELEOP, and ENDGAME values (team standard: SCREAMING_SNAKE_CASE).",
+					"description": "A MatchPeriod enum with AUTONOMOUS, TELEOP, and ENDGAME values (team standard: UpperCamelCase type name, SCREAMING_SNAKE_CASE values).",
 					"verifier": {
 						"type": "script",
 						"path": "lessons/java-variables/checkpoints/verify/match-period-enum.sh"
@@ -1944,7 +1944,7 @@
 		{
 			"id": "java-variables-constants-enums",
 			"title": "Constants and enums",
-			"summary": "final, SCREAMING_SNAKE_CASE, and enums nested in Main.",
+			"summary": "final, SCREAMING_SNAKE_CASE, and enums (UpperCamelCase types) nested in Main.",
 			"topic": "Java",
 			"order": 203,
 			"modules": [
