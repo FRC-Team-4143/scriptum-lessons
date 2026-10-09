@@ -1,0 +1,51 @@
+{
+	"title": "Aiming at a spot",
+	"summary": "How a robot works out which way to turn to face a point.",
+	"topic": "Robot",
+	"order": 513,
+	"steps": [
+		{
+			"title": "Facing a spot",
+			"say": {
+				"never": "Imagine you're standing in a gym and someone says \"face the basket\". You don't turn to a number like 90 degrees. You look at where the basket is and turn until you face it, and if you walk somewhere else you turn a different amount. A robot that aims at a goal does the same. It knows where it is (its pose), it knows where the goal is, and it works out the direction from one to the other. So aiming works wherever the robot ended up.",
+				"bit": "Aim at a spot, not a fixed angle: work out the direction from where the robot is to where the goal is."
+			}
+		},
+		{
+			"title": "The arrow to the goal",
+			"say": {
+				"never": "Draw an arrow from the robot to the goal. Its sideways part is the goal's x minus the robot's x, and its forward part is the goal's y minus the robot's y. In WPILib, a position is a `Translation2d`, and subtracting two of them gives that arrow. Every arrow has a direction, and `getAngle()` tells you which way it points as a field heading: 0 degrees is straight along +x and turning left (counterclockwise) is positive.",
+				"bit": "Goal position minus robot position is an arrow; its `getAngle()` is the field heading to face."
+			}
+		},
+		{
+			"title": "Error: how far still to turn",
+			"say": {
+				"never": "Last lesson, error was target minus current. It's the same here: the target is the direction to the goal and the current value is which way the robot faces. If the error is positive the goal is to your left, and if it's negative it's to your right. When the error is zero you are aimed. The PID's whole job is to push that error to zero.",
+				"bit": "Error = direction to the goal minus the robot's heading. Positive: goal on the left. Zero: aimed."
+			}
+		},
+		{
+			"title": "Angles wrap around",
+			"say": {
+				"never": "Headings are a circle. 179 degrees and -179 degrees are the same direction to within 2 degrees, but as plain numbers they're 358 apart. A normal PID would spin the long way round! Telling the PID the input is **continuous** from -pi to pi (about -180 to 180 degrees) makes it always take the short way. Remember: WPILib angles are in **radians**, and pi radians is 180 degrees.",
+				"bit": "179 and -179 degrees are neighbours. Continuous input makes the PID take the short way round."
+			}
+		},
+		{
+			"title": "A PID has three parts",
+			"say": {
+				"never": "A PID adds three pushes together. **P** (proportional) pushes in proportion to the error: far away, push hard; close, push gently. **D** (derivative) looks at how fast the error is shrinking and eases off, like braking as you near a stop sign. **I** (integral) adds up the error over time and slowly pushes harder if you've been stuck a little short for a while. You choose how much of each with three numbers: kP, kI and kD.",
+				"bit": "P pushes with the error, D brakes as you approach, I builds up if you're stuck short. kP, kI, kD say how much of each."
+			}
+		},
+		{
+			"title": "Which way is positive?",
+			"say": {
+				"never": "Careful, here's a trap. A positive error means the goal is on the left, so the robot must turn left. But in this robot, a positive **turn** command turns it **right** (the left stick pushed right is a right turn). So the number the PID gives you has the opposite sign from the turn you need, and you flip it with a minus sign. If your robot spins away from the goal instead of toward it, this is almost always why.",
+				"bit": "Positive error means turn left, but a positive turn command turns right: flip the sign."
+			}
+		}
+	],
+	"kind": "concept"
+}

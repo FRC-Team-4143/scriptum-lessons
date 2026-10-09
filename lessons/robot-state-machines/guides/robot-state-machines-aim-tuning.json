@@ -1,0 +1,221 @@
+{
+	"title": "Tune kP to reach the goal",
+	"summary": "Raise kP until the robot settles within 2 degrees.",
+	"topic": "Robot",
+	"order": 515,
+	"steps": [
+		{
+			"title": "Tuning by hand",
+			"say": {
+				"never": "There's no formula that gives the right numbers. You find them by trying. The recipe is the same for almost every PID. One: set kI and kD to 0. Two: raise kP until the robot gets to the goal quickly, but starts to overshoot and wobble. Three: back kP off a little. Four: add kD to damp the wobble. Five: only add kI if the robot stops a little short and stays there. Change one number at a time, and write down what each one did.",
+				"bit": "Set kI and kD to 0. Raise kP until it overshoots, back off, add kD to damp. kI only if it gets stuck short."
+			}
+		},
+		{
+			"title": "What to watch",
+			"say": {
+				"never": "Your eyes can't judge a 2 degree error, so watch a graph. Plot `AimErrorDegrees`. It starts around 56 and should fall to 0 and sit there. Plot `AimOutput` too, the turn command the PID asks for: it should be big at first and shrink to nothing. Each time you tune, press Start for a fresh run, enable Teleop, and hold the left bumper (**E**).",
+				"bit": "Plot AimErrorDegrees (should fall to 0) and AimOutput (the turn command). Fresh Start for every try."
+			}
+		},
+		{
+			"title": "Start the robot",
+			"say": {
+				"never": "Your code only works once it's started. Press **Start** and wait until the status says **Running**. Every change to the constants needs a fresh Start, so you will do this a few times.",
+				"bit": "Your code only runs once it's built and started. Do it again after every change."
+			},
+			"target": {
+				"selector": "[data-tour='sim-controls']"
+			},
+			"waitFor": {
+				"target": {
+					"selector": "[data-tour='code-status']",
+					"text": "Running"
+				},
+				"hint": {
+					"never": "press Start, then wait for Running.",
+					"bit": "press Start and wait for Running."
+				}
+			},
+			"assist": true
+		},
+		{
+			"title": "Enable in Teleop",
+			"say": {
+				"never": "Choose **Teleop**, then press **Enable**. The robot stays frozen until it's enabled.",
+				"bit": "Pick **Teleop** and press **Enable**. Robot code runs only while it's enabled."
+			},
+			"target": {
+				"selector": "[data-tour='enable']"
+			},
+			"waitFor": {
+				"target": {
+					"selector": "[data-tour='enable'] button",
+					"text": "Enabled"
+				},
+				"hint": {
+					"never": "choose Teleop, then press Enable.",
+					"bit": "choose Teleop, then Enable."
+				}
+			},
+			"assist": true
+		},
+		{
+			"title": "Plot AimErrorDegrees",
+			"say": {
+				"never": "This is how far the robot still has to turn, in degrees. Look at **AdvantageScope**, the graphing tool. Type `AimErrorDegrees` in its search box. Find **Subsystem/Drivetrain/AimErrorDegrees** in the list and drag it with your mouse onto the **Left Axis** of the graph.",
+				"bit": "This is how far the robot still has to turn, in degrees. In AdvantageScope, search for `AimErrorDegrees`, then drag **Subsystem/Drivetrain/AimErrorDegrees** onto the **Left Axis**."
+			},
+			"close": [
+				"editor",
+				"preview",
+				"elastic"
+			],
+			"open": [
+				"scope"
+			],
+			"target": {
+				"pane": "scope",
+				"selector": ".line-graph-left.source-list"
+			},
+			"waitFor": {
+				"target": {
+					"pane": "scope",
+					"selector": ".line-graph-left.source-list .key-container",
+					"text": "Subsystem/Drivetrain/AimErrorDegrees"
+				},
+				"hint": "drag Subsystem/Drivetrain/AimErrorDegrees onto the graph."
+			},
+			"assist": true
+		},
+		{
+			"title": "Plot AimOutput",
+			"say": {
+				"never": "This is the turn command the PID is sending. Look at **AdvantageScope**, the graphing tool. Type `AimOutput` in its search box. Find **Subsystem/Drivetrain/AimOutput** in the list and drag it with your mouse onto the **Right Axis** of the graph.",
+				"bit": "This is the turn command the PID is sending. In AdvantageScope, search for `AimOutput`, then drag **Subsystem/Drivetrain/AimOutput** onto the **Right Axis**."
+			},
+			"close": [
+				"editor",
+				"preview",
+				"elastic"
+			],
+			"open": [
+				"scope"
+			],
+			"target": {
+				"pane": "scope",
+				"selector": ".line-graph-right.source-list"
+			},
+			"waitFor": {
+				"target": {
+					"pane": "scope",
+					"selector": ".line-graph-right.source-list .key-container",
+					"text": "Subsystem/Drivetrain/AimOutput"
+				},
+				"hint": "drag Subsystem/Drivetrain/AimOutput onto the graph."
+			},
+			"assist": true
+		},
+		{
+			"title": "First run: kP is too low",
+			"say": {
+				"never": "Hold **E** (the left bumper) for a few seconds. With the starter `AIM_KP = 0.2`, the error falls and then stops several degrees short of 0 while the output has faded to almost nothing. The motors need a minimum push to get the wheels moving, and a tiny error times a tiny kP isn't enough. That's called steady-state error. Click **I did it** once you've seen it stall.",
+				"bit": "Hold **E**. With kP 0.2 the error stalls a few degrees short. Click I did it when you've seen it."
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"hint": "hold E and watch the error stall, then click I did it."
+			},
+			"assist": true,
+			"target": {
+				"selector": "[data-tour='mode']"
+			}
+		},
+		{
+			"title": "Open DrivetrainConstants.java",
+			"say": {
+				"never": "Now change the gains. Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `DrivetrainConstants`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "Now change the gains. Press **Ctrl+P**, type `DrivetrainConstants` and press Enter. Quick Open finds any file by name."
+			},
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "DrivetrainConstants.java"
+				},
+				"hint": "open DrivetrainConstants.java with Ctrl+P.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Find it",
+			"say": {
+				"never": "The aim gains are in the AIM section. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `public static final double AIM_KP` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "The aim gains are in the AIM section. Press **Ctrl+F**, type `public static final double AIM_KP` and press Enter to jump to it."
+			},
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "public static final double AIM_KP"
+				},
+				"hint": "find public static final double AIM_KP with Ctrl+F.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Raise kP",
+			"say": {
+				"never": "Raise `AIM_KP` and try again. Stop the robot, change the number, press Start, Enable, and hold **E**. Try 0.5, then 0.7, then 1.0. Watch the error: it should now reach 0 and stay. Pick the value that gets within 2 degrees and stays. Click **I did it** when the robot settles.",
+				"bit": "Try `AIM_KP` = 0.5, 0.7, 1.0, restarting each time. Stop when the error settles within 2 degrees."
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"hint": "try a few kP values until the robot settles within 2 degrees, then click I did it."
+			},
+			"assist": true,
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "public static final double AIM_KP"
+			}
+		},
+		{
+			"title": "A little kI?",
+			"say": {
+				"never": "If you'd rather keep kP small and the robot still stops a hair short, kI is the fix: it adds up the leftover error until the push is big enough to finish the job. But it also builds up while the robot is still far away, which makes it overshoot, so keep it tiny (like 0.1) or leave it at 0. Most robots you'll build never need it, and here a bigger kP does the job.",
+				"bit": "kI cures stopping short, but builds up and overshoots. Keep it tiny or at 0."
+			}
+		},
+		{
+			"title": "Check your work",
+			"say": {
+				"never": "When it all works the way you expect, click the lesson chip and press **Verify**. Each checkpoint tells you what it wants if it doesn't pass yet, so read the message.",
+				"bit": "When it runs the way you expect, open the lesson chip and press **Verify**. Each checkpoint tells you what it's looking for if it doesn't pass yet."
+			},
+			"target": {
+				"selector": "[data-tour='lesson']"
+			}
+		}
+	],
+	"kind": "mixed"
+}

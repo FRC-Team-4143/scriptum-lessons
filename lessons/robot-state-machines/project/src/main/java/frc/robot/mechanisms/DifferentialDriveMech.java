@@ -302,6 +302,13 @@ public class DifferentialDriveMech extends MechBase {
     if (IS_SIM) {
       // Where the simulated robot REALLY is, to compare with the pose your code estimates.
       MwLog.log(getLoggingKey() + "TruePose", sim.getPose());
+      // How far the simulated robot REALLY is from facing the goal (the aim lesson's checks use
+      // this, so a drifting pose estimate cannot fool them). Positive: the goal is to the left.
+      Pose2d truth = sim.getPose();
+      Rotation2d toGoal =
+          DrivetrainConstants.GOAL.getTranslation().minus(truth.getTranslation()).getAngle();
+      MwLog.log(
+          getLoggingKey() + "TrueAimErrorDegrees", toGoal.minus(truth.getRotation()).getDegrees());
     }
   }
 

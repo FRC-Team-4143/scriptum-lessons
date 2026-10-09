@@ -122,6 +122,11 @@ has to be made in every module (`lessons/robot-*/project/`):
   states-plus-`switch` drivetrain in `robot-state-machines`. In `robot-control-theory` the flywheel starts in bang-bang mode with untuned gains on purpose; that
   lesson's task is to write bang-bang and feedforward, then tune PID (`kV` about 0.12, `kP` about 0.2
   works). `lessons/robot-control-theory/solution/` is the finished version.
+- `robot-state-machines` ends with an aim state: `DriveStates.AIM` turns the robot in place to face
+  `DrivetrainConstants.GOAL` with a student-written `PIDController` (`AIM_KP/KI/KD`, starting at values
+  that stall short of the goal). `lesson/AimChecks.java` publishes `Check/Aim/Settled` and
+  `Check/Aim/OvershootDegrees` from the sim's true heading error (`Drive/TrueAimErrorDegrees`). The
+  autonomous lesson calls the state through `DrivetrainCommands.aim()` and waits on `isAimed()`.
 - MWLib comes from jitpack (`com.github.FRC-Team-4143.MW-Lib:mw-lib-java:<tag>`), with no
   credentials. Bump the tag in every `build.gradle` together.
 - `lessons/<id>/solution/` holds the reference solution used by that lesson's `lesson.test.ts` to
@@ -141,7 +146,7 @@ and uses them right away. The Java modules remain available as a deeper, standal
 | 4 Objects and Odometry | classes and objects, `new`, `import`, `static`, `abstract` |
 | 5 Mechanisms and Subsystems | inheritance (`extends`, `@Override`), constructors, lists, enums as a list of states, `if` / `else` in subsystem logic |
 | 6 Control Theory | enums and `switch` (picking a control style), unit conversion, small methods |
-| 7 State Machines and Commands | `switch` on a subsystem's state (practice), `&&` `\|\|` `!`, boolean methods, lambdas |
+| 7 State Machines and Commands | `switch` on a subsystem's state (practice), `&&` `\|\|` `!`, boolean methods, lambdas, WPILib's `PIDController` tuned by hand |
 | 8 Autonomous | extending `Command`, command groups (and a `for` loop used again) |
 
 Recursion is not used on the robot.
