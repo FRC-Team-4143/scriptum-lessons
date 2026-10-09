@@ -3,7 +3,7 @@
 	"description": "Draw two paths in Choreo, then write the autonomous routine the way the competition robot does: follow the first path, pick up, follow the second path, aim at the goal with the aim state you built, and shoot.",
 	"kind": "robot",
 	"track": "FRC Robot",
-	"order": 27,
+	"order": 28,
 	"requires": [
 		"robot-state-machines",
 		"choreo-intro"

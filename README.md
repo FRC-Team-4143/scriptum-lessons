@@ -58,9 +58,9 @@ Three tracks, in curriculum order (each lesson's `track` and `order` are in its 
   `robot-drivetrain` (Motors and Drivetrains), `robot-sensors` (Sensors and Feedback),
   `robot-drive-math` (Drive Math and Methods), `robot-odometry` (Objects and Odometry),
   `robot-subsystems` (Mechanisms and Subsystems), `robot-control-theory` (Control Theory),
-  `robot-state-machines` (State Machines and Commands) and `robot-autonomous` (Choreo Autonomous).
-  Each module's `README.md` is the lesson. Computer Vision has no robot code, so it has no module.
-  See [Robot modules](#robot-modules).
+  `robot-state-machines` (State Machines and Commands), `robot-computer-vision` (Computer Vision, in
+  progress) and `robot-autonomous` (Choreo Autonomous).
+  Each module's `README.md` is the lesson. See [Robot modules](#robot-modules).
 
 ## Tutor (Dozer)
 
@@ -134,6 +134,16 @@ has to be made in every module (`lessons/robot-*/project/`):
   `Subsystem/Shooter/AimErrorAtShotDegrees`, `ShotCount`) use the simulator's true pose, so the drifting
   estimate cannot fool them. `choreo-intro` is a prerequisite. The `solution/` folder has the finished
   paths and `Autos.java`.
+- `robot-computer-vision` (Computer Vision, in progress) starts from the finished State Machines robot minus
+  the aim state. The pose estimator moves out of the drive mech into a provided `LocalizationSubsystem`
+  (`DrivetrainSubsystem.getPose()` and `resetPose(Pose2d)` route to it). A provided `SimulationSubsystem`
+  (registered only in simulation) owns MWLib's `MwVisionSim` with a front and a back camera on the 2026
+  AprilTag layout, pointed from the TRUE pose (`getTruePose()`), and a provided `vision/TagVision` turns
+  each camera's multi-tag pose into a filtered `VisionMeasurement`. The student's job in
+  `LocalizationSubsystem.updateLogic()` is the `addVisionMeasurement(...)` call and its standard
+  deviations. It needs the PhotonLib vendordep (`vendordeps/photonlib.json`); PhotonLib publishes no
+  `linuxarm64` natives, so the vision simulator only runs on x86-64. The `FieldTargets` poses `START` and
+  `GOAL` are the same as `robot-autonomous`'s. The aim material arrives in a later change.
 - MWLib comes from jitpack (`com.github.FRC-Team-4143.MW-Lib:mw-lib-java:<tag>`), with no
   credentials. Bump the tag in every `build.gradle` together.
 - `lessons/<id>/solution/` holds the reference solution used by that lesson's `lesson.test.ts` to

@@ -1514,8 +1514,21 @@
 			]
 		},
 		{
-			"id": "robot-autonomous",
+			"id": "robot-computer-vision",
 			"order": 27,
+			"track": "FRC Robot",
+			"title": "Computer Vision",
+			"description": "Teach the robot to see AprilTags: feed camera measurements to the pose estimator so the robot always knows where it is on the field, then aim at the goal from that estimate.",
+			"kind": "robot",
+			"subdir": "lessons/robot-computer-vision/project",
+			"requires": [
+				"robot-state-machines"
+			],
+			"checkpoints": []
+		},
+		{
+			"id": "robot-autonomous",
+			"order": 28,
 			"track": "FRC Robot",
 			"title": "Choreo Autonomous",
 			"description": "Draw two paths in Choreo, then write the autonomous routine the way the competition robot does: follow the first path, pick up, follow the second path, aim at the goal with the aim state you built, and shoot.",
