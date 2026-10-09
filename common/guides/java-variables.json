@@ -179,8 +179,8 @@
 		{
 			"title": "Now in your code",
 			"say": {
-				"never": "Now look at your own code. Find a line shaped like the one on the board: a **type**, a **name**, an `=`, a **value** and a `;`. Every line like that is a named box holding something.",
-				"bit": "Your lesson's code is full of these. Look for a line shaped like the one on the board: a **type**, a **name**, `=`, a **value**, and a `;`. Every one is a named box holding something."
+				"never": "Every line like the one on the board is a named box holding something: a **type**, a **name**, an `=`, a **value** and a `;`. Your own code is full of lines shaped like this. When you see one, find those five parts, and you'll know what box it makes. Take a look at your code now.",
+				"bit": "Your lesson's code is full of lines shaped like the one on the board: a **type**, a **name**, `=`, a **value**, and a `;`. Each one is a named box holding something."
 			},
 			"open": [
 				"editor"
@@ -188,7 +188,29 @@
 			"target": {
 				"pane": "editor"
 			},
-			"assist": true
+			"assist": true,
+			"board": {
+				"code": "double speed = 0.5;",
+				"language": "java",
+				"marks": [
+					{
+						"text": "double",
+						"label": "type"
+					},
+					{
+						"text": "speed",
+						"label": "name"
+					},
+					{
+						"text": "= 0.5",
+						"label": "value stored in the box"
+					},
+					{
+						"text": ";",
+						"label": "end of the statement"
+					}
+				]
+			}
 		}
 	],
 	"kind": "mixed"
