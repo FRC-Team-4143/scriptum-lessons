@@ -1,6 +1,6 @@
 {
 	"about": {
-		"never": "This lesson builds an autonomous routine the way the team's competition robot does it. You draw two paths in Choreo, then write the list of commands that drives them: go to the pickup, go to the scoring spot, aim at the goal with the aim state you tuned last lesson, and shoot. The lesson's README lists each job.",
+		"never": "This lesson builds an autonomous routine the way the team's competition robot does it. You draw two paths in Choreo, then write the list of commands that drives them: go to the pickup, go to the scoring spot, aim at the goal with the aim state you tuned in the Computer Vision lesson, and shoot. The lesson's README lists each job.",
 		"bit": "Draw ToPickup and ToScore in Choreo, then write the Autos.java sequence: follow, wait, follow, aim until isAimed, shoot.",
 		"lot": "Two Choreo paths (exact names), then loadTrajectory x2 and addCommands(follow, wait, follow, aim.until(isAimed).withTimeout, shoot.withTimeout) in Autos.java."
 	},
@@ -190,8 +190,8 @@
 					"bit": "Press Start again for a fresh run."
 				},
 				{
-					"never": "The robot's own estimate drifts from where it truly is, so the robot may look 0.2 to 0.3 meters off the spot. The check uses the true pose and allows 0.4, so that alone is fine. A much larger distance means the path is wrong.",
-					"bit": "A small drift is normal. A big miss means a wrong path."
+					"never": "The robot's estimate is only a few centimeters from where it truly is, and the check uses the true pose and allows 0.4 meters. A distance near or over 0.4 means the path is wrong (or the robot never got there).",
+					"bit": "A few centimeters is normal. A big miss means a wrong path."
 				},
 				"Choose Pickup And Score, Auto, Enable. Drive/DistanceToPickup must dip under 0.4."
 			]
@@ -217,8 +217,8 @@
 					"bit": "Check that ToScore starts at 5.5, 2.5."
 				},
 				{
-					"never": "The route can look a little off the spot because the estimated pose drifts. The check uses the true pose and allows 0.4 meters, so this isn't a failure.",
-					"bit": "A little drift is fine."
+					"never": "The route can look a little off the spot because the estimated pose is not exact. The check uses the true pose and allows 0.4 meters, so a few centimeters isn't a failure.",
+					"bit": "A few centimeters off is fine."
 				},
 				"Press Start, choose Pickup And Score, Auto, Enable, and make sure Drive/DistanceToScoreSpot falls under 0.4."
 			]
@@ -244,7 +244,7 @@
 					"bit": "Use `.until(DrivetrainSubsystem.getInstance()::isAimed)`."
 				},
 				{
-					"never": "If aiming itself is the problem (hold the left bumper, E, in Teleop to test it), go back to your tuned AIM_KP and AIM_KD from the State Machines lesson. Aim also takes a while to settle, and 3 seconds is generous.",
+					"never": "If aiming itself is the problem (hold the left bumper, E, in Teleop to test it), go back to your tuned AIM_KP and AIM_KD from the Computer Vision lesson. Aim also takes a while to settle, and 3 seconds is generous.",
 					"bit": "Test the aim state with the E key in Teleop. Retune if it overshoots."
 				},
 				"`DrivetrainCommands.aim().until(DrivetrainSubsystem.getInstance()::isAimed).withTimeout(3.0),` right after the second followPath and right before the shoot line."

@@ -4,15 +4,15 @@ The first 15 seconds of a match are **autonomous**: nobody holds a controller an
 itself. The competition robot's autonomous routines are built in two jobs: first you **draw paths** in
 Choreo, then you **write the sequence** of commands that drives them. In this lesson you do both. Your
 robot drives to a game piece, drives to a scoring spot, **aims at the goal** with the aim state you built
-and tuned in the State Machines lesson, and **shoots**.
+and tuned in the Computer Vision lesson, and **shoots**.
 
 > **New to an idea here?** Press the **Dozer** button in the top bar. His guides explain each idea this lesson uses, and **I'm so lost → Teach me, step by step** walks you through every job.
 
 ## Before you start
 
-- You finished **State Machines and Commands**. This lesson reuses your `aim()` command and your
-  `isAimed()` method, so they must work (hold the left bumper, **E** on the keyboard, in Teleop to test
-  them).
+- You finished **Computer Vision**. This lesson reuses your `aim()` command and your `isAimed()` method,
+  and the robot's position estimate, which now comes from the AprilTag cameras as well as the wheels.
+  They must work (hold the left bumper, **E** on the keyboard, in Teleop to test the aim).
 - You finished the **Choreo** lesson. It teaches the Choreo pane: waypoints, constraints and Generate.
   This lesson only says which waypoints to draw.
 
@@ -29,6 +29,9 @@ Everything is under `src/main/`:
 - `subsystems/drive/DrivetrainCommands.java` has `followPath(...)` (play a path back) and your `aim()`.
   `DifferentialPathFollower.java` and the Choreo methods in `DrivetrainSubsystem.java` turn the path into
   wheel speeds. They are already tuned: read them to see how a path becomes motor power.
+- `subsystems/localization/LocalizationSubsystem.java` is the pose estimate you finished in the Computer
+  Vision lesson (wheels plus cameras). The path follower, `aim()` and the distance checks all use it.
+  Read it, don't change it.
 - `subsystems/shooter/ShooterCommands.java` has `shoot()`.
 - `autos/DriveDistanceCommand.java` and `autos/TurnToAngleCommand.java` are finished example commands
   that the Dozer guides about commands use. Read them, don't change them.
@@ -95,9 +98,9 @@ Go slower on anything that is new. The stretch ideas at the end are not expected
 On the 2D Field tab add these, and plot the others:
 
 - `Drive/TruePose`: where the simulated robot **really** is.
-- `Drive/Pose`: where the robot **thinks** it is. It drifts a little from the true pose, because the
-  wheels slip and the encoder readings jitter. Don't be surprised if the robot ends 0.2 to 0.3 meters
-  from the spot it was aiming at. The checks use the true pose.
+- `Subsystem/Localization/Pose`: where the robot **thinks** it is, from your Localization subsystem.
+  The cameras keep it close to the true pose: about 1 to 9 centimeters apart while the robot drives,
+  and about 1 centimeter once it stops. It is not exactly the same, so the checks use the true pose.
 - `Subsystem/Drivetrain/Choreo/Trajectory`: the path being followed, and
   `Subsystem/Drivetrain/Choreo/DesiredPose`: where the path says the robot should be right now.
 - `Drive/DistanceToPickup` and `Drive/DistanceToScoreSpot`: true distances in meters, to plot.

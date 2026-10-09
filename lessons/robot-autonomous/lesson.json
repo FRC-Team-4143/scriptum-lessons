@@ -5,7 +5,7 @@
 	"track": "FRC Robot",
 	"order": 28,
 	"requires": [
-		"robot-state-machines",
+		"robot-computer-vision",
 		"choreo-intro"
 	],
 	"guides": [

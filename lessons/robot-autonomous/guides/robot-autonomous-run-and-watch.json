@@ -212,15 +212,15 @@
 		{
 			"title": "Estimate against truth",
 			"say": {
-				"never": "Add **Drive/Pose** to the field as well. It's the position the robot *thinks* it has, built from wheel readings, and it ends up a little off **Drive/TruePose**. That is why the robot may look 20 or 30 centimeters from the spot while the checks still pass: they measure the true pose.",
-				"bit": "Add **Drive/Pose** too. It drifts from **Drive/TruePose**, and the checks use the true one."
+				"never": "Add **Subsystem/Localization/Pose** to the field as well. It's the position the robot *thinks* it has, from the wheels plus the AprilTag cameras, and it stays within a few centimeters of **Drive/TruePose**. The checks measure the true pose, so a small difference between the two is not a problem.",
+				"bit": "Add **Subsystem/Localization/Pose** too. It stays a few centimeters from **Drive/TruePose**, and the checks use the true one."
 			},
 			"target": {
 				"pane": "scope"
 			},
 			"assist": true,
 			"waitFor": {
-				"hint": "compare Drive/Pose with Drive/TruePose, then click I did it."
+				"hint": "compare Subsystem/Localization/Pose with Drive/TruePose, then click I did it."
 			}
 		},
 		{
