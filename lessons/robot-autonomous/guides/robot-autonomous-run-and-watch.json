@@ -26,19 +26,73 @@
 			"assist": true
 		},
 		{
+			"title": "Open Elastic",
+			"say": {
+				"never": "The autonomous routine is picked in **Elastic**, the dashboard on the right. I've opened it for you. It shows **Network Tables: Connected** in the bottom-left corner once the robot is running.",
+				"bit": "Elastic is on the right. The robot is running, so it should say **Network Tables: Connected**."
+			},
+			"close": [
+				"editor",
+				"preview",
+				"scope"
+			],
+			"open": [
+				"elastic",
+				"driverStation"
+			],
+			"target": {
+				"pane": "elastic"
+			},
+			"assist": true,
+			"waitFor": {
+				"hint": "look at Elastic, then click I did it."
+			}
+		},
+		{
+			"title": "Add the Auto Choices chooser",
+			"say": {
+				"never": "Click **Add Widget**, find **Auto Choices** in the list (it is under **SmartDashboard**), and drag it onto the grid. It is the drop-down menu your robot publishes. Click **I did it** once it is on the grid.",
+				"bit": "**Add Widget**, then drag **Auto Choices** onto the grid."
+			},
+			"target": {
+				"pane": "elastic",
+				"selector": "flt-semantics[role='button']",
+				"text": "Add Widget"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"hint": "drag Auto Choices onto the grid, then click I did it."
+			},
+			"assist": true
+		},
+		{
+			"title": "Make it a ComboBox Chooser",
+			"say": {
+				"never": "Right-click the widget, choose **Edit Properties**, and make sure **Widget Type** is **ComboBox Chooser**, the same widget you used in the Elastic lesson. Click **I did it** once it is.",
+				"bit": "Set **Widget Type** to **ComboBox Chooser**."
+			},
+			"target": {
+				"pane": "elastic"
+			},
+			"waitFor": {
+				"hint": "set the widget type to ComboBox Chooser, then click I did it."
+			},
+			"assist": true
+		},
+		{
 			"title": "Pick the routine",
 			"say": {
-				"never": "In the Driver Station strip, find the autonomous chooser and choose **Pickup And Score**. The default, Do Nothing, would leave the robot sitting still. Click **I did it** once it says Pickup And Score.",
-				"bit": "Choose **Pickup And Score** in the autonomous chooser."
+				"never": "Open the ComboBox Chooser and choose **Pickup And Score**. The default, Do Nothing, would leave the robot sitting still. Click **I did it** once it says Pickup And Score.",
+				"bit": "Choose **Pickup And Score** in the ComboBox Chooser."
+			},
+			"target": {
+				"pane": "elastic"
 			},
 			"waitFor": {
 				"hint": "choose Pickup And Score in the chooser, then click I did it."
 			},
 			"assist": true,
-			"target": {
-				"selector": "[data-tour='mode']"
-			},
-			"cardAt": "top-right"
+			"cardAt": "bottom-right"
 		},
 		{
 			"title": "Plot the distance to the pickup",
