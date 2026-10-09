@@ -23,8 +23,8 @@ directly. Instead you tell the drivetrain what you want.
 ## Running it
 
 Click **Start** in the Scriptum Driver Station, choose **Teleop** and click **Enable**. Drive with
-a gamepad, or with the keyboard: **W / S** is the left stick up and down, **Arrow Up / Arrow Down**
-is the right stick up and down, and **Arrow Left / Arrow Right** is the right stick left and right.
+a gamepad, or with the keyboard: **W / S** is the left stick up and down, **A / D** is the left stick left and right, and
+**Arrow Up / Arrow Down** is the right stick up and down.
 Open AdvantageScope to watch `Drive/LeftOutput` and `Drive/RightOutput`.
 
 ## Session plan (about 3 hours)
@@ -53,11 +53,11 @@ Everything here is code **you write** in `teleopPeriodic()`. Run it after each s
    Run it: **W / S** drives the left side, **Arrow Up / Down** the right side.
 2. **Arcade drive.** Replace your code so that you:
    - declare `forward` from the **left stick Y** (still with the minus sign),
-   - declare `turn` from the **right stick X** (`controller.getRightX()`),
+   - declare `turn` from the **left stick X** (`controller.getLeftX()`),
    - set `leftSpeed = forward + turn` and `rightSpeed = forward - turn`,
    - call `drive.setDutyCycles(leftSpeed, rightSpeed);`.
 
-   Run it: **W / S** drive, **Arrow Left / Right** turn. If it turns the wrong way, check your signs.
+   Run it: **W / S** drive, **A / D** turn (all on the left stick). If it turns the wrong way, check your signs.
 3. **Click Verify** to check your work.
 
 Stuck on a step? Open **Dozer**: he can explain the idea or walk you through it.
@@ -70,4 +70,3 @@ Stuck on a step? Open **Dozer**: he can explain the idea or walk you through it.
 - **Squared sticks.** Make small stick movements gentler by multiplying `forward` by its own
   absolute value: `forward = forward * Math.abs(forward);`. (`Math.abs(x)` is a method that gives the
   size of `x` without its sign.)
-

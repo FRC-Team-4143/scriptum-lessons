@@ -7,11 +7,11 @@
 		{
 			"title": "Two sticks, two jobs",
 			"say": {
-				"never": "In **arcade drive** you steer with two jobs. One stick says *how fast to go forward or back*. The other says *how much to turn*. It feels like driving a car, which is why many drivers like it.",
-				"bit": "Arcade drive splits the sticks into two jobs: forward/back speed and turning."
+				"never": "In **arcade drive** you steer with two jobs, both on the **left stick**. Up and down says *how fast to go forward or back*. Left and right says *how much to turn*. It feels like driving a car, which is why many drivers like it.",
+				"bit": "Arcade drive gives the left stick two jobs: forward/back speed and turning."
 			},
 			"board": {
-				"code": "one stick, up and down     ->  how fast to go forward or back\nthe other, left and right  ->  how much to turn",
+				"code": "left stick, up and down     ->  how fast to go forward or back\nleft stick, left and right  ->  how much to turn",
 				"language": "text",
 				"marks": [
 					{
@@ -28,18 +28,18 @@
 		{
 			"title": "In your lesson: Two sticks, two jobs",
 			"say": {
-				"never": "In **arcade drive** you steer with two jobs. One stick says *how fast to go forward or back*. The other says *how much to turn*. It feels like driving a car, which is why many drivers like it.",
-				"bit": "Arcade drive: one stick goes forward and back, the other turns. Most drivers prefer it."
+				"never": "In **arcade drive** you steer with two jobs, both on the **left stick**. Up and down says *how fast to go forward or back*. Left and right says *how much to turn*. It feels like driving a car, which is why many drivers like it.",
+				"bit": "Arcade drive: the left stick goes forward and back and also turns. Most drivers prefer it."
 			},
 			"board": {
-				"code": "double forward = -controller.getLeftY();\ndouble turn = controller.getRightX();",
+				"code": "double forward = -controller.getLeftY();\ndouble turn = controller.getLeftX();",
 				"marks": [
 					{
 						"text": "getLeftY",
 						"label": "forward and back"
 					},
 					{
-						"text": "getRightX",
+						"text": "getLeftX",
 						"label": "left and right: no minus sign"
 					}
 				]
@@ -152,8 +152,8 @@
 		{
 			"title": "Drive it",
 			"say": {
-				"never": "Time to drive! **W** and **S** go forward and back. The **left and right arrow keys** turn. If the robot turns the wrong way, the sign on `turn` is backwards. Swap the `+` and `-`, restart, and try again.",
-				"bit": "**W / S** drive forward and back, **Arrow Left / Right** turn. If it turns the wrong way, check the sign on `turn`."
+				"never": "Time to drive! **W** and **S** go forward and back. The **A** and **D** keys turn. If the robot turns the wrong way, the sign on `turn` is backwards. Swap the `+` and `-`, restart, and try again.",
+				"bit": "**W / S** drive forward and back, **A / D** turn. If it turns the wrong way, check the sign on `turn`."
 			},
 			"target": {
 				"selector": "[data-tour='mode']"

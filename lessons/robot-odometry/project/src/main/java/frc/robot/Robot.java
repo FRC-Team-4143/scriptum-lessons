@@ -35,7 +35,7 @@ public class Robot extends LoggedRobot {
     // TODO (STEP 1): use OI.getForward() and OI.getTurn() instead of the controller.
     drive.arcadeDrive(
         MathUtil.applyDeadband(-controller.getLeftY(), 0.1),
-        MathUtil.applyDeadband(controller.getRightX(), 0.1));
+        MathUtil.applyDeadband(controller.getLeftX(), 0.1));
   }
 
   @Override

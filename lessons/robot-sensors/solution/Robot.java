@@ -53,7 +53,7 @@ public class Robot extends LoggedRobot {
   @Override
   public void teleopPeriodic() {
     double forward = -controller.getLeftY();
-    double turn = controller.getRightX();
+    double turn = controller.getLeftX();
     if (Math.abs(forward) < DEADBAND) {
       forward = 0.0;
     }

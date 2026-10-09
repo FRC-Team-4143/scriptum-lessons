@@ -13,8 +13,8 @@ if [[ "$(grep -Eo '\bdouble[[:space:]]+[A-Za-z_][A-Za-z0-9_]*[[:space:]]*=' <<<"
 	echo "Declare your own double variables in teleopPeriodic(), for example forward, turn, leftSpeed and rightSpeed."
 	exit 1
 fi
-if ! grep -q 'getLeftY()' <<<"$CODE" || ! grep -q 'getRightX()' <<<"$CODE"; then
-	echo "Arcade drive reads forward from controller.getLeftY() and turn from controller.getRightX()."
+if ! grep -q 'getLeftY()' <<<"$CODE" || ! grep -q 'getLeftX()' <<<"$CODE"; then
+	echo "Arcade drive reads forward from controller.getLeftY() and turn from controller.getLeftX()."
 	exit 1
 fi
 if ! grep -Eq '=[[:space:]]*[A-Za-z_][A-Za-z0-9_]*[[:space:]]*\+[[:space:]]*[A-Za-z_]' <<<"$CODE" || ! grep -Eq '=[[:space:]]*[A-Za-z_][A-Za-z0-9_]*[[:space:]]*-[[:space:]]*[A-Za-z_]' <<<"$CODE"; then

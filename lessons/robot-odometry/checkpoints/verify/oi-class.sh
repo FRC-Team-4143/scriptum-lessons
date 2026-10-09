@@ -18,8 +18,8 @@ for method in getForward getTurn; do
 		exit 1
 	fi
 done
-if ! flat OI.java | grep -Eq 'return[^;]*(getLeftY|getRightX)'; then
-	echo "OI's methods should return values from the controller (getLeftY / getRightX)."
+if ! flat OI.java | grep -Eq 'return[^;]*(getLeftY|getLeftX)'; then
+	echo "OI's methods should return values from the controller (getLeftY / getLeftX)."
 	exit 1
 fi
 if grep -q 'XboxController' "$DIR/Robot.java"; then
