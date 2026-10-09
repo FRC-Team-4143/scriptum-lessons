@@ -1,0 +1,127 @@
+{
+  "name": "robot",
+  "version": 2,
+  "type": "Differential",
+  "variables": {
+    "expressions": {},
+    "poses": {
+      "Start": {
+        "x": {
+          "exp": "1.5 m",
+          "val": 1.5
+        },
+        "y": {
+          "exp": "1.5 m",
+          "val": 1.5
+        },
+        "heading": {
+          "exp": "0.0 rad",
+          "val": 0.0
+        }
+      },
+      "Pickup": {
+        "x": {
+          "exp": "5.5 m",
+          "val": 5.5
+        },
+        "y": {
+          "exp": "2.5 m",
+          "val": 2.5
+        },
+        "heading": {
+          "exp": "0.0 rad",
+          "val": 0.0
+        }
+      },
+      "ScoreSpot": {
+        "x": {
+          "exp": "6.5 m",
+          "val": 6.5
+        },
+        "y": {
+          "exp": "5.0 m",
+          "val": 5.0
+        },
+        "heading": {
+          "exp": "1.5707963267948966 rad",
+          "val": 1.5707963267948966
+        }
+      }
+    }
+  },
+  "config": {
+    "frontLeft": {
+      "x": {
+        "exp": "11 in",
+        "val": 0.2794
+      },
+      "y": {
+        "exp": "12 in",
+        "val": 0.3048
+      }
+    },
+    "backLeft": {
+      "x": {
+        "exp": "-11 in",
+        "val": -0.2794
+      },
+      "y": {
+        "exp": "12 in",
+        "val": 0.3048
+      }
+    },
+    "mass": {
+      "exp": "50 kg",
+      "val": 50.0
+    },
+    "inertia": {
+      "exp": "7.5 kg m ^ 2",
+      "val": 7.5
+    },
+    "gearing": {
+      "exp": "8.45",
+      "val": 8.45
+    },
+    "radius": {
+      "exp": "3 in",
+      "val": 0.0762
+    },
+    "vmax": {
+      "exp": "6000 RPM",
+      "val": 628.3185307179587
+    },
+    "tmax": {
+      "exp": "1.0 N * m",
+      "val": 1.0
+    },
+    "cof": {
+      "exp": "1.5",
+      "val": 1.5
+    },
+    "bumper": {
+      "front": {
+        "exp": "17 in",
+        "val": 0.4318
+      },
+      "side": {
+        "exp": "17 in",
+        "val": 0.4318
+      },
+      "back": {
+        "exp": "17 in",
+        "val": 0.4318
+      }
+    },
+    "differentialTrackWidth": {
+      "exp": "24 in",
+      "val": 0.6096
+    }
+  },
+  "generationFeatures": [],
+  "codegen": {
+    "root": "",
+    "genVars": false,
+    "genTrajData": false,
+    "useChoreoLib": true
+  }
+}
