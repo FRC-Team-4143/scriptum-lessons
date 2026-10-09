@@ -37,7 +37,7 @@
 				"marks": [
 					{
 						"text": "less than 2.0 meters",
-						"label": "not there yet? (distanceMeters)"
+						"label": "not there yet? (distance_meters_)"
 					},
 					{
 						"text": "stop (0.0)",
@@ -101,7 +101,7 @@
 		{
 			"title": "autonomousPeriodic",
 			"say": {
-				"never": "Write an `if` / `else` inside `autonomousPeriodic()`, between its curly braces, using the plan from the card: drive at `0.4` while `distanceMeters` is below `2.0`, otherwise stop. This one runs by itself in **Auto** mode, so nobody has to touch the keys.",
+				"never": "Write an `if` / `else` inside `autonomousPeriodic()`, between its curly braces, using the plan from the card: drive at `0.4` while `distance_meters_` is below `2.0`, otherwise stop. This one runs by itself in **Auto** mode, so nobody has to touch the keys.",
 				"bit": "Write the if/else inside `autonomousPeriodic()`: drive at 0.4 below 2.0 m, otherwise stop."
 			},
 			"target": {
@@ -188,7 +188,7 @@
 		{
 			"title": "What reset means",
 			"say": {
-				"never": "Look at `autonomousInit()`: it calls `drive.resetEncoders()`. **Reset** means *forget everything driven so far and start counting from zero again.* Auto begins with the distance at 0 and the robot back at its starting spot. Without a reset, the distance would still say 2.0 from the last run, and the robot would never move.",
+				"never": "Look at `autonomousInit()`: it calls `drive_.resetEncoders()`. **Reset** means *forget everything driven so far and start counting from zero again.* Auto begins with the distance at 0 and the robot back at its starting spot. Without a reset, the distance would still say 2.0 from the last run, and the robot would never move.",
 				"bit": "`resetEncoders()` starts the distance over at 0. Without it, each run would begin where the last one stopped."
 			},
 			"assist": true

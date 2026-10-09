@@ -32,10 +32,10 @@
 				"bit": "The encoder sits in the **motor**, so it counts motor turns, not wheel turns. Through the gearbox the motor spins `GEAR_RATIO` (8.45) times per wheel turn. Always know where a sensor is and convert to the output you care about. These getters are already converted to **wheel** rotations."
 			},
 			"board": {
-				"code": "// The sensor is in the motor: motorRotations = wheelRotations * GEAR_RATIO\n// These getters have already divided that out, so they are WHEEL rotations:\ndrive.getLeftPositionRotations()  // how far the wheel turned, in rotations\ndrive.getLeftVelocityRps()        // how fast the wheel turns, in rotations per second",
+				"code": "// The sensor is in the motor: motor_rotations = wheel_rotations * GEAR_RATIO\n// These getters have already divided that out, so they are WHEEL rotations:\ndrive_.getLeftPositionRotations()  // how far the wheel turned, in rotations\ndrive_.getLeftVelocityRps()        // how fast the wheel turns, in rotations per second",
 				"marks": [
 					{
-						"text": "motorRotations = wheelRotations * GEAR_RATIO",
+						"text": "motor_rotations = wheel_rotations * GEAR_RATIO",
 						"label": "what the sensor really counts"
 					},
 					{
