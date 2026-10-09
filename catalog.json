@@ -1557,7 +1557,7 @@
 			"kind": "robot",
 			"subdir": "lessons/robot-autonomous/project",
 			"requires": [
-				"robot-state-machines",
+				"robot-computer-vision",
 				"choreo-intro"
 			],
 			"checkpoints": [
@@ -2768,7 +2768,7 @@
 		{
 			"id": "robot-autonomous-autos-concept",
 			"title": "Autos = paths + a sequence",
-			"summary": "What an autonomous routine is: Choreo paths, a list of commands, and a pose that drifts.",
+			"summary": "What an autonomous routine is: Choreo paths, a list of commands, and a pose estimate that is close but not perfect.",
 			"topic": "Robot",
 			"order": 528,
 			"modules": [
