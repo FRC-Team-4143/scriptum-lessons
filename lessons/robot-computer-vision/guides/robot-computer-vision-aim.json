@@ -21,7 +21,7 @@
 		{
 			"title": "Error: how far still to turn",
 			"say": {
-				"never": "Last lesson, error was target minus current. It's the same here: the target is the direction to the goal and the current value is which way the robot faces. If the error is positive the goal is to your left, and if it's negative it's to your right. When the error is zero you are aimed. The PID's whole job is to push that error to zero.",
+				"never": "In the control theory lesson, error was target minus current. It's the same here: the target is the direction to the goal and the current value is which way the robot faces. If the error is positive the goal is to your left, and if it's negative it's to your right. When the error is zero you are aimed. The PID's whole job is to push that error to zero.",
 				"bit": "Error = direction to the goal minus the robot's heading. Positive: goal on the left. Zero: aimed."
 			}
 		},

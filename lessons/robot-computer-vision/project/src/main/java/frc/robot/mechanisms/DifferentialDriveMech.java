@@ -18,6 +18,7 @@ import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.simulation.DifferentialDrivetrainSim;
 import frc.robot.DriveMath;
+import frc.robot.FieldTargets;
 import frc.robot.subsystems.drive.DrivetrainConstants;
 import java.util.List;
 import java.util.Random;
@@ -314,6 +315,13 @@ public class DifferentialDriveMech extends MechBase {
     if (IS_SIM) {
       // Where the simulated robot REALLY is, to compare with the pose your code estimates.
       MwLog.log(getLoggingKey() + "TruePose", sim_.getPose());
+      // How far the simulated robot REALLY is from facing the goal (the aim checks use this, so a
+      // drifting pose estimate cannot fool them). Positive: the goal is to the left.
+      Pose2d truth = sim_.getPose();
+      Rotation2d to_goal =
+          FieldTargets.GOAL.getTranslation().minus(truth.getTranslation()).getAngle();
+      MwLog.log(
+          getLoggingKey() + "TrueAimErrorDegrees", to_goal.minus(truth.getRotation()).getDegrees());
     }
   }
 

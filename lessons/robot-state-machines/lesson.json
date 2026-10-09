@@ -1,6 +1,6 @@
 {
 	"title": "State Machines and Commands",
-	"description": "Give the shooter a state machine and control it with commands bound to buttons, then build an aim state that turns the robot to face the goal and tune its PID by hand.",
+	"description": "Give the shooter a state machine and control it with commands bound to buttons.",
 	"kind": "robot",
 	"track": "FRC Robot",
 	"order": 26,
@@ -43,39 +43,6 @@
 				"check": "range",
 				"min": 2,
 				"max": 50
-			}
-		},
-		{
-			"id": "aim-state-written",
-			"title": "Aim state written",
-			"description": "DriveStates has AIM, the switch handles it with a PIDController (continuous input), getAngleToGoal() and isAimed() are written, and DrivetrainCommands.aim() starts and ends the state.",
-			"verifier": {
-				"type": "script",
-				"path": "checkpoints/verify/aim-state-written.sh"
-			}
-		},
-		{
-			"id": "aim-converges",
-			"title": "Aims within 2 degrees",
-			"description": "Start fresh, enable Teleop and hold the left bumper (E). The robot should turn to face the goal and stay within 2 degrees of it for half a second, within 4 seconds. Raise AIM_KP if it stops short.",
-			"verifier": {
-				"type": "nt4-value",
-				"topic": "/AdvantageKit/RealOutputs/Check/Aim/Settled",
-				"check": "range",
-				"min": 1,
-				"max": 1
-			}
-		},
-		{
-			"id": "aim-no-overshoot",
-			"title": "No wild overshoot",
-			"description": "On that same aim, the robot must not swing more than 10 degrees past the goal. Lower AIM_KP or add AIM_KD to damp it.",
-			"verifier": {
-				"type": "nt4-value",
-				"topic": "/AdvantageKit/RealOutputs/Check/Aim/OvershootDegrees",
-				"check": "range",
-				"min": 0,
-				"max": 10
 			}
 		}
 	]

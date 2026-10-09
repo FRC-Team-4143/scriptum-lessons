@@ -202,7 +202,7 @@
 		{
 			"title": "Direction to the goal",
 			"say": {
-				"never": "Fill in `getAngleToGoal()`. Take the goal's translation, `DrivetrainConstants.GOAL.getTranslation()`, and subtract the robot's: `.minus(getPose().getTranslation())`. That's the arrow from the robot to the goal. Finish with `.getAngle()` and return it. Click **I did it** when it returns the arrow's angle.",
+				"never": "Fill in `getAngleToGoal()`. Take the goal's translation, `FieldTargets.GOAL.getTranslation()`, and subtract the robot's: `.minus(getPose().getTranslation())`. That's the arrow from the robot to the goal. Finish with `.getAngle()` and return it. Click **I did it** when it returns the arrow's angle.",
 				"bit": "Return `GOAL.getTranslation().minus(getPose().getTranslation()).getAngle()`."
 			},
 			"cardAt": "bottom-right",
