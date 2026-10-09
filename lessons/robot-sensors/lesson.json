@@ -40,8 +40,8 @@
 				"type": "nt4-value",
 				"topic": "/AdvantageKit/RealOutputs/Check/Robot/AngularSpeed/Max",
 				"check": "range",
-				"min": 10.0,
-				"max": 25.0
+				"min": 3.0,
+				"max": 8.0
 			}
 		},
 		{
