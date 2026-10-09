@@ -1,4 +1,8 @@
 {
+	"about": {
+		"never": "This lesson is about knowing where the robot is. First you move the controller code into its own class, OI. Then you use WPILib's kinematics and pose estimator to turn wheel movement into the robot's speed, heading and position on the field, and finally you use that position to drive to a spot in autonomous. The lesson's README lists each job.",
+		"bit": "Write the OI class, then use WPILib kinematics and a pose estimator so the robot knows its speed, heading and position, and drive to x = 3 m in Auto."
+	},
 	"plan": [
 		{
 			"checkpoint": "oi-class",
@@ -15,10 +19,107 @@
 			]
 		},
 		{
-			"checkpoint": "pose-auto",
+			"checkpoint": "yaw",
 			"guides": [
+				"robot-odometry-yaw",
 				"robot-odometry-pose"
 			]
+		},
+		{
+			"checkpoint": "pose-auto",
+			"guides": [
+				"robot-odometry-auto"
+			]
 		}
-	]
+	],
+	"checkpoints": {
+		"oi-class": {
+			"why": "One class that owns the controller keeps the rest of the robot code from caring which stick does what.",
+			"guide": "robot-odometry-oi-assist",
+			"concept": {
+				"guide": "robot-odometry-oi",
+				"label": "What is OI?"
+			},
+			"hints": [
+				{
+					"never": "OI.java needs two methods, one for the forward stick and one for the turn stick. Which two names does the lesson want?",
+					"bit": "OI needs `getForward()` and `getTurn()`, both `public static double`."
+				},
+				{
+					"never": "Both methods return a stick value from `driverController`. Forward uses the left stick Y and turn uses the right stick X.",
+					"bit": "Return `driverController.getLeftY()` (with a minus) and `driverController.getRightX()`."
+				},
+				{
+					"never": "Robot.java must not mention `XboxController` anywhere, including the import at the top. Did you delete that line too?",
+					"bit": "Delete the `XboxController` field and its import from Robot.java."
+				},
+				"`public static double getForward() { return -driverController.getLeftY(); }` and `public static double getTurn() { return driverController.getRightX(); }`, then `drive.arcadeDrive(OI.getForward(), OI.getTurn());` in Robot.java."
+			]
+		},
+		"chassis-speeds": {
+			"why": "Kinematics turns the two wheel speeds into one forward speed and one turning speed for the whole robot.",
+			"guide": "robot-odometry-kinematics",
+			"concept": {
+				"guide": "robot-odometry-objects",
+				"label": "What is an object?"
+			},
+			"hints": [
+				{
+					"never": "Look at `getChassisSpeeds()` in DifferentialDriveMech.java. It still returns an empty `ChassisSpeeds`. What should it return instead?",
+					"bit": "`getChassisSpeeds()` should return what `kinematics.toChassisSpeeds(...)` gives back."
+				},
+				{
+					"never": "`toChassisSpeeds` wants a `DifferentialDriveWheelSpeeds` object built from the left and right speeds. Did you make one with `new`?",
+					"bit": "Make a `DifferentialDriveWheelSpeeds` from the left and right speeds with `new`."
+				},
+				{
+					"never": "If the build fails on `DifferentialDriveWheelSpeeds`, Java doesn't know the class yet. Which line at the top of the file fixes that?",
+					"bit": "Add `import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;`."
+				},
+				"`DifferentialDriveWheelSpeeds wheels = new DifferentialDriveWheelSpeeds(getLeftMetersPerSecond(), getRightMetersPerSecond());` then `return kinematics.toChassisSpeeds(wheels);`. Then drive forward at full speed."
+			]
+		},
+		"yaw": {
+			"why": "The pose needs a heading, and this robot works it out from how far each side has driven.",
+			"guide": "robot-odometry-yaw",
+			"hints": [
+				{
+					"never": "Spinning left makes the right side go farther than the left. Which of the two is subtracted from the other, and what do you divide by?",
+					"bit": "Yaw is (right - left) divided by the track width, in radians."
+				},
+				{
+					"never": "The yaw doesn't reach the log until `updatePose()` feeds it to the estimator. Did you write both lines in `updatePose()`?",
+					"bit": "`updatePose()` must call `poseEstimator.update(...)` and then set `pose`."
+				},
+				{
+					"never": "Spin the robot to the left for a few seconds, then Verify. Spinning right makes the angle negative.",
+					"bit": "Hold the right stick to the left for a few seconds, then Verify."
+				},
+				"`double radians = (getRightMeters() - getLeftMeters()) / Constants.TRACK_WIDTH_METERS; return new Rotation2d(radians);`, then `poseEstimator.update(getYaw(), getLeftMeters(), getRightMeters()); pose = poseEstimator.getEstimatedPosition();` in `updatePose()`."
+			]
+		},
+		"pose-auto": {
+			"why": "With a position, autonomous can decide when to stop from where the robot actually is.",
+			"guide": "robot-odometry-auto",
+			"concept": {
+				"guide": "robot-odometry-pose",
+				"label": "What is a pose?"
+			},
+			"hints": [
+				{
+					"never": "In `autonomousPeriodic()`, the robot should drive while it is short of 3 meters and stop otherwise. Which keywords do that?",
+					"bit": "An `if` / `else` on the pose's x value."
+				},
+				{
+					"never": "The pose's x position comes from asking `drive`: first for its pose, then for the x of that pose.",
+					"bit": "Use `drive.getPose().getX()`."
+				},
+				{
+					"never": "Make sure you ran Auto (not Teleop) and let the robot stop before you press Verify.",
+					"bit": "Run in Auto, let it stop, then Verify."
+				},
+				"`if (drive.getPose().getX() < 3.0) { drive.arcadeDrive(0.4, 0.0); } else { drive.arcadeDrive(0.0, 0.0); }`"
+			]
+		}
+	}
 }

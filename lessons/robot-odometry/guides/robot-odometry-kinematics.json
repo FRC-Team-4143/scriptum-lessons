@@ -7,26 +7,17 @@
 		{
 			"title": "Wheel speeds in, robot speeds out",
 			"say": {
-				"never": "Last lesson you worked out the robot's speed with your own math. WPILib, the robot toolkit, has a class that does it for you: `DifferentialDriveKinematics`. You give it the two wheel speeds, and it gives back the robot's forward speed and turning speed together in a single object called `ChassisSpeeds`.",
-				"bit": "`DifferentialDriveKinematics` does the math you wrote by hand last lesson."
-			},
-			"board": {
-				"code": "DifferentialDriveWheelSpeeds wheels =\n    new DifferentialDriveWheelSpeeds(getLeftSpeed(), getRightSpeed());\nChassisSpeeds speeds = kinematics.toChassisSpeeds(wheels);\n// speeds.vxMetersPerSecond     forward\n// speeds.omegaRadiansPerSecond turning",
-				"marks": [
-					{
-						"text": "new DifferentialDriveWheelSpeeds",
-						"label": "left and right"
-					},
-					{
-						"text": "kinematics.toChassisSpeeds",
-						"label": "convert"
-					},
-					{
-						"text": "vxMetersPerSecond",
-						"label": "forward speed"
-					}
-				]
+				"never": "Last lesson you worked out the robot's speed with your own math. WPILib, the robot toolkit, has a class that does it for you: `DifferentialDriveKinematics`. You give it the two wheel speeds, and it gives back the robot's forward speed and turning speed together in a single object called `ChassisSpeeds`.\n\nSay the left side does 3.0 m/s and the right side does 5.0 m/s. Kinematics works out that the robot moves forward at 4.0 m/s (the average) and turns at (5.0 - 3.0) / track width radians per second.",
+				"bit": "`DifferentialDriveKinematics` does the math you wrote by hand last lesson: wheel speeds in, a `ChassisSpeeds` (forward and turning) out."
 			}
+		},
+		{
+			"title": "In your lesson: Wheel speeds in, robot speeds out",
+			"say": {
+				"never": "In `getChassisSpeeds()` you will do it in two moves. First bundle the two wheel speeds into one object, then hand it to kinematics:\n\n`DifferentialDriveWheelSpeeds wheels = new DifferentialDriveWheelSpeeds(getLeftMetersPerSecond(), getRightMetersPerSecond());`\n\n`return kinematics.toChassisSpeeds(wheels);`\n\nThe answer has `vxMetersPerSecond` (forward) and `omegaRadiansPerSecond` (turning).",
+				"bit": "Bundle the two speeds as `new DifferentialDriveWheelSpeeds(left, right)`, then `kinematics.toChassisSpeeds(wheels)` returns forward (`vxMetersPerSecond`) and turning (`omegaRadiansPerSecond`)."
+			},
+			"assist": true
 		},
 		{
 			"title": "Open DifferentialDriveMech.java",
@@ -59,19 +50,76 @@
 			"assist": true
 		},
 		{
-			"title": "Find getChassisSpeeds",
+			"title": "Import the class",
 			"say": {
-				"never": "Click in the code, then hold **Ctrl** and tap **F**. Search for `getChassisSpeeds`, then fill it in with the board's code.",
-				"bit": "Press **Ctrl+F** and search for `getChassisSpeeds`, then fill it in."
+				"never": "`DifferentialDriveWheelSpeeds` is a WPILib class, so it needs an `import`. Press **Ctrl+Home** to jump to the top of the file and add this line next to the other `kinematics` imports:\n\n`import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;`",
+				"bit": "Press **Ctrl+Home** and add `import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;` beside the other kinematics imports."
 			},
-			"waitFor": {
-				"hint": {
-					"never": "write getChassisSpeeds.",
-					"bit": "write getChassisSpeeds."
-				}
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "public class DifferentialDriveMech"
 			},
 			"cardAt": "bottom-right",
+			"assist": true,
+			"waitFor": {
+				"hint": "add the DifferentialDriveWheelSpeeds import."
+			}
+		},
+		{
+			"title": "Find getChassisSpeeds",
+			"say": {
+				"never": "Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `getChassisSpeeds` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "Press **Ctrl+F**, type `getChassisSpeeds` and press Enter to jump to it."
+			},
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "public ChassisSpeeds getChassisSpeeds"
+				},
+				"hint": "find getChassisSpeeds with Ctrl+F.",
+				"skipIfDone": true
+			},
 			"assist": true
+		},
+		{
+			"title": "Bundle the wheel speeds",
+			"say": {
+				"never": "Inside `getChassisSpeeds()`, under the TODO comment, make the wheel speeds object. Type this one line:\n\n`DifferentialDriveWheelSpeeds wheels = new DifferentialDriveWheelSpeeds(getLeftMetersPerSecond(), getRightMetersPerSecond());`\n\n`new` builds the object from the left and right speeds, and `wheels` is the name you will use to refer to it.",
+				"bit": "Under the TODO, write `DifferentialDriveWheelSpeeds wheels = new DifferentialDriveWheelSpeeds(getLeftMetersPerSecond(), getRightMetersPerSecond());`."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "public ChassisSpeeds getChassisSpeeds"
+			},
+			"cardAt": "bottom-right",
+			"assist": true,
+			"waitFor": {
+				"hint": "write the wheels line."
+			}
+		},
+		{
+			"title": "Convert and return",
+			"say": {
+				"never": "Now let kinematics do the math. **Replace** the placeholder line `return new ChassisSpeeds();` with:\n\n`return kinematics.toChassisSpeeds(wheels);`\n\nReplace it rather than adding a second `return`. A method can only return once, and Java complains about code after a `return`.",
+				"bit": "Replace `return new ChassisSpeeds();` with `return kinematics.toChassisSpeeds(wheels);`. Only one `return` allowed."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "public ChassisSpeeds getChassisSpeeds"
+			},
+			"cardAt": "bottom-right",
+			"assist": true,
+			"waitFor": {
+				"hint": "return kinematics.toChassisSpeeds(wheels)."
+			}
 		},
 		{
 			"title": "Start the robot",
@@ -118,7 +166,7 @@
 		{
 			"title": "WPILib's answer",
 			"say": {
-				"never": "Drive around. Look at **AdvantageScope**, the graphing tool. Type `LinearSpeed` in its search box. Find **Drive/LinearSpeed** in the list and drag it with your mouse onto the **Left Axis** of the graph. Then move the robot and watch the line change.",
+				"never": "Drive forward. Look at **AdvantageScope**, the graphing tool. Type `LinearSpeed` in its search box. Find **Drive/LinearSpeed** in the list and drag it with your mouse onto the **Left Axis** of the graph. Then move the robot and watch the line change.",
 				"bit": "Drive around. In AdvantageScope, search for `LinearSpeed`, then drag **Drive/LinearSpeed** onto the **Left Axis**."
 			},
 			"close": [
@@ -146,8 +194,8 @@
 		{
 			"title": "Your answer",
 			"say": {
-				"never": "Your DriveMath version should sit right on top of it. Look at **AdvantageScope**, the graphing tool. Type `LinearSpeedByHand` in its search box. Find **Drive/LinearSpeedByHand** in the list and drag it with your mouse onto the **Right Axis** of the graph. Then move the robot and watch the line change.",
-				"bit": "Your DriveMath version should sit right on top of it. In AdvantageScope, search for `LinearSpeedByHand`, then drag **Drive/LinearSpeedByHand** onto the **Right Axis**."
+				"never": "Your DriveMath version from last lesson should sit right on top of it. In **AdvantageScope**, type `LinearSpeedByHand` in the search box. Find **Drive/LinearSpeedByHand** in the list and drag it onto the **Right Axis** of the graph. The two lines should match.",
+				"bit": "Your DriveMath version should sit right on top of it. Search for `LinearSpeedByHand`, then drag **Drive/LinearSpeedByHand** onto the **Right Axis**."
 			},
 			"close": [
 				"editor",
@@ -169,6 +217,18 @@
 				},
 				"hint": "drag Drive/LinearSpeedByHand onto the graph."
 			},
+			"assist": true
+		},
+		{
+			"title": "Full speed",
+			"say": {
+				"never": "Push the left stick all the way forward for a couple of seconds. **Drive/LinearSpeed** should climb to about 5 meters per second. Then press **Verify** in the lesson chip to check the Chassis speeds job.",
+				"bit": "Push the left stick all the way forward. `Drive/LinearSpeed` should reach about 5 m/s. Then press **Verify**."
+			},
+			"target": {
+				"selector": "[data-tour='lesson']"
+			},
+			"cardAt": "top-right",
 			"assist": true
 		}
 	],
