@@ -9,7 +9,7 @@ import com.marswars.auto.Auto;
 public final class Autos {
   private Autos() {}
 
-  /** Drive to the game piece, pick it up, drive to the scoring spot, and shoot. */
+  /** Drive to the game piece, pick it up, drive to the scoring spot, aim at the goal, and shoot. */
   public static Auto pickupAndScore() {
     return new PickupAndScore();
   }
@@ -22,18 +22,16 @@ public final class Autos {
       //   loadTrajectory("ToPickup");
       //   loadTrajectory("ToScore");
 
-      // TODO 2 (optional): do something when the robot passes an event marker you put on a path in
-      // Choreo. For a marker named "Shoot" on the ToScore path, start the shooter early:
-      //   DrivetrainSubsystem.getInstance()
-      //       .getChoreoEventTimeTrigger("Shoot")
-      //       .onTrue(Commands.runOnce(() ->
-      // ShooterSubsystem.getInstance().setWantedState(ShooterStates.SHOOT)));
-
-      // TODO 3: add the commands, in order, with addCommands(...):
+      // TODO 2: add the commands, in order, with addCommands(...):
       //   DrivetrainCommands.followPath(getTrajectory("ToPickup"))   // drive the first path
       //   Commands.waitSeconds(0.5)                                  // pretend to pick the piece
       // up
       //   DrivetrainCommands.followPath(getTrajectory("ToScore"))    // drive the second path
+      //   DrivetrainCommands.aim()                                   // turn to face the goal, but
+      //       .until(DrivetrainSubsystem.getInstance()::isAimed)     // stop once the robot is
+      // aimed
+      //       .withTimeout(3.0)                                      // (and give up after 3
+      // seconds)
       //   ShooterCommands.shoot().withTimeout(2.0)                   // shoot for 2 seconds
     }
   }

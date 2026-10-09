@@ -45,6 +45,8 @@ public class DrivetrainConstants extends MwConstants {
     ARCADE,
     /** Driving whatever speeds the autonomous commands ask for. */
     COMMANDED,
+    /** Turning in place to face the goal (FieldTargets.GOAL). */
+    AIM,
     /**
      * Following a Choreo path: the robot drives the speeds the path says, corrected by where it is.
      */
@@ -72,6 +74,19 @@ public class DrivetrainConstants extends MwConstants {
   public final double TURN_KP = 0.3;
   /** Turning counts as finished when this close to the goal, in degrees. */
   public final double TURN_TOLERANCE_DEGREES = 2.0;
+
+  // =============================================================================
+  // AIMING (finished in the State Machines lesson, tuned there: you only use it here)
+  // =============================================================================
+
+  // The PID that turns the robot to face FieldTargets.GOAL. Its output is a turn command from
+  // -1.0 to 1.0 per radian of error. These are the gains you tuned by hand last lesson.
+  public static final double AIM_KP = 2.0;
+  public static final double AIM_KI = 0.0;
+  public static final double AIM_KD = 0.2;
+
+  // Close enough to count as aimed, in degrees.
+  public static final double AIM_TOLERANCE_DEGREES = 2.0;
 
   // =============================================================================
   // CHOREO PATH FOLLOWING (pretuned, provided: you read it, you do not tune it)
