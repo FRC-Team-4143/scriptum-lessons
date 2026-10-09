@@ -1,44 +1,40 @@
 package frc.robot.autos;
 
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.Commands;
+import com.marswars.auto.Auto;
 
 /**
- * The robot's autonomous routines. Each one is a sequence of commands that run one after another:
- * the next starts when the one before it finishes.
+ * The robot's autonomous routines. An {@link Auto} is a list of commands that run one after
+ * another, and it can load the paths you drew in Choreo by name.
  */
 public final class Autos {
   private Autos() {}
 
-  /**
-   * Left auto: drive forward 5 meters, turn to 45 degrees, drive forward 2 more meters, then shoot.
-   *
-   * <p>TODO: return Commands.sequence(...) with, in order, these commands: new
-   * DriveDistanceCommand(5.0) new TurnToAngleCommand(45.0) new DriveDistanceCommand(2.0)
-   * ShooterCommands.shoot().withTimeout(2.0) // shoots for 2 seconds, then stops
-   */
-  public static Command leftAuto() {
-    return Commands.none();
+  /** Drive to the game piece, pick it up, drive to the scoring spot, and shoot. */
+  public static Auto pickupAndScore() {
+    return new PickupAndScore();
   }
 
-  /**
-   * Right auto: the same, but turn to -45 degrees (to the right) instead.
-   *
-   * <p>TODO: build it like leftAuto().
-   */
-  public static Command rightAuto() {
-    return Commands.none();
-  }
+  /** The routine itself. */
+  public static class PickupAndScore extends Auto {
+    public PickupAndScore() {
+      // TODO 1: tell the routine which paths it uses, in the order it drives them. The names are
+      // the names of the paths you drew in Choreo, spelled exactly the same:
+      //   loadTrajectory("ToPickup");
+      //   loadTrajectory("ToScore");
 
-  /**
-   * Square auto: drive a 1 meter square. That is the same two steps four times: drive forward 1
-   * meter, then turn 90 degrees more than before (to 90, 180, 270 and finally 360 degrees).
-   *
-   * <p>TODO: do NOT write the four pairs out by hand. Create a SequentialCommandGroup, then use a
-   * for loop to add a DriveDistanceCommand(1.0) and a TurnToAngleCommand(90.0 * i) each time, with
-   * i going from 1 to 4. A command group has addCommands(...) for this. Return the group.
-   */
-  public static Command squareAuto() {
-    return Commands.none();
+      // TODO 2 (optional): do something when the robot passes an event marker you put on a path in
+      // Choreo. For a marker named "Shoot" on the ToScore path, start the shooter early:
+      //   DrivetrainSubsystem.getInstance()
+      //       .getChoreoEventTimeTrigger("Shoot")
+      //       .onTrue(Commands.runOnce(() ->
+      // ShooterSubsystem.getInstance().setWantedState(ShooterStates.SHOOT)));
+
+      // TODO 3: add the commands, in order, with addCommands(...):
+      //   DrivetrainCommands.followPath(getTrajectory("ToPickup"))   // drive the first path
+      //   Commands.waitSeconds(0.5)                                  // pretend to pick the piece
+      // up
+      //   DrivetrainCommands.followPath(getTrajectory("ToScore"))    // drive the second path
+      //   ShooterCommands.shoot().withTimeout(2.0)                   // shoot for 2 seconds
+    }
   }
 }

@@ -1,7 +1,11 @@
 package frc.robot;
 
+import com.marswars.auto.Auto;
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.Commands;
 import frc.robot.subsystems.drive.DrivetrainConstants.DriveStates;
 import frc.robot.subsystems.drive.DrivetrainSubsystem;
 import frc.robot.subsystems.shooter.ShooterSubsystem;
@@ -34,11 +38,29 @@ public class Robot extends LoggedRobot {
 
   @Override
   public void autonomousInit() {
-    // Start from the origin, let commands drive, then run the routine picked in the chooser.
-    DrivetrainSubsystem.getInstance().resetPose();
+    // Run the routine picked in the chooser, starting from where its first path starts.
+    autoCommand = container.getSelectedAuto();
+    Pose2d startPose = new Pose2d(); // routines without a path start at the origin
+    if (autoCommand instanceof Auto auto) {
+      try {
+        // Load the paths the routine named with loadTrajectory(...). false = we are the blue
+        // alliance, so the paths are used as drawn, not mirrored to the other side of the field.
+        auto.cacheTrajetories(false);
+        startPose = auto.getStartPose();
+      } catch (RuntimeException e) {
+        DriverStation.reportError(
+            "Could not load a path for "
+                + auto.getName()
+                + ". Did you draw it in Choreo and "
+                + "generate it? "
+                + e,
+            false);
+        autoCommand = Commands.none();
+      }
+    }
+    DrivetrainSubsystem.getInstance().resetPose(startPose);
     DrivetrainSubsystem.getInstance().setWantedState(DriveStates.COMMANDED);
     ShooterSubsystem.getInstance().resetShotCount();
-    autoCommand = container.getSelectedAuto();
     CommandScheduler.getInstance().schedule(autoCommand);
   }
 

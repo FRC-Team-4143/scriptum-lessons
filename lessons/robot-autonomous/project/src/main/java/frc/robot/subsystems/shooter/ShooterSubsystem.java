@@ -6,6 +6,8 @@ import com.marswars.mechanisms.RollerMech;
 import com.marswars.subsystem.MwSubsystem;
 import com.marswars.subsystem.SubsystemIoBase;
 import edu.wpi.first.wpilibj.Timer;
+import frc.robot.FieldTargets;
+import frc.robot.subsystems.drive.DrivetrainSubsystem;
 import frc.robot.subsystems.shooter.ShooterConstants.ShooterStates;
 import java.util.List;
 
@@ -32,6 +34,7 @@ public class ShooterSubsystem extends MwSubsystem<ShooterStates, ShooterConstant
   private ShooterStates lastState = ShooterStates.IDLE;
   private long shotCount = 0;
   private double spinUpSeconds = 0.0;
+  private double shotDistanceFromScoreSpot = 0.0; // how far from the scoring spot the last shot was
 
   private ShooterSubsystem() {
     super(ShooterStates.IDLE, new ShooterConstants());
@@ -66,6 +69,7 @@ public class ShooterSubsystem extends MwSubsystem<ShooterStates, ShooterConstant
   /** Starts the shot counter over (used at the start of autonomous). */
   public void resetShotCount() {
     shotCount = 0;
+    shotDistanceFromScoreSpot = 0.0;
   }
 
   /** True when the flywheel is close enough to the target speed. */
@@ -145,6 +149,7 @@ public class ShooterSubsystem extends MwSubsystem<ShooterStates, ShooterConstant
     MwLog.log(getSubsystemKey() + "FlywheelTarget", CONSTANTS.SHOOT_VELOCITY);
     MwLog.log(getSubsystemKey() + "ShotCount", shotCount);
     MwLog.log(getSubsystemKey() + "SpinUpSeconds", spinUpSeconds);
+    MwLog.log(getSubsystemKey() + "ShotDistanceFromScoreSpot", shotDistanceFromScoreSpot);
   }
 
   /** Holds the flywheel at its target speed using whichever control style the constants choose. */
@@ -193,6 +198,12 @@ public class ShooterSubsystem extends MwSubsystem<ShooterStates, ShooterConstant
       }
       if (system_state_ == ShooterStates.SHOOT) {
         shotCount++;
+        // Where the robot REALLY was when this shot started (the simulation knows).
+        shotDistanceFromScoreSpot =
+            DrivetrainSubsystem.getInstance()
+                .getTruePose()
+                .getTranslation()
+                .getDistance(FieldTargets.SCORE_SPOT.getTranslation());
         spinUpSeconds = spinUpTimer.get();
       }
       lastState = system_state_;

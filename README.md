@@ -58,7 +58,7 @@ Three tracks, in curriculum order (each lesson's `track` and `order` are in its 
   `robot-drivetrain` (Motors and Drivetrains), `robot-sensors` (Sensors and Feedback),
   `robot-drive-math` (Drive Math and Methods), `robot-odometry` (Objects and Odometry),
   `robot-subsystems` (Mechanisms and Subsystems), `robot-control-theory` (Control Theory),
-  `robot-state-machines` (State Machines and Commands) and `robot-autonomous` (Autonomous).
+  `robot-state-machines` (State Machines and Commands) and `robot-autonomous` (Choreo Autonomous).
   Each module's `README.md` is the lesson. Computer Vision has no robot code, so it has no module.
   See [Robot modules](#robot-modules).
 

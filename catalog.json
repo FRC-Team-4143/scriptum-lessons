@@ -1517,74 +1517,57 @@
 			"id": "robot-autonomous",
 			"order": 27,
 			"track": "FRC Robot",
-			"title": "Autonomous",
-			"description": "Build Left and Right autonomous routines from drive, turn and shoot commands, and pick them from a chooser.",
+			"title": "Choreo Autonomous",
+			"description": "Draw two paths in Choreo, then build an autonomous routine that drives them with a provided path follower: drive to the game piece, pick it up, drive to the scoring spot and shoot.",
 			"kind": "robot",
 			"subdir": "lessons/robot-autonomous/project",
 			"requires": [
-				"robot-state-machines"
+				"robot-state-machines",
+				"choreo-intro"
 			],
 			"checkpoints": [
 				{
-					"id": "autos-in-chooser",
-					"title": "Autos in the chooser",
-					"description": "RobotContainer adds the Left Auto, Right Auto and Square Auto to the chooser.",
-					"verifier": {
-						"type": "script",
-						"path": "lessons/robot-autonomous/checkpoints/verify/autos-in-chooser.sh"
-					}
-				},
-				{
-					"id": "square-loop",
-					"title": "Square auto uses a loop",
-					"description": "squareAuto() builds the square with a for loop and a command group.",
-					"verifier": {
-						"type": "script",
-						"path": "lessons/robot-autonomous/checkpoints/verify/square-loop.sh"
-					}
-				},
-				{
-					"id": "left-forward",
-					"title": "Left auto drives forward",
-					"description": "Run Left Auto. The robot should travel more than 6 meters in x.",
+					"id": "reaches-pickup",
+					"title": "Reaches the pickup",
+					"description": "Run Pickup And Score. The robot should get within 0.3 meters of the Pickup point.",
 					"verifier": {
 						"type": "nt4-value",
-						"topic": "/AdvantageKit/RealOutputs/Check/Drive/PoseX/Max",
+						"topic": "/AdvantageKit/RealOutputs/Check/Drive/DistanceToPickup/Min",
 						"check": "range",
-						"min": 6
+						"max": 0.3
 					}
 				},
 				{
-					"id": "left-sideways",
-					"title": "Left auto ends to the left",
-					"description": "Run Left Auto. After turning 45 degrees, the robot should be more than 1 meter to the left (positive y).",
+					"id": "reaches-score-spot",
+					"title": "Reaches the scoring spot",
+					"description": "Run Pickup And Score. The robot should get within 0.3 meters of the ScoreSpot point.",
 					"verifier": {
 						"type": "nt4-value",
-						"topic": "/AdvantageKit/RealOutputs/Check/Drive/PoseY/Max",
+						"topic": "/AdvantageKit/RealOutputs/Check/Drive/DistanceToScoreSpot/Min",
 						"check": "range",
-						"min": 1
-					}
-				},
-				{
-					"id": "right-sideways",
-					"title": "Right auto ends to the right",
-					"description": "Run Right Auto. After turning -45 degrees, the robot should be more than 1 meter to the right (negative y).",
-					"verifier": {
-						"type": "nt4-value",
-						"topic": "/AdvantageKit/RealOutputs/Check/Drive/PoseY/Min",
-						"check": "range",
-						"max": -1
+						"max": 0.3
 					}
 				},
 				{
 					"id": "autos-shoot",
-					"title": "Autos shoot",
-					"description": "Both routines should end by shooting at least once.",
+					"title": "Shoots",
+					"description": "The routine should end by shooting at least once.",
 					"verifier": {
 						"type": "nt4-value",
 						"topic": "/AdvantageKit/RealOutputs/Check/Subsystem/Shooter/ShotCount/Max",
 						"check": "range",
 						"min": 1
+					}
+				},
+				{
+					"id": "shoots-from-score-spot",
+					"title": "Shoots from the scoring spot",
+					"description": "Every shot should be taken within 0.3 meters of the ScoreSpot point.",
+					"verifier": {
+						"type": "nt4-value",
+						"topic": "/AdvantageKit/RealOutputs/Check/Subsystem/Shooter/ShotDistanceFromScoreSpot/Max",
+						"check": "range",
+						"max": 0.3
 					}
 				}
 			]
@@ -2746,30 +2729,6 @@
 			],
 			"kind": "concept",
 			"path": "lessons/robot-autonomous/guides/robot-autonomous-command-decorators.json"
-		},
-		{
-			"id": "robot-autonomous-drive-distance",
-			"title": "Driving to a distance",
-			"summary": "Proportional control: speed that shrinks as you arrive.",
-			"topic": "Robot",
-			"order": 533,
-			"modules": [
-				"robot-autonomous"
-			],
-			"kind": "mixed",
-			"path": "lessons/robot-autonomous/guides/robot-autonomous-drive-distance.json"
-		},
-		{
-			"id": "robot-autonomous-sequences",
-			"title": "Building routines",
-			"summary": "Commands.sequence, and a for loop for the square.",
-			"topic": "Robot",
-			"order": 534,
-			"modules": [
-				"robot-autonomous"
-			],
-			"kind": "mixed",
-			"path": "lessons/robot-autonomous/guides/robot-autonomous-sequences.json"
 		}
 	]
 }

@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
+import frc.robot.autos.Autos;
 import frc.robot.subsystems.drive.DrivetrainSubsystem;
 import frc.robot.subsystems.shooter.ShooterSubsystem;
 
@@ -23,9 +24,8 @@ public class RobotContainer extends SubsystemManager {
 
     // The default choice does nothing at all.
     autoChooser.setDefaultOption("Do Nothing", Commands.none());
-    // TODO: add the autos to the chooser. addOption takes a name and a command:
-    //   autoChooser.addOption("Left Auto", Autos.leftAuto());
-    // Add "Left Auto", "Right Auto" and "Square Auto".
+    // The routines you can pick from. Pickup And Score is the one you build in Autos.java.
+    autoChooser.addOption("Pickup And Score", Autos.pickupAndScore());
     SmartDashboard.putData("Auto Choices", autoChooser);
   }
 

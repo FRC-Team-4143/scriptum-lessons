@@ -1,19 +1,12 @@
 {
 	"plan": [
 		{
-			"checkpoint": "autos-in-chooser",
+			"checkpoint": "reaches-pickup",
 			"guides": [
 				"robot-state-machines-commands",
 				"robot-autonomous-command-lifecycle",
 				"robot-autonomous-command-types",
-				"robot-autonomous-command-decorators",
-				"robot-autonomous-sequences"
-			]
-		},
-		{
-			"checkpoint": "left-forward",
-			"guides": [
-				"robot-autonomous-drive-distance"
+				"robot-autonomous-command-decorators"
 			]
 		}
 	]

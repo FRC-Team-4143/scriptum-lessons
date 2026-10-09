@@ -19,6 +19,7 @@ import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.simulation.DifferentialDrivetrainSim;
 import frc.robot.DriveMath;
+import frc.robot.FieldTargets;
 import frc.robot.subsystems.drive.DrivetrainConstants;
 import java.util.List;
 import java.util.Random;
@@ -235,9 +236,39 @@ public class DifferentialDriveMech extends MechBase {
 
   /** Puts the robot back at the origin, facing forward, with fresh encoders. */
   public void resetPose() {
-    resetEncoders();
-    poseEstimator.resetPosition(new Rotation2d(), 0.0, 0.0, new Pose2d());
-    pose = new Pose2d();
+    resetPose(new Pose2d());
+  }
+
+  /**
+   * Tells the robot where it is on the field. Autonomous uses this to start from the first point of
+   * the path: the robot is placed there, its encoders start counting from zero, and the pose
+   * estimate starts out exactly right.
+   *
+   * @param newPose where the robot is now, in field coordinates
+   */
+  public void resetPose(Pose2d newPose) {
+    if (IS_SIM) {
+      // The simulation owns the wheel positions (see resetEncoders), so it is the one that moves.
+      resetSimulation(newPose);
+    } else {
+      leftMotors[0].setPosition(0.0);
+      rightMotors[0].setPosition(0.0);
+    }
+    inputs.leftPositionRotations = 0.0;
+    inputs.rightPositionRotations = 0.0;
+    inputs.leftVelocityRps = 0.0;
+    inputs.rightVelocityRps = 0.0;
+    // The wheels read zero now, so the estimator starts from "zero turned, zero driven" at newPose.
+    poseEstimator.resetPosition(getYaw(), 0.0, 0.0, newPose);
+    pose = poseEstimator.getEstimatedPosition();
+  }
+
+  /**
+   * Where the robot REALLY is. Only the simulation knows this; on a real robot nothing does, so it
+   * falls back to the estimate. Used by the lesson's checks.
+   */
+  public Pose2d getTruePose() {
+    return IS_SIM ? sim.getPose() : pose;
   }
 
   /** Sets how hard ONLY the left side pushes, from -1.0 to 1.0. */
@@ -302,6 +333,13 @@ public class DifferentialDriveMech extends MechBase {
     if (IS_SIM) {
       // Where the simulated robot REALLY is, to compare with the pose your code estimates.
       MwLog.log(getLoggingKey() + "TruePose", sim.getPose());
+      // How far the robot REALLY is from the two field targets. The lesson's checks read these.
+      MwLog.log(
+          getLoggingKey() + "DistanceToPickup",
+          sim.getPose().getTranslation().getDistance(FieldTargets.PICKUP.getTranslation()));
+      MwLog.log(
+          getLoggingKey() + "DistanceToScoreSpot",
+          sim.getPose().getTranslation().getDistance(FieldTargets.SCORE_SPOT.getTranslation()));
     }
   }
 
@@ -380,7 +418,12 @@ public class DifferentialDriveMech extends MechBase {
 
   /** Puts the simulated robot back at the origin with fresh (zeroed) encoders. */
   private void resetSimulation() {
-    sim.setPose(new Pose2d());
+    resetSimulation(new Pose2d());
+  }
+
+  /** Puts the simulated robot at a pose, standing still, with fresh (zeroed) encoders. */
+  private void resetSimulation(Pose2d where) {
+    sim.setPose(where);
     sim.setInputs(0.0, 0.0);
     // Start counting from wherever the simulation says the wheels are now (zero in most versions of
     // WPILib, but this does not depend on it).
