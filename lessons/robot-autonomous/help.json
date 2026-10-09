@@ -178,8 +178,8 @@
 			},
 			"hints": [
 				{
-					"never": "Did you choose Pickup And Score in the autonomous chooser and enable in Auto (not Teleop)? The default, Do Nothing, leaves the robot still.",
-					"bit": "Chooser = Pickup And Score, mode = Auto."
+					"never": "Did you choose Pickup And Score in the Auto Choices ComboBox Chooser in Elastic and enable in Auto (not Teleop)? The default, Do Nothing, leaves the robot still.",
+					"bit": "Elastic Auto Choices = Pickup And Score, mode = Auto."
 				},
 				{
 					"never": "Watch Drive/DistanceToPickup in AdvantageScope. It should fall under 0.4 meters. If the robot never moves, read the console for \"Could not load a path\": the name or the generated file is the problem.",

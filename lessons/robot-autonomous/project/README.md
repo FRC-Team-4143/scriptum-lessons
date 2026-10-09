@@ -82,8 +82,9 @@ Go slower on anything that is new. The stretch ideas at the end are not expected
 
 **Part 3: run it**
 
-9. Press **Start** and wait for **Running**. In the Driver Station choose **Pickup And Score** as the
-   autonomous routine, pick **Auto** and press **Enable**. Keep your hands off the keys: the routine drives
+9. Press **Start** and wait for **Running**. In Elastic, add a **ComboBox Chooser** widget for
+   **Auto Choices** (under SmartDashboard) and choose **Pickup And Score** as the
+   autonomous routine (the default, Do Nothing, leaves the robot still). Then in the Driver Station pick **Auto** and press **Enable**. Keep your hands off the keys: the routine drives
    itself. (To practice by hand in **Teleop**, drive with **W/S** and turn with **A/D**, the left stick;
    the left bumper, **E**, aims at the goal, and the right bumper, **U**, shoots.)
 10. **Watch it in AdvantageScope** (below). Fix what looks wrong, press Start again, and run again.
