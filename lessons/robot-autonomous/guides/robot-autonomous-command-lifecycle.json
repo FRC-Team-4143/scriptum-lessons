@@ -1,29 +1,146 @@
 {
 	"title": "Inside a command",
-	"summary": "initialize, execute, isFinished, end.",
+	"summary": "Three states, initialize / execute / end, and isFinished as the condition.",
 	"topic": "Robot",
-	"order": 532,
+	"order": 530,
 	"steps": [
 		{
-			"title": "Four methods",
+			"title": "What a command is",
 			"say": {
-				"never": "A command is a little program with four parts, and WPILib calls them for you at the right times. `initialize` runs **once** at the start. `execute` runs again and again, every 20 thousandths of a second. `isFinished` answers \"are we done yet?\" and when it says yes, `end` runs once to clean up.",
-				"bit": "A command class overrides the parts it needs. WPILib calls them for you."
+				"never": "A **command** is one action the robot does, with a clear start and a clear finish: drive 2 meters, turn to 90 degrees, shoot. You don't call it yourself. You hand it to WPILib, and WPILib runs it for you, 50 times a second.",
+				"bit": "A command is one action with a start and a finish. WPILib runs it for you, 50 times a second."
 			},
 			"board": {
-				"code": "@Override public void initialize() { }   // once, at the start\n@Override public void execute() { }      // every 20 ms\n@Override public boolean isFinished() { } // stop when true\n@Override public void end(boolean interrupted) { } // once, at the end",
+				"code": "new DriveDistanceCommand(2.0)\nnew TurnToAngleCommand(90.0)",
+				"language": "java",
+				"marks": [
+					{
+						"text": "DriveDistanceCommand",
+						"label": "a whole action, as one object"
+					},
+					{
+						"text": "TurnToAngleCommand",
+						"label": "another one"
+					}
+				]
+			}
+		},
+		{
+			"title": "Three states",
+			"say": {
+				"never": "At any moment a command is in one of three states. **Waiting**: nobody has started it yet. **Running**: WPILib is calling it every loop. **Finished**: it is done and never runs again (unless you start it fresh). Everything else in this guide is about how it moves from one state to the next.",
+				"bit": "A command is waiting, running, or finished. The rest of this guide is how it moves between them."
+			}
+		},
+		{
+			"title": "Starting: initialize",
+			"say": {
+				"never": "The moment a command goes from waiting to running, WPILib calls `initialize()` **one time**. Use it to remember things about the starting situation. `DriveDistanceCommand` saves where the robot is right now, so later it can work out how far it has driven.",
+				"bit": "`initialize()` runs once, when the command starts. Use it to remember the starting situation."
+			},
+			"board": {
+				"code": "@Override\npublic void initialize() {\n    startPose = drive.getPose();\n}",
+				"language": "java",
 				"marks": [
 					{
 						"text": "initialize()",
-						"label": "once"
+						"label": "once, at the start"
 					},
+					{
+						"text": "startPose = drive.getPose();",
+						"label": "remember where we began"
+					}
+				]
+			}
+		},
+		{
+			"title": "Running: execute",
+			"say": {
+				"never": "While the command is running, WPILib calls `execute()` over and over, once every 20 thousandths of a second. This is the working part. `TurnToAngleCommand` checks how far off it is and sets the turning speed, every loop, so it keeps correcting.",
+				"bit": "`execute()` runs every 20 ms while the command is running. It's the working part."
+			},
+			"board": {
+				"code": "@Override\npublic void execute() {\n    double turn = -constants.TURN_KP * errorRadians();\n    drive.setCommandedSpeeds(0.0, turn);\n}",
+				"language": "java",
+				"marks": [
 					{
 						"text": "execute()",
 						"label": "every loop"
 					},
 					{
+						"text": "errorRadians()",
+						"label": "how far off are we, right now?"
+					}
+				]
+			}
+		},
+		{
+			"title": "The condition: isFinished",
+			"say": {
+				"never": "After each `execute()`, WPILib asks `isFinished()`, a yes or no question: \"are we done?\" That yes/no is the command's **condition**. While it says `false`, the command keeps running. The first time it says `true`, the command stops. If you never make it say `true`, the command runs forever.",
+				"bit": "After every `execute()`, WPILib asks `isFinished()`. `false` means keep going. `true` means stop."
+			},
+			"board": {
+				"code": "@Override\npublic boolean isFinished() {\n    boolean onTarget = Math.abs(Math.toDegrees(errorRadians()))\n        < constants.TURN_TOLERANCE_DEGREES;\n    return onTarget && Math.abs(drive.getAngularSpeed()) < 0.15;\n}",
+				"language": "java",
+				"marks": [
+					{
 						"text": "isFinished()",
-						"label": "when to stop"
+						"label": "the yes/no condition"
+					},
+					{
+						"text": "onTarget &&",
+						"label": "close enough AND"
+					},
+					{
+						"text": "< 0.15",
+						"label": "barely spinning anymore"
+					}
+				]
+			}
+		},
+		{
+			"title": "Finishing: end",
+			"say": {
+				"never": "When `isFinished()` says yes, WPILib calls `end(interrupted)` **one time**, then the command is finished. Use it to clean up, usually by stopping the motors. `interrupted` is `false` when the command finished by itself, and `true` when something else cut it off early (a button let go, a timeout, another command taking over).",
+				"bit": "`end(interrupted)` runs once at the finish. Stop the motors here. `interrupted` is true if it was cut short."
+			},
+			"board": {
+				"code": "@Override\npublic void end(boolean interrupted) {\n    drive.setCommandedSpeeds(0.0, 0.0);\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "end(boolean interrupted)",
+						"label": "once, at the finish"
+					},
+					{
+						"text": "0.0, 0.0",
+						"label": "stop, however it ended"
+					}
+				]
+			}
+		},
+		{
+			"title": "The whole life, in order",
+			"say": {
+				"never": "Read it as a story. `initialize` once. Then a loop: `execute`, ask `isFinished`, and if the answer is no, `execute` again. When the answer is yes, `end(false)` once and the command is finished. If something cuts it off, `end(true)` runs instead and it is finished the same way. `end` always runs, whichever way it stops.",
+				"bit": "initialize once, then execute and isFinished in a loop, then end once. end always runs."
+			},
+			"board": {
+				"code": "initialize()\nexecute()   isFinished()? no\nexecute()   isFinished()? no\nexecute()   isFinished()? YES\nend(false)",
+				"language": "text",
+				"marks": [
+					{
+						"text": "initialize()",
+						"label": "waiting becomes running"
+					},
+					{
+						"text": "YES",
+						"label": "the condition is met"
+					},
+					{
+						"text": "end(false)",
+						"label": "finished normally"
 					}
 				]
 			}
@@ -59,15 +176,15 @@
 			"assist": true
 		},
 		{
-			"title": "Find the error",
+			"title": "Find the condition",
 			"say": {
-				"never": "Look through the code for where it works out the **error** (how far off the robot is) and turns that into a motor command. When you've spotted it, press **I did it**.",
-				"bit": "Find where it works out the **error** and turns it into a motor command. Press I did it when you've spotted it."
+				"never": "Look through the code for `isFinished`. That is the yes/no condition that decides when this turn is over. Then find `execute` above it, the part that does the turning. When you've found both, press **I did it**.",
+				"bit": "Find `isFinished` (the condition) and `execute` (the turning). Press I did it when you've found both."
 			},
 			"waitFor": {
 				"hint": {
-					"never": "find the error in TurnToAngleCommand.",
-					"bit": "find the error in TurnToAngleCommand."
+					"never": "find isFinished in TurnToAngleCommand.",
+					"bit": "find isFinished in TurnToAngleCommand."
 				}
 			},
 			"cardAt": "bottom-right",

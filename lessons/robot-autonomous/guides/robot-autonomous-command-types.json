@@ -1,0 +1,128 @@
+{
+	"title": "Kinds of commands",
+	"summary": "runOnce, run, startEnd, waitSeconds and FunctionalCommand, and when to pick each.",
+	"topic": "Robot",
+	"order": 531,
+	"steps": [
+		{
+			"title": "Two ways to make a command",
+			"say": {
+				"never": "You can **write a class**, like `TurnToAngleCommand`, with all four methods. That's the most flexible way, but it's a lot of typing for something small. Or you can **build one in a line** with a helper from `Commands`. Each helper below is a command class already written for you, with a different answer to \"when is it finished?\"",
+				"bit": "Write a command class, or build one in a line with a `Commands` helper. They differ in when they finish."
+			}
+		},
+		{
+			"title": "runOnce: do it one time",
+			"say": {
+				"never": "`Commands.runOnce(note)` runs your note a single time and is finished right away. `isFinished` is `true` from the first check. Pick it for a quick one-shot action, like changing a state or launching one ball. WPILib's class for this is `InstantCommand`.",
+				"bit": "`runOnce` runs a lambda one time and finishes at once. Pick it for a quick one-shot action. (Class: `InstantCommand`.)"
+			},
+			"board": {
+				"code": "public static Command simulateBallLaunch() {\n    return Commands.runOnce(\n        () -> ShooterSubsystem.getInstance().simulateBallLaunch());\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "Commands.runOnce(",
+						"label": "once, then finished"
+					},
+					{
+						"text": "simulateBallLaunch()",
+						"label": "the one thing it does"
+					}
+				]
+			}
+		},
+		{
+			"title": "run: repeat until stopped",
+			"say": {
+				"never": "`Commands.run(note)` runs your note **every loop** and never finishes by itself. It has to be stopped from outside, by a button let go, a timeout or another command. Pick it for something that must keep updating, like following a joystick. WPILib's class for this is `RunCommand`.",
+				"bit": "`run` repeats a lambda every loop and never finishes on its own. Pick it for continuous work. (Class: `RunCommand`.)"
+			},
+			"board": {
+				"code": "Commands.run(\n    () -> drive.setCommandedSpeeds(0.5, 0.0))",
+				"language": "java",
+				"marks": [
+					{
+						"text": "Commands.run(",
+						"label": "every loop, forever"
+					},
+					{
+						"text": "0.5, 0.0",
+						"label": "keep driving forward"
+					}
+				]
+			}
+		},
+		{
+			"title": "startEnd: on, then off",
+			"say": {
+				"never": "`Commands.startEnd(start, end)` runs the first note once when it starts and the second note once when it ends, and does nothing in between. It also never finishes by itself, so it is ideal for a button you hold: on while held, off when let go. WPILib's class is `StartEndCommand`.",
+				"bit": "`startEnd` runs one lambda at the start and one at the end. Pick it for hold-to-run. (Class: `StartEndCommand`.)"
+			},
+			"board": {
+				"code": "public static Command shoot() {\n    ShooterSubsystem shooter = ShooterSubsystem.getInstance();\n    return Commands.startEnd(\n        () -> shooter.setWantedState(ShooterStates.SHOOT),\n        () -> shooter.setWantedState(ShooterStates.IDLE));\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "() -> shooter.setWantedState(ShooterStates.SHOOT)",
+						"label": "the start note"
+					},
+					{
+						"text": "() -> shooter.setWantedState(ShooterStates.IDLE)",
+						"label": "the end note"
+					}
+				]
+			}
+		},
+		{
+			"title": "waitSeconds: just wait",
+			"say": {
+				"never": "`Commands.waitSeconds(2.0)` does nothing for two seconds, then finishes. Its condition is time. It is the glue of an autonomous routine: pause between steps, or give the shooter time to spin up. WPILib's class is `WaitCommand`.",
+				"bit": "`waitSeconds` does nothing for a set time, then finishes. Pick it for pauses. (Class: `WaitCommand`.)"
+			},
+			"board": {
+				"code": "Commands.waitSeconds(2.0)",
+				"language": "java",
+				"marks": [
+					{
+						"text": "2.0",
+						"label": "seconds, then finished"
+					}
+				]
+			}
+		},
+		{
+			"title": "FunctionalCommand: all four",
+			"say": {
+				"never": "When none of those fits, `FunctionalCommand` takes four notes, one per method: what to do at the start, every loop, at the end, and the yes/no condition. It is a command class written inline. Pick it when you need your own `isFinished` but the command is too small for a whole class.",
+				"bit": "`FunctionalCommand` takes four lambdas: init, execute, end, and isFinished. Pick it for a small command with its own condition."
+			},
+			"board": {
+				"code": "new FunctionalCommand(\n    () -> {},                                    // initialize\n    () -> drive.setCommandedSpeeds(0.5, 0.0),     // execute\n    interrupted -> drive.setCommandedSpeeds(0.0, 0.0), // end\n    () -> drive.getPose().getX() > 3.0)           // isFinished",
+				"language": "java",
+				"marks": [
+					{
+						"text": "() -> {}",
+						"label": "nothing to set up"
+					},
+					{
+						"text": "interrupted ->",
+						"label": "end gets the interrupted flag"
+					},
+					{
+						"text": "getX() > 3.0",
+						"label": "the condition: done past 3 m"
+					}
+				]
+			}
+		},
+		{
+			"title": "Which one do I pick?",
+			"say": {
+				"never": "Ask what the command should do and when it should stop. One quick thing, then done: `runOnce`. Repeat forever until cut off: `run`. On while held, off after: `startEnd`. Pause for a time: `waitSeconds`. Your own stop condition in a small spot: `FunctionalCommand`. A real action with its own logic and several steps, like turning to an angle: write a command class.",
+				"bit": "Quick one-shot: runOnce. Keep going: run. On then off: startEnd. Pause: waitSeconds. Own condition: FunctionalCommand. Big job: a class."
+			}
+		}
+	],
+	"kind": "concept"
+}
