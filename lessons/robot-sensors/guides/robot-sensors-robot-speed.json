@@ -28,13 +28,15 @@
 				"bit": "The robot's speed is the **average** of the two sides."
 			},
 			"board": {
-				"code": "double linearSpeed = (leftMetersPerSecond + rightMetersPerSecond) / 2.0;",
+				"code": "forward speed = (left speed + right speed) / 2",
+				"language": "text",
 				"marks": [
 					{
-						"text": "/ 2.0",
+						"text": "/ 2",
 						"label": "the average"
 					}
-				]
+				],
+				"caption": "Units: meters per second."
 			},
 			"assist": true
 		},
@@ -62,15 +64,16 @@
 				"bit": "When the sides go different speeds, the robot turns. Divide the difference by how far apart the wheels are."
 			},
 			"board": {
-				"code": "double angularSpeed =\n    (rightMetersPerSecond - leftMetersPerSecond) / Constants.TRACK_WIDTH_METERS;",
+				"code": "turning speed = (right speed - left speed) / track width",
+				"language": "text",
 				"marks": [
 					{
-						"text": "rightMetersPerSecond - leftMetersPerSecond",
+						"text": "right speed - left speed",
 						"label": "positive means turning left"
 					},
 					{
-						"text": "TRACK_WIDTH_METERS",
-						"label": "distance between the wheels"
+						"text": "track width",
+						"label": "Constants.TRACK_WIDTH_METERS: the distance between the wheels"
 					}
 				],
 				"caption": "Units: radians per second."
@@ -131,8 +134,8 @@
 		{
 			"title": "STEP 2",
 			"say": {
-				"never": "Fill in the three lines marked TODO under this comment. Use the two formulas from the board: one for forward speed, one for turning speed.",
-				"bit": "Fill in the three TODO lines under this comment."
+				"never": "Fill in the three values under this comment, using your four meter readings from STEP 1:\n\n- **forward speed** = (left speed + right speed) / 2\n- **turning speed** = (right speed - left speed) / track width, where the track width is `Constants.TRACK_WIDTH_METERS`\n- **distance** = (left meters + right meters) / 2",
+				"bit": "Forward speed and distance are averages. Turning speed is (right - left) / track width."
 			},
 			"target": {
 				"pane": "editor",

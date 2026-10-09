@@ -18,7 +18,8 @@ public final class Constants {
       Units.inchesToMeters(24.0); // left to right wheels
   public static final double ROBOT_MASS_KG = 50.0;
 
-  // The driver's sticks. STEP 4: add your DEADBAND constant here.
+  // The driver's sticks: anything pushed less than this far counts as zero.
+  public static final double DEADBAND = 0.1;
 
   // Each side of the drivetrain has one brushless Kraken X60. A side is a List of motors, so a
   // robot

@@ -19,8 +19,6 @@ public class Robot extends LoggedRobot {
   // Filled in every loop by robotPeriodic() so autonomousPeriodic() can use it too.
   private double distanceMeters = 0.0;
 
-  private static final double DEADBAND = 0.1;
-
   @Override
   public void robotPeriodic() {
     loop.doControlLoop();
@@ -54,10 +52,10 @@ public class Robot extends LoggedRobot {
   public void teleopPeriodic() {
     double forward = -controller.getLeftY();
     double turn = controller.getRightX();
-    if (Math.abs(forward) < DEADBAND) {
+    if (Math.abs(forward) < Constants.DEADBAND) {
       forward = 0.0;
     }
-    if (Math.abs(turn) < DEADBAND) {
+    if (Math.abs(turn) < Constants.DEADBAND) {
       turn = 0.0;
     }
     drive.setDutyCycles(forward + turn, forward - turn);
@@ -65,7 +63,8 @@ public class Robot extends LoggedRobot {
 
   @Override
   public void autonomousInit() {
-    // Start counting from zero.
+    // "Reset" means: forget everything driven so far and start counting from zero again. Without
+    // it, each time you run Auto the distance would pick up where the last run left off.
     drive.resetEncoders();
   }
 
