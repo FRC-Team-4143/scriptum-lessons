@@ -11,27 +11,27 @@ import org.littletonrobotics.junction.LoggedRobot;
  * enabled in teleop mode.
  */
 public class Robot extends LoggedRobot {
-  private final XboxController controller = new XboxController(0);
-  private final DifferentialDriveMech drive =
+  private final XboxController controller_ = new XboxController(0);
+  private final DifferentialDriveMech drive_ =
       new DifferentialDriveMech(Constants.LEFT_MOTORS, Constants.RIGHT_MOTORS);
-  private final LessonLoop loop = new LessonLoop(drive);
+  private final LessonLoop loop_ = new LessonLoop(drive_);
 
   @Override
   public void robotPeriodic() {
     // MWLib reads the sensors and sends the motor commands for us. Leave this line alone.
-    loop.doControlLoop();
+    loop_.doControlLoop();
   }
 
   @Override
   public void disabledPeriodic() {
-    drive.setDutyCycles(0.0, 0.0);
+    drive_.setDutyCycles(0.0, 0.0);
   }
 
   @Override
   public void teleopPeriodic() {
     // Write your drive code here. The README walks you through it.
     //
-    // The one method you need is  drive.setDutyCycles(left, right)  where each number goes from
+    // The one method you need is  drive_.setDutyCycles(left, right)  where each number goes from
     // -1.0 (full backward) to 1.0 (full forward).
   }
 }

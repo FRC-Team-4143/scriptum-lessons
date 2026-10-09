@@ -6,28 +6,28 @@ import lesson.LessonLoop;
 import org.littletonrobotics.junction.LoggedRobot;
 
 public class Robot extends LoggedRobot {
-  private final XboxController controller = new XboxController(0);
-  private final DifferentialDriveMech drive =
+  private final XboxController controller_ = new XboxController(0);
+  private final DifferentialDriveMech drive_ =
       new DifferentialDriveMech(Constants.LEFT_MOTORS, Constants.RIGHT_MOTORS);
-  private final LessonLoop loop = new LessonLoop(drive);
+  private final LessonLoop loop_ = new LessonLoop(drive_);
 
   @Override
   public void robotPeriodic() {
-    loop.doControlLoop();
+    loop_.doControlLoop();
   }
 
   @Override
   public void disabledPeriodic() {
-    drive.setDutyCycles(0.0, 0.0);
+    drive_.setDutyCycles(0.0, 0.0);
   }
 
   @Override
   public void teleopPeriodic() {
-    double forward = -controller.getLeftY();
-    double turn = controller.getLeftX();
+    double forward = -controller_.getLeftY();
+    double turn = controller_.getLeftX();
 
-    double leftSpeed = forward + turn;
-    double rightSpeed = forward - turn;
-    drive.setDutyCycles(leftSpeed, rightSpeed);
+    double left_speed = forward + turn;
+    double right_speed = forward - turn;
+    drive_.setDutyCycles(left_speed, right_speed);
   }
 }
