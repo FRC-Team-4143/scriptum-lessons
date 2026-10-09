@@ -109,8 +109,8 @@
 		{
 			"title": "Write getTurn",
 			"say": {
-				"never": "Now the turning method, just below `getForward()`. Type these three lines:\n\n`public static double getTurn() {`\n\n`return MathUtil.applyDeadband(driverController.getRightX(), 0.1);`\n\n`}`\n\nThere is no minus sign this time: the right stick pushed to the right is already positive.",
-				"bit": "Below `getForward()`, write `public static double getTurn() {`, then `return MathUtil.applyDeadband(driverController.getRightX(), 0.1);`, then `}`."
+				"never": "Now the turning method, just below `getForward()`. Type these three lines:\n\n`public static double getTurn() {`\n\n`return MathUtil.applyDeadband(driverController.getLeftX(), 0.1);`\n\n`}`\n\nThere is no minus sign this time: the left stick pushed to the right is already positive.",
+				"bit": "Below `getForward()`, write `public static double getTurn() {`, then `return MathUtil.applyDeadband(driverController.getLeftX(), 0.1);`, then `}`."
 			},
 			"target": {
 				"pane": "editor",
@@ -291,7 +291,7 @@
 		{
 			"title": "Drive it",
 			"say": {
-				"never": "Push the left stick forward and the right stick sideways. The robot should drive exactly as before, only now OI reads the controller. If it doesn't, check the minus sign in `getForward()`.",
+				"never": "Push the left stick forward, then sideways. The robot should drive exactly as before, only now OI reads the controller. If it doesn't, check the minus sign in `getForward()`.",
 				"bit": "Drive with the sticks. It should feel exactly the same as before. If forward is backward, check the minus sign in `getForward()`."
 			},
 			"target": {

@@ -46,14 +46,14 @@
 					"bit": "OI needs `getForward()` and `getTurn()`, both `public static double`."
 				},
 				{
-					"never": "Both methods return a stick value from `driverController`. Forward uses the left stick Y and turn uses the right stick X.",
-					"bit": "Return `driverController.getLeftY()` (with a minus) and `driverController.getRightX()`."
+					"never": "Both methods return a stick value from `driverController`. Forward uses the left stick Y and turn uses the left stick X.",
+					"bit": "Return `driverController.getLeftY()` (with a minus) and `driverController.getLeftX()`."
 				},
 				{
 					"never": "Robot.java must not mention `XboxController` anywhere, including the import at the top. Did you delete that line too?",
 					"bit": "Delete the `XboxController` field and its import from Robot.java."
 				},
-				"`public static double getForward() { return -driverController.getLeftY(); }` and `public static double getTurn() { return driverController.getRightX(); }`, then `drive.arcadeDrive(OI.getForward(), OI.getTurn());` in Robot.java."
+				"`public static double getForward() { return -driverController.getLeftY(); }` and `public static double getTurn() { return driverController.getLeftX(); }`, then `drive.arcadeDrive(OI.getForward(), OI.getTurn());` in Robot.java."
 			]
 		},
 		"chassis-speeds": {
@@ -93,7 +93,7 @@
 				},
 				{
 					"never": "Spin the robot to the left for a few seconds, then Verify. Spinning right makes the angle negative.",
-					"bit": "Hold the right stick to the left for a few seconds, then Verify."
+					"bit": "Hold the left stick to the left for a few seconds, then Verify."
 				},
 				"`double radians = (getRightMeters() - getLeftMeters()) / Constants.TRACK_WIDTH_METERS; return new Rotation2d(radians);`, then `poseEstimator.update(getYaw(), getLeftMeters(), getRightMeters()); pose = poseEstimator.getEstimatedPosition();` in `updatePose()`."
 			]

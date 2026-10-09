@@ -149,8 +149,8 @@
 		{
 			"title": "Spin left",
 			"say": {
-				"never": "Spin the robot counterclockwise (to the left): push the right stick to the left and hold it for a couple of seconds. Next you will watch the yaw angle.",
-				"bit": "Spin the robot to the left: hold the right stick to the left for a couple of seconds."
+				"never": "Spin the robot counterclockwise (to the left): push the left stick to the left and hold it for a couple of seconds. Next you will watch the yaw angle.",
+				"bit": "Spin the robot to the left: hold the left stick to the left for a couple of seconds."
 			},
 			"target": {
 				"selector": "[data-tour='mode']"
