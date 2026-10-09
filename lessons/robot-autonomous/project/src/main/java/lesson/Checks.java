@@ -8,9 +8,6 @@ public final class Checks {
   private static final LessonChecks checks =
       new LessonChecks(
           "Drive/LeftOutput",
-          "Drive/PoseX",
-          "Drive/PoseY",
-          "Drive/PoseYawDeg",
           "Subsystem/Shooter/ShotCount",
           // How far the robot REALLY is (not its estimate) from the two field targets, and how far
           // from the scoring spot it was when it last shot.
