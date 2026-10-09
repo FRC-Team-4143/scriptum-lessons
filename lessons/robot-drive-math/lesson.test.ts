@@ -38,7 +38,7 @@ describe("robot-drive-math: the student creates two methods", () => {
 		for (const file of [await read(...mech), await read("solution", "DifferentialDriveMech.java")]) {
 			expect(file).toContain("STATIC_FRICTION_VOLTS = 0.25");
 			expect(file).toContain("SCRUB_VOLTS_PER_METER_PER_SECOND = 4.5");
-			expect(file).toContain("minusStaticFriction(leftVolts)");
+			expect(file).toContain("minusStaticFriction(left_volts)");
 		}
 	});
 

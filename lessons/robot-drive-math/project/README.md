@@ -55,7 +55,7 @@ Work through the methods one at a time. After each, click **Verify** to test it.
 5. **`DriveMath.average`.** Take an array of numbers and return their average, using a `for` loop.
    Then compare `Robot/SmoothedSpeed` with `Robot/LinearSpeed` in AdvantageScope.
 6. **`setLeftDutyCycle` and `setRightDutyCycle`** in the drivetrain. Copy how `setDutyCycles` stores
-   a clamped value in `leftRequest.Output`.
+   a clamped value in `left_request_.Output`.
 7. **`arcadeDrive`** in the drivetrain. Call `DriveMath.arcadeToWheelSpeeds` and pass the result to
    `setDutyCycles`.
 

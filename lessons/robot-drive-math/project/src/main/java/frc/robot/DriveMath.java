@@ -11,11 +11,11 @@ public final class DriveMath {
    * Converts wheel rotations into meters driven. One full rotation of a wheel moves the robot one
    * circumference: 2 * pi * radius.
    *
-   * @param wheelRotations how many times the wheel turned
-   * @param wheelRadiusMeters the wheel radius in meters
+   * @param wheel_rotations how many times the wheel turned
+   * @param wheel_radius_meters the wheel radius in meters
    * @return the distance driven in meters
    */
-  public static double rotationsToMeters(double wheelRotations, double wheelRadiusMeters) {
+  public static double rotationsToMeters(double wheel_rotations, double wheel_radius_meters) {
     // TODO: Math.PI is built in
     return 0.0;
   }

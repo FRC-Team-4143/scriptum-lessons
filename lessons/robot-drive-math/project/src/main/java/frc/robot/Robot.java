@@ -13,56 +13,56 @@ import org.littletonrobotics.junction.LoggedRobot;
  * is to write those methods. This file already uses them.
  */
 public class Robot extends LoggedRobot {
-  private final XboxController controller = new XboxController(0);
-  private final DifferentialDriveMech drive =
+  private final XboxController controller_ = new XboxController(0);
+  private final DifferentialDriveMech drive_ =
       new DifferentialDriveMech(Constants.LEFT_MOTORS, Constants.RIGHT_MOTORS);
-  private final LessonLoop loop = new LessonLoop(drive);
+  private final LessonLoop loop_ = new LessonLoop(drive_);
 
   // The last 5 speed readings, to smooth out the jitter. DriveMath.average does the averaging.
-  private final double[] recentSpeeds = new double[5];
-  private int nextSlot = 0;
+  private final double[] recent_speeds_ = new double[5];
+  private int next_slot_ = 0;
 
   @Override
   public void robotPeriodic() {
-    loop.doControlLoop();
+    loop_.doControlLoop();
 
     // The drivetrain now reports meters and meters per second, using your DriveMath methods.
-    MwLog.log("Robot/Distance", drive.getDistanceMeters());
-    MwLog.log("Robot/LinearSpeed", drive.getLinearSpeed());
-    MwLog.log("Robot/AngularSpeed", drive.getAngularSpeed());
+    MwLog.log("Robot/Distance", drive_.getDistanceMeters());
+    MwLog.log("Robot/LinearSpeed", drive_.getLinearSpeed());
+    MwLog.log("Robot/AngularSpeed", drive_.getAngularSpeed());
 
     // Remember this reading, wrapping around the array with %, and log the average of the last 5.
-    recentSpeeds[nextSlot] = drive.getLinearSpeed();
-    nextSlot = (nextSlot + 1) % recentSpeeds.length;
-    MwLog.log("Robot/SmoothedSpeed", DriveMath.average(recentSpeeds));
+    recent_speeds_[next_slot_] = drive_.getLinearSpeed();
+    next_slot_ = (next_slot_ + 1) % recent_speeds_.length;
+    MwLog.log("Robot/SmoothedSpeed", DriveMath.average(recent_speeds_));
   }
 
   @Override
   public void disabledPeriodic() {
-    drive.setLeftDutyCycle(0.0);
-    drive.setRightDutyCycle(0.0);
+    drive_.setLeftDutyCycle(0.0);
+    drive_.setRightDutyCycle(0.0);
   }
 
   @Override
   public void teleopPeriodic() {
     // Arcade drive: the left stick sets forward/backward and turns. The deadband you
     // wrote by hand in lesson 1 is built into WPILib as MathUtil.applyDeadband.
-    drive.arcadeDrive(
-        MathUtil.applyDeadband(-controller.getLeftY(), 0.1),
-        MathUtil.applyDeadband(controller.getLeftX(), 0.1));
+    drive_.arcadeDrive(
+        MathUtil.applyDeadband(-controller_.getLeftY(), 0.1),
+        MathUtil.applyDeadband(controller_.getLeftX(), 0.1));
   }
 
   @Override
   public void autonomousInit() {
-    drive.resetEncoders();
+    drive_.resetEncoders();
   }
 
   @Override
   public void autonomousPeriodic() {
-    if (drive.getDistanceMeters() < 2.0) {
-      drive.arcadeDrive(0.4, 0.0);
+    if (drive_.getDistanceMeters() < 2.0) {
+      drive_.arcadeDrive(0.4, 0.0);
     } else {
-      drive.arcadeDrive(0.0, 0.0);
+      drive_.arcadeDrive(0.0, 0.0);
     }
   }
 }
