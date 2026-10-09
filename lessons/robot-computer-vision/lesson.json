@@ -1,0 +1,11 @@
+{
+	"title": "Computer Vision",
+	"description": "Teach the robot to see AprilTags: feed camera measurements to the pose estimator so the robot always knows where it is on the field, then aim at the goal from that estimate.",
+	"kind": "robot",
+	"track": "FRC Robot",
+	"order": 27,
+	"requires": [
+		"robot-state-machines"
+	],
+	"checkpoints": []
+}
