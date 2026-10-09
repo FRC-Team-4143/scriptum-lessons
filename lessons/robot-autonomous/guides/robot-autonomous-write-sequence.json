@@ -1,0 +1,278 @@
+{
+	"title": "Write the autonomous sequence",
+	"summary": "Load the two paths and put the drive, wait, aim and shoot commands in order.",
+	"topic": "Robot",
+	"order": 533,
+	"steps": [
+		{
+			"title": "Open Autos.java",
+			"say": {
+				"never": "Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `Autos`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "Press **Ctrl+P**, type `Autos` and press Enter. Quick Open finds any file by name."
+			},
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "Autos.java"
+				},
+				"hint": "open Autos.java with Ctrl+P.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Find it",
+			"say": {
+				"never": "The constructor of the routine has two jobs. First, tell it which paths it uses. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `TODO 1: tell the routine which paths it uses` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "The constructor of the routine has two jobs. First, tell it which paths it uses. Press **Ctrl+F**, type `TODO 1: tell the routine which paths it uses` and press Enter to jump to it."
+			},
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "TODO 1: tell the routine which paths it uses"
+				},
+				"hint": "find TODO 1: tell the routine which paths it uses with Ctrl+F.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Load ToPickup",
+			"say": {
+				"never": "Under that comment, write `loadTrajectory(\"ToPickup\");`. The name goes in quotes and must be exactly the name of the path in Choreo. Click **I did it** when it's written.",
+				"bit": "`loadTrajectory(\"ToPickup\");`, spelled exactly like the Choreo path."
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"hint": "write the loadTrajectory line for ToPickup, then click I did it."
+			},
+			"assist": true,
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "TODO 1: tell the routine which paths it uses"
+			}
+		},
+		{
+			"title": "Load ToScore",
+			"say": {
+				"never": "On the next line, the same for the second path: `loadTrajectory(\"ToScore\");`. Click **I did it** when it's written.",
+				"bit": "`loadTrajectory(\"ToScore\");`"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"hint": "write the loadTrajectory line for ToScore, then click I did it."
+			},
+			"assist": true,
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "TODO 1: tell the routine which paths it uses"
+			}
+		},
+		{
+			"title": "Find it",
+			"say": {
+				"never": "Second job: the list of commands. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `TODO 2: add the commands, in order` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "Second job: the list of commands. Press **Ctrl+F**, type `TODO 2: add the commands, in order` and press Enter to jump to it."
+			},
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "TODO 2: add the commands, in order"
+				},
+				"hint": "find TODO 2: add the commands, in order with Ctrl+F.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Start the list",
+			"say": {
+				"never": "Write `addCommands(` and close it with `);`. Everything between the brackets runs **one after another**, and the commands are separated by commas. Put each command on its own line. Click **I did it** when you have the empty brackets.",
+				"bit": "Write `addCommands( );`. Commands go inside, separated by commas, and run in order."
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"hint": "write addCommands( ... ); then click I did it."
+			},
+			"assist": true,
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "TODO 2: add the commands, in order"
+			}
+		},
+		{
+			"title": "Drive the first path",
+			"say": {
+				"never": "First command inside: `DrivetrainCommands.followPath(getTrajectory(\"ToPickup\")),`. It plays ToPickup back and finishes when the robot has arrived. Click **I did it** when it's written.",
+				"bit": "`DrivetrainCommands.followPath(getTrajectory(\"ToPickup\")),`"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"hint": "write the followPath line for ToPickup, then click I did it."
+			},
+			"assist": true,
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "TODO 2: add the commands, in order"
+			}
+		},
+		{
+			"title": "Wait a moment",
+			"say": {
+				"never": "Next, `Commands.waitSeconds(0.5),`. It does nothing for half a second, standing in for the real robot picking up the game piece. Click **I did it** when it's written.",
+				"bit": "`Commands.waitSeconds(0.5),`"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"hint": "write the waitSeconds line, then click I did it."
+			},
+			"assist": true,
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "TODO 2: add the commands, in order"
+			}
+		},
+		{
+			"title": "Drive the second path",
+			"say": {
+				"never": "Then the second path: `DrivetrainCommands.followPath(getTrajectory(\"ToScore\")),`. Click **I did it** when it's written.",
+				"bit": "`DrivetrainCommands.followPath(getTrajectory(\"ToScore\")),`"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"hint": "write the followPath line for ToScore, then click I did it."
+			},
+			"assist": true,
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "TODO 2: add the commands, in order"
+			}
+		},
+		{
+			"title": "Aim at the goal",
+			"say": {
+				"never": "Now the aim state from the State Machines lesson: `DrivetrainCommands.aim()`. On its own it never finishes by itself (it aims for as long as it runs), so it needs an end. Write it for now and add the end in the next steps. Click **I did it**.",
+				"bit": "`DrivetrainCommands.aim()`. It never ends by itself, so it needs an end."
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"hint": "write DrivetrainCommands.aim(), then click I did it."
+			},
+			"assist": true,
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "TODO 2: add the commands, in order"
+			}
+		},
+		{
+			"title": "End it when aimed",
+			"say": {
+				"never": "Add `.until(DrivetrainSubsystem.getInstance()::isAimed)` after it. `isAimed` is the yes/no method you wrote last lesson. The `::` hands over the method itself, so the command can ask it again and again instead of asking once. Click **I did it** when it's added.",
+				"bit": "`.until(DrivetrainSubsystem.getInstance()::isAimed)` stops aiming once it is true."
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"hint": "add the until(...isAimed) part, then click I did it."
+			},
+			"assist": true,
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "TODO 2: add the commands, in order"
+			}
+		},
+		{
+			"title": "Give up after 3 seconds",
+			"say": {
+				"never": "If something is wrong the robot might never become aimed, and the routine would be stuck forever. Add `.withTimeout(3.0),` at the end, with the comma that separates this command from the next. Click **I did it** when it's added.",
+				"bit": "Add `.withTimeout(3.0),` so a robot that cannot aim doesn't hold up the routine."
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"hint": "add .withTimeout(3.0), then click I did it."
+			},
+			"assist": true,
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "TODO 2: add the commands, in order"
+			}
+		},
+		{
+			"title": "Shoot",
+			"say": {
+				"never": "Last command, with **no comma** after it: `ShooterCommands.shoot().withTimeout(2.0)`. `shoot()` never finishes on its own either, so the timeout ends the routine after 2 seconds of shooting. Click **I did it** when it's written.",
+				"bit": "`ShooterCommands.shoot().withTimeout(2.0)`, last in the list, no comma."
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"hint": "write the shoot line with withTimeout(2.0), then click I did it."
+			},
+			"assist": true,
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "TODO 2: add the commands, in order"
+			}
+		},
+		{
+			"title": "Fix the imports",
+			"say": {
+				"never": "The file doesn't know `Commands`, `DrivetrainCommands`, `DrivetrainSubsystem` or `ShooterCommands` yet, so they have red squiggles. Hover over each one and choose the quick fix that adds the import (or type the import lines at the top yourself). Click **I did it** when no red squiggles are left.",
+				"bit": "Hover each red name and add its import. Click I did it when no squiggles are left."
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"hint": "add the four imports so nothing is red, then click I did it."
+			},
+			"assist": true,
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "TODO 2: add the commands, in order"
+			}
+		},
+		{
+			"title": "Check what you have",
+			"say": {
+				"never": "Open the lesson chip and press **Verify**. **Paths named ToPickup and ToScore** and **Autonomous sequence written** read your Java and the Choreo files. If one fails, its message says which line it wanted.",
+				"bit": "Press Verify. The checkers read Autos.java and the Choreo files and say what's missing."
+			},
+			"target": {
+				"selector": "[data-tour='lesson']"
+			}
+		}
+	],
+	"kind": "mixed"
+}

@@ -1,0 +1,79 @@
+{
+	"title": "Autos = paths + a sequence",
+	"summary": "What an autonomous routine is: Choreo paths, a list of commands, and a pose that drifts.",
+	"topic": "Robot",
+	"order": 528,
+	"steps": [
+		{
+			"title": "The first 15 seconds",
+			"say": {
+				"never": "Every match starts with **autonomous**: for about 15 seconds nobody holds a controller and the robot drives itself. Whatever it does, it must do the same way every time, because there is no driver to fix a mistake.",
+				"bit": "Autonomous is the first 15 seconds of a match. The robot drives itself, so it has to repeat the same thing every time."
+			}
+		},
+		{
+			"title": "Two jobs",
+			"say": {
+				"never": "The team builds an autonomous in two parts. First you **draw the paths** in Choreo: where the robot drives and how fast. Then you **write the sequence** in Java: which path to drive, when to wait, when to aim, when to shoot. The paths say *where*, the sequence says *in what order*.",
+				"bit": "Two jobs: draw the paths in Choreo (where to drive), then write the sequence in Java (what order to do things in)."
+			}
+		},
+		{
+			"title": "What a path is",
+			"say": {
+				"never": "When you press Generate, Choreo works out a list of tiny moments, about every 20 milliseconds: where the robot should be, which way it faces, and how fast each wheel should turn. It saves them in a file ending in `.traj` inside `deploy/choreo`. That file is a **trajectory**: a path with a schedule. Its name is the name you gave the path.",
+				"bit": "Generate saves a `.traj` file: a list of moments, each with where the robot should be and how fast each wheel should turn."
+			}
+		},
+		{
+			"title": "An Auto loads paths by name",
+			"say": {
+				"never": "In the code, a routine is a class that **extends `Auto`**. It starts by naming the paths it needs with `loadTrajectory(\"Name\")`, spelled exactly like the path in Choreo. Later `getTrajectory(\"Name\")` hands the loaded path to a command. Capital letters count: `toPickup` is not `ToPickup`.",
+				"bit": "An `Auto` calls `loadTrajectory(\"Name\")` for each path, spelled exactly like in Choreo, then uses `getTrajectory(\"Name\")`."
+			},
+			"board": {
+				"code": "loadTrajectory(\"Leave\");\n// later, inside the commands:\ngetTrajectory(\"Leave\")",
+				"language": "java",
+				"marks": [
+					{
+						"text": "loadTrajectory(\"Leave\")",
+						"label": "get the path ready, by name"
+					},
+					{
+						"text": "getTrajectory(\"Leave\")",
+						"label": "hand it to a command"
+					}
+				]
+			}
+		},
+		{
+			"title": "The follower does the steering",
+			"say": {
+				"never": "A command called `followPath` plays the trajectory back. 50 times a second it asks: where *should* the robot be right now? Where *is* it? It nudges the left and right wheel speeds to close the gap. That code is `DifferentialPathFollower`, already tuned and provided. You can read it, but you don't have to change it.",
+				"bit": "`followPath` plays the trajectory back, 50 times a second nudging the wheels toward where the robot should be."
+			}
+		},
+		{
+			"title": "The sequence",
+			"say": {
+				"never": "Your routine is a list of commands that run one after another. Here: drive the first path, wait a moment as if picking up a game piece, drive the second path, **aim** at the goal with the aim state you built in the State Machines lesson, then **shoot**. Aiming comes before shooting, or the shot misses.",
+				"bit": "Drive path one, wait, drive path two, aim, shoot, in that order. Aim before shooting."
+			}
+		},
+		{
+			"title": "The robot only thinks it knows where it is",
+			"say": {
+				"never": "The robot works out its position from its wheels, like your odometry in an earlier lesson. Wheels slip a little and the readings jitter, so the **estimated** pose drifts. In the simulator we also know the **true** pose (`Drive/TruePose`). The robot may seem to stop 20 or 30 centimeters off its spot, and that's normal. The lesson's checks use the true pose.",
+				"bit": "The estimated pose drifts a little. The simulator also logs `Drive/TruePose`, and the checks use that one."
+			}
+		},
+		{
+			"title": "Extra: event markers",
+			"say": {
+				"never": "Choreo can also put **event markers** on a path, like \"Intake Out\" or \"Shoot\". The competition robot uses them to run an action partway along a path. This robot already has the code (`getChoreoEventTimeTrigger`), but this lesson doesn't need markers, so it's a stretch idea in the README.",
+				"bit": "Optional: event markers run an action partway along a path. Not needed here."
+			}
+		}
+	],
+	"kind": "concept"
+}

@@ -1,13 +1,281 @@
 {
+	"about": {
+		"never": "This lesson builds an autonomous routine the way the team's competition robot does it. You draw two paths in Choreo, then write the list of commands that drives them: go to the pickup, go to the scoring spot, aim at the goal with the aim state you tuned last lesson, and shoot. The lesson's README lists each job.",
+		"bit": "Draw ToPickup and ToScore in Choreo, then write the Autos.java sequence: follow, wait, follow, aim until isAimed, shoot.",
+		"lot": "Two Choreo paths (exact names), then loadTrajectory x2 and addCommands(follow, wait, follow, aim.until(isAimed).withTimeout, shoot.withTimeout) in Autos.java."
+	},
 	"plan": [
 		{
-			"checkpoint": "reaches-pickup",
+			"checkpoint": "paths-drawn",
+			"guides": [
+				"robot-autonomous-autos-concept",
+				"robot-autonomous-draw-paths"
+			]
+		},
+		{
+			"checkpoint": "path-names",
+			"guides": [
+				"robot-autonomous-draw-paths",
+				"robot-autonomous-write-sequence"
+			]
+		},
+		{
+			"checkpoint": "paths-goal",
+			"guides": [
+				"robot-autonomous-draw-paths"
+			]
+		},
+		{
+			"checkpoint": "auto-sequence",
 			"guides": [
 				"robot-state-machines-commands",
 				"robot-autonomous-command-lifecycle",
 				"robot-autonomous-command-types",
-				"robot-autonomous-command-decorators"
+				"robot-autonomous-command-decorators",
+				"robot-autonomous-write-sequence"
+			]
+		},
+		{
+			"checkpoint": "reaches-pickup",
+			"guides": [
+				"robot-autonomous-run-and-watch"
+			]
+		},
+		{
+			"checkpoint": "reaches-score-spot",
+			"guides": [
+				"robot-autonomous-run-and-watch"
+			]
+		},
+		{
+			"checkpoint": "aimed-before-shot",
+			"guides": [
+				"robot-autonomous-run-and-watch"
+			]
+		},
+		{
+			"checkpoint": "autos-shoot",
+			"guides": [
+				"robot-autonomous-run-and-watch"
 			]
 		}
-	]
+	],
+	"checkpoints": {
+		"paths-drawn": {
+			"why": "The robot can only follow a path that Choreo has solved for it, so each path has to be drawn and generated, not just dragged around.",
+			"guide": "robot-autonomous-draw-paths",
+			"concept": {
+				"guide": "robot-autonomous-autos-concept",
+				"label": "What is an autonomous?"
+			},
+			"hints": [
+				{
+					"never": "Open the Choreo pane and look at the paths list. You need two paths, and each one needs a start, a point in between and an end.",
+					"bit": "Two paths, each with at least three waypoints."
+				},
+				{
+					"never": "If a path has only two waypoints, add a Translation Waypoint between them. A path that was never generated has no schedule yet.",
+					"bit": "Add a middle waypoint to any path with two."
+				},
+				{
+					"never": "Press Generate in the Choreo pane and wait for the path to appear on the field. Choreo saves the file for you.",
+					"bit": "Press Generate for both paths."
+				},
+				{
+					"never": "If Generate fails, a limit or waypoint is impossible (for example a very low Max Velocity, or a waypoint outside the field). Remove the limit and try again. The Choreo lesson's \"When a path won't generate\" guide explains why.",
+					"bit": "Generate fails: loosen the Max Velocity or move the waypoint."
+				},
+				"Both paths drawn, three waypoints each (start, middle, end), then Generate each one before you Verify."
+			]
+		},
+		"path-names": {
+			"why": "Your Java finds a path by its name, so the name in Choreo and the name in the code must match letter for letter.",
+			"guide": "robot-autonomous-write-sequence",
+			"concept": {
+				"guide": "robot-autonomous-autos-concept",
+				"label": "What is an autonomous?"
+			},
+			"hints": [
+				{
+					"never": "This checkpoint looks at two things: the names of the paths in Choreo, and the loadTrajectory lines in Autos.java. Which one do you not have yet?",
+					"bit": "Needs both the Choreo names and the loadTrajectory lines."
+				},
+				{
+					"never": "The paths must be named exactly ToPickup and ToScore, with capital letters. Rename them in the Choreo pane (not by renaming the file), then press Generate again.",
+					"bit": "Rename the paths to exactly ToPickup and ToScore in Choreo."
+				},
+				{
+					"never": "In Autos.java, under TODO 1, the routine has to name each path it uses. Which method loads a path by name?",
+					"bit": "Under TODO 1, `loadTrajectory(\"...\")`, once per path."
+				},
+				{
+					"never": "Spelling must match the Choreo name exactly, quotes included. `toPickup` or `To Pickup` won't find the file.",
+					"bit": "`ToPickup` and `ToScore`, same capitals as in Choreo."
+				},
+				"`loadTrajectory(\"ToPickup\");` and `loadTrajectory(\"ToScore\");` in the constructor of PickupAndScore, in Autos.java."
+			]
+		},
+		"paths-goal": {
+			"why": "Each path has to start and end on the right place, and the second has to pick up exactly where the first ended, or the robot would have to jump between them.",
+			"guide": "robot-autonomous-draw-paths",
+			"concept": {
+				"guide": "robot-autonomous-autos-concept",
+				"label": "What is an autonomous?"
+			},
+			"hints": [
+				{
+					"never": "The message says which end is wrong. ToPickup goes from Start to Pickup, ToScore from Pickup to ScoreSpot. Which waypoint is off?",
+					"bit": "Read which end the message names."
+				},
+				{
+					"never": "Click the waypoint in the Choreo pane and type its exact numbers. Start is 1.5, 1.5 at 0 degrees. Pickup is 5.5, 2.5 at 0 degrees. ScoreSpot is 6.5, 5.0 at 90 degrees.",
+					"bit": "Type the exact numbers: Start 1.5, 1.5. Pickup 5.5, 2.5. ScoreSpot 6.5, 5.0."
+				},
+				{
+					"never": "The end of ToPickup and the start of ToScore must be the same place. Type the same numbers for both (5.5, 2.5), instead of dragging them by eye.",
+					"bit": "ToPickup's last waypoint and ToScore's first one must have identical numbers."
+				},
+				{
+					"never": "After you change a waypoint, press Generate again, otherwise the saved path still has the old shape.",
+					"bit": "Regenerate after every change."
+				},
+				"ToPickup: pose (1.5, 1.5, 0), translation (3.5, 2.0), pose (5.5, 2.5, 0). ToScore: pose (5.5, 2.5, 0), translation (6.0, 3.8), pose (6.5, 5.0, 90 degrees)."
+			]
+		},
+		"auto-sequence": {
+			"why": "The routine is a list of commands that run in order. Aiming has to come before shooting, or the shot misses.",
+			"guide": "robot-autonomous-write-sequence",
+			"concept": {
+				"guide": "robot-autonomous-autos-concept",
+				"label": "What is an autonomous?"
+			},
+			"hints": [
+				{
+					"never": "The checker reads Autos.java after TODO 2. In order, it wants: follow ToPickup, follow ToScore, aim until the robot is aimed, and shoot. Which one is missing, or in the wrong place?",
+					"bit": "The order is ToPickup, ToScore, aim, shoot."
+				},
+				{
+					"never": "Everything goes inside `addCommands(...)`, the commands separated by commas, with no comma after the last one. Driving a path is `DrivetrainCommands.followPath(getTrajectory(\"Name\"))`.",
+					"bit": "`addCommands(...)` with the commands separated by commas."
+				},
+				{
+					"never": "Aiming never finishes by itself. Stop it with `.until(...)` and the `isAimed` method of the drivetrain, and give it a `.withTimeout(...)` so it can't hang.",
+					"bit": "`DrivetrainCommands.aim().until(DrivetrainSubsystem.getInstance()::isAimed).withTimeout(3.0)`."
+				},
+				{
+					"never": "Shooting never finishes by itself either. End the routine with `ShooterCommands.shoot()` and a `.withTimeout(...)`.",
+					"bit": "Finish with `ShooterCommands.shoot().withTimeout(2.0)`."
+				},
+				"addCommands(followPath(getTrajectory(\"ToPickup\")), Commands.waitSeconds(0.5), followPath(getTrajectory(\"ToScore\")), DrivetrainCommands.aim().until(DrivetrainSubsystem.getInstance()::isAimed).withTimeout(3.0), ShooterCommands.shoot().withTimeout(2.0)); and the imports."
+			]
+		},
+		"reaches-pickup": {
+			"why": "If the robot gets to the pickup point, then the first path and the follower work together.",
+			"guide": "robot-autonomous-run-and-watch",
+			"concept": {
+				"guide": "robot-autonomous-autos-concept",
+				"label": "What is an autonomous?"
+			},
+			"hints": [
+				{
+					"never": "Did you choose Pickup And Score in the autonomous chooser and enable in Auto (not Teleop)? The default, Do Nothing, leaves the robot still.",
+					"bit": "Chooser = Pickup And Score, mode = Auto."
+				},
+				{
+					"never": "Watch Drive/DistanceToPickup in AdvantageScope. It should fall under 0.4 meters. If the robot never moves, read the console for \"Could not load a path\": the name or the generated file is the problem.",
+					"bit": "Plot Drive/DistanceToPickup. Look for a load error in the console."
+				},
+				{
+					"never": "Press Start again before a new run, so the checks start from a clean run. The robot starts at Start, so a path that begins somewhere else makes the robot cut across the field.",
+					"bit": "Press Start again for a fresh run."
+				},
+				{
+					"never": "The robot's own estimate drifts from where it truly is, so the robot may look 0.2 to 0.3 meters off the spot. The check uses the true pose and allows 0.4, so that alone is fine. A much larger distance means the path is wrong.",
+					"bit": "A small drift is normal. A big miss means a wrong path."
+				},
+				"Choose Pickup And Score, Auto, Enable. Drive/DistanceToPickup must dip under 0.4."
+			]
+		},
+		"reaches-score-spot": {
+			"why": "The second path has to carry the robot from the pickup to the place it shoots from.",
+			"guide": "robot-autonomous-run-and-watch",
+			"concept": {
+				"guide": "robot-autonomous-autos-concept",
+				"label": "What is an autonomous?"
+			},
+			"hints": [
+				{
+					"never": "This one needs the first path to work too, since ToScore starts where ToPickup ended. Plot Drive/DistanceToScoreSpot and see if it falls.",
+					"bit": "Plot Drive/DistanceToScoreSpot."
+				},
+				{
+					"never": "Is there a second `followPath(getTrajectory(\"ToScore\"))` in the sequence, after the first path and the wait?",
+					"bit": "Second followPath after the wait."
+				},
+				{
+					"never": "If the robot starts ToScore far from where ToPickup ended, check the two paths' joint (5.5, 2.5) in the Choreo pane.",
+					"bit": "Check that ToScore starts at 5.5, 2.5."
+				},
+				{
+					"never": "The route can look a little off the spot because the estimated pose drifts. The check uses the true pose and allows 0.4 meters, so this isn't a failure.",
+					"bit": "A little drift is fine."
+				},
+				"Press Start, choose Pickup And Score, Auto, Enable, and make sure Drive/DistanceToScoreSpot falls under 0.4."
+			]
+		},
+		"aimed-before-shot": {
+			"why": "A shot only goes in if the robot is facing the goal, so the routine has to finish aiming before it starts shooting.",
+			"guide": "robot-autonomous-run-and-watch",
+			"concept": {
+				"guide": "robot-autonomous-autos-concept",
+				"label": "What is an autonomous?"
+			},
+			"hints": [
+				{
+					"never": "Plot Drive/TrueAimErrorDegrees in AdvantageScope. At the moment the shot starts it has to be inside 5 degrees. Is it near 0 before the shot or only after?",
+					"bit": "Plot Drive/TrueAimErrorDegrees. Under 5 at the shot."
+				},
+				{
+					"never": "Check the order in Autos.java: the aim command must come after the second path and before `ShooterCommands.shoot()`.",
+					"bit": "Aim must be between the second path and shoot."
+				},
+				{
+					"never": "`aim()` alone never finishes. Without `.until(...isAimed)` the shot only starts after the timeout, and `.withTimeout(3.0)` cuts the aim short if it's too slow.",
+					"bit": "Use `.until(DrivetrainSubsystem.getInstance()::isAimed)`."
+				},
+				{
+					"never": "If aiming itself is the problem (hold the left bumper, E, in Teleop to test it), go back to your tuned AIM_KP and AIM_KD from the State Machines lesson. Aim also takes a while to settle, and 3 seconds is generous.",
+					"bit": "Test the aim state with the E key in Teleop. Retune if it overshoots."
+				},
+				"`DrivetrainCommands.aim().until(DrivetrainSubsystem.getInstance()::isAimed).withTimeout(3.0),` right after the second followPath and right before the shoot line."
+			]
+		},
+		"autos-shoot": {
+			"why": "The point of the routine is to shoot, so it has to reach the shoot command.",
+			"guide": "robot-autonomous-run-and-watch",
+			"concept": {
+				"guide": "robot-autonomous-autos-concept",
+				"label": "What is an autonomous?"
+			},
+			"hints": [
+				{
+					"never": "Plot Subsystem/Shooter/ShotCount. It should reach 1. If it stays 0, the routine never got as far as `shoot()`.",
+					"bit": "Plot Subsystem/Shooter/ShotCount."
+				},
+				{
+					"never": "Each command has to finish for the next one to start. A path that gets stuck for its 10 second limit, or an aim that waits its full 3 seconds, delays the shot. Watch how long each step takes.",
+					"bit": "A step that takes long delays the shot."
+				},
+				{
+					"never": "Is `ShooterCommands.shoot().withTimeout(2.0)` the last item in `addCommands`, with no comma after it, and are all the other commands before it?",
+					"bit": "Shoot is last, no trailing comma."
+				},
+				{
+					"never": "Make sure you ran in Auto for the whole routine (about 10 seconds) and did not switch to Teleop, which cancels it.",
+					"bit": "Stay in Auto until the shot is done."
+				},
+				"Press Start, pick Pickup And Score, enable in Auto, and wait until ShotCount reaches 1 before you Verify."
+			]
+		}
+	}
 }
