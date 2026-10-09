@@ -127,6 +127,13 @@ has to be made in every module (`lessons/robot-*/project/`):
   that stall short of the goal). `lesson/AimChecks.java` publishes `Check/Aim/Settled` and
   `Check/Aim/OvershootDegrees` from the sim's true heading error (`Drive/TrueAimErrorDegrees`). The
   autonomous lesson calls the state through `DrivetrainCommands.aim()` and waits on `isAimed()`.
+- `robot-autonomous` (Choreo Autonomous, about 3 hours) starts from that finished robot. Students draw two
+  Choreo paths (`ToPickup`, `ToScore`) in the Choreo pane, then write `Autos.java`: follow, wait, follow,
+  aim until `isAimed`, shoot. `FieldTargets.java` has the field poses (the same as the named poses in
+  `robot.chor`), and the `Check/...` topics (`Drive/DistanceToPickup`, `Drive/DistanceToScoreSpot`,
+  `Subsystem/Shooter/AimErrorAtShotDegrees`, `ShotCount`) use the simulator's true pose, so the drifting
+  estimate cannot fool them. `choreo-intro` is a prerequisite. The `solution/` folder has the finished
+  paths and `Autos.java`.
 - MWLib comes from jitpack (`com.github.FRC-Team-4143.MW-Lib:mw-lib-java:<tag>`), with no
   credentials. Bump the tag in every `build.gradle` together.
 - `lessons/<id>/solution/` holds the reference solution used by that lesson's `lesson.test.ts` to
@@ -147,6 +154,6 @@ and uses them right away. The Java modules remain available as a deeper, standal
 | 5 Mechanisms and Subsystems | inheritance (`extends`, `@Override`), constructors, lists, enums as a list of states, `if` / `else` in subsystem logic |
 | 6 Control Theory | enums and `switch` (picking a control style), unit conversion, small methods |
 | 7 State Machines and Commands | `switch` on a subsystem's state (practice), `&&` `\|\|` `!`, boolean methods, lambdas, WPILib's `PIDController` tuned by hand |
-| 8 Autonomous | extending `Command`, command groups (and a `for` loop used again) |
+| 8 Choreo Autonomous (about 3 hours) | reading `Command` classes, command lists with `addCommands`, decorators (`until`, `withTimeout`), method references (`::`) |
 
 Recursion is not used on the robot.

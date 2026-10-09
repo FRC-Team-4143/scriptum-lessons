@@ -16,7 +16,7 @@
 		{
 			"id": "paths-drawn",
 			"title": "Two paths drawn",
-			"description": "The Choreo project has two generated paths, each with at least three waypoints.",
+			"description": "The Choreo project has two paths that you generated, each with at least three waypoints (a start, a point in between, and an end).",
 			"verifier": {
 				"type": "script",
 				"path": "checkpoints/verify/paths-drawn.sh"
@@ -34,7 +34,7 @@
 		{
 			"id": "paths-goal",
 			"title": "Paths go where they should",
-			"description": "ToPickup runs from the Start point to the Pickup point, and ToScore carries on from there to the ScoreSpot point.",
+			"description": "ToPickup starts on the Start point and ends on the Pickup point, and ToScore starts where ToPickup ended and ends on the ScoreSpot point (each within about 30 centimeters, the join within 15).",
 			"verifier": {
 				"type": "script",
 				"path": "checkpoints/verify/paths-goal.sh"
@@ -52,7 +52,7 @@
 		{
 			"id": "reaches-pickup",
 			"title": "Reaches the pickup",
-			"description": "Run Pickup And Score. The robot should get within 0.4 meters of the Pickup point.",
+			"description": "Run Pickup And Score in Auto. The robot, measured by its true position in the simulator, should get within 0.4 meters of the Pickup point.",
 			"verifier": {
 				"type": "nt4-value",
 				"topic": "/AdvantageKit/RealOutputs/Check/Drive/DistanceToPickup/Min",
@@ -63,7 +63,7 @@
 		{
 			"id": "reaches-score-spot",
 			"title": "Reaches the scoring spot",
-			"description": "Run Pickup And Score. The robot should get within 0.4 meters of the ScoreSpot point.",
+			"description": "Run Pickup And Score in Auto. The robot, measured by its true position, should get within 0.4 meters of the ScoreSpot point.",
 			"verifier": {
 				"type": "nt4-value",
 				"topic": "/AdvantageKit/RealOutputs/Check/Drive/DistanceToScoreSpot/Min",
@@ -74,7 +74,7 @@
 		{
 			"id": "aimed-before-shot",
 			"title": "Aims before it shoots",
-			"description": "Every shot should start with the robot facing the goal, within 5 degrees. Aim before you shoot.",
+			"description": "Every shot should start with the robot truly facing the goal, within 5 degrees. Aim (until isAimed) before you shoot.",
 			"verifier": {
 				"type": "nt4-value",
 				"topic": "/AdvantageKit/RealOutputs/Check/Subsystem/Shooter/AimErrorAtShotDegrees/Max",

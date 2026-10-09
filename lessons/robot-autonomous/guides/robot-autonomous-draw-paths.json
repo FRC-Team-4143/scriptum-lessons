@@ -1,0 +1,351 @@
+{
+	"title": "Draw ToPickup and ToScore",
+	"summary": "Draw and generate the two Choreo paths, with the exact names and places the routine needs.",
+	"topic": "Robot",
+	"order": 529,
+	"needs": [
+		"choreo"
+	],
+	"steps": [
+		{
+			"title": "Open the Choreo pane",
+			"say": {
+				"never": "Time for the first job. This lesson uses the Choreo pane exactly like the **Choreo** lesson did, so if the editor is new to you, do that one first. Everything here happens in this pane.",
+				"bit": "Everything in this guide happens in the Choreo pane. The Choreo lesson covers the editor itself."
+			},
+			"open": [
+				"choreo"
+			],
+			"close": [
+				"editor",
+				"preview"
+			],
+			"target": {
+				"pane": "choreo"
+			},
+			"assist": true,
+			"waitFor": {
+				"hint": "look at the Choreo pane, then click I did it."
+			}
+		},
+		{
+			"title": "The places on the field",
+			"say": {
+				"never": "The project already knows four places, saved as **named poses**: `Start`, `Pickup`, `ScoreSpot` and `Goal`. Your two paths use three of them: **ToPickup** goes from Start to Pickup, and **ToScore** carries on from Pickup to ScoreSpot. The numbers are on my board, in meters and degrees.",
+				"bit": "ToPickup: Start to Pickup. ToScore: Pickup to ScoreSpot. The numbers are on my board."
+			},
+			"board": {
+				"code": "Start      x 1.5   y 1.5   heading 0\nPickup     x 5.5   y 2.5   heading 0\nScoreSpot  x 6.5   y 5.0   heading 90",
+				"language": "text",
+				"marks": [
+					{
+						"text": "Start",
+						"label": "where the robot begins"
+					},
+					{
+						"text": "Pickup",
+						"label": "where the game piece is"
+					},
+					{
+						"text": "ScoreSpot",
+						"label": "where it shoots from"
+					}
+				]
+			},
+			"target": {
+				"pane": "choreo"
+			},
+			"assist": true,
+			"waitFor": {
+				"hint": "read the three places, then click I did it."
+			}
+		},
+		{
+			"title": "Add the first path",
+			"say": {
+				"never": "Press the **+** in the paths list to make a new path.",
+				"bit": "Press **+** to add a path."
+			},
+			"target": {
+				"pane": "choreo",
+				"selector": "[aria-label='Add Path']"
+			},
+			"waitFor": {
+				"target": {
+					"pane": "choreo",
+					"selector": "[class*='_SidebarLabel_'] input"
+				},
+				"more": true,
+				"hint": "press + to add a path."
+			},
+			"assist": true
+		},
+		{
+			"title": "Name it ToPickup",
+			"say": {
+				"never": "Click the path's name in the list and type `ToPickup`, then press **Enter**. The spelling and capital letters must be exact, because your Java will load the path by this name. Rename it in the Choreo pane, not by renaming the file. Click **I did it** when it says ToPickup.",
+				"bit": "Rename the path to exactly `ToPickup` (capital T and P)."
+			},
+			"waitFor": {
+				"hint": "name the path ToPickup, then click I did it."
+			},
+			"assist": true,
+			"target": {
+				"pane": "choreo",
+				"selector": "[class*='_SidebarLabel_'] input"
+			},
+			"cardAt": "bottom-right"
+		},
+		{
+			"title": "Drop the start waypoint",
+			"say": {
+				"never": "Pick the **Pose Waypoint** tool (it pins where the robot is and which way it faces), then click the field to drop the first waypoint. Anywhere is fine for now, you will type the exact numbers next.",
+				"bit": "Choose Pose Waypoint and click the field once for the start."
+			},
+			"cardAt": "bottom-right",
+			"target": {
+				"pane": "choreo",
+				"selector": "[aria-label='Pose Waypoint']"
+			},
+			"waitFor": {
+				"target": {
+					"pane": "choreo",
+					"selector": "[class*='_SidebarLabel_']",
+					"text": "Waypoint"
+				},
+				"hint": "pick Pose Waypoint and click the field.",
+				"more": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Put it on Start",
+			"say": {
+				"never": "Click the waypoint in the list on the left. Its numbers appear in a panel: type **1.5** in the X box, **1.5** in the Y box and **0** degrees for the heading, pressing **Enter** after each. Click **I did it** when the waypoint sits on the Start spot.",
+				"bit": "Set the first waypoint to x 1.5, y 1.5, heading 0 degrees."
+			},
+			"waitFor": {
+				"hint": "set the waypoint to 1.5, 1.5, heading 0, then click I did it."
+			},
+			"assist": true,
+			"target": {
+				"pane": "choreo",
+				"selector": "[class*='_SidebarHeading_']",
+				"text": "FEATURES"
+			},
+			"cardAt": "bottom-right"
+		},
+		{
+			"title": "A point in the middle",
+			"say": {
+				"never": "Pick the **Translation Waypoint** tool and click the field between the two ends. It pins only the position and lets Choreo pick the heading. A path needs at least three waypoints: a start, a point to steer through, an end.",
+				"bit": "Add a Translation Waypoint between start and end."
+			},
+			"cardAt": "bottom-right",
+			"target": {
+				"pane": "choreo",
+				"selector": "[aria-label='Translation Waypoint']"
+			},
+			"waitFor": {
+				"target": {
+					"pane": "choreo",
+					"selector": "[class*='_SidebarLabel_']",
+					"text": "Waypoint"
+				},
+				"hint": "pick Translation Waypoint and click the field.",
+				"atLeast": 2
+			},
+			"assist": true
+		},
+		{
+			"title": "Set the middle point",
+			"say": {
+				"never": "Click it in the list and type X **3.5** and Y **2.0**. Any spot between the ends works, this one just makes a gentle curve. Click **I did it** when it is set.",
+				"bit": "Set the middle waypoint to x 3.5, y 2.0."
+			},
+			"waitFor": {
+				"hint": "set the middle waypoint to 3.5, 2.0, then click I did it."
+			},
+			"assist": true,
+			"target": {
+				"pane": "choreo",
+				"selector": "[class*='_SidebarHeading_']",
+				"text": "FEATURES"
+			},
+			"cardAt": "bottom-right"
+		},
+		{
+			"title": "Drop the end waypoint",
+			"say": {
+				"never": "Back to the **Pose Waypoint** tool, and click the field once more for the end of the path. The order in the list is the order the robot drives.",
+				"bit": "Choose Pose Waypoint and click once more for the end."
+			},
+			"cardAt": "bottom-right",
+			"target": {
+				"pane": "choreo",
+				"selector": "[aria-label='Pose Waypoint']"
+			},
+			"waitFor": {
+				"target": {
+					"pane": "choreo",
+					"selector": "[class*='_SidebarLabel_']",
+					"text": "Waypoint"
+				},
+				"hint": "pick Pose Waypoint and click the field again.",
+				"atLeast": 3
+			},
+			"assist": true
+		},
+		{
+			"title": "Put it on Pickup",
+			"say": {
+				"never": "Click the last waypoint and type X **5.5**, Y **2.5**, heading **0** degrees. Click **I did it** when it sits on Pickup.",
+				"bit": "Set the last waypoint to x 5.5, y 2.5, heading 0 degrees."
+			},
+			"waitFor": {
+				"hint": "set the end waypoint to 5.5, 2.5, heading 0, then click I did it."
+			},
+			"assist": true,
+			"target": {
+				"pane": "choreo",
+				"selector": "[class*='_SidebarHeading_']",
+				"text": "FEATURES"
+			},
+			"cardAt": "bottom-right"
+		},
+		{
+			"title": "Optional: cap the speed",
+			"say": {
+				"never": "A speed limit keeps the robot gentle, so the follower can keep up. Pick **Max Velocity**, click the first and last waypoints (it shows in the list as **Max Velo**), then set it to **1.8** m/s. The Choreo lesson showed this. Click **I did it** (or just skip it).",
+				"bit": "Optional: a Max Velocity of 1.8 m/s on the whole path. Click I did it to move on."
+			},
+			"waitFor": {
+				"hint": "add the optional Max Velocity, or just click I did it."
+			},
+			"assist": true,
+			"target": {
+				"pane": "choreo",
+				"selector": "[aria-label='Max Velocity']"
+			},
+			"cardAt": "bottom-right"
+		},
+		{
+			"title": "Generate it",
+			"say": {
+				"never": "Press **Generate** to make Choreo work out the schedule and save the file. Watch the path appear on the field. If it fails, a waypoint or limit is probably impossible, see the \"When a path won't generate\" guide in the Choreo lesson. Click **I did it** when the path is drawn.",
+				"bit": "Press Generate and watch the path appear."
+			},
+			"waitFor": {
+				"hint": "press Generate and wait for the path, then click I did it."
+			},
+			"assist": true,
+			"target": {
+				"pane": "choreo",
+				"selector": "[aria-label='Generate All']"
+			},
+			"cardAt": "bottom-right"
+		},
+		{
+			"title": "Add the second path",
+			"say": {
+				"never": "Now the path from the pickup to the scoring spot. Press **+** again.",
+				"bit": "Press **+** for the second path."
+			},
+			"target": {
+				"pane": "choreo",
+				"selector": "[aria-label='Add Path']"
+			},
+			"waitFor": {
+				"target": {
+					"pane": "choreo",
+					"selector": "[class*='_SidebarLabel_'] input"
+				},
+				"more": true,
+				"hint": "press + for a second path."
+			},
+			"assist": true
+		},
+		{
+			"title": "Name it ToScore",
+			"say": {
+				"never": "Rename it to exactly `ToScore`, the same careful spelling. Click **I did it** when it says ToScore.",
+				"bit": "Rename it to exactly `ToScore`."
+			},
+			"waitFor": {
+				"hint": "name the path ToScore, then click I did it."
+			},
+			"assist": true,
+			"target": {
+				"pane": "choreo",
+				"selector": "[class*='_SidebarLabel_'] input"
+			},
+			"cardAt": "bottom-right"
+		},
+		{
+			"title": "It has to start where the first one ended",
+			"say": {
+				"never": "The robot is standing on Pickup when ToScore begins, so ToScore must **start at Pickup**: the same spot as ToPickup's last waypoint. The check allows only a few centimeters of gap. Make three waypoints: a **pose** at the start, a **translation** in the middle, a **pose** at the end.",
+				"bit": "ToScore starts on Pickup, where ToPickup ended. Pose, translation, pose."
+			},
+			"cardAt": "bottom-right",
+			"target": {
+				"pane": "choreo",
+				"selector": "[aria-label='Pose Waypoint']"
+			},
+			"waitFor": {
+				"target": {
+					"pane": "choreo",
+					"selector": "[class*='_SidebarLabel_']",
+					"text": "Waypoint"
+				},
+				"hint": "drop three waypoints: pose, translation, pose.",
+				"atLeast": 3
+			},
+			"assist": true
+		},
+		{
+			"title": "Type the three places",
+			"say": {
+				"never": "Click each waypoint in the list and type its numbers. First: X **5.5**, Y **2.5**, heading **0**. Middle: X **6.0**, Y **3.8**. Last: X **6.5**, Y **5.0**, heading **90** degrees (about 1.57 if Choreo asks in radians). Click **I did it** when all three are typed.",
+				"bit": "First 5.5, 2.5 at 0 degrees. Middle 6.0, 3.8. Last 6.5, 5.0 at 90 degrees."
+			},
+			"waitFor": {
+				"hint": "type the three waypoints, then click I did it."
+			},
+			"assist": true,
+			"target": {
+				"pane": "choreo",
+				"selector": "[class*='_SidebarHeading_']",
+				"text": "FEATURES"
+			},
+			"cardAt": "bottom-right"
+		},
+		{
+			"title": "Cap the speed and generate",
+			"say": {
+				"never": "If you capped ToPickup, add **Max Velocity** 1.8 m/s here too. Then press **Generate** again for this path. Click **I did it** when ToScore has drawn.",
+				"bit": "Optional Max Velocity 1.8, then Generate ToScore."
+			},
+			"waitFor": {
+				"hint": "generate ToScore, then click I did it."
+			},
+			"assist": true,
+			"target": {
+				"pane": "choreo",
+				"selector": "[aria-label='Generate All']"
+			},
+			"cardAt": "bottom-right"
+		},
+		{
+			"title": "Check what you have",
+			"say": {
+				"never": "Open the lesson chip and press **Verify**. **Two paths drawn** and **Paths go where they should** should pass now. **Paths named ToPickup and ToScore** also looks at your Java (Autos.java has to load them by name), so it passes after the next guide.",
+				"bit": "Verify. The first and third checkpoints should pass. The name one needs the Java."
+			},
+			"target": {
+				"selector": "[data-tour='lesson']"
+			}
+		}
+	],
+	"kind": "mixed"
+}

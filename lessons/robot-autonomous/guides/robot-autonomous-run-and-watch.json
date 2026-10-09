@@ -1,0 +1,237 @@
+{
+	"title": "Run the autonomous and watch it",
+	"summary": "Run Pickup And Score, plot the checks in AdvantageScope and read a failing one.",
+	"topic": "Robot",
+	"order": 534,
+	"steps": [
+		{
+			"title": "Start the robot",
+			"say": {
+				"never": "Your code only works once it's started. Press **Start** and wait until the status says **Running**. Every change to your code needs a fresh Start.",
+				"bit": "Press **Start** and wait for Running. Do it again after every change."
+			},
+			"target": {
+				"selector": "[data-tour='sim-controls']"
+			},
+			"waitFor": {
+				"target": {
+					"selector": "[data-tour='code-status']",
+					"text": "Running"
+				},
+				"hint": {
+					"never": "press Start, then wait for Running.",
+					"bit": "press Start and wait for Running."
+				}
+			},
+			"assist": true
+		},
+		{
+			"title": "Pick the routine",
+			"say": {
+				"never": "In the Driver Station strip, find the autonomous chooser and choose **Pickup And Score**. The default, Do Nothing, would leave the robot sitting still. Click **I did it** once it says Pickup And Score.",
+				"bit": "Choose **Pickup And Score** in the autonomous chooser."
+			},
+			"waitFor": {
+				"hint": "choose Pickup And Score in the chooser, then click I did it."
+			},
+			"assist": true,
+			"target": {
+				"selector": "[data-tour='mode']"
+			},
+			"cardAt": "top-right"
+		},
+		{
+			"title": "Plot the distance to the pickup",
+			"say": {
+				"never": "Before you enable, set up a graph. In **AdvantageScope**, type `DistanceToPickup` in the search box and drag **Drive/DistanceToPickup** onto the **Left Axis**. It is how far the robot truly is from the Pickup spot, in meters.",
+				"bit": "Drag **Drive/DistanceToPickup** onto the **Left Axis**. It's the true distance in meters."
+			},
+			"close": [
+				"editor",
+				"preview",
+				"elastic"
+			],
+			"open": [
+				"scope"
+			],
+			"target": {
+				"pane": "scope",
+				"selector": ".line-graph-left.source-list"
+			},
+			"waitFor": {
+				"target": {
+					"pane": "scope",
+					"selector": ".line-graph-left.source-list .key-container",
+					"text": "Drive/DistanceToPickup"
+				},
+				"hint": "drag Drive/DistanceToPickup onto the graph."
+			},
+			"assist": true
+		},
+		{
+			"title": "Plot the distance to the scoring spot",
+			"say": {
+				"never": "Now `DistanceToScoreSpot`: drag **Drive/DistanceToScoreSpot** onto the **Right Axis**. You expect the first line to dip near 0 first, then this one.",
+				"bit": "Drag **Drive/DistanceToScoreSpot** onto the **Right Axis**."
+			},
+			"close": [
+				"editor",
+				"preview",
+				"elastic"
+			],
+			"open": [
+				"scope"
+			],
+			"target": {
+				"pane": "scope",
+				"selector": ".line-graph-right.source-list"
+			},
+			"waitFor": {
+				"target": {
+					"pane": "scope",
+					"selector": ".line-graph-right.source-list .key-container",
+					"text": "Drive/DistanceToScoreSpot"
+				},
+				"hint": "drag Drive/DistanceToScoreSpot onto the graph."
+			},
+			"assist": true
+		},
+		{
+			"title": "Enable in Auto",
+			"say": {
+				"never": "Choose **Auto**, then press **Enable**. Don't touch the keys, the routine drives by itself. The whole thing takes about ten seconds.",
+				"bit": "Pick **Auto** and press **Enable**. Hands off the keys."
+			},
+			"target": {
+				"selector": "[data-tour='enable']"
+			},
+			"waitFor": {
+				"target": {
+					"selector": "[data-tour='enable'] button",
+					"text": "Enabled"
+				},
+				"hint": {
+					"never": "choose Auto, then press Enable.",
+					"bit": "choose Auto, then Enable."
+				}
+			},
+			"assist": true
+		},
+		{
+			"title": "Read the graph",
+			"say": {
+				"never": "The first line should fall to nearly 0 (the robot reached the pickup), rise again, and then the second line should fall to nearly 0 (the scoring spot). The checkpoints **Reaches the pickup** and **Reaches the scoring spot** want each line to get under **0.4 meters**.",
+				"bit": "Each line should dip under 0.4 m: pickup first, then scoring spot."
+			},
+			"target": {
+				"pane": "scope"
+			},
+			"close": [
+				"editor",
+				"preview",
+				"elastic"
+			],
+			"open": [
+				"scope"
+			],
+			"assist": true,
+			"waitFor": {
+				"hint": "look at both lines, then click I did it."
+			}
+		},
+		{
+			"title": "Watch the robot on the field",
+			"say": {
+				"never": "Open the **2D Field** tab in AdvantageScope. Drag **Drive/TruePose** (where the robot really is) onto the field, and **Subsystem/Drivetrain/Choreo/Trajectory** (the path being driven) too. Enable in Auto again to watch the robot stay on the line. **Subsystem/Drivetrain/Choreo/DesiredPose** is where the path says the robot should be right now.",
+				"bit": "On the 2D Field tab, add **Drive/TruePose** and **Subsystem/Drivetrain/Choreo/Trajectory**. `DesiredPose` is where the path says the robot should be right now."
+			},
+			"target": {
+				"pane": "scope",
+				"selector": ".tab",
+				"text": "2D Field"
+			},
+			"assist": true,
+			"waitFor": {
+				"hint": "show TruePose and the Trajectory on the field, then click I did it."
+			}
+		},
+		{
+			"title": "Estimate against truth",
+			"say": {
+				"never": "Add **Drive/Pose** to the field as well. It's the position the robot *thinks* it has, built from wheel readings, and it ends up a little off **Drive/TruePose**. That is why the robot may look 20 or 30 centimeters from the spot while the checks still pass: they measure the true pose.",
+				"bit": "Add **Drive/Pose** too. It drifts from **Drive/TruePose**, and the checks use the true one."
+			},
+			"target": {
+				"pane": "scope"
+			},
+			"assist": true,
+			"waitFor": {
+				"hint": "compare Drive/Pose with Drive/TruePose, then click I did it."
+			}
+		},
+		{
+			"title": "Plot the true aim error",
+			"say": {
+				"never": "Aiming matters most of all. Drag **Drive/TrueAimErrorDegrees** onto the **Left Axis**. It is how many degrees the robot truly is from facing the goal. After the second path it should swing to about 0 *before* the shot, and the **Aims before it shoots** checkpoint wants it under **5 degrees** when the shot starts.",
+				"bit": "Drag **Drive/TrueAimErrorDegrees** onto the **Left Axis**. Under 5 degrees at the shot."
+			},
+			"close": [
+				"editor",
+				"preview",
+				"elastic"
+			],
+			"open": [
+				"scope"
+			],
+			"target": {
+				"pane": "scope",
+				"selector": ".line-graph-left.source-list"
+			},
+			"waitFor": {
+				"target": {
+					"pane": "scope",
+					"selector": ".line-graph-left.source-list .key-container",
+					"text": "Drive/TrueAimErrorDegrees"
+				},
+				"hint": "drag Drive/TrueAimErrorDegrees onto the graph."
+			},
+			"assist": true
+		},
+		{
+			"title": "Did it shoot?",
+			"say": {
+				"never": "**Subsystem/Shooter/ShotCount** counts the shots. The **Shoots** checkpoint wants at least 1. `AimErrorAtShotDegrees` next to it is the aim error at the moment the last shot started, which is the number **Aims before it shoots** reads.",
+				"bit": "`Subsystem/Shooter/ShotCount` should reach 1. `AimErrorAtShotDegrees` is what the aim check reads."
+			},
+			"target": {
+				"pane": "scope"
+			},
+			"assist": true,
+			"waitFor": {
+				"hint": "look at ShotCount, then click I did it."
+			}
+		},
+		{
+			"title": "Reading a failure",
+			"say": {
+				"never": "If **Reaches the pickup** fails, the path or the first command is wrong (wrong path name, no `followPath`). If **Reaches the scoring spot** fails, the second path never ran or wasn't connected to the first. If **Aims before it shoots** fails, the aim command is missing, comes *after* the shot, or has no `.until(...isAimed)`, so it timed out. If **Shoots** fails, the routine ended before reaching `shoot()`. After a fix, press Start again for a clean run.",
+				"bit": "Pickup fails: first path. Scoring spot fails: second path. Aim fails: aim missing, late, or no isAimed. Shoots fails: routine never reached shoot. Fix, then Start again."
+			},
+			"assist": true,
+			"waitFor": {
+				"hint": "read the failures, then click I did it."
+			}
+		},
+		{
+			"title": "Check your work",
+			"say": {
+				"never": "Open the lesson chip and press **Verify**. The four run checkpoints read the best the robot did since you pressed Start, so one good run is enough.",
+				"bit": "Press **Verify**. One good run since Start is enough."
+			},
+			"target": {
+				"selector": "[data-tour='lesson']"
+			}
+		}
+	],
+	"kind": "mixed"
+}
