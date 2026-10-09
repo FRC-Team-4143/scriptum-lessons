@@ -132,13 +132,25 @@ public class DifferentialDriveMech extends MechBase {
     return inputs.rightVelocityRps;
   }
 
-  /** Sets both wheel positions back to zero. */
+  /**
+   * Sets both wheel positions back to zero, so "how far have I driven" starts counting again from
+   * here. (In simulation it also puts the simulated robot back at the start.)
+   */
   public void resetEncoders() {
-    leftMotors[0].setPosition(0.0);
-    rightMotors[0].setPosition(0.0);
     if (IS_SIM) {
+      // The simulation feeds the motors their position every loop, so it has to be the one that
+      // starts over. Telling the motors "you are at zero" with setPosition() would be undone on the
+      // next loop, when the simulation tells them where the wheels really are.
       resetSimulation();
+    } else {
+      leftMotors[0].setPosition(0.0);
+      rightMotors[0].setPosition(0.0);
     }
+    // Let the very next reading say zero too, instead of the old number from the last loop.
+    inputs.leftPositionRotations = 0.0;
+    inputs.rightPositionRotations = 0.0;
+    inputs.leftVelocityRps = 0.0;
+    inputs.rightVelocityRps = 0.0;
   }
 
   // ---------------------------------------------------------------------------------------------
@@ -362,10 +374,17 @@ public class DifferentialDriveMech extends MechBase {
   /** Puts the simulated robot back at the origin with fresh (zeroed) encoders. */
   private void resetSimulation() {
     sim.setPose(new Pose2d());
-    lastTrueLeftMeters = 0.0;
-    lastTrueRightMeters = 0.0;
+    sim.setInputs(0.0, 0.0);
+    // Start counting from wherever the simulation says the wheels are now (zero in most versions of
+    // WPILib, but this does not depend on it).
+    lastTrueLeftMeters = sim.getLeftPositionMeters();
+    lastTrueRightMeters = sim.getRightPositionMeters();
     measuredLeftMeters = 0.0;
     measuredRightMeters = 0.0;
+    // Tell the simulated motors right away that the wheels are back at zero. Their position comes
+    // from what the simulation pushes, so this is what actually resets the reading.
+    pushSimState(leftMotors, 0.0, 0.0);
+    pushSimState(rightMotors, 0.0, 0.0);
   }
 
   /** Keeps the current through one motor under the limit, like the TalonFX's stator limit. */

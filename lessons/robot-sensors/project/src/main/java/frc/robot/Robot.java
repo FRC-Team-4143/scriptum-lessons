@@ -23,22 +23,17 @@ public class Robot extends LoggedRobot {
   public void robotPeriodic() {
     loop.doControlLoop();
 
-    // The drivetrain reports wheel ROTATIONS. One rotation moves the robot one wheel circumference.
-    double metersPerRotation = 2.0 * Math.PI * Constants.WHEEL_RADIUS_METERS;
+    // STEP 1: the drivetrain reports wheel ROTATIONS. Change the four readings into meters and
+    // meters per second. (One rotation moves the robot one wheel circumference.)
+    double leftMeters = 0.0;
+    double rightMeters = 0.0;
+    double leftMetersPerSecond = 0.0;
+    double rightMetersPerSecond = 0.0;
 
-    // STEP 1: change the readings from rotations into meters.
-    double leftMeters = drive.getLeftPositionRotations() * metersPerRotation;
-    double rightMeters = 0.0; // TODO: same as above, but for the right side
-    double leftMetersPerSecond = drive.getLeftVelocityRps() * metersPerRotation;
-    double rightMetersPerSecond = 0.0; // TODO: same as above, but for the right side
-
-    // STEP 2: describe the whole robot, not just each side.
-    // TODO: forward speed (m/s) = the average of the two side speeds
-    double linearSpeed = 0.0;
-    // TODO: turning speed (rad/s) = (right - left) / Constants.TRACK_WIDTH_METERS
-    double angularSpeed = 0.0;
-    // TODO: distance driven = the average of the two sides' meters
-    distanceMeters = 0.0;
+    // STEP 2: describe the whole robot, not just each side. The README has the formulas.
+    double linearSpeed = 0.0; // meters per second
+    double angularSpeed = 0.0; // radians per second
+    distanceMeters = 0.0; // meters
 
     // Send the numbers to AdvantageScope.
     MwLog.log("Robot/LinearSpeed", linearSpeed);
@@ -58,26 +53,22 @@ public class Robot extends LoggedRobot {
     double turn = controller.getLeftX();
 
     // STEP 4: DEADBAND. Real sticks never rest at exactly 0.0, so the robot would creep.
-    // TODO: declare a constant  private static final double DEADBAND = 0.1;  near the top of this
-    // class. Then use an if statement on each of forward and turn: if the absolute value
-    // (Math.abs(...)) is less than DEADBAND, set it to 0.0.
+    // Ignore the tiny values on both sticks (the README says how).
 
     drive.setDutyCycles(forward + turn, forward - turn);
   }
 
   @Override
   public void autonomousInit() {
-    // Start counting from zero.
+    // "Reset" means: forget everything driven so far and start counting from zero again. Without
+    // it, each time you run Auto the distance would pick up where the last run left off.
     drive.resetEncoders();
   }
 
   @Override
   public void autonomousPeriodic() {
-    // STEP 3: BANG-BANG CONTROL. Drive forward at 0.4 until the robot has gone 2.0 meters, then
-    // stop.
-    // "Bang-bang" means the motors are either fully on or fully off, nothing in between.
-    //
-    // TODO: use an if / else with distanceMeters
+    // STEP 3: BANG-BANG CONTROL. Drive forward until the robot has gone 2.0 meters, then stop.
+    // The motors are either on or off, nothing in between.
     drive.setDutyCycles(0.0, 0.0);
   }
 }

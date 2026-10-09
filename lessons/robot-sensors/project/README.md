@@ -16,7 +16,7 @@ Companion docs page: [Sensors and Feedback](https://docs.marswars.org/docs/softw
   - `drive.getLeftPositionRotations()` / `drive.getRightPositionRotations()`: how far each side's
     wheels have turned, in wheel rotations. Forward is positive.
   - `drive.getLeftVelocityRps()` / `drive.getRightVelocityRps()`: how fast, in rotations per second.
-  - `drive.resetEncoders()`: set both positions back to zero.
+  - `drive.resetEncoders()`: reset: set both positions back to zero, so the distance starts over.
 
 ## Running it
 
@@ -34,7 +34,7 @@ A suggested pace that adds up to the 3 hour session. Take short breaks whenever 
 | 20 | Read about conditions and constants |
 | 35 | Steps 1-2: meters, speeds and distance |
 | 25 | Step 3: graph and check your numbers |
-| 35 | Step 4: the deadband |
+| 35 | Step 4: the deadband (in `Constants.java` and `Robot.java`) |
 | 40 | Step 5: bang-bang driving, then the "Think about it" discussion |
 | 15 | Verify |
 | 10 | Bonus challenges |
@@ -43,18 +43,41 @@ Go slower on anything that is new. Finishing every bonus is not expected.
 
 ## What you need to do
 
-1. **Right-side conversions.** In `Robot.java`, convert `rightMeters` and `rightMetersPerSecond` the
-   way the left side is already done.
-2. **Fill the three `TODO` lines in STEP 2:**
-   - `linearSpeed`: the average of the left and right speeds (m/s).
-   - `angularSpeed`: `(right - left) / Constants.TRACK_WIDTH_METERS` (rad/s, positive = turning left).
-   - `distanceMeters`: the average of the left and right distances.
+1. **STEP 1: meters.** In `Robot.java`, fill in `leftMeters`, `rightMeters`, `leftMetersPerSecond` and
+   `rightMetersPerSecond`. One wheel rotation moves the robot one wheel circumference:
+
+   ```text
+   meters            = rotations         x (2 x pi x wheel radius)
+   meters per second = rotations per sec x (2 x pi x wheel radius)
+   ```
+
+   `Math.PI` is pi and `Constants.WHEEL_RADIUS_METERS` is the wheel radius.
+2. **STEP 2: the whole robot.** Fill in the three values under it:
+
+   ```text
+   linear speed  = (left speed + right speed) / 2                        (m/s)
+   angular speed = (right speed - left speed) / track width              (rad/s, positive = turning left)
+   distance      = (left meters + right meters) / 2                      (m)
+   ```
+
+   The track width is `Constants.TRACK_WIDTH_METERS`.
 3. **Check them in AdvantageScope.** Drive forward, then spin in place, and watch the numbers.
-4. **Add a deadband.** In `teleopPeriodic()`, declare the `DEADBAND` constant and use an `if` on
-   `forward` and another on `turn`: if the absolute value is less than `DEADBAND`, set it to `0.0`.
-5. **Drive exactly 2 meters.** In `autonomousPeriodic()`, write an `if` / `else` on `distanceMeters`:
+4. **STEP 4: add a deadband.** Add a `DEADBAND` constant of `0.1` to `Constants.java`. Then, in
+   `teleopPeriodic()`, use an `if` on `forward` and another on `turn`: if the absolute value
+   (`Math.abs(...)`) is less than `Constants.DEADBAND`, set it to `0.0`.
+5. **STEP 3: drive exactly 2 meters.** In `autonomousPeriodic()`, write an `if` / `else` on `distanceMeters`:
    drive at `0.4` while it is below `2.0`, stop otherwise. Run Auto and see where the robot stops.
-6. **Click Verify** to check your work.
+6. **Run Auto again.** Disable, then Enable in Auto a second time. The robot starts over and drives
+   the same distance again. That is thanks to the **reset** in `autonomousInit()` (see below).
+7. **Click Verify** to check your work.
+
+### What "reset" means
+
+`drive.resetEncoders()` means: *forget everything driven so far and start counting from zero again.*
+The encoders only ever count up (or down) from where they started, so after one run of Auto the
+distance reads about 2.0. If Auto did not reset, the next run would start at 2.0, think it had already
+arrived, and never move. With the reset, `Robot/Distance` goes back to **0** at the start of every run
+(it should never go negative), and the simulated robot is put back at its starting spot.
 
 Stuck on a step? Open **Dozer**: he can explain the idea or walk you through it.
 

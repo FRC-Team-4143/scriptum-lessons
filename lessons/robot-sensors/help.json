@@ -42,10 +42,10 @@
 		"deadband-and-ifs": {
 			"hints": [
 				{
-					"never": "A deadband is a constant plus an `if` for each stick. Which of those do you have?",
-					"bit": "Constant at the top of the class, then an `if` on `forward` and one on `turn`."
+					"never": "A deadband is a constant plus an `if` for each stick. The constant lives in `Constants.java`. Which of those do you have?",
+					"bit": "Constant in `Constants.java`, then an `if` on `forward` and one on `turn` in `Robot.java`."
 				},
-				"`private static final double DEADBAND = 0.1;` then `if (Math.abs(forward) < DEADBAND) { forward = 0.0; }`"
+				"In `Constants.java`: `public static final double DEADBAND = 0.1;`. In `Robot.java`: `if (Math.abs(forward) < Constants.DEADBAND) { forward = 0.0; }`"
 			]
 		},
 		"drive-two-meters": {
@@ -54,7 +54,11 @@
 					"never": "The robot should drive while it's short of 2 meters and stop otherwise. Which keyword says \"otherwise\"?",
 					"bit": "An `if` / `else` on `distanceMeters`."
 				},
-				"`if (distanceMeters < 2.0) { drive.setDutyCycles(0.4, 0.4); } else { drive.setDutyCycles(0.0, 0.0); }`"
+				"`if (distanceMeters < 2.0) { drive.setDutyCycles(0.4, 0.4); } else { drive.setDutyCycles(0.0, 0.0); }`",
+				{
+					"never": "If the distance goes negative or the robot drives too far on a second run, check that `autonomousInit()` still calls `drive.resetEncoders()`. A reset starts the distance over at 0.",
+					"bit": "`drive.resetEncoders()` in `autonomousInit()` starts every Auto run at 0."
+				}
 			]
 		}
 	}

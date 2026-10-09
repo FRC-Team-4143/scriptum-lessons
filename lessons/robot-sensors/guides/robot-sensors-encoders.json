@@ -78,21 +78,19 @@
 		{
 			"title": "In your lesson: Rotations to meters",
 			"say": {
-				"never": "How far does one rotation move the robot? Exactly one trip around the wheel's edge. That's the **circumference**, which is `2 x pi x radius`. Multiply the rotations by that and you get **meters**, a unit we can understand.",
-				"bit": "One rotation moves the robot one wheel **circumference**: 2 x pi x radius."
+				"never": "How far does one rotation move the robot? Exactly one trip around the wheel's edge. That's the **circumference**, `2 x pi x radius`. Multiply the rotations by it and you get **meters**. The wheel radius is already in `Constants.java` as `WHEEL_RADIUS_METERS`. The same trick turns rotations per second into meters per second.",
+				"bit": "meters = rotations x (2 x pi x wheel radius). Speeds convert the same way."
 			},
 			"board": {
-				"code": "double metersPerRotation = 2.0 * Math.PI * Constants.WHEEL_RADIUS_METERS;\ndouble leftMeters = drive.getLeftPositionRotations() * metersPerRotation;",
+				"code": "meters            = rotations          x (2 x pi x wheel radius)\nmeters per second = rotations per sec  x (2 x pi x wheel radius)",
+				"language": "text",
 				"marks": [
 					{
-						"text": "2.0 * Math.PI * Constants.WHEEL_RADIUS_METERS",
-						"label": "the circumference"
-					},
-					{
-						"text": "* metersPerRotation",
-						"label": "rotations become meters"
+						"text": "2 x pi x wheel radius",
+						"label": "the circumference: Math.PI and Constants.WHEEL_RADIUS_METERS"
 					}
-				]
+				],
+				"caption": "Do this for the left and right side, position and speed: four lines."
 			},
 			"assist": true
 		},
@@ -140,7 +138,7 @@
 				"target": {
 					"pane": "editor",
 					"selector": ".view-lines .view-line",
-					"text": "STEP 1: change the readings"
+					"text": "STEP 1: the drivetrain reports"
 				},
 				"hint": "find STEP 1 with Ctrl+F.",
 				"skipIfDone": true
@@ -150,13 +148,13 @@
 		{
 			"title": "STEP 1",
 			"say": {
-				"never": "The left side is already done for you. Fill in the right side the same way. It's a copy of the left, with `Right` instead of `Left`.",
-				"bit": "Fill in the right side the same way the left is done."
+				"never": "Four lines to fill in: the left and right **positions** (rotations into meters) and the left and right **speeds** (rotations per second into meters per second). The drivetrain methods are in the README, and the conversion is on the card you just read.",
+				"bit": "Convert all four readings: left and right, position and speed."
 			},
 			"target": {
 				"pane": "editor",
 				"selector": ".view-lines .view-line",
-				"text": "STEP 1: change the readings"
+				"text": "STEP 1: the drivetrain reports"
 			},
 			"cardAt": "bottom-right",
 			"assist": true
