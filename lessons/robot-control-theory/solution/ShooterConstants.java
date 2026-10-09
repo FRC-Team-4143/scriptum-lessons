@@ -48,7 +48,8 @@ public class ShooterConstants extends MwConstants {
   // A solid wheel is harder to spin the heavier and wider it is: 1/2 * mass * radius^2 (kg*m^2).
   public final double FLYWHEEL_INERTIA = 0.5 * FLYWHEEL_MASS * FLYWHEEL_RADIUS * FLYWHEEL_RADIUS;
   public final double SHOOT_VELOCITY = 300.0; // radians per second
-  public final MotorConfig FLYWHEEL_MOTOR_CONFIG = flywheelConfig(FLYWHEEL_MOTOR_ID, FLYWHEEL_KV, FLYWHEEL_KP);
+  public final MotorConfig FLYWHEEL_MOTOR_CONFIG =
+      flywheelConfig(FLYWHEEL_MOTOR_ID, FLYWHEEL_KV, FLYWHEEL_KP);
 
   // The flywheel counts as "at speed" when it is within this fraction of the target.
   public final double AT_SPEED_TOLERANCE = 0.03;
@@ -70,21 +71,21 @@ public class ShooterConstants extends MwConstants {
   // Helper methods that build motor settings. You do not need to change these.
   // =============================================================================
 
-  private static MotorConfig flywheelConfig(int canId, double kV, double kP) {
-    MotorConfig config = baseConfig(canId, false);
+  private static MotorConfig flywheelConfig(int can_id, double k_v, double k_p) {
+    MotorConfig config = baseConfig(can_id, false);
     // The motor controller's velocity gains (used by the PID style).
-    config.getAsFXConfig().Slot1.kV = kV;
-    config.getAsFXConfig().Slot1.kP = kP;
+    config.getAsFXConfig().Slot1.kV = k_v;
+    config.getAsFXConfig().Slot1.kP = k_p;
     return config;
   }
 
-  private static MotorConfig rollerConfig(int canId) {
-    return baseConfig(canId, false);
+  private static MotorConfig rollerConfig(int can_id) {
+    return baseConfig(can_id, false);
   }
 
-  private static MotorConfig baseConfig(int canId, boolean inverted) {
+  private static MotorConfig baseConfig(int can_id, boolean inverted) {
     MotorConfig config = new MotorConfig();
-    config.can_id = canId;
+    config.can_id = can_id;
     config.motor_type = TalonMotorType.X60;
     config.getAsFXConfig().MotorOutput.Inverted =
         inverted ? InvertedValue.Clockwise_Positive : InvertedValue.CounterClockwise_Positive;

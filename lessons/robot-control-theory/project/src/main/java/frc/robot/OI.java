@@ -8,28 +8,28 @@ import edu.wpi.first.wpilibj.XboxController;
  * questions and never touches the controller directly.
  */
 public abstract class OI {
-  private static final XboxController driverController = new XboxController(0);
+  private static final XboxController driver_controller_ = new XboxController(0);
 
   /** How far forward the driver is pushing, -1.0 to 1.0. */
   public static double getForward() {
-    return MathUtil.applyDeadband(-driverController.getLeftY(), 0.1);
+    return MathUtil.applyDeadband(-driver_controller_.getLeftY(), 0.1);
   }
 
   /** How much the driver wants to turn, -1.0 to 1.0. */
   public static double getTurn() {
-    return MathUtil.applyDeadband(driverController.getLeftX(), 0.1);
+    return MathUtil.applyDeadband(driver_controller_.getLeftX(), 0.1);
   }
 
   public static boolean getShootButton() {
-    return driverController.getRightBumperButton();
+    return driver_controller_.getRightBumperButton();
   }
 
   public static boolean getIndexButton() {
-    return driverController.getLeftBumperButton();
+    return driver_controller_.getLeftBumperButton();
   }
 
   /** True while the driver holds the A button, which pretends a game piece was just launched. */
   public static boolean getLaunchButton() {
-    return driverController.getAButton();
+    return driver_controller_.getAButton();
   }
 }
