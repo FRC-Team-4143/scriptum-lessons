@@ -181,7 +181,7 @@
 		{
 			"title": "Aim at the goal",
 			"say": {
-				"never": "Now the aim state from the State Machines lesson: `DrivetrainCommands.aim()`. On its own it never finishes by itself (it aims for as long as it runs), so it needs an end. Write it for now and add the end in the next steps. Click **I did it**.",
+				"never": "Now the aim state from the Computer Vision lesson: `DrivetrainCommands.aim()`. On its own it never finishes by itself (it aims for as long as it runs), so it needs an end. Write it for now and add the end in the next steps. Click **I did it**.",
 				"bit": "`DrivetrainCommands.aim()`. It never ends by itself, so it needs an end."
 			},
 			"cardAt": "bottom-right",
@@ -198,7 +198,7 @@
 		{
 			"title": "End it when aimed",
 			"say": {
-				"never": "Add `.until(DrivetrainSubsystem.getInstance()::isAimed)` after it. `isAimed` is the yes/no method you wrote last lesson. The `::` hands over the method itself, so the command can ask it again and again instead of asking once. Click **I did it** when it's added.",
+				"never": "Add `.until(DrivetrainSubsystem.getInstance()::isAimed)` after it. `isAimed` is the yes/no method you wrote in the Computer Vision lesson. The `::` hands over the method itself, so the command can ask it again and again instead of asking once. Click **I did it** when it's added.",
 				"bit": "`.until(DrivetrainSubsystem.getInstance()::isAimed)` stops aiming once it is true."
 			},
 			"cardAt": "bottom-right",

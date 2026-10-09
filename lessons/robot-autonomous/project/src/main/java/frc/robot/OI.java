@@ -40,7 +40,8 @@ public abstract class OI {
     // onTrue(command): the command runs once each time the button is pressed.
     driver_controller_.a().onTrue(ShooterCommands.simulateBallLaunch());
 
-    // Aim at the goal while the left bumper is held (the aim state from the last lesson).
+    // Aim at the goal while the left bumper is held (the aim state from the Computer Vision
+    // lesson).
     getAimButton().whileTrue(DrivetrainCommands.aim());
   }
 }

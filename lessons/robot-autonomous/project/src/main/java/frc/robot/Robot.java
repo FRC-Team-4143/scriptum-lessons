@@ -21,6 +21,9 @@ public class Robot extends LoggedRobot {
   private Command auto_command_ = null;
 
   public Robot() {
+    // Put the (simulated) robot at the start spot, and the pose estimate with it.
+    DrivetrainSubsystem.getInstance().resetPose(FieldTargets.START);
+    // Connect the controller buttons to commands.
     OI.configureBindings();
   }
 

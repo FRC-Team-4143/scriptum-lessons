@@ -61,6 +61,6 @@ describe("FRC Robot track", () => {
 		expect(requires("robot-control-theory")).toContain("robot-subsystems");
 		expect(requires("robot-state-machines")).toContain("robot-control-theory");
 		expect(requires("robot-computer-vision")).toContain("robot-state-machines");
-		expect(requires("robot-autonomous")).toContain("robot-state-machines");
+		expect(requires("robot-autonomous")).toContain("robot-computer-vision");
 	});
 });

@@ -76,7 +76,7 @@ public class DrivetrainConstants extends MwConstants {
   public final double TURN_TOLERANCE_DEGREES = 2.0;
 
   // =============================================================================
-  // AIMING (finished in the State Machines lesson, tuned there: you only use it here)
+  // AIMING (finished and tuned in the Computer Vision lesson: you only use it here)
   // =============================================================================
 
   // The PID that turns the robot to face FieldTargets.GOAL. Its output is a turn command from

@@ -121,12 +121,15 @@ has to be made in every module (`lessons/robot-*/project/`):
   states-plus-`switch` drivetrain in `robot-state-machines`. In `robot-control-theory` the flywheel starts in bang-bang mode with untuned gains on purpose; that
   lesson's task is to write bang-bang and feedforward, then tune PID (`kV` about 0.12, `kP` about 0.2
   works). `lessons/robot-control-theory/solution/` is the finished version.
-- `robot-autonomous` (Choreo Autonomous, about 3 hours) starts from that finished robot. Students draw two
+- `robot-autonomous` (Choreo Autonomous, about 3 hours) starts from the finished `robot-computer-vision` robot
+  (the `LocalizationSubsystem` with the vision call written at std devs 0.3/0.3, the vision stack and
+  PhotonLib, and the aim state tuned at 2.0/0/0.2; `DrivetrainSubsystem.getPose()` is the vision-corrected
+  estimate and `resetPose(Pose2d)` resets both the mech and Localization). Students draw two
   Choreo paths (`ToPickup`, `ToScore`) in the Choreo pane, then write `Autos.java`: follow, wait, follow,
   aim until `isAimed`, shoot. `FieldTargets.java` has the field poses (the same as the named poses in
   `robot.chor`), and the `Check/...` topics (`Drive/DistanceToPickup`, `Drive/DistanceToScoreSpot`,
-  `Subsystem/Shooter/AimErrorAtShotDegrees`, `ShotCount`) use the simulator's true pose, so the drifting
-  estimate cannot fool them. `choreo-intro` is a prerequisite. The `solution/` folder has the finished
+  `Subsystem/Shooter/AimErrorAtShotDegrees`, `ShotCount`) use the simulator's true pose, so a small
+  estimate error cannot fool them. `choreo-intro` is a prerequisite. The `solution/` folder has the finished
   paths and `Autos.java`.
 - `robot-computer-vision` (Computer Vision, about 3 hours) starts from the finished State Machines robot minus
   the aim state. The pose estimator moves out of the drive mech into a provided `LocalizationSubsystem`

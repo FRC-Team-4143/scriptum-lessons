@@ -1,6 +1,6 @@
 {
 	"title": "Autos = paths + a sequence",
-	"summary": "What an autonomous routine is: Choreo paths, a list of commands, and a pose that drifts.",
+	"summary": "What an autonomous routine is: Choreo paths, a list of commands, and a pose estimate that is close but not perfect.",
 	"topic": "Robot",
 	"order": 528,
 	"steps": [
@@ -56,15 +56,15 @@
 		{
 			"title": "The sequence",
 			"say": {
-				"never": "Your routine is a list of commands that run one after another. Here: drive the first path, wait a moment as if picking up a game piece, drive the second path, **aim** at the goal with the aim state you built in the State Machines lesson, then **shoot**. Aiming comes before shooting, or the shot misses.",
+				"never": "Your routine is a list of commands that run one after another. Here: drive the first path, wait a moment as if picking up a game piece, drive the second path, **aim** at the goal with the aim state you built in the Computer Vision lesson, then **shoot**. Aiming comes before shooting, or the shot misses.",
 				"bit": "Drive path one, wait, drive path two, aim, shoot, in that order. Aim before shooting."
 			}
 		},
 		{
-			"title": "The robot only thinks it knows where it is",
+			"title": "The robot only estimates where it is",
 			"say": {
-				"never": "The robot works out its position from its wheels, like your odometry in an earlier lesson. Wheels slip a little and the readings jitter, so the **estimated** pose drifts. In the simulator we also know the **true** pose (`Drive/TruePose`). The robot may seem to stop 20 or 30 centimeters off its spot, and that's normal. The lesson's checks use the true pose.",
-				"bit": "The estimated pose drifts a little. The simulator also logs `Drive/TruePose`, and the checks use that one."
+				"never": "The robot works out its position with the Localization subsystem you finished in the Computer Vision lesson: the wheels give the movement, and the AprilTag cameras correct it. That **estimated** pose is close, but never exact. In the simulator we also know the **true** pose (`Drive/TruePose`). They are usually only a few centimeters apart, so the robot should stop very near its spot. The lesson's checks use the true pose.",
+				"bit": "The estimated pose is close to the truth (a few centimeters). The simulator also logs `Drive/TruePose`, and the checks use that one."
 			}
 		},
 		{
