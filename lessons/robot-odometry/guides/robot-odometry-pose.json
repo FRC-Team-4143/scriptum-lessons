@@ -2,45 +2,107 @@
 	"title": "Where is the robot?",
 	"summary": "Pose estimation, and why it drifts from the truth.",
 	"topic": "Robot",
-	"order": 441,
+	"order": 442,
 	"steps": [
 		{
 			"title": "Pose",
 			"say": {
-				"never": "A **pose** is a robot's position on the field (x and y) *and* which way it's facing. The pose estimator works it out by adding up every tiny movement of the wheels, like counting your steps to guess how far you walked.",
+				"never": "A **pose** is a robot's position on the field (x and y) *and* which way it's facing. The pose estimator works it out by adding up every tiny movement of the wheels, like counting your steps to guess how far you walked.\n\nStart at (x 0, y 0) facing east. Drive 1 m forward and you are at (x 1, y 0), still facing east. Turn left and drive 1 m and you are at (x 1, y 1), facing north.",
 				"bit": "A pose is x, y and heading, built by adding up many small wheel movements."
-			},
-			"board": {
-				"code": "start:                    (x 0, y 0), facing east\ndrive 1 m forward:        (x 1, y 0), facing east\nturn left, drive 1 m:     (x 1, y 1), facing north",
-				"language": "text",
-				"marks": [
-					{
-						"text": "(x 1, y 1), facing north",
-						"label": "position AND direction"
-					}
-				]
 			}
 		},
 		{
 			"title": "In your lesson: Pose",
 			"say": {
-				"never": "A **pose** is a robot's position on the field (x and y) *and* which way it's facing. The pose estimator works it out by adding up every tiny movement of the wheels, like counting your steps to guess how far you walked.",
-				"bit": "A **pose** is where the robot is (x, y) and which way it faces. The pose estimator adds up every small wheel movement."
-			},
-			"board": {
-				"code": "poseEstimator.update(getYaw(), getLeftMeters(), getRightMeters());\npose = poseEstimator.getEstimatedPosition();",
-				"marks": [
-					{
-						"text": "update(",
-						"label": "feed it the latest movement"
-					},
-					{
-						"text": "getEstimatedPosition()",
-						"label": "where it thinks it is"
-					}
-				]
+				"never": "The pose estimator needs two moves every loop. First feed it the latest movement, then ask where it thinks the robot is and keep the answer:\n\n`poseEstimator.update(getYaw(), getLeftMeters(), getRightMeters());`\n\n`pose = poseEstimator.getEstimatedPosition();`",
+				"bit": "Feed it the latest movement with `poseEstimator.update(getYaw(), getLeftMeters(), getRightMeters());`, then store `poseEstimator.getEstimatedPosition()` in `pose`."
 			},
 			"assist": true
+		},
+		{
+			"title": "Open DifferentialDriveMech.java",
+			"say": {
+				"never": "Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `DifferentialDriveMech`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "Press **Ctrl+P**, type `DifferentialDriveMech` and press Enter. Quick Open finds any file by name, so you never have to dig through folders."
+			},
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "DifferentialDriveMech.java"
+				},
+				"hint": "open DifferentialDriveMech.java with Ctrl+P.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Find updatePose",
+			"say": {
+				"never": "Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `updatePose` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "Press **Ctrl+F**, type `updatePose` and press Enter to jump to it."
+			},
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "private void updatePose"
+				},
+				"hint": "find updatePose with Ctrl+F.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Feed the estimator",
+			"say": {
+				"never": "Inside `updatePose()` the TODO comment shows what to write. Add this line below it (you can delete the comment lines when you are done):\n\n`poseEstimator.update(getYaw(), getLeftMeters(), getRightMeters());`\n\nThis hands the estimator the heading from `getYaw()` and how far each side has driven. It runs every loop, so the estimator keeps adding up the movement.",
+				"bit": "Under the TODO, write `poseEstimator.update(getYaw(), getLeftMeters(), getRightMeters());`."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "private void updatePose"
+			},
+			"cardAt": "bottom-right",
+			"assist": true,
+			"waitFor": {
+				"hint": "write the poseEstimator.update(...) line."
+			}
+		},
+		{
+			"title": "Store the answer",
+			"say": {
+				"never": "Now ask the estimator where the robot is and keep the answer in the `pose` variable. Add this line under the first one:\n\n`pose = poseEstimator.getEstimatedPosition();`\n\n`getPose()` hands this variable to the rest of the robot and to the logs.",
+				"bit": "Add `pose = poseEstimator.getEstimatedPosition();` under the update line."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "private void updatePose"
+			},
+			"cardAt": "bottom-right",
+			"assist": true,
+			"waitFor": {
+				"hint": "store the estimator's answer in pose."
+			}
 		},
 		{
 			"title": "Start the robot",
@@ -85,9 +147,49 @@
 			"assist": true
 		},
 		{
+			"title": "Spin left",
+			"say": {
+				"never": "Spin the robot counterclockwise (to the left): push the right stick to the left and hold it for a couple of seconds. Next you will watch the yaw angle.",
+				"bit": "Spin the robot to the left: hold the right stick to the left for a couple of seconds."
+			},
+			"target": {
+				"selector": "[data-tour='mode']"
+			},
+			"cardAt": "top-right",
+			"assist": true
+		},
+		{
+			"title": "Watch the yaw",
+			"say": {
+				"never": "In **AdvantageScope**, type `PoseYawDeg` in the search box. Find **Drive/PoseYawDeg** in the list and drag it onto the **Left Axis**. Keep spinning left: the angle should become clearly positive (in degrees). Spin right and it goes negative.",
+				"bit": "Search for `PoseYawDeg`, then drag **Drive/PoseYawDeg** onto the **Left Axis**. Spinning left makes it positive."
+			},
+			"close": [
+				"editor",
+				"preview",
+				"elastic"
+			],
+			"open": [
+				"scope"
+			],
+			"target": {
+				"pane": "scope",
+				"selector": ".line-graph-left.source-list"
+			},
+			"waitFor": {
+				"target": {
+					"pane": "scope",
+					"selector": ".line-graph-left.source-list .key-container",
+					"text": "Drive/PoseYawDeg"
+				},
+				"hint": "drag Drive/PoseYawDeg onto the graph."
+			},
+			"assist": true
+		},
+		{
 			"title": "2D Field",
 			"say": {
-				"never": "Open **AdvantageScope** and click the **2D Field** tab. It's a map of the field from above.",
+				"never": "Open the **2D Field** tab in **AdvantageScope**. It's a map of the field from above.",
 				"bit": "Open the 2D Field tab in AdvantageScope."
 			},
 			"close": [
@@ -109,10 +211,7 @@
 					"selector": ".tab.tab-selected",
 					"text": "2D Field"
 				},
-				"hint": {
-					"never": "click the 2D Field tab.",
-					"bit": "click the 2D Field tab."
-				}
+				"hint": "click the 2D Field tab."
 			},
 			"assist": true
 		},
@@ -132,10 +231,7 @@
 					"selector": ".field-2d-sources.source-list .key-container",
 					"text": "Drive/Pose"
 				},
-				"hint": {
-					"never": "drag Drive/Pose onto Poses.",
-					"bit": "drag Drive/Pose onto Poses."
-				}
+				"hint": "drag Drive/Pose onto Poses."
 			},
 			"assist": true
 		},
@@ -155,23 +251,21 @@
 					"selector": ".field-2d-sources.source-list .key-container",
 					"text": "Drive/TruePose"
 				},
-				"hint": {
-					"never": "drag Drive/TruePose onto Poses.",
-					"bit": "drag Drive/TruePose onto Poses."
-				}
+				"hint": "drag Drive/TruePose onto Poses."
 			},
 			"assist": true
 		},
 		{
 			"title": "Drive it",
 			"say": {
-				"never": "Drive a long way. The two robots start together but slowly drift apart. Wheels slip a tiny bit and sensors are never perfect, so the guess gets worse over time. Real robots fix this with cameras and a gyro.",
+				"never": "Drive a long way. The two robots start together but slowly drift apart. Wheels slip a tiny bit and sensors are never perfect, so the guess gets worse over time. Real robots fix this with cameras and a gyro. Press **Verify** in the lesson chip when you have spun left.",
 				"bit": "Drive a long way. The two robots start together and slowly drift apart: wheels slip and encoders are never perfect. Real robots add cameras and gyros to correct it."
 			},
 			"target": {
 				"selector": "[data-tour='mode']"
 			},
-			"cardAt": "top-right"
+			"cardAt": "top-right",
+			"assist": true
 		}
 	],
 	"kind": "mixed"

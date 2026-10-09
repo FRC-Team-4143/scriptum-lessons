@@ -3,7 +3,6 @@
 	"summary": "Write getForward() and getTurn(), then use them in Robot.java.",
 	"topic": "Robot",
 	"order": 460,
-	"kind": "assist",
 	"steps": [
 		{
 			"title": "Open OI.java",
@@ -38,8 +37,8 @@
 		{
 			"title": "Find it",
 			"say": {
-				"never": "It may be further down. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `write  public static double getForward` and press **Enter**. The editor scrolls to the right spot and highlights it.",
-				"bit": "It may be further down. Press **Ctrl+F**, type `write  public static double getForward` and press Enter to jump to it."
+				"never": "Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `public static double getForward` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "Press **Ctrl+F**, type `public static double getForward` and press Enter to jump to it."
 			},
 			"target": {
 				"pane": "editor"
@@ -51,16 +50,16 @@
 					"selector": ".view-lines .view-line",
 					"text": "write  public static double getForward"
 				},
-				"hint": "find write  public static double getForward with Ctrl+F.",
+				"hint": "find public static double getForward with Ctrl+F.",
 				"skipIfDone": true
 			},
 			"assist": true
 		},
 		{
-			"title": "Your turn",
+			"title": "Write getForward",
 			"say": {
-				"never": "Your turn! Under that comment, write `getForward()`. It's one line that asks the controller for the left stick and flips the sign. Then do the same for `getTurn()` just below it. Use the board on the first step as your guide.",
-				"bit": "Write `getForward()` under this comment, then `getTurn()`."
+				"never": "Under those comments, write the first method. Type these three lines:\n\n`public static double getForward() {`\n\n`return -driverController.getLeftY();`\n\n`}`\n\n`public` lets any class call it, `static` lets you call it on the class (`OI.getForward()`), and `double` says it hands back a decimal number. The minus sign is there because pushing the stick forward gives a negative number, and we want forward to be positive.",
+				"bit": "Under the comments, write `public static double getForward() {`, then `return -driverController.getLeftY();`, then `}`. The minus makes forward positive."
 			},
 			"target": {
 				"pane": "editor",
@@ -68,13 +67,67 @@
 				"text": "write  public static double getForward"
 			},
 			"cardAt": "bottom-right",
-			"assist": true
+			"assist": true,
+			"waitFor": {
+				"hint": "write getForward() under the comment."
+			}
+		},
+		{
+			"title": "Add the deadband",
+			"say": {
+				"never": "Sticks never rest at exactly zero, so ignore tiny pushes, just like the deadband you wrote by hand in lesson 1. WPILib has one built in. Change the return line to:\n\n`return MathUtil.applyDeadband(-driverController.getLeftY(), 0.1);`\n\nAnything between -0.1 and 0.1 now counts as 0.",
+				"bit": "Wrap it: `return MathUtil.applyDeadband(-driverController.getLeftY(), 0.1);`. Pushes smaller than 0.1 count as 0."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "write  public static double getForward"
+			},
+			"cardAt": "bottom-right",
+			"assist": true,
+			"waitFor": {
+				"hint": "wrap the value in MathUtil.applyDeadband(...)."
+			}
+		},
+		{
+			"title": "Import MathUtil",
+			"say": {
+				"never": "`MathUtil` is a WPILib class, so Java needs an `import` line to find it. Press **Ctrl+Home** to jump to the top of the file and add this line under the other import:\n\n`import edu.wpi.first.math.MathUtil;`",
+				"bit": "Press **Ctrl+Home** and add `import edu.wpi.first.math.MathUtil;` under the other import."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "public abstract class OI"
+			},
+			"cardAt": "bottom-right",
+			"assist": true,
+			"waitFor": {
+				"hint": "add the MathUtil import at the top."
+			}
+		},
+		{
+			"title": "Write getTurn",
+			"say": {
+				"never": "Now the turning method, just below `getForward()`. Type these three lines:\n\n`public static double getTurn() {`\n\n`return MathUtil.applyDeadband(driverController.getRightX(), 0.1);`\n\n`}`\n\nThere is no minus sign this time: the right stick pushed to the right is already positive.",
+				"bit": "Below `getForward()`, write `public static double getTurn() {`, then `return MathUtil.applyDeadband(driverController.getRightX(), 0.1);`, then `}`."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "write  public static double getTurn"
+			},
+			"cardAt": "bottom-right",
+			"assist": true,
+			"waitFor": {
+				"hint": "write getTurn() below getForward()."
+			}
 		},
 		{
 			"title": "Open Robot.java",
 			"say": {
-				"never": "Now use it. Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `Robot`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
-				"bit": "Now use it. Press **Ctrl+P**, type `Robot` and press Enter. Quick Open finds any file by name, so you never have to dig through folders."
+				"never": "Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `Robot`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "Press **Ctrl+P**, type `Robot` and press Enter. Quick Open finds any file by name, so you never have to dig through folders."
 			},
 			"open": [
 				"editor"
@@ -101,10 +154,10 @@
 			"assist": true
 		},
 		{
-			"title": "Find it",
+			"title": "Find the old controller",
 			"say": {
-				"never": "It may be further down. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `TODO (STEP 1): delete this field` and press **Enter**. The editor scrolls to the right spot and highlights it.",
-				"bit": "It may be further down. Press **Ctrl+F**, type `TODO (STEP 1): delete this field` and press Enter to jump to it."
+				"never": "Now use OI. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `TODO (STEP 1): delete this field` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "Now use OI. Press **Ctrl+F**, type `TODO (STEP 1): delete this field` and press Enter to jump to it."
 			},
 			"target": {
 				"pane": "editor"
@@ -122,10 +175,10 @@
 			"assist": true
 		},
 		{
-			"title": "Delete this",
+			"title": "Delete the controller field",
 			"say": {
-				"never": "Robot.java used to read the controller itself. Now OI does that. Delete the controller line at the top, and where the code used the controller, use `OI.getForward()` and `OI.getTurn()` instead. It's like asking the receptionist instead of walking down the hall.",
-				"bit": "Robot.java shouldn't read the controller anymore. Delete the field, then use `OI.getForward()` and `OI.getTurn()`."
+				"never": "Robot.java used to read the controller itself. Now OI does that, so delete the comment line and the line under it:\n\n`private final XboxController controller = new XboxController(0);`\n\nIt's like asking the receptionist instead of walking down the hall.",
+				"bit": "Delete the `XboxController controller` field and the TODO comment above it. OI reads the controller now."
 			},
 			"target": {
 				"pane": "editor",
@@ -133,7 +186,131 @@
 				"text": "TODO (STEP 1): delete this field"
 			},
 			"cardAt": "bottom-right",
+			"assist": true,
+			"waitFor": {
+				"hint": "delete the controller field."
+			}
+		},
+		{
+			"title": "Delete the import",
+			"say": {
+				"never": "That field is gone, so its import isn't needed. Press **Ctrl+Home** and delete these two lines near the top:\n\n`import edu.wpi.first.math.MathUtil;`\n\n`import edu.wpi.first.wpilibj.XboxController;`\n\nThe lesson check looks for the word `XboxController` anywhere in Robot.java, so this one has to go too.",
+				"bit": "Press **Ctrl+Home** and delete the `MathUtil` and `XboxController` imports. The check fails if `XboxController` is still in Robot.java."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "public class Robot"
+			},
+			"cardAt": "bottom-right",
+			"assist": true,
+			"waitFor": {
+				"hint": "delete the MathUtil and XboxController imports."
+			}
+		},
+		{
+			"title": "Find teleopPeriodic",
+			"say": {
+				"never": "Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `TODO (STEP 1): use OI` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "Press **Ctrl+F**, type `TODO (STEP 1): use OI` and press Enter to jump to it."
+			},
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "TODO (STEP 1): use OI"
+				},
+				"hint": "find TODO (STEP 1): use OI with Ctrl+F.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Ask OI instead",
+			"say": {
+				"never": "Replace the comment and the whole `drive.arcadeDrive(...)` call (it spans three lines) with one line:\n\n`drive.arcadeDrive(OI.getForward(), OI.getTurn());`\n\nThe robot now asks OI for the stick values instead of reading the controller.",
+				"bit": "Replace the whole `drive.arcadeDrive(...)` call with `drive.arcadeDrive(OI.getForward(), OI.getTurn());`."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "TODO (STEP 1): use OI"
+			},
+			"cardAt": "bottom-right",
+			"assist": true,
+			"waitFor": {
+				"hint": "call OI.getForward() and OI.getTurn()."
+			}
+		},
+		{
+			"title": "Start the robot",
+			"say": {
+				"never": "Your code only works once it's started. Press **Start** and wait until the status says **Running**.",
+				"bit": "Your code only runs once it's built and started."
+			},
+			"target": {
+				"selector": "[data-tour='sim-controls']"
+			},
+			"waitFor": {
+				"target": {
+					"selector": "[data-tour='code-status']",
+					"text": "Running"
+				},
+				"hint": {
+					"never": "press Start, then wait for Running.",
+					"bit": "press Start and wait for Running."
+				}
+			},
+			"assist": true
+		},
+		{
+			"title": "Enable in Teleop",
+			"say": {
+				"never": "Choose **Teleop**, then press **Enable**. The robot stays frozen until it's enabled.",
+				"bit": "Pick **Teleop** and press **Enable**. Robot code runs only while it's enabled."
+			},
+			"target": {
+				"selector": "[data-tour='enable']"
+			},
+			"waitFor": {
+				"target": {
+					"selector": "[data-tour='enable'] button",
+					"text": "Enabled"
+				},
+				"hint": {
+					"never": "choose Teleop, then press Enable.",
+					"bit": "choose Teleop, then Enable."
+				}
+			},
+			"assist": true
+		},
+		{
+			"title": "Drive it",
+			"say": {
+				"never": "Push the left stick forward and the right stick sideways. The robot should drive exactly as before, only now OI reads the controller. If it doesn't, check the minus sign in `getForward()`.",
+				"bit": "Drive with the sticks. It should feel exactly the same as before. If forward is backward, check the minus sign in `getForward()`."
+			},
+			"target": {
+				"selector": "[data-tour='mode']"
+			},
+			"cardAt": "top-right",
+			"assist": true
+		},
+		{
+			"title": "Check your work",
+			"say": {
+				"never": "Press **Verify** in the lesson chip to check that OI owns the controller.",
+				"bit": "Press **Verify** to check that OI owns the controller."
+			},
+			"target": {
+				"selector": "[data-tour='lesson']"
+			},
 			"assist": true
 		}
-	]
+	],
+	"kind": "assist"
 }
