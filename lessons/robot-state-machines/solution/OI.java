@@ -3,8 +3,6 @@ package frc.robot;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
-import edu.wpi.first.wpilibj2.command.button.Trigger;
-import frc.robot.subsystems.drive.DrivetrainCommands;
 import frc.robot.subsystems.shooter.ShooterCommands;
 
 /**
@@ -25,11 +23,6 @@ public abstract class OI {
     return MathUtil.applyDeadband(driver_controller_.getLeftX(), 0.1);
   }
 
-  /** The aim button (left bumper). The drivetrain turns to face the goal while it is held. */
-  public static Trigger getAimButton() {
-    return driver_controller_.leftBumper();
-  }
-
   /** Connects buttons to commands. Robot calls this once at startup. */
   public static void configureBindings() {
     DriverStation.silenceJoystickConnectionWarning(true);
@@ -39,8 +32,5 @@ public abstract class OI {
 
     // onTrue(command): the command runs once each time the button is pressed.
     driver_controller_.a().onTrue(ShooterCommands.simulateBallLaunch());
-
-    // Aim at the goal while the left bumper is held. (Finish DrivetrainCommands.aim() first.)
-    getAimButton().whileTrue(DrivetrainCommands.aim());
   }
 }

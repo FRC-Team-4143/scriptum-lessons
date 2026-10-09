@@ -4,8 +4,6 @@ import com.ctre.phoenix6.signals.InvertedValue;
 import com.marswars.mechanisms.MotorConfig;
 import com.marswars.mechanisms.MotorConfig.TalonMotorType;
 import com.marswars.subsystem.MwConstants;
-import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.util.Units;
 import java.util.List;
 
@@ -39,32 +37,11 @@ public class DrivetrainConstants extends MwConstants {
     return config;
   }
 
-  // =============================================================================
-  // AIMING: turn to face the goal
-  // =============================================================================
-
-  // Where the goal is on the field, in meters. The robot starts the simulation at (0, 0) facing
-  // along +x (heading 0), so this goal begins up and to the left of it. Only the position matters;
-  // the heading of this Pose2d is not used.
-  public static final Pose2d GOAL = new Pose2d(2.0, 3.0, new Rotation2d());
-
-  // The PID gains for aiming. The error is in RADIANS and the output is a turn command from
-  // -1.0 to 1.0, so kP = 1.0 means "turn at full power per radian of error" (about 57 degrees).
-  // These starter values do not aim well. Tuning them is your job.
-  public static final double AIM_KP = 0.2;
-  public static final double AIM_KI = 0.0;
-  public static final double AIM_KD = 0.0;
-
-  // Close enough to count as aimed, in degrees.
-  public static final double AIM_TOLERANCE_DEGREES = 2.0;
-
   /** The things the drivetrain can be doing. */
   public enum DriveStates {
     /** Not moving. */
     IDLE,
     /** Driving from the controller sticks. */
     ARCADE
-    // TODO (aim): add a third state, AIM: turn in place to face the goal. Don't forget the comma
-    // after ARCADE.
   }
 }

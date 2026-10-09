@@ -7,5 +7,60 @@
 	"requires": [
 		"robot-state-machines"
 	],
-	"checkpoints": []
+	"checkpoints": [
+		{
+			"id": "vision-added",
+			"title": "Camera measurements added",
+			"description": "LocalizationSubsystem.updateLogic() gives each camera measurement to the pose estimator with addVisionMeasurement(): the pose the camera saw, the time the picture was taken, and the standard deviations.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/vision-added.sh"
+			}
+		},
+		{
+			"id": "estimate-accurate",
+			"title": "Estimate within 5 cm and 1 degree",
+			"description": "Start fresh, enable Teleop and drive around (W/A/S/D) for at least 5 meters in total, then stop and wait 2 seconds. Once the robot has sat still, your estimate must be within 5 centimeters and 1 degree of where the robot really is. Choose better VISION_XY_STD_METERS and VISION_HEADING_STD_RADIANS if it is not.",
+			"verifier": {
+				"type": "nt4-value",
+				"topic": "/AdvantageKit/RealOutputs/Check/Localization/Accurate",
+				"check": "range",
+				"min": 1,
+				"max": 1
+			}
+		},
+		{
+			"id": "aim-state-written",
+			"title": "Aim state written",
+			"description": "DriveStates has AIM, the switch handles it with a PIDController (continuous input) that reads the pose estimate, getAngleToGoal() and isAimed() are written, and DrivetrainCommands.aim() starts and ends the state.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/aim-state-written.sh"
+			}
+		},
+		{
+			"id": "aim-converges",
+			"title": "Aims within 2 degrees",
+			"description": "Start fresh, enable Teleop and hold the left bumper (E). The robot should turn to face the goal and stay within 2 degrees of it for half a second, within 4 seconds. Raise AIM_KP if it stops short.",
+			"verifier": {
+				"type": "nt4-value",
+				"topic": "/AdvantageKit/RealOutputs/Check/Aim/Settled",
+				"check": "range",
+				"min": 1,
+				"max": 1
+			}
+		},
+		{
+			"id": "aim-no-overshoot",
+			"title": "No wild overshoot",
+			"description": "On that same aim, the robot must not swing more than 10 degrees past the goal. Lower AIM_KP or add AIM_KD to damp it.",
+			"verifier": {
+				"type": "nt4-value",
+				"topic": "/AdvantageKit/RealOutputs/Check/Aim/OvershootDegrees",
+				"check": "range",
+				"min": 0,
+				"max": 10
+			}
+		}
+	]
 }

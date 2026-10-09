@@ -34,12 +34,19 @@ if ! code "$DRIVE" | grep -Eq 'enableContinuousInput[[:space:]]*\('; then
 	echo "Headings wrap around: call aim_pid_.enableContinuousInput(-Math.PI, Math.PI)."
 	exit 1
 fi
+# The aim must use the pose ESTIMATE. (The subsystem itself defines getTruePose(), so only look at
+# the two places the aim reads a pose: getAngleToGoal() and the PID's calculate(...).)
+if { code "$DRIVE" | grep -Eo 'getAngleToGoal[[:space:]]*\([[:space:]]*\)[[:space:]]*\{[^}]*\}' || true
+     code "$DRIVE" | grep -Eo '\.calculate[[:space:]]*\([^;]*;' || true; } | grep -Eq 'getTruePose'; then
+	echo "Aim from the pose ESTIMATE, getPose(). getTruePose() is only for checking: a real robot has no such thing."
+	exit 1
+fi
 if ! code "$DRIVE" | grep -Eq '\.calculate[[:space:]]*\('; then
 	echo "In the AIM case, ask the PID for a turn with aim_pid_.calculate(heading, angleToGoal)."
 	exit 1
 fi
 if ! code "$DRIVE" | grep -Eq 'GOAL[^;]*getTranslation[[:space:]]*\(\)[^;]*\.minus[[:space:]]*\(|getTranslation[[:space:]]*\(\)[^;]*\.minus[[:space:]]*\([^;]*GOAL'; then
-	echo "getAngleToGoal() should subtract the robot's position from DrivetrainConstants.GOAL (use getTranslation().minus(...))."
+	echo "getAngleToGoal() should subtract the robot's position from FieldTargets.GOAL (use getTranslation().minus(...))."
 	exit 1
 fi
 if ! code "$DRIVE" | grep -Eq 'boolean[[:space:]]+isAimed[[:space:]]*\([[:space:]]*\)[[:space:]]*\{[[:space:]]*return[[:space:]]+[^;]*(&&|\|\|)'; then

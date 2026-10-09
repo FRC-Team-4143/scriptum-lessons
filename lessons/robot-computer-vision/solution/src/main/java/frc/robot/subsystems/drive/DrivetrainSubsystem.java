@@ -7,15 +7,19 @@ import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
+import edu.wpi.first.wpilibj.RobotBase;
+import frc.robot.FieldTargets;
 import frc.robot.OI;
 import frc.robot.mechanisms.DifferentialDriveMech;
 import frc.robot.subsystems.drive.DrivetrainConstants.DriveStates;
+import frc.robot.subsystems.localization.LocalizationSubsystem;
 import java.util.List;
 
 /**
  * The drivetrain subsystem. It owns the drive mechanism and decides what the drivetrain should do
- * in each state. The mechanism itself works out the robot's speeds and pose (you wrote that in the
- * last lesson), so this class just asks it.
+ * in each state. The mechanism reads the wheels; working out WHERE the robot is on the field is the
+ * LocalizationSubsystem's job, so this class just asks it.
  */
 public class DrivetrainSubsystem extends MwSubsystem<DriveStates, DrivetrainConstants> {
   // There is only ever one drivetrain, so everyone shares it through getInstance().
@@ -68,7 +72,8 @@ public class DrivetrainSubsystem extends MwSubsystem<DriveStates, DrivetrainCons
     switch (system_state_) {
       case AIM:
         // The PID's error is (goal - measurement). A positive error means the goal is to our left,
-        // but a positive turn command turns the robot RIGHT, so the sign is flipped.
+        // but a positive turn command turns the robot RIGHT, so the sign is flipped. The heading
+        // comes from the pose ESTIMATE, like it would on the real robot.
         aim_turn_ =
             -aim_pid_.calculate(
                 getPose().getRotation().getRadians(), getAngleToGoal().getRadians());
@@ -93,14 +98,14 @@ public class DrivetrainSubsystem extends MwSubsystem<DriveStates, DrivetrainCons
     MwLog.log(getSubsystemKey() + "IsAimed", isAimed());
   }
 
-  /** Where the robot thinks it is (the drive mechanism works this out). */
+  /** Where the robot thinks it is on the field (the LocalizationSubsystem works this out). */
   public Pose2d getPose() {
-    return drive_.getPose();
+    return LocalizationSubsystem.getInstance().getPose();
   }
 
   /** The direction from the robot to the goal, as a field heading (0 = along +x, left is +). */
   public Rotation2d getAngleToGoal() {
-    return DrivetrainConstants.GOAL.getTranslation().minus(getPose().getTranslation()).getAngle();
+    return FieldTargets.GOAL.getTranslation().minus(getPose().getTranslation()).getAngle();
   }
 
   /**
@@ -116,5 +121,48 @@ public class DrivetrainSubsystem extends MwSubsystem<DriveStates, DrivetrainCons
     return Math.abs(Math.toDegrees(getAimErrorRadians()))
             < DrivetrainConstants.AIM_TOLERANCE_DEGREES
         && Math.abs(drive_.getAngularSpeed()) < 0.15;
+  }
+
+  /**
+   * Tells the robot where it is on the field. In simulation the simulated robot is moved there too,
+   * its wheel readings start at zero, and the pose estimate starts out exactly right.
+   */
+  public void resetPose(Pose2d new_pose) {
+    drive_.resetPose(new_pose);
+    LocalizationSubsystem.getInstance().resetPose(new_pose);
+  }
+
+  /**
+   * Where the robot REALLY is. Only the simulator knows this; the simulated cameras are pointed
+   * from it and the lesson's checks compare your estimate with it. On a real robot it falls back to
+   * the estimate.
+   */
+  public Pose2d getTruePose() {
+    return RobotBase.isSimulation() ? drive_.getTruePose() : getPose();
+  }
+
+  /** Which way the robot faces, worked out from the wheels (this plays the part of a gyro). */
+  public Rotation2d getYaw() {
+    return drive_.getYaw();
+  }
+
+  /** How far the left wheels have driven, in meters. */
+  public double getLeftMeters() {
+    return drive_.getLeftMeters();
+  }
+
+  /** How far the right wheels have driven, in meters. */
+  public double getRightMeters() {
+    return drive_.getRightMeters();
+  }
+
+  /** The robot's turning speed, in radians per second. Positive is turning left. */
+  public double getAngularSpeed() {
+    return drive_.getAngularSpeed();
+  }
+
+  /** The mech's kinematics (it knows the track width). */
+  public DifferentialDriveKinematics getKinematics() {
+    return drive_.getKinematics();
   }
 }

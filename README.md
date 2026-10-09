@@ -122,11 +122,6 @@ has to be made in every module (`lessons/robot-*/project/`):
   states-plus-`switch` drivetrain in `robot-state-machines`. In `robot-control-theory` the flywheel starts in bang-bang mode with untuned gains on purpose; that
   lesson's task is to write bang-bang and feedforward, then tune PID (`kV` about 0.12, `kP` about 0.2
   works). `lessons/robot-control-theory/solution/` is the finished version.
-- `robot-state-machines` ends with an aim state: `DriveStates.AIM` turns the robot in place to face
-  `DrivetrainConstants.GOAL` with a student-written `PIDController` (`AIM_KP/KI/KD`, starting at values
-  that stall short of the goal). `lesson/AimChecks.java` publishes `Check/Aim/Settled` and
-  `Check/Aim/OvershootDegrees` from the sim's true heading error (`Drive/TrueAimErrorDegrees`). The
-  autonomous lesson calls the state through `DrivetrainCommands.aim()` and waits on `isAimed()`.
 - `robot-autonomous` (Choreo Autonomous, about 3 hours) starts from that finished robot. Students draw two
   Choreo paths (`ToPickup`, `ToScore`) in the Choreo pane, then write `Autos.java`: follow, wait, follow,
   aim until `isAimed`, shoot. `FieldTargets.java` has the field poses (the same as the named poses in
@@ -163,7 +158,7 @@ and uses them right away. The Java modules remain available as a deeper, standal
 | 4 Objects and Odometry | classes and objects, `new`, `import`, `static`, `abstract` |
 | 5 Mechanisms and Subsystems | inheritance (`extends`, `@Override`), constructors, lists, enums as a list of states, `if` / `else` in subsystem logic |
 | 6 Control Theory | enums and `switch` (picking a control style), unit conversion, small methods |
-| 7 State Machines and Commands | `switch` on a subsystem's state (practice), `&&` `\|\|` `!`, boolean methods, lambdas, WPILib's `PIDController` tuned by hand |
+| 7 State Machines and Commands | `switch` on a subsystem's state (practice), `&&` `\|\|` `!`, boolean methods, lambdas |
 | 8 Choreo Autonomous (about 3 hours) | reading `Command` classes, command lists with `addCommands`, decorators (`until`, `withTimeout`), method references (`::`) |
 
 Recursion is not used on the robot.

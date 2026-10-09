@@ -1438,7 +1438,7 @@
 			"order": 26,
 			"track": "FRC Robot",
 			"title": "State Machines and Commands",
-			"description": "Give the shooter a state machine and control it with commands bound to buttons, then build an aim state that turns the robot to face the goal and tune its PID by hand.",
+			"description": "Give the shooter a state machine and control it with commands bound to buttons.",
 			"kind": "robot",
 			"subdir": "lessons/robot-state-machines/project",
 			"requires": [
@@ -1477,14 +1477,49 @@
 						"min": 2,
 						"max": 50
 					}
+				}
+			]
+		},
+		{
+			"id": "robot-computer-vision",
+			"order": 27,
+			"track": "FRC Robot",
+			"title": "Computer Vision",
+			"description": "Teach the robot to see AprilTags: feed camera measurements to the pose estimator so the robot always knows where it is on the field, then aim at the goal from that estimate.",
+			"kind": "robot",
+			"subdir": "lessons/robot-computer-vision/project",
+			"requires": [
+				"robot-state-machines"
+			],
+			"checkpoints": [
+				{
+					"id": "vision-added",
+					"title": "Camera measurements added",
+					"description": "LocalizationSubsystem.updateLogic() gives each camera measurement to the pose estimator with addVisionMeasurement(): the pose the camera saw, the time the picture was taken, and the standard deviations.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/robot-computer-vision/checkpoints/verify/vision-added.sh"
+					}
+				},
+				{
+					"id": "estimate-accurate",
+					"title": "Estimate within 5 cm and 1 degree",
+					"description": "Start fresh, enable Teleop and drive around (W/A/S/D) for at least 5 meters in total, then stop and wait 2 seconds. Once the robot has sat still, your estimate must be within 5 centimeters and 1 degree of where the robot really is. Choose better VISION_XY_STD_METERS and VISION_HEADING_STD_RADIANS if it is not.",
+					"verifier": {
+						"type": "nt4-value",
+						"topic": "/AdvantageKit/RealOutputs/Check/Localization/Accurate",
+						"check": "range",
+						"min": 1,
+						"max": 1
+					}
 				},
 				{
 					"id": "aim-state-written",
 					"title": "Aim state written",
-					"description": "DriveStates has AIM, the switch handles it with a PIDController (continuous input), getAngleToGoal() and isAimed() are written, and DrivetrainCommands.aim() starts and ends the state.",
+					"description": "DriveStates has AIM, the switch handles it with a PIDController (continuous input) that reads the pose estimate, getAngleToGoal() and isAimed() are written, and DrivetrainCommands.aim() starts and ends the state.",
 					"verifier": {
 						"type": "script",
-						"path": "lessons/robot-state-machines/checkpoints/verify/aim-state-written.sh"
+						"path": "lessons/robot-computer-vision/checkpoints/verify/aim-state-written.sh"
 					}
 				},
 				{
@@ -1512,19 +1547,6 @@
 					}
 				}
 			]
-		},
-		{
-			"id": "robot-computer-vision",
-			"order": 27,
-			"track": "FRC Robot",
-			"title": "Computer Vision",
-			"description": "Teach the robot to see AprilTags: feed camera measurements to the pose estimator so the robot always knows where it is on the field, then aim at the goal from that estimate.",
-			"kind": "robot",
-			"subdir": "lessons/robot-computer-vision/project",
-			"requires": [
-				"robot-state-machines"
-			],
-			"checkpoints": []
 		},
 		{
 			"id": "robot-autonomous",
@@ -2696,52 +2718,52 @@
 			"path": "lessons/robot-state-machines/guides/robot-state-machines-shooter-states-assist.json"
 		},
 		{
-			"id": "robot-state-machines-aim",
+			"id": "robot-computer-vision-aim",
 			"title": "Aiming at a spot",
 			"summary": "How a robot works out which way to turn to face a point.",
 			"topic": "Robot",
 			"order": 513,
 			"modules": [
-				"robot-state-machines"
+				"robot-computer-vision"
 			],
 			"kind": "concept",
-			"path": "lessons/robot-state-machines/guides/robot-state-machines-aim.json"
+			"path": "lessons/robot-computer-vision/guides/robot-computer-vision-aim.json"
 		},
 		{
-			"id": "robot-state-machines-aim-assist",
+			"id": "robot-computer-vision-aim-assist",
 			"title": "Write the aim state",
 			"summary": "Add AIM, the PID, the angle to the goal, isAimed and the command.",
 			"topic": "Robot",
 			"order": 514,
 			"modules": [
-				"robot-state-machines"
+				"robot-computer-vision"
 			],
 			"kind": "mixed",
-			"path": "lessons/robot-state-machines/guides/robot-state-machines-aim-assist.json"
+			"path": "lessons/robot-computer-vision/guides/robot-computer-vision-aim-assist.json"
 		},
 		{
-			"id": "robot-state-machines-aim-tuning",
+			"id": "robot-computer-vision-aim-tuning",
 			"title": "Tune kP to reach the goal",
 			"summary": "Raise kP until the robot settles within 2 degrees.",
 			"topic": "Robot",
 			"order": 515,
 			"modules": [
-				"robot-state-machines"
+				"robot-computer-vision"
 			],
 			"kind": "mixed",
-			"path": "lessons/robot-state-machines/guides/robot-state-machines-aim-tuning.json"
+			"path": "lessons/robot-computer-vision/guides/robot-computer-vision-aim-tuning.json"
 		},
 		{
-			"id": "robot-state-machines-aim-damping",
+			"id": "robot-computer-vision-aim-damping",
 			"title": "Damp the overshoot with kD",
 			"summary": "Use kD to stop the robot swinging past the goal.",
 			"topic": "Robot",
 			"order": 516,
 			"modules": [
-				"robot-state-machines"
+				"robot-computer-vision"
 			],
 			"kind": "mixed",
-			"path": "lessons/robot-state-machines/guides/robot-state-machines-aim-damping.json"
+			"path": "lessons/robot-computer-vision/guides/robot-computer-vision-aim-damping.json"
 		},
 		{
 			"id": "robot-autonomous-autos-concept",
