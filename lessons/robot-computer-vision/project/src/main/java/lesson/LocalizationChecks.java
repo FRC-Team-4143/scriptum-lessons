@@ -55,8 +55,7 @@ public final class LocalizationChecks {
           && !evaluated_this_rest_) {
         Pose2d estimate = drive.getPose();
         position_error_ = truth.getTranslation().getDistance(estimate.getTranslation());
-        heading_error_ =
-            Math.abs(truth.getRotation().minus(estimate.getRotation()).getDegrees());
+        heading_error_ = Math.abs(truth.getRotation().minus(estimate.getRotation()).getDegrees());
         accurate_ =
             position_error_ <= MAX_POSITION_ERROR_METERS
                 && heading_error_ <= MAX_HEADING_ERROR_DEGREES;

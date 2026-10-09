@@ -8,7 +8,6 @@ import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.wpilibj.RobotBase;
-import frc.robot.FieldTargets;
 import frc.robot.OI;
 import frc.robot.mechanisms.DifferentialDriveMech;
 import frc.robot.subsystems.drive.DrivetrainConstants.DriveStates;
