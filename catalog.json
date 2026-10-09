@@ -1785,6 +1785,7 @@
 				"robot-subsystems",
 				"robot-control-theory",
 				"robot-state-machines",
+				"robot-computer-vision",
 				"robot-autonomous"
 			],
 			"needs": [
@@ -2669,6 +2670,18 @@
 			"path": "lessons/robot-state-machines/guides/robot-state-machines-states.json"
 		},
 		{
+			"id": "robot-computer-vision-where-am-i",
+			"title": "Where am I? Odometry vs vision",
+			"summary": "Why wheels alone drift, and how cameras fix it.",
+			"topic": "Robot",
+			"order": 510,
+			"modules": [
+				"robot-computer-vision"
+			],
+			"kind": "concept",
+			"path": "lessons/robot-computer-vision/guides/robot-computer-vision-where-am-i.json"
+		},
+		{
 			"id": "robot-state-machines-commands",
 			"title": "Commands and lambdas",
 			"summary": "startEnd, runOnce, and handing over code to run later.",
@@ -2680,6 +2693,18 @@
 			],
 			"kind": "mixed",
 			"path": "common/guides/robot-state-machines-commands.json"
+		},
+		{
+			"id": "robot-computer-vision-add-vision",
+			"title": "Add the camera measurement",
+			"summary": "Give each camera measurement to the pose estimator, then see how close the estimate gets.",
+			"topic": "Robot",
+			"order": 511,
+			"modules": [
+				"robot-computer-vision"
+			],
+			"kind": "mixed",
+			"path": "lessons/robot-computer-vision/guides/robot-computer-vision-add-vision.json"
 		},
 		{
 			"id": "robot-state-machines-bindings",
@@ -2704,6 +2729,18 @@
 			],
 			"kind": "assist",
 			"path": "lessons/robot-state-machines/guides/robot-state-machines-commands-assist.json"
+		},
+		{
+			"id": "robot-computer-vision-trust",
+			"title": "How much should I trust the camera?",
+			"summary": "What the standard deviations, the timestamp and the heading do to the estimate.",
+			"topic": "Robot",
+			"order": 512,
+			"modules": [
+				"robot-computer-vision"
+			],
+			"kind": "concept",
+			"path": "lessons/robot-computer-vision/guides/robot-computer-vision-trust.json"
 		},
 		{
 			"id": "robot-state-machines-shooter-states-assist",
