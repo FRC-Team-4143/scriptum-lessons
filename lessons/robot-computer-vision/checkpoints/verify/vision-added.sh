@@ -12,15 +12,15 @@ CODE="$(grep -Ev '^[[:space:]]*(//|\*|/\*)' "$LOC" | sed -E 's://.*$::' | tr '\n
 CALL="$(printf '%s' "$CODE" | grep -Eo '\.[[:space:]]*addVisionMeasurement[[:space:]]*\([^;]*;' | head -n 1 || true)"
 
 if [[ -z "$CALL" ]]; then
-	echo "In LocalizationSubsystem.updateLogic(), call pose_estimator_.addVisionMeasurement(...) for each measurement."
+	echo "In LocalizationSubsystem.updateLogic(), call pose_estimator_.addVisionMeasurement(...) for each tag solution."
 	exit 1
 fi
-if ! printf '%s' "$CALL" | grep -Eq 'getPose[[:space:]]*\('; then
-	echo "Pass the pose the camera saw, measurement.getPose(), as the first argument."
+if ! printf '%s' "$CALL" | grep -Eq '(^|[^[:alnum:]_])solution[[:space:]]*\.[[:space:]]*pose([^[:alnum:]_]|$)'; then
+	echo "Pass the pose the camera saw, solution.pose, as the first argument."
 	exit 1
 fi
-if ! printf '%s' "$CALL" | grep -Eq 'getTimestamp[[:space:]]*\('; then
-	echo "Pass the time the PICTURE was taken, measurement.getTimestamp(), as the second argument (not the time now): the camera's picture is a little old."
+if ! printf '%s' "$CALL" | grep -Eq 'timestamp[[:space:]]*\.[[:space:]]*getSeconds[[:space:]]*\('; then
+	echo "Pass the time the PICTURE was taken, solution.timestamp.getSeconds(), as the second argument (not the time now): the camera's picture is a little old."
 	exit 1
 fi
 if ! printf '%s' "$CALL" | grep -Eq 'VecBuilder[[:space:]]*\.[[:space:]]*fill|VISION_XY_STD_METERS|VISION_HEADING_STD_RADIANS'; then

@@ -142,7 +142,9 @@ has to be made in every module (`lessons/robot-*/project/`):
   `linuxarm64` natives, so the vision simulator only runs on x86-64. The `FieldTargets` poses `START` and
   `GOAL` are the same as `robot-autonomous`'s. The student also builds the drivetrain's `AIM` state (a PID with continuous input, `getAngleToGoal()`, `isAimed()` and `DrivetrainCommands.aim()`), aiming from the vision-corrected estimate, and tunes `AIM_KP`/`AIM_KD`. The `Check/Localization/Accurate` and `Check/Aim/...` topics judge the estimate and the aim against the true pose. Guides: the concept guides `where-am-i` and `trust`, the vision walkthrough `add-vision`, and the four aim guides.
 - MWLib comes from jitpack (`com.github.FRC-Team-4143.MW-Lib:mw-lib-java:<tag>`), with no
-  credentials. Bump the tag in every `build.gradle` together.
+  credentials. Bump the tag in every `build.gradle` together. It is TEMPORARILY pinned to the MW-Lib PR #142
+  commit `4101c00` (the vision-sim multi-tag fix the CV and Choreo lessons need); re-pin to the released
+  26.17.x tag once it is published.
 - `lessons/<id>/solution/` holds the reference solution used by that lesson's `lesson.test.ts` to
   round-trip the script checkpoints. The `nt4-value` checkpoints need a running simulator.
 
