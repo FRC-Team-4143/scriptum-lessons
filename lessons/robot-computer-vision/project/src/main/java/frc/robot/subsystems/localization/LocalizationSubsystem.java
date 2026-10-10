@@ -48,13 +48,11 @@ public class LocalizationSubsystem extends MwSubsystem<LocalizationStates, Local
   // The proxy server hands back the same recent solutions on every call, so remember the newest
   // picture time already looked at for each camera.
   private final Map<String, Double> last_seen_seconds_ = new HashMap<>();
-  // The tags each camera used in its latest picture, for the VisibleTags log. A camera only sends a
-  // solution every ~33 ms and only when it sees tags, so each camera's tags are kept for a short
-  // time (VISIBLE_TAGS_SECONDS) instead of being rebuilt every 20 ms loop, which would blink.
-  private final Map<String, SeenTags> camera_tags_ = new HashMap<>();
+  // The newest solution from each camera. A camera only sends one every ~33 ms, and none at all
+  // while it sees no tags, so the VisibleTags log keeps a camera's last solution for a short time
+  // (VISIBLE_TAGS_SECONDS) instead of rebuilding the list from this loop's solutions, which blinks.
+  private final Map<String, TagSolutionData> camera_latest_ = new HashMap<>();
   private final List<Pose3d> visible_tags_ = new ArrayList<>();
-
-  private record SeenTags(double picture_seconds, List<Pose3d> tags) {}
 
   // Solutions from pictures taken before this time are ignored (see resetPose()).
   private double ignore_before_seconds_ = 0.0;
@@ -102,13 +100,8 @@ public class LocalizationSubsystem extends MwSubsystem<LocalizationStates, Local
       if (!isNew(solution)) {
         continue;
       }
-      // Remember the tags this camera just used, even if the solution is dropped below: the camera
-      // did see them.
-      List<Pose3d> tags = new ArrayList<>();
-      for (int tag_id : solution.detectedIds) {
-        VisionConstants.FIELD_LAYOUT.getTagPose(tag_id).ifPresent(tags::add);
-      }
-      camera_tags_.put(solution.cameraSerial, new SeenTags(solution.timestamp.getSeconds(), tags));
+      // Remember it for VisibleTags, even if it is dropped below: the camera did see those tags.
+      camera_latest_.put(solution.cameraSerial, solution);
       if (!isSensible(solution)) {
         vision_measurements_dropped_++;
         continue;
@@ -124,15 +117,20 @@ public class LocalizationSubsystem extends MwSubsystem<LocalizationStates, Local
       // VISION_HEADING_STD_RADIANS for them.
     }
 
-    // Show each camera's tags until its picture is too old (a camera that sees nothing sends
-    // nothing, so this is also how its old tags go away).
+    // Log the tags of every camera whose picture is recent. A camera that sees nothing sends
+    // nothing, so its old tags go away when its last picture gets too old.
     double now_seconds = Timer.getFPGATimestamp();
-    camera_tags_
+    camera_latest_
         .values()
         .removeIf(
-            seen -> now_seconds - seen.picture_seconds() > VisionConstants.VISIBLE_TAGS_SECONDS);
+            latest ->
+                now_seconds - latest.timestamp.getSeconds() > VisionConstants.VISIBLE_TAGS_SECONDS);
     visible_tags_.clear();
-    camera_tags_.values().forEach(seen -> visible_tags_.addAll(seen.tags()));
+    for (TagSolutionData latest : camera_latest_.values()) {
+      for (int tag_id : latest.detectedIds) {
+        VisionConstants.FIELD_LAYOUT.getTagPose(tag_id).ifPresent(visible_tags_::add);
+      }
+    }
 
     pose_ = pose_estimator_.getEstimatedPosition();
     logPose();
