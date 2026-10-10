@@ -1,21 +1,21 @@
 {
 	"title": "Add the camera measurement",
-	"summary": "Give each camera measurement to the pose estimator, then see how close the estimate gets.",
+	"summary": "Give each camera tag solution to the pose estimator, then see how close the estimate gets.",
 	"topic": "Robot",
 	"order": 511,
 	"steps": [
 		{
 			"title": "The job",
 			"say": {
-				"never": "`LocalizationSubsystem` already collects the camera measurements and loops over them. Nothing hands them to the pose estimator yet, so the estimate is just odometry. You will add one call, `addVisionMeasurement(...)`, and then pick how much to trust the cameras.",
-				"bit": "The measurements are collected but never given to the estimator. Add one call, then choose the trust."
+				"never": "`LocalizationSubsystem` already asks MW-Lib's proxy server for the camera **tag solutions** and loops over the new, sensible ones. Nothing hands them to the pose estimator yet, so the estimate is just odometry. You will add one call, `addVisionMeasurement(...)`, and then pick how much to trust the cameras.",
+				"bit": "The tag solutions are collected but never given to the estimator. Add one call, then choose the trust."
 			}
 		},
 		{
 			"title": "Open LocalizationSubsystem.java",
 			"say": {
-				"never": "The loop over the measurements is in this file. Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `LocalizationSubsystem`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
-				"bit": "The measurement loop is in this file. Press **Ctrl+P**, type `LocalizationSubsystem` and press Enter. Quick Open finds any file by name."
+				"never": "The loop over the tag solutions is in this file. Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `LocalizationSubsystem`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "The solution loop is in this file. Press **Ctrl+P**, type `LocalizationSubsystem` and press Enter. Quick Open finds any file by name."
 			},
 			"open": [
 				"editor"
@@ -44,8 +44,8 @@
 		{
 			"title": "Find it",
 			"say": {
-				"never": "The TODO sits inside the loop. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `give this measurement to the pose estimator` and press **Enter**. The editor scrolls to the right spot and highlights it.",
-				"bit": "The TODO is inside the loop. Press **Ctrl+F**, type `give this measurement to the pose estimator` and press Enter to jump to it."
+				"never": "The TODO sits inside the loop. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `give this solution to the pose estimator` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "The TODO is inside the loop. Press **Ctrl+F**, type `give this solution to the pose estimator` and press Enter to jump to it."
 			},
 			"target": {
 				"pane": "editor"
@@ -55,9 +55,9 @@
 				"target": {
 					"pane": "editor",
 					"selector": ".view-lines .view-line",
-					"text": "give this measurement to the pose estimator"
+					"text": "give this solution to the pose estimator"
 				},
-				"hint": "find give this measurement to the pose estimator with Ctrl+F.",
+				"hint": "find give this solution to the pose estimator with Ctrl+F.",
 				"skipIfDone": true
 			},
 			"assist": true
@@ -65,7 +65,7 @@
 		{
 			"title": "Three things to pass",
 			"say": {
-				"never": "Read the TODO. The call needs three things, in this order: the pose the camera saw, when the picture was taken, and how far off it could be. The loop variable `measurement` holds the first two.",
+				"never": "Read the TODO. The call needs three things, in this order: the pose the camera saw, when the picture was taken, and how far off it could be. The loop variable `solution` holds the first two: its `pose` and its `timestamp`.",
 				"bit": "The call takes: the pose, the picture's time, and the standard deviations."
 			},
 			"target": {
@@ -83,7 +83,7 @@
 			"target": {
 				"pane": "editor",
 				"selector": ".view-lines .view-line",
-				"text": "give this measurement to the pose estimator"
+				"text": "give this solution to the pose estimator"
 			},
 			"cardAt": "bottom-right",
 			"waitFor": {
@@ -94,34 +94,34 @@
 		{
 			"title": "First: the pose",
 			"say": {
-				"never": "The first thing is the pose the camera saw: `measurement.getPose()`. Add it, then a comma. Click **I did it** when it is in.",
-				"bit": "Pass `measurement.getPose()`, then a comma."
+				"never": "The first thing is the pose the camera saw: `solution.pose`. It is a field, so there are no brackets. Add it, then a comma. Click **I did it** when it is in.",
+				"bit": "Pass `solution.pose`, then a comma."
 			},
 			"target": {
 				"pane": "editor",
 				"selector": ".view-lines .view-line",
-				"text": "give this measurement to the pose estimator"
+				"text": "give this solution to the pose estimator"
 			},
 			"cardAt": "bottom-right",
 			"waitFor": {
-				"hint": "add measurement.getPose() and a comma, then click I did it."
+				"hint": "add solution.pose and a comma, then click I did it."
 			},
 			"assist": true
 		},
 		{
 			"title": "Second: the picture's time",
 			"say": {
-				"never": "The second is when the picture was taken: `measurement.getTimestamp()`. Do not use the time now: the picture is a little old, and the estimator needs to know how old so it can put it in the right place. Add it and a comma, then click **I did it**.",
-				"bit": "Pass `measurement.getTimestamp()`, not the time now. Then a comma."
+				"never": "The second is when the picture was taken: `solution.timestamp.getSeconds()`. Its timestamp holds the time of the picture and `getSeconds()` turns it into seconds. Do not use the time now: the picture is a little old, and the estimator needs to know how old so it can put it in the right place. Add it and a comma, then click **I did it**.",
+				"bit": "Pass `solution.timestamp.getSeconds()`, not the time now. Then a comma."
 			},
 			"target": {
 				"pane": "editor",
 				"selector": ".view-lines .view-line",
-				"text": "give this measurement to the pose estimator"
+				"text": "give this solution to the pose estimator"
 			},
 			"cardAt": "bottom-right",
 			"waitFor": {
-				"hint": "add measurement.getTimestamp() and a comma, then click I did it."
+				"hint": "add solution.timestamp.getSeconds() and a comma, then click I did it."
 			},
 			"assist": true
 		},
@@ -134,7 +134,7 @@
 			"target": {
 				"pane": "editor",
 				"selector": ".view-lines .view-line",
-				"text": "give this measurement to the pose estimator"
+				"text": "give this solution to the pose estimator"
 			},
 			"cardAt": "bottom-right",
 			"waitFor": {
@@ -249,6 +249,28 @@
 					"never": "choose Teleop, then Enable.",
 					"bit": "choose Teleop, then Enable."
 				}
+			},
+			"assist": true
+		},
+		{
+			"title": "See the tag solutions",
+			"say": {
+				"never": "In the simulator there are no real cameras, so a provided piece plays the camera computers: it sends tag solutions into MW-Lib's **proxy server**, the same place a real robot's camera computers send theirs. MW-Lib logs what the proxy server holds under **Proxy/TagSolutions**. In **AdvantageScope**, search for `TagSolutions` and look at it while the robot is in view of some tags. Each solution has a pose, the time of its picture, the camera and the ids of the tags it used. Two or more ids means a multi-tag solution, which is the accurate kind. You may also see an alert saying the proxy server has no clients: that is normal here. Click **I did it** when you have looked.",
+				"bit": "Simulated cameras send tag solutions through MW-Lib's proxy server, like real camera computers. Look at **Proxy/TagSolutions** in AdvantageScope: pose, time and tag ids. Two or more ids is accurate. Click I did it."
+			},
+			"open": [
+				"scope"
+			],
+			"close": [
+				"editor",
+				"preview",
+				"elastic"
+			],
+			"target": {
+				"pane": "scope"
+			},
+			"waitFor": {
+				"hint": "look at Proxy/TagSolutions in AdvantageScope, then click I did it."
 			},
 			"assist": true
 		},

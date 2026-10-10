@@ -35,8 +35,8 @@
 		{
 			"title": "But a camera is noisy and late",
 			"say": {
-				"never": "A single picture is a little wrong each time, and the picture is a little old by the time the computer has worked on it. This lesson's cameras use the answer from **several tags at once**, which is much steadier, and each answer comes stamped with the time the picture was taken. One camera answer is called a **vision measurement**.",
-				"bit": "Each camera answer (a vision measurement) is a bit noisy and a bit old. Several tags at once is steadier."
+				"never": "A single picture is a little wrong each time, and the picture is a little old by the time the computer has worked on it. The cameras send their answers, called **tag solutions**, to the robot over the network (here through MW-Lib's proxy server, the same way the real camera computers do). A solution made from **several tags at once** is much steadier, and each one comes with the ids of the tags it used and the time the picture was taken. The code gives the good ones to the pose estimator as **vision measurements**.",
+				"bit": "Each camera answer (a tag solution) is a bit noisy and a bit old. Several tags at once is steadier."
 			}
 		},
 		{

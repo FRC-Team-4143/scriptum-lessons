@@ -1,6 +1,6 @@
 {
 	"title": "Computer Vision",
-	"description": "Teach the robot to see AprilTags: feed camera measurements to the pose estimator so the robot always knows where it is on the field, then aim at the goal from that estimate.",
+	"description": "Teach the robot to see AprilTags: feed camera tag solutions to the pose estimator so the robot always knows where it is on the field, then aim at the goal from that estimate.",
 	"kind": "robot",
 	"track": "FRC Robot",
 	"order": 27,
@@ -13,8 +13,8 @@
 	"checkpoints": [
 		{
 			"id": "vision-added",
-			"title": "Camera measurements added",
-			"description": "LocalizationSubsystem.updateLogic() gives each camera measurement to the pose estimator with addVisionMeasurement(): the pose the camera saw, the time the picture was taken, and the standard deviations.",
+			"title": "Camera tag solutions added",
+			"description": "LocalizationSubsystem.updateLogic() gives each camera tag solution to the pose estimator with addVisionMeasurement(): the pose the camera saw, the time the picture was taken, and the standard deviations.",
 			"verifier": {
 				"type": "script",
 				"path": "checkpoints/verify/vision-added.sh"

@@ -34,7 +34,7 @@ describe("robot-computer-vision", () => {
 		expect(photon.name).toBe("photonlib");
 		expect(photon.version).toBe("v2026.2.2");
 		const gradle = readFileSync(join(L.dir, "project", "build.gradle"), "utf8");
-		expect(gradle).toContain("mw-lib-java:26.17.3");
+		expect(gradle).toContain("mw-lib-java:4101c00073eacc5fb2241885ff76b12de7ce84c8");
 	});
 
 	test("the provided pieces the next chunks build on exist", () => {
@@ -42,8 +42,6 @@ describe("robot-computer-vision", () => {
 			"FieldTargets.java",
 			"subsystems/localization/LocalizationConstants.java",
 			"subsystems/simulation/SimulationSubsystem.java",
-			"vision/TagVision.java",
-			"vision/VisionMeasurement.java",
 			"vision/VisionConstants.java",
 		]) {
 			expect(existsSync(join(L.dir, "project", ROBOT_SRC, file)), file).toBe(true);
@@ -106,10 +104,10 @@ describe.skipIf(!hasJdk)("robot-computer-vision script checkpoints", () => {
 			"commented out (line comments)": (t) => t.replace(call, (m) => m.split("\n").map((l) => `// ${l}`).join("\n")),
 			"commented out (block comment lines)": (t) => t.replace(call, (m) => `/*\n * ${m.split("\n").join("\n * ")}\n */`),
 			"mentioned only in a trailing comment": (t) => t.replace(call, "// pose_estimator_.addVisionMeasurement(a, b, c);"),
-			"the time now instead of the picture's": (t) => t.replace("measurement.getTimestamp()", "Timer.getFPGATimestamp()"),
+			"the time now instead of the picture's": (t) => t.replace("solution.timestamp.getSeconds()", "Timer.getFPGATimestamp()"),
 			"no standard deviations": (t) =>
-				t.replace(call, "pose_estimator_.addVisionMeasurement(measurement.getPose(), measurement.getTimestamp());"),
-			"not the camera's pose": (t) => t.replace("measurement.getPose(),\n", "new Pose2d(),\n"),
+				t.replace(call, "pose_estimator_.addVisionMeasurement(solution.pose, solution.timestamp.getSeconds());"),
+			"not the camera's pose": (t) => t.replace("solution.pose,\n", "new Pose2d(),\n"),
 		};
 		for (const [what, change] of Object.entries(cases)) {
 			const project = await solved();
@@ -124,7 +122,7 @@ describe.skipIf(!hasJdk)("robot-computer-vision script checkpoints", () => {
 		const project = await solved();
 		try {
 			edit(project, LOC, (t) =>
-				t.replace(call, "pose_estimator_.addVisionMeasurement(measurement.getPose(), measurement.getTimestamp(), VecBuilder.fill(0.1, 0.1, 0.1)); // fine"),
+				t.replace(call, "pose_estimator_.addVisionMeasurement(solution.pose, solution.timestamp.getSeconds(), VecBuilder.fill(0.1, 0.1, 0.1)); // fine"),
 			);
 			expect(L.verify(project, "vision-added").exitCode).toBe(0);
 		} finally {

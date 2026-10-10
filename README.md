@@ -134,15 +134,20 @@ has to be made in every module (`lessons/robot-*/project/`):
 - `robot-computer-vision` (Computer Vision, about 3 hours) starts from the finished State Machines robot minus
   the aim state. The pose estimator moves out of the drive mech into a provided `LocalizationSubsystem`
   (`DrivetrainSubsystem.getPose()` and `resetPose(Pose2d)` route to it). A provided `SimulationSubsystem`
-  (registered only in simulation) owns MWLib's `MwVisionSim` with a front and a back camera on the 2026
-  AprilTag layout, pointed from the TRUE pose (`getTruePose()`), and a provided `vision/TagVision` turns
-  each camera's multi-tag pose into a filtered `VisionMeasurement`. The student's job in
+  (registered only in simulation) sets up MWLib's `MwVisionSim` through `ProxyServerThread` with a front
+  and a back camera on the 2026 AprilTag layout, pointed from the TRUE pose (`getTruePose()`), exactly as
+  the competition robot does. The simulated cameras send tag solutions (pose, timestamp, tag ids) through
+  the proxy server like real coprocessors; the provided parts of `LocalizationSubsystem.updateLogic()` read
+  `ProxyServerThread.getInstance().getLatestTagSolutions()`, skip solutions already used, drop them while
+  spinning fast, and keep only multi-tag ones on the field. The student's job in
   `LocalizationSubsystem.updateLogic()` is the `addVisionMeasurement(...)` call and its standard
   deviations. It needs the PhotonLib vendordep (`vendordeps/photonlib.json`); PhotonLib publishes no
   `linuxarm64` natives, so the vision simulator only runs on x86-64. The `FieldTargets` poses `START` and
   `GOAL` are the same as `robot-autonomous`'s. The student also builds the drivetrain's `AIM` state (a PID with continuous input, `getAngleToGoal()`, `isAimed()` and `DrivetrainCommands.aim()`), aiming from the vision-corrected estimate, and tunes `AIM_KP`/`AIM_KD`. The `Check/Localization/Accurate` and `Check/Aim/...` topics judge the estimate and the aim against the true pose. Guides: the concept guides `where-am-i` and `trust`, the vision walkthrough `add-vision`, and the four aim guides.
 - MWLib comes from jitpack (`com.github.FRC-Team-4143.MW-Lib:mw-lib-java:<tag>`), with no
-  credentials. Bump the tag in every `build.gradle` together.
+  credentials. Bump the tag in every `build.gradle` together. It is TEMPORARILY pinned to the MW-Lib PR #142
+  commit `4101c00` (the vision-sim multi-tag fix the CV and Choreo lessons need); re-pin to the released
+  26.17.x tag once it is published.
 - `lessons/<id>/solution/` holds the reference solution used by that lesson's `lesson.test.ts` to
   round-trip the script checkpoints. The `nt4-value` checkpoints need a running simulator.
 
