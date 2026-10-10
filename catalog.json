@@ -1503,8 +1503,8 @@
 				},
 				{
 					"id": "estimate-accurate",
-					"title": "Estimate within 5 cm and 1 degree",
-					"description": "Start fresh, enable Teleop and drive around (W/A/S/D) for at least 5 meters in total, then stop and wait 2 seconds. Once the robot has sat still, your estimate must be within 5 centimeters and 1 degree of where the robot really is. Choose better VISION_XY_STD_METERS and VISION_HEADING_STD_RADIANS if it is not.",
+					"title": "Estimate within 6 cm and 1 degree",
+					"description": "Start fresh, enable Teleop and drive around (W/A/S/D) for at least 5 meters in total, with at least a quarter turn in it, then stop and wait 2 seconds. Once the robot has sat still, your estimate must be within 6 centimeters and 1 degree of where the robot really is. Choose better VISION_XY_STD_METERS and VISION_HEADING_STD_RADIANS if it is not.",
 					"verifier": {
 						"type": "nt4-value",
 						"topic": "/AdvantageKit/RealOutputs/Check/Localization/Accurate",
