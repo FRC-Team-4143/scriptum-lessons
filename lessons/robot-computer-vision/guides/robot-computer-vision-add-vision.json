@@ -69,9 +69,11 @@
 				"bit": "The call takes: the pose, the picture's time, and the standard deviations."
 			},
 			"target": {
-				"selector": "[data-tour='mode']"
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "give this solution to the pose estimator"
 			},
-			"cardAt": "top-right",
+			"cardAt": "bottom-right",
 			"assist": true
 		},
 		{
@@ -415,9 +417,9 @@
 				"bit": "The error should settle to a few centimeters once you stop. If not, the trust numbers or the call are off."
 			},
 			"target": {
-				"selector": "[data-tour='mode']"
+				"pane": "scope"
 			},
-			"cardAt": "top-right"
+			"cardAt": "bottom-right"
 		},
 		{
 			"title": "Check your work",
