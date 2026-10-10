@@ -5,6 +5,13 @@
 	"order": 465,
 	"steps": [
 		{
+			"title": "What you will do",
+			"say": {
+				"never": "In this guide you will write the shooter's numbers, then its roller, then the list that tells the library to run it.",
+				"bit": "In this guide you will write the shooter's constants and roller, then register it."
+			}
+		},
+		{
 			"title": "Open ShooterConstants.java",
 			"say": {
 				"never": "Numbers first. Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `ShooterConstants`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",

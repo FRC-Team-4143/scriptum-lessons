@@ -124,6 +124,27 @@ describe("guides", () => {
 		}
 	});
 
+	test("a mixed guide opens on an explaining step, so Walk me through it sits at the start", () => {
+		for (const concept of index.concepts) {
+			const { steps } = readJson(concept.path) as { steps: Step[] };
+			const n = steps.filter((s) => s.assist).length;
+			if (n === 0 || n === steps.length) continue;
+			expect(
+				steps[0]?.assist,
+				`${concept.id} mixes explaining and assist steps but starts with an assist step, so Dozer's "Walk me through it" link cannot sit at the top. Add a short explaining first step (what the guide will have the student do), or mark every step assist: true.`,
+			).not.toBe(true);
+		}
+	});
+
+	test("every guide declares a kind that matches its steps", () => {
+		for (const concept of index.concepts as (Guide & { kind?: string })[]) {
+			const { steps } = readJson(concept.path) as { steps: Step[] };
+			const n = steps.filter((s) => s.assist).length;
+			const want = n === 0 ? "concept" : n === steps.length ? "assist" : "mixed";
+			expect(concept.kind, `${concept.id} has ${n} assist steps of ${steps.length}, so kind must be "${want}"`).toBe(want);
+		}
+	});
+
 	test("have unique, kebab-case ids, a title, a topic and a whole-number order", () => {
 		const ids = index.concepts.map((c) => c.id);
 		expect(new Set(ids).size).toBe(ids.length);

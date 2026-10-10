@@ -111,8 +111,9 @@
 		},
 		{
 			"title": "Your shortcuts",
-			"say": "Ctrl+P finds a file by name. Ctrl+Shift+F finds words everywhere. Ctrl+F finds words in the file you're in. Ctrl+Shift+P finds any command. Together they save you a lot of clicking."
+			"say": "Ctrl+P finds a file by name. Ctrl+Shift+F finds words everywhere. Ctrl+F finds words in the file you're in. Ctrl+Shift+P finds any command. Together they save you a lot of clicking.",
+			"assist": true
 		}
 	],
-	"kind": "mixed"
+	"kind": "assist"
 }

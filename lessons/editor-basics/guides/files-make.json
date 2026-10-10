@@ -172,8 +172,9 @@
 			"say": "That's two of the five jobs. Open the lesson chip and press **Verify**: it checks that `my-team` is a folder and `my-team/about.txt` has words in it.",
 			"target": {
 				"selector": "[data-tour='lesson']"
-			}
+			},
+			"assist": true
 		}
 	],
-	"kind": "mixed"
+	"kind": "assist"
 }

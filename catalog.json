@@ -1678,7 +1678,7 @@
 			"modules": [
 				"editor-basics"
 			],
-			"kind": "mixed",
+			"kind": "assist",
 			"path": "lessons/editor-basics/guides/files-make.json"
 		},
 		{
@@ -1690,7 +1690,7 @@
 			"modules": [
 				"editor-basics"
 			],
-			"kind": "mixed",
+			"kind": "assist",
 			"path": "lessons/editor-basics/guides/editor-typing.json"
 		},
 		{
@@ -1702,7 +1702,7 @@
 			"modules": [
 				"editor-basics"
 			],
-			"kind": "mixed",
+			"kind": "assist",
 			"path": "lessons/editor-basics/guides/files-rename-delete.json"
 		},
 		{
@@ -1726,7 +1726,7 @@
 			"modules": [
 				"editor-basics"
 			],
-			"kind": "mixed",
+			"kind": "assist",
 			"path": "lessons/editor-basics/guides/find-things-fast.json"
 		},
 		{
@@ -1753,7 +1753,7 @@
 			"needs": [
 				"editor"
 			],
-			"kind": "mixed",
+			"kind": "assist",
 			"path": "lessons/git-basics/guides/git-source-control.json"
 		},
 		{
@@ -2775,7 +2775,7 @@
 			"modules": [
 				"robot-computer-vision"
 			],
-			"kind": "mixed",
+			"kind": "assist",
 			"path": "lessons/robot-computer-vision/guides/robot-computer-vision-aim-assist.json"
 		},
 		{
@@ -2826,7 +2826,7 @@
 			"needs": [
 				"choreo"
 			],
-			"kind": "mixed",
+			"kind": "assist",
 			"path": "lessons/robot-autonomous/guides/robot-autonomous-draw-paths.json"
 		},
 		{
@@ -2874,7 +2874,7 @@
 			"modules": [
 				"robot-autonomous"
 			],
-			"kind": "mixed",
+			"kind": "assist",
 			"path": "lessons/robot-autonomous/guides/robot-autonomous-write-sequence.json"
 		},
 		{
@@ -2886,7 +2886,7 @@
 			"modules": [
 				"robot-autonomous"
 			],
-			"kind": "mixed",
+			"kind": "assist",
 			"path": "lessons/robot-autonomous/guides/robot-autonomous-run-and-watch.json"
 		}
 	]
