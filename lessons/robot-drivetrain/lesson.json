@@ -15,7 +15,7 @@
 		{
 			"id": "teleop-code",
 			"title": "Your drive code",
-			"description": "Robot.java declares its own variables and uses arithmetic for arcade drive from the left stick Y and right stick X.",
+			"description": "Robot.java declares its own variables and uses arithmetic for arcade drive from the left stick Y and left stick X.",
 			"verifier": {
 				"type": "script",
 				"path": "checkpoints/verify/teleop-code.sh"
@@ -48,7 +48,7 @@
 		{
 			"id": "turns-in-place",
 			"title": "Turns in place",
-			"description": "Push the right stick left or right (Arrow Left / Right) so one side drives forward and the other backward.",
+			"description": "Push the left stick left or right (A / D) so one side drives forward and the other backward.",
 			"verifier": {
 				"type": "nt4-value",
 				"topic": "/AdvantageKit/RealOutputs/Check/Drive/Turn/Max",

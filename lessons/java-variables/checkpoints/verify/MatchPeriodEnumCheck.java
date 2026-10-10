@@ -3,20 +3,20 @@ public class MatchPeriodEnumCheck {
         Class<?> matchPeriodClass;
         try {
             // Nested inside Main, so its binary (compiled) name is
-            // Main$MATCH_PERIOD, not a bare top-level MATCH_PERIOD - see
+            // Main$MatchPeriod, not a bare top-level MatchPeriod - see
             // Main.java's TODO.
-            matchPeriodClass = Class.forName("Main$MATCH_PERIOD");
+            matchPeriodClass = Class.forName("Main$MatchPeriod");
         } catch (ClassNotFoundException e) {
             System.out.println(
-                "No MATCH_PERIOD type found. Define it inside Main: "
-                    + "enum MATCH_PERIOD { AUTONOMOUS, TELEOP, ENDGAME } "
-                    + "(team standard: enum names are SCREAMING_SNAKE_CASE)."
+                "No MatchPeriod type found. Define it inside Main: "
+                    + "enum MatchPeriod { AUTONOMOUS, TELEOP, ENDGAME } "
+                    + "(team standard: enum type names are UpperCamelCase, like classes; the values are SCREAMING_SNAKE_CASE)."
             );
             System.exit(1);
             return;
         }
         if (!matchPeriodClass.isEnum()) {
-            System.out.println("MATCH_PERIOD exists but isn't an enum.");
+            System.out.println("MatchPeriod exists but isn't an enum.");
             System.exit(1);
         }
         Object[] constants = matchPeriodClass.getEnumConstants();
@@ -29,9 +29,9 @@ public class MatchPeriodEnumCheck {
             if (c.toString().equals("ENDGAME")) hasEndgame = true;
         }
         if (!hasAutonomous || !hasTeleop || !hasEndgame) {
-            System.out.println("MATCH_PERIOD enum needs AUTONOMOUS, TELEOP, and ENDGAME values.");
+            System.out.println("MatchPeriod enum needs AUTONOMOUS, TELEOP, and ENDGAME values.");
             System.exit(1);
         }
-        System.out.println("MATCH_PERIOD enum looks good.");
+        System.out.println("MatchPeriod enum looks good.");
     }
 }

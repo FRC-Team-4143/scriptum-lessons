@@ -18,6 +18,8 @@ public final class Constants {
       Units.inchesToMeters(24.0); // left to right wheels
   public static final double ROBOT_MASS_KG = 50.0;
 
+  // The driver's sticks. STEP 4: add your DEADBAND constant here.
+
   // Each side of the drivetrain has one brushless Kraken X60. A side is a List of motors, so a
   // robot
   // with more motors per side could simply add to its list.
@@ -25,9 +27,9 @@ public final class Constants {
   public static final List<MotorConfig> RIGHT_MOTORS = List.of(motor(2, true));
 
   /** Builds the settings for one drive motor: its CAN id and whether it spins backwards. */
-  private static MotorConfig motor(int canId, boolean inverted) {
+  private static MotorConfig motor(int can_id, boolean inverted) {
     MotorConfig config = new MotorConfig();
-    config.can_id = canId;
+    config.can_id = can_id;
     config.motor_type = TalonMotorType.X60;
     config.getAsFXConfig().MotorOutput.Inverted =
         inverted ? InvertedValue.Clockwise_Positive : InvertedValue.CounterClockwise_Positive;

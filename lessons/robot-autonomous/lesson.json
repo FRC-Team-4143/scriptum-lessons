@@ -1,11 +1,12 @@
 {
-	"title": "Autonomous",
-	"description": "Build Left and Right autonomous routines from drive, turn and shoot commands, and pick them from a chooser.",
+	"title": "Choreo Autonomous",
+	"description": "Draw two paths in Choreo, then write the autonomous routine the way the competition robot does: follow the first path, pick up, follow the second path, aim at the goal with the aim state you built, and shoot.",
 	"kind": "robot",
 	"track": "FRC Robot",
-	"order": 27,
+	"order": 28,
 	"requires": [
-		"robot-state-machines"
+		"robot-computer-vision",
+		"choreo-intro"
 	],
 	"guides": [
 		"build-and-run",
@@ -13,60 +14,78 @@
 	],
 	"checkpoints": [
 		{
-			"id": "autos-in-chooser",
-			"title": "Autos in the chooser",
-			"description": "RobotContainer adds the Left Auto, Right Auto and Square Auto to the chooser.",
+			"id": "paths-drawn",
+			"title": "Two paths drawn",
+			"description": "The Choreo project has two paths that you generated, each with at least three waypoints (a start, a point in between, and an end).",
 			"verifier": {
 				"type": "script",
-				"path": "checkpoints/verify/autos-in-chooser.sh"
+				"path": "checkpoints/verify/paths-drawn.sh"
 			}
 		},
 		{
-			"id": "square-loop",
-			"title": "Square auto uses a loop",
-			"description": "squareAuto() builds the square with a for loop and a command group.",
+			"id": "path-names",
+			"title": "Paths named ToPickup and ToScore",
+			"description": "The paths are named ToPickup and ToScore, and Autos.java loads them by those names.",
 			"verifier": {
 				"type": "script",
-				"path": "checkpoints/verify/square-loop.sh"
+				"path": "checkpoints/verify/path-names.sh"
 			}
 		},
 		{
-			"id": "left-forward",
-			"title": "Left auto drives forward",
-			"description": "Run Left Auto. The robot should travel more than 6 meters in x.",
+			"id": "paths-goal",
+			"title": "Paths go where they should",
+			"description": "ToPickup starts on the Start point and ends on the Pickup point, and ToScore starts where ToPickup ended and ends on the ScoreSpot point (each within about 30 centimeters, the join within 15).",
 			"verifier": {
-				"type": "nt4-value",
-				"topic": "/AdvantageKit/RealOutputs/Check/Drive/PoseX/Max",
-				"check": "range",
-				"min": 6.0
+				"type": "script",
+				"path": "checkpoints/verify/paths-goal.sh"
 			}
 		},
 		{
-			"id": "left-sideways",
-			"title": "Left auto ends to the left",
-			"description": "Run Left Auto. After turning 45 degrees, the robot should be more than 1 meter to the left (positive y).",
+			"id": "auto-sequence",
+			"title": "Autonomous sequence written",
+			"description": "Autos.java drives ToPickup, then ToScore, then aims at the goal (until isAimed), then shoots, in that order.",
 			"verifier": {
-				"type": "nt4-value",
-				"topic": "/AdvantageKit/RealOutputs/Check/Drive/PoseY/Max",
-				"check": "range",
-				"min": 1.0
+				"type": "script",
+				"path": "checkpoints/verify/auto-sequence.sh"
 			}
 		},
 		{
-			"id": "right-sideways",
-			"title": "Right auto ends to the right",
-			"description": "Run Right Auto. After turning -45 degrees, the robot should be more than 1 meter to the right (negative y).",
+			"id": "reaches-pickup",
+			"title": "Reaches the pickup",
+			"description": "Run Pickup And Score in Auto. The robot, measured by its true position in the simulator, should get within 0.4 meters of the Pickup point.",
 			"verifier": {
 				"type": "nt4-value",
-				"topic": "/AdvantageKit/RealOutputs/Check/Drive/PoseY/Min",
+				"topic": "/AdvantageKit/RealOutputs/Check/Drive/DistanceToPickup/Min",
 				"check": "range",
-				"max": -1.0
+				"max": 0.4
+			}
+		},
+		{
+			"id": "reaches-score-spot",
+			"title": "Reaches the scoring spot",
+			"description": "Run Pickup And Score in Auto. The robot, measured by its true position, should get within 0.4 meters of the ScoreSpot point.",
+			"verifier": {
+				"type": "nt4-value",
+				"topic": "/AdvantageKit/RealOutputs/Check/Drive/DistanceToScoreSpot/Min",
+				"check": "range",
+				"max": 0.4
+			}
+		},
+		{
+			"id": "aimed-before-shot",
+			"title": "Aims before it shoots",
+			"description": "Every shot should start with the robot truly facing the goal, within 5 degrees. Aim (until isAimed) before you shoot.",
+			"verifier": {
+				"type": "nt4-value",
+				"topic": "/AdvantageKit/RealOutputs/Check/Subsystem/Shooter/AimErrorAtShotDegrees/Max",
+				"check": "range",
+				"max": 5
 			}
 		},
 		{
 			"id": "autos-shoot",
-			"title": "Autos shoot",
-			"description": "Both routines should end by shooting at least once.",
+			"title": "Shoots",
+			"description": "The routine should end by shooting at least once.",
 			"verifier": {
 				"type": "nt4-value",
 				"topic": "/AdvantageKit/RealOutputs/Check/Subsystem/Shooter/ShotCount/Max",

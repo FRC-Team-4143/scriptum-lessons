@@ -527,7 +527,7 @@
 				{
 					"id": "alliance-enum",
 					"title": "Alliance enum",
-					"description": "An ALLIANCE enum with RED and BLUE values (team standard: SCREAMING_SNAKE_CASE).",
+					"description": "An Alliance enum with RED and BLUE values (team standard: UpperCamelCase type name, SCREAMING_SNAKE_CASE values).",
 					"verifier": {
 						"type": "script",
 						"path": "lessons/java-variables/checkpoints/verify/alliance-enum.sh"
@@ -536,7 +536,7 @@
 				{
 					"id": "match-period-enum",
 					"title": "Match period enum",
-					"description": "A MATCH_PERIOD enum with AUTONOMOUS, TELEOP, and ENDGAME values (team standard: SCREAMING_SNAKE_CASE).",
+					"description": "A MatchPeriod enum with AUTONOMOUS, TELEOP, and ENDGAME values (team standard: UpperCamelCase type name, SCREAMING_SNAKE_CASE values).",
 					"verifier": {
 						"type": "script",
 						"path": "lessons/java-variables/checkpoints/verify/match-period-enum.sh"
@@ -654,7 +654,7 @@
 				{
 					"id": "can-enable",
 					"title": "Can enable",
-					"description": "canEnable(hasComms, eStopped) combines conditions with && and !.",
+					"description": "canEnable(has_comms, e_stopped) combines conditions with && and !.",
 					"verifier": {
 						"type": "script",
 						"path": "lessons/java-conditions/checkpoints/verify/can-enable.sh"
@@ -672,7 +672,7 @@
 				{
 					"id": "motor-direction",
 					"title": "Motor direction",
-					"description": "motorDirection(isReversed) uses the ternary operator.",
+					"description": "motorDirection(is_reversed) uses the ternary operator.",
 					"verifier": {
 						"type": "script",
 						"path": "lessons/java-conditions/checkpoints/verify/motor-direction.sh"
@@ -813,7 +813,7 @@
 				{
 					"id": "scale-joystick",
 					"title": "Scale joystick",
-					"description": "scaleJoystick(rawInput, sensitivity) scales and clamps, reusing clamp.",
+					"description": "scaleJoystick(raw_input, sensitivity) scales and clamps, reusing clamp.",
 					"verifier": {
 						"type": "script",
 						"path": "lessons/java-methods/checkpoints/verify/scale-joystick.sh"
@@ -1022,7 +1022,7 @@
 				{
 					"id": "teleop-code",
 					"title": "Your drive code",
-					"description": "Robot.java declares its own variables and uses arithmetic for arcade drive from the left stick Y and right stick X.",
+					"description": "Robot.java declares its own variables and uses arithmetic for arcade drive from the left stick Y and left stick X.",
 					"verifier": {
 						"type": "script",
 						"path": "lessons/robot-drivetrain/checkpoints/verify/teleop-code.sh"
@@ -1055,7 +1055,7 @@
 				{
 					"id": "turns-in-place",
 					"title": "Turns in place",
-					"description": "Push the right stick left or right (Arrow Left / Right) so one side drives forward and the other backward.",
+					"description": "Push the left stick left or right (A / D) so one side drives forward and the other backward.",
 					"verifier": {
 						"type": "nt4-value",
 						"topic": "/AdvantageKit/RealOutputs/Check/Drive/Turn/Max",
@@ -1081,7 +1081,7 @@
 				{
 					"id": "deadband-and-ifs",
 					"title": "Deadband and if statements",
-					"description": "Robot.java has a DEADBAND constant used in an if statement on each stick, and an if / else in autonomousPeriodic().",
+					"description": "Constants.java has a DEADBAND constant, Robot.java uses it in an if statement on each stick, and autonomousPeriodic() has an if / else.",
 					"verifier": {
 						"type": "script",
 						"path": "lessons/robot-sensors/checkpoints/verify/deadband.sh"
@@ -1090,7 +1090,7 @@
 				{
 					"id": "linear-speed",
 					"title": "Linear speed",
-					"description": "Drive both sides forward at full speed. Robot/LinearSpeed should read about 5 m/s.",
+					"description": "Drive both sides forward at full speed. Robot/LinearSpeed should read about 5.5 m/s.",
 					"verifier": {
 						"type": "nt4-value",
 						"topic": "/AdvantageKit/RealOutputs/Check/Robot/LinearSpeed/Max",
@@ -1102,19 +1102,19 @@
 				{
 					"id": "angular-speed",
 					"title": "Angular speed",
-					"description": "Spin in place at full speed (one stick forward, one back, left side backward). Robot/AngularSpeed should be positive.",
+					"description": "Spin in place at full speed (hold A, the left stick pushed left). Robot/AngularSpeed should be positive.",
 					"verifier": {
 						"type": "nt4-value",
 						"topic": "/AdvantageKit/RealOutputs/Check/Robot/AngularSpeed/Max",
 						"check": "range",
-						"min": 10,
-						"max": 25
+						"min": 3,
+						"max": 8
 					}
 				},
 				{
 					"id": "drive-two-meters",
 					"title": "Drive 2 meters",
-					"description": "Run Auto and let the robot stop. Robot/Distance should read about 2 meters (it may coast a little past).",
+					"description": "Run Auto and let the robot stop. Robot/Distance should read about 2 meters (it coasts a little past, to about 2.5).",
 					"verifier": {
 						"type": "nt4-value",
 						"topic": "/AdvantageKit/RealOutputs/Robot/Distance",
@@ -1197,7 +1197,7 @@
 				{
 					"id": "arcade-turn",
 					"title": "Arcade turn",
-					"description": "In Teleop, push the right stick to the right. The right side should reverse.",
+					"description": "In Teleop, push the left stick to the right (D). The right side should reverse.",
 					"verifier": {
 						"type": "nt4-value",
 						"topic": "/AdvantageKit/RealOutputs/Check/Drive/RightOutput/Min",
@@ -1310,6 +1310,15 @@
 					}
 				},
 				{
+					"id": "shoot-logic",
+					"title": "Shoot button logic",
+					"description": "ShooterSubsystem runs the flywheel at SHOOT_DUTY_CYCLE while the shoot button is held, and stops it otherwise.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/robot-subsystems/checkpoints/verify/shoot-logic.sh"
+					}
+				},
+				{
 					"id": "drive-from-subsystem",
 					"title": "Drive from the subsystem",
 					"description": "In Teleop, push the left stick forward. The drivetrain subsystem should drive the robot.",
@@ -1324,12 +1333,12 @@
 				{
 					"id": "flywheel-spins",
 					"title": "Flywheel spins up",
-					"description": "Hold the shoot button until the flywheel reaches its speed.",
+					"description": "Hold the shoot button. The flywheel should spin up to speed.",
 					"verifier": {
 						"type": "nt4-value",
 						"topic": "/AdvantageKit/RealOutputs/Check/Subsystem/Shooter/FlywheelVelocity/Max",
 						"check": "range",
-						"min": 270,
+						"min": 250,
 						"max": 340
 					}
 				},
@@ -1472,72 +1481,159 @@
 			]
 		},
 		{
-			"id": "robot-autonomous",
+			"id": "robot-computer-vision",
 			"order": 27,
 			"track": "FRC Robot",
-			"title": "Autonomous",
-			"description": "Build Left and Right autonomous routines from drive, turn and shoot commands, and pick them from a chooser.",
+			"title": "Computer Vision",
+			"description": "Teach the robot to see AprilTags: feed camera tag solutions to the pose estimator so the robot always knows where it is on the field, then aim at the goal from that estimate.",
 			"kind": "robot",
-			"subdir": "lessons/robot-autonomous/project",
+			"subdir": "lessons/robot-computer-vision/project",
 			"requires": [
 				"robot-state-machines"
 			],
 			"checkpoints": [
 				{
-					"id": "autos-in-chooser",
-					"title": "Autos in the chooser",
-					"description": "RobotContainer adds the Left Auto, Right Auto and Square Auto to the chooser.",
+					"id": "vision-added",
+					"title": "Camera tag solutions added",
+					"description": "LocalizationSubsystem.updateLogic() gives each camera tag solution to the pose estimator with addVisionMeasurement(): the pose the camera saw, the time the picture was taken, and the standard deviations.",
 					"verifier": {
 						"type": "script",
-						"path": "lessons/robot-autonomous/checkpoints/verify/autos-in-chooser.sh"
+						"path": "lessons/robot-computer-vision/checkpoints/verify/vision-added.sh"
 					}
 				},
 				{
-					"id": "square-loop",
-					"title": "Square auto uses a loop",
-					"description": "squareAuto() builds the square with a for loop and a command group.",
+					"id": "estimate-accurate",
+					"title": "Estimate within 6 cm and 1 degree",
+					"description": "Start fresh, enable Teleop and drive around (W/A/S/D) for at least 5 meters in total, with at least a quarter turn in it, then stop and wait 2 seconds. Once the robot has sat still, your estimate must be within 6 centimeters and 1 degree of where the robot really is. Choose better VISION_XY_STD_METERS and VISION_HEADING_STD_RADIANS if it is not.",
+					"verifier": {
+						"type": "nt4-value",
+						"topic": "/AdvantageKit/RealOutputs/Check/Localization/Accurate",
+						"check": "range",
+						"min": 1,
+						"max": 1
+					}
+				},
+				{
+					"id": "aim-state-written",
+					"title": "Aim state written",
+					"description": "DriveStates has AIM, the switch handles it with a PIDController (continuous input) that reads the pose estimate, getAngleToGoal() and isAimed() are written, and DrivetrainCommands.aim() starts and ends the state.",
 					"verifier": {
 						"type": "script",
-						"path": "lessons/robot-autonomous/checkpoints/verify/square-loop.sh"
+						"path": "lessons/robot-computer-vision/checkpoints/verify/aim-state-written.sh"
 					}
 				},
 				{
-					"id": "left-forward",
-					"title": "Left auto drives forward",
-					"description": "Run Left Auto. The robot should travel more than 6 meters in x.",
+					"id": "aim-converges",
+					"title": "Aims within 2 degrees",
+					"description": "Start fresh, enable Teleop and hold the left bumper (E). The robot should turn to face the goal and stay within 2 degrees of it for half a second, within 4 seconds. Raise AIM_KP if it stops short.",
 					"verifier": {
 						"type": "nt4-value",
-						"topic": "/AdvantageKit/RealOutputs/Check/Drive/PoseX/Max",
+						"topic": "/AdvantageKit/RealOutputs/Check/Aim/Settled",
 						"check": "range",
-						"min": 6
+						"min": 1,
+						"max": 1
 					}
 				},
 				{
-					"id": "left-sideways",
-					"title": "Left auto ends to the left",
-					"description": "Run Left Auto. After turning 45 degrees, the robot should be more than 1 meter to the left (positive y).",
+					"id": "aim-no-overshoot",
+					"title": "No wild overshoot",
+					"description": "On that same aim, the robot must not swing more than 10 degrees past the goal. Lower AIM_KP or add AIM_KD to damp it.",
 					"verifier": {
 						"type": "nt4-value",
-						"topic": "/AdvantageKit/RealOutputs/Check/Drive/PoseY/Max",
+						"topic": "/AdvantageKit/RealOutputs/Check/Aim/OvershootDegrees",
 						"check": "range",
-						"min": 1
+						"min": 0,
+						"max": 10
+					}
+				}
+			]
+		},
+		{
+			"id": "robot-autonomous",
+			"order": 28,
+			"track": "FRC Robot",
+			"title": "Choreo Autonomous",
+			"description": "Draw two paths in Choreo, then write the autonomous routine the way the competition robot does: follow the first path, pick up, follow the second path, aim at the goal with the aim state you built, and shoot.",
+			"kind": "robot",
+			"subdir": "lessons/robot-autonomous/project",
+			"requires": [
+				"robot-computer-vision",
+				"choreo-intro"
+			],
+			"checkpoints": [
+				{
+					"id": "paths-drawn",
+					"title": "Two paths drawn",
+					"description": "The Choreo project has two paths that you generated, each with at least three waypoints (a start, a point in between, and an end).",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/robot-autonomous/checkpoints/verify/paths-drawn.sh"
 					}
 				},
 				{
-					"id": "right-sideways",
-					"title": "Right auto ends to the right",
-					"description": "Run Right Auto. After turning -45 degrees, the robot should be more than 1 meter to the right (negative y).",
+					"id": "path-names",
+					"title": "Paths named ToPickup and ToScore",
+					"description": "The paths are named ToPickup and ToScore, and Autos.java loads them by those names.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/robot-autonomous/checkpoints/verify/path-names.sh"
+					}
+				},
+				{
+					"id": "paths-goal",
+					"title": "Paths go where they should",
+					"description": "ToPickup starts on the Start point and ends on the Pickup point, and ToScore starts where ToPickup ended and ends on the ScoreSpot point (each within about 30 centimeters, the join within 15).",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/robot-autonomous/checkpoints/verify/paths-goal.sh"
+					}
+				},
+				{
+					"id": "auto-sequence",
+					"title": "Autonomous sequence written",
+					"description": "Autos.java drives ToPickup, then ToScore, then aims at the goal (until isAimed), then shoots, in that order.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/robot-autonomous/checkpoints/verify/auto-sequence.sh"
+					}
+				},
+				{
+					"id": "reaches-pickup",
+					"title": "Reaches the pickup",
+					"description": "Run Pickup And Score in Auto. The robot, measured by its true position in the simulator, should get within 0.4 meters of the Pickup point.",
 					"verifier": {
 						"type": "nt4-value",
-						"topic": "/AdvantageKit/RealOutputs/Check/Drive/PoseY/Min",
+						"topic": "/AdvantageKit/RealOutputs/Check/Drive/DistanceToPickup/Min",
 						"check": "range",
-						"max": -1
+						"max": 0.4
+					}
+				},
+				{
+					"id": "reaches-score-spot",
+					"title": "Reaches the scoring spot",
+					"description": "Run Pickup And Score in Auto. The robot, measured by its true position, should get within 0.4 meters of the ScoreSpot point.",
+					"verifier": {
+						"type": "nt4-value",
+						"topic": "/AdvantageKit/RealOutputs/Check/Drive/DistanceToScoreSpot/Min",
+						"check": "range",
+						"max": 0.4
+					}
+				},
+				{
+					"id": "aimed-before-shot",
+					"title": "Aims before it shoots",
+					"description": "Every shot should start with the robot truly facing the goal, within 5 degrees. Aim (until isAimed) before you shoot.",
+					"verifier": {
+						"type": "nt4-value",
+						"topic": "/AdvantageKit/RealOutputs/Check/Subsystem/Shooter/AimErrorAtShotDegrees/Max",
+						"check": "range",
+						"max": 5
 					}
 				},
 				{
 					"id": "autos-shoot",
-					"title": "Autos shoot",
-					"description": "Both routines should end by shooting at least once.",
+					"title": "Shoots",
+					"description": "The routine should end by shooting at least once.",
 					"verifier": {
 						"type": "nt4-value",
 						"topic": "/AdvantageKit/RealOutputs/Check/Subsystem/Shooter/ShotCount/Max",
@@ -1582,7 +1678,7 @@
 			"modules": [
 				"editor-basics"
 			],
-			"kind": "mixed",
+			"kind": "assist",
 			"path": "lessons/editor-basics/guides/files-make.json"
 		},
 		{
@@ -1594,7 +1690,7 @@
 			"modules": [
 				"editor-basics"
 			],
-			"kind": "mixed",
+			"kind": "assist",
 			"path": "lessons/editor-basics/guides/editor-typing.json"
 		},
 		{
@@ -1606,7 +1702,7 @@
 			"modules": [
 				"editor-basics"
 			],
-			"kind": "mixed",
+			"kind": "assist",
 			"path": "lessons/editor-basics/guides/files-rename-delete.json"
 		},
 		{
@@ -1630,7 +1726,7 @@
 			"modules": [
 				"editor-basics"
 			],
-			"kind": "mixed",
+			"kind": "assist",
 			"path": "lessons/editor-basics/guides/find-things-fast.json"
 		},
 		{
@@ -1657,7 +1753,7 @@
 			"needs": [
 				"editor"
 			],
-			"kind": "mixed",
+			"kind": "assist",
 			"path": "lessons/git-basics/guides/git-source-control.json"
 		},
 		{
@@ -1689,6 +1785,7 @@
 				"robot-subsystems",
 				"robot-control-theory",
 				"robot-state-machines",
+				"robot-computer-vision",
 				"robot-autonomous"
 			],
 			"needs": [
@@ -1935,7 +2032,7 @@
 		{
 			"id": "java-variables-constants-enums",
 			"title": "Constants and enums",
-			"summary": "final, SCREAMING_SNAKE_CASE, and enums nested in Main.",
+			"summary": "final, SCREAMING_SNAKE_CASE, and enums (UpperCamelCase types) nested in Main.",
 			"topic": "Java",
 			"order": 203,
 			"modules": [
@@ -2368,16 +2465,40 @@
 			"path": "lessons/robot-odometry/guides/robot-odometry-kinematics.json"
 		},
 		{
-			"id": "robot-odometry-pose",
-			"title": "Where is the robot?",
-			"summary": "Pose estimation, and why it drifts from the truth.",
+			"id": "robot-odometry-yaw",
+			"title": "Which way is it facing?",
+			"summary": "Yaw: working out the robot's heading from the wheels.",
 			"topic": "Robot",
 			"order": 441,
 			"modules": [
 				"robot-odometry"
 			],
 			"kind": "mixed",
+			"path": "lessons/robot-odometry/guides/robot-odometry-yaw.json"
+		},
+		{
+			"id": "robot-odometry-pose",
+			"title": "Where is the robot?",
+			"summary": "Pose estimation, and why it drifts from the truth.",
+			"topic": "Robot",
+			"order": 442,
+			"modules": [
+				"robot-odometry"
+			],
+			"kind": "mixed",
 			"path": "lessons/robot-odometry/guides/robot-odometry-pose.json"
+		},
+		{
+			"id": "robot-odometry-auto",
+			"title": "Drive to a spot",
+			"summary": "Use the pose in autonomous to drive to x = 3 m.",
+			"topic": "Robot",
+			"order": 443,
+			"modules": [
+				"robot-odometry"
+			],
+			"kind": "mixed",
+			"path": "lessons/robot-odometry/guides/robot-odometry-auto.json"
 		},
 		{
 			"id": "robot-odometry-objects",
@@ -2441,22 +2562,21 @@
 			"path": "lessons/robot-subsystems/guides/robot-subsystems-big-idea.json"
 		},
 		{
-			"id": "robot-subsystems-states",
+			"id": "robot-state-machines-enums-switch",
 			"title": "Enums and switch",
 			"summary": "A subsystem's states, and doing something different in each.",
 			"topic": "Robot",
 			"order": 463,
 			"modules": [
-				"robot-subsystems",
 				"robot-state-machines"
 			],
 			"kind": "mixed",
-			"path": "common/guides/robot-subsystems-states.json"
+			"path": "lessons/robot-state-machines/guides/robot-state-machines-enums-switch.json"
 		},
 		{
 			"id": "robot-subsystems-drive-states-assist",
 			"title": "Drive from the subsystem",
-			"summary": "Fill in the ARCADE case so the drivetrain subsystem drives with the sticks.",
+			"summary": "Fill in updateLogic so the drivetrain subsystem drives with the sticks.",
 			"topic": "Robot",
 			"order": 464,
 			"modules": [
@@ -2488,6 +2608,18 @@
 			],
 			"kind": "mixed",
 			"path": "lessons/robot-subsystems/guides/robot-subsystems-shooter.json"
+		},
+		{
+			"id": "robot-subsystems-shoot-logic",
+			"title": "Write the shoot button logic",
+			"summary": "Use an if / else so the flywheel runs only while the shoot button is held.",
+			"topic": "Robot",
+			"order": 466,
+			"modules": [
+				"robot-subsystems"
+			],
+			"kind": "assist",
+			"path": "lessons/robot-subsystems/guides/robot-subsystems-shoot-logic.json"
 		},
 		{
 			"id": "robot-control-error",
@@ -2538,6 +2670,18 @@
 			"path": "lessons/robot-state-machines/guides/robot-state-machines-states.json"
 		},
 		{
+			"id": "robot-computer-vision-where-am-i",
+			"title": "Where am I? Odometry vs vision",
+			"summary": "Why wheels alone drift, and how cameras fix it.",
+			"topic": "Robot",
+			"order": 510,
+			"modules": [
+				"robot-computer-vision"
+			],
+			"kind": "concept",
+			"path": "lessons/robot-computer-vision/guides/robot-computer-vision-where-am-i.json"
+		},
+		{
 			"id": "robot-state-machines-commands",
 			"title": "Commands and lambdas",
 			"summary": "startEnd, runOnce, and handing over code to run later.",
@@ -2549,6 +2693,18 @@
 			],
 			"kind": "mixed",
 			"path": "common/guides/robot-state-machines-commands.json"
+		},
+		{
+			"id": "robot-computer-vision-add-vision",
+			"title": "Add the camera measurement",
+			"summary": "Give each camera tag solution to the pose estimator, then see how close the estimate gets.",
+			"topic": "Robot",
+			"order": 511,
+			"modules": [
+				"robot-computer-vision"
+			],
+			"kind": "mixed",
+			"path": "lessons/robot-computer-vision/guides/robot-computer-vision-add-vision.json"
 		},
 		{
 			"id": "robot-state-machines-bindings",
@@ -2575,6 +2731,18 @@
 			"path": "lessons/robot-state-machines/guides/robot-state-machines-commands-assist.json"
 		},
 		{
+			"id": "robot-computer-vision-trust",
+			"title": "How much should I trust the camera?",
+			"summary": "What the standard deviations, the timestamp and the heading do to the estimate.",
+			"topic": "Robot",
+			"order": 512,
+			"modules": [
+				"robot-computer-vision"
+			],
+			"kind": "concept",
+			"path": "lessons/robot-computer-vision/guides/robot-computer-vision-trust.json"
+		},
+		{
 			"id": "robot-state-machines-shooter-states-assist",
 			"title": "Write the shooter's states",
 			"summary": "Write handleStateTransition and the switch in updateLogic.",
@@ -2587,11 +2755,86 @@
 			"path": "lessons/robot-state-machines/guides/robot-state-machines-shooter-states-assist.json"
 		},
 		{
+			"id": "robot-computer-vision-aim",
+			"title": "Aiming at a spot",
+			"summary": "How a robot works out which way to turn to face a point.",
+			"topic": "Robot",
+			"order": 513,
+			"modules": [
+				"robot-computer-vision"
+			],
+			"kind": "concept",
+			"path": "lessons/robot-computer-vision/guides/robot-computer-vision-aim.json"
+		},
+		{
+			"id": "robot-computer-vision-aim-assist",
+			"title": "Write the aim state",
+			"summary": "Add AIM, the PID, the angle to the goal, isAimed and the command.",
+			"topic": "Robot",
+			"order": 514,
+			"modules": [
+				"robot-computer-vision"
+			],
+			"kind": "mixed",
+			"path": "lessons/robot-computer-vision/guides/robot-computer-vision-aim-assist.json"
+		},
+		{
+			"id": "robot-computer-vision-aim-tuning",
+			"title": "Tune kP to reach the goal",
+			"summary": "Raise kP until the robot settles within 2 degrees.",
+			"topic": "Robot",
+			"order": 515,
+			"modules": [
+				"robot-computer-vision"
+			],
+			"kind": "mixed",
+			"path": "lessons/robot-computer-vision/guides/robot-computer-vision-aim-tuning.json"
+		},
+		{
+			"id": "robot-computer-vision-aim-damping",
+			"title": "Damp the overshoot with kD",
+			"summary": "Use kD to stop the robot swinging past the goal.",
+			"topic": "Robot",
+			"order": 516,
+			"modules": [
+				"robot-computer-vision"
+			],
+			"kind": "mixed",
+			"path": "lessons/robot-computer-vision/guides/robot-computer-vision-aim-damping.json"
+		},
+		{
+			"id": "robot-autonomous-autos-concept",
+			"title": "Autos = paths + a sequence",
+			"summary": "What an autonomous routine is: Choreo paths, a list of commands, and a pose estimate that is close but not perfect.",
+			"topic": "Robot",
+			"order": 528,
+			"modules": [
+				"robot-autonomous"
+			],
+			"kind": "concept",
+			"path": "lessons/robot-autonomous/guides/robot-autonomous-autos-concept.json"
+		},
+		{
+			"id": "robot-autonomous-draw-paths",
+			"title": "Draw ToPickup and ToScore",
+			"summary": "Draw and generate the two Choreo paths, with the exact names and places the routine needs.",
+			"topic": "Robot",
+			"order": 529,
+			"modules": [
+				"robot-autonomous"
+			],
+			"needs": [
+				"choreo"
+			],
+			"kind": "mixed",
+			"path": "lessons/robot-autonomous/guides/robot-autonomous-draw-paths.json"
+		},
+		{
 			"id": "robot-autonomous-command-lifecycle",
 			"title": "Inside a command",
-			"summary": "initialize, execute, isFinished, end.",
+			"summary": "Three states, initialize / execute / end, and isFinished as the condition.",
 			"topic": "Robot",
-			"order": 532,
+			"order": 530,
 			"modules": [
 				"robot-autonomous"
 			],
@@ -2599,28 +2842,52 @@
 			"path": "lessons/robot-autonomous/guides/robot-autonomous-command-lifecycle.json"
 		},
 		{
-			"id": "robot-autonomous-drive-distance",
-			"title": "Driving to a distance",
-			"summary": "Proportional control: speed that shrinks as you arrive.",
+			"id": "robot-autonomous-command-types",
+			"title": "Kinds of commands",
+			"summary": "runOnce, run, startEnd, waitSeconds and FunctionalCommand, and when to pick each.",
+			"topic": "Robot",
+			"order": 531,
+			"modules": [
+				"robot-autonomous"
+			],
+			"kind": "concept",
+			"path": "lessons/robot-autonomous/guides/robot-autonomous-command-types.json"
+		},
+		{
+			"id": "robot-autonomous-command-decorators",
+			"title": "Dots that change commands",
+			"summary": "withTimeout, until, andThen and alongWith.",
+			"topic": "Robot",
+			"order": 532,
+			"modules": [
+				"robot-autonomous"
+			],
+			"kind": "concept",
+			"path": "lessons/robot-autonomous/guides/robot-autonomous-command-decorators.json"
+		},
+		{
+			"id": "robot-autonomous-write-sequence",
+			"title": "Write the autonomous sequence",
+			"summary": "Load the two paths and put the drive, wait, aim and shoot commands in order.",
 			"topic": "Robot",
 			"order": 533,
 			"modules": [
 				"robot-autonomous"
 			],
 			"kind": "mixed",
-			"path": "lessons/robot-autonomous/guides/robot-autonomous-drive-distance.json"
+			"path": "lessons/robot-autonomous/guides/robot-autonomous-write-sequence.json"
 		},
 		{
-			"id": "robot-autonomous-sequences",
-			"title": "Building routines",
-			"summary": "Commands.sequence, and a for loop for the square.",
+			"id": "robot-autonomous-run-and-watch",
+			"title": "Run the autonomous and watch it",
+			"summary": "Run Pickup And Score, plot the checks in AdvantageScope and read a failing one.",
 			"topic": "Robot",
 			"order": 534,
 			"modules": [
 				"robot-autonomous"
 			],
 			"kind": "mixed",
-			"path": "lessons/robot-autonomous/guides/robot-autonomous-sequences.json"
+			"path": "lessons/robot-autonomous/guides/robot-autonomous-run-and-watch.json"
 		}
 	]
 }

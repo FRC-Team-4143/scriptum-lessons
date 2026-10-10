@@ -58,12 +58,12 @@
 		{
 			"title": "The tuning button",
 			"say": {
-				"never": "Look at the top of the field list on the left, next to the search box. There is a small **slider icon**. That's the tuning button. If you can't see it, the robot hasn't published any tunable values yet, so make sure it's running and wait a few seconds.",
-				"bit": "Next to the search box in the field list there's a slider icon: the tuning button. It only appears once the robot publishes values under Tuning."
+				"never": "Look at the top of the field list on the left, next to the search box. There is a small **slider icon**. That's the tuning button. If you can't see it, scroll the field list back to the top. If it's still missing, the robot hasn't published any tunable values yet, so make sure it's running and wait a few seconds.",
+				"bit": "Next to the search box in the field list there's a slider icon: the tuning button. It only appears once the robot publishes values under Tuning. Scroll the list to the top if you can't see it."
 			},
 			"target": {
 				"pane": "scope",
-				"selector": ".side-bar-tuning-button"
+				"selector": ".side-bar"
 			},
 			"waitFor": {
 				"target": {
@@ -78,12 +78,12 @@
 		{
 			"title": "Turn tuning mode on",
 			"say": {
-				"never": "Click the slider icon. It turns **purple** when tuning mode is on. Click it again any time to turn it off. While it's on, the values you can change become editable boxes.",
+				"never": "Click the slider icon (scroll the field list to the top if you can't see it). It turns **purple** when tuning mode is on. Click it again any time to turn it off. While it's on, the values you can change become editable boxes.",
 				"bit": "Click the slider icon. It turns purple when tuning mode is on."
 			},
 			"target": {
 				"pane": "scope",
-				"selector": ".side-bar-tuning-button"
+				"selector": ".side-bar"
 			},
 			"waitFor": {
 				"target": {
@@ -138,7 +138,7 @@
 		{
 			"title": "Type a new value",
 			"say": {
-				"never": "Click in the box next to **FlywheelTargetRPM**, type a new number (the starting one is 3000, so try 3500), and press **Enter**. The robot now uses your number. Press **I did it** when you've done that.",
+				"never": "Click in the box next to **FlywheelTargetRPM**, type a new number (the starting one is 3000, so try 3500), and press **Enter**. The robot now uses your number. Dozer can't read what you typed, so press **I did it** when you've done that, then **Verify** checks it for real.",
 				"bit": "Type a different number than 3000 into the FlywheelTargetRPM box and press Enter. Press I did it when you have."
 			},
 			"target": {
@@ -146,7 +146,7 @@
 				"selector": ".side-bar"
 			},
 			"waitFor": {
-				"hint": "type a new value (not 3000) and press Enter."
+				"hint": "type a new value (not 3000), press Enter, then press I did it."
 			},
 			"assist": true
 		},

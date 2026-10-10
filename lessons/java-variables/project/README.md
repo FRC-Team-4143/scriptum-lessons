@@ -10,8 +10,9 @@ More depth: the team docs page [Variables](https://frc-team-4143.github.io/docs/
 
 1. **Store four facts in local variables.** Inside `main`, declare one
    variable for each row below, choosing the datatype shown, and declare and
-   assign on the same line. Name them whatever you like - the checkpoint
-   reads what gets printed, not your variable names.
+   assign on the same line. Team standard: local variables are
+   `snake_case` (lowercase words joined by underscores, like `team_number`).
+   The checkpoint reads what gets printed, not your variable names.
 
    | Datatype | Value | Printed key |
    | --- | --- | --- |
@@ -22,7 +23,7 @@ More depth: the team docs page [Variables](https://frc-team-4143.github.io/docs/
 
 2. **Print each one** with `System.out.println`, as the key, a colon, one
    space, then the value - e.g.
-   `System.out.println("Team number: " + yourVariableName);`.
+   `System.out.println("Team number: " + your_variable_name);`.
 
    :::warning[Match the printed format exactly]
 
@@ -34,13 +35,13 @@ More depth: the team docs page [Variables](https://frc-team-4143.github.io/docs/
 
 3. **Add four named values to the `Main` class itself**, outside of `main`.
    The checkpoints look these up by name via reflection, so use exactly
-   these names. Team standard: constants and enums are `final` /
-   `SCREAMING_SNAKE_CASE`.
+   these names. Team standard: constants are `final` /
+   `SCREAMING_SNAKE_CASE`, enum type names are `UpperCamelCase` like classes (the enum's values are `SCREAMING_SNAKE_CASE`).
    - `String TEAM_NAME` - a `public static final` constant equal to
      `"Team 4143"`.
    - `double MAX_SPEED` - a `public static final` constant equal to `5.0`.
-   - An `enum` named `ALLIANCE` with values `RED` and `BLUE`.
-   - An `enum` named `MATCH_PERIOD` with values `AUTONOMOUS`, `TELEOP`, and
+   - An `enum` named `Alliance` with values `RED` and `BLUE`.
+   - An `enum` named `MatchPeriod` with values `AUTONOMOUS`, `TELEOP`, and
      `ENDGAME`.
 
    Define both enums as nested types inside `Main`, not as their own

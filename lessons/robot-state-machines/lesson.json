@@ -9,8 +9,7 @@
 	],
 	"guides": [
 		"build-and-run",
-		"robot-state-machines-commands",
-		"robot-subsystems-states"
+		"robot-state-machines-commands"
 	],
 	"checkpoints": [
 		{

@@ -32,10 +32,10 @@
 				"bit": "PID here is the feedforward guess **plus** a correction that grows with the error."
 			},
 			"board": {
-				"code": "duty = (kV * targetRps + kP * error) / 12.0;",
+				"code": "duty = (kV * target_rps + kP * error) / 12.0;",
 				"marks": [
 					{
-						"text": "kV * targetRps",
+						"text": "kV * target_rps",
 						"label": "feedforward: the power to hold the speed"
 					},
 					{

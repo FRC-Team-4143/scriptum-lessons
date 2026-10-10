@@ -11,9 +11,7 @@ import frc.robot.subsystems.shooter.ShooterConstants.ShooterStates;
 public final class ShooterCommands {
   private ShooterCommands() {}
 
-  /**
-   * Shoots for as long as the command runs, then goes back to idle.
-   */
+  /** Shoots for as long as the command runs, then goes back to idle. */
   public static Command shoot() {
     ShooterSubsystem shooter = ShooterSubsystem.getInstance();
     return Commands.startEnd(
@@ -21,9 +19,7 @@ public final class ShooterCommands {
         () -> shooter.setWantedState(ShooterStates.IDLE));
   }
 
-  /**
-   * An instant command that pretends a game piece was just launched.
-   */
+  /** An instant command that pretends a game piece was just launched. */
   public static Command simulateBallLaunch() {
     return Commands.runOnce(() -> ShooterSubsystem.getInstance().simulateBallLaunch());
   }

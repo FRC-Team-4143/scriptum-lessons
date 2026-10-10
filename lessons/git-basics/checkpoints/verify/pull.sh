@@ -10,13 +10,13 @@ if [ -z "$origin" ] || [ ! -d "$origin" ]; then
 fi
 
 if [ "$(git rev-parse develop)" = "$(git rev-parse lesson-develop-before)" ]; then
-	echo "Your develop still doesn't have your teammate's commit. Make sure you're on develop, then run: git pull"
+	echo "Your develop still doesn't have your teammate's commit. Make sure you're on develop, then use the ... menu in Source Control: Pull, Push, Pull."
 	exit 1
 fi
 
 remote_tip="$(git --git-dir="$origin" rev-parse refs/heads/develop)"
 if ! git merge-base --is-ancestor "$remote_tip" develop 2>/dev/null; then
-	echo "develop is missing the newest commit from origin. Try: git pull"
+	echo "develop is missing the newest commit from origin. Use the ... menu in Source Control: Pull, Push, Pull."
 	exit 1
 fi
 if ! grep -q "Saturday" Schedule.txt 2>/dev/null && ! git show develop:Schedule.txt | grep -q "Saturday"; then

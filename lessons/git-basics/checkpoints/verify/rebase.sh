@@ -4,7 +4,7 @@ PROJECT="$1"
 cd "$PROJECT/05-rebase"
 
 if [ -d .git/rebase-merge ] || [ -d .git/rebase-apply ]; then
-	echo "A rebase is still in progress - finish it (git rebase --continue) or abort and retry."
+	echo "A rebase is still in progress - finish it or abort it, then try again."
 	exit 1
 fi
 
@@ -22,7 +22,7 @@ fi
 
 merges="$(git rev-list --merges develop..issue-15-led-colors | wc -l | tr -d ' ')"
 if [ "$merges" -ne 0 ]; then
-	echo "That looks like a merge, not a rebase - try git rebase develop instead of git merge develop."
+	echo "That looks like a merge, not a rebase - use ... > Branch > Rebase Branch... with develop instead of Merge."
 	exit 1
 fi
 

@@ -20,7 +20,7 @@ public class Main {
 
     // TODO: return whether the robot can enable - true only when there's
     // comms AND the robot is not e-stopped. Use && and !.
-    public static boolean canEnable(boolean hasComms, boolean eStopped) {
+    public static boolean canEnable(boolean has_comms, boolean e_stopped) {
         return false;
     }
 
@@ -29,10 +29,10 @@ public class Main {
         return false;
     }
 
-    // TODO: return "REVERSED" if isReversed is true, "FORWARD" otherwise.
+    // TODO: return "REVERSED" if is_reversed is true, "FORWARD" otherwise.
     // Use the ternary operator (condition ? ifTrue : ifFalse) instead of an
     // if/else - one line, no braces.
-    public static String motorDirection(boolean isReversed) {
+    public static String motorDirection(boolean is_reversed) {
         return null;
     }
 

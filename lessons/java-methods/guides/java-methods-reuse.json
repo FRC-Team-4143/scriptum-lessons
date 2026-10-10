@@ -32,10 +32,10 @@
 				"bit": "`scaleJoystick` needs the same range check `clamp` already does, so it **calls** clamp instead of copying it."
 			},
 			"board": {
-				"code": "public static double scaleJoystick(double rawInput, double sensitivity) {\n    return clamp(rawInput * sensitivity, -1.0, 1.0);\n}",
+				"code": "public static double scaleJoystick(double raw_input, double sensitivity) {\n    return clamp(raw_input * sensitivity, -1.0, 1.0);\n}",
 				"marks": [
 					{
-						"text": "rawInput * sensitivity",
+						"text": "raw_input * sensitivity",
 						"label": "the scaled value"
 					},
 					{

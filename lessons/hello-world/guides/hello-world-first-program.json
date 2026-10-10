@@ -5,6 +5,13 @@
 	"order": 180,
 	"steps": [
 		{
+			"title": "What you will do",
+			"say": {
+				"never": "In this guide you will open Main.java and look at each line to see what it does. Then you will run it and check that it prints what you expect.",
+				"bit": "In this guide you will open Main.java, see what each line does, then run it."
+			}
+		},
+		{
 			"title": "Open Main.java",
 			"say": {
 				"never": "Every Java program starts somewhere. Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `Main`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",

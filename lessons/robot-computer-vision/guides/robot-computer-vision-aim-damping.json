@@ -1,0 +1,219 @@
+{
+	"title": "Damp the overshoot with kD",
+	"summary": "Use kD to stop the robot swinging past the goal.",
+	"topic": "Robot",
+	"order": 516,
+	"steps": [
+		{
+			"title": "Overshoot",
+			"say": {
+				"never": "A bigger kP gets there faster, but the robot arrives with speed. It can't stop instantly, so it swings past the goal, then comes back, then swings past again. That's overshoot, and on a real robot it makes the shot miss. The checkpoint allows 10 degrees past the goal, and a big kP will go way past that. You have two ways out: use a smaller kP, or add damping with kD.",
+				"bit": "Too much kP swings past the goal. Use less kP, or damp it with kD."
+			}
+		},
+		{
+			"title": "kD brakes",
+			"say": {
+				"never": "kD looks at how fast the error is changing. When the error is shrinking fast, kD pushes back against it, like easing off the gas as you roll up to a stop sign. A good kD lets you keep a large kP, so the robot is fast **and** doesn't overshoot. Too much kD makes the robot twitchy and slow, and on real robots it amplifies sensor noise, so use the smallest that works.",
+				"bit": "kD pushes against fast change, so a big kP no longer overshoots. Too much is twitchy and slow."
+			}
+		},
+		{
+			"title": "Start the robot",
+			"say": {
+				"never": "Your code only works once it's started. Press **Start** and wait until the status says **Running**. Every change to the constants needs a fresh Start, so you will do this a few times.",
+				"bit": "Your code only runs once it's built and started. Do it again after every change."
+			},
+			"target": {
+				"selector": "[data-tour='sim-controls']"
+			},
+			"waitFor": {
+				"target": {
+					"selector": "[data-tour='code-status']",
+					"text": "Running"
+				},
+				"hint": {
+					"never": "press Start, then wait for Running.",
+					"bit": "press Start and wait for Running."
+				}
+			},
+			"assist": true
+		},
+		{
+			"title": "Enable in Teleop",
+			"say": {
+				"never": "Choose **Teleop**, then press **Enable**. The robot stays frozen until it's enabled.",
+				"bit": "Pick **Teleop** and press **Enable**. Robot code runs only while it's enabled."
+			},
+			"target": {
+				"selector": "[data-tour='enable']"
+			},
+			"waitFor": {
+				"target": {
+					"selector": "[data-tour='enable'] button",
+					"text": "Enabled"
+				},
+				"hint": {
+					"never": "choose Teleop, then press Enable.",
+					"bit": "choose Teleop, then Enable."
+				}
+			},
+			"assist": true
+		},
+		{
+			"title": "Plot AimErrorDegrees",
+			"say": {
+				"never": "Keep the error plot up; you are looking for a line that drops to 0 without going below it. Look at **AdvantageScope**, the graphing tool. Type `AimErrorDegrees` in its search box. Find **Subsystem/Drivetrain/AimErrorDegrees** in the list and drag it with your mouse onto the **Left Axis** of the graph.",
+				"bit": "Keep the error plot up; you are looking for a line that drops to 0 without going below it. In AdvantageScope, search for `AimErrorDegrees`, then drag **Subsystem/Drivetrain/AimErrorDegrees** onto the **Left Axis**."
+			},
+			"close": [
+				"editor",
+				"preview",
+				"elastic"
+			],
+			"open": [
+				"scope"
+			],
+			"target": {
+				"pane": "scope",
+				"selector": ".line-graph-left.source-list"
+			},
+			"waitFor": {
+				"target": {
+					"pane": "scope",
+					"selector": ".line-graph-left.source-list .key-container",
+					"text": "Subsystem/Drivetrain/AimErrorDegrees"
+				},
+				"hint": "drag Subsystem/Drivetrain/AimErrorDegrees onto the graph."
+			},
+			"assist": true
+		},
+		{
+			"title": "Open DrivetrainConstants.java",
+			"say": {
+				"never": "Set a big kP first. Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `DrivetrainConstants`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "Set a big kP first. Press **Ctrl+P**, type `DrivetrainConstants` and press Enter. Quick Open finds any file by name."
+			},
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "DrivetrainConstants.java"
+				},
+				"hint": "open DrivetrainConstants.java with Ctrl+P.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Find it",
+			"say": {
+				"never": "The aim gains are in the AIM section. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `public static final double AIM_KP` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "The aim gains are in the AIM section. Press **Ctrl+F**, type `public static final double AIM_KP` and press Enter to jump to it."
+			},
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "public static final double AIM_KP"
+				},
+				"hint": "find public static final double AIM_KP with Ctrl+F.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Make it overshoot",
+			"say": {
+				"never": "Set `AIM_KP = 1.0` and leave `AIM_KD = 0.0`. Start, Enable, hold **E**. The error should swing a few degrees past 0 (about 6) before it comes back. That is allowed, but it is close to the line. Click **I did it** once you've seen it swing past.",
+				"bit": "`AIM_KP = 1.0`, `AIM_KD = 0.0`: watch the error swing a few degrees past 0. Click I did it."
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"hint": "set kP to 1.0, watch it overshoot, then click I did it."
+			},
+			"assist": true,
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "public static final double AIM_KP"
+			}
+		},
+		{
+			"title": "Overshoot after a long drive",
+			"say": {
+				"never": "The farther the robot has to turn, the faster it is going when it arrives, and the more it overshoots. Release **E**, drive away with **W/A/S/D** for several meters, and press **E** again. In testing a turn of about 150 degrees swung about 17 degrees past the goal, more than the 10 degrees allowed. Click **I did it** once you have seen a big swing.",
+				"bit": "A longer turn overshoots more: about 17 degrees after a ~150 degree turn. Drive away, press E, click I did it."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "public static final double AIM_KP"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"hint": "drive away, hold E, watch the bigger swing, then click I did it."
+			},
+			"assist": true
+		},
+		{
+			"title": "Add kD",
+			"say": {
+				"never": "Now raise `AIM_KP` to 2.0 and `AIM_KD`: try 0.1, then 0.2, then 0.3, with a fresh Start each time. Watch the swing past zero shrink. With kP 2.0 and kD 0.2 the robot settled in about half a second with almost no overshoot. Pick a kD where the robot goes to the goal quickly and the overshoot stays under 10 degrees, even after a long drive. Click **I did it** once you've found one.",
+				"bit": "Set kP 2.0 and try `AIM_KD` = 0.1, 0.2, 0.3. About 0.2 settles in ~0.5 s with almost no overshoot. Keep it under 10 degrees, even after a long drive."
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"hint": "try kD values until the overshoot is under 10 degrees, then click I did it."
+			},
+			"assist": true,
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "public static final double AIM_KD"
+			}
+		},
+		{
+			"title": "Which is best?",
+			"say": {
+				"never": "There's no single right answer. Many combinations settle quickly and stay put. Try for the fastest one: how fast can you get inside 2 degrees without going past the goal at all? Notice also what happens when you push kP up and up (try 6): the robot never settles and just wobbles. That's the edge of what a PID can do, and why real teams tune a little under it.",
+				"bit": "Many gains work. Chase the fastest settle with no overshoot. A huge kP (try 6) wobbles and never settles."
+			}
+		},
+		{
+			"title": "The check remembers",
+			"say": {
+				"never": "The overshoot check keeps the worst swing from **every** press of **E**, so one bad try stays recorded even if later tries are good. Press **Start** again to clear it, then do one clean press of **E** from the start with your final numbers. The same goes for the settle check, which gives you 4 seconds from the moment you press **E**.",
+				"bit": "The overshoot check remembers your worst swing until you press Start again. Do a clean final try after a fresh Start. You have 4 s to settle."
+			}
+		},
+		{
+			"title": "Check your work",
+			"say": {
+				"never": "When it all works the way you expect, click the lesson chip and press **Verify**. Each checkpoint tells you what it wants if it doesn't pass yet, so read the message.",
+				"bit": "When it runs the way you expect, open the lesson chip and press **Verify**. Each checkpoint tells you what it's looking for if it doesn't pass yet."
+			},
+			"target": {
+				"selector": "[data-tour='lesson']"
+			}
+		}
+	],
+	"kind": "mixed"
+}

@@ -1,5 +1,6 @@
 package frc.robot.autos;
 
+import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.drive.DrivetrainConstants;
@@ -7,49 +8,53 @@ import frc.robot.subsystems.drive.DrivetrainSubsystem;
 
 /**
  * Drives straight ahead (in whatever direction the robot is facing) for a distance, then stops.
- * Compare it with TurnToAngleCommand, which is already finished.
+ * This one is finished for you: read it along with TurnToAngleCommand to see how a command is
+ * built.
  */
 public class DriveDistanceCommand extends Command {
-  private final DrivetrainSubsystem drive = DrivetrainSubsystem.getInstance();
-  private final DrivetrainConstants constants = drive.getConstants();
-  private final double goalMeters;
-  private Pose2d startPose = new Pose2d();
+  private final DrivetrainSubsystem drive_ = DrivetrainSubsystem.getInstance();
+  private final DrivetrainConstants CONSTANTS = drive_.getConstants();
+  private final double goal_meters_;
+  private Pose2d start_pose_ = new Pose2d();
 
   /**
    * @param meters how far to drive. Negative drives backward.
    */
   public DriveDistanceCommand(double meters) {
-    goalMeters = meters;
+    goal_meters_ = meters;
   }
 
   /** How far the robot has driven since the command started, in meters. */
   private double distanceDriven() {
-    return drive.getPose().getTranslation().getDistance(startPose.getTranslation());
+    return drive_.getPose().getTranslation().getDistance(start_pose_.getTranslation());
   }
 
   @Override
   public void initialize() {
-    // TODO: remember where the robot is right now: startPose = drive.getPose();
+    start_pose_ = drive_.getPose();
   }
 
   @Override
   public void execute() {
-    // TODO: work out how far we still have to go: error = Math.abs(goalMeters) - distanceDriven()
-    // Then drive faster the farther we are from the goal:
-    //   double forward = constants.DRIVE_KP * error;
-    //   forward = MathUtil.clamp(forward, ...);   // no faster than constants.MAX_AUTO_SPEED
-    // Make it negative if goalMeters is negative, then call drive.setCommandedSpeeds(forward, 0.0).
-    drive.setCommandedSpeeds(0.0, 0.0);
+    double error = Math.abs(goal_meters_) - distanceDriven();
+    double forward = CONSTANTS.DRIVE_KP * error;
+    forward = MathUtil.clamp(forward, -CONSTANTS.MAX_AUTO_SPEED, CONSTANTS.MAX_AUTO_SPEED);
+    if (Math.abs(forward) < CONSTANTS.MIN_AUTO_SPEED) {
+      forward = Math.copySign(CONSTANTS.MIN_AUTO_SPEED, forward);
+    }
+    if (goal_meters_ < 0) {
+      forward = -forward;
+    }
+    drive_.setCommandedSpeeds(forward, 0.0);
   }
 
   @Override
   public boolean isFinished() {
-    // TODO: finished when we are within constants.DRIVE_TOLERANCE_METERS of the goal.
-    return true;
+    return Math.abs(Math.abs(goal_meters_) - distanceDriven()) < CONSTANTS.DRIVE_TOLERANCE_METERS;
   }
 
   @Override
   public void end(boolean interrupted) {
-    drive.setCommandedSpeeds(0.0, 0.0);
+    drive_.setCommandedSpeeds(0.0, 0.0);
   }
 }

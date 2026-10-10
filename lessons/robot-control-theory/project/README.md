@@ -22,6 +22,9 @@ Companion docs pages: [Control Theory](https://docs.marswars.org/docs/software/t
 - Everything from last lesson (the drivetrain and shooter subsystems and their buttons) is already
   finished. The shooter still reads its buttons directly; next lesson replaces that with a state machine
   and commands.
+- Last lesson the flywheel ran at a fixed power (`SHOOT_DUTY_CYCLE`). That has no idea how fast the
+  wheel is actually spinning, so here the shooter gets a **target speed** (`SHOOT_VELOCITY`) and you
+  decide how to reach and hold it. This is where velocity control and closed loop control begin.
 
 ## Session plan (about 3 hours)
 
@@ -70,4 +73,3 @@ Stuck on a step? Open **Dozer**: he can explain the idea or walk you through it.
 - Tune live without rebuilding: in AdvantageScope's Tuning mode change the numbers under
   `Tuning/Subsystem/Shooter/Flywheel/VelocityGains`, then copy the best values into the constants file.
 - Change `SHOOT_VELOCITY` to `400`. Which of your gains still work?
-

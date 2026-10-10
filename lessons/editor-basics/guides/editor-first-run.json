@@ -5,6 +5,10 @@
 	"order": 8,
 	"steps": [
 		{
+			"title": "What you will do",
+			"say": "In this guide you will open Main.java, put your name in the line that prints, and run it."
+		},
+		{
 			"title": "Open Main.java",
 			"say": "Time to run some code. Press **Ctrl+P**, type `Main` and press Enter. Quick Open finds any file by name, so you never have to dig through folders. Click somewhere in the editor first, so it hears your keys.",
 			"open": [

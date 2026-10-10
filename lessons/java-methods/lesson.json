@@ -23,7 +23,7 @@
 		{
 			"id": "scale-joystick",
 			"title": "Scale joystick",
-			"description": "scaleJoystick(rawInput, sensitivity) scales and clamps, reusing clamp.",
+			"description": "scaleJoystick(raw_input, sensitivity) scales and clamps, reusing clamp.",
 			"verifier": {
 				"type": "script",
 				"path": "checkpoints/verify/scale-joystick.sh"

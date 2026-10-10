@@ -12,7 +12,7 @@ public class Main {
     // otherwise.
 
     // TODO: write a method named scaleJoystick that takes two double
-    // parameters (rawInput, sensitivity) and returns rawInput multiplied
+    // parameters (raw_input, sensitivity) and returns raw_input multiplied
     // by sensitivity, clamped to [-1.0, 1.0]. Don't rewrite the min/max
     // check - call the clamp method you just wrote. That's the payoff:
     // a method isn't just a place to hide one calculation, it's a

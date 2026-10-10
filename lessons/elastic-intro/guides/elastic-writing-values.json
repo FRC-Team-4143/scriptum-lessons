@@ -16,14 +16,15 @@
 				"scope"
 			],
 			"open": [
-				"elastic"
+				"elastic",
+				"driverStation"
 			]
 		},
 		{
 			"title": "Start the robot",
 			"say": {
-				"never": "Your code only works once it's started. Press **Start** and wait until the status says **Running**.",
-				"bit": "Your code only runs once it's built and started."
+				"never": "Your code only works once it's started. In the Driver Station strip at the bottom, press **Start** and wait until the status says **Running**.",
+				"bit": "Your code only runs once it's built and started. Press Start at the bottom."
 			},
 			"target": {
 				"selector": "[data-tour='sim-controls']"
@@ -64,7 +65,7 @@
 		},
 		{
 			"title": "Add a slider",
-			"say": "Open **Add Widget**, drag **ShooterAngleDegrees** onto the grid, then right-click it and change its Widget Type to **Number Slider**.",
+			"say": "With the robot running, click **Add Widget**, search for **ShooterAngleDegrees**, and drag it onto the grid. Then right-click it, choose **Edit Properties**, and change **Widget Type** to **Number Slider**.",
 			"target": {
 				"pane": "elastic",
 				"selector": "flt-semantics[role='button']",
@@ -78,7 +79,7 @@
 		},
 		{
 			"title": "Set its range",
-			"say": "In Edit Properties, set **Min 0** and **Max 45**.",
+			"say": "Still in Edit Properties on the slider (right-click it and choose Edit Properties if you closed it), set **Min 0** and **Max 45**.",
 			"target": {
 				"pane": "elastic",
 				"region": {
@@ -100,7 +101,7 @@
 		},
 		{
 			"title": "Move it",
-			"say": "Close the dialog and drag the slider. The checkpoint watches the **live** value, so you have to actually move it.",
+			"say": "Close the dialog, then drag the slider's handle to a new angle. The checkpoint watches the **live** value, so you have to actually move it. This needs the robot to still say Running.",
 			"waitFor": {
 				"hint": "drag the slider to a new angle."
 			},
@@ -112,11 +113,16 @@
 		},
 		{
 			"title": "Submit button",
-			"say": "For `AutoDelaySeconds`, turn on **Show Submit Button** in its properties. Then it only sends when you press Enter, not on every keystroke."
+			"say": "Add a second widget the same way: drag **AutoDelaySeconds** onto the grid. Right-click it, choose **Edit Properties**, and turn on **Show Submit Button**. Then type a number and press Enter, and it sends once instead of on every keystroke.",
+			"target": {
+				"pane": "elastic",
+				"selector": "flt-semantics[role='button']",
+				"text": "Add Widget"
+			}
 		},
 		{
 			"title": "Save",
-			"say": "Elastic doesn't always save right away. Use **File → Save** before you Verify.",
+			"say": "Elastic doesn't always save right away. With your widgets on the grid, use **File → Save** before you Verify.",
 			"target": {
 				"pane": "elastic",
 				"selector": "flt-semantics[role='button']",

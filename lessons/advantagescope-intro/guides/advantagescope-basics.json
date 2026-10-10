@@ -125,13 +125,13 @@
 		},
 		{
 			"title": "Lock the scale",
-			"say": "The scale jumps around as the speed changes. Open the **⋯** menu for Left Axis, choose **Lock Axis**, then **Edit Range** and set it to about 0 to 3000.",
+			"say": "The scale jumps around as the speed changes. Open the **⋯** menu for Left Axis, choose **Lock Axis**, then **Edit Range** and set it to about 0 to 3000. Dozer can't see inside that menu, so press **I did it** when the axis is locked. The lesson chip's **Verify** double-checks it.",
 			"target": {
 				"pane": "scope",
 				"selector": ".line-graph-left.source-list .edit"
 			},
 			"waitFor": {
-				"hint": "lock the left axis to roughly 0-3000."
+				"hint": "lock the left axis to roughly 0-3000, then press I did it."
 			},
 			"assist": true
 		},
@@ -154,13 +154,13 @@
 		},
 		{
 			"title": "How fast is it changing?",
-			"say": "In the **⋯** menu for Right Axis, choose **Differentiate**. Now the right line shows how fast the speed is *changing*: big when the flywheel spins up, zero when it holds steady.",
+			"say": "In the **⋯** menu for Right Axis, choose **Differentiate**. Now the right line shows how fast the speed is *changing*: big when the flywheel spins up, zero when it holds steady. Dozer can't see that setting, so press **I did it** when you've turned it on.",
 			"target": {
 				"pane": "scope",
 				"selector": ".line-graph-right.source-list .edit"
 			},
 			"waitFor": {
-				"hint": "set the right axis to Differentiate."
+				"hint": "set the right axis to Differentiate, then press I did it."
 			},
 			"assist": true
 		},
@@ -218,13 +218,13 @@
 		},
 		{
 			"title": "Pick the field",
-			"say": "Set **Field** to **Evergreen** and you'll see the robot tracing a figure 8 from above.",
+			"say": "Set **Field** to **Evergreen** and you'll see the robot tracing a figure 8 from above. Dozer can't see the Field setting, so press **I did it** when you've picked it.",
 			"target": {
 				"pane": "scope",
 				"selector": ".field-2d-settings"
 			},
 			"waitFor": {
-				"hint": "set the field to Evergreen."
+				"hint": "set the field to Evergreen, then press I did it."
 			},
 			"assist": true
 		},

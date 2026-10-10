@@ -28,8 +28,8 @@ exist; the rest are classic practice problems.
 2. **Write `scaleJoystick` by calling `clamp`.** The checkpoint can't see
    whether you reused `clamp`, but that's the lesson: don't repeat the
    range check, reuse the method you already wrote.
-   - `double scaleJoystick(double rawInput, double sensitivity)` -
-     `rawInput * sensitivity`, clamped to `[-1.0, 1.0]`.
+   - `double scaleJoystick(double raw_input, double sensitivity)` -
+     `raw_input * sensitivity`, clamped to `[-1.0, 1.0]`.
 3. **Write three classics** using the loop skills from earlier lessons.
    Think about edge cases: what's the answer for `0`, `1`, negatives, or an
    empty string?

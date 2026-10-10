@@ -24,11 +24,11 @@ only sees the answers, but each step below names the tool to use.
    `"Unknown mode"` for anything else.
 3. **Combining conditions.** Each of these is a single `return` of a
    boolean expression - no `if` required.
-   - `boolean canEnable(boolean hasComms, boolean eStopped)` - `true` only
+   - `boolean canEnable(boolean has_comms, boolean e_stopped)` - `true` only
      when there's comms **and** the robot is not e-stopped. Use `&&` and `!`.
    - `boolean isWeekend(String day)` - `true` when `day` is `"Saturday"`
      **or** `"Sunday"`. Use `||`.
-4. **Shorthand.** `String motorDirection(boolean isReversed)` returns
+4. **Shorthand.** `String motorDirection(boolean is_reversed)` returns
    `"REVERSED"` or `"FORWARD"`. Write it with the ternary operator
    (`condition ? ifTrue : ifFalse`) on one line, instead of an `if`/`else`.
 5. **Run it** and confirm the sample outputs in `main` match what you

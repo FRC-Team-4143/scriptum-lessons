@@ -72,7 +72,7 @@
 		{
 			"id": "arcade-turn",
 			"title": "Arcade turn",
-			"description": "In Teleop, push the right stick to the right. The right side should reverse.",
+			"description": "In Teleop, push the left stick to the right (D). The right side should reverse.",
 			"verifier": {
 				"type": "nt4-value",
 				"topic": "/AdvantageKit/RealOutputs/Check/Drive/RightOutput/Min",

@@ -3,21 +3,22 @@ public class Main {
     // Team standard: constants use the `final` keyword and SCREAMING_SNAKE_CASE.
     public static final String TEAM_NAME = "";
 
-    // TODO: define an enum named ALLIANCE with two values: RED and BLUE.
-    // Team standard: both the enum name and its values are SCREAMING_SNAKE_CASE.
+    // TODO: define an enum named Alliance with two values: RED and BLUE.
+    // Team standard: the enum name is UpperCamelCase (like a class) and its values are SCREAMING_SNAKE_CASE.
     // Put it inside this class, as a nested type - not as its own top-level
     // type below the class. It's used only by Main, so it belongs in Main.
 
-    // TODO: define an enum named MATCH_PERIOD with three values: AUTONOMOUS,
-    // TELEOP, and ENDGAME. Same rules as ALLIANCE: nested inside this class,
-    // SCREAMING_SNAKE_CASE name and values.
+    // TODO: define an enum named MatchPeriod with three values: AUTONOMOUS,
+    // TELEOP, and ENDGAME. Same rules as Alliance: nested inside this class,
+    // UpperCamelCase name, SCREAMING_SNAKE_CASE values.
 
     // TODO: declare a constant named MAX_SPEED holding 5.0.
     // Team standard: constants use the `final` keyword and SCREAMING_SNAKE_CASE.
     public static final double MAX_SPEED = 0.0;
 
     public static void main(String[] args) {
-        // TODO: declare four local variables (name them whatever you like)
+        // TODO: declare four local variables (team standard: snake_case names,
+        // like team_number)
         // and print each on its own line with System.out.println, matching
         // these datatypes/values/printed keys - see the README's table:
         //   int, 4143         -> "Team number: " + <your variable>

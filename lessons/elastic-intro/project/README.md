@@ -7,15 +7,16 @@ data.
 
 The robot code is already written and already publishing one value for every
 single-topic widget type Elastic has, plus a robot pose driving in a circle
-at `Field2d/Robot` - this lesson is about the tool, not the code. Click
-**Start** in the Driver Station, choose a mode, and click **Enable**. Then
-open the **Elastic** pane on the right. Unlike AdvantageScope, Elastic only
+at `Field2d/Robot` - this lesson is about the tool, not the code. First
+click **Start** in the Driver Station at the bottom and wait for the status to say **Running**
+(the first build takes a while; you don't need to Enable the robot). Then look at the **Elastic**
+pane on the right: the bottom-left corner should say **Network Tables: Connected**. Unlike AdvantageScope, Elastic only
 shows *live* data - there's no log file to open, and it connects
 automatically.
 
 ## Using Elastic
 
-With the robot running, drag each of these onto the grid and bind it to the
+With the robot running, click **Add Widget** in Elastic, then drag each of these onto the grid and bind it to the
 listed topic (type the topic into the widget's properties, or drag the topic
 from the tree on the left):
 

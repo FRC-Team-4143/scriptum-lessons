@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.XboxController;
  * fields and methods belong to the class itself, so you call them like OI.getForward().
  */
 public abstract class OI {
-  private static final XboxController driverController = new XboxController(0);
+  private static final XboxController driver_controller_ = new XboxController(0);
 
   // TODO: write  public static double getForward()
   // It returns how far forward the driver is pushing: the left stick Y, with the minus sign.
@@ -19,5 +19,5 @@ public abstract class OI {
   //   MathUtil.applyDeadband(value, 0.1)   (import edu.wpi.first.math.MathUtil)
 
   // TODO: write  public static double getTurn()
-  // It returns how much the driver wants to turn: the right stick X (also with a deadband).
+  // It returns how much the driver wants to turn: the left stick X (also with a deadband).
 }

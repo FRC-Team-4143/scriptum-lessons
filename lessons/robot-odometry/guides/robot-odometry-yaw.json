@@ -1,0 +1,98 @@
+{
+	"title": "Which way is it facing?",
+	"summary": "Yaw: working out the robot's heading from the wheels.",
+	"topic": "Robot",
+	"order": 441,
+	"steps": [
+		{
+			"title": "Yaw: which way it faces",
+			"say": {
+				"never": "**Yaw** is which way the robot is facing, as an angle. This robot has no compass, so it works the angle out from the wheels: if the right side has driven farther than the left, the robot has turned left.\n\nIn this guide you will open `DifferentialDriveMech.java`, find `getYaw()`, and make it turn the two wheel distances into an angle. Press **Verify** in the lesson chip when you are done. It reads your Java and tells you which line it wanted if something is missing.",
+				"bit": "Yaw is the heading angle, worked out from how far each side has driven. You will fill in `getYaw()`, then press **Verify**."
+			}
+		},
+		{
+			"title": "Open DifferentialDriveMech.java",
+			"say": {
+				"never": "Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `DifferentialDriveMech`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "Press **Ctrl+P**, type `DifferentialDriveMech` and press Enter. Quick Open finds any file by name, so you never have to dig through folders."
+			},
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "DifferentialDriveMech.java"
+				},
+				"hint": "open DifferentialDriveMech.java with Ctrl+P.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Find getYaw",
+			"say": {
+				"never": "Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `getYaw` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "Press **Ctrl+F**, type `getYaw` and press Enter to jump to it."
+			},
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "public Rotation2d getYaw"
+				},
+				"hint": "find getYaw with Ctrl+F.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Angle from the wheel difference",
+			"say": {
+				"never": "The angle is the distance difference divided by how far apart the wheels are: right minus left, divided by the track width. It comes out in **radians**. If the left side drove 1.0 m, the right side 1.6 m and the wheels are 0.6 m apart, then (1.6 - 1.0) / 0.6 = 1 radian, about 57 degrees to the left.\n\nWPILib passes angles around inside a `Rotation2d` object, so the last step is to wrap your number in one and return it. The distances come from `getLeftMeters()` and `getRightMeters()`, and the track width is `Constants.TRACK_WIDTH_METERS`.",
+				"bit": "Angle in radians = (right - left) / track width. Wrap it in a `Rotation2d` and return it."
+			}
+		},
+		{
+			"title": "Write getYaw",
+			"say": {
+				"never": "Inside `getYaw()`, under the TODO comment, write two things. First a `double radians` that holds right distance minus left distance, divided by `Constants.TRACK_WIDTH_METERS`. Then **replace** the placeholder `return new Rotation2d();` with a return of a new `Rotation2d` built from `radians`. Replace the old return rather than adding a second one: a method can only return once.\n\nClick **I did it** when both are written.",
+				"bit": "Under the TODO, compute `radians` from `getRightMeters()`, `getLeftMeters()` and the track width, then replace the placeholder return with `new Rotation2d(radians)`."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "public Rotation2d getYaw"
+			},
+			"cardAt": "bottom-right",
+			"assist": true,
+			"waitFor": {
+				"hint": "write the radians line and the new return, then click I did it."
+			}
+		},
+		{
+			"title": "Why nothing shows yet",
+			"say": {
+				"never": "Yaw doesn't show up anywhere on its own yet. The pose estimator in the next guide, **Where is the robot?**, calls `getYaw()` and logs it as `Drive/PoseYawDeg`. Open that guide to wire it in and watch the yaw change.",
+				"bit": "Yaw only shows up through the pose estimator. Do **Where is the robot?** next to wire it in."
+			}
+		}
+	],
+	"kind": "mixed"
+}

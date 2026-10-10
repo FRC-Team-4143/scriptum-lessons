@@ -59,8 +59,8 @@
 		{
 			"title": "Transitions",
 			"say": {
-				"never": "Turn the comment above into code, one rule at a time. From IDLE, if the driver wants SHOOT, go to SPIN_UP first. From SPIN_UP, go to SHOOT once `flywheel.isAtSpeed()` is true. From SHOOT, go back to SPIN_UP if `flywheel.hasDipped()` is true. Anything else, go to IDLE.",
-				"bit": "Turn the comment above it into code: from IDLE, wanting SHOOT goes to SPIN_UP; from SPIN_UP go to SHOOT once `flywheel.isAtSpeed()`; from SHOOT go back to SPIN_UP if `flywheel.hasDipped()`; anything else, IDLE."
+				"never": "Turn the comment above into code, one rule at a time. From IDLE, if the driver wants SHOOT, go to SPIN_UP first. From SPIN_UP, go to SHOOT once `flywheel_.isAtSpeed()` is true. From SHOOT, go back to SPIN_UP if `flywheel_.hasDipped()` is true. Anything else, go to IDLE.",
+				"bit": "Turn the comment above it into code: from IDLE, wanting SHOOT goes to SPIN_UP; from SPIN_UP go to SHOOT once `flywheel_.isAtSpeed()`; from SHOOT go back to SPIN_UP if `flywheel_.hasDipped()`; anything else, IDLE."
 			},
 			"target": {
 				"pane": "editor",

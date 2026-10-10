@@ -15,11 +15,11 @@ import org.littletonrobotics.junction.Logger;
  * edit -> run -> telemetry works end to end, then start replacing this with your own code.
  */
 public class RobotContainer {
-  private final Timer timer = new Timer();
-  private long counter = 0;
+  private final Timer timer_ = new Timer();
+  private long counter_ = 0;
 
   public RobotContainer() {
-    timer.start();
+    timer_.start();
   }
 
   /** Called every loop while the robot is running. Add your own logic here. */
@@ -28,11 +28,11 @@ public class RobotContainer {
     CommandScheduler.getInstance().run();
 
     // A counter that ticks up once per loop.
-    counter++;
-    Logger.recordOutput("Counter", counter);
+    counter_++;
+    Logger.recordOutput("Counter", counter_);
 
     // A pose that drives in a circle around the middle of the field.
-    double seconds = timer.get();
+    double seconds = timer_.get();
     double radius = 2.0;
     double omega = 1.0;
     double x = 4.0 + radius * Math.cos(omega * seconds);

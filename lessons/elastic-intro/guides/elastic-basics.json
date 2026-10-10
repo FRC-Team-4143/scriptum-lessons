@@ -9,14 +9,15 @@
 	"steps": [
 		{
 			"title": "This is Elastic",
-			"say": "Elastic is a **driver dashboard**: the screen drivers look at during a match. Let's add a widget and set it up. Everything works while I'm here, so do each step when I ask.",
+			"say": "Elastic is a **driver dashboard**: the screen drivers look at during a match. I've opened it on the right. Let's add a widget and set it up. Do each step when I ask.",
 			"close": [
 				"editor",
 				"preview",
 				"scope"
 			],
 			"open": [
-				"elastic"
+				"elastic",
+				"driverStation"
 			],
 			"target": {
 				"pane": "elastic"
@@ -24,7 +25,7 @@
 		},
 		{
 			"title": "Start the robot",
-			"say": "Elastic only shows **live** values, so the robot code has to be running.",
+			"say": "Elastic only shows **live** values, so the robot code has to be running first. In the Driver Station strip at the bottom, press **Start**, then wait for the status to say **Running**. The first build takes a while. You don't need to Enable the robot.",
 			"target": {
 				"selector": "[data-tour='sim-controls']"
 			},
@@ -33,13 +34,13 @@
 					"selector": "[data-tour='code-status']",
 					"text": "Running"
 				},
-				"hint": "press Start and wait for it to say Running."
+				"hint": "press Start at the bottom and wait for Running."
 			},
 			"assist": true
 		},
 		{
 			"title": "Connected?",
-			"say": "Down here it says **Network Tables: Connected** once Elastic can see your robot. Red means it can't.",
+			"say": "Now that the robot is running, look in the bottom-left corner of Elastic. It says **Network Tables: Connected** once Elastic can see your robot. Red means it can't: check that the status at the bottom says Running, then give it a few seconds.",
 			"target": {
 				"pane": "elastic",
 				"region": {
@@ -52,7 +53,7 @@
 		},
 		{
 			"title": "Add a widget",
-			"say": "**Add Widget** lists everything your robot publishes.",
+			"say": "In Elastic, click **Add Widget** (top of the Elastic pane). It lists everything your robot publishes.",
 			"target": {
 				"pane": "elastic",
 				"selector": "flt-semantics[role='button']",
@@ -69,16 +70,29 @@
 		},
 		{
 			"title": "Every topic",
-			"say": "Each line is a value the robot publishes, called a **topic**. Folders like `AdvantageKit` hold more of them. The **Search** box at the bottom finds one by name.",
+			"say": "Each line is a value the robot publishes, called a **topic**. Folders like `AdvantageKit` hold more of them. This list has to stay open for the next step. The **Search** box at the bottom finds a topic by name.",
 			"target": {
 				"pane": "elastic",
 				"selector": "flt-semantics[aria-label='Add Widget']"
 			}
 		},
 		{
+			"title": "Search for Counter",
+			"cardAt": "bottom-right",
+			"say": "With the topic list open, type **Counter** into the **Search** box at the bottom of the list.",
+			"target": {
+				"pane": "elastic",
+				"selector": "flt-semantics[aria-label='Add Widget']"
+			},
+			"waitFor": {
+				"hint": "search for Counter, then press I did it."
+			},
+			"assist": true
+		},
+		{
 			"title": "Drag one onto the grid",
 			"cardAt": "bottom-right",
-			"say": "Find **Counter** (search for it) and drag it onto the grid. Elastic picks a widget to match: a number gets a text display.",
+			"say": "Drag **Counter** from the list onto the grid. Elastic picks a widget to match: a number gets a text display.",
 			"target": {
 				"pane": "elastic",
 				"region": {
@@ -94,9 +108,32 @@
 			"assist": true
 		},
 		{
+			"title": "Close the topic list",
+			"cardAt": "bottom-right",
+			"say": "Your widget is on the grid. Close the topic list so you can reach it.",
+			"target": {
+				"pane": "elastic",
+				"region": {
+					"left": 0,
+					"top": "72px",
+					"right": 0,
+					"bottom": "32px"
+				}
+			},
+			"waitFor": {
+				"target": {
+					"pane": "elastic",
+					"selector": "flt-semantics[aria-label='Add Widget']"
+				},
+				"gone": true,
+				"hint": "close the topic list."
+			},
+			"assist": true
+		},
+		{
 			"title": "Open its menu",
 			"cardAt": "bottom-right",
-			"say": "Close the topic list, then **right-click** your new widget.",
+			"say": "**Right-click** your new Counter widget on the grid.",
 			"target": {
 				"pane": "elastic",
 				"region": {
@@ -118,7 +155,7 @@
 		},
 		{
 			"title": "Edit Properties",
-			"say": "Every widget's settings live in **Edit Properties**.",
+			"say": "Every widget's settings live in **Edit Properties**. Click it in the menu.",
 			"target": {
 				"pane": "elastic",
 				"selector": "flt-semantics[role='button']",
@@ -204,7 +241,7 @@
 		{
 			"title": "Move and resize",
 			"cardAt": "bottom-right",
-			"say": "Drag a widget to move it, and drag its bottom-right corner to resize it. It snaps to the grid.",
+			"say": "With the dialog closed, drag a widget to move it, and drag its bottom-right corner to resize it. It snaps to the grid.",
 			"target": {
 				"pane": "elastic",
 				"region": {
@@ -221,7 +258,7 @@
 		},
 		{
 			"title": "Keep going",
-			"say": "That's the whole loop: drag a topic on, then Edit Properties to set it up. The lesson's table lists the rest. Use **File → Save Layout** so your dashboard is still there next time.",
+			"say": "That's the whole loop: **Add Widget**, drag a topic on, then right-click it and choose Edit Properties. The lesson's table lists the rest. When you have widgets you want to keep, use **File → Save** (not just closing Elastic) so your dashboard is still there next time.",
 			"target": {
 				"pane": "elastic",
 				"selector": "flt-semantics[role='button']",

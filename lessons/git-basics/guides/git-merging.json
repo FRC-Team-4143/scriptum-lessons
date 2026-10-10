@@ -7,20 +7,20 @@
 		{
 			"title": "Merge",
 			"say": {
-				"never": "**Merging** copies another branch's work into the branch you're standing on. Stand on the branch that should **receive** the work: first switch to `develop`, then merge the feature into it.",
-				"bit": "Merging brings another branch's commits into the branch you're on. You stand on the branch that **receives** them."
+				"never": "Merging brings another branch's commits into the branch you're on. You stand on the branch that **receives** them: be on `develop`, then merge `issue-7-auto-distance` into it.",
+				"bit": "Merging brings another branch's commits into the branch you're on. Be on `develop`, then merge `issue-7-auto-distance`."
 			},
 			"board": {
-				"code": "git checkout develop\ngit merge issue-7-auto-distance",
-				"language": "shell",
+				"code": "be on:     develop   (receives the work)\nmerge in:  issue-7-auto-distance",
+				"language": "text",
 				"marks": [
 					{
-						"text": "git checkout develop",
-						"label": "stand on the receiving branch"
+						"text": "develop",
+						"label": "the branch you stand on"
 					},
 					{
-						"text": "git merge issue-7-auto-distance",
-						"label": "bring its commits in"
+						"text": "issue-7-auto-distance",
+						"label": "the finished feature"
 					}
 				]
 			}
@@ -43,41 +43,29 @@
 			}
 		},
 		{
-			"title": "Open a terminal",
+			"title": "Pick the repository",
 			"say": {
-				"never": "Open the **terminal**: the typing area at the bottom of the screen where you give the computer instructions. Hold **Ctrl** and tap the backtick key, the one above **Tab**. Most of these exercises are easier there.",
-				"bit": "These exercises are easiest in the terminal."
+				"never": "Open **Source Control** (the branch icon on the left). Each exercise folder has its own section there. Click **03-merge** so the buttons and menus work on that folder.",
+				"bit": "In Source Control, click **03-merge** so the buttons act on it."
 			},
-			"open": [
-				"editor"
-			],
 			"target": {
-				"pane": "editor"
+				"pane": "editor",
+				"selector": ".scm-view"
 			},
 			"cardAt": "top-right",
-			"waitFor": {
-				"target": {
-					"pane": "editor",
-					"selector": ".terminal-wrapper"
-				},
-				"hint": {
-					"never": "press Ctrl and the backtick key (above Tab).",
-					"bit": "press Ctrl+` (the key above Tab)."
-				}
-			},
 			"assist": true
 		},
 		{
 			"title": "Your turn",
 			"say": {
-				"never": "Type `cd 03-merge` and press **Enter**, then switch to `develop` and merge the feature branch, like the board shows. Afterwards, open `Constants.java`: the new line `AUTO_DISTANCE_METERS` is there, brought in by the merge.",
-				"bit": "`cd 03-merge`, then merge. Look at `Constants.java` afterwards: `AUTO_DISTANCE_METERS` is there."
-			},
-			"target": {
-				"pane": "editor",
-				"selector": "[id='workbench.parts.panel']"
+				"never": "Check the branch name in the bottom-left says `develop`. Then open the **...** menu in Source Control, choose **Branch**, then **Merge...**, and pick `issue-7-auto-distance`. Look at `Constants.java` afterwards: `AUTO_DISTANCE_METERS` is there.",
+				"bit": "On `develop`: **...** menu, Branch, Merge..., `issue-7-auto-distance`. Then `AUTO_DISTANCE_METERS` is in `Constants.java`."
 			},
 			"cardAt": "top-right",
+			"target": {
+				"pane": "editor",
+				"selector": ".scm-view"
+			},
 			"waitFor": {
 				"hint": {
 					"never": "merge issue-7-auto-distance into develop.",

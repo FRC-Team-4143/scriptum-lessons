@@ -58,9 +58,8 @@ Three tracks, in curriculum order (each lesson's `track` and `order` are in its 
   `robot-drivetrain` (Motors and Drivetrains), `robot-sensors` (Sensors and Feedback),
   `robot-drive-math` (Drive Math and Methods), `robot-odometry` (Objects and Odometry),
   `robot-subsystems` (Mechanisms and Subsystems), `robot-control-theory` (Control Theory),
-  `robot-state-machines` (State Machines and Commands) and `robot-autonomous` (Autonomous).
-  Each module's `README.md` is the lesson. Computer Vision has no robot code, so it has no module.
-  See [Robot modules](#robot-modules).
+  `robot-state-machines` (State Machines and Commands), `robot-computer-vision` (Computer Vision) and `robot-autonomous` (Choreo Autonomous).
+  Each module's `README.md` is the lesson. See [Robot modules](#robot-modules).
 
 ## Tutor (Dozer)
 
@@ -112,12 +111,39 @@ has to be made in every module (`lessons/robot-*/project/`):
   a few logged values under `Check/...`, so the `nt4-value` checkpoints still pass after the student
   lets go of the sticks. Each module's `.vscode/settings.json` hides it, the build files and other
   scaffolding from the Explorer.
-- `Constants.java` holds the chassis numbers. The wheel radius (3 in) and track width (24 in) are the
-  real robot's; the gear ratio and mass are still placeholders.
-- The shooter uses the real flywheel's wheel radius (3 in) and mass (2.3 kg). In
-  `robot-control-theory` the flywheel starts in bang-bang mode with untuned gains on purpose; that
+- Modules 1-4 keep the chassis numbers in `Constants.java`; from `robot-subsystems` on that file is gone
+  and they live in `subsystems/drive/DrivetrainConstants.java` (static fields, read as
+  `DrivetrainConstants.WHEEL_RADIUS_METERS`). The wheel radius (3 in) and track width (24 in) are
+  the real robot's; the gear ratio and mass are still placeholders.
+- The shooter uses the real flywheel's wheel radius (3 in) and mass (2.3 kg). In `robot-subsystems`
+  the flywheel runs at a fixed duty cycle (`SHOOT_DUTY_CYCLE`, 0.5) and the drivetrain has no state
+  switch; velocity control (`SHOOT_VELOCITY`) first appears in `robot-control-theory` and the
+  states-plus-`switch` drivetrain in `robot-state-machines`. In `robot-control-theory` the flywheel starts in bang-bang mode with untuned gains on purpose; that
   lesson's task is to write bang-bang and feedforward, then tune PID (`kV` about 0.12, `kP` about 0.2
   works). `lessons/robot-control-theory/solution/` is the finished version.
+- `robot-autonomous` (Choreo Autonomous, about 3 hours) starts from the finished `robot-computer-vision` robot
+  (the `LocalizationSubsystem` with the vision call written at std devs 0.3/0.3, the vision stack and
+  PhotonLib, and the aim state tuned at 2.0/0/0.2; `DrivetrainSubsystem.getPose()` is the vision-corrected
+  estimate and `resetPose(Pose2d)` resets both the mech and Localization). Students draw two
+  Choreo paths (`ToPickup`, `ToScore`) in the Choreo pane, then write `Autos.java`: follow, wait, follow,
+  aim until `isAimed`, shoot. `FieldTargets.java` has the field poses (the same as the named poses in
+  `robot.chor`), and the `Check/...` topics (`Drive/DistanceToPickup`, `Drive/DistanceToScoreSpot`,
+  `Subsystem/Shooter/AimErrorAtShotDegrees`, `ShotCount`) use the simulator's true pose, so a small
+  estimate error cannot fool them. `choreo-intro` is a prerequisite. The `solution/` folder has the finished
+  paths and `Autos.java`.
+- `robot-computer-vision` (Computer Vision, about 3 hours) starts from the finished State Machines robot minus
+  the aim state. The pose estimator moves out of the drive mech into a provided `LocalizationSubsystem`
+  (`DrivetrainSubsystem.getPose()` and `resetPose(Pose2d)` route to it). A provided `SimulationSubsystem`
+  (registered only in simulation) sets up MWLib's `MwVisionSim` through `ProxyServerThread` with a front
+  and a back camera on the 2026 AprilTag layout, pointed from the TRUE pose (`getTruePose()`), exactly as
+  the competition robot does. The simulated cameras send tag solutions (pose, timestamp, tag ids) through
+  the proxy server like real coprocessors; the provided parts of `LocalizationSubsystem.updateLogic()` read
+  `ProxyServerThread.getInstance().getLatestTagSolutions()`, skip solutions already used, drop them while
+  spinning fast, and keep only multi-tag ones on the field. The student's job in
+  `LocalizationSubsystem.updateLogic()` is the `addVisionMeasurement(...)` call and its standard
+  deviations. It needs the PhotonLib vendordep (`vendordeps/photonlib.json`); PhotonLib publishes no
+  `linuxarm64` natives, so the vision simulator only runs on x86-64. The `FieldTargets` poses `START` and
+  `GOAL` are the same as `robot-autonomous`'s. The student also builds the drivetrain's `AIM` state (a PID with continuous input, `getAngleToGoal()`, `isAimed()` and `DrivetrainCommands.aim()`), aiming from the vision-corrected estimate, and tunes `AIM_KP`/`AIM_KD`. The `Check/Localization/Accurate` and `Check/Aim/...` topics judge the estimate and the aim against the true pose. Guides: the concept guides `where-am-i` and `trust`, the vision walkthrough `add-vision`, and the four aim guides.
 - MWLib comes from jitpack (`com.github.FRC-Team-4143.MW-Lib:mw-lib-java:<tag>`), with no
   credentials. Bump the tag in every `build.gradle` together.
 - `lessons/<id>/solution/` holds the reference solution used by that lesson's `lesson.test.ts` to
@@ -135,9 +161,10 @@ and uses them right away. The Java modules remain available as a deeper, standal
 | 2 Sensors and Feedback | `if` / `else`, comparison operators, `static final` constants |
 | 3 Drive Math and Methods | writing methods (parameters, return values), arrays, `for` loops, `%`, `Math` |
 | 4 Objects and Odometry | classes and objects, `new`, `import`, `static`, `abstract` |
-| 5 Mechanisms and Subsystems | enums and `switch`, inheritance (`extends`, `@Override`), constructors, lists |
-| 6 Control Theory | practice: unit conversion, `switch`, small methods |
-| 7 State Machines and Commands | `&&` `\|\|` `!`, boolean methods, lambdas |
-| 8 Autonomous | extending `Command`, command groups (and a `for` loop used again) |
+| 5 Mechanisms and Subsystems | inheritance (`extends`, `@Override`), constructors, lists, enums as a list of states, `if` / `else` in subsystem logic |
+| 6 Control Theory | enums and `switch` (picking a control style), unit conversion, small methods |
+| 7 State Machines and Commands | `switch` on a subsystem's state (practice), `&&` `\|\|` `!`, boolean methods, lambdas |
+| 7b Computer Vision (about 3 hours) | passing a timestamp and standard deviations (`VecBuilder.fill`, `double` constants), a `PIDController` object, a new enum case in a `switch`, `&&`, `Math.toRadians` |
+| 8 Choreo Autonomous (about 3 hours) | reading `Command` classes, command lists with `addCommands`, decorators (`until`, `withTimeout`), method references (`::`) |
 
 Recursion is not used on the robot.

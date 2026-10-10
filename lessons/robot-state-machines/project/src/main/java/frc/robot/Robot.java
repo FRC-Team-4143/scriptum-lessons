@@ -11,7 +11,7 @@ import org.littletonrobotics.junction.LoggedRobot;
  * connects things together. You should not need to change it.
  */
 public class Robot extends LoggedRobot {
-  private final RobotContainer container = new RobotContainer();
+  private final RobotContainer container_ = new RobotContainer();
 
   public Robot() {
     // Connect the controller buttons to commands.
@@ -21,7 +21,7 @@ public class Robot extends LoggedRobot {
   @Override
   public void robotPeriodic() {
     // Runs every subsystem: read sensors, update logic, write motor outputs.
-    container.doControlLoop();
+    container_.doControlLoop();
     // Runs every command that is currently scheduled.
     CommandScheduler.getInstance().run();
     Checks.update(); // lesson helper, used by the Verify button

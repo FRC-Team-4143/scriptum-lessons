@@ -8,11 +8,11 @@ if [[ ! -f "$FILE" ]]; then
 fi
 CODE="$(grep -Ev '^[[:space:]]*//' "$FILE" | tr '\n' ' ')"
 if ! grep -Eq 'getShootButton[[:space:]]*\([[:space:]]*\)[[:space:]]*\{[^}]*getRightBumperButton' <<<"$CODE"; then
-	echo "getShootButton() should return driverController.getRightBumperButton()."
+	echo "getShootButton() should return driver_controller_.getRightBumperButton()."
 	exit 1
 fi
 if ! grep -Eq 'getIndexButton[[:space:]]*\([[:space:]]*\)[[:space:]]*\{[^}]*getLeftBumperButton' <<<"$CODE"; then
-	echo "getIndexButton() should return driverController.getLeftBumperButton()."
+	echo "getIndexButton() should return driver_controller_.getLeftBumperButton()."
 	exit 1
 fi
 echo "Both shooter buttons are wired up."

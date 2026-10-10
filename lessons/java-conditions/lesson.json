@@ -29,7 +29,7 @@
 		{
 			"id": "can-enable",
 			"title": "Can enable",
-			"description": "canEnable(hasComms, eStopped) combines conditions with && and !.",
+			"description": "canEnable(has_comms, e_stopped) combines conditions with && and !.",
 			"verifier": {
 				"type": "script",
 				"path": "checkpoints/verify/can-enable.sh"
@@ -47,7 +47,7 @@
 		{
 			"id": "motor-direction",
 			"title": "Motor direction",
-			"description": "motorDirection(isReversed) uses the ternary operator.",
+			"description": "motorDirection(is_reversed) uses the ternary operator.",
 			"verifier": {
 				"type": "script",
 				"path": "checkpoints/verify/motor-direction.sh"

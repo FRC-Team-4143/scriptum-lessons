@@ -72,18 +72,18 @@
 		{
 			"title": "The two objects",
 			"say": {
-				"never": "Two things are already built for you, and you give them orders. `controller` is the gamepad: you can ask it how far a stick is pushed. `drive` is the drivetrain: you can tell it how fast to spin the wheels. Orders are written as `thing.order(...)`.",
+				"never": "Two things are already built for you, and you give them orders. `controller_` is the gamepad: you can ask it how far a stick is pushed. `drive_` is the drivetrain: you can tell it how fast to spin the wheels. Orders are written as `thing.order(...)`.",
 				"bit": "Two objects are already made for you. You call methods on them."
 			},
 			"board": {
-				"code": "controller.getLeftY()          // how far the left stick is pushed\ndrive.setDutyCycles(0.5, 0.5)  // run both sides at half power",
+				"code": "controller_.getLeftY()          // how far the left stick is pushed\ndrive_.setDutyCycles(0.5, 0.5)  // run both sides at half power",
 				"marks": [
 					{
-						"text": "controller",
+						"text": "controller_",
 						"label": "the gamepad"
 					},
 					{
-						"text": "drive",
+						"text": "drive_",
 						"label": "the drivetrain"
 					},
 					{
@@ -101,10 +101,10 @@
 				"bit": "Pushing a stick **forward** gives a negative number (that's how gamepads work), so you flip it with a minus sign."
 			},
 			"board": {
-				"code": "double leftSpeed = -controller.getLeftY();",
+				"code": "double left_speed = -controller_.getLeftY();",
 				"marks": [
 					{
-						"text": "-controller",
+						"text": "-controller_",
 						"label": "flip: forward becomes positive"
 					}
 				]

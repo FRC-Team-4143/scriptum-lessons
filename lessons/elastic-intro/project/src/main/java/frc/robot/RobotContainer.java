@@ -18,37 +18,37 @@ import org.littletonrobotics.junction.networktables.LoggedNetworkNumber;
  * AdvantageKit's {@link Logger} - open Elastic (the "Elastic" tab above) to confirm live telemetry
  * works end to end, then configure Elastic to display them.
  *
- * <p>{@link #autoRoutine}, {@link #autoDelaySeconds}, {@link #shooterAngleDegrees}, {@link
- * #brakeModeEnabledButton}, and {@link #brakeModeEnabledSwitch} run the other direction: they're
- * written *from* Elastic, and the robot only reads them. Unlike AdvantageScope's Tuning Mode,
- * Elastic has no separate "armed" toggle to flip first - any widget bound to a plain writable topic
- * accepts input as soon as it's on the grid.
+ * <p>{@link #auto_routine_}, {@link #auto_delay_seconds_}, {@link #shooter_angle_degrees_}, {@link
+ * #brake_mode_enabled_button_}, and {@link #brake_mode_enabled_switch_} run the other direction:
+ * they're written *from* Elastic, and the robot only reads them. Unlike AdvantageScope's Tuning
+ * Mode, Elastic has no separate "armed" toggle to flip first - any widget bound to a plain writable
+ * topic accepts input as soon as it's on the grid.
  */
 public class RobotContainer {
-  private final Timer timer = new Timer();
-  private long counter = 0;
+  private final Timer timer_ = new Timer();
+  private long counter_ = 0;
 
   // An operator input, chosen from Elastic's ComboBox Chooser or Split Button Chooser - the same
   // chooser, just displayed with two different widgets.
-  private final LoggedDashboardChooser<String> autoRoutine =
+  private final LoggedDashboardChooser<String> auto_routine_ =
       new LoggedDashboardChooser<>("AutoRoutine");
 
   // An operator input, written from Elastic's Text Display (turn on its Show Submit Button
   // setting so it publishes once on submit, not on every keystroke).
-  private final LoggedNetworkNumber autoDelaySeconds =
+  private final LoggedNetworkNumber auto_delay_seconds_ =
       new LoggedNetworkNumber("/AutoDelaySeconds", 0.0);
 
   // An operator input, dragged in from Elastic's Number Slider - unlike every other angle/speed
   // value in this file, this one is not computed here.
-  private final LoggedNetworkNumber shooterAngleDegrees =
+  private final LoggedNetworkNumber shooter_angle_degrees_ =
       new LoggedNetworkNumber("/ShooterAngleDegrees", 0.0);
 
   // Two separate operator inputs, each written by its own widget - unlike every other boolean in
   // this file, neither is computed here. Separate keys (rather than one topic shared by both
   // widgets) so a checkpoint can tell the two widgets apart live over NT4.
-  private final LoggedNetworkBoolean brakeModeEnabledButton =
+  private final LoggedNetworkBoolean brake_mode_enabled_button_ =
       new LoggedNetworkBoolean("/BrakeModeEnabledButton", false);
-  private final LoggedNetworkBoolean brakeModeEnabledSwitch =
+  private final LoggedNetworkBoolean brake_mode_enabled_switch_ =
       new LoggedNetworkBoolean("/BrakeModeEnabledSwitch", false);
 
   // Between 0.0 and 1.0, changing over time.
@@ -93,10 +93,10 @@ public class RobotContainer {
   }
 
   public RobotContainer() {
-    autoRoutine.addDefaultOption("Do nothing", "Do nothing");
-    autoRoutine.addOption("Leave only", "Leave only");
-    autoRoutine.addOption("Score preload, then leave", "Score preload, then leave");
-    timer.start();
+    auto_routine_.addDefaultOption("Do nothing", "Do nothing");
+    auto_routine_.addOption("Leave only", "Leave only");
+    auto_routine_.addOption("Score preload, then leave", "Score preload, then leave");
+    timer_.start();
   }
 
   /** Called every loop while the robot is running. Add your own logic here. */
@@ -104,11 +104,11 @@ public class RobotContainer {
     // Run the command scheduler so subsystems and commands you add keep working.
     CommandScheduler.getInstance().run();
 
-    double seconds = timer.get();
+    double seconds = timer_.get();
 
     // A counter that ticks up once per loop.
-    counter++;
-    Logger.recordOutput("Counter", counter);
+    counter_++;
+    Logger.recordOutput("Counter", counter_);
 
     Logger.recordOutput("ClimberSpeed", climberSpeed(seconds));
     Logger.recordOutput("GamePieceLoaded", gamePieceLoaded(seconds));
@@ -133,8 +133,8 @@ public class RobotContainer {
     Rotation2d heading = new Rotation2d(omega * seconds + Math.PI / 2);
     Logger.recordOutput("Field2d/Robot", new Pose2d(x, y, heading));
 
-    // autoRoutine, autoDelaySeconds, shooterAngleDegrees,
-    // brakeModeEnabledButton, and brakeModeEnabledSwitch need nothing here -
+    // auto_routine_, auto_delay_seconds_, shooter_angle_degrees_,
+    // brake_mode_enabled_button_, and brake_mode_enabled_switch_ need nothing here -
     // they're LoggedDashboardChooser/LoggedNetworkNumber/LoggedNetworkBoolean,
     // which read their live NT value automatically every loop.
   }

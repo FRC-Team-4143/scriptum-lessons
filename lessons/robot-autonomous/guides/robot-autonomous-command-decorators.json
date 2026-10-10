@@ -1,0 +1,125 @@
+{
+	"title": "Dots that change commands",
+	"summary": "withTimeout, until, andThen and alongWith.",
+	"topic": "Robot",
+	"order": 532,
+	"steps": [
+		{
+			"title": "Change a command with a dot",
+			"say": {
+				"never": "Every command has helper methods you can add on the end with a dot. They don't change the original: they wrap it in a new command that behaves a little differently, mostly by changing **when it finishes** or **what runs with it**. They are called **decorators**.",
+				"bit": "Add a helper on the end with a dot to wrap a command in a new one. Decorators change when it finishes or what runs with it."
+			}
+		},
+		{
+			"title": "withTimeout: a time limit",
+			"say": {
+				"never": "`.withTimeout(2.0)` stops the command after two seconds if it hasn't finished already. A command that never finishes on its own, like `shoot()`, now has an end: the timeout is the condition. When it times out, the wrapped command's `end(true)` runs, so it still cleans up.",
+				"bit": "`withTimeout(seconds)` stops a command after that long. It still cleans up through `end`."
+			},
+			"board": {
+				"code": "ShooterCommands.shoot().withTimeout(2.0)",
+				"language": "java",
+				"marks": [
+					{
+						"text": "ShooterCommands.shoot()",
+						"label": "never finishes by itself"
+					},
+					{
+						"text": ".withTimeout(2.0)",
+						"label": "now it stops after 2 s"
+					}
+				]
+			}
+		},
+		{
+			"title": "until: your own condition",
+			"say": {
+				"never": "`.until(condition)` finishes the command as soon as your yes/no condition becomes true, or whenever the command itself finishes, whichever comes first. It is a custom `isFinished` without writing a class.",
+				"bit": "`until(condition)` finishes the command as soon as your yes/no condition is true."
+			},
+			"board": {
+				"code": "ShooterCommands.shoot()\n    .until(() -> shooter.hasDipped())",
+				"language": "java",
+				"marks": [
+					{
+						"text": ".until(",
+						"label": "stop when this is true"
+					},
+					{
+						"text": "shooter.hasDipped()",
+						"label": "the condition: a ball just left"
+					}
+				]
+			}
+		},
+		{
+			"title": "andThen: one after another",
+			"say": {
+				"never": "`first.andThen(second)` runs `first` until it finishes, then runs `second`. This is the same as `Commands.sequence(first, second)`, written as a chain. Pick it when two steps read naturally as \"this, then that\".",
+				"bit": "`a.andThen(b)` runs a until it finishes, then b. Same as a sequence of two."
+			},
+			"board": {
+				"code": "new DriveDistanceCommand(5.0)\n    .andThen(new TurnToAngleCommand(45.0))",
+				"language": "java",
+				"marks": [
+					{
+						"text": ".andThen(",
+						"label": "after the drive finishes..."
+					},
+					{
+						"text": "new TurnToAngleCommand(45.0)",
+						"label": "...turn"
+					}
+				]
+			}
+		},
+		{
+			"title": "alongWith: at the same time",
+			"say": {
+				"never": "`a.alongWith(b)` starts both together and finishes when **both** are done. Pick it when two things can happen at once, like driving while the shooter spins up. If you'd rather stop when the first one finishes, `raceWith` does that.",
+				"bit": "`a.alongWith(b)` runs both together and finishes when both are done."
+			},
+			"board": {
+				"code": "new DriveDistanceCommand(5.0)\n    .alongWith(ShooterCommands.shoot().withTimeout(3.0))",
+				"language": "java",
+				"marks": [
+					{
+						"text": ".alongWith(",
+						"label": "both start together"
+					},
+					{
+						"text": ".withTimeout(3.0)",
+						"label": "so this side can finish too"
+					}
+				]
+			}
+		},
+		{
+			"title": "Reading a chain",
+			"say": {
+				"never": "Read a chain left to right, one decorator at a time, and ask each time: when does this stop? Here the shot ends after two seconds (`withTimeout`), and the drive only starts once the turn has finished (`andThen`). Each dot builds a new, bigger command, and `Commands.sequence` from the next guide does the same for longer lists.",
+				"bit": "Read a chain left to right and ask of each dot: when does this stop?"
+			},
+			"board": {
+				"code": "new TurnToAngleCommand(45.0)\n    .andThen(new DriveDistanceCommand(2.0))\n    .andThen(ShooterCommands.shoot().withTimeout(2.0))",
+				"language": "java",
+				"marks": [
+					{
+						"text": "new TurnToAngleCommand(45.0)",
+						"label": "first: turn"
+					},
+					{
+						"text": ".andThen(new DriveDistanceCommand(2.0))",
+						"label": "then drive"
+					},
+					{
+						"text": ".withTimeout(2.0)",
+						"label": "then shoot, 2 s at most"
+					}
+				]
+			}
+		}
+	],
+	"kind": "concept"
+}

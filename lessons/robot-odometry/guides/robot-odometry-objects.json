@@ -7,37 +7,15 @@
 		{
 			"title": "Making objects",
 			"say": {
-				"never": "A **class** is a blueprint, like the plans for a house. The word `new` builds a real house from the plans, and that thing is an **object**. WPILib has ready-made blueprints for angles (`Rotation2d`) and positions (`Pose2d`). Once you have an object you can ask it things, like `start.getX()`.",
-				"bit": "A class is a blueprint; `new` builds an object from it. WPILib has classes for angles, positions and more."
-			},
-			"board": {
-				"code": "Rotation2d turned = new Rotation2d(0.5);   // 0.5 radians\nPose2d start = new Pose2d(2.0, 4.0, turned);\ndouble x = start.getX();                  // 2.0",
-				"marks": [
-					{
-						"text": "new Rotation2d(0.5)",
-						"label": "an angle object"
-					},
-					{
-						"text": "start.getX()",
-						"label": "ask the object a question"
-					}
-				]
+				"never": "A **class** is a blueprint, like the plans for a house. The word `new` builds a real house from the plans, and that thing is an **object**. WPILib has ready-made blueprints for angles (`Rotation2d`) and positions (`Pose2d`). Once you have an object you can ask it things, like `start.getX()`.\n\nFor example:\n\n`Rotation2d turned = new Rotation2d(0.5);` makes an angle object of 0.5 radians.\n\n`Pose2d start = new Pose2d(2.0, 4.0, turned);` makes a position object.\n\n`double x = start.getX();` asks it a question and gets 2.0.",
+				"bit": "A class is a blueprint; `new` builds an object from it. `new Rotation2d(0.5)` is an angle object, and `start.getX()` asks an object a question."
 			}
 		},
 		{
 			"title": "import",
 			"say": {
-				"never": "Java doesn't know where WPILib's classes live until you tell it. An `import` line at the top of the file is like writing the address on an envelope: it says which toolbox to find `Pose2d` in.",
-				"bit": "To use a class from a library, name it at the top of the file."
-			},
-			"board": {
-				"code": "import edu.wpi.first.math.geometry.Pose2d;\nimport edu.wpi.first.math.geometry.Rotation2d;",
-				"marks": [
-					{
-						"text": "import",
-						"label": "bring a class into this file"
-					}
-				]
+				"never": "Java doesn't know where WPILib's classes live until you tell it. An `import` line at the top of the file is like writing the address on an envelope: it says which toolbox to find `Pose2d` in.\n\n`import edu.wpi.first.math.geometry.Pose2d;`\n\n`import edu.wpi.first.math.geometry.Rotation2d;`",
+				"bit": "To use a class from a library, name it at the top of the file, like `import edu.wpi.first.math.geometry.Pose2d;`."
 			}
 		}
 	],

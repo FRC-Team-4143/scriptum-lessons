@@ -78,21 +78,21 @@ public class ShooterConstants extends MwConstants {
   // Helper methods that build motor settings. You do not need to change these.
   // =============================================================================
 
-  private static MotorConfig flywheelConfig(int canId, double kV, double kP) {
-    MotorConfig config = baseConfig(canId, false);
+  private static MotorConfig flywheelConfig(int can_id, double k_v, double k_p) {
+    MotorConfig config = baseConfig(can_id, false);
     // The motor controller's velocity gains (used by the PID style).
-    config.getAsFXConfig().Slot1.kV = kV;
-    config.getAsFXConfig().Slot1.kP = kP;
+    config.getAsFXConfig().Slot1.kV = k_v;
+    config.getAsFXConfig().Slot1.kP = k_p;
     return config;
   }
 
-  private static MotorConfig rollerConfig(int canId) {
-    return baseConfig(canId, false);
+  private static MotorConfig rollerConfig(int can_id) {
+    return baseConfig(can_id, false);
   }
 
-  private static MotorConfig baseConfig(int canId, boolean inverted) {
+  private static MotorConfig baseConfig(int can_id, boolean inverted) {
     MotorConfig config = new MotorConfig();
-    config.can_id = canId;
+    config.can_id = can_id;
     config.motor_type = TalonMotorType.X60;
     config.getAsFXConfig().MotorOutput.Inverted =
         inverted ? InvertedValue.Clockwise_Positive : InvertedValue.CounterClockwise_Positive;

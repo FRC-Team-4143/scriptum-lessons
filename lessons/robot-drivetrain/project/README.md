@@ -16,15 +16,15 @@ directly. Instead you tell the drivetrain what you want.
 
 - `Robot.java` is **your code**. Everything you write goes in `teleopPeriodic()`.
 - `Constants.java` lists the robot's motors (one on each side) and measurements.
-- The drivetrain is the `drive` object in `Robot.java`. The one thing you need from it is
-  `drive.setDutyCycles(left, right)`.
-- The controller is the `controller` object. It can tell you how far each stick is pushed.
+- The drivetrain is the `drive_` object in `Robot.java`. The one thing you need from it is
+  `drive_.setDutyCycles(left, right)`.
+- The controller is the `controller_` object. It can tell you how far each stick is pushed.
 
 ## Running it
 
 Click **Start** in the Scriptum Driver Station, choose **Teleop** and click **Enable**. Drive with
-a gamepad, or with the keyboard: **W / S** is the left stick up and down, **Arrow Up / Arrow Down**
-is the right stick up and down, and **Arrow Left / Arrow Right** is the right stick left and right.
+a gamepad, or with the keyboard: **W / S** is the left stick up and down, **A / D** is the left stick left and right, and
+**Arrow Up / Arrow Down** is the right stick up and down.
 Open AdvantageScope to watch `Drive/LeftOutput` and `Drive/RightOutput`.
 
 ## Session plan (about 3 hours)
@@ -47,17 +47,17 @@ Go slower on anything that is new. Finishing every bonus is not expected.
 
 Everything here is code **you write** in `teleopPeriodic()`. Run it after each step.
 
-1. **Tank drive.** Declare `double leftSpeed` from the left stick (`controller.getLeftY()`) and
-   `double rightSpeed` from the right stick (`controller.getRightY()`), each with a minus sign in
-   front. Finish with `drive.setDutyCycles(leftSpeed, rightSpeed);`.
+1. **Tank drive.** Declare `double left_speed` from the left stick (`controller_.getLeftY()`) and
+   `double right_speed` from the right stick (`controller_.getRightY()`), each with a minus sign in
+   front. Finish with `drive_.setDutyCycles(left_speed, right_speed);`.
    Run it: **W / S** drives the left side, **Arrow Up / Down** the right side.
 2. **Arcade drive.** Replace your code so that you:
    - declare `forward` from the **left stick Y** (still with the minus sign),
-   - declare `turn` from the **right stick X** (`controller.getRightX()`),
-   - set `leftSpeed = forward + turn` and `rightSpeed = forward - turn`,
-   - call `drive.setDutyCycles(leftSpeed, rightSpeed);`.
+   - declare `turn` from the **left stick X** (`controller_.getLeftX()`),
+   - set `left_speed = forward + turn` and `right_speed = forward - turn`,
+   - call `drive_.setDutyCycles(left_speed, right_speed);`.
 
-   Run it: **W / S** drive, **Arrow Left / Right** turn. If it turns the wrong way, check your signs.
+   Run it: **W / S** drive, **A / D** turn (all on the left stick). If it turns the wrong way, check your signs.
 3. **Click Verify** to check your work.
 
 Stuck on a step? Open **Dozer**: he can explain the idea or walk you through it.
@@ -70,4 +70,3 @@ Stuck on a step? Open **Dozer**: he can explain the idea or walk you through it.
 - **Squared sticks.** Make small stick movements gentler by multiplying `forward` by its own
   absolute value: `forward = forward * Math.abs(forward);`. (`Math.abs(x)` is a method that gives the
   size of `x` without its sign.)
-

@@ -13,7 +13,7 @@ import org.littletonrobotics.junction.wpilog.WPILOGWriter;
  * RobotContainer#robotPeriodic()} instead.
  */
 public class Robot extends LoggedRobot {
-  private final RobotContainer robotContainer;
+  private final RobotContainer robot_container_;
 
   public Robot() {
     // Record metadata
@@ -31,7 +31,7 @@ public class Robot extends LoggedRobot {
         });
 
     // Set up data receivers & replay source
-    switch (Constants.currentMode) {
+    switch (Constants.CURRENT_MODE) {
       case REAL:
         // Running on a real robot, log to a USB stick ("/U/logs")
         Logger.addDataReceiver(new WPILOGWriter());
@@ -46,20 +46,20 @@ public class Robot extends LoggedRobot {
       case REPLAY:
         // Replaying a log, set up replay source
         setUseTiming(false); // Run as fast as possible
-        String logPath = LogFileUtil.findReplayLog();
-        Logger.setReplaySource(new WPILOGReader(logPath));
-        Logger.addDataReceiver(new WPILOGWriter(LogFileUtil.addPathSuffix(logPath, "_sim")));
+        String log_path = LogFileUtil.findReplayLog();
+        Logger.setReplaySource(new WPILOGReader(log_path));
+        Logger.addDataReceiver(new WPILOGWriter(LogFileUtil.addPathSuffix(log_path, "_sim")));
         break;
     }
 
     // Start AdvantageKit logger
     Logger.start();
 
-    robotContainer = new RobotContainer();
+    robot_container_ = new RobotContainer();
   }
 
   @Override
   public void robotPeriodic() {
-    robotContainer.robotPeriodic();
+    robot_container_.robotPeriodic();
   }
 }

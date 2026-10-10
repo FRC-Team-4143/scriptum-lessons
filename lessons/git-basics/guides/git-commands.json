@@ -11,8 +11,8 @@
 		{
 			"title": "Commands and buttons",
 			"say": {
-				"never": "Everything git can do, you can do two ways: by **typing a command** in the terminal, or by **clicking a button** in the **Source Control** panel on the left. They do exactly the same thing. We'll learn each command next to its button, so you can use whichever you like.",
-				"bit": "Every git command here has a matching button in Source Control. Same result either way."
+				"never": "Every git command has a matching button or menu item in the **Source Control** panel on the left, and this lesson uses the buttons. The command names are listed here so you can recognise them in the team's docs and when other people talk about git. Same result either way.",
+				"bit": "Every git command has a button or menu item in Source Control, and this lesson uses the buttons. The commands are here so you recognise the names."
 			},
 			"open": [
 				"editor"
@@ -145,8 +145,8 @@
 		{
 			"title": "push and pull",
 			"say": {
-				"never": "The **remote** is the shared copy of the project (on GitHub). `git push` **sends** your commits there so teammates can see them. `git pull` **fetches** their new commits and brings them into your branch. **The button:** the little **sync** arrows next to the branch name in the bottom-left corner do both. If the branch is new, the button says **Publish Branch** instead.",
-				"bit": "`git push` uploads your commits to the remote (`origin`); `git pull` downloads and merges others'. **Button:** the sync arrows by the branch name (or **Publish Branch** for a new branch)."
+				"never": "The **remote** is the shared copy of the project (on GitHub). `git push` **sends** your commits there so teammates can see them. `git pull` **fetches** their new commits and brings them into your branch. **The button:** in Source Control, click **...**, then **Pull, Push**, and choose **Pull**, **Push** or **Push to...**. (In this lesson the blue Publish Branch and Sync buttons are hidden, so use that menu.)",
+				"bit": "`git push` uploads your commits to the remote (`origin`); `git pull` downloads and merges others'. **Button:** **...** menu, then Pull, Push (Pull, Push or Push to...)."
 			},
 			"board": {
 				"code": "git push origin issue-30-add-intake-sensor\ngit pull",

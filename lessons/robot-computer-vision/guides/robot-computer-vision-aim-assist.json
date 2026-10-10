@@ -1,0 +1,453 @@
+{
+	"title": "Write the aim state",
+	"summary": "Add AIM, the PID, the angle to the goal, isAimed and the command.",
+	"topic": "Robot",
+	"order": 514,
+	"steps": [
+		{
+			"title": "The job",
+			"say": {
+				"never": "The drivetrain already has two states, `ARCADE` and `IDLE`. You will give it a third, `AIM`: while the left bumper is held, the robot spins on the spot until it faces the goal.\n\nYou will do six things, in this order: 1) add the new state, 2) make a PID controller that turns the robot, 3) work out which way the goal is, 4) write what the `AIM` state does each loop, 5) write the yes/no `isAimed` method, 6) write the command the button starts.\n\nYou are done when the robot spins toward the goal on the left bumper. The checkpoints read your code. Tuning comes after.",
+				"bit": "Add a third state, AIM. A PID turns the robot toward the goal. Then write isAimed and the button command, and try it."
+			}
+		},
+		{
+			"title": "Open DrivetrainConstants.java",
+			"say": {
+				"never": "Start with the state itself. Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `DrivetrainConstants`, then press **Enter**.",
+				"bit": "Press **Ctrl+P**, type `DrivetrainConstants` and press Enter."
+			},
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "DrivetrainConstants.java"
+				},
+				"hint": "open DrivetrainConstants.java with Ctrl+P.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Find it",
+			"say": {
+				"never": "The enum is at the bottom of the file. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `add a third state, AIM` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "The enum is at the bottom of the file. Press **Ctrl+F**, type `add a third state, AIM` and press Enter to jump to it."
+			},
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "add a third state, AIM"
+				},
+				"hint": "find add a third state, AIM with Ctrl+F.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Add AIM",
+			"say": {
+				"never": "Add a new state called `AIM` to the enum, below `ARCADE`. Enum values are separated by commas, so `ARCADE` needs a comma after it. Press the **I did it** button when it's written.",
+				"bit": "Add `AIM` to the enum (and a comma after `ARCADE`)."
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"hint": "add AIM after ARCADE with a comma, then click I did it."
+			},
+			"assist": true,
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "add a third state, AIM"
+			}
+		},
+		{
+			"title": "The controller and the wrap-around",
+			"say": {
+				"never": "To face the goal, the robot needs a turning command that gets smaller as it lines up. A **PID controller** makes that from the **error**: how far the robot's heading is from the direction it wants. It has three terms.\n\n- **P** pushes in proportion to the error: far off, big push.\n- **I** adds up the error that is left over time, to finish the last bit. Too much makes it wind up.\n- **D** reacts to how fast the error is changing, to calm things down before it overshoots.\n\nThe constants hold the three gains. The controller also needs two settings: **headings wrap around** (359 degrees and -1 degree are the same direction, so it should take the short way round), and a **tolerance** (how close counts as aimed). It works in radians.",
+				"bit": "A PID turns the error (how far off the heading is) into a turn command: P in proportion, I for leftover error, D to calm it. It needs wrap-around and a tolerance, in radians."
+			}
+		},
+		{
+			"title": "Open DrivetrainSubsystem.java",
+			"say": {
+				"never": "Now the subsystem, where the other four jobs are. Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `DrivetrainSubsystem`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "Now the subsystem, where the other four jobs are. Press **Ctrl+P**, type `DrivetrainSubsystem` and press Enter. Quick Open finds any file by name."
+			},
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "DrivetrainSubsystem.java"
+				},
+				"hint": "open DrivetrainSubsystem.java with Ctrl+P.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Find it",
+			"say": {
+				"never": "First the PID controller. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `create the PIDController that turns the robot` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "First the PID controller. Press **Ctrl+F**, type `create the PIDController that turns the robot` and press Enter to jump to it."
+			},
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "create the PIDController that turns the robot"
+				},
+				"hint": "find create the PIDController that turns the robot with Ctrl+F.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Make the PID",
+			"say": {
+				"never": "Under the comment, make a field called `aim_pid_`: `private final PIDController aim_pid_ = new PIDController(kP, kI, kD);`. Fill in the three gains with `DrivetrainConstants.AIM_KP`, `AIM_KI` and `AIM_KD`, so changing the constants changes the PID. You'll also need to import `PIDController` (hover on the red squiggle to add it). Click **I did it** when it's written.",
+				"bit": "Make `aim_pid_` from the three `AIM_` gains in `DrivetrainConstants`. Import `PIDController`."
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"hint": "write the aim_pid_ field, then click I did it."
+			},
+			"assist": true,
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "create the PIDController that turns the robot"
+			}
+		},
+		{
+			"title": "Find it",
+			"say": {
+				"never": "Then set the PID up in the constructor. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `configure the PID here` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "Then set the PID up in the constructor. Press **Ctrl+F**, type `configure the PID here` and press Enter to jump to it."
+			},
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "configure the PID here"
+				},
+				"hint": "find configure the PID here with Ctrl+F.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Configure the PID",
+			"say": {
+				"never": "Two calls on `aim_pid_`, below that comment. `enableContinuousInput(-Math.PI, Math.PI)` makes headings wrap round. `setTolerance(...)` says how close counts as aimed. Give it `Math.toRadians(DrivetrainConstants.AIM_TOLERANCE_DEGREES)`, because the PID works in radians. Click **I did it** when both are written.",
+				"bit": "`aim_pid_.enableContinuousInput(-Math.PI, Math.PI)` and `aim_pid_.setTolerance(...)` in radians."
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"hint": "write both calls on aim_pid_, then click I did it."
+			},
+			"assist": true,
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "configure the PID here"
+			}
+		},
+		{
+			"title": "Which way is the goal?",
+			"say": {
+				"never": "The **error** needs two directions: where the robot faces, and where the goal is.\n\nThe direction to the goal is the arrow from the robot to the goal: take the goal's position and subtract the robot's. The angle of that arrow is the direction you want to face. `getAngleToGoal()` should return it.\n\nUse the robot's **estimated** pose, the one from the vision work. A robot can only aim from where it thinks it is, and that is why the vision work matters.",
+				"bit": "The direction to the goal is the angle of the arrow from the robot to the goal. Use the estimated pose."
+			}
+		},
+		{
+			"title": "Find it",
+			"say": {
+				"never": "Next, which way is the goal? Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `subtract the robot's position from` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "Next, which way is the goal? Press **Ctrl+F**, type `subtract the robot's position from` and press Enter to jump to it."
+			},
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "subtract the robot's position from"
+				},
+				"hint": "find subtract the robot's position from with Ctrl+F.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Direction to the goal",
+			"say": {
+				"never": "Fill in `getAngleToGoal()`. Take the goal's translation, `FieldTargets.GOAL.getTranslation()`, and subtract the robot's: `.minus(getPose().getTranslation())`. That's the arrow from the robot to the goal. Finish with `.getAngle()` and return it. Click **I did it** when it returns the arrow's angle. Use `getPose()` here, the estimate: a robot can only aim from where it thinks it is, and that is why the vision work matters.",
+				"bit": "Return `GOAL.getTranslation().minus(getPose().getTranslation()).getAngle()`."
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"hint": "write getAngleToGoal, then click I did it."
+			},
+			"assist": true,
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "subtract the robot's position from"
+			}
+		},
+		{
+			"title": "What the AIM state does",
+			"say": {
+				"never": "Each loop, the `AIM` case does two things: it asks the PID for a turn command from the robot's heading and the angle to the goal, and it hands that turn to the drive with no forward speed so the robot **spins on the spot**.\n\n**Which way is positive?** Headings count positive counter-clockwise, but the drive's turn command can point the other way, so the PID's answer has to be flipped. If the robot spins away from the goal, check this first.\n\nThe other states must also **reset** the controller. Otherwise old error and old buildup from the last aim carry into the next one.",
+				"bit": "The AIM case feeds heading and goal angle to the PID and spins the robot on the spot. The turn sign may need flipping. Other states reset the PID."
+			}
+		},
+		{
+			"title": "Find it",
+			"say": {
+				"never": "Now the state itself, in the switch. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `add a case for your new AIM state` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "Now the state itself, in the switch. Press **Ctrl+F**, type `add a case for your new AIM state` and press Enter to jump to it."
+			},
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "add a case for your new AIM state"
+				},
+				"hint": "find add a case for your new AIM state with Ctrl+F.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "The AIM case and the resets",
+			"say": {
+				"never": "Add `case AIM:` to the switch. Set `aim_turn_ = -aim_pid_.calculate(heading, angleToGoal);` where the heading is `getPose().getRotation().getRadians()` and the angle is `getAngleToGoal().getRadians()`. The minus sign is the flip. Then call `drive_.arcadeDrive(0.0, aim_turn_);` so the robot spins on the spot, and end the case with `break;`.\n\nAlso add `aim_pid_.reset();` to the `ARCADE` and `IDLE` cases. Click **I did it** when the AIM case and both resets are written.",
+				"bit": "Write the `AIM` case: `aim_turn_` from the PID (flipped), `arcadeDrive(0.0, aim_turn_)`, `break;`. Add `aim_pid_.reset();` to ARCADE and IDLE."
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"hint": "write the AIM case and both resets, then click I did it."
+			},
+			"assist": true,
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "add a case for your new AIM state"
+			}
+		},
+		{
+			"title": "Aimed means stopped too",
+			"say": {
+				"never": "`isAimed()` answers a yes/no question, and two things must both be true: the heading error is inside the tolerance, **and** the robot has stopped turning. A robot that is swinging through the goal is not aimed, even for a moment.\n\nThe tolerance comes from the constants, and the heading error is in radians, so convert before comparing it.\n\nThe command at the end is the same shape as the shoot command: it sets the wanted state to `AIM` when the button goes down and back to `ARCADE` when it is released.",
+				"bit": "isAimed needs both a small heading error and a stopped robot. The command sets AIM on press and ARCADE on release."
+			}
+		},
+		{
+			"title": "Find it",
+			"say": {
+				"never": "One more: how does the robot know it is aimed? Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `return true only when BOTH are true` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "One more: how does the robot know it is aimed? Press **Ctrl+F**, type `return true only when BOTH are true` and press Enter to jump to it."
+			},
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "return true only when BOTH are true"
+				},
+				"hint": "find return true only when BOTH are true with Ctrl+F.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "isAimed",
+			"say": {
+				"never": "Replace `return false;` with one `return` that uses `&&`: the heading error in degrees, `Math.toDegrees(getAimErrorRadians())`, has an absolute value (`Math.abs`) smaller than `DrivetrainConstants.AIM_TOLERANCE_DEGREES`, **and** `Math.abs(drive_.getAngularSpeed())` is smaller than `0.15`. The second part makes sure it has stopped turning. Click **I did it** when it's written.",
+				"bit": "`Math.abs(error in degrees) < AIM_TOLERANCE_DEGREES && Math.abs(drive_.getAngularSpeed()) < 0.15`."
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"hint": "write isAimed with &&, then click I did it."
+			},
+			"assist": true,
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "return true only when BOTH are true"
+			}
+		},
+		{
+			"title": "Open DrivetrainCommands.java",
+			"say": {
+				"never": "Last, a command so the button can start the state. Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `DrivetrainCommands`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "Last, a command so the button can start the state. Press **Ctrl+P**, type `DrivetrainCommands` and press Enter. Quick Open finds any file by name."
+			},
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "DrivetrainCommands.java"
+				},
+				"hint": "open DrivetrainCommands.java with Ctrl+P.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Find it",
+			"say": {
+				"never": "The command is at the top of the class. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `TODO: return Commands.startEnd` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "The command is at the top of the class. Press **Ctrl+F**, type `TODO: return Commands.startEnd` and press Enter to jump to it."
+			},
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "TODO: return Commands.startEnd"
+				},
+				"hint": "find TODO: return Commands.startEnd with Ctrl+F.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "The aim command",
+			"say": {
+				"never": "This is the same shape as `ShooterCommands.shoot()`. Return `Commands.startEnd(start, end)`: start sets the drivetrain's wanted state to `DriveStates.AIM`, and end sets it back to `DriveStates.ARCADE`. Use `DrivetrainSubsystem.getInstance().setWantedState(...)`. The left bumper is already wired to this command in `OI`. Click **I did it** when it's written.",
+				"bit": "`Commands.startEnd(() -> setWantedState(AIM), () -> setWantedState(ARCADE))` on the drivetrain."
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"hint": "write the startEnd command, then click I did it."
+			},
+			"assist": true,
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "TODO: return Commands.startEnd"
+			}
+		},
+		{
+			"title": "Start the robot",
+			"say": {
+				"never": "Your code only works once it's started. Press **Start** and wait until the status says **Running**. Every change to the constants needs a fresh Start, so you will do this a few times.",
+				"bit": "Your code only runs once it's built and started. Do it again after every change."
+			},
+			"target": {
+				"selector": "[data-tour='sim-controls']"
+			},
+			"waitFor": {
+				"target": {
+					"selector": "[data-tour='code-status']",
+					"text": "Running"
+				},
+				"hint": {
+					"never": "press Start, then wait for Running.",
+					"bit": "press Start and wait for Running."
+				}
+			},
+			"assist": true
+		},
+		{
+			"title": "Enable in Teleop",
+			"say": {
+				"never": "Choose **Teleop**, then press **Enable**. The robot stays frozen until it's enabled.",
+				"bit": "Pick **Teleop** and press **Enable**. Robot code runs only while it's enabled."
+			},
+			"target": {
+				"selector": "[data-tour='enable']"
+			},
+			"waitFor": {
+				"target": {
+					"selector": "[data-tour='enable'] button",
+					"text": "Enabled"
+				},
+				"hint": {
+					"never": "choose Teleop, then press Enable.",
+					"bit": "choose Teleop, then Enable."
+				}
+			},
+			"assist": true
+		},
+		{
+			"title": "Try it and tune it",
+			"say": {
+				"never": "Hold the **left bumper** (**E** on the keyboard). The robot should spin toward the goal, which starts about 45 degrees to its left. It probably won't stop in the right place yet, and that's fine.\n\nIf it spins the wrong way, check the sign flip. If nothing happens, check the binding and that the state is `AIM` in AdvantageScope.\n\nThen tune **by hand**, one gain at a time. Start with only P: raise it until the robot turns briskly, lower it if it swings back and forth. If it overshoots, add a little D. Leave I at zero unless it stops just short of the goal. Change one number, Start again, and try again.",
+				"bit": "Hold the left bumper. It should spin toward the goal. If it spins the wrong way, flip the sign. Tune by hand: P first, a little D to stop overshoot, I last."
+			},
+			"target": {
+				"selector": "[data-tour='mode']"
+			},
+			"cardAt": "top-right"
+		}
+	],
+	"kind": "mixed"
+}

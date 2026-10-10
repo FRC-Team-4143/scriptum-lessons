@@ -7,6 +7,18 @@
 			]
 		},
 		{
+			"checkpoint": "linear-speed",
+			"guides": [
+				"robot-drive-math-methods"
+			]
+		},
+		{
+			"checkpoint": "angular-speed",
+			"guides": [
+				"robot-drive-math-methods"
+			]
+		},
+		{
 			"checkpoint": "arcade-math",
 			"guides": [
 				"robot-drive-math-arrays"

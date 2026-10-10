@@ -15,28 +15,28 @@ import java.util.List;
  * time.
  */
 public class ShooterSubsystem extends MwSubsystem<ShooterStates, ShooterConstants> {
-  private static ShooterSubsystem instance = null;
+  private static ShooterSubsystem instance_ = null;
 
   public static ShooterSubsystem getInstance() {
-    if (instance == null) {
-      instance = new ShooterSubsystem();
+    if (instance_ == null) {
+      instance_ = new ShooterSubsystem();
     }
-    return instance;
+    return instance_;
   }
 
-  private final FlywheelMech flywheel;
-  private final RollerMech roller;
+  private final FlywheelMech flywheel_;
+  private final RollerMech roller_;
 
   // Bookkeeping for the lesson's checks. You do not need to change it.
-  private final Timer spinUpTimer = new Timer();
-  private ShooterStates lastState = ShooterStates.IDLE;
-  private long shotCount = 0;
-  private double spinUpSeconds = 0.0;
+  private final Timer spin_up_timer_ = new Timer();
+  private ShooterStates last_state_ = ShooterStates.IDLE;
+  private long shot_count_ = 0;
+  private double spin_up_seconds_ = 0.0;
 
   private ShooterSubsystem() {
     super(ShooterStates.IDLE, new ShooterConstants());
 
-    flywheel =
+    flywheel_ =
         new FlywheelMech(
             getSubsystemKey(),
             "Flywheel",
@@ -44,7 +44,7 @@ public class ShooterSubsystem extends MwSubsystem<ShooterStates, ShooterConstant
             CONSTANTS.FLYWHEEL_GEAR_RATIO,
             CONSTANTS.FLYWHEEL_INERTIA,
             CONSTANTS.FLYWHEEL_RADIUS);
-    roller =
+    roller_ =
         new RollerMech(
             getSubsystemKey(),
             "Roller",
@@ -55,7 +55,7 @@ public class ShooterSubsystem extends MwSubsystem<ShooterStates, ShooterConstant
 
   @Override
   public List<SubsystemIoBase> getIos() {
-    return List.of(flywheel, roller);
+    return List.of(flywheel_, roller_);
   }
 
   @Override
@@ -65,28 +65,28 @@ public class ShooterSubsystem extends MwSubsystem<ShooterStates, ShooterConstant
 
   /** True when the flywheel is close enough to the target speed. */
   public boolean isAtSpeed() {
-    return flywheel.getCurrentVelocity()
+    return flywheel_.getCurrentVelocity()
         >= CONSTANTS.SHOOT_VELOCITY * (1.0 - CONSTANTS.AT_SPEED_TOLERANCE);
   }
 
   /** True when the flywheel has slowed down too much (for example after launching a piece). */
   public boolean hasDipped() {
-    return flywheel.getCurrentVelocity()
+    return flywheel_.getCurrentVelocity()
         < CONSTANTS.SHOOT_VELOCITY * (1.0 - CONSTANTS.DIP_TOLERANCE);
   }
 
   /** Pretends a game piece was just launched, which pushes back on the flywheel. */
   public void simulateBallLaunch() {
-    flywheel.applyLoadTorque(CONSTANTS.BALL_LOAD_TORQUE);
+    flywheel_.applyLoadTorque(CONSTANTS.BALL_LOAD_TORQUE);
   }
 
   /**
    * Decides which state the shooter is in. MWLib calls this every loop with the state the driver
    * WANTS. Set system_state_ to the state we are actually allowed to go to.
    *
-   * <p>Rules: IDLE always goes straight to IDLE. If SHOOT is wanted, you may NOT jump from IDLE
-   * to SHOOT: go IDLE -> SPIN_UP first. From SPIN_UP go to SHOOT once the flywheel isAtSpeed().
-   * From SHOOT go back to SPIN_UP if the flywheel hasDipped().
+   * <p>Rules: IDLE always goes straight to IDLE. If SHOOT is wanted, you may NOT jump from IDLE to
+   * SHOOT: go IDLE -> SPIN_UP first. From SPIN_UP go to SHOOT once the flywheel isAtSpeed(). From
+   * SHOOT go back to SPIN_UP if the flywheel hasDipped().
    */
   @Override
   protected void handleStateTransition(ShooterStates wanted) {
@@ -123,23 +123,23 @@ public class ShooterSubsystem extends MwSubsystem<ShooterStates, ShooterConstant
     switch (system_state_) {
       case SPIN_UP:
         runFlywheel();
-        roller.setTargetDutyCycle(0.0);
+        roller_.setTargetDutyCycle(0.0);
         break;
       case SHOOT:
         runFlywheel();
-        roller.setTargetDutyCycle(CONSTANTS.INDEX_DUTY_CYCLE);
+        roller_.setTargetDutyCycle(CONSTANTS.INDEX_DUTY_CYCLE);
         break;
       case IDLE:
       default:
-        flywheel.setTargetDutyCycle(0.0);
-        roller.setTargetDutyCycle(0.0);
+        flywheel_.setTargetDutyCycle(0.0);
+        roller_.setTargetDutyCycle(0.0);
         break;
     }
 
-    MwLog.log(getSubsystemKey() + "FlywheelVelocity", flywheel.getCurrentVelocity());
+    MwLog.log(getSubsystemKey() + "FlywheelVelocity", flywheel_.getCurrentVelocity());
     MwLog.log(getSubsystemKey() + "FlywheelTarget", CONSTANTS.SHOOT_VELOCITY);
-    MwLog.log(getSubsystemKey() + "ShotCount", shotCount);
-    MwLog.log(getSubsystemKey() + "SpinUpSeconds", spinUpSeconds);
+    MwLog.log(getSubsystemKey() + "ShotCount", shot_count_);
+    MwLog.log(getSubsystemKey() + "SpinUpSeconds", spin_up_seconds_);
   }
 
   /** Holds the flywheel at its target speed using whichever control style the constants choose. */
@@ -154,7 +154,7 @@ public class ShooterSubsystem extends MwSubsystem<ShooterStates, ShooterConstant
       case PID:
       default:
         // The motor controller runs feedforward (kV) plus feedback (kP) for us.
-        flywheel.setTargetVelocity(CONSTANTS.SHOOT_VELOCITY);
+        flywheel_.setTargetVelocity(CONSTANTS.SHOOT_VELOCITY);
         break;
     }
   }
@@ -163,10 +163,10 @@ public class ShooterSubsystem extends MwSubsystem<ShooterStates, ShooterConstant
    * Bang-bang control: full power while the flywheel is too slow, no power once it is fast enough.
    */
   private void bangBang() {
-    if (flywheel.getCurrentVelocity() < CONSTANTS.SHOOT_VELOCITY) {
-      flywheel.setTargetDutyCycle(1.0);
+    if (flywheel_.getCurrentVelocity() < CONSTANTS.SHOOT_VELOCITY) {
+      flywheel_.setTargetDutyCycle(1.0);
     } else {
-      flywheel.setTargetDutyCycle(0.0);
+      flywheel_.setTargetDutyCycle(0.0);
     }
   }
 
@@ -175,22 +175,22 @@ public class ShooterSubsystem extends MwSubsystem<ShooterStates, ShooterConstant
    * apply it.
    */
   private void feedforward() {
-    double targetRps = CONSTANTS.SHOOT_VELOCITY / (2.0 * Math.PI);
-    double volts = CONSTANTS.FLYWHEEL_KV * targetRps;
-    flywheel.setTargetDutyCycle(volts / 12.0);
+    double target_rps = CONSTANTS.SHOOT_VELOCITY / (2.0 * Math.PI);
+    double volts = CONSTANTS.FLYWHEEL_KV * target_rps;
+    flywheel_.setTargetDutyCycle(volts / 12.0);
   }
 
   /** Counts launches and times each spin-up. Used by the lesson checks. */
   private void trackShots() {
-    if (system_state_ != lastState) {
+    if (system_state_ != last_state_) {
       if (system_state_ == ShooterStates.SPIN_UP) {
-        spinUpTimer.restart();
+        spin_up_timer_.restart();
       }
       if (system_state_ == ShooterStates.SHOOT) {
-        shotCount++;
-        spinUpSeconds = spinUpTimer.get();
+        shot_count_++;
+        spin_up_seconds_ = spin_up_timer_.get();
       }
-      lastState = system_state_;
+      last_state_ = system_state_;
     }
   }
 }

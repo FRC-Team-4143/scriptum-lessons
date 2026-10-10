@@ -14,6 +14,8 @@ import java.util.Map;
 public final class LessonChecks {
   private static final String PREFIX = "/AdvantageKit/RealOutputs/";
 
+  // {smallest, biggest}, set by the first value seen (so a value that starts big and shrinks
+  // toward a target, like a distance, gets a real minimum instead of 0).
   private final Map<String, double[]> ranges = new LinkedHashMap<>();
   private final Map<String, NetworkTableEntry> entries = new LinkedHashMap<>();
 
@@ -24,7 +26,7 @@ public final class LessonChecks {
 
   public LessonChecks(String... keys) {
     for (String key : keys) {
-      ranges.put(key, new double[] {0.0, 0.0}); // {smallest, biggest}
+      ranges.put(key, new double[] {Double.NaN, Double.NaN});
       entries.put(key, NetworkTableInstance.getDefault().getEntry(PREFIX + key));
     }
   }
@@ -47,11 +49,16 @@ public final class LessonChecks {
       double[] range = item.getValue();
       if (entry.exists()) {
         double value = entry.getDouble(0.0);
+        if (Double.isNaN(range[0])) {
+          range[0] = value;
+          range[1] = value;
+        }
         range[0] = Math.min(range[0], value);
         range[1] = Math.max(range[1], value);
       }
-      MwLog.log("Check/" + item.getKey() + "/Min", range[0]);
-      MwLog.log("Check/" + item.getKey() + "/Max", range[1]);
+      // Until the value has been logged once, publish 0 like before.
+      MwLog.log("Check/" + item.getKey() + "/Min", Double.isNaN(range[0]) ? 0.0 : range[0]);
+      MwLog.log("Check/" + item.getKey() + "/Max", Double.isNaN(range[1]) ? 0.0 : range[1]);
     }
     for (var item : spreads.entrySet()) {
       Spread spread = item.getValue();

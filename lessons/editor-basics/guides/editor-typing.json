@@ -111,8 +111,9 @@
 		},
 		{
 			"title": "Nice work",
-			"say": "Undo, copy, paste and save are the four moves you'll use all day. Next, try **Rename and delete**."
+			"say": "Undo, copy, paste and save are the four moves you'll use all day. Next, try **Rename and delete**.",
+			"assist": true
 		}
 	],
-	"kind": "mixed"
+	"kind": "assist"
 }

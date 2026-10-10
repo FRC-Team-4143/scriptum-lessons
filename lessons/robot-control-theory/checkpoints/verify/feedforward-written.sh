@@ -14,7 +14,7 @@ if ! grep -q 'SHOOT_VELOCITY' <<<"$BODY"; then
 	exit 1
 fi
 if ! grep -Eq 'setTargetDutyCycle\([[:space:]]*[^0)[:space:]]' <<<"$BODY"; then
-	echo "feedforward() should pass the power it worked out to flywheel.setTargetDutyCycle(...)."
+	echo "feedforward() should pass the power it worked out to flywheel_.setTargetDutyCycle(...)."
 	exit 1
 fi
 echo "feedforward() is written."
