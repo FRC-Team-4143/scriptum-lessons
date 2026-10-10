@@ -284,8 +284,9 @@
 			},
 			"target": {
 				"selector": "[data-tour='lesson']"
-			}
+			},
+			"assist": true
 		}
 	],
-	"kind": "mixed"
+	"kind": "assist"
 }

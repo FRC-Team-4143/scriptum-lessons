@@ -428,8 +428,9 @@
 			"target": {
 				"selector": "[data-tour='mode']"
 			},
-			"cardAt": "top-right"
+			"cardAt": "top-right",
+			"assist": true
 		}
 	],
-	"kind": "mixed"
+	"kind": "assist"
 }

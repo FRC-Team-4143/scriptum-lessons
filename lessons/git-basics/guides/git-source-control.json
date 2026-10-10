@@ -216,8 +216,9 @@
 			"say": {
 				"never": "Each numbered folder's `README.md` has the next task: a feature branch, a merge, a conflict and a rebase, then pushing, pulling and stashing. Check your progress in the lesson chip at the top.",
 				"bit": "Each numbered folder's `README.md` has the next task. Check progress in the lesson chip at the top."
-			}
+			},
+			"assist": true
 		}
 	],
-	"kind": "mixed"
+	"kind": "assist"
 }

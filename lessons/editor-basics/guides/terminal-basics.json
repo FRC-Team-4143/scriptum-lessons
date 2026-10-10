@@ -5,6 +5,10 @@
 	"order": 6,
 	"steps": [
 		{
+			"title": "What you will do",
+			"say": "In this guide you will open the terminal and type five short commands to look around and make a folder."
+		},
+		{
 			"title": "Open the terminal",
 			"say": "Press **Ctrl+`** (the key just above Tab, on the left). A panel slides up at the bottom: that's the **terminal**. Click somewhere in the editor first, so it hears your keys.",
 			"open": [
