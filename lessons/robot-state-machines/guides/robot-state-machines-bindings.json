@@ -1,6 +1,6 @@
 {
-	"title": "Buttons to commands",
-	"summary": "whileTrue vs onTrue, then watch the state change.",
+	"title": "Buttons to robot states",
+	"summary": "whileTrue vs onTrue, asking the robot for a state, then watching it change.",
 	"topic": "Robot",
 	"order": 511,
 	"steps": [
@@ -28,15 +28,19 @@
 		{
 			"title": "In your lesson: Two kinds of button",
 			"say": {
-				"never": "A **binding** connects a button to a command. There are two kinds. `whileTrue` runs the command *as long as you hold the button* and stops when you let go. `onTrue` runs it **once** each time you press the button.",
-				"bit": "`whileTrue` runs the command while the button's held. `onTrue` starts it once per press."
+				"never": "Your buttons don't talk to the shooter. They ask the **robot** for a state. `whileTrue` with `Commands.startEnd` asks for `SHOOT` while the right bumper is held and `DRIVE` when you let go. `onTrue` with `Commands.runOnce` does one thing per press: here, a pretend launch for the simulator.",
+				"bit": "The right bumper asks the robot for `SHOOT` while held and `DRIVE` on release. `onTrue` runs once per press."
 			},
 			"board": {
-				"code": "driver.rightBumper().whileTrue(ShooterCommands.shoot());\ndriver.a().onTrue(ShooterCommands.simulateBallLaunch());",
+				"code": "driver.rightBumper().whileTrue(Commands.startEnd(\n    () -> robot.setWantedState(RobotStates.SHOOT),\n    () -> robot.setWantedState(RobotStates.DRIVE)));\ndriver.a().onTrue(Commands.runOnce(\n    () -> ShooterSubsystem.getInstance().simulateBallLaunch()));",
 				"marks": [
 					{
 						"text": "whileTrue",
 						"label": "held: keep shooting"
+					},
+					{
+						"text": "RobotStates.DRIVE",
+						"label": "let go: back to driving"
 					},
 					{
 						"text": "onTrue",
@@ -100,8 +104,8 @@
 		{
 			"title": "Bind them",
 			"say": {
-				"never": "Add both lines here, below their comments: the right bumper with `whileTrue`, and the A button with `onTrue`. The board on the first step shows the pattern.",
-				"bit": "Add both lines here."
+				"never": "Add both bindings here, below their comments: the right bumper with `whileTrue` and `Commands.startEnd`, and the A button with `onTrue` and `Commands.runOnce`. The board on the second step shows the pattern.",
+				"bit": "Add both bindings here."
 			},
 			"target": {
 				"pane": "editor",
@@ -156,8 +160,8 @@
 		{
 			"title": "Drive it",
 			"say": {
-				"never": "Hold **U** (the right bumper): the shooter goes SPIN_UP, then SHOOT. Tap **K** (the A button): it drops back to SPIN_UP, then recovers. Watch the state change in AdvantageScope.",
-				"bit": "Hold **U** (right bumper): the state goes SPIN_UP, then SHOOT. Tap **K** (A): it drops back to SPIN_UP, then recovers."
+				"never": "Hold **U** (the right bumper): the robot goes to SHOOT, and the shooter goes SPIN_UP, then SHOOT. Tap **K** (the A button): the shooter drops back to SPIN_UP, then recovers. Watch `Robot/State` and the shooter's `State` change in AdvantageScope.",
+				"bit": "Hold **U** (right bumper): `Robot/State` is SHOOT and the shooter goes SPIN_UP, then SHOOT. Tap **K** (A): it drops back to SPIN_UP, then recovers."
 			},
 			"target": {
 				"selector": "[data-tour='mode']"

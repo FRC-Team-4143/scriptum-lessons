@@ -34,7 +34,7 @@ describe("robot-computer-vision", () => {
 		expect(photon.name).toBe("photonlib");
 		expect(photon.version).toBe("v2026.2.2");
 		const gradle = readFileSync(join(L.dir, "project", "build.gradle"), "utf8");
-		expect(gradle).toContain("mw-lib-java:26.17.3");
+		expect(gradle).toContain("mw-lib-java:26.17.4");
 	});
 
 	test("the provided pieces the next chunks build on exist", () => {
@@ -52,7 +52,7 @@ describe("robot-computer-vision", () => {
 const AIM_FILES = [
 	"subsystems/drive/DrivetrainConstants.java",
 	"subsystems/drive/DrivetrainSubsystem.java",
-	"subsystems/drive/DrivetrainCommands.java",
+	"RobotContainer.java",
 ];
 
 /** A copy of the project with the whole solution laid over it, then `change` applied. */

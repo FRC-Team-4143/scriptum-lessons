@@ -22,17 +22,20 @@ public final class Autos {
       //   loadTrajectory("ToPickup");
       //   loadTrajectory("ToScore");
 
-      // TODO 2: add the commands, in order, with addCommands(...):
-      //   DrivetrainCommands.followPath(getTrajectory("ToPickup"))   // drive the first path
-      //   Commands.waitSeconds(0.5)                                  // pretend to pick the piece
-      // up
-      //   DrivetrainCommands.followPath(getTrajectory("ToScore"))    // drive the second path
-      //   DrivetrainCommands.aim()                                   // turn to face the goal, but
-      //       .until(DrivetrainSubsystem.getInstance()::isAimed)     // stop once the robot is
-      // aimed
-      //       .withTimeout(3.0)                                      // (and give up after 3
-      // seconds)
-      //   ShooterCommands.shoot().withTimeout(2.0)                   // shoot for 2 seconds
+      // TODO 2: add the commands, in order, with addCommands(...). The robot is
+      // RobotContainer.getInstance(); ask it for states the same way the buttons do:
+      //   robot.followPath(getTrajectory("ToPickup"))               // drive the first path
+      //   Commands.waitSeconds(0.5)                                 // pretend to pick the piece up
+      //   robot.followPath(getTrajectory("ToScore"))                // drive the second path
+      //   Commands.startEnd(                                        // turn to face the goal:
+      //           () -> robot.setWantedState(RobotStates.AIM),      //   ask for AIM,
+      //           () -> robot.setWantedState(RobotStates.AUTO))     //   then back to AUTO,
+      //       .until(DrivetrainSubsystem.getInstance()::isAimed)    // once the robot is aimed
+      //       .withTimeout(3.0)                                     // (or after 3 seconds)
+      //   Commands.startEnd(                                        // shoot:
+      //           () -> robot.setWantedState(RobotStates.SHOOT),
+      //           () -> robot.setWantedState(RobotStates.AUTO))
+      //       .withTimeout(2.0)                                     // for 2 seconds
     }
   }
 }

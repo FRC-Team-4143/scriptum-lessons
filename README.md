@@ -58,7 +58,7 @@ Three tracks, in curriculum order (each lesson's `track` and `order` are in its 
   `robot-drivetrain` (Motors and Drivetrains), `robot-sensors` (Sensors and Feedback),
   `robot-drive-math` (Drive Math and Methods), `robot-odometry` (Objects and Odometry),
   `robot-subsystems` (Mechanisms and Subsystems), `robot-control-theory` (Control Theory),
-  `robot-state-machines` (State Machines and Commands), `robot-computer-vision` (Computer Vision) and `robot-autonomous` (Choreo Autonomous).
+  `robot-state-machines` (State Machines), `robot-computer-vision` (Computer Vision) and `robot-autonomous` (Choreo Autonomous).
   Each module's `README.md` is the lesson. See [Robot modules](#robot-modules).
 
 ## Tutor (Dozer)
@@ -98,15 +98,18 @@ help file. The Java round trips need a JDK on your PATH and are skipped without 
 
 ## Robot modules
 
-The first four `robot-*` modules keep the student's code in `Robot.java`, and the last three move to
-subsystems and commands. They share one scaffold, so a change to the drivetrain or the build usually
+The first four `robot-*` modules keep the student's code in `Robot.java`, and the later ones move to
+subsystems and, from State Machines on, the robot's own state machine in `RobotContainer`. They share one scaffold, so a change to the drivetrain or the build usually
 has to be made in every module (`lessons/robot-*/project/`):
 
 - `mechanisms/DifferentialDriveMech.java` is the lesson-local drive mech. It extends MWLib's
   `MechBase`, simulates the drivetrain (including slightly imperfect encoders, so a student's pose
   differs a little from `Drive/TruePose`), and grows a few methods per lesson.
 - Modules 1-4: `lesson/LessonLoop.java` runs MWLib's `SubsystemManager` loop so students never call
-  `readInputs` or `writeOutputs`. Modules 5-7 use a real `RobotContainer extends SubsystemManager`.
+  `readInputs` or `writeOutputs`. Module 5 (subsystems) and 6 (control theory) use a real `RobotContainer extends SubsystemManager`; from
+  module 7 (state machines) on, `RobotContainer extends MwSuperStateMachine<RobotStates>`, the robot's own
+  state machine. Buttons and autos ask it for robot states with `setWantedState(...)`; there are no
+  per-subsystem command files.
 - `lesson/LessonChecks.java` (via `lesson/Checks.java` in modules 5-7) republishes the min and max of
   a few logged values under `Check/...`, so the `nt4-value` checkpoints still pass after the student
   lets go of the sticks. Each module's `.vscode/settings.json` hides it, the build files and other
@@ -143,7 +146,7 @@ has to be made in every module (`lessons/robot-*/project/`):
   `LocalizationSubsystem.updateLogic()` is the `addVisionMeasurement(...)` call and its standard
   deviations. It needs the PhotonLib vendordep (`vendordeps/photonlib.json`); PhotonLib publishes no
   `linuxarm64` natives, so the vision simulator only runs on x86-64. The `FieldTargets` poses `START` and
-  `GOAL` are the same as `robot-autonomous`'s. The student also builds the drivetrain's `AIM` state (a PID with continuous input, `getAngleToGoal()`, `isAimed()` and `DrivetrainCommands.aim()`), aiming from the vision-corrected estimate, and tunes `AIM_KP`/`AIM_KD`. The `Check/Localization/Accurate` and `Check/Aim/...` topics judge the estimate and the aim against the true pose. Guides: the concept guides `where-am-i` and `trust`, the vision walkthrough `add-vision`, and the four aim guides.
+  `GOAL` are the same as `robot-autonomous`'s. The student also builds the drivetrain's `AIM` state (a PID with continuous input, `getAngleToGoal()`, `isAimed()` and the `AIM` case in `RobotContainer`), aiming from the vision-corrected estimate, and tunes `AIM_KP`/`AIM_KD`. The `Check/Localization/Accurate` and `Check/Aim/...` topics judge the estimate and the aim against the true pose. Guides: the concept guides `where-am-i` and `trust`, the vision walkthrough `add-vision`, and the four aim guides.
 - MWLib comes from jitpack (`com.github.FRC-Team-4143.MW-Lib:mw-lib-java:<tag>`), with no
   credentials. Bump the tag in every `build.gradle` together.
 - `lessons/<id>/solution/` holds the reference solution used by that lesson's `lesson.test.ts` to
@@ -163,7 +166,7 @@ and uses them right away. The Java modules remain available as a deeper, standal
 | 4 Objects and Odometry | classes and objects, `new`, `import`, `static`, `abstract` |
 | 5 Mechanisms and Subsystems | inheritance (`extends`, `@Override`), constructors, lists, enums as a list of states, `if` / `else` in subsystem logic |
 | 6 Control Theory | enums and `switch` (picking a control style), unit conversion, small methods |
-| 7 State Machines and Commands | `switch` on a subsystem's state (practice), `&&` `\|\|` `!`, boolean methods, lambdas |
+| 7 State Machines | `switch` on a subsystem's state (practice), `&&` `\|\|` `!`, boolean methods, lambdas |
 | 7b Computer Vision (about 3 hours) | passing a timestamp and standard deviations (`VecBuilder.fill`, `double` constants), a `PIDController` object, a new enum case in a `switch`, `&&`, `Math.toRadians` |
 | 8 Choreo Autonomous (about 3 hours) | reading `Command` classes, command lists with `addCommands`, decorators (`until`, `withTimeout`), method references (`::`) |
 

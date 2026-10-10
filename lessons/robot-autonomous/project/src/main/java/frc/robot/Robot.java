@@ -6,25 +6,25 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.Commands;
-import frc.robot.subsystems.drive.DrivetrainConstants.DriveStates;
 import frc.robot.subsystems.drive.DrivetrainSubsystem;
 import frc.robot.subsystems.shooter.ShooterSubsystem;
 import lesson.Checks;
 import org.littletonrobotics.junction.LoggedRobot;
 
 /**
- * The main robot class. It connects the subsystems, commands and the autonomous chooser. You should
- * not need to change it.
+ * The main robot class. It connects RobotContainer, the buttons and the autonomous chooser. You
+ * should not need to change it.
  */
 public class Robot extends LoggedRobot {
-  private final RobotContainer container_ = new RobotContainer();
+  private final RobotContainer container_ = RobotContainer.getInstance();
   private Command auto_command_ = null;
 
   public Robot() {
     // Put the (simulated) robot at the start spot, and the pose estimate with it.
     DrivetrainSubsystem.getInstance().resetPose(FieldTargets.START);
-    // Connect the controller buttons to commands.
+    // Connect the controller buttons to robot states, and fill the autonomous chooser.
     OI.configureBindings();
+    container_.configureAutos();
   }
 
   @Override
@@ -36,7 +36,7 @@ public class Robot extends LoggedRobot {
 
   @Override
   public void disabledInit() {
-    DrivetrainSubsystem.getInstance().setWantedState(DriveStates.IDLE);
+    container_.setWantedState(RobotStates.IDLE);
   }
 
   @Override
@@ -62,7 +62,7 @@ public class Robot extends LoggedRobot {
       }
     }
     DrivetrainSubsystem.getInstance().resetPose(start_pose);
-    DrivetrainSubsystem.getInstance().setWantedState(DriveStates.COMMANDED);
+    container_.setWantedState(RobotStates.AUTO);
     ShooterSubsystem.getInstance().resetShotCount();
     CommandScheduler.getInstance().schedule(auto_command_);
   }
@@ -73,6 +73,6 @@ public class Robot extends LoggedRobot {
     if (auto_command_ != null) {
       auto_command_.cancel();
     }
-    DrivetrainSubsystem.getInstance().setWantedState(DriveStates.ARCADE);
+    container_.setWantedState(RobotStates.DRIVE);
   }
 }

@@ -244,7 +244,7 @@
 		{
 			"title": "Reading a failure",
 			"say": {
-				"never": "If **Reaches the pickup** fails, the path or the first command is wrong (wrong path name, no `followPath`). If **Reaches the scoring spot** fails, the second path never ran or wasn't connected to the first. If **Aims before it shoots** fails, the aim command is missing, comes *after* the shot, or has no `.until(...isAimed)`, so it timed out. If **Shoots** fails, the routine ended before reaching `shoot()`. After a fix, press Start again for a clean run.",
+				"never": "If **Reaches the pickup** fails, the path or the first command is wrong (wrong path name, no `followPath`). If **Reaches the scoring spot** fails, the second path never ran or wasn't connected to the first. If **Aims before it shoots** fails, the AIM step is missing, comes *after* the shot, or has no `.until(...isAimed)`, so it timed out. If **Shoots** fails, the routine ended before reaching the SHOOT step. After a fix, press Start again for a clean run.",
 				"bit": "Each failing check points at one missing or misordered command. Fix it and Start again."
 			}
 		},

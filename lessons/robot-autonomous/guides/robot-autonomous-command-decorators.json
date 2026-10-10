@@ -14,15 +14,15 @@
 		{
 			"title": "withTimeout: a time limit",
 			"say": {
-				"never": "`.withTimeout(2.0)` stops the command after two seconds if it hasn't finished already. A command that never finishes on its own, like `shoot()`, now has an end: the timeout is the condition. When it times out, the wrapped command's `end(true)` runs, so it still cleans up.",
+				"never": "`.withTimeout(2.0)` stops the command after two seconds if it hasn't finished already. A command that never finishes on its own, like asking the robot for `SHOOT`, now has an end: the timeout is the condition. When it times out, the wrapped command's `end(true)` runs, so it still cleans up.",
 				"bit": "`withTimeout(seconds)` stops a command after that long. It still cleans up through `end`."
 			},
 			"board": {
-				"code": "ShooterCommands.shoot().withTimeout(2.0)",
+				"code": "Command shoot = Commands.startEnd(\n    () -> robot.setWantedState(RobotStates.SHOOT),\n    () -> robot.setWantedState(RobotStates.AUTO));\nshoot.withTimeout(2.0)",
 				"language": "java",
 				"marks": [
 					{
-						"text": "ShooterCommands.shoot()",
+						"text": "Command shoot =",
 						"label": "never finishes by itself"
 					},
 					{
@@ -39,7 +39,7 @@
 				"bit": "`until(condition)` finishes the command as soon as your yes/no condition is true."
 			},
 			"board": {
-				"code": "ShooterCommands.shoot()\n    .until(() -> shooter.hasDipped())",
+				"code": "Command shoot = Commands.startEnd(\n    () -> robot.setWantedState(RobotStates.SHOOT),\n    () -> robot.setWantedState(RobotStates.AUTO));\nshoot.until(() -> shooter.hasDipped())",
 				"language": "java",
 				"marks": [
 					{
@@ -81,7 +81,7 @@
 				"bit": "`a.alongWith(b)` runs both together and finishes when both are done."
 			},
 			"board": {
-				"code": "new DriveDistanceCommand(5.0)\n    .alongWith(ShooterCommands.shoot().withTimeout(3.0))",
+				"code": "Command shoot = Commands.startEnd(\n    () -> robot.setWantedState(RobotStates.SHOOT),\n    () -> robot.setWantedState(RobotStates.AUTO));\nnew DriveDistanceCommand(5.0)\n    .alongWith(shoot.withTimeout(3.0))",
 				"language": "java",
 				"marks": [
 					{
@@ -102,7 +102,7 @@
 				"bit": "Read a chain left to right and ask of each dot: when does this stop?"
 			},
 			"board": {
-				"code": "new TurnToAngleCommand(45.0)\n    .andThen(new DriveDistanceCommand(2.0))\n    .andThen(ShooterCommands.shoot().withTimeout(2.0))",
+				"code": "Command shoot = Commands.startEnd(\n    () -> robot.setWantedState(RobotStates.SHOOT),\n    () -> robot.setWantedState(RobotStates.AUTO));\nnew TurnToAngleCommand(45.0)\n    .andThen(new DriveDistanceCommand(2.0))\n    .andThen(shoot.withTimeout(2.0))",
 				"language": "java",
 				"marks": [
 					{

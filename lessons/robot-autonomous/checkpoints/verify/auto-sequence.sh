@@ -15,27 +15,27 @@ if ! has 'loadTrajectory[[:space:]]*\([[:space:]]*"ToPickup"' || ! has 'loadTraj
 	exit 1
 fi
 if ! has 'followPath[[:space:]]*\([^;]*getTrajectory[[:space:]]*\([[:space:]]*"ToPickup"'; then
-	echo "Drive the first path with DrivetrainCommands.followPath(getTrajectory(\"ToPickup\"))."
+	echo "Drive the first path with robot.followPath(getTrajectory(\"ToPickup\"))."
 	exit 1
 fi
 if ! has 'followPath[[:space:]]*\([^;]*getTrajectory[[:space:]]*\([[:space:]]*"ToScore"'; then
-	echo "Drive the second path with DrivetrainCommands.followPath(getTrajectory(\"ToScore\"))."
+	echo "Drive the second path with robot.followPath(getTrajectory(\"ToScore\"))."
 	exit 1
 fi
-if ! has '(\.aim[[:space:]]*\(|DriveStates\.AIM)'; then
-	echo "Turn to face the goal before shooting: add DrivetrainCommands.aim() to the routine."
+if ! has 'setWantedState[[:space:]]*\([[:space:]]*RobotStates\.AIM[[:space:]]*\)'; then
+	echo "Turn to face the goal before shooting: a Commands.startEnd(...) that asks the robot for RobotStates.AIM, then RobotStates.AUTO."
 	exit 1
 fi
 if ! has 'isAimed'; then
-	echo "End the aim step when the robot is aimed: DrivetrainCommands.aim().until(DrivetrainSubsystem.getInstance()::isAimed)."
+	echo "End the aim step when the robot is aimed: .until(DrivetrainSubsystem.getInstance()::isAimed)."
 	exit 1
 fi
-if ! has '(ShooterCommands\.shoot[[:space:]]*\(|ShooterStates\.SHOOT)'; then
-	echo "Finish the routine by shooting: add ShooterCommands.shoot() (with a timeout, so the routine ends)."
+if ! has 'setWantedState[[:space:]]*\([[:space:]]*RobotStates\.SHOOT[[:space:]]*\)'; then
+	echo "Finish the routine by shooting: a Commands.startEnd(...) that asks the robot for RobotStates.SHOOT, then RobotStates.AUTO (with a timeout, so the routine ends)."
 	exit 1
 fi
 # The order matters: pickup path, score path, aim, then shoot.
-if ! has 'getTrajectory[[:space:]]*\([[:space:]]*"ToPickup".*getTrajectory[[:space:]]*\([[:space:]]*"ToScore".*(\.aim[[:space:]]*\(|DriveStates\.AIM).*isAimed.*(ShooterCommands\.shoot[[:space:]]*\(|ShooterStates\.SHOOT)'; then
+if ! has 'getTrajectory[[:space:]]*\([[:space:]]*"ToPickup".*getTrajectory[[:space:]]*\([[:space:]]*"ToScore".*RobotStates\.AIM.*isAimed.*RobotStates\.SHOOT'; then
 	echo "Put the steps in order inside addCommands(...): ToPickup path, ToScore path, aim at the goal, then shoot (shooting before the robot is aimed misses)."
 	exit 1
 fi

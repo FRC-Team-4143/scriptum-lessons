@@ -35,7 +35,7 @@
 		{
 			"id": "aim-state-written",
 			"title": "Aim state written",
-			"description": "DriveStates has AIM, the switch handles it with a PIDController (continuous input) that reads the pose estimate, getAngleToGoal() and isAimed() are written, and DrivetrainCommands.aim() starts and ends the state.",
+			"description": "DriveStates has AIM, the switch handles it with a PIDController (continuous input) that reads the pose estimate, getAngleToGoal() and isAimed() are written, and RobotContainer asks the drivetrain for AIM in the robot's AIM state.",
 			"verifier": {
 				"type": "script",
 				"path": "checkpoints/verify/aim-state-written.sh"

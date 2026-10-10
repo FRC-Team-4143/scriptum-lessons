@@ -89,8 +89,8 @@
 		{
 			"title": "The commands, one after another",
 			"say": {
-				"never": "The second job is the list of commands. Everything inside `addCommands(...)` runs **one after another**, with commas between the commands, each on its own line.\n\nTo drive a path, use the drivetrain's `followPath` command with the loaded path: it plays the path back and finishes when the robot has arrived. To wait, use `Commands.waitSeconds`: it does nothing for the time you give it, half a second here.",
-				"bit": "addCommands runs its commands in order, separated by commas. followPath finishes on arrival; waitSeconds just waits."
+				"never": "The second job is the list of commands. Everything inside `addCommands(...)` runs **one after another**, with commas between the commands, each on its own line.\n\nTo drive a path, use the robot's `followPath` command with the loaded path: it asks the robot for `FOLLOW_PATH`, plays the path back and finishes when the robot has arrived. To wait, use `Commands.waitSeconds`: it does nothing for the time you give it, half a second here.",
+				"bit": "addCommands runs its commands in order, separated by commas. robot.followPath finishes on arrival; waitSeconds just waits."
 			}
 		},
 		{
@@ -134,8 +134,8 @@
 		{
 			"title": "Path, wait, path",
 			"say": {
-				"never": "Inside the brackets write three commands, each ending with a comma:\n- `DrivetrainCommands.followPath(getTrajectory(\"ToPickup\")),`\n- `Commands.waitSeconds(0.5),`\n- `DrivetrainCommands.followPath(getTrajectory(\"ToScore\")),`\n\nClick **I did it** when all three are written.",
-				"bit": "Inside `addCommands`: follow ToPickup, wait 0.5 s, follow ToScore, each with a comma."
+				"never": "First get the robot: `RobotContainer robot = RobotContainer.getInstance();` at the top of the constructor. Then inside the brackets write three commands, each ending with a comma:\n- `robot.followPath(getTrajectory(\"ToPickup\")),`\n- `Commands.waitSeconds(0.5),`\n- `robot.followPath(getTrajectory(\"ToScore\")),`\n\nClick **I did it** when all three are written.",
+				"bit": "Get `robot` with `RobotContainer.getInstance()`. Inside `addCommands`: follow ToPickup, wait 0.5 s, follow ToScore, each with a comma."
 			},
 			"cardAt": "bottom-right",
 			"waitFor": {
@@ -158,12 +158,12 @@
 		{
 			"title": "Aim, until aimed, give up after 3 seconds",
 			"say": {
-				"never": "Add `DrivetrainCommands.aim()` after the second path, then `.until(DrivetrainSubsystem.getInstance()::isAimed)`, then `.withTimeout(3.0),` with the comma that separates it from the next command. Click **I did it** when the three pieces are written.",
-				"bit": "`DrivetrainCommands.aim()`, then `.until(DrivetrainSubsystem.getInstance()::isAimed)`, then `.withTimeout(3.0),`."
+				"never": "After the second path, ask the robot for `AIM` the same way a button does: `Commands.startEnd(() -> robot.setWantedState(RobotStates.AIM), () -> robot.setWantedState(RobotStates.AUTO))`. Then add `.until(DrivetrainSubsystem.getInstance()::isAimed)`, then `.withTimeout(3.0),` with the comma that separates it from the next command. Click **I did it** when the three pieces are written.",
+				"bit": "`Commands.startEnd(...)` asking for `RobotStates.AIM` then `RobotStates.AUTO`, then `.until(DrivetrainSubsystem.getInstance()::isAimed)`, then `.withTimeout(3.0),`."
 			},
 			"cardAt": "bottom-right",
 			"waitFor": {
-				"hint": "write aim().until(isAimed).withTimeout(3.0), then click I did it."
+				"hint": "write the AIM startEnd with .until(isAimed).withTimeout(3.0), then click I did it."
 			},
 			"assist": true,
 			"target": {
@@ -175,8 +175,8 @@
 		{
 			"title": "Shoot",
 			"say": {
-				"never": "Last command, with **no comma** after it: `ShooterCommands.shoot().withTimeout(2.0)`. The timeout ends the routine after 2 seconds of shooting. Click **I did it** when it's written.",
-				"bit": "Write `ShooterCommands.shoot().withTimeout(2.0)`, no comma."
+				"never": "Last command, with **no comma** after it: the same `Commands.startEnd(...)`, asking for `RobotStates.SHOOT` and then `RobotStates.AUTO`, followed by `.withTimeout(2.0)`. The timeout ends the routine after 2 seconds of shooting. Click **I did it** when it's written.",
+				"bit": "A `Commands.startEnd(...)` asking for `RobotStates.SHOOT` then `RobotStates.AUTO`, with `.withTimeout(2.0)` and no comma."
 			},
 			"cardAt": "bottom-right",
 			"waitFor": {
@@ -192,7 +192,7 @@
 		{
 			"title": "Fix the imports",
 			"say": {
-				"never": "The file doesn't know `Commands`, `DrivetrainCommands`, `DrivetrainSubsystem` or `ShooterCommands` yet, so they have red squiggles. Hover over each one and choose the quick fix that adds the import (or type the import lines at the top yourself). Click **I did it** when no red squiggles are left.",
+				"never": "The file doesn't know `Commands`, `RobotContainer`, `RobotStates` or `DrivetrainSubsystem` yet, so they have red squiggles. Hover over each one and choose the quick fix that adds the import (or type the import lines at the top yourself). Click **I did it** when no red squiggles are left.",
 				"bit": "Hover each red name and add its import. Click I did it when no squiggles are left."
 			},
 			"cardAt": "bottom-right",

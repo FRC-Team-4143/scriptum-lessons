@@ -1437,8 +1437,8 @@
 			"id": "robot-state-machines",
 			"order": 26,
 			"track": "FRC Robot",
-			"title": "State Machines and Commands",
-			"description": "Give the shooter a state machine and control it with commands bound to buttons.",
+			"title": "State Machines",
+			"description": "Give the shooter a state machine, and make RobotContainer the robot's own state machine that buttons ask for states.",
 			"kind": "robot",
 			"subdir": "lessons/robot-state-machines/project",
 			"requires": [
@@ -1446,12 +1446,12 @@
 			],
 			"checkpoints": [
 				{
-					"id": "bindings",
-					"title": "Button bindings",
-					"description": "OI binds the right bumper to ShooterCommands.shoot() and A to simulateBallLaunch().",
+					"id": "robot-states",
+					"title": "Robot states",
+					"description": "RobotContainer asks the drivetrain and shooter for the states each robot state needs, the right bumper asks the robot for SHOOT while held, and A simulates a launch.",
 					"verifier": {
 						"type": "script",
-						"path": "lessons/robot-state-machines/checkpoints/verify/bindings.sh"
+						"path": "lessons/robot-state-machines/checkpoints/verify/robot-states.sh"
 					}
 				},
 				{
@@ -1516,7 +1516,7 @@
 				{
 					"id": "aim-state-written",
 					"title": "Aim state written",
-					"description": "DriveStates has AIM, the switch handles it with a PIDController (continuous input) that reads the pose estimate, getAngleToGoal() and isAimed() are written, and DrivetrainCommands.aim() starts and ends the state.",
+					"description": "DriveStates has AIM, the switch handles it with a PIDController (continuous input) that reads the pose estimate, getAngleToGoal() and isAimed() are written, and RobotContainer asks the drivetrain for AIM in the robot's AIM state.",
 					"verifier": {
 						"type": "script",
 						"path": "lessons/robot-computer-vision/checkpoints/verify/aim-state-written.sh"
@@ -2695,6 +2695,18 @@
 			"path": "common/guides/robot-state-machines-commands.json"
 		},
 		{
+			"id": "robot-state-machines-robot-states",
+			"title": "The robot's state machine",
+			"summary": "RobotContainer is a state machine too: buttons ask the robot, the robot asks the subsystems.",
+			"topic": "Robot",
+			"order": 510,
+			"modules": [
+				"robot-state-machines"
+			],
+			"kind": "mixed",
+			"path": "lessons/robot-state-machines/guides/robot-state-machines-robot-states.json"
+		},
+		{
 			"id": "robot-computer-vision-add-vision",
 			"title": "Add the camera measurement",
 			"summary": "Give each camera tag solution to the pose estimator, then see how close the estimate gets.",
@@ -2708,8 +2720,8 @@
 		},
 		{
 			"id": "robot-state-machines-bindings",
-			"title": "Buttons to commands",
-			"summary": "whileTrue vs onTrue, then watch the state change.",
+			"title": "Buttons to robot states",
+			"summary": "whileTrue vs onTrue, asking the robot for a state, then watching it change.",
 			"topic": "Robot",
 			"order": 511,
 			"modules": [
@@ -2719,16 +2731,16 @@
 			"path": "lessons/robot-state-machines/guides/robot-state-machines-bindings.json"
 		},
 		{
-			"id": "robot-state-machines-commands-assist",
-			"title": "Write the shooter commands",
-			"summary": "Write shoot() with startEnd and simulateBallLaunch() with runOnce.",
+			"id": "robot-state-machines-robot-states-assist",
+			"title": "Write the robot's states",
+			"summary": "Write the switch in RobotContainer.updateLogic() that asks each subsystem for its state.",
 			"topic": "Robot",
 			"order": 511,
 			"modules": [
 				"robot-state-machines"
 			],
 			"kind": "assist",
-			"path": "lessons/robot-state-machines/guides/robot-state-machines-commands-assist.json"
+			"path": "lessons/robot-state-machines/guides/robot-state-machines-robot-states-assist.json"
 		},
 		{
 			"id": "robot-computer-vision-trust",

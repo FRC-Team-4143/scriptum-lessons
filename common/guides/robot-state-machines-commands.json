@@ -28,11 +28,11 @@
 		{
 			"title": "In your lesson: A lambda",
 			"say": {
-				"never": "A **lambda** is a tiny method with no name, written `() -> ...`. The key idea: you're *not running it now*. You're handing it over so something else can run it later, like giving someone a note that says \"when I press this button, do this\".",
+				"never": "A **lambda** is a tiny method with no name, written `() -> ...`. The key idea: you're *not running it now*. You're handing it over so something else can run it later, like giving someone a note that says \"when I press this button, ask the robot to shoot\".",
 				"bit": "`() -> ...` is a tiny method with no name. You're not running it now: you're handing it over to run later."
 			},
 			"board": {
-				"code": "() -> shooter.setWantedState(ShooterStates.SHOOT)",
+				"code": "() -> robot.setWantedState(RobotStates.SHOOT)",
 				"marks": [
 					{
 						"text": "()",
@@ -70,18 +70,18 @@
 		{
 			"title": "In your lesson: A command",
 			"say": {
-				"never": "`startEnd` builds a command out of two notes. The first lambda runs when the command **starts** (here: tell the shooter to SHOOT). The second runs when it **ends** (here: tell it to go back to IDLE). When you let go of the button, the command ends.",
+				"never": "`startEnd` builds a command out of two notes. The first lambda runs when the command **starts** (here: ask the robot for SHOOT). The second runs when it **ends** (here: ask it for DRIVE again). When you let go of the button, the command ends.",
 				"bit": "`startEnd` runs one lambda when the command starts and another when it ends."
 			},
 			"board": {
-				"code": "public static Command shoot() {\n    return Commands.startEnd(\n        () -> shooter.setWantedState(ShooterStates.SHOOT),\n        () -> shooter.setWantedState(ShooterStates.IDLE),\n        shooter);\n}",
+				"code": "driver.rightBumper().whileTrue(Commands.startEnd(\n    () -> robot.setWantedState(RobotStates.SHOOT),\n    () -> robot.setWantedState(RobotStates.DRIVE)));",
 				"marks": [
 					{
 						"text": "Commands.startEnd(",
 						"label": "start, then end"
 					},
 					{
-						"text": "ShooterStates.IDLE",
+						"text": "RobotStates.DRIVE",
 						"label": "when the button's released"
 					}
 				]

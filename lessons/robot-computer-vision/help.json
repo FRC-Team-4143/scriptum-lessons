@@ -130,8 +130,8 @@
 			},
 			"hints": [
 				{
-					"never": "Work down the TODOs in order: the `AIM` state in `DrivetrainConstants`, then the PID, `getAngleToGoal()`, the switch case and `isAimed()` in `DrivetrainSubsystem`, then `aim()` in `DrivetrainCommands`.",
-					"bit": "The TODOs, in order: `AIM` in the enum, the PID, `getAngleToGoal()`, `case AIM`, `isAimed()`, `aim()`."
+					"never": "Work down the TODOs in order: the `AIM` state in `DrivetrainConstants`, then the PID, `getAngleToGoal()`, the switch case and `isAimed()` in `DrivetrainSubsystem`, then the `AIM` case in `RobotContainer`.",
+					"bit": "The TODOs, in order: `AIM` in the enum, the PID, `getAngleToGoal()`, `case AIM`, `isAimed()`, then `case AIM` in `RobotContainer`."
 				},
 				{
 					"never": "The Verify message tells you which part is missing. Read it: it names the file and the thing to add.",
@@ -142,8 +142,8 @@
 					"bit": "Build the PID from `AIM_KP/KI/KD`, enable continuous input, and subtract the robot's translation from `GOAL`'s."
 				},
 				{
-					"never": "Use `getPose()` (the estimate), not `getTruePose()`. `isAimed()` must use `&&`: small error AND not spinning. `aim()` is `Commands.startEnd(...)` setting AIM and then ARCADE.",
-					"bit": "Aim from `getPose()`, never `getTruePose()`. `isAimed()` uses `&&`. `aim()` is a `startEnd`."
+					"never": "Use `getPose()` (the estimate), not `getTruePose()`. `isAimed()` must use `&&`: small error AND not spinning. In `RobotContainer`, `case AIM:` calls `drive_.setWantedState(DriveStates.AIM);`.",
+					"bit": "Aim from `getPose()`, never `getTruePose()`. `isAimed()` uses `&&`. `RobotContainer` asks for `DriveStates.AIM`."
 				},
 				"Switch case: `case AIM: aim_turn_ = -aim_pid_.calculate(getPose().getRotation().getRadians(), getAngleToGoal().getRadians()); drive_.arcadeDrive(0.0, aim_turn_); break;` and `return Math.abs(Math.toDegrees(getAimErrorRadians())) < DrivetrainConstants.AIM_TOLERANCE_DEGREES && Math.abs(drive_.getAngularSpeed()) < 0.15;`"
 			]

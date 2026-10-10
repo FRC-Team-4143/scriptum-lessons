@@ -10,7 +10,7 @@ and tuned in the Computer Vision lesson, and **shoots**.
 
 ## Before you start
 
-- You finished **Computer Vision**. This lesson reuses your `aim()` command and your `isAimed()` method,
+- You finished **Computer Vision**. This lesson reuses the robot's `AIM` state and your `isAimed()` method,
   and the robot's position estimate, which now comes from the AprilTag cameras as well as the wheels. In
   the simulator the cameras send their tag solutions through MW-Lib's proxy server, like real camera computers.
   They must work (hold the left bumper, **E** on the keyboard, in Teleop to test the aim).
@@ -27,13 +27,15 @@ Everything is under `src/main/`:
 - `java/frc/robot/autos/Autos.java` is the routine, and **the only Java file you edit**. It has two TODOs.
 - `java/frc/robot/FieldTargets.java` has the same poses in code, so the checks can measure how close the
   robot got. Provided, don't edit.
-- `subsystems/drive/DrivetrainCommands.java` has `followPath(...)` (play a path back) and your `aim()`.
+- `java/frc/robot/RobotContainer.java` is the robot's state machine. Your routine asks it for robot
+  states (`AIM`, `SHOOT`, back to `AUTO`) the same way the buttons do, with `setWantedState(...)`. It
+  also has `followPath(...)`, which asks for `FOLLOW_PATH` and plays a path back. One `SHOOT` state
+  serves both the right bumper and your routine, so shooting is written once.
   `DifferentialPathFollower.java` and the Choreo methods in `DrivetrainSubsystem.java` turn the path into
   wheel speeds. They are already tuned: read them to see how a path becomes motor power.
 - `subsystems/localization/LocalizationSubsystem.java` is the pose estimate you finished in the Computer
-  Vision lesson (wheels plus cameras). The path follower, `aim()` and the distance checks all use it.
+  Vision lesson (wheels plus cameras). The path follower, the aim and the distance checks all use it.
   Read it, don't change it.
-- `subsystems/shooter/ShooterCommands.java` has `shoot()`.
 - `autos/DriveDistanceCommand.java` and `autos/TurnToAngleCommand.java` are finished example commands
   that the Dozer guides about commands use. Read them, don't change them.
 
@@ -96,13 +98,17 @@ Go slower on anything that is new. The stretch ideas at the end are not expected
 **Part 2: write the sequence (`Autos.java`)**
 
 7. **TODO 1: load both paths** by name with `loadTrajectory("ToPickup")` and `loadTrajectory("ToScore")`.
-8. **TODO 2: add the commands**, in this order, inside `addCommands(...)`:
-   1. follow the first path: `DrivetrainCommands.followPath(getTrajectory("ToPickup"))`
+8. **TODO 2: add the commands**, in this order, inside `addCommands(...)`. Get the robot first with
+   `RobotContainer robot = RobotContainer.getInstance();`.
+   1. follow the first path: `robot.followPath(getTrajectory("ToPickup"))`
    2. wait half a second, standing in for picking up the game piece: `Commands.waitSeconds(0.5)`
    3. follow the second path
-   4. aim at the goal: `DrivetrainCommands.aim()`, ended with `.until(...)` the drivetrain's `isAimed`
-      method, and `.withTimeout(3.0)` so a robot that cannot aim cannot hold up the routine
-   5. shoot: `ShooterCommands.shoot()` with a `.withTimeout(2.0)`
+   4. aim at the goal: ask the robot for `AIM` with
+      `Commands.startEnd(() -> robot.setWantedState(RobotStates.AIM), () -> robot.setWantedState(RobotStates.AUTO))`,
+      ended with `.until(...)` the drivetrain's `isAimed` method, and `.withTimeout(3.0)` so a robot that
+      cannot aim cannot hold up the routine
+   5. shoot: the same kind of `Commands.startEnd(...)`, asking for `RobotStates.SHOOT`, with a
+      `.withTimeout(2.0)`
 9. **Add the imports** for the classes you used (hover over a red name and use the quick fix).
 
 **Part 3: run it**

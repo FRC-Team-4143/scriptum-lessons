@@ -155,18 +155,18 @@
 					"bit": "The order is ToPickup, ToScore, aim, shoot."
 				},
 				{
-					"never": "Everything goes inside `addCommands(...)`, the commands separated by commas, with no comma after the last one. Driving a path is `DrivetrainCommands.followPath(getTrajectory(\"Name\"))`.",
+					"never": "Everything goes inside `addCommands(...)`, the commands separated by commas, with no comma after the last one. Driving a path is `robot.followPath(getTrajectory(\"Name\"))`, with `RobotContainer robot = RobotContainer.getInstance();` at the top.",
 					"bit": "`addCommands(...)` with the commands separated by commas."
 				},
 				{
 					"never": "Aiming never finishes by itself. Stop it with `.until(...)` and the `isAimed` method of the drivetrain, and give it a `.withTimeout(...)` so it can't hang.",
-					"bit": "`DrivetrainCommands.aim().until(DrivetrainSubsystem.getInstance()::isAimed).withTimeout(3.0)`."
+					"bit": "Ask for AIM with a `Commands.startEnd(...)`, then `.until(DrivetrainSubsystem.getInstance()::isAimed).withTimeout(3.0)`."
 				},
 				{
-					"never": "Shooting never finishes by itself either. End the routine with `ShooterCommands.shoot()` and a `.withTimeout(...)`.",
-					"bit": "Finish with `ShooterCommands.shoot().withTimeout(2.0)`."
+					"never": "Shooting never finishes by itself either. End the routine by asking the robot for SHOOT, `Commands.startEnd(() -> robot.setWantedState(RobotStates.SHOOT), () -> robot.setWantedState(RobotStates.AUTO))`, with a `.withTimeout(...)`.",
+					"bit": "Finish with a `Commands.startEnd(...)` asking for SHOOT, then `.withTimeout(2.0)`."
 				},
-				"addCommands(followPath(getTrajectory(\"ToPickup\")), Commands.waitSeconds(0.5), followPath(getTrajectory(\"ToScore\")), DrivetrainCommands.aim().until(DrivetrainSubsystem.getInstance()::isAimed).withTimeout(3.0), ShooterCommands.shoot().withTimeout(2.0)); and the imports."
+				"addCommands(robot.followPath(getTrajectory(\"ToPickup\")), Commands.waitSeconds(0.5), robot.followPath(getTrajectory(\"ToScore\")), Commands.startEnd(() -> robot.setWantedState(RobotStates.AIM), () -> robot.setWantedState(RobotStates.AUTO)).until(DrivetrainSubsystem.getInstance()::isAimed).withTimeout(3.0), Commands.startEnd(() -> robot.setWantedState(RobotStates.SHOOT), () -> robot.setWantedState(RobotStates.AUTO)).withTimeout(2.0)); with RobotContainer robot = RobotContainer.getInstance(); first, and the imports."
 			]
 		},
 		"reaches-pickup": {
@@ -236,18 +236,18 @@
 					"bit": "Plot Drive/TrueAimErrorDegrees. Under 5 at the shot."
 				},
 				{
-					"never": "Check the order in Autos.java: the aim command must come after the second path and before `ShooterCommands.shoot()`.",
+					"never": "Check the order in Autos.java: the AIM step must come after the second path and before the SHOOT step.",
 					"bit": "Aim must be between the second path and shoot."
 				},
 				{
-					"never": "`aim()` alone never finishes. Without `.until(...isAimed)` the shot only starts after the timeout, and `.withTimeout(3.0)` cuts the aim short if it's too slow.",
+					"never": "Asking for AIM alone never finishes. Without `.until(...isAimed)` the shot only starts after the timeout, and `.withTimeout(3.0)` cuts the aim short if it's too slow.",
 					"bit": "Use `.until(DrivetrainSubsystem.getInstance()::isAimed)`."
 				},
 				{
 					"never": "If aiming itself is the problem (hold the left bumper, E, in Teleop to test it), go back to your tuned AIM_KP and AIM_KD from the Computer Vision lesson. Aim also takes a while to settle, and 3 seconds is generous.",
 					"bit": "Test the aim state with the E key in Teleop. Retune if it overshoots."
 				},
-				"`DrivetrainCommands.aim().until(DrivetrainSubsystem.getInstance()::isAimed).withTimeout(3.0),` right after the second followPath and right before the shoot line."
+				"`Commands.startEnd(() -> robot.setWantedState(RobotStates.AIM), () -> robot.setWantedState(RobotStates.AUTO)).until(DrivetrainSubsystem.getInstance()::isAimed).withTimeout(3.0),` right after the second followPath and right before the SHOOT line."
 			]
 		},
 		"autos-shoot": {
@@ -259,7 +259,7 @@
 			},
 			"hints": [
 				{
-					"never": "Plot Subsystem/Shooter/ShotCount. It should reach 1. If it stays 0, the routine never got as far as `shoot()`.",
+					"never": "Plot Subsystem/Shooter/ShotCount. It should reach 1. If it stays 0, the routine never got as far as the SHOOT step.",
 					"bit": "Plot Subsystem/Shooter/ShotCount."
 				},
 				{
@@ -267,7 +267,7 @@
 					"bit": "A step that takes long delays the shot."
 				},
 				{
-					"never": "Is `ShooterCommands.shoot().withTimeout(2.0)` the last item in `addCommands`, with no comma after it, and are all the other commands before it?",
+					"never": "Is the SHOOT step (with `.withTimeout(2.0)`) the last item in `addCommands`, with no comma after it, and are all the other commands before it?",
 					"bit": "Shoot is last, no trailing comma."
 				},
 				{

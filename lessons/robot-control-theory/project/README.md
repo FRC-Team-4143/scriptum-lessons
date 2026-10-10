@@ -20,8 +20,8 @@ Companion docs pages: [Control Theory](https://docs.marswars.org/docs/software/t
 - `subsystems/shooter/ShooterSubsystem.java`: `bangBang()` and `feedforward()` (you write these) and
   `runFlywheel()` (it picks the style).
 - Everything from last lesson (the drivetrain and shooter subsystems and their buttons) is already
-  finished. The shooter still reads its buttons directly; next lesson replaces that with a state machine
-  and commands.
+  finished. The shooter still reads its buttons directly; next lesson replaces that with a state machine,
+  and makes the robot itself a state machine that the buttons ask for states.
 - Last lesson the flywheel ran at a fixed power (`SHOOT_DUTY_CYCLE`). That has no idea how fast the
   wheel is actually spinning, so here the shooter gets a **target speed** (`SHOOT_VELOCITY`) and you
   decide how to reach and hold it. This is where velocity control and closed loop control begin.

@@ -41,7 +41,7 @@ export function lessonKit(testFileUrl: string) {
 		run(project, ["bash", join(dir, "checkpoints", "verify", `${checkpointId}.sh`), project]);
 
 	/** Robot lessons keep solution files flat, by name; each `file` is where it goes
-	 * under src/main/java/frc/robot (e.g. "subsystems/shooter/ShooterCommands.java"). */
+	 * under src/main/java/frc/robot (e.g. "subsystems/shooter/ShooterSubsystem.java"). */
 	const applySolution = async (project: string, files: string[]): Promise<void> => {
 		for (const file of files) {
 			await cp(join(dir, "solution", basename(file)), join(project, ROBOT_SRC, file));

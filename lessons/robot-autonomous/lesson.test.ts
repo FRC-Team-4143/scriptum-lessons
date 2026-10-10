@@ -123,10 +123,12 @@ describe.skipIf(!hasJdk)("robot-autonomous script checkpoints", () => {
 	/** Autos.java's body with only these commands inside addCommands(...). */
 	const autosWith = (commands: string[]) => (text: string) =>
 		`${text.slice(0, text.indexOf("      addCommands("))}      addCommands(${commands.join(", ")});\n    }\n  }\n}\n`;
-	const PICKUP = 'DrivetrainCommands.followPath(getTrajectory("ToPickup"))';
-	const SCORE = 'DrivetrainCommands.followPath(getTrajectory("ToScore"))';
-	const AIM = "DrivetrainCommands.aim().until(DrivetrainSubsystem.getInstance()::isAimed).withTimeout(3.0)";
-	const SHOOT = "ShooterCommands.shoot().withTimeout(2.0)";
+	const PICKUP = 'robot.followPath(getTrajectory("ToPickup"))';
+	const SCORE = 'robot.followPath(getTrajectory("ToScore"))';
+	const want = (state: string) =>
+		`Commands.startEnd(() -> robot.setWantedState(RobotStates.${state}), () -> robot.setWantedState(RobotStates.AUTO))`;
+	const AIM = `${want("AIM")}.until(DrivetrainSubsystem.getInstance()::isAimed).withTimeout(3.0)`;
+	const SHOOT = `${want("SHOOT")}.withTimeout(2.0)`;
 
 	test("every script checkpoint fails on the starter and passes with the solution", async () => {
 		await L.roundTrip(SCRIPTS);
@@ -200,7 +202,7 @@ describe.skipIf(!hasJdk)("robot-autonomous script checkpoints", () => {
 			"no shot": [PICKUP, SCORE, AIM],
 			"scoring path first": [SCORE, PICKUP, AIM, SHOOT],
 			"only the first path": [PICKUP, AIM, SHOOT],
-			"aim without isAimed": [PICKUP, SCORE, "DrivetrainCommands.aim().withTimeout(2.0)", SHOOT],
+			"aim without isAimed": [PICKUP, SCORE, `${want("AIM")}.withTimeout(2.0)`, SHOOT],
 		};
 		for (const [what, commands] of Object.entries(cases)) {
 			const result = await spoiled("auto-sequence", sequence(commands));
@@ -211,7 +213,9 @@ describe.skipIf(!hasJdk)("robot-autonomous script checkpoints", () => {
 		expect(fine.exitCode).toBe(0);
 		// a commented-out aim does not count
 		const commented = await spoiled("auto-sequence", (p) =>
-			editText(join(p, AUTOS), (t) => t.replace("DrivetrainCommands.aim()", "// DrivetrainCommands.aim()\n          Commands.none()")),
+			editText(join(p, AUTOS), (t) =>
+				t.replace("() -> robot.setWantedState(RobotStates.AIM),", "// () -> robot.setWantedState(RobotStates.AIM),\n                  () -> {},"),
+			),
 		);
 		expect(commented.exitCode).not.toBe(0);
 	}, 90_000);

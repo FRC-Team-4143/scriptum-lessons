@@ -18,7 +18,7 @@
 				"bit": "`runOnce` runs a lambda one time and finishes at once. Pick it for a quick one-shot action. (Class: `InstantCommand`.)"
 			},
 			"board": {
-				"code": "public static Command simulateBallLaunch() {\n    return Commands.runOnce(\n        () -> ShooterSubsystem.getInstance().simulateBallLaunch());\n}",
+				"code": "driver.a().onTrue(Commands.runOnce(\n    () -> ShooterSubsystem.getInstance().simulateBallLaunch()));",
 				"language": "java",
 				"marks": [
 					{
@@ -56,19 +56,19 @@
 		{
 			"title": "startEnd: on, then off",
 			"say": {
-				"never": "`Commands.startEnd(start, end)` runs the first note once when it starts and the second note once when it ends, and does nothing in between. It also never finishes by itself, so it is ideal for a button you hold: on while held, off when let go. WPILib's class is `StartEndCommand`.",
+				"never": "`Commands.startEnd(start, end)` runs the first note once when it starts and the second note once when it ends, and does nothing in between. It also never finishes by itself, so it is ideal for a button you hold: on while held, off when let go. It is how buttons and routines ask the robot for a state. WPILib's class is `StartEndCommand`.",
 				"bit": "`startEnd` runs one lambda at the start and one at the end. Pick it for hold-to-run. (Class: `StartEndCommand`.)"
 			},
 			"board": {
-				"code": "public static Command shoot() {\n    ShooterSubsystem shooter = ShooterSubsystem.getInstance();\n    return Commands.startEnd(\n        () -> shooter.setWantedState(ShooterStates.SHOOT),\n        () -> shooter.setWantedState(ShooterStates.IDLE));\n}",
+				"code": "Commands.startEnd(\n    () -> robot.setWantedState(RobotStates.SHOOT),\n    () -> robot.setWantedState(RobotStates.AUTO))",
 				"language": "java",
 				"marks": [
 					{
-						"text": "() -> shooter.setWantedState(ShooterStates.SHOOT)",
+						"text": "() -> robot.setWantedState(RobotStates.SHOOT)",
 						"label": "the start note"
 					},
 					{
-						"text": "() -> shooter.setWantedState(ShooterStates.IDLE)",
+						"text": "() -> robot.setWantedState(RobotStates.AUTO)",
 						"label": "the end note"
 					}
 				]

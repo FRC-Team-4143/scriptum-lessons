@@ -2,12 +2,13 @@ package frc.robot;
 
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
-import frc.robot.subsystems.shooter.ShooterCommands;
+import frc.robot.subsystems.shooter.ShooterSubsystem;
 
 /**
  * OI stands for "Operator Interface": everything the human drivers do. It now also connects
- * controller buttons to commands.
+ * controller buttons to robot states.
  */
 public abstract class OI {
   // A CommandXboxController is an XboxController whose buttons can start commands.
@@ -23,14 +24,24 @@ public abstract class OI {
     return MathUtil.applyDeadband(driver_controller_.getLeftX(), 0.1);
   }
 
-  /** Connects buttons to commands. Robot calls this once at startup. */
+  /** Connects buttons to robot states. Robot calls this once at startup. */
   public static void configureBindings() {
     DriverStation.silenceJoystickConnectionWarning(true);
+    RobotContainer robot = RobotContainer.getInstance();
 
     // whileTrue(command): the command runs while the button is held and stops when it is released.
-    driver_controller_.rightBumper().whileTrue(ShooterCommands.shoot());
+    // Commands.startEnd(start, end) runs the start lambda when it starts and the end lambda when it
+    // ends.
+    driver_controller_
+        .rightBumper()
+        .whileTrue(
+            Commands.startEnd(
+                () -> robot.setWantedState(RobotStates.SHOOT),
+                () -> robot.setWantedState(RobotStates.DRIVE)));
 
     // onTrue(command): the command runs once each time the button is pressed.
-    driver_controller_.a().onTrue(ShooterCommands.simulateBallLaunch());
+    driver_controller_
+        .a()
+        .onTrue(Commands.runOnce(() -> ShooterSubsystem.getInstance().simulateBallLaunch()));
   }
 }

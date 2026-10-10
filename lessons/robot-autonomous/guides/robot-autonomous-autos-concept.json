@@ -49,8 +49,8 @@
 		{
 			"title": "The follower does the steering",
 			"say": {
-				"never": "A command called `followPath` plays the trajectory back. 50 times a second it asks: where *should* the robot be right now? Where *is* it? It nudges the left and right wheel speeds to close the gap. That code is `DifferentialPathFollower`, already tuned and provided. You can read it, but you don't have to change it.",
-				"bit": "`followPath` plays the trajectory back, 50 times a second nudging the wheels toward where the robot should be."
+				"never": "The robot's `followPath` command asks the robot for `FOLLOW_PATH`, and the drivetrain plays the trajectory back. 50 times a second it asks: where *should* the robot be right now? Where *is* it? It nudges the left and right wheel speeds to close the gap. That code is `DifferentialPathFollower`, already tuned and provided. You can read it, but you don't have to change it.",
+				"bit": "`robot.followPath` plays the trajectory back, 50 times a second nudging the wheels toward where the robot should be."
 			}
 		},
 		{

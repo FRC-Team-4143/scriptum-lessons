@@ -10,7 +10,7 @@ import frc.robot.subsystems.shooter.ShooterConstants.ShooterStates;
 import java.util.List;
 
 /**
- * The shooter, now with a state machine. The driver (through a command) only says what they WANT:
+ * The shooter, now with a state machine. The robot (RobotContainer) only says what it WANTS:
  * "shoot" or "idle". The subsystem decides what state it can actually be in, one safe step at a
  * time.
  */

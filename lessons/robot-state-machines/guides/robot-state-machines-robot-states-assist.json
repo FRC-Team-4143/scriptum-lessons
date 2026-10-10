@@ -1,0 +1,74 @@
+{
+	"title": "Write the robot's states",
+	"summary": "Write the switch in RobotContainer.updateLogic() that asks each subsystem for its state.",
+	"topic": "Robot",
+	"order": 511,
+	"kind": "assist",
+	"steps": [
+		{
+			"title": "Open RobotContainer.java",
+			"say": {
+				"never": "Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `RobotContainer`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "Press **Ctrl+P**, type `RobotContainer` and press Enter. Quick Open finds any file by name, so you never have to dig through folders."
+			},
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "RobotContainer.java"
+				},
+				"hint": "open RobotContainer.java with Ctrl+P.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Find updateLogic",
+			"say": {
+				"never": "Below the comment that describes it. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `void updateLogic` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "Below the comment that describes it. Press **Ctrl+F**, type `void updateLogic` and press Enter to jump to it."
+			},
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "protected void updateLogic"
+				},
+				"hint": "find void updateLogic with Ctrl+F.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Your turn",
+			"say": {
+				"never": "Your turn! Write a `switch (getSystemState())` with one `case` for each robot state, like the drivetrain's switch. In each case, ask the drivetrain and the shooter for the state that robot state needs, using `setWantedState`. The comment above lists all six lines.",
+				"bit": "Write a `switch (getSystemState())`: one `case` per robot state, each asking `drive_` and `shooter_` for a state with `setWantedState`."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "protected void updateLogic"
+			},
+			"cardAt": "bottom-right",
+			"assist": true
+		}
+	]
+}
