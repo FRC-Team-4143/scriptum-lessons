@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * Works out where the robot is on the field. It owns the pose estimator: every loop it feeds the
@@ -108,16 +109,20 @@ public class LocalizationSubsystem extends MwSubsystem<LocalizationStates, Local
       }
       vision_measurements_seen_++;
       MwLog.log(getSubsystemKey() + "LastVisionPose", solution.pose);
+      // How far the closest AprilTag the camera saw is from the pose it worked out, in meters.
+      double tag_distance = nearestTagDistance(solution);
 
       // How far off could the camera be? The standard deviations: x in meters, y in meters,
       // heading in radians. The smaller they are, the more the estimator pulls toward the camera.
+      // They grow with the square of the tag's distance: the farther the tag, the less sure.
+      double distance_squared = tag_distance * tag_distance;
       pose_estimator_.addVisionMeasurement(
           solution.pose,
           solution.timestamp.getSeconds(),
           VecBuilder.fill(
-              LocalizationConstants.VISION_XY_STD_METERS,
-              LocalizationConstants.VISION_XY_STD_METERS,
-              LocalizationConstants.VISION_HEADING_STD_RADIANS));
+              LocalizationConstants.VISION_XY_STD_METERS * distance_squared,
+              LocalizationConstants.VISION_XY_STD_METERS * distance_squared,
+              LocalizationConstants.VISION_HEADING_STD_RADIANS * distance_squared));
     }
 
     // Log the tags of every camera whose picture is recent. A camera that sees nothing sends
@@ -175,13 +180,39 @@ public class LocalizationSubsystem extends MwSubsystem<LocalizationStates, Local
 
   /**
    * True if a solution can be trusted at all: its picture is not from before a reset, the robot was
-   * not spinning (a blurred picture), it used enough tags, and its pose is on the field.
+   * not spinning (a blurred picture), its pose is on the field, and it is not far from where the
+   * robot already thinks it is. (The simulated cameras work out each pose from one tag, however
+   * many they see, and now and then that pose is wildly wrong, meters off. The wheels are never
+   * that far off.)
    */
   private boolean isSensible(TagSolutionData solution) {
     return solution.timestamp.getSeconds() >= ignore_before_seconds_
         && Math.abs(drive_.getAngularSpeed()) <= VisionConstants.MAX_YAW_RATE_RADIANS_PER_SECOND
-        && solution.detectedIds.size() >= VisionConstants.MIN_TAG_COUNT
-        && isOnField(solution.pose);
+        && isOnField(solution.pose)
+        && solution
+                .pose
+                .getTranslation()
+                .getDistance(pose_estimator_.getEstimatedPosition().getTranslation())
+            <= VisionConstants.MAX_JUMP_METERS;
+  }
+
+  /** Meters from the pose the camera worked out to the closest AprilTag it saw. */
+  private static double nearestTagDistance(TagSolutionData solution) {
+    double nearest = Double.MAX_VALUE;
+    for (int tag_id : solution.detectedIds) {
+      Optional<Pose3d> tag_pose = VisionConstants.FIELD_LAYOUT.getTagPose(tag_id);
+      if (tag_pose.isPresent()) {
+        nearest =
+            Math.min(
+                nearest,
+                tag_pose
+                    .get()
+                    .toPose2d()
+                    .getTranslation()
+                    .getDistance(solution.pose.getTranslation()));
+      }
+    }
+    return nearest;
   }
 
   /** True if the pose is inside the walls of the field. */

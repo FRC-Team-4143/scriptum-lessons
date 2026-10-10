@@ -190,7 +190,7 @@
 					"bit": "Press Start again for a fresh run."
 				},
 				{
-					"never": "The robot's estimate is only a few centimeters from where it truly is, and the check uses the true pose and allows 0.4 meters. A distance near or over 0.4 means the path is wrong (or the robot never got there).",
+					"never": "The robot's estimate is usually only a few centimeters from where it truly is (up to about 20 while moving), and the check uses the true pose and allows 0.4 meters. A distance near or over 0.4 means the path is wrong (or the robot never got there).",
 					"bit": "A few centimeters is normal. A big miss means a wrong path."
 				},
 				"Choose Pickup And Score, Auto, Enable. Drive/DistanceToPickup must dip under 0.4."
@@ -217,7 +217,7 @@
 					"bit": "Check that ToScore starts at 5.5, 2.5."
 				},
 				{
-					"never": "The route can look a little off the spot because the estimated pose is not exact. The check uses the true pose and allows 0.4 meters, so a few centimeters isn't a failure.",
+					"never": "The route can look a little off the spot because the estimated pose is not exact. The check uses the true pose and allows 0.4 meters, so a few centimeters (or a bit more while it moves) isn't a failure.",
 					"bit": "A few centimeters off is fine."
 				},
 				"Press Start, choose Pickup And Score, Auto, Enable, and make sure Drive/DistanceToScoreSpot falls under 0.4."

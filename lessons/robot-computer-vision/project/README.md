@@ -13,8 +13,8 @@ Companion docs page: [Computer Vision](https://docs.marswars.org/docs/software/t
 ## What you will build
 
 1. **Vision.** Give each camera tag solution to the pose estimator, and choose how much to trust the
-   cameras. When it works, your estimate stays within 5 centimeters and 1 degree of where the robot
-   really is, even after a long drive.
+   cameras. When it works, your estimate stays within 6 centimeters and 1 degree of where the robot
+   really is once it has stopped, even after a long drive.
 2. **Aiming.** Add an `AIM` state to the drivetrain. While the driver holds the left bumper, the robot
    turns in place to face the goal at (4.0, 4.0), using your estimate of where it is. You tune a PID so
    it gets there quickly without swinging past.
@@ -30,8 +30,9 @@ state, and the PID tuning from **Control Theory**.
 - **Localization** is just "working out where the robot is on the field". The `LocalizationSubsystem`
   does it. It adds up the wheel readings every loop, and blends in the camera answers.
 - A **tag solution** is one camera answer: "from the AprilTags I can see, the robot is *here*, and I took
-  this picture *then*". It has a pose, a timestamp and the ids of the tags it was worked out from. Two or
-  more tags means a **multi-tag** solution, which is the accurate kind. Real robots get tag solutions from
+  this picture *then*". It has a pose, a timestamp and the ids of the tags the camera saw. (The simulated
+  cameras work out the pose from the best single tag, however many are in view. From a tag within about
+  3 meters it is a few centimeters off, but from a tag more than 5 meters away it can be meters off.) Real robots get tag solutions from
   camera computers over the network, into MW-Lib's `ProxyServerThread`. A solution you give to the
   **pose estimator** (a WPILib class) becomes a **vision measurement**, and it blends many of them with
   the wheels. Each one comes with a **standard deviation**: how far off it could be. Small means "trust it", big means "barely listen".
@@ -42,7 +43,8 @@ Everything is under `src/main/java/frc/robot/`:
 
 - `subsystems/localization/LocalizationSubsystem.java`: owns the pose estimator. It adds up the wheel
   readings every loop and reads the camera tag solutions from the proxy server. It skips ones it already
-  used, drops them while the robot spins fast, and keeps only multi-tag ones on the field. **This is where
+  used, and drops them while the robot spins fast, when the pose is off the field, or when it is more than 1
+  meter from the current estimate (now and then a simulated camera pose is wildly wrong). **This is where
   you add the vision measurement** (look for `TODO`).
 - `subsystems/localization/LocalizationConstants.java`: how much to trust the wheels and the cameras.
   **You choose the vision numbers.**
@@ -86,14 +88,16 @@ Go slower on anything that is new. The stretch below is optional.
 
 1. **Add the call.** In `LocalizationSubsystem.updateLogic()`, inside the loop, give each solution
    to the pose estimator with `pose_estimator_.addVisionMeasurement(...)`. It takes the pose the
-   camera saw, **the time the picture was taken** (not the time now) and the standard deviations.
+   camera saw, **the time the picture was taken** (not the time now) and the standard deviations. The farther
+   the closest tag (`tag_distance`), the less sure the camera is, so scale the standard deviations by
+   `tag_distance * tag_distance`.
 2. **Choose the trust.** The starter `VISION_XY_STD_METERS` and `VISION_HEADING_STD_RADIANS` are both
-   5.0, which means "ignore the cameras". Pick better numbers in `LocalizationConstants.java`.
+   5.0, which means "barely listen to the cameras". Around 0.2 works well (we measured 0.01 and 0.5 failing). Pick better numbers in `LocalizationConstants.java`.
 3. **Look at it.** Start, enable Teleop, and drive with **W/A/S/D**. In AdvantageScope look at the
    solutions in `Proxy/TagSolutions`, plot
    `Subsystem/Localization/PositionErrorMeters`, and put `Subsystem/Localization/Pose` and
    `Drive/TruePose` on the 2D Field.
-4. **Drive more than 5 meters, stop, wait 2 seconds**, then click **Verify**.
+4. **Drive more than 5 meters with a turn, stop, wait 2 seconds**, then click **Verify**.
 
 **Part 2: aiming**
 
@@ -116,8 +120,9 @@ Go slower on anything that is new. The stretch below is optional.
 - **Camera tag solutions added.** Reads your `LocalizationSubsystem.java`. It looks for an
   `addVisionMeasurement(...)` call that passes the solution's pose, the solution's own timestamp (`solution.timestamp.getSeconds()`)
   and the standard deviations.
-- **Estimate within 5 cm and 1 degree.** Needs a simulator running. The check watches the robot and only
-  judges after you have **driven more than 5 meters in total and then sat still for 1.5 seconds**. It then
+- **Estimate within 6 cm and 1 degree.** Needs a simulator running. The check watches the robot and only
+  judges after you have **driven more than 5 meters in total, turned at least a quarter circle, and then
+  sat still for 1.5 seconds**. It then
   compares your estimate with the true pose. It reads failing until you have done that, so drive, stop,
   wait 2 seconds, then Verify. Start fresh to try again.
 - **Aim state written.** Reads your drivetrain files. It looks for the `AIM` state, a `case AIM:`, a

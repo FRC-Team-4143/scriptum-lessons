@@ -14,50 +14,57 @@
 		{
 			"title": "Too big: the camera is ignored",
 			"say": {
-				"never": "With the starter 5.0 the estimator thinks the camera could be 5 meters off, so it ignores it. You are back to odometry alone, which drifts about 0.1 to 0.5 meters and a few degrees over a 6 to 11 meter drive. That fails the 5 cm limit.",
-				"bit": "At 5.0 the camera is ignored. You get plain odometry: about 0.1 to 0.5 m and a few degrees of drift."
+				"never": "With the starter 5.0 the estimator thinks the camera could be 5 meters off, so it hardly listens. You are back to roughly odometry alone, which drifts about 0.15 to 0.6 meters and 2 to 10 degrees over a drive with turns. That fails the 1 degree limit.",
+				"bit": "At 5.0 the camera is hardly heard. You get roughly plain odometry: about 0.15 to 0.6 m and 2 to 10 degrees of drift."
 			}
 		},
 		{
 			"title": "Good numbers: tight and steady",
 			"say": {
-				"never": "With sensible numbers (the reference solution uses 0.3 for both) the estimate follows the camera. Once the robot has stopped it ends within about 3 millimeters and 0.2 degrees of the truth. The check allows 5 centimeters and 1 degree, so you have lots of room.",
-				"bit": "With good numbers the estimate ends about 3 mm and 0.2 degrees from the truth once stopped. The limit is 5 cm and 1 degree."
+				"never": "With sensible numbers (the reference solution uses 0.2 for both, multiplied by the tag's distance squared) the estimate follows the cameras. Once the robot has stopped it usually ends within about 1 centimeter and 0.3 degrees of the truth, and in the worst runs we measured within about 4 centimeters and 0.65 degrees. The check allows 6 centimeters and 1 degree. The cameras only nudge the estimate a little each time, but they send about 60 solutions a second, so it adds up.",
+				"bit": "With good numbers the estimate ends about 1 cm and 0.3 degrees from the truth once stopped (worst about 4 cm and 0.65 degrees). The limit is 6 cm and 1 degree."
 			}
 		},
 		{
 			"title": "Too small: every picture is believed",
 			"say": {
-				"never": "A tiny number says \"the camera is perfect\". Then each noisy picture drags the estimate straight to it, and the estimate shakes. That is why the code only keeps the tag solutions made from at least two tags: single-tag answers are too noisy to believe. Watch the estimate on the 2D Field: if it shivers, trust the camera a little less.",
-				"bit": "Too small and every noisy picture yanks the estimate around. A shaking estimate means trust less."
+				"never": "A tiny number says \"the camera is perfect\". Then each noisy picture drags the estimate straight to it, and the estimate shakes. With 0.01 the estimate can end 18 centimeters and 1.4 degrees off, and jump by half a meter while the robot moves. Numbers around 0.1 to 0.2 work well. Watch the estimate on the 2D Field: if it shivers, trust the camera a little less.",
+				"bit": "Too small and every noisy picture yanks the estimate around (0.01 can end 18 cm and 1.4 degrees off). A shaking estimate means trust less."
 			}
 		},
 		{
 			"title": "Use the picture's time, not now",
 			"say": {
-				"never": "A camera picture is a little old when it arrives. If you tell the estimator it was taken just now (`Timer.getFPGATimestamp()`), it puts the old position in the present, and the estimate lags behind the truth by about 0.08 to 0.12 meters while the robot moves. Using `solution.timestamp.getSeconds()` lets the estimator slot the picture in at the right moment.",
-				"bit": "Passing \"now\" instead of the picture's time makes the estimate lag about 0.08 to 0.12 m while moving."
+				"never": "A camera picture is a little old when it arrives. If you tell the estimator it was taken just now (`Timer.getFPGATimestamp()`), it puts the old position in the present, so the estimate is a few centimeters off while the robot moves, and more the faster you drive. Using `solution.timestamp.getSeconds()` lets the estimator slot the picture in at the right moment. The code check also looks for it.",
+				"bit": "Passing \"now\" instead of the picture's time puts the estimate a few centimeters off while moving. Use the picture's time."
 			}
 		},
 		{
 			"title": "Heading: use it, or ignore it",
 			"say": {
-				"never": "A huge heading number (like 99999) tells the estimator to ignore the camera's heading and keep the wheels' heading. Here the wheels' heading is about 2 to 7 degrees off, which fails the 1 degree limit. The camera's heading from several tags is good, so give it a small heading number too.",
-				"bit": "A huge heading number means ignore camera heading. Then heading stays about 2 to 7 degrees off. Trust it."
+				"never": "A huge heading number (like 99999) tells the estimator to ignore the camera's heading and keep the wheels' heading. Here the wheels' heading ends 2 to 10 degrees off, which fails the 1 degree limit. The camera's heading from a close tag is good (well under a degree), so give it a small heading number too.",
+				"bit": "A huge heading number means ignore camera heading. Then heading stays 2 to 10 degrees off. Trust it."
+			}
+		},
+		{
+			"title": "Far tags: trust less",
+			"say": {
+				"never": "A camera is much less sure of a far tag than of a near one. In this simulator the pose from a tag within 3 meters is a few centimeters off, from 3 to 5 meters it is usually within about 10 centimeters but can be wildly off, and beyond 5 meters it can be 5 or 6 meters off. So you make the standard deviation grow with the square of the distance: the number you pass is the constant times `tag_distance * tag_distance`. Without this, a constant like 0.2 left the estimate up to 19 centimeters and 2 degrees off in our worst run. At 1 meter the constant is the whole number, at 3 meters it is nine times bigger.",
+				"bit": "Far tags give worse poses. You multiply the constants by the tag distance squared."
 			}
 		},
 		{
 			"title": "What the code already does",
 			"say": {
-				"never": "`LocalizationSubsystem` does some of the safety for you before your call. There are two cameras (front and back), and they send their tag solutions through MW-Lib's proxy server. The proxy server hands back its last 20 solutions every loop, so the code skips ones it already used. It only keeps solutions that used at least two tags (multi-tag, the accurate kind). It also drops them while the robot spins faster than about 180 degrees per second, because a spinning robot blurs the picture. If your estimate is wrong only during fast spins, that is why.",
-				"bit": "Two cameras, repeats skipped, at least two tags, and solutions dropped while spinning faster than about 180 deg/s."
+				"never": "`LocalizationSubsystem` does some of the safety for you before your call. There are two cameras (front and back), and they send their tag solutions through MW-Lib's proxy server. The proxy server hands back its last 20 solutions every loop, so the code skips ones it already used. It drops a solution whose pose is more than 1 meter from where the robot already thinks it is (`MAX_JUMP_METERS`): the simulated cameras work out each pose from just one tag, the best one, and now and then that pose is wildly wrong, while the wheels never drift that far. How many tags are in view tells you nothing about how good it is. It also drops solutions while the robot spins faster than about 180 degrees per second, because a spinning robot blurs the picture, and ones that put the robot outside the field. If your estimate is wrong only during fast spins, that is why.",
+				"bit": "Two cameras, repeats skipped, solutions more than 1 m from the estimate dropped, and solutions dropped while spinning faster than about 180 deg/s."
 			}
 		},
 		{
 			"title": "How to tune it",
 			"say": {
-				"never": "Change one number, press Start, drive more than 5 meters, stop, and read `PositionErrorMeters` and `HeadingErrorDegrees` once you have stopped. Both under the limits? Done. Still big? Trust the camera more. Shaking? Trust it less.",
-				"bit": "Change one number, drive, stop, read the errors. Large: trust more. Shaky: trust less."
+				"never": "Change one number, press Start, drive more than 5 meters with a turn or two, stop, and read `PositionErrorMeters` and `HeadingErrorDegrees` once you have stopped. Both under the limits? Done. Still big? Trust the camera more (we measured 0.5 leaving the heading about 1.8 degrees off in the worst run). Shaking? Trust it less.",
+				"bit": "Change one number, drive and turn, stop, read the errors. Large: trust more. Shaky: trust less."
 			}
 		}
 	],

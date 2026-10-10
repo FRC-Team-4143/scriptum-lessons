@@ -21,9 +21,11 @@ public class LocalizationConstants extends MwConstants {
   // VISION: how much to trust the cameras (your job)
   // =============================================================================
 
-  // How far off could a camera's position be, in meters? Same idea for the heading, in radians.
-  // These starter numbers say "cameras are very unreliable", so they barely help. Choose better
-  // ones once you have looked at how far off the camera poses really are.
+  // How far off could a camera's position be, in meters, when the tag is 1 meter away? Same idea
+  // for the heading, in radians. Your addVisionMeasurement() call multiplies them by the tag's
+  // distance squared, because a far tag is much less sure. These starter numbers say "cameras are
+  // very unreliable", so they barely help. Choose better ones once you have looked at how far off
+  // the camera poses really are.
   public static final double VISION_XY_STD_METERS = 5.0;
   public static final double VISION_HEADING_STD_RADIANS = 5.0;
 

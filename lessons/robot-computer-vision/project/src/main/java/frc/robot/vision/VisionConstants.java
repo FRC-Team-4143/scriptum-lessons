@@ -33,9 +33,12 @@ public final class VisionConstants {
   // away above this turning speed (radians per second).
   public static final double MAX_YAW_RATE_RADIANS_PER_SECOND = Math.toRadians(180.0);
 
-  // A pose worked out from fewer tags than this is thrown away: one tag can look like two
-  // different poses, so a camera that sees a single tag is not trusted.
-  public static final int MIN_TAG_COUNT = 2;
+  // The simulated cameras work out each pose from one tag only, the best one, and the farther that
+  // tag is the worse the pose gets: within about 3 meters it is a few centimeters off, but now and
+  // then, mostly beyond 3.5 meters, a pose is wildly wrong (up to 6 meters). A pose farther than
+  // this
+  // from the current estimate is thrown away (meters). The wheels drift much less than this.
+  public static final double MAX_JUMP_METERS = 1.0;
 
   // The tags a camera used in its latest picture stay in the VisibleTags log for this long
   // (seconds). A bit more than the gap between two pictures (about 0.033 s at 30 frames per

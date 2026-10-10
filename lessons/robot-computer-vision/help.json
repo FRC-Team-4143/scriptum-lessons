@@ -78,20 +78,20 @@
 					"bit": "Arguments: `solution.pose`, `solution.timestamp.getSeconds()`, then a `VecBuilder.fill(...)`."
 				},
 				{
-					"never": "The time must be the picture's time, `solution.timestamp.getSeconds()`, not the time now. The last argument is `VecBuilder.fill(x meters, y meters, heading radians)` and should use the two numbers in LocalizationConstants.",
-					"bit": "Use `solution.timestamp.getSeconds()` (not the time now) and `VecBuilder.fill` with `VISION_XY_STD_METERS` twice and `VISION_HEADING_STD_RADIANS`."
+					"never": "The time must be the picture's time, `solution.timestamp.getSeconds()`, not the time now. The last argument is `VecBuilder.fill(x meters, y meters, heading radians)` and should use the two numbers in LocalizationConstants, each multiplied by `tag_distance * tag_distance` (the farther the tag, the less sure).",
+					"bit": "Use `solution.timestamp.getSeconds()` (not the time now) and `VecBuilder.fill` with `VISION_XY_STD_METERS` twice and `VISION_HEADING_STD_RADIANS`, each times `tag_distance * tag_distance`."
 				},
 				{
 					"never": "Common slip: the call is outside the `for` loop, so `solution` does not exist, or it is still commented out. Put it inside the loop, under the TODO comment, and end it with a semicolon.",
 					"bit": "Put the call inside the loop and end it with `;`. A commented line does not count."
 				},
-				"`pose_estimator_.addVisionMeasurement(solution.pose, solution.timestamp.getSeconds(), VecBuilder.fill(LocalizationConstants.VISION_XY_STD_METERS, LocalizationConstants.VISION_XY_STD_METERS, LocalizationConstants.VISION_HEADING_STD_RADIANS));`"
+				"`pose_estimator_.addVisionMeasurement(solution.pose, solution.timestamp.getSeconds(), VecBuilder.fill(LocalizationConstants.VISION_XY_STD_METERS * tag_distance * tag_distance, LocalizationConstants.VISION_XY_STD_METERS * tag_distance * tag_distance, LocalizationConstants.VISION_HEADING_STD_RADIANS * tag_distance * tag_distance));`"
 			]
 		},
 		"estimate-accurate": {
 			"why": {
-				"never": "A shot is only as good as the robot's idea of where it is. The estimate has to stay within 5 centimeters and 1 degree even after driving a long way.",
-				"bit": "The estimate must stay within 5 cm and 1 degree of the truth after a long drive."
+				"never": "A shot is only as good as the robot's idea of where it is. The estimate has to stay within 6 centimeters and 1 degree even after driving a long way.",
+				"bit": "The estimate must stay within 6 cm and 1 degree of the truth after a long drive."
 			},
 			"guide": "robot-computer-vision-add-vision",
 			"concept": {
@@ -100,22 +100,22 @@
 			},
 			"hints": [
 				{
-					"never": "This check reads failing until you have driven. Press Start (fresh), enable Teleop, drive with W/A/S/D for more than 5 meters in total, let go, wait 2 seconds, and then click Verify.",
-					"bit": "Start fresh, drive more than 5 m, stop, wait 2 s, then Verify. It fails before that."
+					"never": "This check reads failing until you have driven. Press Start (fresh), enable Teleop, drive with W/A/S/D for more than 5 meters in total with a turn or two, let go, wait 2 seconds, and then click Verify.",
+					"bit": "Start fresh, drive more than 5 m with a turn, stop, wait 2 s, then Verify. It fails before that."
 				},
 				{
-					"never": "Plot `Subsystem/Localization/PositionErrorMeters` and `HeadingErrorDegrees` in AdvantageScope once you have stopped. Under 0.05 and under 1.0 is a pass. If they are big, the estimator is ignoring the cameras.",
-					"bit": "Plot PositionErrorMeters and HeadingErrorDegrees after stopping. Need under 0.05 m and 1.0 degree."
+					"never": "Plot `Subsystem/Localization/PositionErrorMeters` and `HeadingErrorDegrees` in AdvantageScope once you have stopped. Under 0.06 and under 1.0 is a pass. If they are big, the estimator is ignoring the cameras.",
+					"bit": "Plot PositionErrorMeters and HeadingErrorDegrees after stopping. Need under 0.06 m and 1.0 degree."
 				},
 				{
-					"never": "The starter 5.0 for `VISION_XY_STD_METERS` and `VISION_HEADING_STD_RADIANS` tells the estimator to ignore the cameras, which leaves plain odometry (about 0.1 to 0.5 m and a few degrees of drift). Make both much smaller, around 0.3.",
-					"bit": "5.0 means ignore the camera. Both constants need to be much smaller, around 0.3."
+					"never": "The starter 5.0 for `VISION_XY_STD_METERS` and `VISION_HEADING_STD_RADIANS` barely lets the estimator listen to the cameras, which leaves roughly plain odometry (about 0.15 to 0.6 m and 2 to 10 degrees of drift). Make both much smaller, around 0.2.",
+					"bit": "5.0 means barely listen to the camera. Both constants need to be much smaller, around 0.2."
 				},
 				{
-					"never": "If the estimate lags behind while you drive, you probably passed the time now instead of `solution.timestamp.getSeconds()`. If the position is fine but the heading is 2 to 7 degrees off, the heading number is too large and the camera's heading is being ignored.",
+					"never": "If the estimate lags behind while you drive, you probably passed the time now instead of `solution.timestamp.getSeconds()`. If the position is fine but the heading is 2 to 10 degrees off, the heading number is too large and the camera's heading is being ignored.",
 					"bit": "Lagging while moving: use `solution.timestamp.getSeconds()`. Heading a few degrees off: make the heading number small."
 				},
-				"In `LocalizationConstants`: `VISION_XY_STD_METERS = 0.3` and `VISION_HEADING_STD_RADIANS = 0.3`. Press Start, drive more than 5 m, stop, wait 2 s, Verify."
+				"In `LocalizationConstants`: `VISION_XY_STD_METERS = 0.2` and `VISION_HEADING_STD_RADIANS = 0.2`. Press Start, drive more than 5 m with a turn, stop, wait 2 s, Verify."
 			]
 		},
 		"aim-state-written": {
