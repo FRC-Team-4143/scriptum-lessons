@@ -5,19 +5,11 @@
 	"order": 440,
 	"steps": [
 		{
-			"title": "Wheel speeds in, robot speeds out",
+			"title": "The job: wheel speeds in, robot speeds out",
 			"say": {
-				"never": "Last lesson you worked out the robot's speed with your own math. WPILib, the robot toolkit, has a class that does it for you: `DifferentialDriveKinematics`. You give it the two wheel speeds, and it gives back the robot's forward speed and turning speed together in a single object called `ChassisSpeeds`.\n\nSay the left side does 3.0 m/s and the right side does 5.0 m/s. Kinematics works out that the robot moves forward at 4.0 m/s (the average) and turns at (5.0 - 3.0) / track width radians per second.",
+				"never": "Last lesson you worked out the robot's speed with your own math. WPILib, the robot toolkit, has a class that does it for you: `DifferentialDriveKinematics`. You give it the two wheel speeds, and it gives back the robot's forward speed and turning speed together in a single object called `ChassisSpeeds`.\n\nSay the left side does 3.0 m/s and the right side does 5.0 m/s. Kinematics works out that the robot moves forward at 4.0 m/s (the average) and turns at (5.0 - 3.0) / track width radians per second.\n\nYou will open `DifferentialDriveMech.java`, fill in `getChassisSpeeds()`, then compare your robot's speed with your own math from last lesson in AdvantageScope.",
 				"bit": "`DifferentialDriveKinematics` does the math you wrote by hand last lesson: wheel speeds in, a `ChassisSpeeds` (forward and turning) out."
 			}
-		},
-		{
-			"title": "In your lesson: Wheel speeds in, robot speeds out",
-			"say": {
-				"never": "In `getChassisSpeeds()` you will do it in two moves. First bundle the two wheel speeds into one object, then hand it to kinematics:\n\n`DifferentialDriveWheelSpeeds wheels = new DifferentialDriveWheelSpeeds(getLeftMetersPerSecond(), getRightMetersPerSecond());`\n\n`return kinematics_.toChassisSpeeds(wheels);`\n\nThe answer has `vxMetersPerSecond` (forward) and `omegaRadiansPerSecond` (turning).",
-				"bit": "Bundle the two speeds as `new DifferentialDriveWheelSpeeds(left, right)`, then `kinematics_.toChassisSpeeds(wheels)` returns forward (`vxMetersPerSecond`) and turning (`omegaRadiansPerSecond`)."
-			},
-			"assist": true
 		},
 		{
 			"title": "Open DifferentialDriveMech.java",
@@ -88,27 +80,17 @@
 			"assist": true
 		},
 		{
-			"title": "Bundle the wheel speeds",
+			"title": "Bundle, then convert",
 			"say": {
-				"never": "Inside `getChassisSpeeds()`, under the TODO comment, make the wheel speeds object. Type this one line:\n\n`DifferentialDriveWheelSpeeds wheels = new DifferentialDriveWheelSpeeds(getLeftMetersPerSecond(), getRightMetersPerSecond());`\n\n`new` builds the object from the left and right speeds, and `wheels` is the name you will use to refer to it.",
-				"bit": "Under the TODO, write `DifferentialDriveWheelSpeeds wheels = new DifferentialDriveWheelSpeeds(getLeftMetersPerSecond(), getRightMetersPerSecond());`."
-			},
-			"target": {
-				"pane": "editor",
-				"selector": ".view-lines .view-line",
-				"text": "public ChassisSpeeds getChassisSpeeds"
-			},
-			"cardAt": "bottom-right",
-			"assist": true,
-			"waitFor": {
-				"hint": "write the wheels line."
+				"never": "`getChassisSpeeds()` takes two moves. First **bundle** the two wheel speeds into one `DifferentialDriveWheelSpeeds` object, built from `getLeftMetersPerSecond()` and `getRightMetersPerSecond()`. Then **convert**: hand that bundle to `kinematics_` with `toChassisSpeeds`, and return what comes back.\n\nThe answer has `vxMetersPerSecond` (forward) and `omegaRadiansPerSecond` (turning). A method can only return once, so replace the placeholder return instead of adding a second one.",
+				"bit": "Bundle the two speeds as `DifferentialDriveWheelSpeeds`, then `kinematics_.toChassisSpeeds(...)` gives forward and turning."
 			}
 		},
 		{
-			"title": "Convert and return",
+			"title": "Write the two lines",
 			"say": {
-				"never": "Now let kinematics do the math. **Replace** the placeholder line `return new ChassisSpeeds();` with:\n\n`return kinematics_.toChassisSpeeds(wheels);`\n\nReplace it rather than adding a second `return`. A method can only return once, and Java complains about code after a `return`.",
-				"bit": "Replace `return new ChassisSpeeds();` with `return kinematics_.toChassisSpeeds(wheels);`. Only one `return` allowed."
+				"never": "Inside `getChassisSpeeds()`, under the TODO comment, make a `DifferentialDriveWheelSpeeds` called `wheels` with `new`, passing the left and right speeds. Then **replace** the placeholder `return new ChassisSpeeds();` with a return of `kinematics_.toChassisSpeeds(wheels)`.\n\nClick **I did it** when both are written.",
+				"bit": "Make `wheels` with `new DifferentialDriveWheelSpeeds(...)`, then replace the placeholder return with a call to `kinematics_.toChassisSpeeds(wheels)`."
 			},
 			"target": {
 				"pane": "editor",
@@ -118,7 +100,7 @@
 			"cardAt": "bottom-right",
 			"assist": true,
 			"waitFor": {
-				"hint": "return kinematics_.toChassisSpeeds(wheels)."
+				"hint": "write the wheels line and the return, then click I did it."
 			}
 		},
 		{
@@ -162,6 +144,13 @@
 				}
 			},
 			"assist": true
+		},
+		{
+			"title": "What to compare",
+			"say": {
+				"never": "Two lines should end up on top of each other. **Drive/LinearSpeed** is WPILib's answer. **Drive/LinearSpeedByHand** is your own DriveMath from last lesson. Same wheels, two routes, so the lines should match. At full stick forward the speed should climb to about 5 meters per second.",
+				"bit": "LinearSpeed (WPILib) and LinearSpeedByHand (your math) should match; full stick is about 5 m/s."
+			}
 		},
 		{
 			"title": "WPILib's answer",
@@ -230,6 +219,13 @@
 			},
 			"cardAt": "top-right",
 			"assist": true
+		},
+		{
+			"title": "Check it",
+			"say": {
+				"never": "If the two lines match and the speed reaches about 5 m/s, press **Verify** in the lesson chip to check the Chassis speeds job. If the lines disagree, look at your two lines in `getChassisSpeeds()`.",
+				"bit": "Lines match and speed reaches about 5 m/s? Press **Verify**."
+			}
 		}
 	],
 	"kind": "mixed"
