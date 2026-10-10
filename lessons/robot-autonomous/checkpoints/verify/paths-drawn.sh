@@ -24,7 +24,7 @@ for traj in "${trajs[@]}"; do
 		exit 1
 	fi
 	if ! jq -e '.trajectory.sampleType == "Differential"' "$traj" >/dev/null 2>&1; then
-		echo "$name was not made for a Differential drivetrain. Use the project's own robot.chor settings."
+		echo "$name was made as a Swerve path, but this robot is Differential. In the Choreo pane open the menu, then Document Settings, then Robot Config, and set Drive Type to Differential (and the numbers from the README). Then delete and redraw or regenerate the path."
 		exit 1
 	fi
 done

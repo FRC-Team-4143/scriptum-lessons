@@ -10,8 +10,8 @@
 		{
 			"title": "The job",
 			"say": {
-				"never": "The autonomous routine drives two **paths** you draw in Choreo. **ToPickup** goes from the start spot to the game piece. **ToScore** carries on from the game piece to the scoring spot.\n\nYou will do four things: 1) draw ToPickup with a start, a point in the middle and an end, 2) name it exactly and press Generate, 3) draw ToScore so that it starts where ToPickup ended, 4) name it and generate it.\n\nYou are done when both paths are drawn, named exactly, and go where they should. Verify checks this. This lesson uses the Choreo pane just like the **Choreo** lesson, so do that one first if the editor is new to you.",
-				"bit": "Draw two Choreo paths, ToPickup and ToScore, with exact names, and generate each. ToScore must start where ToPickup ends."
+				"never": "The autonomous routine drives two **paths** you draw in Choreo. **ToPickup** goes from the start spot to the game piece. **ToScore** carries on from the game piece to the scoring spot.\n\nYou will do five things: 1) set the robot up in Choreo, 2) draw ToPickup with a start, a point in the middle and an end, 3) name it exactly and press Generate, 4) draw ToScore so that it starts where ToPickup ended, 5) name it and generate it.\n\nYou are done when both paths are drawn, named exactly, and go where they should. Verify checks this. This lesson uses the Choreo pane just like the **Choreo** lesson, so do that one first if the editor is new to you.",
+				"bit": "Set Choreo's drive type to Differential, then draw two paths, ToPickup and ToScore, with exact names, and generate each. ToScore must start where ToPickup ends."
 			},
 			"open": [
 				"choreo"
@@ -23,6 +23,61 @@
 			"target": {
 				"pane": "choreo"
 			}
+		},
+		{
+			"title": "Set up the robot",
+			"say": {
+				"never": "Before you draw anything, the Choreo pane needs this robot's settings. Choreo starts with its own defaults, and the main one is wrong for us: **Drive Type** is **Swerve**, but this robot is **Differential** (two sides of wheels, like a tank). If it stays Swerve, Choreo makes Swerve paths, the follower cannot use them and Verify says so. The other numbers (mass, wheel size and so on) should match this robot too, or a path may ask for more than the robot can do.",
+				"bit": "Before drawing: set Drive Type to Differential and the robot numbers in Choreo's Document Settings."
+			},
+			"target": {
+				"pane": "choreo"
+			}
+		},
+		{
+			"title": "Open Document Settings",
+			"say": {
+				"never": "Click the menu, the three-line icon at the top left of the Choreo pane next to the Choreo title, then choose **Document Settings** and open the **Robot Config** tab. Click **I did it** when you can see Drive Type.",
+				"bit": "Menu (three lines, top left), Document Settings, Robot Config tab."
+			},
+			"waitFor": {
+				"hint": "open the menu, then Document Settings and Robot Config, then click I did it."
+			},
+			"assist": true,
+			"target": {
+				"pane": "choreo"
+			},
+			"cardAt": "bottom-right"
+		},
+		{
+			"title": "Drive Type: Differential",
+			"say": {
+				"never": "Slide **Drive Type** from Swerve to **Differential**. Set **Trackwidth** to **24** in. Click **I did it** when Drive Type reads Differential.",
+				"bit": "Drive Type to Differential, Trackwidth 24 in."
+			},
+			"waitFor": {
+				"hint": "set Drive Type to Differential and Trackwidth to 24 in, then click I did it."
+			},
+			"assist": true,
+			"target": {
+				"pane": "choreo"
+			},
+			"cardAt": "bottom-right"
+		},
+		{
+			"title": "Type the robot numbers",
+			"say": {
+				"never": "Type these, pressing **Enter** after each: Mass **50** kg, MOI **7.5** kg m^2, Bumpers **17** in (front, back and sides), Wheel Radius **3** in, Motor Rev / Wheel Rev **8.45**, Motor Max Speed **6000** RPM, Motor Max Torque **1.0** N*m, Wheel COF **1.5**. Click **I did it** when they match, then close the dialog.",
+				"bit": "Mass 50, MOI 7.5, Bumpers 17, Wheel Radius 3, gearing 8.45, 6000 RPM, 1.0 N*m, COF 1.5."
+			},
+			"waitFor": {
+				"hint": "type the robot numbers, then click I did it."
+			},
+			"assist": true,
+			"target": {
+				"pane": "choreo"
+			},
+			"cardAt": "bottom-right"
 		},
 		{
 			"title": "The places on the field",
