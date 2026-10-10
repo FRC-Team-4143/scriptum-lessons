@@ -5,6 +5,20 @@
 	"order": 533,
 	"steps": [
 		{
+			"title": "The job",
+			"say": {
+				"never": "`Autos.java` holds the routine, and its constructor has two jobs: tell the routine which paths it uses, then list the commands to run.\n\nThe routine you will write runs these, one after another: drive the first path, wait a moment (a stand-in for picking up the game piece), drive the second path, aim until the robot is aimed (with a time limit), then shoot (also with a time limit).\n\nYou are done when Verify says the paths are named and the sequence is written. It reads your Java, so if a check fails its message says which line it wanted.",
+				"bit": "Load the two paths, then list the commands: path, wait, path, aim until aimed (with a timeout), shoot (with a timeout)."
+			}
+		},
+		{
+			"title": "Telling the routine its paths",
+			"say": {
+				"never": "A routine has to **load** a path before it can play it back. The name goes in quotes and must be exactly the name of the path in Choreo. One load for each path.",
+				"bit": "Load each path by its exact Choreo name."
+			}
+		},
+		{
 			"title": "Open Autos.java",
 			"say": {
 				"never": "Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `Autos`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
@@ -56,14 +70,14 @@
 			"assist": true
 		},
 		{
-			"title": "Load ToPickup",
+			"title": "Load both paths",
 			"say": {
-				"never": "Under that comment, write `loadTrajectory(\"ToPickup\");`. The name goes in quotes and must be exactly the name of the path in Choreo. Click **I did it** when it's written.",
-				"bit": "`loadTrajectory(\"ToPickup\");`, spelled exactly like the Choreo path."
+				"never": "Under that comment, load the first path: `loadTrajectory(\"ToPickup\");`. On the next line, the same for the second: `loadTrajectory(\"ToScore\");`. Click **I did it** when both are written.",
+				"bit": "Write `loadTrajectory(\"ToPickup\");` and `loadTrajectory(\"ToScore\");`."
 			},
 			"cardAt": "bottom-right",
 			"waitFor": {
-				"hint": "write the loadTrajectory line for ToPickup, then click I did it."
+				"hint": "write both loadTrajectory lines, then click I did it."
 			},
 			"assist": true,
 			"target": {
@@ -73,20 +87,10 @@
 			}
 		},
 		{
-			"title": "Load ToScore",
+			"title": "The commands, one after another",
 			"say": {
-				"never": "On the next line, the same for the second path: `loadTrajectory(\"ToScore\");`. Click **I did it** when it's written.",
-				"bit": "`loadTrajectory(\"ToScore\");`"
-			},
-			"cardAt": "bottom-right",
-			"waitFor": {
-				"hint": "write the loadTrajectory line for ToScore, then click I did it."
-			},
-			"assist": true,
-			"target": {
-				"pane": "editor",
-				"selector": ".view-lines .view-line",
-				"text": "TODO 1: tell the routine which paths it uses"
+				"never": "The second job is the list of commands. Everything inside `addCommands(...)` runs **one after another**, with commas between the commands, each on its own line.\n\nTo drive a path, use the drivetrain's `followPath` command with the loaded path: it plays the path back and finishes when the robot has arrived. To wait, use `Commands.waitSeconds`: it does nothing for the time you give it, half a second here.",
+				"bit": "addCommands runs its commands in order, separated by commas. followPath finishes on arrival; waitSeconds just waits."
 			}
 		},
 		{
@@ -128,14 +132,14 @@
 			}
 		},
 		{
-			"title": "Drive the first path",
+			"title": "Path, wait, path",
 			"say": {
-				"never": "First command inside: `DrivetrainCommands.followPath(getTrajectory(\"ToPickup\")),`. It plays ToPickup back and finishes when the robot has arrived. Click **I did it** when it's written.",
-				"bit": "`DrivetrainCommands.followPath(getTrajectory(\"ToPickup\")),`"
+				"never": "Inside the brackets write three commands, each ending with a comma:\n- `DrivetrainCommands.followPath(getTrajectory(\"ToPickup\")),`\n- `Commands.waitSeconds(0.5),`\n- `DrivetrainCommands.followPath(getTrajectory(\"ToScore\")),`\n\nClick **I did it** when all three are written.",
+				"bit": "Inside `addCommands`: follow ToPickup, wait 0.5 s, follow ToScore, each with a comma."
 			},
 			"cardAt": "bottom-right",
 			"waitFor": {
-				"hint": "write the followPath line for ToPickup, then click I did it."
+				"hint": "write the path, wait, path commands, then click I did it."
 			},
 			"assist": true,
 			"target": {
@@ -145,82 +149,21 @@
 			}
 		},
 		{
-			"title": "Wait a moment",
+			"title": "Aim until aimed, then shoot",
 			"say": {
-				"never": "Next, `Commands.waitSeconds(0.5),`. It does nothing for half a second, standing in for the real robot picking up the game piece. Click **I did it** when it's written.",
-				"bit": "`Commands.waitSeconds(0.5),`"
-			},
-			"cardAt": "bottom-right",
-			"waitFor": {
-				"hint": "write the waitSeconds line, then click I did it."
-			},
-			"assist": true,
-			"target": {
-				"pane": "editor",
-				"selector": ".view-lines .view-line",
-				"text": "TODO 2: add the commands, in order"
+				"never": "The aim command from the Computer Vision lesson never finishes by itself: it aims for as long as it runs. So it needs an **end**.\n\n`.until(...)` ends it as soon as a yes/no method says true. Give it your `isAimed` method from the Computer Vision lesson. A `::` hands over the method itself, so the command can ask it again and again instead of asking once.\n\nIf something is wrong the robot might never become aimed, and the routine would be stuck forever. `.withTimeout(...)` gives up after a number of seconds. The shoot command never finishes either, so a timeout on it ends the routine. The last command has **no comma** after it.",
+				"bit": "Aim never finishes alone: end it with until(isAimed) and give up with a timeout. Shoot also needs a timeout. No comma after the last command."
 			}
 		},
 		{
-			"title": "Drive the second path",
+			"title": "Aim, until aimed, give up after 3 seconds",
 			"say": {
-				"never": "Then the second path: `DrivetrainCommands.followPath(getTrajectory(\"ToScore\")),`. Click **I did it** when it's written.",
-				"bit": "`DrivetrainCommands.followPath(getTrajectory(\"ToScore\")),`"
+				"never": "Add `DrivetrainCommands.aim()` after the second path, then `.until(DrivetrainSubsystem.getInstance()::isAimed)`, then `.withTimeout(3.0),` with the comma that separates it from the next command. Click **I did it** when the three pieces are written.",
+				"bit": "`DrivetrainCommands.aim()`, then `.until(DrivetrainSubsystem.getInstance()::isAimed)`, then `.withTimeout(3.0),`."
 			},
 			"cardAt": "bottom-right",
 			"waitFor": {
-				"hint": "write the followPath line for ToScore, then click I did it."
-			},
-			"assist": true,
-			"target": {
-				"pane": "editor",
-				"selector": ".view-lines .view-line",
-				"text": "TODO 2: add the commands, in order"
-			}
-		},
-		{
-			"title": "Aim at the goal",
-			"say": {
-				"never": "Now the aim state from the Computer Vision lesson: `DrivetrainCommands.aim()`. On its own it never finishes by itself (it aims for as long as it runs), so it needs an end. Write it for now and add the end in the next steps. Click **I did it**.",
-				"bit": "`DrivetrainCommands.aim()`. It never ends by itself, so it needs an end."
-			},
-			"cardAt": "bottom-right",
-			"waitFor": {
-				"hint": "write DrivetrainCommands.aim(), then click I did it."
-			},
-			"assist": true,
-			"target": {
-				"pane": "editor",
-				"selector": ".view-lines .view-line",
-				"text": "TODO 2: add the commands, in order"
-			}
-		},
-		{
-			"title": "End it when aimed",
-			"say": {
-				"never": "Add `.until(DrivetrainSubsystem.getInstance()::isAimed)` after it. `isAimed` is the yes/no method you wrote in the Computer Vision lesson. The `::` hands over the method itself, so the command can ask it again and again instead of asking once. Click **I did it** when it's added.",
-				"bit": "`.until(DrivetrainSubsystem.getInstance()::isAimed)` stops aiming once it is true."
-			},
-			"cardAt": "bottom-right",
-			"waitFor": {
-				"hint": "add the until(...isAimed) part, then click I did it."
-			},
-			"assist": true,
-			"target": {
-				"pane": "editor",
-				"selector": ".view-lines .view-line",
-				"text": "TODO 2: add the commands, in order"
-			}
-		},
-		{
-			"title": "Give up after 3 seconds",
-			"say": {
-				"never": "If something is wrong the robot might never become aimed, and the routine would be stuck forever. Add `.withTimeout(3.0),` at the end, with the comma that separates this command from the next. Click **I did it** when it's added.",
-				"bit": "Add `.withTimeout(3.0),` so a robot that cannot aim doesn't hold up the routine."
-			},
-			"cardAt": "bottom-right",
-			"waitFor": {
-				"hint": "add .withTimeout(3.0), then click I did it."
+				"hint": "write aim().until(isAimed).withTimeout(3.0), then click I did it."
 			},
 			"assist": true,
 			"target": {
@@ -232,8 +175,8 @@
 		{
 			"title": "Shoot",
 			"say": {
-				"never": "Last command, with **no comma** after it: `ShooterCommands.shoot().withTimeout(2.0)`. `shoot()` never finishes on its own either, so the timeout ends the routine after 2 seconds of shooting. Click **I did it** when it's written.",
-				"bit": "`ShooterCommands.shoot().withTimeout(2.0)`, last in the list, no comma."
+				"never": "Last command, with **no comma** after it: `ShooterCommands.shoot().withTimeout(2.0)`. The timeout ends the routine after 2 seconds of shooting. Click **I did it** when it's written.",
+				"bit": "Write `ShooterCommands.shoot().withTimeout(2.0)`, no comma."
 			},
 			"cardAt": "bottom-right",
 			"waitFor": {
@@ -264,16 +207,15 @@
 			}
 		},
 		{
-			"title": "Check what you have",
+			"title": "Check your work",
 			"say": {
 				"never": "Open the lesson chip and press **Verify**. **Paths named ToPickup and ToScore** and **Autonomous sequence written** read your Java and the Choreo files. If one fails, its message says which line it wanted.",
-				"bit": "Press Verify. The checkers read Autos.java and the Choreo files and say what's missing."
+				"bit": "Press Verify. If a check fails, its message says which line it wanted."
 			},
 			"target": {
 				"selector": "[data-tour='lesson']"
-			},
-			"assist": true
+			}
 		}
 	],
-	"kind": "assist"
+	"kind": "mixed"
 }

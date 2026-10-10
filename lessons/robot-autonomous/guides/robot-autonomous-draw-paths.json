@@ -8,10 +8,10 @@
 	],
 	"steps": [
 		{
-			"title": "Open the Choreo pane",
+			"title": "The job",
 			"say": {
-				"never": "Time for the first job. This lesson uses the Choreo pane exactly like the **Choreo** lesson did, so if the editor is new to you, do that one first. Everything here happens in this pane.",
-				"bit": "Everything in this guide happens in the Choreo pane. The Choreo lesson covers the editor itself."
+				"never": "The autonomous routine drives two **paths** you draw in Choreo. **ToPickup** goes from the start spot to the game piece. **ToScore** carries on from the game piece to the scoring spot.\n\nYou will do four things: 1) draw ToPickup with a start, a point in the middle and an end, 2) name it exactly and press Generate, 3) draw ToScore so that it starts where ToPickup ended, 4) name it and generate it.\n\nYou are done when both paths are drawn, named exactly, and go where they should. Verify checks this. This lesson uses the Choreo pane just like the **Choreo** lesson, so do that one first if the editor is new to you.",
+				"bit": "Draw two Choreo paths, ToPickup and ToScore, with exact names, and generate each. ToScore must start where ToPickup ends."
 			},
 			"open": [
 				"choreo"
@@ -22,17 +22,13 @@
 			],
 			"target": {
 				"pane": "choreo"
-			},
-			"assist": true,
-			"waitFor": {
-				"hint": "look at the Choreo pane, then click I did it."
 			}
 		},
 		{
 			"title": "The places on the field",
 			"say": {
-				"never": "The project already knows four places, saved as **named poses**: `Start`, `Pickup`, `ScoreSpot` and `Goal`. Your two paths use three of them: **ToPickup** goes from Start to Pickup, and **ToScore** carries on from Pickup to ScoreSpot. The numbers are on my board, in meters and degrees.",
-				"bit": "ToPickup: Start to Pickup. ToScore: Pickup to ScoreSpot. The numbers are on my board."
+				"never": "The project already knows four places, saved as **named poses**: `Start`, `Pickup`, `ScoreSpot` and `Goal`. Your two paths use three of them. The numbers are on the board, in meters and degrees.\n\nThe robot is standing on Pickup when ToScore begins, so **ToScore must start at Pickup**: the same spot as ToPickup's last waypoint. The check allows only a few centimeters of gap.",
+				"bit": "ToPickup: Start to Pickup. ToScore: Pickup to ScoreSpot. The two paths must meet at Pickup."
 			},
 			"board": {
 				"code": "Start      x 1.5   y 1.5   heading 0\nPickup     x 5.5   y 2.5   heading 0\nScoreSpot  x 6.5   y 5.0   heading 90",
@@ -54,10 +50,13 @@
 			},
 			"target": {
 				"pane": "choreo"
-			},
-			"assist": true,
-			"waitFor": {
-				"hint": "read the three places, then click I did it."
+			}
+		},
+		{
+			"title": "Waypoints and names",
+			"say": {
+				"never": "A path is a list of **waypoints**, and the order in the list is the order the robot drives. A **Pose Waypoint** pins where the robot is and which way it faces. A **Translation Waypoint** pins only the position and lets Choreo choose the heading. A path needs at least three: a start, a point to steer through, an end.\n\nThe **name** matters most of all: your Java loads each path by its name, so the spelling and capital letters must be exact. Rename it in the Choreo pane, not by renaming the file. Then press **Generate**: Choreo works out the schedule and saves the file.",
+				"bit": "Pose waypoint = position and heading, translation waypoint = position only. Order in the list is the driving order. Names must match your Java exactly. Generate saves the path."
 			}
 		},
 		{
@@ -246,10 +245,17 @@
 			"cardAt": "bottom-right"
 		},
 		{
-			"title": "Add the second path",
+			"title": "The second path",
 			"say": {
-				"never": "Now the path from the pickup to the scoring spot. Press **+** again.",
-				"bit": "Press **+** for the second path."
+				"never": "ToScore is drawn the same way, with one rule: its first waypoint sits exactly on Pickup, where ToPickup ended. Its end is the scoring spot, and the heading turns to face roughly the goal.\n\nIf you capped ToPickup's speed, cap this one the same so the follower can keep up. The name must be exactly `ToScore`.",
+				"bit": "ToScore starts on Pickup and ends on ScoreSpot. Same speed cap, exact name."
+			}
+		},
+		{
+			"title": "Add the second path and name it",
+			"say": {
+				"never": "Press **+** again for a second path, then rename it to exactly `ToScore`: click its name, type it, press **Enter**.",
+				"bit": "Press **+** again and name it exactly `ToScore`."
 			},
 			"target": {
 				"pane": "choreo",
@@ -266,23 +272,7 @@
 			"assist": true
 		},
 		{
-			"title": "Name it ToScore",
-			"say": {
-				"never": "Rename it to exactly `ToScore`, the same careful spelling. Click **I did it** when it says ToScore.",
-				"bit": "Rename it to exactly `ToScore`."
-			},
-			"waitFor": {
-				"hint": "name the path ToScore, then click I did it."
-			},
-			"assist": true,
-			"target": {
-				"pane": "choreo",
-				"selector": "[class*='_SidebarLabel_'] input"
-			},
-			"cardAt": "bottom-right"
-		},
-		{
-			"title": "It has to start where the first one ended",
+			"title": "Three waypoints",
 			"say": {
 				"never": "The robot is standing on Pickup when ToScore begins, so ToScore must **start at Pickup**: the same spot as ToPickup's last waypoint. The check allows only a few centimeters of gap. Make three waypoints: a **pose** at the start, a **translation** in the middle, a **pose** at the end.",
 				"bit": "ToScore starts on Pickup, where ToPickup ended. Pose, translation, pose."
@@ -337,16 +327,15 @@
 			"cardAt": "bottom-right"
 		},
 		{
-			"title": "Check what you have",
+			"title": "Check your work",
 			"say": {
-				"never": "Open the lesson chip and press **Verify**. **Two paths drawn** and **Paths go where they should** should pass now. **Paths named ToPickup and ToScore** also looks at your Java (Autos.java has to load them by name), so it passes after the next guide.",
-				"bit": "Verify. The first and third checkpoints should pass. The name one needs the Java."
+				"never": "Open the lesson chip and press **Verify**. **Two paths drawn** and **Paths go where they should** should pass now. **Paths named ToPickup and ToScore** also looks at your Java (`Autos.java` has to load them by name), so it passes after the next guide.",
+				"bit": "Press Verify. The naming check also reads your Java, so it passes after the next guide."
 			},
 			"target": {
 				"selector": "[data-tour='lesson']"
-			},
-			"assist": true
+			}
 		}
 	],
-	"kind": "assist"
+	"kind": "mixed"
 }
