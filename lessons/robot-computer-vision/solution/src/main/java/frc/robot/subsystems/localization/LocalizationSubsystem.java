@@ -154,6 +154,9 @@ public class LocalizationSubsystem extends MwSubsystem<LocalizationStates, Local
     // Camera pictures taken before the move (some are still on their way) show the OLD spot. Ignore
     // them, plus a couple of loops after the move while the simulated cameras catch up.
     ignore_before_seconds_ = Timer.getFPGATimestamp() + 0.05;
+    // The tags remembered for the logs were seen from the old spot too: forget them.
+    camera_latest_.clear();
+    visible_tags_.clear();
   }
 
   /**
