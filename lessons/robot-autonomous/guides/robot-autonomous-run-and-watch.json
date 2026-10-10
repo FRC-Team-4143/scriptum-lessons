@@ -5,6 +5,13 @@
 	"order": 534,
 	"steps": [
 		{
+			"title": "The job",
+			"say": {
+				"never": "You will run the routine you wrote and watch it in AdvantageScope. The robot picks its routine from a drop-down in **Elastic**, so the job has three parts: 1) start the robot and pick **Pickup And Score** in Elastic, 2) enable in Auto and watch the checks on a graph and on the field, 3) if a check is wrong, read what it says.\n\nYou are done when the four run checkpoints pass. They read the best the robot did since you pressed Start, so one good run is enough.",
+				"bit": "Pick the routine in Elastic, enable in Auto, watch the check numbers in AdvantageScope, then Verify."
+			}
+		},
+		{
 			"title": "Start the robot",
 			"say": {
 				"never": "Your code only works once it's started. Press **Start** and wait until the status says **Running**. Every change to your code needs a fresh Start.",
@@ -24,6 +31,13 @@
 				}
 			},
 			"assist": true
+		},
+		{
+			"title": "Picking the autonomous",
+			"say": {
+				"never": "The robot publishes a **chooser**, a drop-down of its routines. **Elastic**, the dashboard on the right, shows it with an **Auto Choices** widget (under SmartDashboard) set to a **ComboBox Chooser**, like in the Elastic lesson.\n\nThe default, Do Nothing, leaves the robot sitting still, so you must choose **Pickup And Score**. Elastic shows **Network Tables: Connected** in the bottom-left once the robot is running.",
+				"bit": "Elastic shows the robot's routine chooser. Pick Pickup And Score, since the default does nothing."
+			}
 		},
 		{
 			"title": "Open Elastic",
@@ -51,8 +65,8 @@
 		{
 			"title": "Add the Auto Choices chooser",
 			"say": {
-				"never": "Click **Add Widget**, find **Auto Choices** in the list (it is under **SmartDashboard**), and drag it onto the grid. It is the drop-down menu your robot publishes. Click **I did it** once it is on the grid.",
-				"bit": "**Add Widget**, then drag **Auto Choices** onto the grid."
+				"never": "Click **Add Widget**, find **Auto Choices** (under **SmartDashboard**) and drag it onto the grid. Then right-click it, choose **Edit Properties** and make sure **Widget Type** is **ComboBox Chooser**. Click **I did it** once it is on the grid.",
+				"bit": "Drag **Auto Choices** onto the grid and set its type to ComboBox Chooser. Click I did it."
 			},
 			"target": {
 				"pane": "elastic",
@@ -62,20 +76,6 @@
 			"cardAt": "bottom-right",
 			"waitFor": {
 				"hint": "drag Auto Choices onto the grid, then click I did it."
-			},
-			"assist": true
-		},
-		{
-			"title": "Make it a ComboBox Chooser",
-			"say": {
-				"never": "Right-click the widget, choose **Edit Properties**, and make sure **Widget Type** is **ComboBox Chooser**, the same widget you used in the Elastic lesson. Click **I did it** once it is.",
-				"bit": "Set **Widget Type** to **ComboBox Chooser**."
-			},
-			"target": {
-				"pane": "elastic"
-			},
-			"waitFor": {
-				"hint": "set the widget type to ComboBox Chooser, then click I did it."
 			},
 			"assist": true
 		},
@@ -93,6 +93,13 @@
 			},
 			"assist": true,
 			"cardAt": "bottom-right"
+		},
+		{
+			"title": "What each check key means",
+			"say": {
+				"never": "Each checkpoint reads a number the robot logs. These are the ones to watch:\n\n- **Drive/DistanceToPickup** and **Drive/DistanceToScoreSpot**: how far the robot truly is from each spot, in meters. Each should dip under **0.4 meters** in turn, the pickup first, then the scoring spot.\n- **Drive/TrueAimErrorDegrees**: how many degrees the robot truly is from facing the goal. It should swing to about 0 *before* the shot, and under **5 degrees** when the shot starts.\n- **Subsystem/Shooter/ShotCount**: how many shots were taken. At least 1. **AimErrorAtShotDegrees** next to it is the aim error when the last shot started.\n\nThe checks use the **true** pose, not the robot's estimate, so a small gap between the two is not a problem.",
+				"bit": "Watch: distance to the pickup, then to the scoring spot (each under 0.4 m); true aim error (under 5 degrees at the shot); shot count (at least 1)."
+			}
 		},
 		{
 			"title": "Plot the distance to the pickup",
@@ -172,10 +179,10 @@
 			"assist": true
 		},
 		{
-			"title": "Read the graph",
+			"title": "Reading the graph",
 			"say": {
-				"never": "The first line should fall to nearly 0 (the robot reached the pickup), rise again, and then the second line should fall to nearly 0 (the scoring spot). The checkpoints **Reaches the pickup** and **Reaches the scoring spot** want each line to get under **0.4 meters**.",
-				"bit": "Each line should dip under 0.4 m: pickup first, then scoring spot."
+				"never": "The first line should fall to nearly 0 (the robot reached the pickup), rise again, and then the second line should fall to nearly 0 (the scoring spot). The whole run takes about ten seconds, and the robot drives by itself.\n\nOn the field, **Trajectory** is the path being driven and **DesiredPose** is where the path says the robot should be right now: the robot should stay on the line.",
+				"bit": "Line one dips to 0, then line two dips to 0. On the field the robot should stay on the path."
 			},
 			"target": {
 				"pane": "scope"
@@ -188,16 +195,13 @@
 			"open": [
 				"scope"
 			],
-			"assist": true,
-			"waitFor": {
-				"hint": "look at both lines, then click I did it."
-			}
+			"cardAt": "bottom-right"
 		},
 		{
 			"title": "Watch the robot on the field",
 			"say": {
-				"never": "Open the **2D Field** tab in AdvantageScope. Drag **Drive/TruePose** (where the robot really is) onto the field, and **Subsystem/Drivetrain/Choreo/Trajectory** (the path being driven) too. Enable in Auto again to watch the robot stay on the line. **Subsystem/Drivetrain/Choreo/DesiredPose** is where the path says the robot should be right now.",
-				"bit": "On the 2D Field tab, add **Drive/TruePose** and **Subsystem/Drivetrain/Choreo/Trajectory**. `DesiredPose` is where the path says the robot should be right now."
+				"never": "Open the **2D Field** tab in AdvantageScope. Drag **Drive/TruePose** (where the robot really is) onto the field, and **Subsystem/Drivetrain/Choreo/Trajectory** (the path being driven) too. Add **Subsystem/Localization/Pose** as well, the position the robot thinks it has. Enable in Auto again to watch it. Click **I did it** when you have looked.",
+				"bit": "Show **Drive/TruePose**, **Choreo/Trajectory** and **Localization/Pose** on the 2D Field. Click I did it."
 			},
 			"target": {
 				"pane": "scope",
@@ -210,24 +214,10 @@
 			}
 		},
 		{
-			"title": "Estimate against truth",
-			"say": {
-				"never": "Add **Subsystem/Localization/Pose** to the field as well. It's the position the robot *thinks* it has, from the wheels plus the AprilTag cameras, and it stays within a few centimeters of **Drive/TruePose**. The checks measure the true pose, so a small difference between the two is not a problem.",
-				"bit": "Add **Subsystem/Localization/Pose** too. It stays a few centimeters from **Drive/TruePose**, and the checks use the true one."
-			},
-			"target": {
-				"pane": "scope"
-			},
-			"assist": true,
-			"waitFor": {
-				"hint": "compare Subsystem/Localization/Pose with Drive/TruePose, then click I did it."
-			}
-		},
-		{
 			"title": "Plot the true aim error",
 			"say": {
-				"never": "Aiming matters most of all. Drag **Drive/TrueAimErrorDegrees** onto the **Left Axis**. It is how many degrees the robot truly is from facing the goal. After the second path it should swing to about 0 *before* the shot, and the **Aims before it shoots** checkpoint wants it under **5 degrees** when the shot starts.",
-				"bit": "Drag **Drive/TrueAimErrorDegrees** onto the **Left Axis**. Under 5 degrees at the shot."
+				"never": "Drag **Drive/TrueAimErrorDegrees** onto the **Left Axis**. After the second path it should swing to about 0 before the shot. Also look at **Subsystem/Shooter/ShotCount**: it should be at least 1.",
+				"bit": "Drag **Drive/TrueAimErrorDegrees** onto the Left Axis, and look at ShotCount."
 			},
 			"close": [
 				"editor",
@@ -252,28 +242,10 @@
 			"assist": true
 		},
 		{
-			"title": "Did it shoot?",
-			"say": {
-				"never": "**Subsystem/Shooter/ShotCount** counts the shots. The **Shoots** checkpoint wants at least 1. `AimErrorAtShotDegrees` next to it is the aim error at the moment the last shot started, which is the number **Aims before it shoots** reads.",
-				"bit": "`Subsystem/Shooter/ShotCount` should reach 1. `AimErrorAtShotDegrees` is what the aim check reads."
-			},
-			"target": {
-				"pane": "scope"
-			},
-			"assist": true,
-			"waitFor": {
-				"hint": "look at ShotCount, then click I did it."
-			}
-		},
-		{
 			"title": "Reading a failure",
 			"say": {
 				"never": "If **Reaches the pickup** fails, the path or the first command is wrong (wrong path name, no `followPath`). If **Reaches the scoring spot** fails, the second path never ran or wasn't connected to the first. If **Aims before it shoots** fails, the aim command is missing, comes *after* the shot, or has no `.until(...isAimed)`, so it timed out. If **Shoots** fails, the routine ended before reaching `shoot()`. After a fix, press Start again for a clean run.",
-				"bit": "Pickup fails: first path. Scoring spot fails: second path. Aim fails: aim missing, late, or no isAimed. Shoots fails: routine never reached shoot. Fix, then Start again."
-			},
-			"assist": true,
-			"waitFor": {
-				"hint": "read the failures, then click I did it."
+				"bit": "Each failing check points at one missing or misordered command. Fix it and Start again."
 			}
 		},
 		{
@@ -284,9 +256,8 @@
 			},
 			"target": {
 				"selector": "[data-tour='lesson']"
-			},
-			"assist": true
+			}
 		}
 	],
-	"kind": "assist"
+	"kind": "mixed"
 }

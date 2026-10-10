@@ -5,10 +5,17 @@
 	"order": 514,
 	"steps": [
 		{
+			"title": "The job",
+			"say": {
+				"never": "The drivetrain already has two states, `ARCADE` and `IDLE`. You will give it a third, `AIM`: while the left bumper is held, the robot spins on the spot until it faces the goal.\n\nYou will do six things, in this order: 1) add the new state, 2) make a PID controller that turns the robot, 3) work out which way the goal is, 4) write what the `AIM` state does each loop, 5) write the yes/no `isAimed` method, 6) write the command the button starts.\n\nYou are done when the robot spins toward the goal on the left bumper. The checkpoints read your code. Tuning comes after.",
+				"bit": "Add a third state, AIM. A PID turns the robot toward the goal. Then write isAimed and the button command, and try it."
+			}
+		},
+		{
 			"title": "Open DrivetrainConstants.java",
 			"say": {
-				"never": "The drivetrain gets a third state. Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `DrivetrainConstants`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
-				"bit": "The drivetrain gets a third state. Press **Ctrl+P**, type `DrivetrainConstants` and press Enter. Quick Open finds any file by name."
+				"never": "Start with the state itself. Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `DrivetrainConstants`, then press **Enter**.",
+				"bit": "Press **Ctrl+P**, type `DrivetrainConstants` and press Enter."
 			},
 			"open": [
 				"editor"
@@ -70,6 +77,13 @@
 				"pane": "editor",
 				"selector": ".view-lines .view-line",
 				"text": "add a third state, AIM"
+			}
+		},
+		{
+			"title": "The controller and the wrap-around",
+			"say": {
+				"never": "To face the goal, the robot needs a turning command that gets smaller as it lines up. A **PID controller** makes that from the **error**: how far the robot's heading is from the direction it wants. It has three terms.\n\n- **P** pushes in proportion to the error: far off, big push.\n- **I** adds up the error that is left over time, to finish the last bit. Too much makes it wind up.\n- **D** reacts to how fast the error is changing, to calm things down before it overshoots.\n\nThe constants hold the three gains. The controller also needs two settings: **headings wrap around** (359 degrees and -1 degree are the same direction, so it should take the short way round), and a **tolerance** (how close counts as aimed). It works in radians.",
+				"bit": "A PID turns the error (how far off the heading is) into a turn command: P in proportion, I for leftover error, D to calm it. It needs wrap-around and a tolerance, in radians."
 			}
 		},
 		{
@@ -179,6 +193,13 @@
 			}
 		},
 		{
+			"title": "Which way is the goal?",
+			"say": {
+				"never": "The **error** needs two directions: where the robot faces, and where the goal is.\n\nThe direction to the goal is the arrow from the robot to the goal: take the goal's position and subtract the robot's. The angle of that arrow is the direction you want to face. `getAngleToGoal()` should return it.\n\nUse the robot's **estimated** pose, the one from the vision work. A robot can only aim from where it thinks it is, and that is why the vision work matters.",
+				"bit": "The direction to the goal is the angle of the arrow from the robot to the goal. Use the estimated pose."
+			}
+		},
+		{
 			"title": "Find it",
 			"say": {
 				"never": "Next, which way is the goal? Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `subtract the robot's position from` and press **Enter**. The editor scrolls to the right spot and highlights it.",
@@ -217,6 +238,13 @@
 			}
 		},
 		{
+			"title": "What the AIM state does",
+			"say": {
+				"never": "Each loop, the `AIM` case does two things: it asks the PID for a turn command from the robot's heading and the angle to the goal, and it hands that turn to the drive with no forward speed so the robot **spins on the spot**.\n\n**Which way is positive?** Headings count positive counter-clockwise, but the drive's turn command can point the other way, so the PID's answer has to be flipped. If the robot spins away from the goal, check this first.\n\nThe other states must also **reset** the controller. Otherwise old error and old buildup from the last aim carry into the next one.",
+				"bit": "The AIM case feeds heading and goal angle to the PID and spins the robot on the spot. The turn sign may need flipping. Other states reset the PID."
+			}
+		},
+		{
 			"title": "Find it",
 			"say": {
 				"never": "Now the state itself, in the switch. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `add a case for your new AIM state` and press **Enter**. The editor scrolls to the right spot and highlights it.",
@@ -238,14 +266,14 @@
 			"assist": true
 		},
 		{
-			"title": "The AIM case",
+			"title": "The AIM case and the resets",
 			"say": {
-				"never": "Add `case AIM:` to the switch. Set `aim_turn_ = -aim_pid_.calculate(heading, angleToGoal);` where the heading is `getPose().getRotation().getRadians()` and the angle is `getAngleToGoal().getRadians()`. The minus sign is the flip from the last guide. Then call `drive_.arcadeDrive(0.0, aim_turn_);` so the robot spins on the spot, and end the case with `break;`. Click **I did it** when the case is written.",
-				"bit": "`case AIM:` sets `aim_turn_ = -aim_pid_.calculate(heading, angleToGoal)`, calls `drive_.arcadeDrive(0.0, aim_turn_)`, then `break;`."
+				"never": "Add `case AIM:` to the switch. Set `aim_turn_ = -aim_pid_.calculate(heading, angleToGoal);` where the heading is `getPose().getRotation().getRadians()` and the angle is `getAngleToGoal().getRadians()`. The minus sign is the flip. Then call `drive_.arcadeDrive(0.0, aim_turn_);` so the robot spins on the spot, and end the case with `break;`.\n\nAlso add `aim_pid_.reset();` to the `ARCADE` and `IDLE` cases. Click **I did it** when the AIM case and both resets are written.",
+				"bit": "Write the `AIM` case: `aim_turn_` from the PID (flipped), `arcadeDrive(0.0, aim_turn_)`, `break;`. Add `aim_pid_.reset();` to ARCADE and IDLE."
 			},
 			"cardAt": "bottom-right",
 			"waitFor": {
-				"hint": "write the AIM case, then click I did it."
+				"hint": "write the AIM case and both resets, then click I did it."
 			},
 			"assist": true,
 			"target": {
@@ -255,20 +283,10 @@
 			}
 		},
 		{
-			"title": "Reset in the other states",
+			"title": "Aimed means stopped too",
 			"say": {
-				"never": "In the `ARCADE` and `IDLE` cases, add `aim_pid_.reset();` so that old error and old buildup don't carry into the next aim. Click **I did it** when you've added it to both.",
-				"bit": "Add `aim_pid_.reset();` to the ARCADE and IDLE cases."
-			},
-			"cardAt": "bottom-right",
-			"waitFor": {
-				"hint": "add aim_pid_.reset() to ARCADE and IDLE, then click I did it."
-			},
-			"assist": true,
-			"target": {
-				"pane": "editor",
-				"selector": ".view-lines .view-line",
-				"text": "add a case for your new AIM state"
+				"never": "`isAimed()` answers a yes/no question, and two things must both be true: the heading error is inside the tolerance, **and** the robot has stopped turning. A robot that is swinging through the goal is not aimed, even for a moment.\n\nThe tolerance comes from the constants, and the heading error is in radians, so convert before comparing it.\n\nThe command at the end is the same shape as the shoot command: it sets the wanted state to `AIM` when the button goes down and back to `ARCADE` when it is released.",
+				"bit": "isAimed needs both a small heading error and a stopped robot. The command sets AIM on press and ARCADE on release."
 			}
 		},
 		{
@@ -420,17 +438,16 @@
 			"assist": true
 		},
 		{
-			"title": "Try it",
+			"title": "Try it and tune it",
 			"say": {
-				"never": "Hold the **left bumper** (**E** on the keyboard). The robot should spin toward the goal, which starts about 45 degrees to its left. It probably won't stop in the right place yet, and that's fine: next you'll tune it. If it spins the wrong way, check the minus sign. If nothing happens, check the binding and that the state is `AIM` in AdvantageScope.",
-				"bit": "Hold **E** (left bumper). The robot should turn toward the goal, about 45 degrees to its left. Tuning comes next."
+				"never": "Hold the **left bumper** (**E** on the keyboard). The robot should spin toward the goal, which starts about 45 degrees to its left. It probably won't stop in the right place yet, and that's fine.\n\nIf it spins the wrong way, check the sign flip. If nothing happens, check the binding and that the state is `AIM` in AdvantageScope.\n\nThen tune **by hand**, one gain at a time. Start with only P: raise it until the robot turns briskly, lower it if it swings back and forth. If it overshoots, add a little D. Leave I at zero unless it stops just short of the goal. Change one number, Start again, and try again.",
+				"bit": "Hold the left bumper. It should spin toward the goal. If it spins the wrong way, flip the sign. Tune by hand: P first, a little D to stop overshoot, I last."
 			},
 			"target": {
 				"selector": "[data-tour='mode']"
 			},
-			"cardAt": "top-right",
-			"assist": true
+			"cardAt": "top-right"
 		}
 	],
-	"kind": "assist"
+	"kind": "mixed"
 }
