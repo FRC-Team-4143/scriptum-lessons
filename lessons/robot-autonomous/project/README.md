@@ -59,40 +59,61 @@ Go slower on anything that is new. The stretch ideas at the end are not expected
 
 **Part 1: draw the paths (Choreo pane)**
 
-1. **Make a path named `ToPickup`.** Press **+** in the paths list and rename it. The spelling and the
+1. **Set up the robot first.** In the Choreo pane press the menu (the three-line icon at the top left,
+   next to the Choreo title), then **Document Settings**, then the **Robot Config** tab. Slide **Drive
+   Type** from Swerve to **Differential**, then type these numbers (Choreo shows its own defaults, not
+   this project's):
+
+   | Setting | Value |
+   | --- | --- |
+   | Drive Type | Differential |
+   | Trackwidth | 24 in |
+   | Mass | 50 kg |
+   | MOI | 7.5 kg m^2 |
+   | Bumpers (front, back, sides) | 17 in |
+   | Wheel Radius | 3 in |
+   | Motor Rev / Wheel Rev | 8.45 |
+   | Motor Max Speed | 6000 RPM |
+   | Motor Max Torque | 1.0 N*m |
+   | Wheel COF | 1.5 |
+
+   If you skip this, Choreo makes Swerve paths and the Verify check **Two paths drawn** says the paths were
+   not made for a Differential drivetrain (the `paths-drawn` check).
+
+2. **Make a path named `ToPickup`.** Press **+** in the paths list and rename it. The spelling and the
    capital letters must be exact, because your Java loads the path by that name.
-2. **Give it three waypoints:** a **pose** waypoint on **Start** (x 1.5, y 1.5, heading 0 degrees), a
+3. **Give it three waypoints:** a **pose** waypoint on **Start** (x 1.5, y 1.5, heading 0 degrees), a
    **translation** waypoint anywhere between (x 3.5, y 2.0 works), and a **pose** waypoint on **Pickup**
    (x 5.5, y 2.5, heading 0 degrees). Click a waypoint in the list and type its numbers instead of
    dragging it by eye.
-3. **Optional: add a Max Velocity** constraint of about 1.8 m/s, as you did in the Choreo lesson. A gentler
+4. **Optional: add a Max Velocity** constraint of about 1.8 m/s, as you did in the Choreo lesson. A gentler
    robot is easier for the follower to keep on the line.
-4. **Press Generate.** The path is only usable once Choreo has solved it.
-5. **Make a second path named `ToScore`.** It must start **where ToPickup ended**: a pose waypoint on
+5. **Press Generate.** The path is only usable once Choreo has solved it.
+6. **Make a second path named `ToScore`.** It must start **where ToPickup ended**: a pose waypoint on
    Pickup (x 5.5, y 2.5, heading 0), a translation waypoint (x 6.0, y 3.8 works) and a pose waypoint on
    **ScoreSpot** (x 6.5, y 5.0, heading 90 degrees). Generate it too.
 
 **Part 2: write the sequence (`Autos.java`)**
 
-6. **TODO 1: load both paths** by name with `loadTrajectory("ToPickup")` and `loadTrajectory("ToScore")`.
-7. **TODO 2: add the commands**, in this order, inside `addCommands(...)`:
+7. **TODO 1: load both paths** by name with `loadTrajectory("ToPickup")` and `loadTrajectory("ToScore")`.
+8. **TODO 2: add the commands**, in this order, inside `addCommands(...)`:
    1. follow the first path: `DrivetrainCommands.followPath(getTrajectory("ToPickup"))`
    2. wait half a second, standing in for picking up the game piece: `Commands.waitSeconds(0.5)`
    3. follow the second path
    4. aim at the goal: `DrivetrainCommands.aim()`, ended with `.until(...)` the drivetrain's `isAimed`
       method, and `.withTimeout(3.0)` so a robot that cannot aim cannot hold up the routine
    5. shoot: `ShooterCommands.shoot()` with a `.withTimeout(2.0)`
-8. **Add the imports** for the classes you used (hover over a red name and use the quick fix).
+9. **Add the imports** for the classes you used (hover over a red name and use the quick fix).
 
 **Part 3: run it**
 
-9. Press **Start** and wait for **Running**. In Elastic, add a **ComboBox Chooser** widget for
+10. Press **Start** and wait for **Running**. In Elastic, add a **ComboBox Chooser** widget for
    **Auto Choices** (under SmartDashboard) and choose **Pickup And Score** as the
    autonomous routine (the default, Do Nothing, leaves the robot still). Then in the Driver Station pick **Auto** and press **Enable**. Keep your hands off the keys: the routine drives
    itself. (To practice by hand in **Teleop**, drive with **W/S** and turn with **A/D**, the left stick;
    the left bumper, **E**, aims at the goal, and the right bumper, **U**, shoots.)
-10. **Watch it in AdvantageScope** (below). Fix what looks wrong, press Start again, and run again.
-11. **Click Verify.**
+11. **Watch it in AdvantageScope** (below). Fix what looks wrong, press Start again, and run again.
+12. **Click Verify.**
 
 ## Watching it in AdvantageScope
 

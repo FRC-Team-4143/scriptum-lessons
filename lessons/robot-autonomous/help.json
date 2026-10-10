@@ -70,8 +70,8 @@
 			},
 			"hints": [
 				{
-					"never": "Open the Choreo pane and look at the paths list. You need two paths, and each one needs a start, a point in between and an end.",
-					"bit": "Two paths, each with at least three waypoints."
+					"never": "Before you draw, set the robot up: in the Choreo pane open the menu (three lines, top left), then Document Settings, then the Robot Config tab, and slide Drive Type from Swerve to Differential. If the paths were made as Swerve, change it and Generate them again.",
+					"bit": "Menu, Document Settings, Robot Config: Drive Type must be Differential."
 				},
 				{
 					"never": "If a path has only two waypoints, add a Translation Waypoint between them. A path that was never generated has no schedule yet.",
@@ -85,7 +85,7 @@
 					"never": "If Generate fails, a limit or waypoint is impossible (for example a very low Max Velocity, or a waypoint outside the field). Remove the limit and try again. The Choreo lesson's \"When a path won't generate\" guide explains why.",
 					"bit": "Generate fails: loosen the Max Velocity or move the waypoint."
 				},
-				"Both paths drawn, three waypoints each (start, middle, end), then Generate each one before you Verify."
+				"Drive Type Differential, both paths drawn with three waypoints each (start, middle, end), then Generate each one before you Verify."
 			]
 		},
 		"path-names": {
