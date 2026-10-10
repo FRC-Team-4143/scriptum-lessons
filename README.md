@@ -134,9 +134,12 @@ has to be made in every module (`lessons/robot-*/project/`):
 - `robot-computer-vision` (Computer Vision, about 3 hours) starts from the finished State Machines robot minus
   the aim state. The pose estimator moves out of the drive mech into a provided `LocalizationSubsystem`
   (`DrivetrainSubsystem.getPose()` and `resetPose(Pose2d)` route to it). A provided `SimulationSubsystem`
-  (registered only in simulation) owns MWLib's `MwVisionSim` with a front and a back camera on the 2026
-  AprilTag layout, pointed from the TRUE pose (`getTruePose()`), and a provided `vision/TagVision` turns
-  each camera's multi-tag pose into a filtered `VisionMeasurement`. The student's job in
+  (registered only in simulation) sets up MWLib's `MwVisionSim` through `ProxyServerThread` with a front
+  and a back camera on the 2026 AprilTag layout, pointed from the TRUE pose (`getTruePose()`), exactly as
+  the competition robot does. The simulated cameras send tag solutions (pose, timestamp, tag ids) through
+  the proxy server like real coprocessors; the provided parts of `LocalizationSubsystem.updateLogic()` read
+  `ProxyServerThread.getInstance().getLatestTagSolutions()`, skip solutions already used, drop them while
+  spinning fast, and keep only multi-tag ones on the field. The student's job in
   `LocalizationSubsystem.updateLogic()` is the `addVisionMeasurement(...)` call and its standard
   deviations. It needs the PhotonLib vendordep (`vendordeps/photonlib.json`); PhotonLib publishes no
   `linuxarm64` natives, so the vision simulator only runs on x86-64. The `FieldTargets` poses `START` and

@@ -7,7 +7,7 @@
 		{
 			"title": "Standard deviation: how far off?",
 			"say": {
-				"never": "A standard deviation says how far off a number could be. Smaller means the estimator trusts it more. The estimator holds one for the wheels and takes one with every camera measurement, then leans toward whichever is more trustworthy. The two vision numbers are both yours to choose.",
+				"never": "A standard deviation says how far off a number could be. Smaller means the estimator trusts it more. The estimator holds one for the wheels and takes one with every camera solution, then leans toward whichever is more trustworthy. The two vision numbers are both yours to choose.",
 				"bit": "Small standard deviation = trust it. Large = barely listen. You choose the camera's."
 			}
 		},
@@ -28,14 +28,14 @@
 		{
 			"title": "Too small: every picture is believed",
 			"say": {
-				"never": "A tiny number says \"the camera is perfect\". Then each noisy picture drags the estimate straight to it, and the estimate shakes. That is why the provided helper only passes on the answers made from several tags at once: single-tag answers are too noisy to believe. Watch the estimate on the 2D Field: if it shivers, trust the camera a little less.",
+				"never": "A tiny number says \"the camera is perfect\". Then each noisy picture drags the estimate straight to it, and the estimate shakes. That is why the code only keeps the tag solutions made from at least two tags: single-tag answers are too noisy to believe. Watch the estimate on the 2D Field: if it shivers, trust the camera a little less.",
 				"bit": "Too small and every noisy picture yanks the estimate around. A shaking estimate means trust less."
 			}
 		},
 		{
 			"title": "Use the picture's time, not now",
 			"say": {
-				"never": "A camera picture is a little old when it arrives. If you tell the estimator it was taken just now (`Timer.getFPGATimestamp()`), it puts the old position in the present, and the estimate lags behind the truth by about 0.08 to 0.12 meters while the robot moves. Using `measurement.getTimestamp()` lets the estimator slot the picture in at the right moment.",
+				"never": "A camera picture is a little old when it arrives. If you tell the estimator it was taken just now (`Timer.getFPGATimestamp()`), it puts the old position in the present, and the estimate lags behind the truth by about 0.08 to 0.12 meters while the robot moves. Using `solution.timestamp.getSeconds()` lets the estimator slot the picture in at the right moment.",
 				"bit": "Passing \"now\" instead of the picture's time makes the estimate lag about 0.08 to 0.12 m while moving."
 			}
 		},
@@ -47,10 +47,10 @@
 			}
 		},
 		{
-			"title": "What the helper already does",
+			"title": "What the code already does",
 			"say": {
-				"never": "`TagVision` does some of the safety for you. There are two cameras (front and back). It only passes on multi-tag results. It also drops the camera answers while the robot spins faster than about 180 degrees per second, because a spinning robot blurs the picture. If your estimate is wrong only during fast spins, that is why.",
-				"bit": "Two cameras, multi-tag only, and answers dropped while spinning faster than about 180 deg/s."
+				"never": "`LocalizationSubsystem` does some of the safety for you before your call. There are two cameras (front and back), and they send their tag solutions through MW-Lib's proxy server. The proxy server hands back its last 20 solutions every loop, so the code skips ones it already used. It only keeps solutions that used at least two tags (multi-tag, the accurate kind). It also drops them while the robot spins faster than about 180 degrees per second, because a spinning robot blurs the picture. If your estimate is wrong only during fast spins, that is why.",
+				"bit": "Two cameras, repeats skipped, at least two tags, and solutions dropped while spinning faster than about 180 deg/s."
 			}
 		},
 		{

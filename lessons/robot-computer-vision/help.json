@@ -1,7 +1,7 @@
 {
 	"about": {
-		"never": "This lesson teaches the robot to see. First you give the camera measurements to the pose estimator and choose how much to trust them, so the robot always knows where it is. Then you use that position to turn and face the goal with a PID. The lesson's README lists each job.",
-		"bit": "Feed the camera measurements to the pose estimator (and pick the trust numbers), then build an AIM state that turns the robot to face the goal and tune its PID."
+		"never": "This lesson teaches the robot to see. First you give the camera tag solutions to the pose estimator and choose how much to trust them, so the robot always knows where it is. Then you use that position to turn and face the goal with a PID. The lesson's README lists each job.",
+		"bit": "Feed the camera tag solutions to the pose estimator (and pick the trust numbers), then build an AIM state that turns the robot to face the goal and tune its PID."
 	},
 	"plan": [
 		{
@@ -11,7 +11,7 @@
 				"robot-computer-vision-add-vision"
 			],
 			"intro": {
-				"never": "First you hand the camera measurements to the pose estimator.",
+				"never": "First you hand the camera tag solutions to the pose estimator.",
 				"bit": "Add the vision measurement call."
 			}
 		},
@@ -60,8 +60,8 @@
 	"checkpoints": {
 		"vision-added": {
 			"why": {
-				"never": "The pose estimator only blends the cameras in when you give it each measurement, with the time of the picture and how much to trust it.",
-				"bit": "The estimator ignores the cameras until you pass each measurement with its time and standard deviations."
+				"never": "The pose estimator only blends the cameras in when you give it each tag solution, with the time of the picture and how much to trust it.",
+				"bit": "The estimator ignores the cameras until you pass each solution with its time and standard deviations."
 			},
 			"guide": "robot-computer-vision-add-vision",
 			"concept": {
@@ -70,22 +70,22 @@
 			},
 			"hints": [
 				{
-					"never": "Open LocalizationSubsystem.java and find the TODO inside the loop over `measurements`. What one call goes there?",
+					"never": "Open LocalizationSubsystem.java and find the TODO inside the loop over `solutions`. What one call goes there?",
 					"bit": "Find the TODO in `updateLogic()`. One call: `pose_estimator_.addVisionMeasurement(...)`."
 				},
 				{
-					"never": "The call takes three things in order: the pose the camera saw, when the picture was taken, and how far off it could be. The loop variable `measurement` knows the first two.",
-					"bit": "Arguments: `measurement.getPose()`, `measurement.getTimestamp()`, then a `VecBuilder.fill(...)`."
+					"never": "The call takes three things in order: the pose the camera saw, when the picture was taken, and how far off it could be. The loop variable `solution` knows the first two.",
+					"bit": "Arguments: `solution.pose`, `solution.timestamp.getSeconds()`, then a `VecBuilder.fill(...)`."
 				},
 				{
-					"never": "The time must be the picture's time, `measurement.getTimestamp()`, not the time now. The last argument is `VecBuilder.fill(x meters, y meters, heading radians)` and should use the two numbers in LocalizationConstants.",
-					"bit": "Use `getTimestamp()` (not the time now) and `VecBuilder.fill` with `VISION_XY_STD_METERS` twice and `VISION_HEADING_STD_RADIANS`."
+					"never": "The time must be the picture's time, `solution.timestamp.getSeconds()`, not the time now. The last argument is `VecBuilder.fill(x meters, y meters, heading radians)` and should use the two numbers in LocalizationConstants.",
+					"bit": "Use `solution.timestamp.getSeconds()` (not the time now) and `VecBuilder.fill` with `VISION_XY_STD_METERS` twice and `VISION_HEADING_STD_RADIANS`."
 				},
 				{
-					"never": "Common slip: the call is outside the `for` loop, so `measurement` does not exist, or it is still commented out. Put it inside the loop, under the TODO comment, and end it with a semicolon.",
+					"never": "Common slip: the call is outside the `for` loop, so `solution` does not exist, or it is still commented out. Put it inside the loop, under the TODO comment, and end it with a semicolon.",
 					"bit": "Put the call inside the loop and end it with `;`. A commented line does not count."
 				},
-				"`pose_estimator_.addVisionMeasurement(measurement.getPose(), measurement.getTimestamp(), VecBuilder.fill(LocalizationConstants.VISION_XY_STD_METERS, LocalizationConstants.VISION_XY_STD_METERS, LocalizationConstants.VISION_HEADING_STD_RADIANS));`"
+				"`pose_estimator_.addVisionMeasurement(solution.pose, solution.timestamp.getSeconds(), VecBuilder.fill(LocalizationConstants.VISION_XY_STD_METERS, LocalizationConstants.VISION_XY_STD_METERS, LocalizationConstants.VISION_HEADING_STD_RADIANS));`"
 			]
 		},
 		"estimate-accurate": {
@@ -112,8 +112,8 @@
 					"bit": "5.0 means ignore the camera. Both constants need to be much smaller, around 0.3."
 				},
 				{
-					"never": "If the estimate lags behind while you drive, you probably passed the time now instead of `measurement.getTimestamp()`. If the position is fine but the heading is 2 to 7 degrees off, the heading number is too large and the camera's heading is being ignored.",
-					"bit": "Lagging while moving: use `measurement.getTimestamp()`. Heading a few degrees off: make the heading number small."
+					"never": "If the estimate lags behind while you drive, you probably passed the time now instead of `solution.timestamp.getSeconds()`. If the position is fine but the heading is 2 to 7 degrees off, the heading number is too large and the camera's heading is being ignored.",
+					"bit": "Lagging while moving: use `solution.timestamp.getSeconds()`. Heading a few degrees off: make the heading number small."
 				},
 				"In `LocalizationConstants`: `VISION_XY_STD_METERS = 0.3` and `VISION_HEADING_STD_RADIANS = 0.3`. Press Start, drive more than 5 m, stop, wait 2 s, Verify."
 			]

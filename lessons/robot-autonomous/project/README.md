@@ -11,7 +11,8 @@ and tuned in the Computer Vision lesson, and **shoots**.
 ## Before you start
 
 - You finished **Computer Vision**. This lesson reuses your `aim()` command and your `isAimed()` method,
-  and the robot's position estimate, which now comes from the AprilTag cameras as well as the wheels.
+  and the robot's position estimate, which now comes from the AprilTag cameras as well as the wheels. In
+  the simulator the cameras send their tag solutions through MW-Lib's proxy server, like real camera computers.
   They must work (hold the left bumper, **E** on the keyboard, in Teleop to test the aim).
 - You finished the **Choreo** lesson. It teaches the Choreo pane: waypoints, constraints and Generate.
   This lesson only says which waypoints to draw.

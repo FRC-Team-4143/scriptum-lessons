@@ -12,7 +12,7 @@ Companion docs page: [Computer Vision](https://docs.marswars.org/docs/software/t
 
 ## What you will build
 
-1. **Vision.** Give each camera measurement to the pose estimator, and choose how much to trust the
+1. **Vision.** Give each camera tag solution to the pose estimator, and choose how much to trust the
    cameras. When it works, your estimate stays within 5 centimeters and 1 degree of where the robot
    really is, even after a long drive.
 2. **Aiming.** Add an `AIM` state to the drivetrain. While the driver holds the left bumper, the robot
@@ -29,26 +29,31 @@ state, and the PID tuning from **Control Theory**.
 
 - **Localization** is just "working out where the robot is on the field". The `LocalizationSubsystem`
   does it. It adds up the wheel readings every loop, and blends in the camera answers.
-- A **vision measurement** is one camera answer: "from what I can see, the robot is *here*, and I took
-  this picture *then*". It is provided for you as a `VisionMeasurement`. The **pose estimator** (a
-  WPILib class) blends many of them with the wheels. Each measurement comes with a **standard
-  deviation**: how far off it could be. Small means "trust it", big means "barely listen".
+- A **tag solution** is one camera answer: "from the AprilTags I can see, the robot is *here*, and I took
+  this picture *then*". It has a pose, a timestamp and the ids of the tags it was worked out from. Two or
+  more tags means a **multi-tag** solution, which is the accurate kind. Real robots get tag solutions from
+  camera computers over the network, into MW-Lib's `ProxyServerThread`. A solution you give to the
+  **pose estimator** (a WPILib class) becomes a **vision measurement**, and it blends many of them with
+  the wheels. Each one comes with a **standard deviation**: how far off it could be. Small means "trust it", big means "barely listen".
 
 ## Where the code lives
 
 Everything is under `src/main/java/frc/robot/`:
 
 - `subsystems/localization/LocalizationSubsystem.java`: owns the pose estimator. It adds up the wheel
-  readings every loop and passes along each camera measurement. **This is where you add the vision
-  measurement** (look for `TODO`).
+  readings every loop and reads the camera tag solutions from the proxy server. It skips ones it already
+  used, drops them while the robot spins fast, and keeps only multi-tag ones on the field. **This is where
+  you add the vision measurement** (look for `TODO`).
 - `subsystems/localization/LocalizationConstants.java`: how much to trust the wheels and the cameras.
   **You choose the vision numbers.**
 - `subsystems/drive/DrivetrainSubsystem.java`, `DrivetrainConstants.java`, `DrivetrainCommands.java`:
   **the aim state, its PID and its command** (look for `TODO (aim`).
-- `subsystems/simulation/SimulationSubsystem.java`: the simulated cameras. Provided; it points them from
-  the simulator's TRUE position, not from your estimate.
-- `vision/`: `TagVision` hands you clean `VisionMeasurement`s (a pose, the time of the picture and how
-  many tags were seen). Provided.
+- `subsystems/simulation/SimulationSubsystem.java`: the simulated cameras. Provided; it plays the part of
+  the camera computers and sends their tag solutions into MW-Lib's proxy server, the way a real robot's
+  cameras do. It points the cameras from the simulator's TRUE position, not from your estimate. (An alert
+  saying the proxy server has no clients is normal in the simulator.)
+- `vision/VisionConstants.java`: the field layout, the camera mounts and the limits for dropping a
+  solution. Provided.
 - `FieldTargets.java`: `START` and `GOAL` on the field.
 - `OI.java`: the left bumper (**E** on the keyboard) already starts `DrivetrainCommands.aim()`.
 
@@ -77,12 +82,13 @@ Go slower on anything that is new. The stretch below is optional.
 
 **Part 1: vision**
 
-1. **Add the call.** In `LocalizationSubsystem.updateLogic()`, inside the loop, give each measurement
+1. **Add the call.** In `LocalizationSubsystem.updateLogic()`, inside the loop, give each solution
    to the pose estimator with `pose_estimator_.addVisionMeasurement(...)`. It takes the pose the
    camera saw, **the time the picture was taken** (not the time now) and the standard deviations.
 2. **Choose the trust.** The starter `VISION_XY_STD_METERS` and `VISION_HEADING_STD_RADIANS` are both
    5.0, which means "ignore the cameras". Pick better numbers in `LocalizationConstants.java`.
-3. **Look at it.** Start, enable Teleop, and drive with **W/A/S/D**. In AdvantageScope plot
+3. **Look at it.** Start, enable Teleop, and drive with **W/A/S/D**. In AdvantageScope look at the
+   solutions in `Proxy/TagSolutions`, plot
    `Subsystem/Localization/PositionErrorMeters`, and put `Subsystem/Localization/Pose` and
    `Drive/TruePose` on the 2D Field.
 4. **Drive more than 5 meters, stop, wait 2 seconds**, then click **Verify**.
@@ -105,8 +111,8 @@ Go slower on anything that is new. The stretch below is optional.
 
 ## How each checkpoint is checked
 
-- **Camera measurements added.** Reads your `LocalizationSubsystem.java`. It looks for an
-  `addVisionMeasurement(...)` call that passes the measurement's pose, the measurement's own timestamp
+- **Camera tag solutions added.** Reads your `LocalizationSubsystem.java`. It looks for an
+  `addVisionMeasurement(...)` call that passes the solution's pose, the solution's own timestamp (`solution.timestamp.getSeconds()`)
   and the standard deviations.
 - **Estimate within 5 cm and 1 degree.** Needs a simulator running. The check watches the robot and only
   judges after you have **driven more than 5 meters in total and then sat still for 1.5 seconds**. It then
