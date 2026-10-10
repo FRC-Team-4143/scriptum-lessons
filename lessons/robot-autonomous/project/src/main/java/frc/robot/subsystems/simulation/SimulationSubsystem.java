@@ -13,10 +13,10 @@ import java.util.List;
  * Simulates the robot's cameras. Provided for you, no need to edit. It is only registered in
  * simulation (see RobotContainer). On a real robot the cameras live on a coprocessor that works out
  * the robot's pose from the AprilTags it sees and sends it to the robot over the network, into
- * MW-Lib's ProxyServerThread. Here the simulator plays the coprocessor's part: each loop it looks at
- * where the simulated robot REALLY is, works out what each camera would see from there, and puts the
- * tag solutions into the same ProxyServerThread. LocalizationSubsystem reads them back out, exactly
- * as it would on the real robot.
+ * MW-Lib's ProxyServerThread. Here the simulator plays the coprocessor's part: each loop it looks
+ * at where the simulated robot REALLY is, works out what each camera would see from there, and puts
+ * the tag solutions into the same ProxyServerThread. LocalizationSubsystem reads them back out,
+ * exactly as it would on the real robot.
  */
 public class SimulationSubsystem extends MwSubsystem<SimulationStates, SimulationConstants> {
   private static SimulationSubsystem instance_ = null;
