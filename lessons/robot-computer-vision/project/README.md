@@ -60,6 +60,8 @@ Everything is under `src/main/java/frc/robot/`:
 In AdvantageScope, `Drive/TruePose` is where the simulated robot really is and
 `Subsystem/Localization/Pose` is what your code thinks. `Subsystem/Localization/PositionErrorMeters` and
 `HeadingErrorDegrees` are the difference.
+`Subsystem/Localization/VisibleTags` is the AprilTags the cameras are using right now: drag it onto the
+field's Vision Targets to see them.
 
 ## Session plan (about 3 hours)
 

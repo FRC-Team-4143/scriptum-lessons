@@ -275,6 +275,28 @@
 			"assist": true
 		},
 		{
+			"title": "Optional: see the tags the cameras use",
+			"say": {
+				"never": "If you like, see which AprilTags the cameras are using right now. `LocalizationSubsystem` logs them as **Subsystem/Localization/VisibleTags**. In **AdvantageScope**, open the **3D Field** tab (or the **2D Field**), search for `VisibleTags` and drag it onto **Vision Targets**. The tags light up while a camera sees them. Drive around and watch them change. Click **I did it** when you have looked, or to skip this.",
+				"bit": "Optional: drag **Subsystem/Localization/VisibleTags** onto **Vision Targets** on the field in AdvantageScope to see which tags the cameras use. Click I did it."
+			},
+			"open": [
+				"scope"
+			],
+			"close": [
+				"editor",
+				"preview",
+				"elastic"
+			],
+			"target": {
+				"pane": "scope"
+			},
+			"waitFor": {
+				"hint": "look at Subsystem/Localization/VisibleTags on the field, then click I did it."
+			},
+			"assist": true
+		},
+		{
 			"title": "Plot PositionErrorMeters",
 			"say": {
 				"never": "This is how far your estimate is from the real position, in meters. The closer to zero, the better. Look at **AdvantageScope**, the graphing tool. Type `PositionErrorMeters` in its search box. Find **Subsystem/Localization/PositionErrorMeters** in the list and drag it with your mouse onto the **Left Axis** of the graph.",
