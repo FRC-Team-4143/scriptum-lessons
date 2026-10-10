@@ -7,15 +7,15 @@
 		{
 			"title": "The job",
 			"say": {
-				"never": "`LocalizationSubsystem` already asks MW-Lib's proxy server for the camera **tag solutions** (a tag solution is the robot's position worked out from the AprilTags a camera can see) and loops over the new, sensible ones. Nothing hands them to the pose estimator yet, so the estimate is just odometry, which slowly drifts.\n\nYou will do three things: 1) add one call that gives each solution to the estimator, 2) choose how much to trust the cameras, 3) drive around in the simulator and watch the estimate lock onto the real position.\n\nYou are done when the estimate settles to a few centimeters of the true position after you stop.",
+				"never": "`LocalizationSubsystem` already asks MW-Lib's proxy server for the camera **tag solutions** (a tag solution is the robot's position worked out from the AprilTags a camera can see) and loops over the new, sensible ones (it drops the wild ones). Nothing hands them to the pose estimator yet, so the estimate is just odometry, which slowly drifts.\n\nYou will do three things: 1) add one call that gives each solution to the estimator, 2) choose how much to trust the cameras, 3) drive around in the simulator and watch the estimate lock onto the real position.\n\nYou are done when the estimate stays within 6 centimeters and 1 degree of the true position after you stop.",
 				"bit": "The tag solutions are collected but never given to the estimator. You will add one call, choose the trust, then watch the error in AdvantageScope shrink."
 			}
 		},
 		{
 			"title": "What the call takes",
 			"say": {
-				"never": "`addVisionMeasurement(...)` takes three things, in this order.\n\n1) **The pose** the camera worked out.\n2) **The time the picture was taken**, not the time now. A camera picture is a little old by the time it arrives, so the estimator needs to know how old and rewinds to put it in the right place. Using the time now would pin the picture to the wrong moment.\n3) **How far off it could be**: a number of meters for x, another for y, and a number of radians for the heading. Small numbers mean \"I trust this camera\", big numbers mean \"be careful\".\n\nThe loop variable `solution` already holds the pose and the time.",
-				"bit": "The call takes the camera's pose, when the picture was TAKEN (not now), and how far off it could be (x and y meters, heading radians)."
+				"never": "`addVisionMeasurement(...)` takes three things, in this order.\n\n1) **The pose** the camera worked out.\n2) **The time the picture was taken**, not the time now. A camera picture is a little old by the time it arrives, so the estimator needs to know how old and rewinds to put it in the right place. Using the time now would pin the picture to the wrong moment.\n3) **How far off it could be**: a number of meters for x, another for y, and a number of radians for the heading. Small numbers mean \"I trust this camera\", big numbers mean \"be careful\". A far tag is less sure, so these grow with the tag's distance squared.\n\nThe loop variable `solution` already holds the pose and the time, and `tag_distance` holds the distance in meters to the closest tag it saw.",
+				"bit": "The call takes the camera's pose, when the picture was TAKEN (not now), and how far off it could be (x and y meters, heading radians, bigger for far tags)."
 			}
 		},
 		{
@@ -72,8 +72,8 @@
 		{
 			"title": "Write the call",
 			"say": {
-				"never": "Under the comment write one call on `pose_estimator_` that passes three things, separated by commas:\n- `solution.pose`, the pose (a field, no brackets).\n- `solution.timestamp.getSeconds()`, the time of the picture in seconds.\n- `VecBuilder.fill(...)` holding three numbers: `LocalizationConstants.VISION_XY_STD_METERS` twice (x and y), then `LocalizationConstants.VISION_HEADING_STD_RADIANS`.\n\nClose both brackets and end with a semicolon. The editor's pop-up lists what goes in. Click **I did it** when the line is written.",
-				"bit": "Call `pose_estimator_.addVisionMeasurement(` with `solution.pose`, `solution.timestamp.getSeconds()` and `VecBuilder.fill(XY, XY, HEADING)` from `LocalizationConstants`. End with `;`."
+				"never": "Under the comment write one call on `pose_estimator_` that passes three things, separated by commas:\n- `solution.pose`, the pose (a field, no brackets).\n- `solution.timestamp.getSeconds()`, the time of the picture in seconds.\n- `VecBuilder.fill(...)` holding three numbers: `LocalizationConstants.VISION_XY_STD_METERS * tag_distance * tag_distance` twice (x and y), then `LocalizationConstants.VISION_HEADING_STD_RADIANS * tag_distance * tag_distance`.\n\nClose both brackets and end with a semicolon. The editor's pop-up lists what goes in. Click **I did it** when the line is written.",
+				"bit": "Call `pose_estimator_.addVisionMeasurement(` with `solution.pose`, `solution.timestamp.getSeconds()` and `VecBuilder.fill(...)` using the `LocalizationConstants` numbers times `tag_distance * tag_distance`. End with `;`."
 			},
 			"target": {
 				"pane": "editor",
@@ -89,7 +89,7 @@
 		{
 			"title": "How much to trust the cameras",
 			"say": {
-				"never": "The third thing you pass is a **standard deviation**: how far off the camera could be. The estimator blends the cameras with odometry using it.\n\nThe two vision numbers in `LocalizationConstants` start very large, which says \"the camera could be 5 meters off\", so the estimator ignores it completely. Make them smaller and it starts to follow the cameras.\n\nToo large and the cameras are ignored. Too small and a bad camera reading is believed, so the estimate **jumps** around. The sweet spot is a number that matches how good your cameras really are: pick one, test it, and adjust.",
+				"never": "The third thing you pass is a **standard deviation**: how far off the camera could be. The estimator blends the cameras with odometry using it.\n\nThe two vision numbers in `LocalizationConstants` start very large, which says \"the camera could be 5 meters off at 1 meter\", so the estimator hardly listens. Make them smaller and it starts to follow the cameras.\n\nToo large and the cameras are ignored. Too small and a bad camera reading is believed, so the estimate **jumps** around. The sweet spot is a number that matches how good your cameras really are: pick one, test it, and adjust.",
 				"bit": "The vision numbers start huge, so the cameras are ignored. Too small and bad readings make the estimate jump. Pick a sensible number and test it."
 			}
 		},
@@ -147,8 +147,8 @@
 		{
 			"title": "Pick better numbers",
 			"say": {
-				"never": "Both numbers start at 5.0, which says \"the camera could be 5 meters off\", so the estimate ignores it. Try `0.3` for both. Click **I did it** when you have changed them.",
-				"bit": "Both start at 5.0 (ignore the camera). Try 0.3 for both."
+				"never": "Both numbers start at 5.0, which says \"the camera could be 5 meters off\", so the estimate hardly listens. Try `0.2` for both. Click **I did it** when you have changed them.",
+				"bit": "Both start at 5.0 (ignore the camera). Try 0.2 for both."
 			},
 			"target": {
 				"pane": "editor",
@@ -206,7 +206,7 @@
 		{
 			"title": "What to watch",
 			"say": {
-				"never": "In the simulator there are no real cameras. A provided piece plays the camera computers and sends tag solutions into MW-Lib's **proxy server**, the same place real camera computers send theirs. In **AdvantageScope** you will look at three things:\n\n- **Proxy/TagSolutions**: what the proxy server holds. Each solution has a pose, the time of its picture, the camera and the ids of the tags it used. Two or more ids is a multi-tag solution, the accurate kind.\n- **PositionErrorMeters**: how far your estimate is from the real position, in meters. Closer to zero is better.\n- **The 2D Field**: your estimate (**Localization/Pose**) next to where the robot really is (**Drive/TruePose**). When vision works the two robots sit on top of each other.",
+				"never": "In the simulator there are no real cameras. A provided piece plays the camera computers and sends tag solutions into MW-Lib's **proxy server**, the same place real camera computers send theirs. In **AdvantageScope** you will look at three things:\n\n- **Proxy/TagSolutions**: what the proxy server holds. Each solution has a pose, the time of its picture, the camera and the ids of the tags the camera saw. The pose comes from just the best one of them, and it gets worse the farther that tag is.\n- **PositionErrorMeters**: how far your estimate is from the real position, in meters. Closer to zero is better.\n- **The 2D Field**: your estimate (**Localization/Pose**) next to where the robot really is (**Drive/TruePose**). When vision works the two robots sit on top of each other.",
 				"bit": "Look at three things in AdvantageScope: the tag solutions, PositionErrorMeters (closer to 0 is better), and the estimated robot against the true one on the 2D Field."
 			}
 		},
@@ -354,8 +354,8 @@
 		{
 			"title": "Drive more than 5 meters",
 			"say": {
-				"never": "Drive around with **W**, **A**, **S** and **D**, for more than 5 meters in total. Then let go and wait 2 seconds without touching anything. The check only judges the estimate after the robot has sat still, because a moving robot is always a little behind. Click **I did it** after you have waited.",
-				"bit": "Drive more than 5 m in total, stop, and wait 2 seconds. Click I did it."
+				"never": "Drive around with **W**, **A**, **S** and **D**, for more than 5 meters in total, with at least a quarter turn in it (turning is when the wheels drift the most). Then let go and wait 2 seconds without touching anything. The check only judges the estimate after the robot has sat still, because a moving robot is always a little behind. Click **I did it** after you have waited.",
+				"bit": "Drive more than 5 m with a turn, stop, and wait 2 seconds. Click I did it."
 			},
 			"target": {
 				"selector": "[data-tour='mode']"
@@ -363,14 +363,14 @@
 			"cardAt": "top-right",
 			"assist": true,
 			"waitFor": {
-				"hint": "drive more than 5 meters, stop and wait 2 seconds, then click I did it."
+				"hint": "drive more than 5 meters with a turn, stop and wait 2 seconds, then click I did it."
 			}
 		},
 		{
 			"title": "What good looks like",
 			"say": {
-				"never": "Look at the error plot. While you drive it jumps around a little. Once you stopped it should settle to just a few centimeters, well under the 5 cm limit.\n\nIf it stays large, the cameras are being ignored (numbers too big) or something in the call is wrong. If the estimate jumps around a lot even when you are standing still, the numbers are too small and a bad reading is being believed.",
-				"bit": "The error should settle to a few centimeters once you stop. If not, the trust numbers or the call are off."
+				"never": "Look at the error plot. While you drive it jumps around a little (up to about 0.2 meters). Once you stopped it should settle to a centimeter or two, well under the 6 cm limit.\n\nIf it stays large, the cameras are being ignored (numbers too big) or something in the call is wrong. If the estimate jumps around a lot even when you are standing still, the numbers are too small and a bad reading is being believed.",
+				"bit": "The error should settle to a centimeter or two once you stop. If not, the trust numbers or the call are off."
 			},
 			"target": {
 				"pane": "scope"
@@ -380,8 +380,8 @@
 		{
 			"title": "Check your work",
 			"say": {
-				"never": "Click the lesson chip and press **Verify**. The first checkpoint looks at your code. The estimate checkpoint only passes after you have driven more than 5 meters and stopped for 2 seconds, so do that first if it still fails.",
-				"bit": "Click the lesson chip and press **Verify**. The first checkpoint looks at your code. The estimate checkpoint only passes after you have driven more than 5 meters and stopped for 2 seconds, so do that first if it still fails."
+				"never": "Click the lesson chip and press **Verify**. The first checkpoint looks at your code. The estimate checkpoint only passes after you have driven more than 5 meters, turned a bit and stopped for 2 seconds, so do that first if it still fails.",
+				"bit": "Click the lesson chip and press **Verify**. The first checkpoint looks at your code. The estimate checkpoint only passes after you have driven more than 5 meters, turned a bit and stopped for 2 seconds, so do that first if it still fails."
 			},
 			"target": {
 				"selector": "[data-tour='lesson']"

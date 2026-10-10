@@ -34,7 +34,7 @@ describe("robot-computer-vision", () => {
 		expect(photon.name).toBe("photonlib");
 		expect(photon.version).toBe("v2026.2.2");
 		const gradle = readFileSync(join(L.dir, "project", "build.gradle"), "utf8");
-		expect(gradle).toContain("mw-lib-java:4101c00073eacc5fb2241885ff76b12de7ce84c8");
+		expect(gradle).toContain("mw-lib-java:26.17.3");
 	});
 
 	test("the provided pieces the next chunks build on exist", () => {

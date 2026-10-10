@@ -21,8 +21,8 @@
 		{
 			"title": "But odometry drifts",
 			"say": {
-				"never": "Wheels slip a tiny bit and the wheel size is never exactly right, so every loop adds a tiny mistake and the mistakes pile up. In this simulator the estimate from the wheels alone ends up about 0.1 to 0.5 meters (several inches to a foot and a half) and a few degrees away from the truth after a 6 to 11 meter drive. That is far too much to shoot from.",
-				"bit": "Tiny wheel mistakes pile up. After a 6 to 11 m drive the guess is about 0.1 to 0.5 m and a few degrees off."
+				"never": "Wheels slip a tiny bit and the wheel size is never exactly right, so every loop adds a tiny mistake and the mistakes pile up. In this simulator the estimate from the wheels alone ends up about 0.15 to 0.6 meters (half a foot to two feet) and 2 to 10 degrees away from the truth after a drive of several meters with some turns. That is far too much to shoot from.",
+				"bit": "Tiny wheel mistakes pile up. After a drive with turns the guess is about 0.15 to 0.6 m and 2 to 10 degrees off."
 			}
 		},
 		{
@@ -35,8 +35,8 @@
 		{
 			"title": "But a camera is noisy and late",
 			"say": {
-				"never": "A single picture is a little wrong each time, and the picture is a little old by the time the computer has worked on it. The cameras send their answers, called **tag solutions**, to the robot over the network (here through MW-Lib's proxy server, the same way the real camera computers do). A solution made from **several tags at once** is much steadier, and each one comes with the ids of the tags it used and the time the picture was taken. The code gives the good ones to the pose estimator as **vision measurements**.",
-				"bit": "Each camera answer (a tag solution) is a bit noisy and a bit old. Several tags at once is steadier."
+				"never": "A single picture is a little wrong each time, and the picture is a little old by the time the computer has worked on it. How wrong depends on how far away the tag is: from close up (under about 3 meters) a camera answer is only a few centimeters off, but from a tag far away it can be meters off. The cameras send their answers, called **tag solutions**, to the robot over the network (here through MW-Lib's proxy server, the same way the real camera computers do). Each one comes with the ids of the tags the camera saw and the time the picture was taken. The code throws away any answer that jumps far from where the robot already thinks it is, and gives the rest to the pose estimator as **vision measurements**.",
+				"bit": "Each camera answer (a tag solution) is a bit noisy and a bit old, and from a far tag it can be badly wrong."
 			}
 		},
 		{

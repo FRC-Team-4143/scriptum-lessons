@@ -21,11 +21,13 @@ public class LocalizationConstants extends MwConstants {
   // VISION: how much to trust the cameras (your job)
   // =============================================================================
 
-  // How far off could a camera's position be, in meters? Same idea for the heading, in radians.
-  // The cameras here are good (a few centimeters, a fraction of a degree) but never perfect, and
-  // the wheels are good for a short while. So trust the cameras fairly well, not blindly.
-  public static final double VISION_XY_STD_METERS = 0.3;
-  public static final double VISION_HEADING_STD_RADIANS = 0.3;
+  // How far off could a camera's position be, in meters, when its tag is 1 meter away? Same idea
+  // for the heading, in radians. They are multiplied by the tag's distance squared (a tag 3 meters
+  // away is 9 times less sure). The cameras here are good from close up (a few centimeters) but
+  // never perfect, and the wheels are good for a short while. So the cameras only nudge the
+  // estimate each time, and there are about 60 solutions a second, so it adds up.
+  public static final double VISION_XY_STD_METERS = 0.2;
+  public static final double VISION_HEADING_STD_RADIANS = 0.2;
 
   /** The things the localization subsystem can be doing. */
   public enum LocalizationStates {
