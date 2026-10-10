@@ -1,4 +1,4 @@
-package frc.robot;
+package frc.robot.subsystems.drive;
 
 public final class DriveMath {
   private DriveMath() {}
