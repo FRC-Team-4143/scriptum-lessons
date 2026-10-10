@@ -21,6 +21,8 @@ All of this lives under `src/main/java/frc/robot/`:
 - `subsystems/drive/DrivetrainConstants.java` holds every number that describes the drivetrain: the
   wheel radius, gear ratio, track width, mass and motors that used to live in `Constants.java`. That
   file is gone; each subsystem now keeps its own constants.
+- `subsystems/drive/DriveMath.java` is your `DriveMath` from the Drive Math lesson. It moved here, next
+  to the drivetrain it serves; the code in it is the same.
 - `subsystems/shooter/ShooterConstants.java` and `ShooterSubsystem.java` are the new shooter.
 - `OI.java` reads the driver's controller.
 - `RobotContainer.java` registers the subsystems.

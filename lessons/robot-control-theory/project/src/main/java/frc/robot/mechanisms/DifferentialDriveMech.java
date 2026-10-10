@@ -18,7 +18,7 @@ import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.simulation.DifferentialDrivetrainSim;
-import frc.robot.DriveMath;
+import frc.robot.subsystems.drive.DriveMath;
 import frc.robot.subsystems.drive.DrivetrainConstants;
 import java.util.List;
 import java.util.Random;
