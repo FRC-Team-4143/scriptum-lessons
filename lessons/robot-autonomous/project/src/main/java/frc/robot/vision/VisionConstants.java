@@ -36,4 +36,8 @@ public final class VisionConstants {
   // A pose worked out from fewer tags than this is thrown away: one tag can look like two
   // different poses, so a camera that sees a single tag is not trusted.
   public static final int MIN_TAG_COUNT = 2;
+
+  // The tags a camera used in its latest picture stay in the VisibleTags log for this long
+  // (seconds). A bit more than the gap between two pictures (about 0.033 s at 30 frames per second).
+  public static final double VISIBLE_TAGS_SECONDS = 0.2;
 }

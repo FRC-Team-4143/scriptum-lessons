@@ -8,11 +8,13 @@ import com.marswars.subsystem.SubsystemIoBase;
 import edu.wpi.first.math.VecBuilder;
 import edu.wpi.first.math.estimator.DifferentialDrivePoseEstimator;
 import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.Timer;
 import frc.robot.subsystems.drive.DrivetrainSubsystem;
 import frc.robot.subsystems.localization.LocalizationConstants.LocalizationStates;
 import frc.robot.vision.VisionConstants;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -46,6 +48,14 @@ public class LocalizationSubsystem extends MwSubsystem<LocalizationStates, Local
   // The proxy server hands back the same recent solutions on every call, so remember the newest
   // picture time already looked at for each camera.
   private final Map<String, Double> last_seen_seconds_ = new HashMap<>();
+  // The tags each camera used in its latest picture, for the VisibleTags log. A camera only sends a
+  // solution every ~33 ms and only when it sees tags, so each camera's tags are kept for a short
+  // time (VISIBLE_TAGS_SECONDS) instead of being rebuilt every 20 ms loop, which would blink.
+  private final Map<String, SeenTags> camera_tags_ = new HashMap<>();
+  private final List<Pose3d> visible_tags_ = new ArrayList<>();
+
+  private record SeenTags(double picture_seconds, List<Pose3d> tags) {}
+
   // Solutions from pictures taken before this time are ignored (see resetPose()).
   private double ignore_before_seconds_ = 0.0;
 
@@ -92,6 +102,14 @@ public class LocalizationSubsystem extends MwSubsystem<LocalizationStates, Local
       if (!isNew(solution)) {
         continue;
       }
+      // Remember the tags this camera just used, even if the solution is dropped below: the camera
+      // did see them.
+      List<Pose3d> tags = new ArrayList<>();
+      for (int tag_id : solution.detectedIds) {
+        VisionConstants.FIELD_LAYOUT.getTagPose(tag_id).ifPresent(tags::add);
+      }
+      camera_tags_.put(
+          solution.cameraSerial, new SeenTags(solution.timestamp.getSeconds(), tags));
       if (!isSensible(solution)) {
         vision_measurements_dropped_++;
         continue;
@@ -109,6 +127,14 @@ public class LocalizationSubsystem extends MwSubsystem<LocalizationStates, Local
               LocalizationConstants.VISION_XY_STD_METERS,
               LocalizationConstants.VISION_HEADING_STD_RADIANS));
     }
+
+    // Show each camera's tags until its picture is too old (a camera that sees nothing sends
+    // nothing, so this is also how its old tags go away).
+    double now_seconds = Timer.getFPGATimestamp();
+    camera_tags_.values().removeIf(
+        seen -> now_seconds - seen.picture_seconds() > VisionConstants.VISIBLE_TAGS_SECONDS);
+    visible_tags_.clear();
+    camera_tags_.values().forEach(seen -> visible_tags_.addAll(seen.tags()));
 
     pose_ = pose_estimator_.getEstimatedPosition();
     logPose();
@@ -172,6 +198,8 @@ public class LocalizationSubsystem extends MwSubsystem<LocalizationStates, Local
     MwLog.log(getSubsystemKey() + "PoseYawDeg", pose_.getRotation().getDegrees());
     MwLog.log(getSubsystemKey() + "VisionMeasurementsSeen", vision_measurements_seen_);
     MwLog.log(getSubsystemKey() + "VisionMeasurementsDropped", vision_measurements_dropped_);
+    // The AprilTags the cameras are using, for AdvantageScope's field "Vision Targets".
+    MwLog.log(getSubsystemKey() + "VisibleTags", visible_tags_.toArray(new Pose3d[0]));
     if (RobotBase.isSimulation()) {
       // How far the estimate is from where the simulated robot REALLY is.
       Pose2d truth = drive_.getTruePose();

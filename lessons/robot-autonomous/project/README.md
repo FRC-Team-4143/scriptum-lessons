@@ -102,6 +102,8 @@ On the 2D Field tab add these, and plot the others:
 - `Subsystem/Localization/Pose`: where the robot **thinks** it is, from your Localization subsystem.
   The cameras keep it close to the true pose: about 1 to 9 centimeters apart while the robot drives,
   and about 1 centimeter once it stops. It is not exactly the same, so the checks use the true pose.
+- `Subsystem/Localization/VisibleTags`: the AprilTags the cameras are using right now. Drag it onto the
+  field's Vision Targets to see them.
 - `Subsystem/Drivetrain/Choreo/Trajectory`: the path being followed, and
   `Subsystem/Drivetrain/Choreo/DesiredPose`: where the path says the robot should be right now.
 - `Drive/DistanceToPickup` and `Drive/DistanceToScoreSpot`: true distances in meters, to plot.
