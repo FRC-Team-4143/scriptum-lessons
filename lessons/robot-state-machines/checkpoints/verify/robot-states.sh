@@ -14,7 +14,7 @@ code() { grep -Ev '^[[:space:]]*(//|\*|/\*)' "$1" | tr '\n' ' '; }
 
 # RobotContainer.updateLogic(): a switch on the robot state that asks the subsystems for states.
 if ! code "$RC" | grep -Eq 'switch[[:space:]]*\([[:space:]]*(getSystemState\(\)|system_state_)[[:space:]]*\)'; then
-	echo "In RobotContainer.updateLogic(): write a switch (getSystemState()) with a case for each robot state."
+	echo "In RobotContainer.updateLogic(): write a switch (system_state_) with a case for each robot state."
 	exit 1
 fi
 for state in IDLE DRIVE SHOOT; do

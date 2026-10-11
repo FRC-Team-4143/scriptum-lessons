@@ -36,10 +36,10 @@
 				"bit": "`RobotContainer.updateLogic` runs first each loop and asks each subsystem for a state."
 			},
 			"board": {
-				"code": "switch (getSystemState()) {\n    case SHOOT:\n        drive_.setWantedState(DriveStates.ARCADE);\n        shooter_.setWantedState(ShooterStates.SHOOT);\n        break;\n    ...\n}",
+				"code": "switch (system_state_) {\n    case SHOOT:\n        drive_.setWantedState(DriveStates.ARCADE);\n        shooter_.setWantedState(ShooterStates.SHOOT);\n        break;\n    ...\n}",
 				"marks": [
 					{
-						"text": "getSystemState()",
+						"text": "system_state_",
 						"label": "the robot's state"
 					},
 					{

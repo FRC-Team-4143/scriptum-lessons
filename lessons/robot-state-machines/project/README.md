@@ -57,7 +57,7 @@ Go slower on anything that is new. Finishing every bonus is not expected.
 
 **Part 2: the robot's state machine**
 
-3. **`updateLogic()`** in `RobotContainer.java`: a `switch (getSystemState())` with a case for each
+3. **`updateLogic()`** in `RobotContainer.java`: a `switch (system_state_)` with a case for each
    robot state. Each case asks the drivetrain (`drive_`) and the shooter (`shooter_`) for a state
    with `setWantedState(...)`. The comment above the method lists them.
 4. **Bind the buttons** in `OI.java`. The right bumper: `whileTrue(Commands.startEnd(...))`, asking

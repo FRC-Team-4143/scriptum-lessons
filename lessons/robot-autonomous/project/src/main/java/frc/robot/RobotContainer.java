@@ -77,7 +77,7 @@ public class RobotContainer extends MwSuperStateMachine<RobotStates> {
   /** Asks each subsystem for the state the robot's current state needs. */
   @Override
   protected void updateLogic(double timestamp) {
-    switch (getSystemState()) {
+    switch (system_state_) {
       case SHOOT:
         // In autonomous nobody is on the sticks, so stand still while shooting.
         drive_.setWantedState(

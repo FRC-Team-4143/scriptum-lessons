@@ -36,7 +36,7 @@ public class RobotContainer extends MwSuperStateMachine<RobotStates> {
    * Asks each subsystem for the state the robot's current state needs. Runs every loop, before the
    * subsystems.
    *
-   * <p>TODO: write a switch (getSystemState()) with a case for each robot state:
+   * <p>TODO: write a switch (system_state_) with a case for each robot state:
    *
    * <ul>
    *   <li>IDLE: drive_ wants DriveStates.IDLE, shooter_ wants ShooterStates.IDLE

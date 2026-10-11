@@ -59,8 +59,8 @@
 		{
 			"title": "Your turn",
 			"say": {
-				"never": "Your turn! Write a `switch (getSystemState())` with one `case` for each robot state, like the drivetrain's switch. In each case, ask the drivetrain and the shooter for the state that robot state needs, using `setWantedState`. The comment above lists all six lines.",
-				"bit": "Write a `switch (getSystemState())`: one `case` per robot state, each asking `drive_` and `shooter_` for a state with `setWantedState`."
+				"never": "Your turn! Write a `switch (system_state_)` with one `case` for each robot state, like the drivetrain's switch. In each case, ask the drivetrain and the shooter for the state that robot state needs, using `setWantedState`. The comment above lists all six lines.",
+				"bit": "Write a `switch (system_state_)`: one `case` per robot state, each asking `drive_` and `shooter_` for a state with `setWantedState`."
 			},
 			"target": {
 				"pane": "editor",
