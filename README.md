@@ -49,7 +49,12 @@ folder; the generated `catalog.json` makes them relative to the repo.
 Three tracks, in curriculum order (each lesson's `track` and `order` are in its `lesson.json`):
 
 - **Tools**: `editor-basics` (Meet the Editor: files, folders, saving, the terminal, for someone
-  who has never used a code editor), then git, AdvantageScope, Elastic, and Choreo introductions.
+  who has never used a code editor), then git, AdvantageScope, Elastic, Choreo and Arbor introductions.
+  `arbor-intro` is a tool lesson like `choreo-intro` (`restrictTools: ["arbor"]`, no Java): the student builds a
+  behavior tree in Arbor, and five script checkpoints read the XML it saves in `src/main/deploy/autos/trees`
+  (the starter `Example.xml` never counts). The project ships the Arbor project files (`bt_project.json`, a
+  `nodes.xml` palette). Arbor opens `deploy/autos` on its own only when that folder already exists as the
+  workspace container starts, so the README tells the student to use *Open project* after loading.
 - **Java Programming**: `hello-world` through `java-inheritance`, each
   module locked until its prerequisite is complete.
 - **FRC Robot**: a differential-drive robot that uses [MWLib](https://github.com/FRC-Team-4143/MW-Lib)
@@ -58,7 +63,7 @@ Three tracks, in curriculum order (each lesson's `track` and `order` are in its 
   `robot-drivetrain` (Motors and Drivetrains), `robot-sensors` (Sensors and Feedback),
   `robot-drive-math` (Drive Math and Methods), `robot-odometry` (Objects and Odometry),
   `robot-subsystems` (Mechanisms and Subsystems), `robot-control-theory` (Control Theory),
-  `robot-state-machines` (State Machines), `robot-computer-vision` (Computer Vision) and `robot-autonomous` (Choreo Autonomous).
+  `robot-state-machines` (State Machines), `robot-computer-vision` (Computer Vision) and `robot-autonomous` (Autonomous).
   Each module's `README.md` is the lesson. See [Robot modules](#robot-modules).
 
 ## Tutor (Dozer)
@@ -124,7 +129,7 @@ has to be made in every module (`lessons/robot-*/project/`):
   states-plus-`switch` drivetrain in `robot-state-machines`. In `robot-control-theory` the flywheel starts in bang-bang mode with untuned gains on purpose; that
   lesson's task is to write bang-bang and feedforward, then tune PID (`kV` about 0.12, `kP` about 0.2
   works). `lessons/robot-control-theory/solution/` is the finished version.
-- `robot-autonomous` (Choreo Autonomous, about 3 hours) starts from the finished `robot-computer-vision` robot
+- `robot-autonomous` (Autonomous, about 3 hours) starts from the finished `robot-computer-vision` robot
   (the `LocalizationSubsystem` with the vision call written at std devs 0.3/0.3, the vision stack and
   PhotonLib, and the aim state tuned at 2.0/0/0.2; `DrivetrainSubsystem.getPose()` is the vision-corrected
   estimate and `resetPose(Pose2d)` resets both the mech and Localization). Students draw two
@@ -168,6 +173,6 @@ and uses them right away. The Java modules remain available as a deeper, standal
 | 6 Control Theory | enums and `switch` (picking a control style), unit conversion, small methods |
 | 7 State Machines | the transition table (a `switch` inside a `switch`), `&&` `\|\|` `!`, boolean methods, lambdas |
 | 7b Computer Vision (about 3 hours) | passing a timestamp and standard deviations (`VecBuilder.fill`, `double` constants), a `PIDController` object, a new enum case in a `switch`, `&&`, `Math.toRadians` |
-| 8 Choreo Autonomous (about 3 hours) | reading `Command` classes, command lists with `addCommands`, decorators (`until`, `withTimeout`), method references (`::`) |
+| 8 Autonomous (about 3 hours) | reading `Command` classes, command lists with `addCommands`, decorators (`until`, `withTimeout`), method references (`::`) |
 
 Recursion is not used on the robot.

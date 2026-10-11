@@ -1,0 +1,18 @@
+{
+	"java.configuration.updateBuildConfiguration": "automatic",
+	"java.jdt.ls.vmargs": "-XX:+UseParallelGC -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xms64m -Xmx512m -XX:ReservedCodeCacheSize=96m -Xlog:disable",
+	"java.gradle.buildServer.enabled": "off",
+	"gradle.autoDetect": "off",
+	"java.import.gradle.annotationProcessing.enabled": false,
+	"wpilib.autoStartRioLog": false,
+	"wpilib.skipSelectSimulateExtension": true,
+	"spotlessGradle.format.enable": true,
+	"spotlessGradle.diagnostics.enable": false,
+	"editor.defaultFormatter": "richardwillis.vscode-spotless-gradle",
+	"[java]": {
+		"editor.defaultFormatter": "richardwillis.vscode-spotless-gradle"
+	},
+	"[json]": {
+		"editor.defaultFormatter": "richardwillis.vscode-spotless-gradle"
+	}
+}

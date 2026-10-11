@@ -1,0 +1,34 @@
+{
+	"plan": [
+		{
+			"checkpoint": "new-tree",
+			"guides": [
+				"arbor-basics"
+			]
+		},
+		{
+			"checkpoint": "sequence",
+			"guides": [
+				"arbor-behavior-trees"
+			]
+		},
+		{
+			"checkpoint": "ports",
+			"guides": [
+				"arbor-basics"
+			]
+		},
+		{
+			"checkpoint": "fail-handling",
+			"guides": [
+				"arbor-behavior-trees"
+			]
+		},
+		{
+			"checkpoint": "tunable",
+			"guides": [
+				"arbor-behavior-trees"
+			]
+		}
+	]
+}

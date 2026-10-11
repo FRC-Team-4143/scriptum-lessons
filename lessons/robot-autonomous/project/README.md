@@ -1,4 +1,4 @@
-# Choreo Autonomous
+# Autonomous
 
 The first 15 seconds of a match are **autonomous**: nobody holds a controller and the robot drives
 itself. The competition robot's autonomous routines are built in two jobs: first you **draw paths** in

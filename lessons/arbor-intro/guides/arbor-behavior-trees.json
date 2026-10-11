@@ -1,0 +1,70 @@
+{
+	"title": "Behavior trees",
+	"summary": "How a tree runs: ticks, RUNNING, SUCCESS and FAILURE, Sequence, Fallback and Timeout.",
+	"topic": "Tools",
+	"order": 35,
+	"needs": [
+		"arbor"
+	],
+	"kind": "concept",
+	"steps": [
+		{
+			"title": "A tree of steps",
+			"say": "A behavior tree is a to-do list with a few rules. Each box is a step, and boxes that hold other boxes decide **how** to run them. About fifty times a second the robot goes through the tree once; that pass is called a *tick*.",
+			"board": {
+				"code": "Sequence\n  Wake up\n  Eat breakfast\n  Pack bag",
+				"language": "text",
+				"marks": [
+					{
+						"text": "Sequence",
+						"label": "decides how to run what is inside"
+					}
+				]
+			}
+		},
+		{
+			"title": "Three answers",
+			"say": "Every step answers each tick with one of three things: **RUNNING** (still working), **SUCCESS** (done, it worked) or **FAILURE** (it didn't). Driving a path is RUNNING until the robot arrives, then SUCCESS."
+		},
+		{
+			"title": "Sequence",
+			"say": "A **Sequence** does its children in order, one at a time. It moves on when a child succeeds, and stops with FAILURE the moment a child fails. 'Pack bag' never happens if 'Eat breakfast' fails.",
+			"board": {
+				"code": "Sequence\n  Wake up\n  Eat breakfast\n  Pack bag",
+				"language": "text"
+			}
+		},
+		{
+			"title": "Fallback",
+			"say": "A **Fallback** is plan B. It tries its children in order and stops at the first one that **succeeds**. Only if everything fails does it fail.",
+			"board": {
+				"code": "Fallback\n  Take the bus\n  Walk",
+				"language": "text",
+				"marks": [
+					{
+						"text": "Walk",
+						"label": "only tried if the bus fails"
+					}
+				]
+			}
+		},
+		{
+			"title": "Timeout",
+			"say": "A **Timeout** wraps one step and gives it a time limit in milliseconds. If the step is still RUNNING when time is up, the Timeout stops it and reports FAILURE. That turns 'might hang forever' into 'fails after three seconds', which a Fallback can then handle.",
+			"board": {
+				"code": "Fallback\n  Timeout 3000\n    Aim at the goal\n  Drive to the backup spot",
+				"language": "text",
+				"marks": [
+					{
+						"text": "Timeout 3000",
+						"label": "give up after 3 seconds"
+					}
+				]
+			}
+		},
+		{
+			"title": "Tunable values",
+			"say": "Any number can be a **tunable**: instead of typing 500 into a Sleep, you declare a port on the tree (with a default) and write its name in braces, `{wait_msec}`. On the robot you can then change it from the dashboard without rebuilding anything."
+		}
+	]
+}

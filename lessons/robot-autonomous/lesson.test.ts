@@ -1,4 +1,4 @@
-// robot-autonomous (Choreo Autonomous): the starter ships a Differential Choreo project with the
+// robot-autonomous (Autonomous): the starter ships a Differential Choreo project with the
 // field targets as named poses and NO paths; solution/ adds the two paths (ToPickup and ToScore)
 // and the finished Autos.java. The script checkpoints (paths drawn / named / going to the right
 // places, and the order of the autonomous sequence) are round-tripped below, with negative cases.

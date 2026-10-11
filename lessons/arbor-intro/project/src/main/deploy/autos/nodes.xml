@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root BTCPP_format="4">
+  <TreeNodesModel>
+    <!-- Robot nodes: the actions this robot's autos can use (Sequence, Fallback, Timeout, Sleep and
+         the other BehaviorTree.CPP nodes are built into Arbor) -->
+    <Action ID="SetWantedState">
+      <input_port name="state" type="std::string">Robot state to request: IDLE, DRIVE, AIM, SHOOT or AUTO</input_port>
+      <description>Ask the robot for a state and wait until it is in it (SUCCESS) or the state fails (FAILURE)</description>
+    </Action>
+    <Action ID="FollowPath">
+      <input_port name="trajectory" type="std::string">Name of a Choreo path (deploy/choreo/&lt;name&gt;.traj)</input_port>
+      <description>Drive a Choreo path until the end of it is reached</description>
+    </Action>
+  </TreeNodesModel>
+</root>

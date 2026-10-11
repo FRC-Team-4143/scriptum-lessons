@@ -475,6 +475,65 @@
 			]
 		},
 		{
+			"id": "arbor-intro",
+			"order": 10,
+			"track": "Tools",
+			"title": "Arbor",
+			"description": "Build an autonomous routine as a behavior tree: nodes, ports, a Sequence, a Timeout and a tunable value.",
+			"kind": "robot",
+			"subdir": "lessons/arbor-intro/project",
+			"restrictTools": [
+				"arbor"
+			],
+			"checkpoints": [
+				{
+					"id": "new-tree",
+					"title": "Your own tree",
+					"description": "You created a tree of your own and saved it in the trees folder.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/arbor-intro/checkpoints/verify/new-tree.sh"
+					}
+				},
+				{
+					"id": "sequence",
+					"title": "A Sequence of steps",
+					"description": "A Sequence with at least three steps: a SetWantedState, a Sleep and a FollowPath.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/arbor-intro/checkpoints/verify/sequence.sh"
+					}
+				},
+				{
+					"id": "ports",
+					"title": "Ports filled in",
+					"description": "SetWantedState has a state, FollowPath has a trajectory name and Sleep has a time.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/arbor-intro/checkpoints/verify/ports.sh"
+					}
+				},
+				{
+					"id": "fail-handling",
+					"title": "A Timeout and a Fallback",
+					"description": "A step is wrapped in a Timeout, and a Fallback gives the tree a plan B.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/arbor-intro/checkpoints/verify/fail-handling.sh"
+					}
+				},
+				{
+					"id": "tunable",
+					"title": "A tunable value",
+					"description": "The tree declares an input port and a node uses it as {name}, so it can be tuned from the dashboard.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/arbor-intro/checkpoints/verify/tunable.sh"
+					}
+				}
+			]
+		},
+		{
 			"id": "hello-world",
 			"order": 10,
 			"track": "Java Programming",
@@ -1552,7 +1611,7 @@
 			"id": "robot-autonomous",
 			"order": 28,
 			"track": "FRC Robot",
-			"title": "Choreo Autonomous",
+			"title": "Autonomous",
 			"description": "Draw two paths in Choreo, then write the autonomous routine the way the competition robot does: follow the first path, pick up, follow the second path, aim at the goal with the aim state you built, and shoot.",
 			"kind": "robot",
 			"subdir": "lessons/robot-autonomous/project",
@@ -1838,6 +1897,36 @@
 			],
 			"kind": "mixed",
 			"path": "lessons/choreo-intro/guides/choreo-basics.json"
+		},
+		{
+			"id": "arbor-basics",
+			"title": "Arbor basics",
+			"summary": "Trees, nodes, ports, saving, and the XML Arbor writes.",
+			"topic": "Tools",
+			"order": 34,
+			"modules": [
+				"arbor-intro"
+			],
+			"needs": [
+				"arbor"
+			],
+			"kind": "concept",
+			"path": "lessons/arbor-intro/guides/arbor-basics.json"
+		},
+		{
+			"id": "arbor-behavior-trees",
+			"title": "Behavior trees",
+			"summary": "How a tree runs: ticks, RUNNING, SUCCESS and FAILURE, Sequence, Fallback and Timeout.",
+			"topic": "Tools",
+			"order": 35,
+			"modules": [
+				"arbor-intro"
+			],
+			"needs": [
+				"arbor"
+			],
+			"kind": "concept",
+			"path": "lessons/arbor-intro/guides/arbor-behavior-trees.json"
 		},
 		{
 			"id": "java-variables",

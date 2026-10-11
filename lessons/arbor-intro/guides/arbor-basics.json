@@ -1,0 +1,87 @@
+{
+	"title": "Arbor basics",
+	"summary": "Trees, nodes, ports, saving, and the XML Arbor writes.",
+	"topic": "Tools",
+	"order": 34,
+	"needs": [
+		"arbor"
+	],
+	"kind": "concept",
+	"steps": [
+		{
+			"title": "This is Arbor",
+			"say": "Arbor is where we build **autonomous routines**. A routine is a *tree* of steps the robot works through. You drag the steps together here, and Arbor saves them as a file the robot runs.",
+			"close": [
+				"editor",
+				"preview"
+			],
+			"open": [
+				"arbor"
+			],
+			"target": {
+				"pane": "arbor"
+			}
+		},
+		{
+			"title": "Your trees",
+			"say": "This is the **Trees** list: every file in the project's `trees` folder. `Example` is a small tree to read first. **+ New tree** makes your own: give it a name, and let it save in a new file.",
+			"target": {
+				"pane": "arbor",
+				"selector": ".trees-panel .panel-header",
+				"text": "Trees"
+			}
+		},
+		{
+			"title": "The steps you can use",
+			"say": "Below is the **Nodes** list: every step you can use. The robot's own steps (`SetWantedState`, `FollowPath`) are listed here, and the built-in ones (`Sequence`, `Fallback`, `Timeout`, `Sleep`...) come with Arbor. Drag one onto the canvas, or right-click a node and choose **Add child**. The search box finds a node by name.",
+			"target": {
+				"pane": "arbor",
+				"selector": ".panel-header",
+				"text": "Nodes"
+			}
+		},
+		{
+			"title": "The canvas",
+			"say": "The tree itself. The top node is the root. A node with children, like a `Sequence`, runs them from left to right. Click a node to select it.",
+			"target": {
+				"pane": "arbor",
+				"selector": ".canvas"
+			}
+		},
+		{
+			"title": "Ports",
+			"say": "A node's settings are called **ports**. Select a node and fill them in over here: a `SetWantedState` needs the `state` to ask for, a `FollowPath` needs a `trajectory` name, a `Sleep` needs `msec`, how many milliseconds to wait.",
+			"target": {
+				"pane": "arbor",
+				"selector": ".inspector"
+			}
+		},
+		{
+			"title": "Save, and see the XML",
+			"say": "**Save** (Ctrl+S) writes your changes to the file. Open the **XML** tab at the bottom to see exactly what was saved: that file is what the robot runs. **Problems** lists anything Arbor thinks is wrong.",
+			"target": {
+				"pane": "arbor",
+				"selector": ".toolbar button",
+				"text": "Save"
+			}
+		},
+		{
+			"title": "Live view",
+			"say": "When a robot (or the simulator) is running an auto, Arbor can connect to it from the toolbar. Nodes turn orange while they run, then green for success or red for failure. Not needed for this lesson, but it is how you find out which step an auto got stuck on.",
+			"target": {
+				"pane": "arbor",
+				"selector": ".toolbar"
+			}
+		},
+		{
+			"title": "Check your work",
+			"say": "The checkpoints read the trees you've saved. Open **Checkpoints** in the top bar and press **Verify** whenever you like.",
+			"close": [
+				"arbor"
+			],
+			"target": {
+				"pane": "editor"
+			}
+		}
+	]
+}

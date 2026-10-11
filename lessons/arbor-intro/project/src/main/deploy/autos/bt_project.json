@@ -1,0 +1,8 @@
+{
+  "name": "autos",
+  "nodes": "nodes.xml",
+  "trees": "trees",
+  "live": {
+    "url": "ws://localhost:1670"
+  }
+}
