@@ -112,7 +112,7 @@ has to be made in every module (`lessons/robot-*/project/`):
   differs a little from `Drive/TruePose`), and grows a few methods per lesson.
 - Modules 1-4: `lesson/LessonLoop.java` runs MWLib's `SubsystemManager` loop so students never call
   `readInputs` or `writeOutputs`. Module 5 (subsystems) and 6 (control theory) use a real `RobotContainer extends SubsystemManager`; from
-  module 7 (state machines) on, `RobotContainer extends MwSuperStateMachine<RobotStates>`, the robot's own
+  module 7 (state machines) on, `RobotContainer extends MwSuperStateMachine<RobotStates, RobotConstants>`, the robot's own
   state machine. Buttons and autos ask it for robot states with `setWantedState(...)`; there are no
   per-subsystem command files.
 - `lesson/LessonChecks.java` (via `lesson/Checks.java` in modules 5-7) republishes the min and max of

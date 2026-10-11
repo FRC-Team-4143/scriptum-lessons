@@ -12,7 +12,7 @@ import frc.robot.subsystems.shooter.ShooterSubsystem;
  * asks each subsystem for the state it needs. Every loop it runs first, then each subsystem reads
  * its sensors, runs its logic, and writes its motor outputs.
  */
-public class RobotContainer extends MwSuperStateMachine<RobotStates> {
+public class RobotContainer extends MwSuperStateMachine<RobotStates, RobotConstants> {
   private static RobotContainer instance_ = null;
 
   public static RobotContainer getInstance() {
@@ -26,7 +26,7 @@ public class RobotContainer extends MwSuperStateMachine<RobotStates> {
   private final ShooterSubsystem shooter_ = ShooterSubsystem.getInstance();
 
   private RobotContainer() {
-    super(RobotStates.IDLE, BuildConstants.class);
+    super(RobotStates.IDLE, new RobotConstants(), BuildConstants.class);
 
     registerSubsystem(drive_);
     registerSubsystem(shooter_);
