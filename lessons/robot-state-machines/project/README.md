@@ -49,7 +49,9 @@ Go slower on anything that is new. Finishing every bonus is not expected.
 **Part 1: the state machine**
 
 1. **`handleStateTransition()`** in `ShooterSubsystem.java`. Set `system_state_` to the state the shooter
-   is allowed to be in. The rules are in the comment above the method.
+   is allowed to be in. Write it as a **table**: a `switch` on `system_state_` (where the shooter is), and
+   inside each case a `switch` on `wanted` (what the robot asked for). The rows are in the comment above
+   the method. A request with no row is ignored, which is how you forbid a move.
 2. **`updateLogic()`.** Write a `switch` with a case for each state: `IDLE` stops everything,
    `SPIN_UP` runs only the flywheel, `SHOOT` runs the flywheel and the roller.
 

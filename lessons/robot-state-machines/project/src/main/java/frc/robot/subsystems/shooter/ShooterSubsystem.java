@@ -81,12 +81,20 @@ public class ShooterSubsystem extends MwSubsystem<ShooterStates, ShooterConstant
   }
 
   /**
-   * Decides which state the shooter is in. MWLib calls this every loop with the state the driver
+   * Decides which state the shooter is in. MWLib calls this every loop with the state the robot
    * WANTS. Set system_state_ to the state we are actually allowed to go to.
    *
-   * <p>Rules: IDLE always goes straight to IDLE. If SHOOT is wanted, you may NOT jump from IDLE to
-   * SHOOT: go IDLE -> SPIN_UP first. From SPIN_UP go to SHOOT once the flywheel isAtSpeed(). From
-   * SHOOT go back to SPIN_UP if the flywheel hasDipped().
+   * <p>Write it as a table: an outer switch on system_state_ (where we are now), and inside each
+   * case an inner switch on wanted (what the robot asked for). Each inner case says where to go.
+   * A request with no case is ignored (default: break;). The rows:
+   *
+   * <ul>
+   *   <li>From IDLE: wanting SHOOT goes to SPIN_UP (never straight to SHOOT).
+   *   <li>From SPIN_UP: wanting SHOOT goes to SHOOT once isAtSpeed(); wanting IDLE goes to IDLE.
+   *   <li>From SHOOT: wanting SHOOT goes back to SPIN_UP if hasDipped(); wanting IDLE goes to IDLE.
+   * </ul>
+   *
+   * <p>Nothing ever asks for SPIN_UP: it is a step the table passes through on the way to SHOOT.
    */
   @Override
   protected void handleStateTransition(ShooterStates wanted) {

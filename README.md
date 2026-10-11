@@ -166,7 +166,7 @@ and uses them right away. The Java modules remain available as a deeper, standal
 | 4 Objects and Odometry | classes and objects, `new`, `import`, `static`, `abstract` |
 | 5 Mechanisms and Subsystems | inheritance (`extends`, `@Override`), constructors, lists, enums as a list of states, `if` / `else` in subsystem logic |
 | 6 Control Theory | enums and `switch` (picking a control style), unit conversion, small methods |
-| 7 State Machines | `switch` on a subsystem's state (practice), `&&` `\|\|` `!`, boolean methods, lambdas |
+| 7 State Machines | the transition table (a `switch` inside a `switch`), `&&` `\|\|` `!`, boolean methods, lambdas |
 | 7b Computer Vision (about 3 hours) | passing a timestamp and standard deviations (`VecBuilder.fill`, `double` constants), a `PIDController` object, a new enum case in a `switch`, `&&`, `Math.toRadians` |
 | 8 Choreo Autonomous (about 3 hours) | reading `Command` classes, command lists with `addCommands`, decorators (`until`, `withTimeout`), method references (`::`) |
 
