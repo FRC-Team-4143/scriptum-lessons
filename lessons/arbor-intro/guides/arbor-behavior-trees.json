@@ -1,6 +1,6 @@
 {
 	"title": "Behavior trees",
-	"summary": "How a tree runs: ticks, RUNNING, SUCCESS and FAILURE, Sequence, Fallback and Timeout.",
+	"summary": "Ticks, RUNNING / SUCCESS / FAILURE, Sequence and Fallback, one tick at a time.",
 	"topic": "Tools",
 	"order": 35,
 	"needs": [
@@ -10,61 +10,143 @@
 	"steps": [
 		{
 			"title": "A tree of steps",
-			"say": "A behavior tree is a to-do list with a few rules. Each box is a step, and boxes that hold other boxes decide **how** to run them. About fifty times a second the robot goes through the tree once; that pass is called a *tick*.",
-			"board": {
-				"code": "Sequence\n  Wake up\n  Eat breakfast\n  Pack bag",
-				"language": "text",
-				"marks": [
-					{
-						"text": "Sequence",
-						"label": "decides how to run what is inside"
-					}
-				]
+			"say": "A behavior tree is how we write an autonomous routine: a tree of small steps. Boxes at the bottom (blue) do real work. Boxes that hold other boxes (grey) decide **how** to run them. Read this one from the top, left to right: drive to the pickup, then try to aim for 3 seconds (or drive to the backup spot), then shoot.",
+			"diagram": {
+				"mermaid": "flowchart TD\n  seq[\"→ Sequence\"]\n  fb[\"? Fallback\"]\n  drive[\"FollowPath ToPickup\"]\n  to[\"Timeout 3000 ms\"]\n  aim[\"SetWantedState AIM\"]\n  shoot[\"SetWantedState SHOOT\"]\n  back[\"FollowPath ToBackup\"]\n  seq --> drive\n  seq --> fb\n  seq --> shoot\n  fb --> to\n  to --> aim\n  fb --> back\n  classDef control fill:#3b4357,stroke:#9ca3af,color:#fff\n  classDef leaf fill:#2563eb,stroke:#93c5fd,color:#fff\n  class seq,fb,to control\n  class drive,aim,shoot,back leaf",
+				"caption": "An auto: drive, then aim (with a time limit and a plan B), then shoot."
 			}
 		},
 		{
-			"title": "Three answers",
-			"say": "Every step answers each tick with one of three things: **RUNNING** (still working), **SUCCESS** (done, it worked) or **FAILURE** (it didn't). Driving a path is RUNNING until the robot arrives, then SUCCESS."
-		},
-		{
-			"title": "Sequence",
-			"say": "A **Sequence** does its children in order, one at a time. It moves on when a child succeeds, and stops with FAILURE the moment a child fails. 'Pack bag' never happens if 'Eat breakfast' fails.",
-			"board": {
-				"code": "Sequence\n  Wake up\n  Eat breakfast\n  Pack bag",
-				"language": "text"
+			"title": "Ticks and three answers",
+			"say": "About fifty times a second the robot **ticks** the tree: it starts at the root and goes down. Every node answers with one of three things: **RUNNING** (not done, ask me again next tick), **SUCCESS** (done, it worked) or **FAILURE** (done, it didn't). The answers travel back up, and each grey node uses its children's answers to decide what to do next.",
+			"diagram": {
+				"mermaid": "stateDiagram-v2\n  [*] --> IDLE\n  IDLE --> RUNNING: first tick\n  RUNNING --> RUNNING: ticked again, not done\n  RUNNING --> SUCCESS: finished and worked\n  RUNNING --> FAILURE: finished and failed\n  RUNNING --> IDLE: halted by its parent",
+				"caption": "A node's life: ticked while RUNNING, then done, or halted."
 			}
 		},
 		{
-			"title": "Fallback",
-			"say": "A **Fallback** is plan B. It tries its children in order and stops at the first one that **succeeds**. Only if everything fails does it fail.",
-			"board": {
-				"code": "Fallback\n  Take the bus\n  Walk",
-				"language": "text",
-				"marks": [
-					{
-						"text": "Walk",
-						"label": "only tried if the bus fails"
-					}
-				]
+			"title": "Sequence: do these in order",
+			"say": "A **Sequence** does its children one after another and moves on when one **succeeds**. If a child is RUNNING, the Sequence is RUNNING, and next tick it **resumes at that child**, not at the start. It stops at the first **FAILURE**. Step through this one tick by tick: the yellow lines show where each tick goes, and the colour of a box is its status.",
+			"diagram": {
+				"mermaid": "flowchart TD\n  seq[\"→ Sequence\"]:::idle\n  drive[\"Drive path\"]:::idle\n  aim[\"Aim\"]:::idle\n  shoot[\"Shoot\"]:::idle\n  seq --> drive\n  seq --> aim\n  seq --> shoot\n  classDef idle fill:#6b7280,stroke:#9ca3af,color:#fff\n  classDef running fill:#f59e0b,stroke:#b45309,color:#111\n  classDef success fill:#16a34a,stroke:#166534,color:#fff\n  classDef failure fill:#dc2626,stroke:#991b1b,color:#fff",
+				"caption": "Sequence, Drive path, Aim, Shoot: nothing has run yet."
 			}
 		},
 		{
-			"title": "Timeout",
-			"say": "A **Timeout** wraps one step and gives it a time limit in milliseconds. If the step is still RUNNING when time is up, the Timeout stops it and reports FAILURE. That turns 'might hang forever' into 'fails after three seconds', which a Fallback can then handle.",
-			"board": {
-				"code": "Fallback\n  Timeout 3000\n    Aim at the goal\n  Drive to the backup spot",
-				"language": "text",
-				"marks": [
-					{
-						"text": "Timeout 3000",
-						"label": "give up after 3 seconds"
-					}
-				]
+			"title": "Tick 1",
+			"say": "The Sequence ticks its first child. Driving takes time, so Drive path answers RUNNING, and so does the Sequence.",
+			"diagram": {
+				"mermaid": "flowchart TD\n  seq[\"→ Sequence · RUNNING\"]:::running\n  drive[\"Drive path · RUNNING\"]:::running\n  aim[\"Aim\"]:::idle\n  shoot[\"Shoot\"]:::idle\n  seq --> drive\n  seq --> aim\n  seq --> shoot\n  classDef idle fill:#6b7280,stroke:#9ca3af,color:#fff\n  classDef running fill:#f59e0b,stroke:#b45309,color:#111\n  classDef success fill:#16a34a,stroke:#166534,color:#fff\n  classDef failure fill:#dc2626,stroke:#991b1b,color:#fff\n  linkStyle 0 stroke:#facc15,stroke-width:4px",
+				"caption": "Yellow lines are where this tick went; colours are each node's status."
 			}
 		},
 		{
-			"title": "Tunable values",
-			"say": "Any number can be a **tunable**: instead of typing 500 into a Sleep, you declare a port on the tree (with a default) and write its name in braces, `{wait_msec}`. On the robot you can then change it from the dashboard without rebuilding anything."
+			"title": "Tick 2",
+			"say": "Next tick the Sequence resumes at the child that was RUNNING. Still driving, so still RUNNING.",
+			"diagram": {
+				"mermaid": "flowchart TD\n  seq[\"→ Sequence · RUNNING\"]:::running\n  drive[\"Drive path · RUNNING\"]:::running\n  aim[\"Aim\"]:::idle\n  shoot[\"Shoot\"]:::idle\n  seq --> drive\n  seq --> aim\n  seq --> shoot\n  classDef idle fill:#6b7280,stroke:#9ca3af,color:#fff\n  classDef running fill:#f59e0b,stroke:#b45309,color:#111\n  classDef success fill:#16a34a,stroke:#166534,color:#fff\n  classDef failure fill:#dc2626,stroke:#991b1b,color:#fff\n  linkStyle 0 stroke:#facc15,stroke-width:4px",
+				"caption": "Yellow lines are where this tick went; colours are each node's status."
+			}
+		},
+		{
+			"title": "Tick 3",
+			"say": "Drive path finishes: SUCCESS. The Sequence moves on to the next child in the same tick. Aim starts and is RUNNING.",
+			"diagram": {
+				"mermaid": "flowchart TD\n  seq[\"→ Sequence · RUNNING\"]:::running\n  drive[\"Drive path · SUCCESS\"]:::success\n  aim[\"Aim · RUNNING\"]:::running\n  shoot[\"Shoot\"]:::idle\n  seq --> drive\n  seq --> aim\n  seq --> shoot\n  classDef idle fill:#6b7280,stroke:#9ca3af,color:#fff\n  classDef running fill:#f59e0b,stroke:#b45309,color:#111\n  classDef success fill:#16a34a,stroke:#166534,color:#fff\n  classDef failure fill:#dc2626,stroke:#991b1b,color:#fff\n  linkStyle 0 stroke:#facc15,stroke-width:4px\n  linkStyle 1 stroke:#facc15,stroke-width:4px",
+				"caption": "Yellow lines are where this tick went; colours are each node's status."
+			}
+		},
+		{
+			"title": "Tick 4",
+			"say": "Aim reports SUCCESS, so Shoot is ticked right away. Shoot is RUNNING.",
+			"diagram": {
+				"mermaid": "flowchart TD\n  seq[\"→ Sequence · RUNNING\"]:::running\n  drive[\"Drive path · SUCCESS\"]:::success\n  aim[\"Aim · SUCCESS\"]:::success\n  shoot[\"Shoot · RUNNING\"]:::running\n  seq --> drive\n  seq --> aim\n  seq --> shoot\n  classDef idle fill:#6b7280,stroke:#9ca3af,color:#fff\n  classDef running fill:#f59e0b,stroke:#b45309,color:#111\n  classDef success fill:#16a34a,stroke:#166534,color:#fff\n  classDef failure fill:#dc2626,stroke:#991b1b,color:#fff\n  linkStyle 1 stroke:#facc15,stroke-width:4px\n  linkStyle 2 stroke:#facc15,stroke-width:4px",
+				"caption": "Yellow lines are where this tick went; colours are each node's status."
+			}
+		},
+		{
+			"title": "Tick 5",
+			"say": "Every child succeeded, so the Sequence reports SUCCESS to its parent.",
+			"diagram": {
+				"mermaid": "flowchart TD\n  seq[\"→ Sequence · SUCCESS\"]:::success\n  drive[\"Drive path · SUCCESS\"]:::success\n  aim[\"Aim · SUCCESS\"]:::success\n  shoot[\"Shoot · SUCCESS\"]:::success\n  seq --> drive\n  seq --> aim\n  seq --> shoot\n  classDef idle fill:#6b7280,stroke:#9ca3af,color:#fff\n  classDef running fill:#f59e0b,stroke:#b45309,color:#111\n  classDef success fill:#16a34a,stroke:#166534,color:#fff\n  classDef failure fill:#dc2626,stroke:#991b1b,color:#fff\n  linkStyle 2 stroke:#facc15,stroke-width:4px",
+				"caption": "Yellow lines are where this tick went; colours are each node's status."
+			}
+		},
+		{
+			"title": "Sequence: when a child fails",
+			"say": "Same tree, but this time Aim is going to fail. Watch what happens to Shoot.",
+			"diagram": {
+				"mermaid": "flowchart TD\n  seq[\"→ Sequence\"]:::idle\n  drive[\"Drive path\"]:::idle\n  aim[\"Aim\"]:::idle\n  shoot[\"Shoot\"]:::idle\n  seq --> drive\n  seq --> aim\n  seq --> shoot\n  classDef idle fill:#6b7280,stroke:#9ca3af,color:#fff\n  classDef running fill:#f59e0b,stroke:#b45309,color:#111\n  classDef success fill:#16a34a,stroke:#166534,color:#fff\n  classDef failure fill:#dc2626,stroke:#991b1b,color:#fff",
+				"caption": "Same Sequence, nothing has run yet."
+			}
+		},
+		{
+			"title": "Tick 1",
+			"say": "Drive path is RUNNING, so the Sequence is RUNNING.",
+			"diagram": {
+				"mermaid": "flowchart TD\n  seq[\"→ Sequence · RUNNING\"]:::running\n  drive[\"Drive path · RUNNING\"]:::running\n  aim[\"Aim\"]:::idle\n  shoot[\"Shoot\"]:::idle\n  seq --> drive\n  seq --> aim\n  seq --> shoot\n  classDef idle fill:#6b7280,stroke:#9ca3af,color:#fff\n  classDef running fill:#f59e0b,stroke:#b45309,color:#111\n  classDef success fill:#16a34a,stroke:#166534,color:#fff\n  classDef failure fill:#dc2626,stroke:#991b1b,color:#fff\n  linkStyle 0 stroke:#facc15,stroke-width:4px",
+				"caption": "Yellow lines are where this tick went; colours are each node's status."
+			}
+		},
+		{
+			"title": "Tick 2",
+			"say": "Drive path succeeds, but Aim answers FAILURE (no target in view). The Sequence stops here and reports FAILURE.",
+			"diagram": {
+				"mermaid": "flowchart TD\n  seq[\"→ Sequence · FAILURE\"]:::failure\n  drive[\"Drive path · SUCCESS\"]:::success\n  aim[\"Aim · FAILURE\"]:::failure\n  shoot[\"Shoot\"]:::idle\n  seq --> drive\n  seq --> aim\n  seq --> shoot\n  classDef idle fill:#6b7280,stroke:#9ca3af,color:#fff\n  classDef running fill:#f59e0b,stroke:#b45309,color:#111\n  classDef success fill:#16a34a,stroke:#166534,color:#fff\n  classDef failure fill:#dc2626,stroke:#991b1b,color:#fff\n  linkStyle 0 stroke:#facc15,stroke-width:4px\n  linkStyle 1 stroke:#facc15,stroke-width:4px",
+				"caption": "Yellow lines are where this tick went; colours are each node's status."
+			}
+		},
+		{
+			"title": "Tick 2",
+			"say": "Shoot was never ticked. A Sequence gives up at the first failure, so Shoot can rely on Aim having worked.",
+			"diagram": {
+				"mermaid": "flowchart TD\n  seq[\"→ Sequence · FAILURE\"]:::failure\n  drive[\"Drive path · SUCCESS\"]:::success\n  aim[\"Aim · FAILURE\"]:::failure\n  shoot[\"Shoot\"]:::idle\n  seq --> drive\n  seq --> aim\n  seq --> shoot\n  classDef idle fill:#6b7280,stroke:#9ca3af,color:#fff\n  classDef running fill:#f59e0b,stroke:#b45309,color:#111\n  classDef success fill:#16a34a,stroke:#166534,color:#fff\n  classDef failure fill:#dc2626,stroke:#991b1b,color:#fff",
+				"caption": "Yellow lines are where this tick went; colours are each node's status."
+			}
+		},
+		{
+			"title": "Fallback: plan B",
+			"say": "A **Fallback** is the mirror image of a Sequence. It tries its children in order and stops at the first one that **succeeds**. It only fails if **every** child failed. A Sequence is an AND (all must work); a Fallback is an OR (any one is enough).",
+			"diagram": {
+				"mermaid": "flowchart TD\n  fb[\"? Fallback\"]:::idle\n  a[\"Aim: vision\"]:::idle\n  b[\"Aim: manual\"]:::idle\n  c[\"Skip the shot\"]:::idle\n  fb --> a\n  fb --> b\n  fb --> c\n  classDef idle fill:#6b7280,stroke:#9ca3af,color:#fff\n  classDef running fill:#f59e0b,stroke:#b45309,color:#111\n  classDef success fill:#16a34a,stroke:#166534,color:#fff\n  classDef failure fill:#dc2626,stroke:#991b1b,color:#fff",
+				"caption": "A Fallback with three options."
+			}
+		},
+		{
+			"title": "Tick 1",
+			"say": "A Fallback tries its children in order. Aim: vision is RUNNING, so the Fallback waits.",
+			"diagram": {
+				"mermaid": "flowchart TD\n  fb[\"? Fallback · RUNNING\"]:::running\n  a[\"Aim: vision · RUNNING\"]:::running\n  b[\"Aim: manual\"]:::idle\n  c[\"Skip the shot\"]:::idle\n  fb --> a\n  fb --> b\n  fb --> c\n  classDef idle fill:#6b7280,stroke:#9ca3af,color:#fff\n  classDef running fill:#f59e0b,stroke:#b45309,color:#111\n  classDef success fill:#16a34a,stroke:#166534,color:#fff\n  classDef failure fill:#dc2626,stroke:#991b1b,color:#fff\n  linkStyle 0 stroke:#facc15,stroke-width:4px",
+				"caption": "Yellow lines are where this tick went; colours are each node's status."
+			}
+		},
+		{
+			"title": "Tick 2",
+			"say": "Aim: vision FAILS, so the Fallback tries its next child: Aim: manual.",
+			"diagram": {
+				"mermaid": "flowchart TD\n  fb[\"? Fallback · RUNNING\"]:::running\n  a[\"Aim: vision · FAILURE\"]:::failure\n  b[\"Aim: manual · RUNNING\"]:::running\n  c[\"Skip the shot\"]:::idle\n  fb --> a\n  fb --> b\n  fb --> c\n  classDef idle fill:#6b7280,stroke:#9ca3af,color:#fff\n  classDef running fill:#f59e0b,stroke:#b45309,color:#111\n  classDef success fill:#16a34a,stroke:#166534,color:#fff\n  classDef failure fill:#dc2626,stroke:#991b1b,color:#fff\n  linkStyle 0 stroke:#facc15,stroke-width:4px\n  linkStyle 1 stroke:#facc15,stroke-width:4px",
+				"caption": "Yellow lines are where this tick went; colours are each node's status."
+			}
+		},
+		{
+			"title": "Tick 3",
+			"say": "Aim: manual SUCCEEDS. The Fallback stops and reports SUCCESS; Skip the shot is never tried.",
+			"diagram": {
+				"mermaid": "flowchart TD\n  fb[\"? Fallback · SUCCESS\"]:::success\n  a[\"Aim: vision · FAILURE\"]:::failure\n  b[\"Aim: manual · SUCCESS\"]:::success\n  c[\"Skip the shot\"]:::idle\n  fb --> a\n  fb --> b\n  fb --> c\n  classDef idle fill:#6b7280,stroke:#9ca3af,color:#fff\n  classDef running fill:#f59e0b,stroke:#b45309,color:#111\n  classDef success fill:#16a34a,stroke:#166534,color:#fff\n  classDef failure fill:#dc2626,stroke:#991b1b,color:#fff\n  linkStyle 1 stroke:#facc15,stroke-width:4px",
+				"caption": "Yellow lines are where this tick went; colours are each node's status."
+			}
+		},
+		{
+			"title": "Tick 1",
+			"say": "Every child failed, so the Fallback reports FAILURE. Only now does its parent hear bad news.",
+			"diagram": {
+				"mermaid": "flowchart TD\n  fb[\"? Fallback · FAILURE\"]:::failure\n  a[\"Aim: vision · FAILURE\"]:::failure\n  b[\"Aim: manual · FAILURE\"]:::failure\n  c[\"Skip the shot · FAILURE\"]:::failure\n  fb --> a\n  fb --> b\n  fb --> c\n  classDef idle fill:#6b7280,stroke:#9ca3af,color:#fff\n  classDef running fill:#f59e0b,stroke:#b45309,color:#111\n  classDef success fill:#16a34a,stroke:#166534,color:#fff\n  classDef failure fill:#dc2626,stroke:#991b1b,color:#fff\n  linkStyle 0 stroke:#facc15,stroke-width:4px\n  linkStyle 1 stroke:#facc15,stroke-width:4px\n  linkStyle 2 stroke:#facc15,stroke-width:4px",
+				"caption": "Yellow lines are where this tick went; colours are each node's status."
+			}
+		},
+		{
+			"title": "What you've got",
+			"say": "Sequence = do these in order, stop at the first failure. Fallback = try these in order, stop at the first success. Put them together and you can say \"do A, then B, and if B doesn't work out, do C\". Next guide: time limits, checking a condition on every tick, and doing two things at once."
 		}
 	]
 }

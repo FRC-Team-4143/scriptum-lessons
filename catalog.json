@@ -1916,7 +1916,7 @@
 		{
 			"id": "arbor-behavior-trees",
 			"title": "Behavior trees",
-			"summary": "How a tree runs: ticks, RUNNING, SUCCESS and FAILURE, Sequence, Fallback and Timeout.",
+			"summary": "Ticks, RUNNING / SUCCESS / FAILURE, Sequence and Fallback, one tick at a time.",
 			"topic": "Tools",
 			"order": 35,
 			"modules": [
@@ -1927,6 +1927,21 @@
 			],
 			"kind": "concept",
 			"path": "lessons/arbor-intro/guides/arbor-behavior-trees.json"
+		},
+		{
+			"id": "arbor-trees-more",
+			"title": "Behavior trees: time limits and more",
+			"summary": "Timeout, ReactiveSequence, ParallelDeadline, and tunable values.",
+			"topic": "Tools",
+			"order": 36,
+			"modules": [
+				"arbor-intro"
+			],
+			"needs": [
+				"arbor"
+			],
+			"kind": "concept",
+			"path": "lessons/arbor-intro/guides/arbor-trees-more.json"
 		},
 		{
 			"id": "java-variables",

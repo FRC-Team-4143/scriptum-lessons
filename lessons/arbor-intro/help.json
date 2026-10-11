@@ -21,13 +21,13 @@
 		{
 			"checkpoint": "fail-handling",
 			"guides": [
-				"arbor-behavior-trees"
+				"arbor-trees-more"
 			]
 		},
 		{
 			"checkpoint": "tunable",
 			"guides": [
-				"arbor-behavior-trees"
+				"arbor-trees-more"
 			]
 		}
 	]
