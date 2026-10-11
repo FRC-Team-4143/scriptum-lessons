@@ -110,8 +110,8 @@
 		{
 			"title": "Waypoints and names",
 			"say": {
-				"never": "A path is a list of **waypoints**, and the order in the list is the order the robot drives. A **Pose Waypoint** pins where the robot is and which way it faces. A **Translation Waypoint** pins only the position and lets Choreo choose the heading. A path needs at least three: a start, a point to steer through, an end.\n\nThe **name** matters most of all: your Java loads each path by its name, so the spelling and capital letters must be exact. Rename it in the Choreo pane, not by renaming the file. Then press **Generate**: Choreo works out the schedule and saves the file.",
-				"bit": "Pose waypoint = position and heading, translation waypoint = position only. Order in the list is the driving order. Names must match your Java exactly. Generate saves the path."
+				"never": "A path is a list of **waypoints**, and the order in the list is the order the robot drives. A **Pose Waypoint** pins where the robot is and which way it faces. A **Translation Waypoint** pins only the position and lets Choreo choose the heading. A path needs at least three: a start, a point to steer through, an end.\n\nThe **name** matters most of all: your tree drives each path by its name, so the spelling and capital letters must be exact. Rename it in the Choreo pane, not by renaming the file. Then press **Generate**: Choreo works out the schedule and saves the file.",
+				"bit": "Pose waypoint = position and heading, translation waypoint = position only. Order in the list is the driving order. Names must match your tree exactly. Generate saves the path."
 			}
 		},
 		{
@@ -137,7 +137,7 @@
 		{
 			"title": "Name it ToPickup",
 			"say": {
-				"never": "Click the path's name in the list and type `ToPickup`, then press **Enter**. The spelling and capital letters must be exact, because your Java will load the path by this name. Rename it in the Choreo pane, not by renaming the file. Click **I did it** when it says ToPickup.",
+				"never": "Click the path's name in the list and type `ToPickup`, then press **Enter**. The spelling and capital letters must be exact, because your tree will drive the path by this name. Rename it in the Choreo pane, not by renaming the file. Click **I did it** when it says ToPickup.",
 				"bit": "Rename the path to exactly `ToPickup` (capital T and P)."
 			},
 			"waitFor": {
@@ -384,8 +384,8 @@
 		{
 			"title": "Check your work",
 			"say": {
-				"never": "Open the lesson chip and press **Verify**. **Two paths drawn** and **Paths go where they should** should pass now. **Paths named ToPickup and ToScore** also looks at your Java (`Autos.java` has to load them by name), so it passes after the next guide.",
-				"bit": "Press Verify. The naming check also reads your Java, so it passes after the next guide."
+				"never": "Open the lesson chip and press **Verify**. **Two paths drawn** and **Paths go where they should** should pass now. **Paths named ToPickup and ToScore** also looks at your tree (a `FollowPath` has to drive each path by name), so it passes after the next guide.",
+				"bit": "Press Verify. The naming check also reads your tree, so it passes after the next guide."
 			},
 			"target": {
 				"selector": "[data-tour='lesson']"

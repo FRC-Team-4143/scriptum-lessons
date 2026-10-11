@@ -1,7 +1,8 @@
 // robot-autonomous (Autonomous): the starter ships a Differential Choreo project with the
-// field targets as named poses and NO paths; solution/ adds the two paths (ToPickup and ToScore)
-// and the finished Autos.java. The script checkpoints (paths drawn / named / going to the right
-// places, and the order of the autonomous sequence) are round-tripped below, with negative cases.
+// field targets as named poses and NO paths, and a PickupAndScore behavior tree that only drives the
+// first path; solution/ adds the two paths (ToPickup and ToScore), the finished tree and the AIMING
+// step in RobotContainer. The script checkpoints (paths drawn / named / going to the right places,
+// the tree, the aim step) are round-tripped below, with negative cases.
 // The nt4-value checkpoints need a running simulator, so they are not covered here; they read the
 // "Check/..." topics that the provided LessonChecks.java and ShooterSubsystem publish.
 import { describe, expect, test } from "bun:test";
@@ -89,16 +90,62 @@ describe("robot-autonomous Choreo project", () => {
 		await L.overlaySolution(project);
 		expect(existsSync(join(choreo(project), "ToPickup.traj"))).toBe(true);
 		expect(existsSync(join(choreo(project), "ToScore.traj"))).toBe(true);
-		const autos = readFileSync(join(project, "src/main/java/frc/robot/autos/Autos.java"), "utf8");
-		expect(autos).toContain('loadTrajectory("ToPickup")');
-		expect(autos).toContain('loadTrajectory("ToScore")');
+		const tree = readFileSync(join(project, "src/main/deploy/autos/trees/PickupAndScore.xml"), "utf8");
+		expect(tree).toContain('<FollowPath trajectory="ToPickup"/>');
+		expect(tree).toContain('<FollowPath trajectory="ToScore"/>');
 	});
 });
 
-// The script checkpoints read the student's files (jq over the .traj files, grep over Autos.java).
+describe("robot-autonomous behavior trees", () => {
+	const autos = join(L.dir, "project/src/main/deploy/autos");
+	const java = (file: string) => readFileSync(join(L.dir, "project/src/main/java/frc/robot", file), "utf8");
+
+	test("nodes.xml lists exactly the robot nodes AutoNodes registers", () => {
+		const ids = [...readFileSync(join(autos, "nodes.xml"), "utf8").matchAll(/<(?:Action|Condition) ID="([^"]+)"/g)].map((m) => m[1]);
+		expect(ids.sort()).toEqual(["FollowPath", "IsSystemState", "SetWantedState"]);
+		const nodes = java("autos/AutoNodes.java");
+		expect(nodes).toContain('"FollowPath"');
+		expect(nodes).toContain("RobotStateNodes.register(");
+	});
+
+	test("nodes.xml names the robot states a tree may ask for, and RobotStates has them", () => {
+		const states = [...java("RobotStates.java").matchAll(/^\s{2}([A-Z_]+),?$/gm)].map((m) => m[1]);
+		const nodes = readFileSync(join(autos, "nodes.xml"), "utf8");
+		const askable = nodes.match(/Robot state to request: ([A-Z_, ]+?) or ([A-Z_]+)</);
+		expect(askable).not.toBeNull();
+		for (const state of [...askable![1].split(", "), askable![2]]) expect(states).toContain(state);
+		// the step state is picked by the robot, never asked for
+		expect(askable![0]).not.toContain("AIMING");
+		expect(states).toContain("AIMING");
+	});
+
+	test("the Arbor project points at the trees and the simulator's live view", () => {
+		const project = readJson(join(autos, "bt_project.json"));
+		expect(project.nodes).toBe("nodes.xml");
+		expect(project.trees).toBe("trees");
+		expect(project.live.url).toBe("ws://localhost:1670");
+	});
+
+	test("the starter tree is PickupAndScore and only drives the first path", () => {
+		const tree = readFileSync(join(autos, "trees/PickupAndScore.xml"), "utf8");
+		expect(tree).toContain('main_tree_to_execute="PickupAndScore"');
+		expect(tree).toContain('<BehaviorTree ID="PickupAndScore">');
+		expect(tree).toContain('<FollowPath trajectory="ToPickup"/>');
+		expect(tree).not.toContain("ToScore");
+	});
+
+	test("the starter has no command-based autos left", () => {
+		const dir = join(L.dir, "project/src/main/java/frc/robot/autos");
+		expect(readdirSync(dir)).toEqual(["AutoNodes.java"]);
+	});
+});
+
+// The script checkpoints read the student's files (jq over the .traj files, grep over the tree XML
+// and RobotContainer.java).
 describe.skipIf(!hasJdk)("robot-autonomous script checkpoints", () => {
-	const SCRIPTS = ["paths-drawn", "path-names", "paths-goal", "auto-sequence"];
-	const AUTOS = "src/main/java/frc/robot/autos/Autos.java";
+	const SCRIPTS = ["paths-drawn", "path-names", "paths-goal", "auto-tree", "aim-step"];
+	const TREE = "src/main/deploy/autos/trees/PickupAndScore.xml";
+	const CONTAINER = "src/main/java/frc/robot/RobotContainer.java";
 	const traj = (project: string, name: string) => join(choreo(project), `${name}.traj`);
 
 	/** A solved project that `break` then spoils; verify() says whether `checkpoint` notices. */
@@ -120,15 +167,16 @@ describe.skipIf(!hasJdk)("robot-autonomous script checkpoints", () => {
 	};
 	const editText = (file: string, edit: (text: string) => string) =>
 		writeFileSync(file, edit(readFileSync(file, "utf8")));
-	/** Autos.java's body with only these commands inside addCommands(...). */
-	const autosWith = (commands: string[]) => (text: string) =>
-		`${text.slice(0, text.indexOf("      addCommands("))}      addCommands(${commands.join(", ")});\n    }\n  }\n}\n`;
-	const PICKUP = 'robot.followPath(getTrajectory("ToPickup"))';
-	const SCORE = 'robot.followPath(getTrajectory("ToScore"))';
-	const want = (state: string) =>
-		`Commands.startEnd(() -> robot.setWantedState(RobotStates.${state}), () -> robot.setWantedState(RobotStates.AUTO))`;
-	const AIM = `${want("AIM")}.until(DrivetrainSubsystem.getInstance()::isAimed).withTimeout(3.0)`;
-	const SHOOT = `${want("SHOOT")}.withTimeout(2.0)`;
+	/** PickupAndScore.xml with only these steps inside the Sequence. */
+	const treeWith = (steps: string[]) => (p: string) =>
+		editText(join(p, TREE), (t) => t.replace(/<Sequence>[\s\S]*<\/Sequence>/, `<Sequence>\n${steps.join("\n")}\n</Sequence>`));
+	const PICKUP = '<FollowPath trajectory="ToPickup"/>';
+	const SCORE = '<FollowPath trajectory="ToScore"/>';
+	const WAIT = '<Sleep msec="500"/>';
+	const AIM = '<Timeout msec="3000"><SetWantedState state="AIM"/></Timeout>';
+	const SHOOT = '<SetWantedState state="SHOOT"/>';
+	const KEEP = '<Sleep msec="2000"/>';
+	const STOP = '<SetWantedState state="AUTO"/>';
 
 	test("every script checkpoint fails on the starter and passes with the solution", async () => {
 		await L.roundTrip(SCRIPTS);
@@ -152,7 +200,7 @@ describe.skipIf(!hasJdk)("robot-autonomous script checkpoints", () => {
 		expect(swerve.exitCode).not.toBe(0);
 	}, 60_000);
 
-	test("path-names needs ToPickup and ToScore, spelled the way Autos.java loads them", async () => {
+	test("path-names needs ToPickup and ToScore, spelled the way the tree drives them", async () => {
 		const renamed = await spoiled("path-names", (p) => renameSync(traj(p, "ToScore"), traj(p, "Score")));
 		expect(renamed.exitCode).not.toBe(0);
 		const insideName = await spoiled("path-names", (p) =>
@@ -160,14 +208,17 @@ describe.skipIf(!hasJdk)("robot-autonomous script checkpoints", () => {
 		);
 		expect(insideName.exitCode).not.toBe(0);
 		const misspelled = await spoiled("path-names", (p) =>
-			editText(join(p, AUTOS), (t) => t.replace('loadTrajectory("ToScore")', 'loadTrajectory("toScore")')),
+			editText(join(p, TREE), (t) => t.replace('trajectory="ToScore"', 'trajectory="toScore"')),
 		);
 		expect(misspelled.exitCode).not.toBe(0);
-		const unknown = await spoiled("path-names", (p) =>
-			editText(join(p, AUTOS), (t) => t.replace('loadTrajectory("ToScore");', 'loadTrajectory("ToScore");\n      loadTrajectory("Nope");')),
-		);
+		const unknown = await spoiled("path-names", treeWith([PICKUP, SCORE, '<FollowPath trajectory="Nope"/>']));
 		expect(unknown.exitCode).not.toBe(0);
 		expect(unknown.text).toContain("Nope");
+		// a commented-out path does not count
+		const commented = await spoiled("path-names", (p) =>
+			editText(join(p, TREE), (t) => t.replace(SCORE, `<!-- ${SCORE} -->`)),
+		);
+		expect(commented.exitCode).not.toBe(0);
 	}, 60_000);
 
 	test("paths-goal needs the paths to start, join and end at the field targets", async () => {
@@ -194,30 +245,64 @@ describe.skipIf(!hasJdk)("robot-autonomous script checkpoints", () => {
 		expect((await spoiled("paths-goal", moveEnd("ToScore", "last", 0.1))).exitCode).toBe(0);
 	}, 60_000);
 
-	test("auto-sequence needs both paths, then aim, then shoot, in that order", async () => {
-		const sequence = (commands: string[]) => (p: string) => editText(join(p, AUTOS), autosWith(commands));
+	test("auto-tree needs both paths, then aim in a Timeout, then shoot, wait and stop, in that order", async () => {
 		const cases: Record<string, string[]> = {
-			"aim after the shot": [PICKUP, SCORE, SHOOT, AIM],
-			"no aim step": [PICKUP, SCORE, SHOOT],
-			"no shot": [PICKUP, SCORE, AIM],
-			"scoring path first": [SCORE, PICKUP, AIM, SHOOT],
-			"only the first path": [PICKUP, AIM, SHOOT],
-			"aim without isAimed": [PICKUP, SCORE, `${want("AIM")}.withTimeout(2.0)`, SHOOT],
+			"aim after the shot": [PICKUP, SCORE, SHOOT, KEEP, AIM, STOP],
+			"no aim step": [PICKUP, SCORE, SHOOT, KEEP, STOP],
+			"aim without a Timeout": [PICKUP, SCORE, '<SetWantedState state="AIM"/>', SHOOT, KEEP, STOP],
+			"no shot": [PICKUP, SCORE, AIM, KEEP, STOP],
+			"no Sleep after the shot": [PICKUP, SCORE, AIM, SHOOT, STOP],
+			"never back to AUTO": [PICKUP, SCORE, AIM, SHOOT, KEEP],
+			"AUTO before the Sleep": [PICKUP, SCORE, AIM, SHOOT, STOP, KEEP],
+			"scoring path first": [SCORE, PICKUP, AIM, SHOOT, KEEP, STOP],
+			"only the first path": [PICKUP, AIM, SHOOT, KEEP, STOP],
 		};
-		for (const [what, commands] of Object.entries(cases)) {
-			const result = await spoiled("auto-sequence", sequence(commands));
+		for (const [what, steps] of Object.entries(cases)) {
+			const result = await spoiled("auto-tree", treeWith(steps));
 			expect(result.exitCode, what).not.toBe(0);
 		}
-		// extra commands in between (the pickup wait) and other formatting are fine
-		const fine = await spoiled("auto-sequence", sequence([PICKUP, "Commands.waitSeconds(0.5)", SCORE, AIM, SHOOT]));
-		expect(fine.exitCode).toBe(0);
-		// a commented-out aim does not count
-		const commented = await spoiled("auto-sequence", (p) =>
-			editText(join(p, AUTOS), (t) =>
-				t.replace("() -> robot.setWantedState(RobotStates.AIM),", "// () -> robot.setWantedState(RobotStates.AIM),\n                  () -> {},"),
-			),
+		// what Arbor writes is fine too: other attribute orders, names, line breaks, no pickup wait
+		const arbor = await spoiled(
+			"auto-tree",
+			treeWith([
+				'<FollowPath name="first" trajectory="ToPickup" />',
+				'<FollowPath\n  trajectory="ToScore"\n  name="second"/>',
+				'<Timeout name="limit" msec="2500">\n  <SetWantedState name="aim" state="AIM"></SetWantedState>\n</Timeout>',
+				'<SetWantedState state="SHOOT" name="shoot"/>',
+				'<Sleep name="keep" msec="1500"/>',
+				STOP,
+			]),
 		);
+		expect(arbor.exitCode, arbor.text).toBe(0);
+		// a commented-out aim does not count
+		const commented = await spoiled("auto-tree", treeWith([PICKUP, SCORE, `<!-- ${AIM} -->`, SHOOT, KEEP, STOP]));
 		expect(commented.exitCode).not.toBe(0);
+		// the tree must be saved as PickupAndScore
+		const renamed = await spoiled("auto-tree", (p) =>
+			renameSync(join(p, TREE), join(p, "src/main/deploy/autos/trees/Mine.xml")),
+		);
+		expect(renamed.exitCode).not.toBe(0);
+	}, 120_000);
+
+	test("aim-step needs AIMING until isAimed, then AIM, in handleStateTransition", async () => {
+		const aimCase = (body: string) => (p: string) =>
+			editText(join(p, CONTAINER), (t) => t.replace(/case AIM:\n[\s\S]*?break;/, `case AIM:\n${body}\n        break;`));
+		const cases: Record<string, string> = {
+			"straight to AIM": "system_state_ = RobotStates.AIM;",
+			"always AIMING": "system_state_ = RobotStates.AIMING;",
+			"no isAimed": "if (true) { system_state_ = RobotStates.AIM; } else { system_state_ = RobotStates.AIMING; }",
+			"commented out": "// if (drive_.isAimed()) { system_state_ = RobotStates.AIM; } else { system_state_ = RobotStates.AIMING; }\nsystem_state_ = RobotStates.AIM;",
+		};
+		for (const [what, body] of Object.entries(cases)) {
+			const result = await spoiled("aim-step", aimCase(body));
+			expect(result.exitCode, what).not.toBe(0);
+		}
+		// another fine way to write it
+		const ternaryFree = await spoiled(
+			"aim-step",
+			aimCase("if (!drive_.isAimed()) {\n  system_state_ = RobotStates.AIMING;\n} else {\n  system_state_ = RobotStates.AIM;\n}"),
+		);
+		expect(ternaryFree.exitCode).toBe(0);
 	}, 90_000);
 });
 

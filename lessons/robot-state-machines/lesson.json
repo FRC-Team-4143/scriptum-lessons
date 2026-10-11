@@ -8,8 +8,7 @@
 		"robot-control-theory"
 	],
 	"guides": [
-		"build-and-run",
-		"robot-state-machines-commands"
+		"build-and-run"
 	],
 	"checkpoints": [
 		{

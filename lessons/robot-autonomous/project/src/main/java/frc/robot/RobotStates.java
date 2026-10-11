@@ -8,8 +8,16 @@ public enum RobotStates {
   DRIVE,
   /** Shooting (driving from the sticks in teleop, standing still in autonomous). */
   SHOOT,
-  /** Turning to face the goal, shooter stopped. */
+  /**
+   * Facing the goal, shooter stopped. This is what buttons and autos ask for. The robot only gets
+   * here once it is aimed: until then it is in the step state AIMING.
+   */
   AIM,
+  /**
+   * Step state: still turning to face the goal. Nothing asks for it; handleStateTransition picks it
+   * on the way to AIM.
+   */
+  AIMING,
   /** Autonomous: the drivetrain drives whatever speeds the routine asks for, shooter stopped. */
   AUTO,
   /** Autonomous: following a Choreo path (see {@link RobotContainer#followPath}). */

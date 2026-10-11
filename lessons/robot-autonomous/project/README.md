@@ -2,9 +2,10 @@
 
 The first 15 seconds of a match are **autonomous**: nobody holds a controller and the robot drives
 itself. The competition robot's autonomous routines are built in two jobs: first you **draw paths** in
-Choreo, then you **write the sequence** of commands that drives them. In this lesson you do both. Your
+Choreo, then you **build a behavior tree** in Arbor that drives them. In this lesson you do both. Your
 robot drives to a game piece, drives to a scoring spot, **aims at the goal** with the aim state you built
-and tuned in the Computer Vision lesson, and **shoots**.
+and tuned in the Computer Vision lesson, and **shoots**. Last, you teach the robot's `AIM` state to wait
+until the robot is really aimed, so the tree doesn't shoot too early.
 
 > **New to an idea here?** Press the **Dozer** button in the top bar. His guides explain each idea this lesson uses, and **I'm so lost → Teach me, step by step** walks you through every job.
 
@@ -16,6 +17,8 @@ and tuned in the Computer Vision lesson, and **shoots**.
   They must work (hold the left bumper, **E** on the keyboard, in Teleop to test the aim).
 - You finished the **Choreo** lesson. It teaches the Choreo pane: waypoints, constraints and Generate.
   This lesson only says which waypoints to draw.
+- You finished the **Arbor** lesson. It teaches the Arbor pane: trees, nodes, ports, Sequence, Timeout
+  and Sleep. This lesson only says which steps to put in the tree.
 
 ## Where things live
 
@@ -24,20 +27,24 @@ Everything is under `src/main/`:
 - `deploy/choreo/robot.chor` is the Choreo project: a **Differential** drive with the robot's numbers
   (24 inch track width, 50 kg) and four named poses, `Start`, `Pickup`, `ScoreSpot` and `Goal`. The paths
   you draw are saved next to it as `ToPickup.traj` and `ToScore.traj`.
-- `java/frc/robot/autos/Autos.java` is the routine, and **the only Java file you edit**. It has two TODOs.
+- `deploy/autos/trees/PickupAndScore.xml` is the routine, a **behavior tree**. You build it in the Arbor
+  pane, which saves it here. The starter tree only drives the first path. Every tree in this folder is a
+  choice in the dashboard's **Auto Chooser**, named after its file.
+- `deploy/autos/nodes.xml` tells Arbor which robot steps exist (`FollowPath`, `SetWantedState`,
+  `IsSystemState`). Provided, don't edit.
+- `java/frc/robot/RobotContainer.java` is the robot's state machine. Your tree asks it for robot states
+  (`AIM`, `SHOOT`, back to `AUTO`) with `SetWantedState`, the same way the buttons do with
+  `setWantedState(...)`. One `SHOOT` state serves both the right bumper and your tree, so shooting is
+  written once. It has **one TODO**, in `handleStateTransition`: the only Java you write.
+- `java/frc/robot/autos/AutoNodes.java` is where the robot's steps come from: `FollowPath` asks
+  RobotContainer to follow a path and succeeds once the robot has arrived. Read it, don't change it.
 - `java/frc/robot/FieldTargets.java` has the same poses in code, so the checks can measure how close the
   robot got. Provided, don't edit.
-- `java/frc/robot/RobotContainer.java` is the robot's state machine. Your routine asks it for robot
-  states (`AIM`, `SHOOT`, back to `AUTO`) the same way the buttons do, with `setWantedState(...)`. It
-  also has `followPath(...)`, which asks for `FOLLOW_PATH` and plays a path back. One `SHOOT` state
-  serves both the right bumper and your routine, so shooting is written once.
-  `DifferentialPathFollower.java` and the Choreo methods in `DrivetrainSubsystem.java` turn the path into
+- `DifferentialPathFollower.java` and the Choreo methods in `DrivetrainSubsystem.java` turn the path into
   wheel speeds. They are already tuned: read them to see how a path becomes motor power.
 - `subsystems/localization/LocalizationSubsystem.java` is the pose estimate you finished in the Computer
   Vision lesson (wheels plus cameras). The path follower, the aim and the distance checks all use it.
   Read it, don't change it.
-- `autos/DriveDistanceCommand.java` and `autos/TurnToAngleCommand.java` are finished example commands
-  that the Dozer guides about commands use. Read them, don't change them.
 
 ## Session plan (about 3 hours)
 
@@ -45,13 +52,13 @@ A suggested pace. Take short breaks whenever the class needs one.
 
 | Minutes | What to do |
 | --- | --- |
-| 15 | Read: Autos = paths + a sequence |
-| 30 | Read about commands: inside a command, command types, dots that change commands |
+| 15 | Read: Autos = paths + a tree |
+| 20 | Read: behavior trees, Timeout and Sleep (the Arbor lesson's guides, again) |
 | 25 | Part 1: draw and generate **ToPickup** |
 | 20 | Part 1: draw and generate **ToScore** |
-| 15 | Part 2: load the paths |
-| 30 | Part 2: write the sequence |
-| 20 | Part 3: run it and watch it in AdvantageScope |
+| 30 | Part 2: build the tree in Arbor |
+| 25 | Part 3: make AIM wait until aimed |
+| 20 | Part 4: run it and watch it in Arbor and AdvantageScope |
 | 20 | Fix whatever a check says is wrong |
 | 5 | Verify |
 
@@ -95,31 +102,66 @@ Go slower on anything that is new. The stretch ideas at the end are not expected
    Pickup (x 5.5, y 2.5, heading 0), a translation waypoint (x 6.0, y 3.8 works) and a pose waypoint on
    **ScoreSpot** (x 6.5, y 5.0, heading 90 degrees). Generate it too.
 
-**Part 2: write the sequence (`Autos.java`)**
+**Part 2: build the tree (Arbor pane)**
 
-7. **TODO 1: load both paths** by name with `loadTrajectory("ToPickup")` and `loadTrajectory("ToScore")`.
-8. **TODO 2: add the commands**, in this order, inside `addCommands(...)`. Get the robot first with
-   `RobotContainer robot = RobotContainer.getInstance();`.
-   1. follow the first path: `robot.followPath(getTrajectory("ToPickup"))`
-   2. wait half a second, standing in for picking up the game piece: `Commands.waitSeconds(0.5)`
-   3. follow the second path
-   4. aim at the goal: ask the robot for `AIM` with
-      `Commands.startEnd(() -> robot.setWantedState(RobotStates.AIM), () -> robot.setWantedState(RobotStates.AUTO))`,
-      ended with `.until(...)` the drivetrain's `isAimed` method, and `.withTimeout(3.0)` so a robot that
-      cannot aim cannot hold up the routine
-   5. shoot: the same kind of `Commands.startEnd(...)`, asking for `RobotStates.SHOOT`, with a
-      `.withTimeout(2.0)`
-9. **Add the imports** for the classes you used (hover over a red name and use the quick fix).
+7. **Open the tree.** In the Arbor pane's **Trees** list, click **PickupAndScore**. It is a `Sequence`
+   with one step, `FollowPath` with the `trajectory` `ToPickup`.
+8. **Add the steps**, in this order, under the Sequence (drag them from the **Nodes** list, then fill in
+   their ports on the right):
+   1. after the first path, a `Sleep` with `msec` `500`, standing in for picking up the game piece
+   2. a second `FollowPath` with `trajectory` `ToScore`
+   3. a `Timeout` with `msec` `3000`, and **inside it** a `SetWantedState` with `state` `AIM`. The
+      Timeout gives up after 3 seconds, so a robot that cannot aim cannot hold up the routine
+   4. a `SetWantedState` with `state` `SHOOT`
+   5. a `Sleep` with `msec` `2000`: asking for SHOOT succeeds as soon as the robot is shooting, so this
+      is what keeps it shooting for a while
+   6. a `SetWantedState` with `state` `AUTO`, which stops the shooter
+9. **Save** (Ctrl+S) and open the **XML** tab to see what Arbor wrote. It should look like this:
 
-**Part 3: run it**
+   ```xml
+   <BehaviorTree ID="PickupAndScore">
+     <Sequence>
+       <FollowPath trajectory="ToPickup"/>
+       <Sleep msec="500"/>
+       ...
+     </Sequence>
+   </BehaviorTree>
+   ```
 
-10. Press **Start** and wait for **Running**. In Elastic, add a **ComboBox Chooser** widget for
-   **Auto Choices** (under SmartDashboard) and choose **Pickup And Score** as the
-   autonomous routine (the default, Do Nothing, leaves the robot still). Then in the Driver Station pick **Auto** and press **Enable**. Keep your hands off the keys: the routine drives
-   itself. (To practice by hand in **Teleop**, drive with **W/S** and turn with **A/D**, the left stick;
-   the left bumper, **E**, aims at the goal, and the right bumper, **U**, shoots.)
-11. **Watch it in AdvantageScope** (below). Fix what looks wrong, press Start again, and run again.
-12. **Click Verify.**
+   Each step is a **tag**. The tag name is the node, each `name="value"` is a port, and a step that
+   holds others (the Sequence, the Timeout) has an opening and a closing tag with its children between
+   them. The robot reads this file every time it starts, so **changing a tree needs no rebuild**.
+
+**Part 3: make AIM wait until aimed (`RobotContainer.java`)**
+
+Run the tree now and the robot shoots without turning. `SetWantedState AIM` succeeds as soon as the
+robot is **in** AIM, and right now `handleStateTransition` puts it in AIM at once. So the tree moves
+straight on to SHOOT.
+
+10. **Find the TODO** in `handleStateTransition`, in `case AIM:`. Make AIM a sequence with a **step
+    state**, like the shooter's SPIN_UP: while the robot is still turning it is in `RobotStates.AIMING`,
+    and only once `drive_.isAimed()` is true is it in `RobotStates.AIM`. Write it as an `if`/`else` that
+    sets `system_state_` in each branch, and keep the `break;`.
+
+Both states turn toward the goal (see `updateLogic`), so the left bumper still aims the same way. The
+difference is *when* the robot counts as being in AIM, and that is what the tree waits for. This is how
+the competition robot writes its sequences: once, in the robot's state machine, used by buttons and
+autos alike.
+
+**Part 4: run it**
+
+11. Press **Start** and wait for **Running** (Java changes need a rebuild). In Elastic, add a **ComboBox
+   Chooser** widget for **Auto Chooser** (under SmartDashboard) and choose **PickupAndScore** (the
+   default, Do_Nothing, leaves the robot still). Keep the Driver Station on a **Blue** alliance: the paths
+   are drawn for blue. Then in the Driver Station pick **Auto** and press **Enable**. Keep your hands off
+   the keys: the tree drives the robot. (To practice by hand in **Teleop**, drive with **W/S** and turn
+   with **A/D**, the left stick; the left bumper, **E**, aims at the goal, and the right bumper, **U**,
+   shoots.)
+12. **Watch the tree in Arbor.** Press **Connect** in Arbor's toolbar, then run again. Each step turns
+   orange while it runs, then green (SUCCESS) or red (FAILURE). Each run is also saved in `logs/bt` as a
+   `.btlog` file, which Arbor can replay step by step.
+13. **Watch it in AdvantageScope** (below). Fix what looks wrong, press Start again, and run again.
+14. **Click Verify.**
 
 ## Watching it in AdvantageScope
 
@@ -136,6 +178,9 @@ On the 2D Field tab add these, and plot the others:
 - `Drive/DistanceToPickup` and `Drive/DistanceToScoreSpot`: true distances in meters, to plot.
 - `Drive/TrueAimErrorDegrees`: how far the robot truly is from facing the goal.
 - `Subsystem/Shooter/ShotCount` and `Subsystem/Shooter/AimErrorAtShotDegrees`.
+- `Robot/State`: the robot state right now. During the aim you should see `AIMING`, then `AIM`.
+- `BehaviorTree/PickupAndScore/Result`: `SUCCESS` or `FAILURE` once the tree has finished, and
+  `BehaviorTree/PickupAndScore/Error` if the tree could not load (a misspelled node or a missing path).
 - `Check/...`: the smallest and biggest values since Start, which Verify reads.
 
 ## How each checkpoint is checked
@@ -143,40 +188,43 @@ On the 2D Field tab add these, and plot the others:
 | Checkpoint | What it looks for |
 | --- | --- |
 | **Two paths drawn** | Two generated paths, each with at least three waypoints. |
-| **Paths named ToPickup and ToScore** | Paths named exactly `ToPickup` and `ToScore`, and `Autos.java` loads both by those names. |
+| **Paths named ToPickup and ToScore** | Paths named exactly `ToPickup` and `ToScore`, and FollowPath steps in your trees that drive both by those names. |
 | **Paths go where they should** | ToPickup starts on Start and ends on Pickup. ToScore starts where ToPickup ended and ends on ScoreSpot. Each end must be within about 30 centimeters, the join within 15. |
-| **Autonomous sequence written** | `Autos.java` drives ToPickup, then ToScore, then aims (with `isAimed`), then shoots, in that order. |
+| **Autonomous tree built** | `PickupAndScore.xml` drives ToPickup, then ToScore, then asks for AIM inside a Timeout, then SHOOT, a Sleep, and AUTO, in that order. |
+| **AIM waits until aimed** | `handleStateTransition` puts the robot in AIMING until `drive_.isAimed()`, and only then in AIM. |
 | **Reaches the pickup** | The robot's true position got within 0.4 meters of Pickup during a run. |
 | **Reaches the scoring spot** | The robot's true position got within 0.4 meters of ScoreSpot. |
 | **Aims before it shoots** | When each shot started, the robot truly faced the goal within 5 degrees. |
-| **Shoots** | The routine shot at least once. |
+| **Shoots** | The tree shot at least once. |
 
-The last four read a running simulation, so run **Pickup And Score** in Auto before you Verify. They
+The last four read a running simulation, so run **PickupAndScore** in Auto before you Verify. They
 remember the best the robot did since you pressed **Start**, so after a fix, press Start again.
 
-If a run check fails, read it as a clue. Pickup failed: the first path or its `followPath`. Scoring spot
-failed: the second path never ran, or doesn't start where the first ended. Aim failed: the aim step is
-missing, comes after the shot, or has no `.until(...isAimed)`. Shoots failed: the routine ended before
-`shoot()`.
+If a run check fails, read it as a clue, and look for the red step in Arbor. Pickup failed: the first
+path or its FollowPath. Scoring spot failed: the second path never ran, or doesn't start where the first
+ended. Aim failed: the AIM step is missing or comes after the shot, or the robot reaches AIM before it is
+aimed (Part 3). Shoots failed: the tree stopped before SHOOT (a Timeout that ran out fails the tree), or
+there is no Sleep after SHOOT.
 
 Stuck on a step? Open **Dozer**: he can explain the idea or walk you through it.
 
-## Java you will meet
+## Java and XML you will meet
 
-- A routine **extends `Auto`**, which holds a list of commands run in order (`addCommands(...)`).
-- **Decorators** change a command: `.until(...)` ends it on a condition and `.withTimeout(...)` ends it
-  after a time.
-- A **method reference** like `DrivetrainSubsystem.getInstance()::isAimed` hands over a method so a
-  command can call it again and again.
+- A **step state**: a state nothing asks for, which `handleStateTransition` picks on the way to the state
+  that was asked for (AIMING on the way to AIM).
+- An **`if`/`else` inside a `switch` case**, where each branch picks the next state.
+- **XML**: tags, attributes and nesting. `<Sleep msec="500"/>` is one tag with one attribute; a tag with
+  children has an opening `<Timeout msec="3000">` and a closing `</Timeout>`.
 
 ## Stretch
 
-- **Event markers.** In Choreo, a path can carry named markers. The competition robot binds markers such
-  as `Intake Out` and `Shoot` to actions that run partway along a path. `DrivetrainSubsystem` already has
-  `getChoreoEventTimeTrigger("Name")`, which turns true when the path passes a marker. Add a marker to
-  ToScore and make something log a message when it is reached.
-- Spin the flywheel up **while** the robot drives the second path, with `.alongWith(...)`, so the shot
-  starts sooner.
+- **Plan B.** Put the Timeout around AIM inside a `Fallback`, with a second child that just shoots
+  anyway (`SetWantedState SHOOT`). What happens when you move `GOAL` in `DrivetrainConstants.java` so the
+  robot can't aim in time?
+- **Spin up early.** Use a `ParallelDeadline` so the flywheel spins up while the robot drives the second
+  path.
+- **A tunable wait.** Give the tree an input port such as `pickup_wait_msec` (as in the Arbor lesson) and
+  write `{pickup_wait_msec}` in the first Sleep. Change it from Elastic without touching the XML.
+- **Replay a run.** Open a `.btlog` from `logs/bt` in Arbor and step through it.
 - Change the Max Velocity and see how it changes the total time (`Subsystem/Drivetrain/Choreo/TotalTime`).
-- Move `GOAL` in `DrivetrainConstants.java`. Does the routine still aim before it shoots?
 - Draw a third path that goes back to Start, and drive it at the end.

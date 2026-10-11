@@ -35,7 +35,9 @@
     "**/lesson": true,
     "**/Main.java": true,
     "**/BuildConstants.java": true,
-    "**/deploy": true,
+    "**/deploy/choreo": true,
+    "**/deploy/robots": true,
+    "**/deploy/autos/bt_project.json": true,
     "**/mechanisms": true,
     "ctre_sim": true,
     "networktables.json": true
@@ -60,7 +62,9 @@
     "**/lesson": true,
     "**/Main.java": true,
     "**/BuildConstants.java": true,
-    "**/deploy": true,
+    "**/deploy/choreo": true,
+    "**/deploy/robots": true,
+    "**/deploy/autos/bt_project.json": true,
     "**/mechanisms": true,
     "ctre_sim": true,
     "networktables.json": true

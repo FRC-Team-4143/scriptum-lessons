@@ -7,6 +7,10 @@
 	"restrictTools": [
 		"arbor"
 	],
+	"guides": [
+		"arbor-behavior-trees",
+		"arbor-trees-more"
+	],
 	"checkpoints": [
 		{
 			"id": "new-tree",

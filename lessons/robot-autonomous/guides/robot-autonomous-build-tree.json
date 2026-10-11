@@ -1,0 +1,166 @@
+{
+	"title": "Build the autonomous tree",
+	"summary": "In Arbor: drive both paths, aim inside a Timeout, shoot, wait, and stop.",
+	"topic": "Robot",
+	"order": 533,
+	"needs": [
+		"arbor"
+	],
+	"steps": [
+		{
+			"title": "The job",
+			"say": {
+				"never": "Your routine is a **behavior tree** in the file `PickupAndScore.xml`, and you build it in the **Arbor** pane by dragging steps together, like in the Arbor lesson. The starter tree already drives the first path.\n\nYou will add the rest, in order: wait a moment (a stand-in for picking up the game piece), drive the second path, aim at the goal (with a time limit), shoot for a while, then stop.\n\nYou are done when Verify says **Paths named ToPickup and ToScore** and **Autonomous tree built**. They read the XML Arbor saves, and a failing check says which step it wanted.",
+				"bit": "Build PickupAndScore in Arbor: path, wait, path, aim (inside a Timeout), shoot, wait, back to AUTO."
+			}
+		},
+		{
+			"title": "Steps that wait",
+			"say": {
+				"never": "Every step answers RUNNING, SUCCESS or FAILURE each tick, and a **Sequence** moves on only when a step succeeds.\n\n`FollowPath` stays RUNNING until the robot has arrived at the end of the path. `Sleep` stays RUNNING for the time you give it, in milliseconds (1000 = one second). `SetWantedState` asks the robot for a state, the same states the buttons ask for, and succeeds **as soon as the robot is in that state**.",
+				"bit": "FollowPath runs until the robot arrives, Sleep for its msec, SetWantedState until the robot is in the state."
+			}
+		},
+		{
+			"title": "Why SHOOT needs a Sleep",
+			"say": {
+				"never": "Asking for `SHOOT` succeeds at once: the robot is in SHOOT the moment it is asked. If the next step asked for `AUTO` straight away, the shooter would stop before it shot anything.\n\nSo after `SHOOT` comes a `Sleep` (2000 milliseconds is plenty), and only then `SetWantedState AUTO`, which stops the shooter and ends the routine.",
+				"bit": "SHOOT succeeds at once, so Sleep about 2000 ms before asking for AUTO."
+			}
+		},
+		{
+			"title": "Why AIM goes in a Timeout",
+			"say": {
+				"never": "Aiming can take a while, and if something is wrong it might never finish. A **Timeout** wraps one step and gives it a time limit: when the time is up it stops the step and answers FAILURE, so the routine can't hang. 3000 milliseconds is generous for this robot.\n\nRight now `SetWantedState AIM` would succeed at once too. Making it wait until the robot is really aimed is the next guide's job, in Java.",
+				"bit": "Wrap the AIM step in a Timeout of about 3000 ms so it can't hang."
+			}
+		},
+		{
+			"title": "Open Arbor",
+			"say": {
+				"never": "This is **Arbor**. In the **Trees** list, click **PickupAndScore** to open the tree. You'll see a Sequence with one step under it: `FollowPath` with the trajectory `ToPickup`. Click **I did it** when the tree is open.",
+				"bit": "Open **PickupAndScore** from the Trees list."
+			},
+			"target": {
+				"pane": "arbor",
+				"selector": ".trees-panel .panel-header",
+				"text": "Trees"
+			},
+			"waitFor": {
+				"hint": "open PickupAndScore, then click I did it."
+			},
+			"assist": true,
+			"close": [
+				"editor",
+				"preview",
+				"scope",
+				"choreo",
+				"elastic"
+			],
+			"open": [
+				"arbor"
+			]
+		},
+		{
+			"title": "Path, wait, path",
+			"say": {
+				"never": "From the **Nodes** list, drag a `Sleep` under the Sequence, after the first `FollowPath`. Select it and set its `msec` port to `500` in the panel on the right.\n\nThen drag in a second `FollowPath` after the Sleep and set its `trajectory` port to `ToScore`, spelled exactly like the path in Choreo. Click **I did it** when both are there.",
+				"bit": "Add Sleep (msec 500) and a second FollowPath (trajectory ToScore) after the first path."
+			},
+			"target": {
+				"pane": "arbor",
+				"selector": ".panel-header",
+				"text": "Nodes"
+			},
+			"waitFor": {
+				"hint": "add the Sleep and the second FollowPath, then click I did it."
+			},
+			"assist": true,
+			"cardAt": "bottom-right"
+		},
+		{
+			"title": "Aim, with a time limit",
+			"say": {
+				"never": "Drag a `Timeout` into the Sequence after the second path, and set its `msec` to `3000`. Then drag a `SetWantedState` **onto the Timeout**, so it becomes the Timeout's child, and set its `state` port to `AIM`. Click **I did it** when the Timeout holds the AIM step.",
+				"bit": "Add a Timeout (msec 3000) holding a SetWantedState with state AIM."
+			},
+			"target": {
+				"pane": "arbor",
+				"selector": ".canvas"
+			},
+			"waitFor": {
+				"hint": "add the Timeout with SetWantedState AIM inside, then click I did it."
+			},
+			"assist": true,
+			"cardAt": "bottom-right"
+		},
+		{
+			"title": "Shoot, wait, stop",
+			"say": {
+				"never": "Last three steps, in the Sequence after the Timeout: a `SetWantedState` with `state` `SHOOT`, a `Sleep` with `msec` `2000`, and a `SetWantedState` with `state` `AUTO`. Click **I did it** when the tree ends with them.",
+				"bit": "Add SetWantedState SHOOT, Sleep 2000, SetWantedState AUTO at the end."
+			},
+			"target": {
+				"pane": "arbor",
+				"selector": ".canvas"
+			},
+			"waitFor": {
+				"hint": "add SHOOT, the Sleep and AUTO, then click I did it."
+			},
+			"assist": true,
+			"cardAt": "bottom-right"
+		},
+		{
+			"title": "Save it",
+			"say": {
+				"never": "Press **Save** (or Ctrl+S). Arbor writes the tree to `deploy/autos/trees/PickupAndScore.xml`, and that file is what the robot runs. Open the **XML** tab at the bottom to read what it wrote: one line per step, in order, with the ports as attributes. Click **I did it** once it is saved.",
+				"bit": "Save (Ctrl+S), then look at the XML tab."
+			},
+			"target": {
+				"pane": "arbor",
+				"selector": ".toolbar button",
+				"text": "Save"
+			},
+			"waitFor": {
+				"hint": "save the tree, then click I did it."
+			},
+			"assist": true
+		},
+		{
+			"title": "Reading the XML",
+			"say": {
+				"never": "Each step is a **tag**, like `<Sleep msec=\"500\"/>`: the tag name is the node, and each `name=\"value\"` is a port. A step that holds others has an opening and a closing tag, with its children between them, like the `Timeout` around the AIM step.\n\nThe robot reads this file when it starts, so changing a tree needs **no Java and no rebuild**: save, press Start, run it.",
+				"bit": "Tags are nodes, attributes are ports, nesting is the tree. The robot reads the XML at start, so no rebuild is needed."
+			},
+			"board": {
+				"code": "<Sequence>\n  <FollowPath trajectory=\"Leave\"/>\n  <Timeout msec=\"1500\">\n    <SetWantedState state=\"DRIVE\"/>\n  </Timeout>\n</Sequence>",
+				"language": "text",
+				"marks": [
+					{
+						"text": "<FollowPath trajectory=\"Leave\"/>",
+						"label": "one step, its port as an attribute"
+					},
+					{
+						"text": "<Timeout msec=\"1500\">",
+						"label": "opens a step that holds another"
+					},
+					{
+						"text": "</Timeout>",
+						"label": "closes it"
+					}
+				]
+			}
+		},
+		{
+			"title": "Check your work",
+			"say": {
+				"never": "Open the lesson chip and press **Verify**. **Paths named ToPickup and ToScore** and **Autonomous tree built** read the tree you saved. If one fails, its message names the step it wanted.",
+				"bit": "Press Verify. A failing check names the step it wanted."
+			},
+			"target": {
+				"selector": "[data-tour='lesson']"
+			}
+		}
+	],
+	"kind": "mixed"
+}

@@ -1,0 +1,137 @@
+{
+	"title": "Make AIM wait until aimed",
+	"summary": "A step state in RobotContainer, so asking for AIM finishes only once the robot faces the goal.",
+	"topic": "Robot",
+	"order": 534,
+	"steps": [
+		{
+			"title": "The job",
+			"say": {
+				"never": "Run your tree now and the robot shoots without aiming. `SetWantedState AIM` succeeds as soon as the robot is **in** AIM, and right now RobotContainer puts it in AIM at once, before it has turned at all. So the tree moves straight on to SHOOT.\n\nThe fix lives in the robot, not in the tree: make AIM a **sequence** that only reaches AIM once the robot is really aimed. You are done when Verify says **AIM waits until aimed**.",
+				"bit": "The tree shoots too early because the robot reaches AIM at once. Make AIM wait until the robot is aimed, in RobotContainer."
+			}
+		},
+		{
+			"title": "A step state",
+			"say": {
+				"never": "You met step states in the shooter: asking for SHOOT first goes through SPIN_UP. The robot can do the same. When something asks for AIM, the robot sits in a **step state**, `AIMING`, while it turns, and moves on to `AIM` itself only once it faces the goal. Nobody ever asks for AIMING: `handleStateTransition` picks it.\n\nBoth states turn toward the goal (look at `updateLogic`), so the buttons work just as before. The only difference is *when* the robot counts as being in AIM.",
+				"bit": "Asking for AIM goes through the step state AIMING while turning, and reaches AIM only when aimed."
+			}
+		},
+		{
+			"title": "Written once, used twice",
+			"say": {
+				"never": "This is why the team writes sequences in the robot's state machine. The left bumper asks for AIM, and your tree asks for AIM, and both get the same, finished behavior. A `SetWantedState` node stays RUNNING while the robot is in AIMING, and succeeds once it reaches AIM, so the tree waits for the aim without knowing how aiming works.",
+				"bit": "Buttons and trees ask for the same AIM, so the sequence is written once. SetWantedState waits while the robot is in AIMING."
+			}
+		},
+		{
+			"title": "Picking a state with if",
+			"say": {
+				"never": "Here is the same idea for a kettle. Asking for BOIL goes through HEATING until the water is hot enough. The decision is an `if` in `handleStateTransition`: one branch for each state it could pick.",
+				"bit": "The kettle goes through HEATING until it boils: an if in handleStateTransition picks the state."
+			},
+			"board": {
+				"code": "case BOIL:\n  if (kettle_.isBoiling()) {\n    system_state_ = KettleStates.BOIL;\n  } else {\n    system_state_ = KettleStates.HEATING;\n  }\n  break;",
+				"language": "java",
+				"marks": [
+					{
+						"text": "kettle_.isBoiling()",
+						"label": "the condition"
+					},
+					{
+						"text": "system_state_ = KettleStates.HEATING;",
+						"label": "the step state, until then"
+					}
+				]
+			}
+		},
+		{
+			"title": "Open RobotContainer.java",
+			"say": {
+				"never": "Hold down **Ctrl** and tap **P**. Type `RobotContainer`, then press **Enter**.",
+				"bit": "Press **Ctrl+P**, type `RobotContainer` and press Enter."
+			},
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"arbor",
+				"elastic",
+				"preview"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "RobotContainer.java"
+				},
+				"hint": "open RobotContainer.java with Ctrl+P.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Find it",
+			"say": {
+				"never": "Click in the code, then press **Ctrl+F**, type `TODO: AIM is a sequence` and press **Enter**. It is inside `handleStateTransition`, in the `case AIM:` of the switch on `wanted`.",
+				"bit": "Press **Ctrl+F** and find `TODO: AIM is a sequence`."
+			},
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "TODO: AIM is a sequence"
+				},
+				"hint": "find TODO: AIM is a sequence with Ctrl+F.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Write the if",
+			"say": {
+				"never": "Replace the line `system_state_ = RobotStates.AIM;` under the TODO with an `if`, like the kettle: if `drive_.isAimed()`, the robot is in `RobotStates.AIM`; otherwise it is in `RobotStates.AIMING`. Keep the `break;` after it. Click **I did it** when it's written.",
+				"bit": "An if on `drive_.isAimed()`: AIM when aimed, AIMING otherwise. Keep the break."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "TODO: AIM is a sequence"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"hint": "write the if with AIM and AIMING, then click I did it."
+			},
+			"assist": true
+		},
+		{
+			"title": "Run it again",
+			"say": {
+				"never": "Java changes need a rebuild: press **Start** again, then run PickupAndScore in Auto. Now the tree waits at the AIM step while the robot turns (in AdvantageScope, `Robot/State` shows AIMING, then AIM), and only then shoots.",
+				"bit": "Press Start to rebuild, run in Auto, and watch Robot/State go AIMING, then AIM, then SHOOT."
+			}
+		},
+		{
+			"title": "Check your work",
+			"say": {
+				"never": "Open the lesson chip and press **Verify**. **AIM waits until aimed** reads `handleStateTransition`. **Aims before it shoots** needs a run after the fix.",
+				"bit": "Press Verify. Aims before it shoots needs a fresh run."
+			},
+			"target": {
+				"selector": "[data-tour='lesson']"
+			}
+		}
+	],
+	"kind": "mixed"
+}

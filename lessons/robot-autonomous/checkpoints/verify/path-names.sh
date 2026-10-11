@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 PROJECT="$1"
+source "$(dirname "$0")/_trees.sh"
 DEPLOY="$PROJECT/src/main/deploy/choreo"
-AUTOS="$PROJECT/src/main/java/frc/robot/autos/Autos.java"
 
 for name in ToPickup ToScore; do
 	if [[ ! -f "$DEPLOY/$name.traj" ]]; then
@@ -15,27 +15,23 @@ for name in ToPickup ToScore; do
 	fi
 done
 
-if [[ ! -f "$AUTOS" ]]; then
-	echo "Can't find Autos.java."
-	exit 1
-fi
-# The paths Autos.java loads, written without comment lines.
-loaded="$(grep -Ev '^[[:space:]]*(//|\*|/\*)' "$AUTOS" | grep -oE 'loadTrajectory[[:space:]]*\([[:space:]]*"[^"]*"' | sed -E 's/.*"([^"]*)"/\1/' || true)"
-if [[ -z "$loaded" ]]; then
-	echo "Autos.java does not load any path yet. Use loadTrajectory(\"ToPickup\") and loadTrajectory(\"ToScore\")."
+# The paths the trees drive: every trajectory="..." of a FollowPath node.
+used="$(all_trees | grep -oE '<FollowPath\b[^>]*>' | grep -oE '\btrajectory="[^"]*"' | sed -E 's/.*"([^"]*)"/\1/' || true)"
+if [[ -z "$used" ]]; then
+	echo "Your tree does not drive any path yet. Open PickupAndScore in the Arbor pane and give FollowPath nodes the trajectory names ToPickup and ToScore."
 	exit 1
 fi
 for name in ToPickup ToScore; do
-	if ! grep -qx "$name" <<<"$loaded"; then
-		echo "Autos.java should call loadTrajectory(\"$name\"), spelled exactly like the path's name."
+	if ! grep -qx "$name" <<<"$used"; then
+		echo "Add a FollowPath with trajectory $name to your tree, spelled exactly like the path's name."
 		exit 1
 	fi
 done
 while IFS= read -r name; do
 	if [[ ! -f "$DEPLOY/$name.traj" ]]; then
-		echo "Autos.java loads \"$name\" but there is no path with that name. Check the spelling against the Choreo pane."
+		echo "A FollowPath drives \"$name\" but there is no path with that name. Check the spelling against the Choreo pane."
 		exit 1
 	fi
-done <<<"$loaded"
+done <<<"$used"
 
-echo "The paths ToPickup and ToScore exist and Autos.java loads them."
+echo "The paths ToPickup and ToScore exist and your tree drives them."

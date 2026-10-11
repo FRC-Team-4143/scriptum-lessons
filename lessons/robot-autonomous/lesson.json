@@ -1,16 +1,18 @@
 {
 	"title": "Autonomous",
-	"description": "Draw two paths in Choreo, then write the autonomous routine the way the competition robot does: follow the first path, pick up, follow the second path, aim at the goal with the aim state you built, and shoot.",
+	"description": "Draw two paths in Choreo, then build the autonomous routine as a behavior tree in Arbor, the way the competition robot does: follow the first path, pick up, follow the second path, aim at the goal, and shoot. Then make AIM wait until the robot is really aimed.",
 	"kind": "robot",
 	"track": "FRC Robot",
 	"order": 28,
 	"requires": [
 		"robot-computer-vision",
-		"choreo-intro"
+		"choreo-intro",
+		"arbor-intro"
 	],
 	"guides": [
 		"build-and-run",
-		"robot-state-machines-commands"
+		"arbor-behavior-trees",
+		"arbor-trees-more"
 	],
 	"checkpoints": [
 		{
@@ -25,7 +27,7 @@
 		{
 			"id": "path-names",
 			"title": "Paths named ToPickup and ToScore",
-			"description": "The paths are named ToPickup and ToScore, and Autos.java loads them by those names.",
+			"description": "The paths are named ToPickup and ToScore, and your tree's FollowPath nodes drive them by those names.",
 			"verifier": {
 				"type": "script",
 				"path": "checkpoints/verify/path-names.sh"
@@ -41,18 +43,27 @@
 			}
 		},
 		{
-			"id": "auto-sequence",
-			"title": "Autonomous sequence written",
-			"description": "Autos.java drives ToPickup, then ToScore, then aims at the goal (until isAimed), then shoots, in that order.",
+			"id": "auto-tree",
+			"title": "Autonomous tree built",
+			"description": "PickupAndScore.xml is a Sequence: FollowPath ToPickup, then FollowPath ToScore, then SetWantedState AIM inside a Timeout, then SetWantedState SHOOT, a Sleep, and SetWantedState AUTO.",
 			"verifier": {
 				"type": "script",
-				"path": "checkpoints/verify/auto-sequence.sh"
+				"path": "checkpoints/verify/auto-tree.sh"
+			}
+		},
+		{
+			"id": "aim-step",
+			"title": "AIM waits until aimed",
+			"description": "In RobotContainer's handleStateTransition, asking for AIM puts the robot in the step state AIMING until drive_.isAimed(), and only then in AIM.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/aim-step.sh"
 			}
 		},
 		{
 			"id": "reaches-pickup",
 			"title": "Reaches the pickup",
-			"description": "Run Pickup And Score in Auto. The robot, measured by its true position in the simulator, should get within 0.4 meters of the Pickup point.",
+			"description": "Run PickupAndScore in Auto. The robot, measured by its true position in the simulator, should get within 0.4 meters of the Pickup point.",
 			"verifier": {
 				"type": "nt4-value",
 				"topic": "/AdvantageKit/RealOutputs/Check/Drive/DistanceToPickup/Min",
@@ -63,7 +74,7 @@
 		{
 			"id": "reaches-score-spot",
 			"title": "Reaches the scoring spot",
-			"description": "Run Pickup And Score in Auto. The robot, measured by its true position, should get within 0.4 meters of the ScoreSpot point.",
+			"description": "Run PickupAndScore in Auto. The robot, measured by its true position, should get within 0.4 meters of the ScoreSpot point.",
 			"verifier": {
 				"type": "nt4-value",
 				"topic": "/AdvantageKit/RealOutputs/Check/Drive/DistanceToScoreSpot/Min",
@@ -74,7 +85,7 @@
 		{
 			"id": "aimed-before-shot",
 			"title": "Aims before it shoots",
-			"description": "Every shot should start with the robot truly facing the goal, within 5 degrees. Aim (until isAimed) before you shoot.",
+			"description": "Every shot should start with the robot truly facing the goal, within 5 degrees. AIM has to wait until the robot is aimed before the tree moves on to SHOOT.",
 			"verifier": {
 				"type": "nt4-value",
 				"topic": "/AdvantageKit/RealOutputs/Check/Subsystem/Shooter/AimErrorAtShotDegrees/Max",
@@ -85,7 +96,7 @@
 		{
 			"id": "autos-shoot",
 			"title": "Shoots",
-			"description": "The routine should end by shooting at least once.",
+			"description": "The tree should get as far as shooting at least once.",
 			"verifier": {
 				"type": "nt4-value",
 				"topic": "/AdvantageKit/RealOutputs/Check/Subsystem/Shooter/ShotCount/Max",
