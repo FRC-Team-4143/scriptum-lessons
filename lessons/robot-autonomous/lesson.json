@@ -10,6 +10,7 @@
 	],
 	"guides": [
 		"build-and-run",
+		"camera-streams",
 		"robot-state-machines-commands"
 	],
 	"checkpoints": [
