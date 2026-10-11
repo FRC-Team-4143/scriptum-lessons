@@ -72,12 +72,22 @@ describe("arbor-intro", () => {
 		});
 	});
 
-	test("only the starter Example.xml does not count as your own tree", async () => {
-		await withTrees({ "Example.xml": GOOD }, (p) => {
-			const r = L.verify(p, "new-tree");
-			expect(r.exitCode).not.toBe(0);
-			expect(r.text).toContain("New tree");
-		});
+	test("the two trees that ship with the lesson never count as your own", async () => {
+		for (const starter of ["Example.xml", "ReplayDemo.xml"]) {
+			await withTrees({ [starter]: GOOD }, (p) => {
+				for (const id of ALL) expect(L.verify(p, id).exitCode, `${starter}: ${id}`).not.toBe(0);
+				expect(L.verify(p, "new-tree").text).toContain("New tree");
+			});
+		}
+	});
+
+	test("ships a replayable sample log next to the tree it was recorded from", async () => {
+		const starter = join(import.meta.dir, "project");
+		const log = await readFile(join(starter, "sample-logs/ReplayDemo.btlog"));
+		expect(log.subarray(0, 18).toString("latin1")).toBe("BTCPP4-FileLogger2");
+		expect(log.toString("latin1")).toContain('BehaviorTree ID="ReplayDemo"');
+		const tree = await readFile(join(starter, "src/main/deploy/autos/trees/ReplayDemo.xml"), "utf8");
+		expect(tree).toContain('main_tree_to_execute="ReplayDemo"');
 	});
 
 	test("a Sequence with two steps is too short, and a missing Sequence is said so", async () => {

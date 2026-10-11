@@ -15,7 +15,8 @@ holds the trees, and `nodes.xml` lists the robot-specific steps you can use.
 When Arbor opens, **Open project** and pick `src/main/deploy/autos` if it
 isn't already showing. You'll see:
 
-- **Trees** (left): the tree files. `Example` is a small one to read first.
+- **Trees** (left): the tree files. `Example` is a small one to read first; `ReplayDemo` goes with
+  the sample log (see *Replay a run*).
 - **Nodes** (left, below): every step you can drag onto the canvas. Search
   box at the top. `SetWantedState` and `FollowPath` are the robot's own; the
   rest (`Sequence`, `Fallback`, `Timeout`, `Sleep`...) are built in.
@@ -42,6 +43,23 @@ isn't already showing. You'll see:
    `Sleep`'s `msec`. On the robot that value shows up on the dashboard.
 6. **Save** (Ctrl+S) and look at the **XML** tab. That is the file the robot
    runs.
+
+## Replay a run
+
+Every time the robot runs an auto it records a **log**: each node's status, and exactly when it
+changed. Arbor can play one back, node by node, so you can see where an auto went wrong after the
+match. On the robot the logs are in `/U/logs/bt` (on the USB stick); in simulation, in the project's
+`logs/bt` folder. This lesson ships one to try: `sample-logs/ReplayDemo.btlog`, recorded from the
+`ReplayDemo` tree.
+
+1. Arbor opens a log from **your own computer**, so first download it: in the editor's file list,
+   right-click `sample-logs/ReplayDemo.btlog` and choose **Download**.
+2. In Arbor, click the **project name** in the top-left corner and choose **Replay a log file
+   (.btlog)...**, then pick the file you downloaded. (Dragging the file onto Arbor works too.)
+3. Arbor opens `ReplayDemo` and shows a playback bar: **Space** plays and pauses, **← / →** step one
+   change at a time, **Home / End** jump to the start and end, and the menu on the right sets the
+   speed.
+4. Work out why the auto failed: which node went red, and which one never ran?
 
 ## Checking your work
 
