@@ -34,7 +34,8 @@ Everything is under `src/main/`:
   `IsSystemState`). Provided, don't edit.
 - `java/frc/robot/RobotContainer.java` is the robot's state machine. Your tree asks it for robot states
   (`AIM`, `SHOOT`, back to `AUTO`) with `SetWantedState`, the same way the buttons do with
-  `setWantedState(...)`. One `SHOOT` state serves both the right bumper and your tree, so shooting is
+  `setWantedState(...)`. Asking is instant, like a button press. To wait until the robot gets there,
+  the tree asks `IsSystemState` again and again. One `SHOOT` state serves both the right bumper and your tree, so shooting is
   written once. It has **one TODO**, in `handleStateTransition`: the only Java you write.
 - `java/frc/robot/autos/AutoNodes.java` is where the robot's steps come from: `FollowPath` asks
   RobotContainer to follow a path and succeeds once the robot has arrived. Read it, don't change it.
@@ -110,12 +111,16 @@ Go slower on anything that is new. The stretch ideas at the end are not expected
    their ports on the right):
    1. after the first path, a `Sleep` with `msec` `500`, standing in for picking up the game piece
    2. a second `FollowPath` with `trajectory` `ToScore`
-   3. a `Timeout` with `msec` `3000`, and **inside it** a `SetWantedState` with `state` `AIM`. The
-      Timeout gives up after 3 seconds, so a robot that cannot aim cannot hold up the routine
-   4. a `SetWantedState` with `state` `SHOOT`
-   5. a `Sleep` with `msec` `2000`: asking for SHOOT succeeds as soon as the robot is shooting, so this
-      is what keeps it shooting for a while
-   6. a `SetWantedState` with `state` `AUTO`, which stops the shooter
+   3. a `SetWantedState` with `state` `AIM`. Asking succeeds at once, before the robot has turned
+   4. the wait for AIM: a `Timeout` with `msec` `3000`; **inside it** a `RetryUntilSuccessful` with
+      `num_attempts` `-1` (retry forever); and **inside that** an `IsSystemState` with `state` `AIM`.
+      `IsSystemState` answers "is the robot in AIM right now?", the retry asks again every tick until
+      the answer is yes, and the Timeout gives up after 3 seconds, so a robot that cannot aim cannot
+      hold up the routine
+   5. a `SetWantedState` with `state` `SHOOT`
+   6. a `Sleep` with `msec` `2000`: asking for SHOOT succeeds at once too, so this is what keeps it
+      shooting for a while
+   7. a `SetWantedState` with `state` `AUTO`, which stops the shooter
 9. **Save** (Ctrl+S) and open the **XML** tab to see what Arbor wrote. It should look like this:
 
    ```xml
@@ -134,9 +139,9 @@ Go slower on anything that is new. The stretch ideas at the end are not expected
 
 **Part 3: make AIM wait until aimed (`RobotContainer.java`)**
 
-Run the tree now and the robot shoots without turning. `SetWantedState AIM` succeeds as soon as the
-robot is **in** AIM, and right now `handleStateTransition` puts it in AIM at once. So the tree moves
-straight on to SHOOT.
+Run the tree now and the robot shoots without turning. The tree waits until `IsSystemState AIM` is
+true, and right now `handleStateTransition` puts the robot in AIM the moment it is asked. So the wait
+ends at once and the tree moves straight on to SHOOT.
 
 10. **Find the TODO** in `handleStateTransition`, in `case AIM:`. Make AIM a sequence with a **step
     state**, like the shooter's SPIN_UP: while the robot is still turning it is in `RobotStates.AIMING`,
@@ -190,7 +195,7 @@ On the 2D Field tab add these, and plot the others:
 | **Two paths drawn** | Two generated paths, each with at least three waypoints. |
 | **Paths named ToPickup and ToScore** | Paths named exactly `ToPickup` and `ToScore`, and FollowPath steps in your trees that drive both by those names. |
 | **Paths go where they should** | ToPickup starts on Start and ends on Pickup. ToScore starts where ToPickup ended and ends on ScoreSpot. Each end must be within about 30 centimeters, the join within 15. |
-| **Autonomous tree built** | `PickupAndScore.xml` drives ToPickup, then ToScore, then asks for AIM inside a Timeout, then SHOOT, a Sleep, and AUTO, in that order. |
+| **Autonomous tree built** | `PickupAndScore.xml` drives ToPickup, then ToScore, then asks for AIM and waits for it (IsSystemState AIM, retried inside a Timeout), then SHOOT, a Sleep, and AUTO, in that order. |
 | **AIM waits until aimed** | `handleStateTransition` puts the robot in AIMING until `drive_.isAimed()`, and only then in AIM. |
 | **Reaches the pickup** | The robot's true position got within 0.4 meters of Pickup during a run. |
 | **Reaches the scoring spot** | The robot's true position got within 0.4 meters of ScoreSpot. |
@@ -202,7 +207,7 @@ remember the best the robot did since you pressed **Start**, so after a fix, pre
 
 If a run check fails, read it as a clue, and look for the red step in Arbor. Pickup failed: the first
 path or its FollowPath. Scoring spot failed: the second path never ran, or doesn't start where the first
-ended. Aim failed: the AIM step is missing or comes after the shot, or the robot reaches AIM before it is
+ended. Aim failed: the wait for AIM is missing or comes after the shot, or the robot reaches AIM before it is
 aimed (Part 3). Shoots failed: the tree stopped before SHOOT (a Timeout that ran out fails the tree), or
 there is no Sleep after SHOOT.
 
@@ -218,7 +223,7 @@ Stuck on a step? Open **Dozer**: he can explain the idea or walk you through it.
 
 ## Stretch
 
-- **Plan B.** Put the Timeout around AIM inside a `Fallback`, with a second child that just shoots
+- **Plan B.** Put the Timeout around the wait for AIM inside a `Fallback`, with a second child that just shoots
   anyway (`SetWantedState SHOOT`). What happens when you move `GOAL` in `DrivetrainConstants.java` so the
   robot can't aim in time?
 - **Spin up early.** Use a `ParallelDeadline` so the flywheel spins up while the robot drives the second

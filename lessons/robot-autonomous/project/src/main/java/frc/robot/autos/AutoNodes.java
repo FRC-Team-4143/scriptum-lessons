@@ -27,8 +27,9 @@ public final class AutoNodes {
   public static BehaviorTreeFactory createFactory() {
     BehaviorTreeFactory factory = new BehaviorTreeFactory();
 
-    // SetWantedState: ask the robot for a state (the same states the buttons ask for), and wait
-    // until the robot is in it. IsSystemState: a condition, true while the robot is in a state.
+    // SetWantedState: ask the robot for a state (the same states the buttons ask for). Instant,
+    // like a button press: it succeeds at once. IsSystemState: a condition, true while the robot is
+    // in a state. Retry it (RetryUntilSuccessful) to wait until the robot gets there.
     RobotStateNodes.register(factory, RobotContainer::getInstance, RobotStates.class);
 
     // FollowPath: drive one of your Choreo paths, and succeed once the robot has arrived.

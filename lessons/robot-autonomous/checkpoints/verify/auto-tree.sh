@@ -21,6 +21,7 @@ fi
 pickup="$(at '<FollowPath\b[^>]*\btrajectory="ToPickup"')"
 score="$(at '<FollowPath\b[^>]*\btrajectory="ToScore"')"
 aim="$(at '<SetWantedState\b[^>]*\bstate="AIM"')"
+wait="$(at '<IsSystemState\b[^>]*\bstate="AIM"')"
 shoot="$(at '<SetWantedState\b[^>]*\bstate="SHOOT"')"
 if [[ -z "$pickup" ]]; then
 	echo "Drive the first path: a FollowPath with trajectory ToPickup."
@@ -34,16 +35,26 @@ if [[ -z "$aim" ]]; then
 	echo "Turn to face the goal before shooting: a SetWantedState with state AIM."
 	exit 1
 fi
-if [[ -z "$(at '<Timeout\b[^>]*\bmsec="[0-9]+"[^>]*>[[:space:]]*<SetWantedState\b[^>]*\bstate="AIM"')" ]]; then
-	echo "Put the AIM step inside a Timeout with a msec, so a robot that cannot aim cannot hold up the routine."
+# Asking is instant, so the tree waits for AIM: Timeout > RetryUntilSuccessful(-1) > IsSystemState AIM.
+if [[ -z "$wait" ]]; then
+	echo "Asking for AIM succeeds at once, before the robot has turned. After it, wait until the robot is in AIM: an IsSystemState with state AIM."
+	exit 1
+fi
+retry='<RetryUntilSuccessful\b[^>]*\bnum_attempts="-1"([^>]*[^/>])?>[[:space:]]*<IsSystemState\b[^>]*\bstate="AIM"'
+if [[ -z "$(at "$retry")" ]]; then
+	echo "IsSystemState AIM only checks once. Put it inside a RetryUntilSuccessful with num_attempts -1, so it asks again every tick until the robot is in AIM."
+	exit 1
+fi
+if [[ -z "$(at '<Timeout\b[^>]*\bmsec="[0-9]+"([^>]*[^/>])?>[[:space:]]*'"$retry")" ]]; then
+	echo "Put the wait for AIM (the RetryUntilSuccessful) inside a Timeout with a msec, so a robot that cannot aim cannot hold up the routine."
 	exit 1
 fi
 if [[ -z "$shoot" ]]; then
 	echo "Shoot: a SetWantedState with state SHOOT, after the aim step."
 	exit 1
 fi
-if ! ((pickup < score && score < aim && aim < shoot)); then
-	echo "Put the steps in order inside the Sequence: FollowPath ToPickup, FollowPath ToScore, aim, then shoot (shooting before the robot is aimed misses)."
+if ! ((pickup < score && score < aim && aim < wait && wait < shoot)); then
+	echo "Put the steps in order inside the Sequence: FollowPath ToPickup, FollowPath ToScore, ask for AIM, wait for AIM, then shoot (shooting before the robot is aimed misses)."
 	exit 1
 fi
 # After SHOOT: let the shooter run for a while, then go back to AUTO.
@@ -59,4 +70,4 @@ if [[ -z "$auto_at" ]] || ((auto_at < sleep_at)); then
 	exit 1
 fi
 
-echo "The tree drives both paths, aims (with a time limit), shoots, then stops."
+echo "The tree drives both paths, asks for AIM and waits for it (with a time limit), shoots, then stops."

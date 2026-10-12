@@ -33,7 +33,7 @@
 		},
 		{
 			"title": "The steps you can use",
-			"say": "Below is the **Nodes** list: every step you can use. The robot's own steps (`SetWantedState`, `FollowPath`) are listed here, and the built-in ones (`Sequence`, `Fallback`, `Timeout`, `Sleep`...) come with Arbor. Drag one onto the canvas, or right-click a node and choose **Add child**. The search box finds a node by name.",
+			"say": "Below is the **Nodes** list: every step you can use. The robot's own steps (`SetWantedState`, `IsSystemState`, `FollowPath`) are listed here, and the built-in ones (`Sequence`, `Fallback`, `Timeout`, `Sleep`...) come with Arbor. Drag one onto the canvas, or right-click a node and choose **Add child**. The search box finds a node by name.",
 			"target": {
 				"pane": "arbor",
 				"selector": ".panel-header",
@@ -114,10 +114,10 @@
 		},
 		{
 			"title": "What went wrong?",
-			"say": "Step to the end. The path finished (green), but **SetWantedState AIM** went red, so the Sequence stopped and failed, and **SHOOT** never ran at all. On a real robot that is your clue: the robot couldn't aim, so look at why (no target in view? a timeout?). This is why a Timeout and a Fallback are worth adding: with them, the tree would have had a plan B.",
+			"say": "Step through it. The path finished (green) and the robot was asked for AIM (green: asking is instant). Then the tree waited for AIM: **IsSystemState AIM** failed again and again while **RetryUntilSuccessful** kept asking, until the **Timeout** ran out after 1.5 seconds and went red. So the Sequence stopped and failed, and **SHOOT** never ran at all. On a real robot that is your clue: the robot never got aimed, so look at why (no target in view? aiming badly tuned?). The Timeout is what kept the robot from waiting forever; a Fallback around it would give the tree a plan B.",
 			"diagram": {
-				"mermaid": "flowchart TD\n  seq[\"→ Sequence · FAILURE\"]:::failure\n  path[\"FollowPath ToPickup · SUCCESS\"]:::success\n  aim[\"SetWantedState AIM · FAILURE\"]:::failure\n  shoot[\"SetWantedState SHOOT\"]:::idle\n  seq --> path\n  seq --> aim\n  seq --> shoot\n  classDef idle fill:#6b7280,stroke:#9ca3af,color:#fff\n  classDef running fill:#f59e0b,stroke:#b45309,color:#111\n  classDef success fill:#16a34a,stroke:#166534,color:#fff\n  classDef failure fill:#dc2626,stroke:#991b1b,color:#fff",
-				"caption": "The end of the sample run: the path worked, aiming failed, so SHOOT never ran."
+				"mermaid": "flowchart TD\n  seq[\"→ Sequence · FAILURE\"]:::failure\n  path[\"FollowPath ToPickup · SUCCESS\"]:::success\n  aim[\"SetWantedState AIM · SUCCESS\"]:::success\n  wait[\"Timeout 1500 · FAILURE\"]:::failure\n  retry[\"RetryUntilSuccessful -1\"]:::running\n  is[\"IsSystemState AIM · FAILURE\"]:::failure\n  shoot[\"SetWantedState SHOOT\"]:::idle\n  seq --> path\n  seq --> aim\n  seq --> wait\n  wait --> retry\n  retry --> is\n  seq --> shoot\n  classDef idle fill:#6b7280,stroke:#9ca3af,color:#fff\n  classDef running fill:#f59e0b,stroke:#b45309,color:#111\n  classDef success fill:#16a34a,stroke:#166534,color:#fff\n  classDef failure fill:#dc2626,stroke:#991b1b,color:#fff",
+				"caption": "The end of the sample run: the path worked, AIM was asked for, the wait for it timed out, so SHOOT never ran."
 			},
 			"target": {
 				"pane": "arbor"

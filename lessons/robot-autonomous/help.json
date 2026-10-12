@@ -1,7 +1,7 @@
 {
 	"about": {
 		"never": "This lesson builds an autonomous routine the way the team's competition robot does it. You draw two paths in Choreo, then build a behavior tree in Arbor that drives them: go to the pickup, go to the scoring spot, aim at the goal, and shoot. Last, you make the robot's AIM state wait until the robot is really aimed, so the tree doesn't shoot too early. The lesson's README lists each job.",
-		"bit": "Draw ToPickup and ToScore in Choreo, build PickupAndScore in Arbor (path, wait, path, Timeout AIM, SHOOT, Sleep, AUTO), then add the AIMING step to RobotContainer.",
+		"bit": "Draw ToPickup and ToScore in Choreo, build PickupAndScore in Arbor (path, wait, path, ask for AIM, wait for AIM in a Timeout, SHOOT, Sleep, AUTO), then add the AIMING step to RobotContainer.",
 		"lot": "Two Choreo paths (exact names), the PickupAndScore tree in Arbor, and AIM -> AIMING until drive_.isAimed() in handleStateTransition."
 	},
 	"plan": [
@@ -156,26 +156,26 @@
 			},
 			"hints": [
 				{
-					"never": "The checker reads PickupAndScore.xml. In order, it wants: FollowPath ToPickup, FollowPath ToScore, a Timeout holding SetWantedState AIM, SetWantedState SHOOT, a Sleep, and SetWantedState AUTO. Which one is missing, or in the wrong place?",
-					"bit": "The order is ToPickup, ToScore, Timeout(AIM), SHOOT, Sleep, AUTO."
+					"never": "The checker reads PickupAndScore.xml. In order, it wants: FollowPath ToPickup, FollowPath ToScore, SetWantedState AIM, a Timeout holding the wait for AIM (RetryUntilSuccessful around IsSystemState AIM), SetWantedState SHOOT, a Sleep, and SetWantedState AUTO. Which one is missing, or in the wrong place?",
+					"bit": "The order is ToPickup, ToScore, AIM, Timeout(wait for AIM), SHOOT, Sleep, AUTO."
 				},
 				{
 					"never": "Did you press Save in Arbor? The check reads the file, not the canvas. Open the XML tab at the bottom to see what was saved.",
 					"bit": "Save in Arbor, then look at the XML tab."
 				},
 				{
-					"never": "The AIM step has to be the child of a Timeout: drag the SetWantedState onto the Timeout, not next to it, and give the Timeout a msec such as 3000.",
-					"bit": "SetWantedState AIM goes inside a Timeout with msec 3000."
+					"never": "Asking for AIM succeeds at once, so the tree also has to wait for it. The wait is nested three deep: a Timeout (msec 3000) holds a RetryUntilSuccessful (num_attempts -1), which holds IsSystemState with state AIM. Drag each one onto the one above it, not next to it.",
+					"bit": "After SetWantedState AIM: Timeout 3000 > RetryUntilSuccessful -1 > IsSystemState AIM."
 				},
 				{
 					"never": "SHOOT succeeds at once, so the tree needs a Sleep after it (2000 msec) before it asks for AUTO. Without the Sleep the shooter stops before it shoots.",
 					"bit": "After SHOOT: Sleep 2000, then SetWantedState AUTO."
 				},
-				"Sequence: FollowPath ToPickup, Sleep 500, FollowPath ToScore, Timeout 3000 { SetWantedState AIM }, SetWantedState SHOOT, Sleep 2000, SetWantedState AUTO. Saved as PickupAndScore."
+				"Sequence: FollowPath ToPickup, Sleep 500, FollowPath ToScore, SetWantedState AIM, Timeout 3000 { RetryUntilSuccessful -1 { IsSystemState AIM } }, SetWantedState SHOOT, Sleep 2000, SetWantedState AUTO. Saved as PickupAndScore."
 			]
 		},
 		"aim-step": {
-			"why": "A SetWantedState step waits until the robot is in the state it asked for. If the robot reaches AIM before it has turned, the tree moves on and shoots too early.",
+			"why": "The tree waits until the robot is in AIM (IsSystemState AIM). If the robot reaches AIM before it has turned, the wait ends at once and the tree shoots too early.",
 			"guide": "robot-autonomous-aim-step",
 			"concept": {
 				"guide": "robot-autonomous-aim-step",
@@ -272,14 +272,14 @@
 					"bit": "Robot/State should show AIMING before AIM. Press Start after Java changes."
 				},
 				{
-					"never": "Check the order in the tree: the AIM step must come after the second path and before SHOOT.",
+					"never": "Check the order in the tree: asking for AIM and waiting for it must come after the second path and before SHOOT.",
 					"bit": "Aim must be between the second path and SHOOT."
 				},
 				{
 					"never": "If aiming itself is the problem (hold the left bumper, E, in Teleop to test it), go back to your tuned AIM_KP and AIM_KD from the Computer Vision lesson. If the Timeout runs out the tree fails and never shoots, so 3000 msec is generous.",
 					"bit": "Test the aim state with the E key in Teleop. Retune if it overshoots."
 				},
-				"AIM in handleStateTransition goes through AIMING until drive_.isAimed(), and the tree has Timeout 3000 { SetWantedState AIM } right after FollowPath ToScore and right before SHOOT."
+				"AIM in handleStateTransition goes through AIMING until drive_.isAimed(), and the tree has SetWantedState AIM then Timeout 3000 { RetryUntilSuccessful -1 { IsSystemState AIM } } right after FollowPath ToScore and right before SHOOT."
 			]
 		},
 		"autos-shoot": {

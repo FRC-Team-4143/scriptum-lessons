@@ -5,8 +5,11 @@
       <FollowPath trajectory="ToPickup"/>
       <Sleep msec="500"/>
       <FollowPath trajectory="ToScore"/>
+      <SetWantedState state="AIM"/>
       <Timeout msec="3000">
-        <SetWantedState state="AIM"/>
+        <RetryUntilSuccessful num_attempts="-1">
+          <IsSystemState state="AIM"/>
+        </RetryUntilSuccessful>
       </Timeout>
       <SetWantedState state="SHOOT"/>
       <Sleep msec="2000"/>

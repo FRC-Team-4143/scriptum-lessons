@@ -18,8 +18,8 @@ isn't already showing. You'll see:
 - **Trees** (left): the tree files. `Example` is a small one to read first; `ReplayDemo` goes with
   the sample log (see *Replay a run*).
 - **Nodes** (left, below): every step you can drag onto the canvas. Search
-  box at the top. `SetWantedState` and `FollowPath` are the robot's own; the
-  rest (`Sequence`, `Fallback`, `Timeout`, `Sleep`...) are built in.
+  box at the top. `SetWantedState`, `IsSystemState` and `FollowPath` are the
+  robot's own; the rest (`Sequence`, `Fallback`, `Timeout`, `Sleep`...) are built in.
 - **The canvas** (middle): the tree. Click a node to select it.
 - **Properties** (right): the selected node's settings, called *ports*.
 - **Problems / XML / Live log** (bottom): mistakes Arbor found, the XML it

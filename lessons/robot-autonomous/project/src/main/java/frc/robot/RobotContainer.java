@@ -70,7 +70,7 @@ public class RobotContainer extends MwSuperStateMachine<RobotStates, RobotConsta
       case AIM:
         // TODO: AIM is a sequence. While the robot is still turning it should be in the step
         // state AIMING, and only once drive_.isAimed() is true in AIM itself. Right now it goes
-        // straight to AIM, so an autonomous that asks for AIM moves on (and shoots) at once.
+        // straight to AIM, so an autonomous that waits for AIM moves on (and shoots) at once.
         system_state_ = RobotStates.AIM;
         break;
       default:

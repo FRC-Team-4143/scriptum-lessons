@@ -7,7 +7,7 @@
 		{
 			"title": "The job",
 			"say": {
-				"never": "Run your tree now and the robot shoots without aiming. `SetWantedState AIM` succeeds as soon as the robot is **in** AIM, and right now RobotContainer puts it in AIM at once, before it has turned at all. So the tree moves straight on to SHOOT.\n\nThe fix lives in the robot, not in the tree: make AIM a **sequence** that only reaches AIM once the robot is really aimed. You are done when Verify says **AIM waits until aimed**.",
+				"never": "Run your tree now and the robot shoots without aiming. The tree waits until `IsSystemState AIM` is true, and right now RobotContainer puts the robot in AIM the moment it is asked, before it has turned at all. So the wait ends at once and the tree moves straight on to SHOOT.\n\nThe fix lives in the robot, not in the tree: make AIM a **sequence** that only reaches AIM once the robot is really aimed. You are done when Verify says **AIM waits until aimed**.",
 				"bit": "The tree shoots too early because the robot reaches AIM at once. Make AIM wait until the robot is aimed, in RobotContainer."
 			}
 		},
@@ -21,8 +21,8 @@
 		{
 			"title": "Written once, used twice",
 			"say": {
-				"never": "This is why the team writes sequences in the robot's state machine. The left bumper asks for AIM, and your tree asks for AIM, and both get the same, finished behavior. A `SetWantedState` node stays RUNNING while the robot is in AIMING, and succeeds once it reaches AIM, so the tree waits for the aim without knowing how aiming works.",
-				"bit": "Buttons and trees ask for the same AIM, so the sequence is written once. SetWantedState waits while the robot is in AIMING."
+				"never": "This is why the team writes sequences in the robot's state machine. The left bumper asks for AIM, and your tree asks for AIM, and both get the same, finished behavior. The tree's wait (`IsSystemState AIM`, retried) keeps failing while the robot is in AIMING and succeeds once it reaches AIM, so the tree waits for the aim without knowing how aiming works.",
+				"bit": "Buttons and trees ask for the same AIM, so the sequence is written once. The tree's wait for AIM keeps going while the robot is in AIMING."
 			}
 		},
 		{

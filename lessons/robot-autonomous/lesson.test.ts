@@ -173,7 +173,10 @@ describe.skipIf(!hasJdk)("robot-autonomous script checkpoints", () => {
 	const PICKUP = '<FollowPath trajectory="ToPickup"/>';
 	const SCORE = '<FollowPath trajectory="ToScore"/>';
 	const WAIT = '<Sleep msec="500"/>';
-	const AIM = '<Timeout msec="3000"><SetWantedState state="AIM"/></Timeout>';
+	const ASK = '<SetWantedState state="AIM"/>';
+	const RETRY = '<RetryUntilSuccessful num_attempts="-1"><IsSystemState state="AIM"/></RetryUntilSuccessful>';
+	const WAIT_AIM = `<Timeout msec="3000">${RETRY}</Timeout>`;
+	const AIM = ASK + WAIT_AIM;
 	const SHOOT = '<SetWantedState state="SHOOT"/>';
 	const KEEP = '<Sleep msec="2000"/>';
 	const STOP = '<SetWantedState state="AUTO"/>';
@@ -245,11 +248,18 @@ describe.skipIf(!hasJdk)("robot-autonomous script checkpoints", () => {
 		expect((await spoiled("paths-goal", moveEnd("ToScore", "last", 0.1))).exitCode).toBe(0);
 	}, 60_000);
 
-	test("auto-tree needs both paths, then aim in a Timeout, then shoot, wait and stop, in that order", async () => {
+	test("auto-tree needs both paths, then ask for AIM and wait for it in a Timeout, then shoot, wait and stop, in that order", async () => {
 		const cases: Record<string, string[]> = {
 			"aim after the shot": [PICKUP, SCORE, SHOOT, KEEP, AIM, STOP],
 			"no aim step": [PICKUP, SCORE, SHOOT, KEEP, STOP],
-			"aim without a Timeout": [PICKUP, SCORE, '<SetWantedState state="AIM"/>', SHOOT, KEEP, STOP],
+			"ask for AIM but no wait": [PICKUP, SCORE, ASK, SHOOT, KEEP, STOP],
+			"wait without asking": [PICKUP, SCORE, WAIT_AIM, SHOOT, KEEP, STOP],
+			"wait without a Timeout": [PICKUP, SCORE, ASK, RETRY, SHOOT, KEEP, STOP],
+			"IsSystemState without a retry": [PICKUP, SCORE, ASK, '<Timeout msec="3000"><IsSystemState state="AIM"/></Timeout>', SHOOT, KEEP, STOP],
+			"retry that gives up": [PICKUP, SCORE, ASK, `<Timeout msec="3000">${RETRY.replace('"-1"', '"3"')}</Timeout>`, SHOOT, KEEP, STOP],
+			"self-closed Timeout next to the retry": [PICKUP, SCORE, ASK, '<Timeout msec="3000"/>', RETRY, SHOOT, KEEP, STOP],
+			"wait before asking": [PICKUP, SCORE, WAIT_AIM, ASK, SHOOT, KEEP, STOP],
+			"the old Timeout around SetWantedState AIM": [PICKUP, SCORE, '<Timeout msec="3000"><SetWantedState state="AIM"/></Timeout>', SHOOT, KEEP, STOP],
 			"no shot": [PICKUP, SCORE, AIM, KEEP, STOP],
 			"no Sleep after the shot": [PICKUP, SCORE, AIM, SHOOT, STOP],
 			"never back to AUTO": [PICKUP, SCORE, AIM, SHOOT, KEEP],
@@ -267,7 +277,8 @@ describe.skipIf(!hasJdk)("robot-autonomous script checkpoints", () => {
 			treeWith([
 				'<FollowPath name="first" trajectory="ToPickup" />',
 				'<FollowPath\n  trajectory="ToScore"\n  name="second"/>',
-				'<Timeout name="limit" msec="2500">\n  <SetWantedState name="aim" state="AIM"></SetWantedState>\n</Timeout>',
+				'<SetWantedState name="aim" state="AIM"></SetWantedState>',
+				'<Timeout name="limit" msec="2500">\n  <RetryUntilSuccessful name="wait" num_attempts="-1">\n    <IsSystemState state="AIM" name="aimed"/>\n  </RetryUntilSuccessful>\n</Timeout>',
 				'<SetWantedState state="SHOOT" name="shoot"/>',
 				'<Sleep name="keep" msec="1500"/>',
 				STOP,

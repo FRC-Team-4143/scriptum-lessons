@@ -1651,7 +1651,7 @@
 				{
 					"id": "auto-tree",
 					"title": "Autonomous tree built",
-					"description": "PickupAndScore.xml is a Sequence: FollowPath ToPickup, then FollowPath ToScore, then SetWantedState AIM inside a Timeout, then SetWantedState SHOOT, a Sleep, and SetWantedState AUTO.",
+					"description": "PickupAndScore.xml is a Sequence: FollowPath ToPickup, then FollowPath ToScore, then SetWantedState AIM and a wait for it (a Timeout holding RetryUntilSuccessful around IsSystemState AIM), then SetWantedState SHOOT, a Sleep, and SetWantedState AUTO.",
 					"verifier": {
 						"type": "script",
 						"path": "lessons/robot-autonomous/checkpoints/verify/auto-tree.sh"
@@ -2959,7 +2959,7 @@
 		{
 			"id": "robot-autonomous-build-tree",
 			"title": "Build the autonomous tree",
-			"summary": "In Arbor: drive both paths, aim inside a Timeout, shoot, wait, and stop.",
+			"summary": "In Arbor: drive both paths, ask for AIM and wait for it with a time limit, shoot, wait, and stop.",
 			"topic": "Robot",
 			"order": 533,
 			"modules": [

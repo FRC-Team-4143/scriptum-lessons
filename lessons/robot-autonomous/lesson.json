@@ -45,7 +45,7 @@
 		{
 			"id": "auto-tree",
 			"title": "Autonomous tree built",
-			"description": "PickupAndScore.xml is a Sequence: FollowPath ToPickup, then FollowPath ToScore, then SetWantedState AIM inside a Timeout, then SetWantedState SHOOT, a Sleep, and SetWantedState AUTO.",
+			"description": "PickupAndScore.xml is a Sequence: FollowPath ToPickup, then FollowPath ToScore, then SetWantedState AIM and a wait for it (a Timeout holding RetryUntilSuccessful around IsSystemState AIM), then SetWantedState SHOOT, a Sleep, and SetWantedState AUTO.",
 			"verifier": {
 				"type": "script",
 				"path": "checkpoints/verify/auto-tree.sh"

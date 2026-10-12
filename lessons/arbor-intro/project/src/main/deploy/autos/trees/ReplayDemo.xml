@@ -6,6 +6,11 @@
     <Sequence>
       <FollowPath trajectory="ToPickup"/>
       <SetWantedState state="AIM"/>
+      <Timeout msec="1500">
+        <RetryUntilSuccessful num_attempts="-1">
+          <IsSystemState state="AIM"/>
+        </RetryUntilSuccessful>
+      </Timeout>
       <SetWantedState state="SHOOT"/>
     </Sequence>
   </BehaviorTree>

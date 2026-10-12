@@ -6,11 +6,11 @@
          Arbor) -->
     <Action ID="SetWantedState">
       <input_port name="state" type="std::string">Robot state to request: IDLE, DRIVE, SHOOT, AIM or AUTO</input_port>
-      <description>Ask the robot for a state and wait until it is in it (SUCCESS) or the state fails (FAILURE)</description>
+      <description>Ask the robot for a state. Instant, like a button press: succeeds at once. To wait for the state, retry IsSystemState</description>
     </Action>
     <Condition ID="IsSystemState">
       <input_port name="state" type="std::string">Robot state to check: IDLE, DRIVE, SHOOT, AIM, AIMING, AUTO or FOLLOW_PATH</input_port>
-      <description>The robot is in the given state</description>
+      <description>The robot is in the given state right now (SUCCESS), or not (FAILURE)</description>
     </Condition>
     <Action ID="FollowPath">
       <input_port name="trajectory" type="std::string">Name of a Choreo path (deploy/choreo/&lt;name&gt;.traj)</input_port>
