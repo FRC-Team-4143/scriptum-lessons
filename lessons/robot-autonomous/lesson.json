@@ -12,7 +12,8 @@
 	"guides": [
 		"build-and-run",
 		"arbor-behavior-trees",
-		"arbor-trees-more"
+		"arbor-trees-more",
+		"camera-streams"
 	],
 	"checkpoints": [
 		{

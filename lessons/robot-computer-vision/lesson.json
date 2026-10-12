@@ -8,7 +8,8 @@
 		"robot-state-machines"
 	],
 	"guides": [
-		"build-and-run"
+		"build-and-run",
+		"camera-streams"
 	],
 	"checkpoints": [
 		{
