@@ -45,10 +45,9 @@ public class DrivetrainSubsystem extends MwSubsystem<DriveStates, DrivetrainCons
         new DifferentialDriveMech(
             DrivetrainConstants.LEFT_MOTORS, DrivetrainConstants.RIGHT_MOTORS);
 
-    // TODO (aim, part 1): configure the PID here. Headings wrap around (179 degrees and -179
-    // degrees are only 2 degrees apart), so call enableContinuousInput(-Math.PI, Math.PI), and
-    // set its tolerance with setTolerance(...) from DrivetrainConstants.AIM_TOLERANCE_DEGREES
-    // (in radians).
+    // TODO (aim, part 1): configure the PID here. Headings wrap around (pi and -pi radians point
+    // the same way), so call enableContinuousInput(-Math.PI, Math.PI), and set its tolerance with
+    // setTolerance(...) from DrivetrainConstants.AIM_TOLERANCE_RAD (already in radians).
   }
 
   /** The mechanisms this subsystem owns. MWLib reads and writes them for us every loop. */
@@ -84,7 +83,7 @@ public class DrivetrainSubsystem extends MwSubsystem<DriveStates, DrivetrainCons
     }
 
     // Logged every loop (in every state) so you can plot them in AdvantageScope.
-    MwLog.log(getSubsystemKey() + "AimErrorDegrees", Math.toDegrees(getAimErrorRadians()));
+    MwLog.log(getSubsystemKey() + "AimErrorRad", getAimErrorRadians());
     MwLog.log(getSubsystemKey() + "AimOutput", aim_turn_);
     MwLog.log(getSubsystemKey() + "IsAimed", isAimed());
   }
@@ -114,12 +113,13 @@ public class DrivetrainSubsystem extends MwSubsystem<DriveStates, DrivetrainCons
   }
 
   /**
-   * True when the robot is facing the goal (within AIM_TOLERANCE_DEGREES) and has stopped turning.
+   * True when the robot is facing the goal (within AIM_TOLERANCE_RAD) and has stopped turning.
    * A later autonomous routine waits on this before it shoots.
    *
-   * <p>TODO (aim, part 4): return true only when BOTH are true: the heading error (use
-   * getAimErrorRadians(), in degrees) is smaller than DrivetrainConstants.AIM_TOLERANCE_DEGREES,
-   * AND the robot is no longer spinning: Math.abs(drive_.getAngularSpeed()) is under 0.15.
+   * <p>TODO (aim, part 4): return true only when BOTH are true: the size of the heading error
+   * (Math.abs(getAimErrorRadians()), in radians) is smaller than
+   * DrivetrainConstants.AIM_TOLERANCE_RAD, AND the robot is no longer spinning:
+   * Math.abs(drive_.getAngularSpeed()) is under 0.15 rad/s.
    */
   public boolean isAimed() {
     return false;

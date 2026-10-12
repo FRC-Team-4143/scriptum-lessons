@@ -13,7 +13,7 @@ Companion docs page: [Computer Vision](https://docs.marswars.org/docs/software/t
 ## What you will build
 
 1. **Vision.** Give each camera tag solution to the pose estimator, and choose how much to trust the
-   cameras. When it works, your estimate stays within 6 centimeters and 1 degree of where the robot
+   cameras. When it works, your estimate stays within 6 centimeters and 0.017 rad (about 1 degree) of where the robot
    really is once it has stopped, even after a long drive.
 2. **Aiming.** Add an `AIM` state to the drivetrain. While the driver holds the left bumper, the robot
    turns in place to face the goal at (4.0, 4.0), using your estimate of where it is. You tune a PID so
@@ -63,7 +63,7 @@ Everything is under `src/main/java/frc/robot/`:
 
 In AdvantageScope, `Drive/TruePose` is where the simulated robot really is and
 `Subsystem/Localization/Pose` is what your code thinks. `Subsystem/Localization/PositionErrorMeters` and
-`HeadingErrorDegrees` are the difference.
+`HeadingErrorRad` are the difference.
 `Subsystem/Localization/VisibleTags` is the AprilTags the cameras are using right now: drag it onto the
 field's Vision Targets to see them.
 
@@ -113,7 +113,7 @@ Go slower on anything that is new. The stretch below is optional.
 9. **`isAimed()`.** True only when the error is small **and** the robot has stopped turning.
 10. **The robot's AIM state.** In `RobotContainer.updateLogic()`, add `case AIM:` that asks the
     drivetrain for `DriveStates.AIM` and the shooter for `ShooterStates.IDLE`.
-11. **Tune it.** Start, enable Teleop, hold **E**. Plot `Subsystem/Drivetrain/AimErrorDegrees` and
+11. **Tune it.** Start, enable Teleop, hold **E**. Plot `Subsystem/Drivetrain/AimErrorRad` and
     `AimOutput`, and change `AIM_KP` and `AIM_KD` in `DrivetrainConstants.java`.
 12. **Click Verify.**
 
@@ -122,7 +122,7 @@ Go slower on anything that is new. The stretch below is optional.
 - **Camera tag solutions added.** Reads your `LocalizationSubsystem.java`. It looks for an
   `addVisionMeasurement(...)` call that passes the solution's pose, the solution's own timestamp (`solution.timestamp.getSeconds()`)
   and the standard deviations.
-- **Estimate within 6 cm and 1 degree.** Needs a simulator running. The check watches the robot and only
+- **Estimate within 6 cm and 0.017 rad.** (0.017 rad is about 1 degree.) Needs a simulator running. The check watches the robot and only
   judges after you have **driven more than 5 meters in total, turned at least a quarter circle, and then
   sat still for 1.5 seconds**. It then
   compares your estimate with the true pose. It reads failing until you have done that, so drive, stop,
@@ -131,10 +131,10 @@ Go slower on anything that is new. The stretch below is optional.
   `PIDController` built from the `AIM_` constants with continuous input, `getAngleToGoal()` aiming
   from the estimate (not the true pose), an `isAimed()` with `&&`, and a `case AIM:` in `RobotContainer`
   that asks the drivetrain for `AIM`.
-- **Aims within 2 degrees.** Needs a simulator running. When you press **E**, the robot has to get
-  within 2 degrees of the goal and **stay there for half a second, within 4 seconds** of the press.
+- **Aims within 0.035 rad.** Needs a simulator running. When you press **E**, the robot has to get
+  within 0.035 rad (about 2 degrees) of the goal and **stay there for half a second, within 4 seconds** of the press.
   The check uses the robot's *true* heading, so the aim is only as good as your estimate.
-- **No wild overshoot.** On the same presses, the robot may not swing more than 10 degrees *past* the
+- **No wild overshoot.** On the same presses, the robot may not swing more than 0.17 rad (about 10 degrees) *past* the
   goal. The check **remembers the worst swing from every press** of **E**, so a bad press stays
   recorded until you press **Start** again. Start fresh and do one clean press with your final numbers.
 

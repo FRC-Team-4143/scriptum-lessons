@@ -82,7 +82,7 @@
 		{
 			"title": "The controller and the wrap-around",
 			"say": {
-				"never": "To face the goal, the robot needs a turning command that gets smaller as it lines up. A **PID controller** makes that from the **error**: how far the robot's heading is from the direction it wants. It has three terms.\n\n- **P** pushes in proportion to the error: far off, big push.\n- **I** adds up the error that is left over time, to finish the last bit. Too much makes it wind up.\n- **D** reacts to how fast the error is changing, to calm things down before it overshoots.\n\nThe constants hold the three gains. The controller also needs two settings: **headings wrap around** (359 degrees and -1 degree are the same direction, so it should take the short way round), and a **tolerance** (how close counts as aimed). It works in radians.",
+				"never": "To face the goal, the robot needs a turning command that gets smaller as it lines up. A **PID controller** makes that from the **error**: how far the robot's heading is from the direction it wants. It has three terms.\n\n- **P** pushes in proportion to the error: far off, big push.\n- **I** adds up the error that is left over time, to finish the last bit. Too much makes it wind up.\n- **D** reacts to how fast the error is changing, to calm things down before it overshoots.\n\nThe constants hold the three gains. The controller also needs two settings: **headings wrap around** (3.1 rad and -3.1 rad are almost the same direction, so it should take the short way round), and a **tolerance** (how close counts as aimed). It works in radians.",
 				"bit": "A PID turns the error (how far off the heading is) into a turn command: P in proportion, I for leftover error, D to calm it. It needs wrap-around and a tolerance, in radians."
 			}
 		},
@@ -178,8 +178,8 @@
 		{
 			"title": "Configure the PID",
 			"say": {
-				"never": "Two calls on `aim_pid_`, below that comment. `enableContinuousInput(-Math.PI, Math.PI)` makes headings wrap round. `setTolerance(...)` says how close counts as aimed. Give it `Math.toRadians(DrivetrainConstants.AIM_TOLERANCE_DEGREES)`, because the PID works in radians. Click **I did it** when both are written.",
-				"bit": "`aim_pid_.enableContinuousInput(-Math.PI, Math.PI)` and `aim_pid_.setTolerance(...)` in radians."
+				"never": "Two calls on `aim_pid_`, below that comment. `enableContinuousInput(-Math.PI, Math.PI)` makes headings wrap round. `setTolerance(...)` says how close counts as aimed. Give it `DrivetrainConstants.AIM_TOLERANCE_RAD`, which is already in radians, like the PID. Click **I did it** when both are written.",
+				"bit": "`aim_pid_.enableContinuousInput(-Math.PI, Math.PI)` and `aim_pid_.setTolerance(DrivetrainConstants.AIM_TOLERANCE_RAD)`."
 			},
 			"cardAt": "bottom-right",
 			"waitFor": {
@@ -313,8 +313,8 @@
 		{
 			"title": "isAimed",
 			"say": {
-				"never": "Replace `return false;` with one `return` that uses `&&`: the heading error in degrees, `Math.toDegrees(getAimErrorRadians())`, has an absolute value (`Math.abs`) smaller than `DrivetrainConstants.AIM_TOLERANCE_DEGREES`, **and** `Math.abs(drive_.getAngularSpeed())` is smaller than `0.15`. The second part makes sure it has stopped turning. Click **I did it** when it's written.",
-				"bit": "`Math.abs(error in degrees) < AIM_TOLERANCE_DEGREES && Math.abs(drive_.getAngularSpeed()) < 0.15`."
+				"never": "Replace `return false;` with one `return` that uses `&&`: the heading error, `getAimErrorRadians()`, has an absolute value (`Math.abs`) smaller than `DrivetrainConstants.AIM_TOLERANCE_RAD`, **and** `Math.abs(drive_.getAngularSpeed())` is smaller than `0.15`. The second part makes sure it has stopped turning. Click **I did it** when it's written.",
+				"bit": "`Math.abs(getAimErrorRadians()) < AIM_TOLERANCE_RAD && Math.abs(drive_.getAngularSpeed()) < 0.15`."
 			},
 			"cardAt": "bottom-right",
 			"waitFor": {
@@ -440,7 +440,7 @@
 		{
 			"title": "Try it and tune it",
 			"say": {
-				"never": "Hold the **left bumper** (**E** on the keyboard). The robot should spin toward the goal, which starts about 45 degrees to its left. It probably won't stop in the right place yet, and that's fine.\n\nIf it spins the wrong way, check the sign flip. If nothing happens, check the `AIM` case in `RobotContainer` and that `Robot/State` and the drivetrain's state are `AIM` in AdvantageScope.\n\nThen tune **by hand**, one gain at a time. Start with only P: raise it until the robot turns briskly, lower it if it swings back and forth. If it overshoots, add a little D. Leave I at zero unless it stops just short of the goal. Change one number, Start again, and try again.",
+				"never": "Hold the **left bumper** (**E** on the keyboard). The robot should spin toward the goal, which starts about 0.785 rad (45 degrees) to its left. It probably won't stop in the right place yet, and that's fine.\n\nIf it spins the wrong way, check the sign flip. If nothing happens, check the `AIM` case in `RobotContainer` and that `Robot/State` and the drivetrain's state are `AIM` in AdvantageScope.\n\nThen tune **by hand**, one gain at a time. Start with only P: raise it until the robot turns briskly, lower it if it swings back and forth. If it overshoots, add a little D. Leave I at zero unless it stops just short of the goal. Change one number, Start again, and try again.",
 				"bit": "Hold the left bumper. It should spin toward the goal. If it spins the wrong way, flip the sign. Tune by hand: P first, a little D to stop overshoot, I last."
 			},
 			"target": {

@@ -8,15 +8,15 @@ public final class DriveMath {
   private DriveMath() {}
 
   /**
-   * Converts wheel rotations into meters driven. One full rotation of a wheel moves the robot one
-   * circumference: 2 * pi * radius.
+   * Converts a wheel angle into meters driven. A point on the wheel's edge travels an arc, and an
+   * arc's length is the angle in radians times the radius.
    *
-   * @param wheel_rotations how many times the wheel turned
+   * @param wheel_radians how far the wheel turned, in radians
    * @param wheel_radius_meters the wheel radius in meters
    * @return the distance driven in meters
    */
-  public static double rotationsToMeters(double wheel_rotations, double wheel_radius_meters) {
-    // TODO: Math.PI is built in
+  public static double radiansToMeters(double wheel_radians, double wheel_radius_meters) {
+    // TODO: arc length = radians x radius
     return 0.0;
   }
 
@@ -24,7 +24,7 @@ public final class DriveMath {
   //
   // Robot.java and DifferentialDriveMech.java already call both of them, so they show red errors
   // until the names match exactly (capital letters count). Both are public and static, take
-  // doubles and return a double, like rotationsToMeters above.
+  // doubles and return a double, like radiansToMeters above.
   //
   //   linearSpeed: takes the left and right side speeds (meters per second) and returns the
   //   robot's forward speed. If both sides move at the same speed, the robot moves at that speed;

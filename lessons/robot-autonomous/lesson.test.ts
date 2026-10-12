@@ -38,22 +38,26 @@ describe("robot-autonomous Choreo project", () => {
 		const java = readFileSync(join(L.dir, "project/src/main/java/frc/robot/FieldTargets.java"), "utf8");
 		const names: Record<string, string> = { START: "Start", PICKUP: "Pickup", SCORE_SPOT: "ScoreSpot", GOAL: "Goal" };
 		for (const [constant, pose] of Object.entries(names)) {
-			const m = java.match(new RegExp(`${constant} =\\s*new Pose2d\\(([-\\d.]+), ([-\\d.]+), Rotation2d.fromDegrees\\(([-\\d.]+)\\)\\)`));
+			// Headings are radians: a plain number, or Math.PI / n.
+			const m = java.match(
+				new RegExp(`${constant} =\\s*new Pose2d\\(([-\\d.]+), ([-\\d.]+), new Rotation2d\\(([-\\d.]+|Math\\.PI(?: / [\\d.]+)?)\\)\\)`),
+			);
 			expect(m, `${constant} in FieldTargets.java`).not.toBeNull();
 			const p = chor.variables.poses[pose];
 			expect(Number(m![1])).toBeCloseTo(p.x.val, 4);
 			expect(Number(m![2])).toBeCloseTo(p.y.val, 4);
-			expect((Number(m![3]) * Math.PI) / 180).toBeCloseTo(p.heading.val, 4);
+			const heading = m![3].startsWith("Math.PI") ? Math.PI / Number(m![3].split("/")[1] ?? 1) : Number(m![3]);
+			expect(heading).toBeCloseTo(p.heading.val, 4);
 		}
 	});
 
 	test("from the scoring spot the turn to face the goal is real, but not a U-turn", () => {
 		const { ScoreSpot, Goal } = chor.variables.poses;
 		const toGoal = Math.atan2(Goal.y.val - ScoreSpot.y.val, Goal.x.val - ScoreSpot.x.val);
-		let turn = ((toGoal - ScoreSpot.heading.val) * 180) / Math.PI;
-		turn = ((((turn + 180) % 360) + 360) % 360) - 180;
-		expect(Math.abs(turn)).toBeGreaterThan(60);
-		expect(Math.abs(turn)).toBeLessThan(150);
+		// radians, wrapped into -pi..pi: more than about 60 degrees, less than about 150
+		const turn = Math.atan2(Math.sin(toGoal - ScoreSpot.heading.val), Math.cos(toGoal - ScoreSpot.heading.val));
+		expect(Math.abs(turn)).toBeGreaterThan(1.05);
+		expect(Math.abs(turn)).toBeLessThan(2.62);
 	});
 
 	test("the starter has no paths drawn", () => {

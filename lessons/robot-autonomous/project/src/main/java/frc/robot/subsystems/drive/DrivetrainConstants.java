@@ -72,8 +72,8 @@ public class DrivetrainConstants extends MwConstants {
   public final double MIN_TURN_SPEED = 0.04;
   /** Turning: duty cycle per radian of heading error. */
   public final double TURN_KP = 0.3;
-  /** Turning counts as finished when this close to the goal, in degrees. */
-  public final double TURN_TOLERANCE_DEGREES = 2.0;
+  /** Turning counts as finished when this close to the goal, in radians. */
+  public final double TURN_TOLERANCE_RAD = 0.035; // about 2 degrees
 
   // =============================================================================
   // AIMING (finished and tuned in the Computer Vision lesson: you only use it here)
@@ -85,19 +85,23 @@ public class DrivetrainConstants extends MwConstants {
   public static final double AIM_KI = 0.0;
   public static final double AIM_KD = 0.2;
 
-  // Close enough to count as aimed, in degrees.
-  public static final double AIM_TOLERANCE_DEGREES = 2.0;
+  // Close enough to count as aimed, in radians.
+  public static final double AIM_TOLERANCE_RAD = 0.035; // about 2 degrees
 
   // =============================================================================
   // CHOREO PATH FOLLOWING (pretuned, provided: you read it, you do not tune it)
   // =============================================================================
 
+  /** A Kraken X60's free speed (nothing to push against), at the motor, in radians per second. */
+  public static final double MOTOR_FREE_SPEED_RAD_PER_SEC = 628.0; // the old "6000 RPM"
+
   /**
-   * Fastest the wheels can spin with nothing to push against: a Kraken X60 at 6000 RPM through the
-   * gearbox, in meters per second. Full duty cycle (1.0) would be this fast.
+   * Fastest the wheels can spin with nothing to push against, in meters per second: the motor's
+   * free speed through the gearbox, times the wheel radius. Full duty cycle (1.0) would be this
+   * fast.
    */
   public static final double FREE_SPEED_METERS_PER_SECOND =
-      Units.rotationsPerMinuteToRadiansPerSecond(6000.0) / GEAR_RATIO * WHEEL_RADIUS_METERS;
+      MOTOR_FREE_SPEED_RAD_PER_SEC / GEAR_RATIO * WHEEL_RADIUS_METERS;
 
   /**
    * Feedforward: duty cycle for every meter per second of wheel speed we want. The simplest honest

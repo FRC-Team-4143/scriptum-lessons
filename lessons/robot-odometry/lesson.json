@@ -37,13 +37,13 @@
 		{
 			"id": "yaw",
 			"title": "Yaw",
-			"description": "Spin the robot counterclockwise (left). Drive/PoseYawDeg should become clearly positive.",
+			"description": "Spin the robot counterclockwise (left). Drive/PoseYawRad should become clearly positive.",
 			"verifier": {
 				"type": "nt4-value",
-				"topic": "/AdvantageKit/RealOutputs/Check/Drive/PoseYawDeg/Max",
+				"topic": "/AdvantageKit/RealOutputs/Check/Drive/PoseYawRad/Max",
 				"check": "range",
-				"min": 20.0,
-				"max": 180.0
+				"min": 0.35,
+				"max": 3.15
 			}
 		},
 		{

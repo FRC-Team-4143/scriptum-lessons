@@ -13,9 +13,10 @@ import frc.robot.subsystems.drive.DrivetrainSubsystem;
  * "Check/Localization/":
  *
  * <ul>
- *   <li>Accurate: 1 if at the latest of those moments the estimate was within 6 centimeters and 1
- *       degree of the truth, otherwise 0 (and 0 until the first such moment has happened).
- *   <li>PositionErrorMeters and HeadingErrorDegrees: the two errors measured at that moment (-1
+ *   <li>Accurate: 1 if at the latest of those moments the estimate was within 6 centimeters and
+ *       0.017 rad (about 1 degree) of the truth, otherwise 0 (and 0 until the first such moment
+ *       has happened).
+ *   <li>PositionErrorMeters and HeadingErrorRad: the two errors measured at that moment (-1
  *       until it has happened).
  * </ul>
  */
@@ -28,7 +29,7 @@ public final class LocalizationChecks {
   private static final double REST_METERS_PER_LOOP = 0.02 * LOOP_SECONDS;
   private static final double REST_RADIANS_PER_LOOP = 0.02 * LOOP_SECONDS;
   private static final double MAX_POSITION_ERROR_METERS = 0.06;
-  private static final double MAX_HEADING_ERROR_DEGREES = 1.0;
+  private static final double MAX_HEADING_ERROR_RAD = 0.017; // about 1 degree
 
   private Pose2d last_true_ = null;
   private double driven_meters_ = 0.0;
@@ -60,16 +61,16 @@ public final class LocalizationChecks {
           && !evaluated_this_rest_) {
         Pose2d estimate = drive.getPose();
         position_error_ = truth.getTranslation().getDistance(estimate.getTranslation());
-        heading_error_ = Math.abs(truth.getRotation().minus(estimate.getRotation()).getDegrees());
+        heading_error_ = Math.abs(truth.getRotation().minus(estimate.getRotation()).getRadians());
         accurate_ =
             position_error_ <= MAX_POSITION_ERROR_METERS
-                && heading_error_ <= MAX_HEADING_ERROR_DEGREES;
+                && heading_error_ <= MAX_HEADING_ERROR_RAD;
         evaluated_this_rest_ = true;
       }
     }
     last_true_ = truth;
     MwLog.log("Check/Localization/Accurate", accurate_ ? 1.0 : 0.0);
     MwLog.log("Check/Localization/PositionErrorMeters", position_error_);
-    MwLog.log("Check/Localization/HeadingErrorDegrees", heading_error_);
+    MwLog.log("Check/Localization/HeadingErrorRad", heading_error_);
   }
 }

@@ -7,7 +7,7 @@
 		{
 			"title": "The job",
 			"say": {
-				"never": "`LocalizationSubsystem` already asks MW-Lib's proxy server for the camera **tag solutions** (a tag solution is the robot's position worked out from the AprilTags a camera can see) and loops over the new, sensible ones (it drops the wild ones). Nothing hands them to the pose estimator yet, so the estimate is just odometry, which slowly drifts.\n\nYou will do three things: 1) add one call that gives each solution to the estimator, 2) choose how much to trust the cameras, 3) drive around in the simulator and watch the estimate lock onto the real position.\n\nYou are done when the estimate stays within 6 centimeters and 1 degree of the true position after you stop.",
+				"never": "`LocalizationSubsystem` already asks MW-Lib's proxy server for the camera **tag solutions** (a tag solution is the robot's position worked out from the AprilTags a camera can see) and loops over the new, sensible ones (it drops the wild ones). Nothing hands them to the pose estimator yet, so the estimate is just odometry, which slowly drifts.\n\nYou will do three things: 1) add one call that gives each solution to the estimator, 2) choose how much to trust the cameras, 3) drive around in the simulator and watch the estimate lock onto the real position.\n\nYou are done when the estimate stays within 6 centimeters and 0.017 rad (about 1 degree) of the true position after you stop.",
 				"bit": "The tag solutions are collected but never given to the estimator. You will add one call, choose the trust, then watch the error in AdvantageScope shrink."
 			}
 		},

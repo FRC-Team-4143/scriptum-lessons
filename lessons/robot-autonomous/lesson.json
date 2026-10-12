@@ -86,12 +86,12 @@
 		{
 			"id": "aimed-before-shot",
 			"title": "Aims before it shoots",
-			"description": "Every shot should start with the robot truly facing the goal, within 5 degrees. AIM has to wait until the robot is aimed before the tree moves on to SHOOT.",
+			"description": "Every shot should start with the robot truly facing the goal, within 0.087 rad (about 5 degrees). AIM has to wait until the robot is aimed before the tree moves on to SHOOT.",
 			"verifier": {
 				"type": "nt4-value",
-				"topic": "/AdvantageKit/RealOutputs/Check/Subsystem/Shooter/AimErrorAtShotDegrees/Max",
+				"topic": "/AdvantageKit/RealOutputs/Check/Subsystem/Shooter/AimErrorAtShotRad/Max",
 				"check": "range",
-				"max": 5
+				"max": 0.087
 			}
 		},
 		{

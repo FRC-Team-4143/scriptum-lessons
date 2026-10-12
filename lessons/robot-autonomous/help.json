@@ -133,7 +133,7 @@
 					"bit": "Read which end the message names."
 				},
 				{
-					"never": "Click the waypoint in the Choreo pane and type its exact numbers. Start is 1.5, 1.5 at 0 degrees. Pickup is 5.5, 2.5 at 0 degrees. ScoreSpot is 6.5, 5.0 at 90 degrees.",
+					"never": "Click the waypoint in the Choreo pane and type its exact numbers. Start is 1.5, 1.5 at 0 rad. Pickup is 5.5, 2.5 at 0 rad. ScoreSpot is 6.5, 5.0 at 1.5708 rad (pi/2).",
 					"bit": "Type the exact numbers: Start 1.5, 1.5. Pickup 5.5, 2.5. ScoreSpot 6.5, 5.0."
 				},
 				{
@@ -144,7 +144,7 @@
 					"never": "After you change a waypoint, press Generate again, otherwise the saved path still has the old shape.",
 					"bit": "Regenerate after every change."
 				},
-				"ToPickup: pose (1.5, 1.5, 0), translation (3.5, 2.0), pose (5.5, 2.5, 0). ToScore: pose (5.5, 2.5, 0), translation (6.0, 3.8), pose (6.5, 5.0, 90 degrees)."
+				"ToPickup: pose (1.5, 1.5, 0), translation (3.5, 2.0), pose (5.5, 2.5, 0). ToScore: pose (5.5, 2.5, 0), translation (6.0, 3.8), pose (6.5, 5.0, 1.5708 rad)."
 			]
 		},
 		"auto-tree": {
@@ -264,8 +264,8 @@
 			},
 			"hints": [
 				{
-					"never": "Plot Drive/TrueAimErrorDegrees in AdvantageScope. At the moment the shot starts it has to be inside 5 degrees. Is it near 0 before the shot or only after?",
-					"bit": "Plot Drive/TrueAimErrorDegrees. Under 5 at the shot."
+					"never": "Plot Drive/TrueAimErrorRad in AdvantageScope. At the moment the shot starts it has to be inside 0.087 rad (about 5 degrees). Is it near 0 before the shot or only after?",
+					"bit": "Plot Drive/TrueAimErrorRad. Under 0.087 at the shot."
 				},
 				{
 					"never": "Plot Robot/State. If it never shows AIMING, the robot reaches AIM at once and the tree shoots right away: the AIMING step in RobotContainer is missing. Did you press Start after changing the Java?",

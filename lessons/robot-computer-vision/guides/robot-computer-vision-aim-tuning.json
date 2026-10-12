@@ -1,6 +1,6 @@
 {
 	"title": "Tune kP to reach the goal",
-	"summary": "Raise kP until the robot settles within 2 degrees.",
+	"summary": "Raise kP until the robot settles within 0.035 rad.",
 	"topic": "Robot",
 	"order": 515,
 	"steps": [
@@ -14,8 +14,8 @@
 		{
 			"title": "What to watch",
 			"say": {
-				"never": "Your eyes can't judge a 2 degree error, so watch a graph. Plot `AimErrorDegrees`. From a fresh start it begins around 45 and should fall to 0 and sit there. Plot `AimOutput` too, the turn command the PID asks for: it should be big at first and shrink to nothing. The aim uses your pose **estimate**, but the checkpoint judges the robot's **true** heading, so a good estimate matters. Each time you tune, press Start for a fresh run, enable Teleop, and hold the left bumper (**E**).",
-				"bit": "Plot AimErrorDegrees (about 45 at first, should fall to 0) and AimOutput (the turn command). Aim uses the estimate; the check uses the truth. Fresh Start for every try."
+				"never": "Your eyes can't judge a 0.035 rad (2 degree) error, so watch a graph. Plot `AimErrorRad`. From a fresh start it begins around 0.785 (45 degrees) and should fall to 0 and sit there. Plot `AimOutput` too, the turn command the PID asks for: it should be big at first and shrink to nothing. The aim uses your pose **estimate**, but the checkpoint judges the robot's **true** heading, so a good estimate matters. Each time you tune, press Start for a fresh run, enable Teleop, and hold the left bumper (**E**).",
+				"bit": "Plot AimErrorRad (about 0.785 at first, should fall to 0) and AimOutput (the turn command). Aim uses the estimate; the check uses the truth. Fresh Start for every try."
 			}
 		},
 		{
@@ -61,10 +61,10 @@
 			"assist": true
 		},
 		{
-			"title": "Plot AimErrorDegrees",
+			"title": "Plot AimErrorRad",
 			"say": {
-				"never": "This is how far the robot still has to turn, in degrees. Look at **AdvantageScope**, the graphing tool. Type `AimErrorDegrees` in its search box. Find **Subsystem/Drivetrain/AimErrorDegrees** in the list and drag it with your mouse onto the **Left Axis** of the graph.",
-				"bit": "This is how far the robot still has to turn, in degrees. In AdvantageScope, search for `AimErrorDegrees`, then drag **Subsystem/Drivetrain/AimErrorDegrees** onto the **Left Axis**."
+				"never": "This is how far the robot still has to turn, in radians. Look at **AdvantageScope**, the graphing tool. Type `AimErrorRad` in its search box. Find **Subsystem/Drivetrain/AimErrorRad** in the list and drag it with your mouse onto the **Left Axis** of the graph.",
+				"bit": "This is how far the robot still has to turn, in radians. In AdvantageScope, search for `AimErrorRad`, then drag **Subsystem/Drivetrain/AimErrorRad** onto the **Left Axis**."
 			},
 			"close": [
 				"editor",
@@ -82,9 +82,9 @@
 				"target": {
 					"pane": "scope",
 					"selector": ".line-graph-left.source-list .key-container",
-					"text": "Subsystem/Drivetrain/AimErrorDegrees"
+					"text": "Subsystem/Drivetrain/AimErrorRad"
 				},
-				"hint": "drag Subsystem/Drivetrain/AimErrorDegrees onto the graph."
+				"hint": "drag Subsystem/Drivetrain/AimErrorRad onto the graph."
 			},
 			"assist": true
 		},
@@ -119,8 +119,8 @@
 		{
 			"title": "First run: kP is too low",
 			"say": {
-				"never": "Hold **E** (the left bumper) for a few seconds. With the starter `AIM_KP = 0.2`, the error falls and then stops about 6 degrees short of 0 while the output has faded to almost nothing. The motors need a minimum push to get the wheels moving, and a tiny error times a tiny kP isn't enough. That's called steady-state error. It never gets inside 2 degrees, so it never settles. Click **I did it** once you've seen it stall.",
-				"bit": "Hold **E**. With kP 0.2 the error stalls about 6 degrees short. Click I did it when you've seen it."
+				"never": "Hold **E** (the left bumper) for a few seconds. With the starter `AIM_KP = 0.2`, the error falls and then stops about 0.10 rad (6 degrees) short of 0 while the output has faded to almost nothing. The motors need a minimum push to get the wheels moving, and a tiny error times a tiny kP isn't enough. That's called steady-state error. It never gets inside 0.035 rad, so it never settles. Click **I did it** once you've seen it stall.",
+				"bit": "Hold **E**. With kP 0.2 the error stalls about 0.10 rad short. Click I did it when you've seen it."
 			},
 			"cardAt": "bottom-right",
 			"waitFor": {
@@ -185,12 +185,12 @@
 		{
 			"title": "Raise kP",
 			"say": {
-				"never": "Raise `AIM_KP` and try again. Stop the robot, change the number, press Start, Enable, and hold **E**. Try 0.5, then 1.0. The checkpoint wants the robot within 2 degrees for half a second, within 4 seconds of when you press **E**. At about 1.0 it gets there, but it swings past the goal on the way; the next guide fixes that. Click **I did it** when the robot settles.",
-				"bit": "Try `AIM_KP` = 0.5, then 1.0, restarting each time. Inside 2 degrees for 0.5 s, within 4 s. Around 1.0 it settles (with some overshoot)."
+				"never": "Raise `AIM_KP` and try again. Stop the robot, change the number, press Start, Enable, and hold **E**. Try 0.5, then 1.0. The checkpoint wants the robot within 0.035 rad (about 2 degrees) for half a second, within 4 seconds of when you press **E**. At about 1.0 it gets there, but it swings past the goal on the way; the next guide fixes that. Click **I did it** when the robot settles.",
+				"bit": "Try `AIM_KP` = 0.5, then 1.0, restarting each time. Inside 0.035 rad for 0.5 s, within 4 s. Around 1.0 it settles (with some overshoot)."
 			},
 			"cardAt": "bottom-right",
 			"waitFor": {
-				"hint": "try a few kP values until the robot settles within 2 degrees, then click I did it."
+				"hint": "try a few kP values until the robot settles within 0.035 rad, then click I did it."
 			},
 			"assist": true,
 			"target": {

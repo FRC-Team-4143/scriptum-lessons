@@ -36,11 +36,12 @@ public class ShooterSubsystem extends MwSubsystem<ShooterStates, ShooterConstant
   private double spin_up_seconds_ = 0.0;
   private double shot_distance_from_score_spot_ =
       0.0; // how far from the scoring spot the last shot was
-  // How far from facing the goal (in degrees) the last shot was, and the worst of all the shots so
-  // far. The worst starts at 180 so that "no shot yet" can never look like "aimed well".
+  // How far from facing the goal (in radians) the last shot was, and the worst of all the shots so
+  // far. The worst starts at pi (facing straight away) so that "no shot yet" can never look like
+  // "aimed well".
   private double aim_error_at_shot_ = 0.0;
-  private double worst_aim_error_at_shot_ = NO_SHOT_YET_DEGREES;
-  private static final double NO_SHOT_YET_DEGREES = 180.0;
+  private double worst_aim_error_at_shot_ = NO_SHOT_YET_RAD;
+  private static final double NO_SHOT_YET_RAD = Math.PI;
 
   private ShooterSubsystem() {
     super(ShooterStates.IDLE, new ShooterConstants());
@@ -77,7 +78,7 @@ public class ShooterSubsystem extends MwSubsystem<ShooterStates, ShooterConstant
     shot_count_ = 0;
     shot_distance_from_score_spot_ = 0.0;
     aim_error_at_shot_ = 0.0;
-    worst_aim_error_at_shot_ = NO_SHOT_YET_DEGREES;
+    worst_aim_error_at_shot_ = NO_SHOT_YET_RAD;
   }
 
   /** True when the flywheel is close enough to the target speed. */
@@ -186,9 +187,9 @@ public class ShooterSubsystem extends MwSubsystem<ShooterStates, ShooterConstant
     MwLog.log(getSubsystemKey() + "ShotCount", shot_count_);
     MwLog.log(getSubsystemKey() + "SpinUpSeconds", spin_up_seconds_);
     MwLog.log(getSubsystemKey() + "ShotDistanceFromScoreSpot", shot_distance_from_score_spot_);
-    MwLog.log(getSubsystemKey() + "AimErrorAtShotDegrees", aim_error_at_shot_);
-    // The lesson's check reads this one: the worst aim of any shot, 180 until the first shot.
-    MwLog.log("Check/" + getSubsystemKey() + "AimErrorAtShotDegrees/Max", worst_aim_error_at_shot_);
+    MwLog.log(getSubsystemKey() + "AimErrorAtShotRad", aim_error_at_shot_);
+    // The lesson's check reads this one: the worst aim of any shot, pi until the first shot.
+    MwLog.log("Check/" + getSubsystemKey() + "AimErrorAtShotRad/Max", worst_aim_error_at_shot_);
   }
 
   /** Holds the flywheel at its target speed using whichever control style the constants choose. */
@@ -224,8 +225,7 @@ public class ShooterSubsystem extends MwSubsystem<ShooterStates, ShooterConstant
    * apply it.
    */
   private void feedforward() {
-    double target_rps = CONSTANTS.SHOOT_VELOCITY / (2.0 * Math.PI);
-    double volts = CONSTANTS.FLYWHEEL_KV * target_rps;
+    double volts = CONSTANTS.FLYWHEEL_KV * CONSTANTS.SHOOT_VELOCITY;
     flywheel_.setTargetDutyCycle(volts / 12.0);
   }
 
@@ -244,7 +244,7 @@ public class ShooterSubsystem extends MwSubsystem<ShooterStates, ShooterConstant
                 .getTranslation()
                 .getDistance(FieldTargets.SCORE_SPOT.getTranslation());
         // How far from facing the goal the robot REALLY was when this shot started.
-        aim_error_at_shot_ = Math.abs(DrivetrainSubsystem.getInstance().getTrueAimErrorDegrees());
+        aim_error_at_shot_ = Math.abs(DrivetrainSubsystem.getInstance().getTrueAimErrorRad());
         worst_aim_error_at_shot_ =
             shot_count_ == 1
                 ? aim_error_at_shot_

@@ -1,22 +1,22 @@
 {
 	"title": "Getting the units right",
-	"summary": "rad/s to rotations per second to volts to duty cycle.",
+	"summary": "rad/s to volts to duty cycle.",
 	"topic": "Robot",
 	"order": 487,
 	"steps": [
 		{
 			"title": "A chain of conversions",
 			"say": {
-				"never": "Numbers in robot code come in different units, and they have to be converted one step at a time, like converting inches to feet to yards. For example a wheel speed of 20 radians per second becomes about 3.2 rotations per second by dividing by 2 pi. Each line on the board converts one unit into the next.",
+				"never": "Numbers in robot code come in different units, and they have to be converted one step at a time, like converting centimeters to meters to kilometers. For example a wheel spinning at 20 radians per second, with a 0.0762 meter radius, moves the robot about 1.5 meters per second: radians times radius is distance. Each line on the board converts one unit into the next.",
 				"bit": "Convert units one step at a time; each line changes one unit into the next."
 			},
 			"board": {
-				"code": "20 rad/s   ->   20 / (2 * pi)   =   3.2 rotations per second\n3.2 rotations/s   ->   3.2 * 60   =   191 rotations per minute",
+				"code": "20 rad/s   ->   20 * 0.0762 m   =   1.52 m/s\n1.52 m/s   ->   1.52 * 60   =   91 meters per minute",
 				"language": "text",
 				"marks": [
 					{
-						"text": "20 / (2 * pi)",
-						"label": "radians become rotations"
+						"text": "20 * 0.0762 m",
+						"label": "radians times radius is meters"
 					}
 				]
 			}
@@ -24,19 +24,15 @@
 		{
 			"title": "In your lesson: A chain of conversions",
 			"say": {
-				"never": "Numbers in robot code come in different units, and they have to be converted. The target is in radians per second, but kV wants rotations per second, and the motor wants a duty cycle. Each line on the board converts one unit into the next, like converting inches to feet to yards.",
-				"bit": "The target is in radians per second, kV wants rotations per second, and the motor wants a duty cycle."
+				"never": "Numbers in robot code come in different units, and they have to be converted. The target is in radians per second, kV is in volts per radian per second, and the motor wants a duty cycle. Because kV and the target use the same unit, multiplying them gives volts. Each line on the board converts one unit into the next.",
+				"bit": "The target is in rad/s, kV is volts per rad/s, so their product is volts. The motor wants a duty cycle."
 			},
 			"board": {
-				"code": "double rps = CONSTANTS.SHOOT_VELOCITY / (2 * Math.PI);   // rad/s -> rotations/s\ndouble volts = CONSTANTS.FLYWHEEL_KV * rps;              // what it takes to hold that speed\ndouble duty = volts / 12.0;                              // a fraction of the battery",
+				"code": "double volts = CONSTANTS.FLYWHEEL_KV * CONSTANTS.SHOOT_VELOCITY;   // (V per rad/s) * rad/s = V\ndouble duty = volts / 12.0;                                        // a fraction of the battery",
 				"marks": [
 					{
-						"text": "/ (2 * Math.PI)",
-						"label": "one rotation is 2 pi radians"
-					},
-					{
-						"text": "FLYWHEEL_KV * rps",
-						"label": "feedforward"
+						"text": "FLYWHEEL_KV * CONSTANTS.SHOOT_VELOCITY",
+						"label": "feedforward: units match, so volts come out"
 					},
 					{
 						"text": "/ 12.0",

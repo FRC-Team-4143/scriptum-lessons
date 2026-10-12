@@ -19,7 +19,7 @@ public class LessonLoop extends SubsystemManager {
           "Drive/LinearSpeed",
           "Drive/AngularSpeed",
           "Drive/PoseX",
-          "Drive/PoseYawDeg");
+          "Drive/PoseYawRad");
 
   public LessonLoop(SubsystemIoBase mech) {
     super(BuildConstants.class);

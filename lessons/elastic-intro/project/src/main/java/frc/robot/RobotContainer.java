@@ -18,7 +18,7 @@ import org.littletonrobotics.junction.networktables.LoggedNetworkNumber;
  * AdvantageKit's {@link Logger} - open Elastic (the "Elastic" tab above) to confirm live telemetry
  * works end to end, then configure Elastic to display them.
  *
- * <p>{@link #auto_routine_}, {@link #auto_delay_seconds_}, {@link #shooter_angle_degrees_}, {@link
+ * <p>{@link #auto_routine_}, {@link #auto_delay_seconds_}, {@link #shooter_angle_rad_}, {@link
  * #brake_mode_enabled_button_}, and {@link #brake_mode_enabled_switch_} run the other direction:
  * they're written *from* Elastic, and the robot only reads them. Unlike AdvantageScope's Tuning
  * Mode, Elastic has no separate "armed" toggle to flip first - any widget bound to a plain writable
@@ -38,10 +38,10 @@ public class RobotContainer {
   private final LoggedNetworkNumber auto_delay_seconds_ =
       new LoggedNetworkNumber("/AutoDelaySeconds", 0.0);
 
-  // An operator input, dragged in from Elastic's Number Slider - unlike every other angle/speed
-  // value in this file, this one is not computed here.
-  private final LoggedNetworkNumber shooter_angle_degrees_ =
-      new LoggedNetworkNumber("/ShooterAngleDegrees", 0.0);
+  // An operator input in radians (0 to 0.785, about 45 degrees), dragged in from Elastic's Number
+  // Slider - unlike every other angle/speed value in this file, this one is not computed here.
+  private final LoggedNetworkNumber shooter_angle_rad_ =
+      new LoggedNetworkNumber("/ShooterAngleRad", 0.0);
 
   // Two separate operator inputs, each written by its own widget - unlike every other boolean in
   // this file, neither is computed here. Separate keys (rather than one topic shared by both
@@ -66,9 +66,10 @@ public class RobotContainer {
     return 12.0 + 0.5 * Math.sin(t);
   }
 
-  // 0-360 degrees, spinning continuously like a gyro heading.
-  public static double gyroHeadingDegrees(double t) {
-    return (t * 45.0) % 360.0;
+  // 0 to 2*pi radians (one full turn), spinning continuously like a gyro heading at
+  // pi/4 rad/s (about 45 degrees per second).
+  public static double gyroHeadingRad(double t) {
+    return (t * Math.PI / 4) % (2 * Math.PI);
   }
 
   // Between 0 and 40 amps, changing over time.
@@ -113,7 +114,7 @@ public class RobotContainer {
     Logger.recordOutput("ClimberSpeed", climberSpeed(seconds));
     Logger.recordOutput("GamePieceLoaded", gamePieceLoaded(seconds));
     Logger.recordOutput("BatteryVoltage", batteryVoltage(seconds));
-    Logger.recordOutput("GyroHeadingDegrees", gyroHeadingDegrees(seconds));
+    Logger.recordOutput("GyroHeadingRad", gyroHeadingRad(seconds));
     Logger.recordOutput("IntakeCurrentAmps", intakeCurrentAmps(seconds));
     Logger.recordOutput("MatchTimeRemaining", matchTimeRemaining(seconds));
     Logger.recordOutput("StatusMessage", statusMessage(seconds));
@@ -133,7 +134,7 @@ public class RobotContainer {
     Rotation2d heading = new Rotation2d(omega * seconds + Math.PI / 2);
     Logger.recordOutput("Field2d/Robot", new Pose2d(x, y, heading));
 
-    // auto_routine_, auto_delay_seconds_, shooter_angle_degrees_,
+    // auto_routine_, auto_delay_seconds_, shooter_angle_rad_,
     // brake_mode_enabled_button_, and brake_mode_enabled_switch_ need nothing here -
     // they're LoggedDashboardChooser/LoggedNetworkNumber/LoggedNetworkBoolean,
     // which read their live NT value automatically every loop.

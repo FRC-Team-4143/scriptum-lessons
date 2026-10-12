@@ -35,11 +35,11 @@ public class ShooterConstants extends MwConstants {
   // Change this, run again, and watch Subsystem/Shooter/FlywheelVelocity in AdvantageScope.
   public final FlywheelControl FLYWHEEL_CONTROL = FlywheelControl.PID;
 
-  // Feedforward: volts needed just to HOLD a speed, per (rotation per second). A first guess is
-  // 12 volts divided by the flywheel's top speed in rotations per second.
-  public final double FLYWHEEL_KV = 0.12;
-  // Feedback: extra volts for every (rotation per second) of speed ERROR.
-  public final double FLYWHEEL_KP = 0.2;
+  // Feedforward: volts needed just to HOLD a speed, per (radian per second). A first guess is
+  // 12 volts divided by the flywheel's top speed in radians per second (12 / 628 = 0.0191).
+  public final double FLYWHEEL_KV = 0.0191;
+  // Feedback: extra volts for every (radian per second) of speed ERROR.
+  public final double FLYWHEEL_KP = 0.032;
 
   public final int FLYWHEEL_MOTOR_ID = 20;
   public final double FLYWHEEL_GEAR_RATIO = 1.0; // motor turns for every 1 flywheel turn
@@ -73,9 +73,10 @@ public class ShooterConstants extends MwConstants {
 
   private static MotorConfig flywheelConfig(int can_id, double k_v, double k_p) {
     MotorConfig config = baseConfig(can_id, false);
-    // The motor controller's velocity gains (used by the PID style).
-    config.getAsFXConfig().Slot1.kV = k_v;
-    config.getAsFXConfig().Slot1.kP = k_p;
+    // The motor controller's velocity gains (used by the PID style). Our gains are per rad/s, but
+    // the TalonFX counts in rotations per second, and one rotation is 2 * PI radians.
+    config.getAsFXConfig().Slot1.kV = k_v * 2.0 * Math.PI;
+    config.getAsFXConfig().Slot1.kP = k_p * 2.0 * Math.PI;
     return config;
   }
 
