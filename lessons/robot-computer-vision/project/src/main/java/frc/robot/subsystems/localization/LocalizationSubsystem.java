@@ -224,7 +224,7 @@ public class LocalizationSubsystem extends MwSubsystem<LocalizationStates, Local
     MwLog.log(getSubsystemKey() + "Pose", pose_);
     MwLog.log(getSubsystemKey() + "PoseX", pose_.getX());
     MwLog.log(getSubsystemKey() + "PoseY", pose_.getY());
-    MwLog.log(getSubsystemKey() + "PoseYawDeg", pose_.getRotation().getDegrees());
+    MwLog.log(getSubsystemKey() + "PoseYawRad", pose_.getRotation().getRadians());
     MwLog.log(getSubsystemKey() + "VisionMeasurementsSeen", vision_measurements_seen_);
     MwLog.log(getSubsystemKey() + "VisionMeasurementsDropped", vision_measurements_dropped_);
     // The AprilTags the cameras are using, for AdvantageScope's field "Vision Targets".
@@ -236,8 +236,8 @@ public class LocalizationSubsystem extends MwSubsystem<LocalizationStates, Local
           getSubsystemKey() + "PositionErrorMeters",
           truth.getTranslation().getDistance(pose_.getTranslation()));
       MwLog.log(
-          getSubsystemKey() + "HeadingErrorDegrees",
-          Math.abs(truth.getRotation().minus(pose_.getRotation()).getDegrees()));
+          getSubsystemKey() + "HeadingErrorRad",
+          Math.abs(truth.getRotation().minus(pose_.getRotation()).getRadians()));
     }
   }
 }

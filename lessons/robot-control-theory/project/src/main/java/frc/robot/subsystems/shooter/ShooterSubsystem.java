@@ -136,10 +136,9 @@ public class ShooterSubsystem extends MwSubsystem<ShooterStates, ShooterConstant
    * Feedforward control: no measuring at all. Work out how much power the target speed needs and
    * apply it.
    *
-   * <p>TODO: the voltage needed is FLYWHEEL_KV times the target speed in rotations per second.
-   * (SHOOT_VELOCITY is in radians per second, so divide it by 2 * Math.PI.) A duty cycle is a
-   * fraction of 12 volts, so divide the voltage by 12.0 and pass it to
-   * flywheel_.setTargetDutyCycle(...).
+   * <p>TODO: the voltage needed is FLYWHEEL_KV times the target speed. Both are in radians per
+   * second, so just multiply them. A duty cycle is a fraction of 12 volts, so divide the voltage
+   * by 12.0 and pass it to flywheel_.setTargetDutyCycle(...).
    */
   private void feedforward() {
     flywheel_.setTargetDutyCycle(0.0);

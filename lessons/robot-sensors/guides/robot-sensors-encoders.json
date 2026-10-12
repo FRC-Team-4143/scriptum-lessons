@@ -1,6 +1,6 @@
 {
 	"title": "Encoders and meters",
-	"summary": "Wheel rotations to distance and speed.",
+	"summary": "Wheel radians to distance and speed.",
 	"topic": "Robot",
 	"order": 410,
 	"steps": [
@@ -28,26 +28,26 @@
 		{
 			"title": "In your lesson: What an encoder says",
 			"say": {
-				"never": "Each drive motor has an **encoder**, a little counter that notices how far the motor has turned. Be careful: the encoder is measuring the **motor**, not the wheel. A gearbox sits between them, and the motor spins about 8 times for every 1 turn of the wheel. That number is the **gear ratio**. What the sensor measures and what you actually care about (the wheel on the floor) are different things, so the numbers have to be converted. The drivetrain code already does that for you, so these readings are in **wheel rotations**: 1.0 means one full turn of the wheel.",
-				"bit": "The encoder sits in the **motor**, so it counts motor turns, not wheel turns. Through the gearbox the motor spins `GEAR_RATIO` (8.45) times per wheel turn. Always know where a sensor is and convert to the output you care about. These getters are already converted to **wheel** rotations."
+				"never": "Each drive motor has an **encoder**, a little counter that notices how far the motor has turned. Be careful: the encoder is measuring the **motor**, not the wheel. A gearbox sits between them, and the motor spins about 8 times for every 1 turn of the wheel. That number is the **gear ratio**. What the sensor measures and what you actually care about (the wheel on the floor) are different things, so the numbers have to be converted. The drivetrain code already does that for you, so these readings are the **wheel's** angle in **radians**: one full turn of the wheel is 2 x pi, about 6.28 radians.",
+				"bit": "The encoder sits in the **motor**, so it counts motor turns, not wheel turns. Through the gearbox the motor spins `GEAR_RATIO` (8.45) times per wheel turn. Always know where a sensor is and convert to the output you care about. These getters are already converted to the **wheel's** angle, in radians."
 			},
 			"board": {
-				"code": "// The sensor is in the motor: motor_rotations = wheel_rotations * GEAR_RATIO\n// These getters have already divided that out, so they are WHEEL rotations:\ndrive_.getLeftPositionRotations()  // how far the wheel turned, in rotations\ndrive_.getLeftVelocityRps()        // how fast the wheel turns, in rotations per second",
+				"code": "// The sensor is in the motor: motor_radians = wheel_radians * GEAR_RATIO\n// These getters have already divided that out, so they are the WHEEL's angle:\ndrive_.getLeftPositionRad()        // how far the wheel turned, in radians\ndrive_.getLeftVelocityRadPerSec()  // how fast the wheel turns, in radians per second",
 				"marks": [
 					{
-						"text": "motor_rotations = wheel_rotations * GEAR_RATIO",
+						"text": "motor_radians = wheel_radians * GEAR_RATIO",
 						"label": "what the sensor really counts"
 					},
 					{
-						"text": "WHEEL rotations",
+						"text": "WHEEL's angle",
 						"label": "what you actually care about"
 					},
 					{
-						"text": "PositionRotations",
+						"text": "PositionRad",
 						"label": "distance"
 					},
 					{
-						"text": "VelocityRps",
+						"text": "VelocityRadPerSec",
 						"label": "speed"
 					}
 				]
@@ -55,39 +55,39 @@
 			"assist": true
 		},
 		{
-			"title": "Rotations to meters",
+			"title": "Radians to meters",
 			"say": {
-				"never": "How far does one wheel rotation move the robot? Exactly one trip around the wheel's edge. That's the **circumference**, which is `2 x pi x radius`. Multiply the wheel's rotations by that and you get **meters**, a unit we can understand. A wheel with a 0.05 meter radius travels about 0.31 meters per turn.",
-				"bit": "One wheel rotation moves the robot one circumference (2 x pi x radius); multiply rotations by it to get meters."
+				"never": "How far does a turning wheel move the robot? A point on the wheel's edge travels an arc, and an arc's length is the **angle in radians times the radius**. That's why radians are so handy: multiply the wheel's angle by its radius and you get **meters**, a unit we can understand. A wheel with a 0.05 meter radius that turns 6 radians (about one full turn) rolls 0.3 meters.",
+				"bit": "Arc length = radians x radius, so wheel radians times the wheel radius is meters."
 			},
 			"board": {
-				"code": "radius = 0.05 m\ncircumference = 2 * pi * 0.05 = 0.314 m per turn\n\n3 wheel turns  ->  3 * 0.314 = 0.94 m",
+				"code": "radius = 0.05 m\n\n6 radians  ->  6 * 0.05 = 0.3 m\n(one full turn is 2 * pi = 6.28 radians -> 0.314 m)",
 				"language": "text",
 				"marks": [
 					{
-						"text": "circumference = 2 * pi * 0.05",
-						"label": "the edge of the wheel"
+						"text": "6 * 0.05",
+						"label": "radians times radius"
 					},
 					{
-						"text": "0.94 m",
-						"label": "rotations become meters"
+						"text": "0.3 m",
+						"label": "radians become meters"
 					}
 				]
 			}
 		},
 		{
-			"title": "In your lesson: Rotations to meters",
+			"title": "In your lesson: Radians to meters",
 			"say": {
-				"never": "How far does one rotation move the robot? Exactly one trip around the wheel's edge. That's the **circumference**, `2 x pi x radius`. Multiply the rotations by it and you get **meters**. The wheel radius is already in `Constants.java` as `WHEEL_RADIUS_METERS`. The same trick turns rotations per second into meters per second.",
-				"bit": "meters = rotations x (2 x pi x wheel radius). Speeds convert the same way."
+				"never": "A wheel's edge travels an arc, and arc length is **radians times radius**. Multiply the wheel's angle by the radius and you get **meters**. The wheel radius is already in `Constants.java` as `WHEEL_RADIUS_METERS`. The same trick turns radians per second into meters per second.",
+				"bit": "meters = radians x wheel radius. Speeds convert the same way."
 			},
 			"board": {
-				"code": "meters            = rotations          x (2 x pi x wheel radius)\nmeters per second = rotations per sec  x (2 x pi x wheel radius)",
+				"code": "meters            = radians          x wheel radius\nmeters per second = radians per sec  x wheel radius",
 				"language": "text",
 				"marks": [
 					{
-						"text": "2 x pi x wheel radius",
-						"label": "the circumference: Math.PI and Constants.WHEEL_RADIUS_METERS"
+						"text": "wheel radius",
+						"label": "Constants.WHEEL_RADIUS_METERS"
 					}
 				],
 				"caption": "Do this for the left and right side, position and speed: four lines."
@@ -148,7 +148,7 @@
 		{
 			"title": "STEP 1",
 			"say": {
-				"never": "Four lines to fill in: the left and right **positions** (rotations into meters) and the left and right **speeds** (rotations per second into meters per second). The drivetrain methods are in the README, and the conversion is on the card you just read.",
+				"never": "Four lines to fill in: the left and right **positions** (radians into meters) and the left and right **speeds** (radians per second into meters per second). The drivetrain methods are in the README, and the conversion is on the card you just read.",
 				"bit": "Convert all four readings: left and right, position and speed."
 			},
 			"target": {

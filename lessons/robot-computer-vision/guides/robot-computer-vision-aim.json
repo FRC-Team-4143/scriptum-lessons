@@ -7,14 +7,14 @@
 		{
 			"title": "Facing a spot",
 			"say": {
-				"never": "Imagine you're standing in a gym and someone says \"face the basket\". You don't turn to a number like 90 degrees. You look at where the basket is and turn until you face it, and if you walk somewhere else you turn a different amount. A robot that aims at a goal does the same. It knows where it thinks it is (its pose estimate, from the wheels and the cameras), it knows where the goal is, and it works out the direction from one to the other. So aiming works wherever the robot ended up.",
+				"never": "Imagine you're standing in a gym and someone says \"face the basket\". You don't turn to a number like pi/2 radians. You look at where the basket is and turn until you face it, and if you walk somewhere else you turn a different amount. A robot that aims at a goal does the same. It knows where it thinks it is (its pose estimate, from the wheels and the cameras), it knows where the goal is, and it works out the direction from one to the other. So aiming works wherever the robot ended up.",
 				"bit": "Aim at a spot, not a fixed angle: work out the direction from where the robot is to where the goal is."
 			}
 		},
 		{
 			"title": "The arrow to the goal",
 			"say": {
-				"never": "Draw an arrow from the robot to the goal. Its sideways part is the goal's x minus the robot's x, and its forward part is the goal's y minus the robot's y. In WPILib, a position is a `Translation2d`, and subtracting two of them gives that arrow. Every arrow has a direction, and `getAngle()` tells you which way it points as a field heading: 0 degrees is straight along +x and turning left (counterclockwise) is positive.",
+				"never": "Draw an arrow from the robot to the goal. Its sideways part is the goal's x minus the robot's x, and its forward part is the goal's y minus the robot's y. In WPILib, a position is a `Translation2d`, and subtracting two of them gives that arrow. Every arrow has a direction, and `getAngle()` tells you which way it points as a field heading in radians: 0 is straight along +x and turning left (counterclockwise) is positive.",
 				"bit": "Goal position minus robot position is an arrow; its `getAngle()` is the field heading to face."
 			}
 		},
@@ -28,8 +28,8 @@
 		{
 			"title": "Angles wrap around",
 			"say": {
-				"never": "Headings are a circle. 179 degrees and -179 degrees are the same direction to within 2 degrees, but as plain numbers they're 358 apart. A normal PID would spin the long way round! Telling the PID the input is **continuous** from -pi to pi (about -180 to 180 degrees) makes it always take the short way. Remember: WPILib angles are in **radians**, and pi radians is 180 degrees.",
-				"bit": "179 and -179 degrees are neighbours. Continuous input makes the PID take the short way round."
+				"never": "Headings are a circle. 3.1 rad and -3.1 rad are only about 0.08 rad apart, but as plain numbers they're 6.2 apart. A normal PID would spin the long way round! Telling the PID the input is **continuous** from -pi to pi (about -180 to 180 degrees) makes it always take the short way. Remember: WPILib angles are in **radians**, and pi radians is 180 degrees.",
+				"bit": "3.1 and -3.1 rad are neighbours. Continuous input makes the PID take the short way round."
 			}
 		},
 		{

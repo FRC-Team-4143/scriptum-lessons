@@ -14,9 +14,9 @@ import org.littletonrobotics.junction.networktables.LoggedNetworkNumber;
  * The robot's behavior lives here. {@link Robot} handles the AdvantageKit logging setup and calls
  * {@link #robotPeriodic()} every loop, so you can focus on the tool, not the code.
  *
- * <p>{@link #flywheelRpm}, {@link #gamePieceLoaded}, and {@link #robotPose} already publish live
- * through AdvantageKit's {@link Logger} - once the robot is running, AdvantageScope (the "Scope"
- * tab above) connects to that live stream automatically, the same way Elastic does.
+ * <p>{@link #flywheelVelocity}, {@link #gamePieceLoaded}, and {@link #robotPose} already publish
+ * live through AdvantageKit's {@link Logger} - once the robot is running, AdvantageScope (the
+ * "Scope" tab above) connects to that live stream automatically, the same way Elastic does.
  */
 public class RobotContainer {
   private final Timer timer_ = new Timer();
@@ -25,12 +25,12 @@ public class RobotContainer {
   // *written* from AdvantageScope's Tuning Mode. Values published under
   // "/Tuning" are the ones Tuning Mode will let you edit; nothing else
   // qualifies.
-  private final LoggedNetworkNumber flywheel_target_rpm_ =
-      new LoggedNetworkNumber("/Tuning/FlywheelTargetRPM", 3000.0);
+  private final LoggedNetworkNumber flywheel_target_velocity_ =
+      new LoggedNetworkNumber("/Tuning/FlywheelTargetVelocity", 300.0); // rad/s
 
-  // Oscillates between 0 and 6000 as t increases.
-  public static double flywheelRpm(double t) {
-    return 3000 + 3000 * Math.sin(t);
+  // Flywheel speed in rad/s. Oscillates between 0 and 600 as t increases.
+  public static double flywheelVelocity(double t) {
+    return 300 + 300 * Math.sin(t);
   }
 
   // Toggles back and forth as t increases.
@@ -76,12 +76,12 @@ public class RobotContainer {
 
     double seconds = timer_.get();
 
-    Logger.recordOutput("FlywheelRPM", flywheelRpm(seconds));
+    Logger.recordOutput("FlywheelVelocity", flywheelVelocity(seconds));
     Logger.recordOutput("GamePieceLoaded", gamePieceLoaded(seconds));
 
     // Echoes back whatever the last Tuning Mode write set - confirms the
     // round trip (write in AdvantageScope -> NT4 -> robot reads it here).
-    Logger.recordOutput("FlywheelTargetRPM", flywheel_target_rpm_.get());
+    Logger.recordOutput("FlywheelTargetVelocity", flywheel_target_velocity_.get());
 
     // Published as both a 2D and a 3D pose - the 2D Field widget wants
     // Pose2d, the 3D Field widget wants Pose3d (Pose3d(Pose2d) lifts it to

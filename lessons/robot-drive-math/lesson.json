@@ -13,12 +13,12 @@
 	],
 	"checkpoints": [
 		{
-			"id": "rotations-to-meters",
-			"title": "rotationsToMeters",
-			"description": "DriveMath.rotationsToMeters(rotations, radius) converts wheel rotations to meters.",
+			"id": "radians-to-meters",
+			"title": "radiansToMeters",
+			"description": "DriveMath.radiansToMeters(radians, radius) converts a wheel angle in radians to meters.",
 			"verifier": {
 				"type": "script",
-				"path": "checkpoints/verify/rotations-to-meters.sh"
+				"path": "checkpoints/verify/radians-to-meters.sh"
 			}
 		},
 		{

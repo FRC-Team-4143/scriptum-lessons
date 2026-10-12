@@ -23,8 +23,8 @@ public class Robot extends LoggedRobot {
   public void robotPeriodic() {
     loop_.doControlLoop();
 
-    // STEP 1: the drivetrain reports wheel ROTATIONS. Change the four readings into meters and
-    // meters per second. (One rotation moves the robot one wheel circumference.)
+    // STEP 1: the drivetrain reports wheel angles in RADIANS. Change the four readings into meters
+    // and meters per second. (Radians times the wheel radius is meters.)
     double left_meters = 0.0;
     double right_meters = 0.0;
     double left_meters_per_second = 0.0;

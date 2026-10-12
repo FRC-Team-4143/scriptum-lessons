@@ -131,15 +131,15 @@
 		{
 			"title": "Yaw and drift",
 			"say": {
-				"never": "Two things are worth watching. **Yaw** is the heading angle in degrees: spinning left should make it clearly positive, and spinning right should make it negative. **Drift** is the gap between where your code thinks the robot is and where it really is. Wheels slip a tiny bit and sensors are never perfect, so the guess slowly gets worse the farther you drive.",
+				"never": "Two things are worth watching. **Yaw** is the heading angle in radians (pi/2, about 1.57, is a quarter turn): spinning left should make it clearly positive, and spinning right should make it negative. **Drift** is the gap between where your code thinks the robot is and where it really is. Wheels slip a tiny bit and sensors are never perfect, so the guess slowly gets worse the farther you drive.",
 				"bit": "Watch yaw (positive when you spin left) and drift (the estimate slowly parts from the truth)."
 			}
 		},
 		{
 			"title": "Watch the yaw",
 			"say": {
-				"never": "Spin the robot to the left: push the left stick to the left and hold it for a couple of seconds. In **AdvantageScope**, type `PoseYawDeg` in the search box. Find **Drive/PoseYawDeg** in the list and drag it onto the **Left Axis**. The angle should become clearly positive (in degrees). Spin right and it goes negative.",
-				"bit": "Spin left, then search for `PoseYawDeg` and drag **Drive/PoseYawDeg** onto the **Left Axis**. Spinning left makes it positive."
+				"never": "Spin the robot to the left: push the left stick to the left and hold it for a couple of seconds. In **AdvantageScope**, type `PoseYawRad` in the search box. Find **Drive/PoseYawRad** in the list and drag it onto the **Left Axis**. The angle should become clearly positive (in radians). Spin right and it goes negative.",
+				"bit": "Spin left, then search for `PoseYawRad` and drag **Drive/PoseYawRad** onto the **Left Axis**. Spinning left makes it positive."
 			},
 			"close": [
 				"editor",
@@ -157,9 +157,9 @@
 				"target": {
 					"pane": "scope",
 					"selector": ".line-graph-left.source-list .key-container",
-					"text": "Drive/PoseYawDeg"
+					"text": "Drive/PoseYawRad"
 				},
-				"hint": "drag Drive/PoseYawDeg onto the graph."
+				"hint": "drag Drive/PoseYawRad onto the graph."
 			},
 			"assist": true
 		},

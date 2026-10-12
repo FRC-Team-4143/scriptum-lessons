@@ -56,9 +56,9 @@
 				"target": {
 					"pane": "scope",
 					"selector": ".search-results-item",
-					"text": "FlywheelRPM"
+					"text": "FlywheelVelocity"
 				},
-				"hint": "type FlywheelRPM in the search box."
+				"hint": "type FlywheelVelocity in the search box."
 			},
 			"assist": true
 		},
@@ -68,15 +68,15 @@
 			"target": {
 				"pane": "scope",
 				"selector": ".search-results-item",
-				"text": "RealOutputs/FlywheelRPM"
+				"text": "RealOutputs/FlywheelVelocity"
 			},
 			"waitFor": {
 				"target": {
 					"pane": "scope",
 					"selector": ".field-item-label",
-					"text": "FlywheelRPM"
+					"text": "FlywheelVelocity"
 				},
-				"hint": "click the RealOutputs/FlywheelRPM result."
+				"hint": "click the RealOutputs/FlywheelVelocity result."
 			},
 			"assist": true
 		},
@@ -100,7 +100,7 @@
 		},
 		{
 			"title": "Drag it onto the graph",
-			"say": "Now grab **FlywheelRPM** in the field list and drop it on **Left Axis**. That's how every graph gets its data: drag a field onto it.",
+			"say": "Now grab **FlywheelVelocity** in the field list and drop it on **Left Axis**. That's how every graph gets its data: drag a field onto it.",
 			"target": {
 				"pane": "scope",
 				"selector": ".line-graph-left.source-list"
@@ -109,9 +109,9 @@
 				"target": {
 					"pane": "scope",
 					"selector": ".line-graph-left.source-list .key-container",
-					"text": "FlywheelRPM"
+					"text": "FlywheelVelocity"
 				},
-				"hint": "drag FlywheelRPM from the field list onto Left Axis."
+				"hint": "drag FlywheelVelocity from the field list onto Left Axis."
 			},
 			"assist": true
 		},
@@ -125,19 +125,19 @@
 		},
 		{
 			"title": "Lock the scale",
-			"say": "The scale jumps around as the speed changes. Open the **⋯** menu for Left Axis, choose **Lock Axis**, then **Edit Range** and set it to about 0 to 3000. Dozer can't see inside that menu, so press **I did it** when the axis is locked. The lesson chip's **Verify** double-checks it.",
+			"say": "The scale jumps around as the speed changes. Open the **⋯** menu for Left Axis, choose **Lock Axis**, then **Edit Range** and set it to about 0 to 600. The speed is in rad/s (radians per second). Dozer can't see inside that menu, so press **I did it** when the axis is locked. The lesson chip's **Verify** double-checks it.",
 			"target": {
 				"pane": "scope",
 				"selector": ".line-graph-left.source-list .edit"
 			},
 			"waitFor": {
-				"hint": "lock the left axis to roughly 0-3000, then press I did it."
+				"hint": "lock the left axis to roughly 0-600, then press I did it."
 			},
 			"assist": true
 		},
 		{
 			"title": "A second scale",
-			"say": "Drop **FlywheelRPM** on **Right Axis** too. Anything on the right axis gets its own scale, which is handy when two values are in very different units.",
+			"say": "Drop **FlywheelVelocity** on **Right Axis** too. Anything on the right axis gets its own scale, which is handy when two values are in very different units.",
 			"target": {
 				"pane": "scope",
 				"selector": ".line-graph-right.source-list"
@@ -146,9 +146,9 @@
 				"target": {
 					"pane": "scope",
 					"selector": ".line-graph-right.source-list .key-container",
-					"text": "FlywheelRPM"
+					"text": "FlywheelVelocity"
 				},
-				"hint": "drag FlywheelRPM onto Right Axis."
+				"hint": "drag FlywheelVelocity onto Right Axis."
 			},
 			"assist": true
 		},

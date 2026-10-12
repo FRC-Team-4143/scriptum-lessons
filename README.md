@@ -110,6 +110,11 @@ has to be made in every module (`lessons/robot-*/project/`):
 - `mechanisms/DifferentialDriveMech.java` is the lesson-local drive mech. It extends MWLib's
   `MechBase`, simulates the drivetrain (including slightly imperfect encoders, so a student's pose
   differs a little from `Drive/TruePose`), and grows a few methods per lesson.
+- Units: every mechanism reports positions in meters or radians and speeds in m/s or rad/s, and all
+  angle math is in radians (degrees only as a spoken hint, like "0.035 rad, about 2 degrees"). The
+  drive mech's getters are `getLeftPositionRad()` and `getLeftVelocityRadPerSec()`; the TalonFX's
+  rotations are converted only at the edge (`Units.rotationsToRadians` in `readInputs`, and the
+  flywheel's per-rad/s gains times 2 pi in `flywheelConfig`).
 - Modules 1-4: `lesson/LessonLoop.java` runs MWLib's `SubsystemManager` loop so students never call
   `readInputs` or `writeOutputs`. Module 5 (subsystems) and 6 (control theory) use a real `RobotContainer extends SubsystemManager`; from
   module 7 (state machines) on, `RobotContainer extends MwSuperStateMachine<RobotStates, RobotConstants>`, the robot's own
@@ -121,14 +126,14 @@ has to be made in every module (`lessons/robot-*/project/`):
   scaffolding from the Explorer.
 - Modules 1-4 keep the chassis numbers in `Constants.java`; from `robot-subsystems` on that file is gone
   and they live in `subsystems/drive/DrivetrainConstants.java` (static fields, read as
-  `DrivetrainConstants.WHEEL_RADIUS_METERS`). The wheel radius (3 in) and track width (24 in) are
-  the real robot's; the gear ratio and mass are still placeholders.
-- The shooter uses the real flywheel's wheel radius (3 in) and mass (2.3 kg). In `robot-subsystems`
+  `DrivetrainConstants.WHEEL_RADIUS_METERS`). The wheel radius (0.0762 m) and track width (0.61 m)
+  are the real robot's; the gear ratio and mass are still placeholders.
+- The shooter uses the real flywheel's wheel radius (0.0762 m) and mass (2.3 kg). In `robot-subsystems`
   the flywheel runs at a fixed duty cycle (`SHOOT_DUTY_CYCLE`, 0.5) and the drivetrain has no state
   switch; velocity control (`SHOOT_VELOCITY`) first appears in `robot-control-theory` and the
   states-plus-`switch` drivetrain in `robot-state-machines`. In `robot-control-theory` the flywheel starts in bang-bang mode with untuned gains on purpose; that
-  lesson's task is to write bang-bang and feedforward, then tune PID (`kV` about 0.12, `kP` about 0.2
-  works). `lessons/robot-control-theory/solution/` is the finished version.
+  lesson's task is to write bang-bang and feedforward, then tune PID (`kV` about 0.0191 and `kP` about 0.032,
+  both per rad/s, works). `lessons/robot-control-theory/solution/` is the finished version.
 - `robot-autonomous` (Autonomous, about 3 hours) starts from the finished `robot-computer-vision` robot
   (the `LocalizationSubsystem` with the vision call written at std devs 0.3/0.3, the vision stack and
   PhotonLib, and the aim state tuned at 2.0/0/0.2; `DrivetrainSubsystem.getPose()` is the vision-corrected
@@ -136,7 +141,7 @@ has to be made in every module (`lessons/robot-*/project/`):
   Choreo paths (`ToPickup`, `ToScore`) in the Choreo pane, then write `Autos.java`: follow, wait, follow,
   aim until `isAimed`, shoot. `FieldTargets.java` has the field poses (the same as the named poses in
   `robot.chor`), and the `Check/...` topics (`Drive/DistanceToPickup`, `Drive/DistanceToScoreSpot`,
-  `Subsystem/Shooter/AimErrorAtShotDegrees`, `ShotCount`) use the simulator's true pose, so a small
+  `Subsystem/Shooter/AimErrorAtShotRad`, `ShotCount`) use the simulator's true pose, so a small
   estimate error cannot fool them. `choreo-intro` is a prerequisite. The `solution/` folder has the finished
   paths and `Autos.java`.
 - `robot-computer-vision` (Computer Vision, about 3 hours) starts from the finished State Machines robot minus
@@ -172,7 +177,7 @@ and uses them right away. The Java modules remain available as a deeper, standal
 | 5 Mechanisms and Subsystems | inheritance (`extends`, `@Override`), constructors, lists, enums as a list of states, `if` / `else` in subsystem logic |
 | 6 Control Theory | enums and `switch` (picking a control style), unit conversion, small methods |
 | 7 State Machines | the transition table (a `switch` inside a `switch`), `&&` `\|\|` `!`, boolean methods, lambdas |
-| 7b Computer Vision (about 3 hours) | passing a timestamp and standard deviations (`VecBuilder.fill`, `double` constants), a `PIDController` object, a new enum case in a `switch`, `&&`, `Math.toRadians` |
+| 7b Computer Vision (about 3 hours) | passing a timestamp and standard deviations (`VecBuilder.fill`, `double` constants), a `PIDController` object, a new enum case in a `switch`, `&&`, angles in radians |
 | 8 Autonomous (about 3 hours) | reading `Command` classes, command lists with `addCommands`, decorators (`until`, `withTimeout`), method references (`::`) |
 
 Recursion is not used on the robot.

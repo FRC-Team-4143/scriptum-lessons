@@ -29,7 +29,7 @@ A suggested pace that adds up to the 3 hour session. Take short breaks whenever 
 | Minutes | What to do |
 | --- | --- |
 | 20 | Read about methods, arrays and loops |
-| 30 | DriveMath: rotationsToMeters, then write linearSpeed and angularSpeed yourself |
+| 30 | DriveMath: radiansToMeters, then write linearSpeed and angularSpeed yourself |
 | 30 | DriveMath.arcadeToWheelSpeeds |
 | 25 | DriveMath.average |
 | 30 | The mech: setLeft, setRight, arcadeDrive |
@@ -43,7 +43,7 @@ Go slower on anything that is new. Finishing every bonus is not expected.
 
 Work through the methods one at a time. After each, click **Verify** to test it.
 
-1. **`DriveMath.rotationsToMeters`.** Wheel rotations times `2 * Math.PI * radius`.
+1. **`DriveMath.radiansToMeters`.** Wheel radians times the wheel radius (arc length).
 2. **Write `DriveMath.linearSpeed` yourself.** It is not in the file yet, but the robot code already
    calls it, so the name must match exactly. It takes the left and right speeds (two `double`s) and
    returns their average.
@@ -66,7 +66,7 @@ Stuck on a step? Open **Dozer**: he can explain the idea or walk you through it.
 
 ## Bonus challenges
 
-- Add `metersToRotations(meters, radius)` to `DriveMath` (the opposite of step 1).
+- Add `metersToRadians(meters, radius)` to `DriveMath` (the opposite of step 1).
 - Add a **slow mode** to `teleopPeriodic()`: multiply forward by `0.5` while a bumper is held.
 - Make the arcade turn gentler near the middle of the stick by **squaring** the stick value but
   keeping its sign. Hint: `Math.copySign(x * x, x)`.

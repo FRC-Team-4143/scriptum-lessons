@@ -15,6 +15,7 @@ import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.math.system.plant.DCMotor;
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.simulation.DifferentialDrivetrainSim;
 import frc.robot.FieldTargets;
@@ -113,24 +114,24 @@ public class DifferentialDriveMech extends MechBase {
     right_request_.Output = clamp(right);
   }
 
-  /** How far the left wheels have turned, in wheel rotations. Forward is positive. */
-  public double getLeftPositionRotations() {
-    return inputs_.leftPositionRotations;
+  /** How far the left wheels have turned, in radians. Forward is positive. */
+  public double getLeftPositionRad() {
+    return inputs_.leftPositionRad;
   }
 
-  /** How far the right wheels have turned, in wheel rotations. Forward is positive. */
-  public double getRightPositionRotations() {
-    return inputs_.rightPositionRotations;
+  /** How far the right wheels have turned, in radians. Forward is positive. */
+  public double getRightPositionRad() {
+    return inputs_.rightPositionRad;
   }
 
-  /** How fast the left wheels are turning, in wheel rotations per second. */
-  public double getLeftVelocityRps() {
-    return inputs_.leftVelocityRps;
+  /** How fast the left wheels are turning, in radians per second. */
+  public double getLeftVelocityRadPerSec() {
+    return inputs_.leftVelocityRadPerSec;
   }
 
-  /** How fast the right wheels are turning, in wheel rotations per second. */
-  public double getRightVelocityRps() {
-    return inputs_.rightVelocityRps;
+  /** How fast the right wheels are turning, in radians per second. */
+  public double getRightVelocityRadPerSec() {
+    return inputs_.rightVelocityRadPerSec;
   }
 
   /**
@@ -148,10 +149,10 @@ public class DifferentialDriveMech extends MechBase {
       right_motors_[0].setPosition(0.0);
     }
     // Let the very next reading say zero too, instead of the old number from the last loop.
-    inputs_.leftPositionRotations = 0.0;
-    inputs_.rightPositionRotations = 0.0;
-    inputs_.leftVelocityRps = 0.0;
-    inputs_.rightVelocityRps = 0.0;
+    inputs_.leftPositionRad = 0.0;
+    inputs_.rightPositionRad = 0.0;
+    inputs_.leftVelocityRadPerSec = 0.0;
+    inputs_.rightVelocityRadPerSec = 0.0;
     just_reset_ = true;
   }
 
@@ -162,26 +163,26 @@ public class DifferentialDriveMech extends MechBase {
 
   /** How far the left side has driven, in meters. */
   public double getLeftMeters() {
-    return DriveMath.rotationsToMeters(
-        inputs_.leftPositionRotations, DrivetrainConstants.WHEEL_RADIUS_METERS);
+    return DriveMath.radiansToMeters(
+        inputs_.leftPositionRad, DrivetrainConstants.WHEEL_RADIUS_METERS);
   }
 
   /** How far the right side has driven, in meters. */
   public double getRightMeters() {
-    return DriveMath.rotationsToMeters(
-        inputs_.rightPositionRotations, DrivetrainConstants.WHEEL_RADIUS_METERS);
+    return DriveMath.radiansToMeters(
+        inputs_.rightPositionRad, DrivetrainConstants.WHEEL_RADIUS_METERS);
   }
 
   /** How fast the left side is moving, in meters per second. */
   public double getLeftMetersPerSecond() {
-    return DriveMath.rotationsToMeters(
-        inputs_.leftVelocityRps, DrivetrainConstants.WHEEL_RADIUS_METERS);
+    return DriveMath.radiansToMeters(
+        inputs_.leftVelocityRadPerSec, DrivetrainConstants.WHEEL_RADIUS_METERS);
   }
 
   /** How fast the right side is moving, in meters per second. */
   public double getRightMetersPerSecond() {
-    return DriveMath.rotationsToMeters(
-        inputs_.rightVelocityRps, DrivetrainConstants.WHEEL_RADIUS_METERS);
+    return DriveMath.radiansToMeters(
+        inputs_.rightVelocityRadPerSec, DrivetrainConstants.WHEEL_RADIUS_METERS);
   }
 
   /** How far the whole robot has driven, in meters: the average of the two sides. */
@@ -239,10 +240,10 @@ public class DifferentialDriveMech extends MechBase {
       left_motors_[0].setPosition(0.0);
       right_motors_[0].setPosition(0.0);
     }
-    inputs_.leftPositionRotations = 0.0;
-    inputs_.rightPositionRotations = 0.0;
-    inputs_.leftVelocityRps = 0.0;
-    inputs_.rightVelocityRps = 0.0;
+    inputs_.leftPositionRad = 0.0;
+    inputs_.rightPositionRad = 0.0;
+    inputs_.leftVelocityRadPerSec = 0.0;
+    inputs_.rightVelocityRadPerSec = 0.0;
     just_reset_ = true;
   }
 
@@ -282,10 +283,14 @@ public class DifferentialDriveMech extends MechBase {
       if (just_reset_) {
         just_reset_ = false;
       } else {
-        inputs_.leftPositionRotations = left_motors_[0].getPosition().getValueAsDouble();
-        inputs_.rightPositionRotations = right_motors_[0].getPosition().getValueAsDouble();
-        inputs_.leftVelocityRps = left_motors_[0].getVelocity().getValueAsDouble();
-        inputs_.rightVelocityRps = right_motors_[0].getVelocity().getValueAsDouble();
+        inputs_.leftPositionRad =
+          Units.rotationsToRadians(left_motors_[0].getPosition().getValueAsDouble());
+        inputs_.rightPositionRad =
+          Units.rotationsToRadians(right_motors_[0].getPosition().getValueAsDouble());
+        inputs_.leftVelocityRadPerSec =
+          Units.rotationsToRadians(left_motors_[0].getVelocity().getValueAsDouble());
+        inputs_.rightVelocityRadPerSec =
+          Units.rotationsToRadians(right_motors_[0].getVelocity().getValueAsDouble());
       }
 
       if (IS_SIM) {
@@ -321,7 +326,7 @@ public class DifferentialDriveMech extends MechBase {
       Rotation2d to_goal =
           FieldTargets.GOAL.getTranslation().minus(truth.getTranslation()).getAngle();
       MwLog.log(
-          getLoggingKey() + "TrueAimErrorDegrees", to_goal.minus(truth.getRotation()).getDegrees());
+          getLoggingKey() + "TrueAimErrorRad", to_goal.minus(truth.getRotation()).getRadians());
     }
   }
 
@@ -388,15 +393,11 @@ public class DifferentialDriveMech extends MechBase {
         sim_.getRightVelocityMetersPerSecond() * RIGHT_SCALE
             + JITTER_METERS_PER_SECOND * noise_.nextGaussian();
 
-    double wheel_circumference = 2.0 * Math.PI * DrivetrainConstants.WHEEL_RADIUS_METERS;
+    // Meters divided by the wheel radius is wheel radians; times the gear ratio is motor radians.
+    double motor_rad_per_meter = DrivetrainConstants.GEAR_RATIO / DrivetrainConstants.WHEEL_RADIUS_METERS;
+    pushSimState(left_motors_, left_meters * motor_rad_per_meter, left_speed * motor_rad_per_meter);
     pushSimState(
-        left_motors_,
-        left_meters / wheel_circumference * DrivetrainConstants.GEAR_RATIO,
-        left_speed / wheel_circumference * DrivetrainConstants.GEAR_RATIO);
-    pushSimState(
-        right_motors_,
-        right_meters / wheel_circumference * DrivetrainConstants.GEAR_RATIO,
-        right_speed / wheel_circumference * DrivetrainConstants.GEAR_RATIO);
+        right_motors_, right_meters * motor_rad_per_meter, right_speed * motor_rad_per_meter);
   }
 
   /** Puts the simulated robot back at the origin with fresh (zeroed) encoders. */
@@ -443,11 +444,12 @@ public class DifferentialDriveMech extends MechBase {
   }
 
   private static void pushSimState(
-      CommonTalon[] motors, double motor_rotations, double motor_rotations_per_second) {
+      CommonTalon[] motors, double motor_rad, double motor_rad_per_sec) {
+    // The TalonFX simulator counts in rotations, so convert only here, at the very edge.
     for (CommonTalon motor : motors) {
       var sim_state = ((TalonFX) motor).getSimState();
-      sim_state.setRawRotorPosition(motor_rotations);
-      sim_state.setRotorVelocity(motor_rotations_per_second);
+      sim_state.setRawRotorPosition(Units.radiansToRotations(motor_rad));
+      sim_state.setRotorVelocity(Units.radiansToRotations(motor_rad_per_sec));
     }
   }
 

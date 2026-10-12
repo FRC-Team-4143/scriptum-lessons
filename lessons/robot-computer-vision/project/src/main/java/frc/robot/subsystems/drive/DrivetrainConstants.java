@@ -49,8 +49,8 @@ public class DrivetrainConstants extends MwConstants {
   public static final double AIM_KI = 0.0;
   public static final double AIM_KD = 0.0;
 
-  // Close enough to count as aimed, in degrees.
-  public static final double AIM_TOLERANCE_DEGREES = 2.0;
+  // Close enough to count as aimed, in radians.
+  public static final double AIM_TOLERANCE_RAD = 0.035; // about 2 degrees
 
   /** The things the drivetrain can be doing. */
   public enum DriveStates {

@@ -28,18 +28,18 @@
 		{
 			"title": "In your lesson: A method",
 			"say": {
-				"never": "This is `rotationsToMeters`, already in your file. You hand it two numbers and it hands back one answer. The first line is its **signature**: its name and what it takes.",
-				"bit": "`rotationsToMeters` takes two numbers and returns one. The first line is its signature."
+				"never": "This is `radiansToMeters`, already in your file. You hand it two numbers and it hands back one answer. The first line is its **signature**: its name and what it takes.",
+				"bit": "`radiansToMeters` takes two numbers and returns one. The first line is its signature."
 			},
 			"board": {
-				"code": "public static double rotationsToMeters(\n    double wheel_rotations,\n    double wheel_radius_meters) {\n  // the math goes here\n}",
+				"code": "public static double radiansToMeters(\n    double wheel_radians,\n    double wheel_radius_meters) {\n  // the math goes here\n}",
 				"marks": [
 					{
-						"text": "rotationsToMeters",
+						"text": "radiansToMeters",
 						"label": "its name"
 					},
 					{
-						"text": "double wheel_rotations",
+						"text": "double wheel_radians",
 						"label": "input one"
 					},
 					{
@@ -102,8 +102,8 @@
 		{
 			"title": "Find it",
 			"say": {
-				"never": "It may be further down. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `public static double rotationsToMeters` and press **Enter**. The editor scrolls to the right spot and highlights it.",
-				"bit": "It may be further down. Press **Ctrl+F**, type `public static double rotationsToMeters` and press Enter to jump to it."
+				"never": "It may be further down. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `public static double radiansToMeters` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "It may be further down. Press **Ctrl+F**, type `public static double radiansToMeters` and press Enter to jump to it."
 			},
 			"target": {
 				"pane": "editor"
@@ -113,9 +113,9 @@
 				"target": {
 					"pane": "editor",
 					"selector": ".view-lines .view-line",
-					"text": "public static double rotationsToMeters"
+					"text": "public static double radiansToMeters"
 				},
-				"hint": "find public static double rotationsToMeters with Ctrl+F.",
+				"hint": "find public static double radiansToMeters with Ctrl+F.",
 				"skipIfDone": true
 			},
 			"assist": true
@@ -129,7 +129,7 @@
 			"target": {
 				"pane": "editor",
 				"selector": ".view-lines .view-line",
-				"text": "public static double rotationsToMeters"
+				"text": "public static double radiansToMeters"
 			},
 			"cardAt": "bottom-right",
 			"assist": true

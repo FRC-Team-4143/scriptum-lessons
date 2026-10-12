@@ -97,8 +97,8 @@
 		{
 			"title": "What each check key means",
 			"say": {
-				"never": "Each checkpoint reads a number the robot logs. These are the ones to watch:\n\n- **Drive/DistanceToPickup** and **Drive/DistanceToScoreSpot**: how far the robot truly is from each spot, in meters. Each should dip under **0.4 meters** in turn, the pickup first, then the scoring spot.\n- **Drive/TrueAimErrorDegrees**: how many degrees the robot truly is from facing the goal. It should swing to about 0 *before* the shot, and under **5 degrees** when the shot starts.\n- **Subsystem/Shooter/ShotCount**: how many shots were taken. At least 1. **AimErrorAtShotDegrees** next to it is the aim error when the last shot started.\n\nThe checks use the **true** pose, not the robot's estimate, so a small gap between the two is not a problem.",
-				"bit": "Watch: distance to the pickup, then to the scoring spot (each under 0.4 m); true aim error (under 5 degrees at the shot); shot count (at least 1)."
+				"never": "Each checkpoint reads a number the robot logs. These are the ones to watch:\n\n- **Drive/DistanceToPickup** and **Drive/DistanceToScoreSpot**: how far the robot truly is from each spot, in meters. Each should dip under **0.4 meters** in turn, the pickup first, then the scoring spot.\n- **Drive/TrueAimErrorRad**: how many radians the robot truly is from facing the goal. It should swing to about 0 *before* the shot, and be under **0.087 rad** (about 5 degrees) when the shot starts.\n- **Subsystem/Shooter/ShotCount**: how many shots were taken. At least 1. **AimErrorAtShotRad** next to it is the aim error when the last shot started.\n\nThe checks use the **true** pose, not the robot's estimate, so a small gap between the two is not a problem.",
+				"bit": "Watch: distance to the pickup, then to the scoring spot (each under 0.4 m); true aim error (under 0.087 rad at the shot); shot count (at least 1)."
 			}
 		},
 		{
@@ -216,8 +216,8 @@
 		{
 			"title": "Plot the true aim error",
 			"say": {
-				"never": "Drag **Drive/TrueAimErrorDegrees** onto the **Left Axis**. After the second path it should swing to about 0 before the shot. Also look at **Subsystem/Shooter/ShotCount**: it should be at least 1.",
-				"bit": "Drag **Drive/TrueAimErrorDegrees** onto the Left Axis, and look at ShotCount."
+				"never": "Drag **Drive/TrueAimErrorRad** onto the **Left Axis**. After the second path it should swing to about 0 before the shot. Also look at **Subsystem/Shooter/ShotCount**: it should be at least 1.",
+				"bit": "Drag **Drive/TrueAimErrorRad** onto the Left Axis, and look at ShotCount."
 			},
 			"close": [
 				"editor",
@@ -235,9 +235,9 @@
 				"target": {
 					"pane": "scope",
 					"selector": ".line-graph-left.source-list .key-container",
-					"text": "Drive/TrueAimErrorDegrees"
+					"text": "Drive/TrueAimErrorRad"
 				},
-				"hint": "drag Drive/TrueAimErrorDegrees onto the graph."
+				"hint": "drag Drive/TrueAimErrorRad onto the graph."
 			},
 			"assist": true
 		},

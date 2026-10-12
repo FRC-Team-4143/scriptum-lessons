@@ -45,7 +45,7 @@
 			"title": "Which widget",
 			"say": "Pick the widget that matches the kind of value.",
 			"board": {
-				"code": "Number Slider         ShooterAngleDegrees   (Min 0, Max 45)\nComboBox Chooser      AutoRoutine\nText Display          AutoDelaySeconds      (Show Submit Button on)\nToggle Button         BrakeModeEnabledButton",
+				"code": "Number Slider         ShooterAngleRad       (Min 0, Max 0.785)\nComboBox Chooser      AutoRoutine\nText Display          AutoDelaySeconds      (Show Submit Button on)\nToggle Button         BrakeModeEnabledButton",
 				"language": "text",
 				"marks": [
 					{
@@ -65,7 +65,7 @@
 		},
 		{
 			"title": "Add a slider",
-			"say": "With the robot running, click **Add Widget**, search for **ShooterAngleDegrees**, and drag it onto the grid. Then right-click it, choose **Edit Properties**, and change **Widget Type** to **Number Slider**.",
+			"say": "With the robot running, click **Add Widget**, search for **ShooterAngleRad**, and drag it onto the grid. Then right-click it, choose **Edit Properties**, and change **Widget Type** to **Number Slider**.",
 			"target": {
 				"pane": "elastic",
 				"selector": "flt-semantics[role='button']",
@@ -73,13 +73,13 @@
 			},
 			"cardAt": "bottom-right",
 			"waitFor": {
-				"hint": "add ShooterAngleDegrees as a Number Slider."
+				"hint": "add ShooterAngleRad as a Number Slider."
 			},
 			"assist": true
 		},
 		{
 			"title": "Set its range",
-			"say": "Still in Edit Properties on the slider (right-click it and choose Edit Properties if you closed it), set **Min 0** and **Max 45**.",
+			"say": "Still in Edit Properties on the slider (right-click it and choose Edit Properties if you closed it), set **Min 0** and **Max 0.785**. Angles are in radians: 0.785 rad is a quarter of π (about 45 degrees).",
 			"target": {
 				"pane": "elastic",
 				"region": {

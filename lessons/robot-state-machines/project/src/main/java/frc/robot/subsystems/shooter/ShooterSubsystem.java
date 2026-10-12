@@ -151,8 +151,7 @@ public class ShooterSubsystem extends MwSubsystem<ShooterStates, ShooterConstant
    * apply it.
    */
   private void feedforward() {
-    double target_rps = CONSTANTS.SHOOT_VELOCITY / (2.0 * Math.PI);
-    double volts = CONSTANTS.FLYWHEEL_KV * target_rps;
+    double volts = CONSTANTS.FLYWHEEL_KV * CONSTANTS.SHOOT_VELOCITY;
     flywheel_.setTargetDutyCycle(volts / 12.0);
   }
 

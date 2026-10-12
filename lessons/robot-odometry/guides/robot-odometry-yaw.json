@@ -89,7 +89,7 @@
 		{
 			"title": "Why nothing shows yet",
 			"say": {
-				"never": "Yaw doesn't show up anywhere on its own yet. The pose estimator in the next guide, **Where is the robot?**, calls `getYaw()` and logs it as `Drive/PoseYawDeg`. Open that guide to wire it in and watch the yaw change.",
+				"never": "Yaw doesn't show up anywhere on its own yet. The pose estimator in the next guide, **Where is the robot?**, calls `getYaw()` and logs it as `Drive/PoseYawRad`. Open that guide to wire it in and watch the yaw change.",
 				"bit": "Yaw only shows up through the pose estimator. Do **Where is the robot?** next to wire it in."
 			}
 		}
