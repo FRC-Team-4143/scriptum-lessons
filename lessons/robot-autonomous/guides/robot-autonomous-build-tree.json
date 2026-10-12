@@ -133,7 +133,7 @@
 				"bit": "Tags are nodes, attributes are ports, nesting is the tree. The robot reads the XML at start, so no rebuild is needed."
 			},
 			"board": {
-				"code": "<Sequence>\n  <FollowPath trajectory=\"Leave\"/>\n  <SetWantedState state=\"DRIVE\"/>\n  <Timeout msec=\"1500\">\n    <RetryUntilSuccessful num_attempts=\"-1\">\n      <IsSystemState state=\"DRIVE\"/>\n    </RetryUntilSuccessful>\n  </Timeout>\n</Sequence>",
+				"code": "<Sequence>\n  <FollowPath trajectory=\"Leave\"/>\n  <Timeout msec=\"1500\">\n    <FollowPath trajectory=\"Return\"/>\n  </Timeout>\n</Sequence>",
 				"language": "text",
 				"marks": [
 					{
