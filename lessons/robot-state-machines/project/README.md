@@ -20,7 +20,8 @@ Everything is under `src/main/java/frc/robot/`:
 - `subsystems/shooter/ShooterConstants.java`: the shooter's states and thresholds.
 - `RobotContainer.java`: the robot's own state machine (the "super state machine"). It lists the
   subsystems, and every loop, before they run, it asks each one for the state the robot needs.
-- `RobotStates.java`: the robot's states, `IDLE`, `DRIVE` and `SHOOT`. `Robot.java` asks for `IDLE`
+- `RobotConstants.java`: the robot's own constants, starting with its states, the `RobotStates` enum:
+  `IDLE`, `DRIVE` and `SHOOT` (the same way `ShooterConstants` holds `ShooterStates`). `Robot.java` asks for `IDLE`
   when the robot is disabled and `DRIVE` when teleop starts.
 - `OI.java`: connects buttons to robot states.
 - `subsystems/drive/DrivetrainSubsystem.java`: already finished, with one new idea. The drivetrain now

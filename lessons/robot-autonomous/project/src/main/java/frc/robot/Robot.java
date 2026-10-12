@@ -10,6 +10,7 @@ import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.wpilibj.DataLogManager;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.RobotConstants.RobotStates;
 import frc.robot.autos.AutoNodes;
 import frc.robot.subsystems.drive.DrivetrainSubsystem;
 import frc.robot.subsystems.shooter.ShooterSubsystem;

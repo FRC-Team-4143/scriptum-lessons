@@ -50,7 +50,7 @@ Everything is under `src/main/java/frc/robot/`:
   **You choose the vision numbers.**
 - `subsystems/drive/DrivetrainSubsystem.java`, `DrivetrainConstants.java`: **the aim state and its
   PID** (look for `TODO (aim`).
-- `RobotContainer.java` and `RobotStates.java`: the robot already has an `AIM` state. You add the
+- `RobotContainer.java` and `RobotConstants.java` (its `RobotStates` enum): the robot already has an `AIM` state. You add the
   `case AIM:` that asks the drivetrain for its new `AIM` state.
 - `subsystems/simulation/SimulationSubsystem.java`: the simulated cameras. Provided; it plays the part of
   the camera computers and sends their tag solutions into MW-Lib's proxy server, the way a real robot's

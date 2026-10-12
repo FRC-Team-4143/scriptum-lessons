@@ -109,7 +109,7 @@ describe("robot-autonomous behavior trees", () => {
 	});
 
 	test("nodes.xml names the robot states a tree may ask for, and RobotStates has them", () => {
-		const states = [...java("RobotStates.java").matchAll(/^\s{2}([A-Z_]+),?$/gm)].map((m) => m[1]);
+		const states = [...java("RobotConstants.java").matchAll(/^\s{4}([A-Z_]+),?$/gm)].map((m) => m[1]);
 		const nodes = readFileSync(join(autos, "nodes.xml"), "utf8");
 		const askable = nodes.match(/Robot state to request: ([A-Z_, ]+?) or ([A-Z_]+)</);
 		expect(askable).not.toBeNull();

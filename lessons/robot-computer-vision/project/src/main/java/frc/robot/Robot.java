@@ -1,6 +1,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.RobotConstants.RobotStates;
 import frc.robot.subsystems.drive.DrivetrainSubsystem;
 import lesson.Checks;
 import org.littletonrobotics.junction.LoggedRobot;
