@@ -121,21 +121,9 @@ Go slower on anything that is new. The stretch ideas at the end are not expected
    6. a `Sleep` with `msec` `2000`: asking for SHOOT succeeds at once too, so this is what keeps it
       shooting for a while
    7. a `SetWantedState` with `state` `AUTO`, which stops the shooter
-9. **Save** (Ctrl+S) and open the **XML** tab to see what Arbor wrote. It should look like this:
-
-   ```xml
-   <BehaviorTree ID="PickupAndScore">
-     <Sequence>
-       <FollowPath trajectory="ToPickup"/>
-       <Sleep msec="500"/>
-       ...
-     </Sequence>
-   </BehaviorTree>
-   ```
-
-   Each step is a **tag**. The tag name is the node, each `name="value"` is a port, and a step that
-   holds others (the Sequence, the Timeout) has an opening and a closing tag with its children between
-   them. The robot reads this file every time it starts, so **changing a tree needs no rebuild**.
+9. **Save** (Ctrl+S). Arbor writes the tree to `deploy/autos/trees/PickupAndScore.xml`, the file the
+   robot runs; you never edit it by hand. The robot reads it every time it starts, so **changing a tree
+   needs no rebuild**.
 
 **Part 3: make AIM wait until aimed (`RobotContainer.java`)**
 
@@ -213,13 +201,11 @@ there is no Sleep after SHOOT.
 
 Stuck on a step? Open **Dozer**: he can explain the idea or walk you through it.
 
-## Java and XML you will meet
+## Java you will meet
 
 - A **step state**: a state nothing asks for, which `handleStateTransition` picks on the way to the state
   that was asked for (AIMING on the way to AIM).
 - An **`if`/`else` inside a `switch` case**, where each branch picks the next state.
-- **XML**: tags, attributes and nesting. `<Sleep msec="500"/>` is one tag with one attribute; a tag with
-  children has an opening `<Timeout msec="3000">` and a closing `</Timeout>`.
 
 ## Stretch
 
@@ -229,7 +215,7 @@ Stuck on a step? Open **Dozer**: he can explain the idea or walk you through it.
 - **Spin up early.** Use a `ParallelDeadline` so the flywheel spins up while the robot drives the second
   path.
 - **A tunable wait.** Give the tree an input port such as `pickup_wait_msec` (as in the Arbor lesson) and
-  write `{pickup_wait_msec}` in the first Sleep. Change it from Elastic without touching the XML.
+  write `{pickup_wait_msec}` in the first Sleep. Change it from Elastic without a rebuild.
 - **Replay a run.** Open a `.btlog` from `logs/bt` in Arbor and step through it.
 - Change the Max Velocity and see how it changes the total time (`Subsystem/Drivetrain/Choreo/TotalTime`).
 - Draw a third path that goes back to Start, and drive it at the end.

@@ -10,7 +10,7 @@
 		{
 			"title": "The job",
 			"say": {
-				"never": "Your routine is a **behavior tree** in the file `PickupAndScore.xml`, and you build it in the **Arbor** pane by dragging steps together, like in the Arbor lesson. The starter tree already drives the first path.\n\nYou will add the rest, in order: wait a moment (a stand-in for picking up the game piece), drive the second path, ask the robot to aim at the goal and wait until it is aimed (with a time limit), shoot for a while, then stop.\n\nYou are done when Verify says **Paths named ToPickup and ToScore** and **Autonomous tree built**. They read the XML Arbor saves, and a failing check says which step it wanted.",
+				"never": "Your routine is a **behavior tree** in the file `PickupAndScore.xml`, and you build it in the **Arbor** pane by dragging steps together, like in the Arbor lesson. The starter tree already drives the first path.\n\nYou will add the rest, in order: wait a moment (a stand-in for picking up the game piece), drive the second path, ask the robot to aim at the goal and wait until it is aimed (with a time limit), shoot for a while, then stop.\n\nYou are done when Verify says **Paths named ToPickup and ToScore** and **Autonomous tree built**. They read the tree Arbor saves, and a failing check says which step it wanted.",
 				"bit": "Build PickupAndScore in Arbor: path, wait, path, ask for AIM, wait for AIM (inside a Timeout), shoot, wait, back to AUTO."
 			}
 		},
@@ -113,8 +113,8 @@
 		{
 			"title": "Save it",
 			"say": {
-				"never": "Press **Save** (or Ctrl+S). Arbor writes the tree to `deploy/autos/trees/PickupAndScore.xml`, and that file is what the robot runs. Open the **XML** tab at the bottom to read what it wrote: one line per step, in order, with the ports as attributes. Click **I did it** once it is saved.",
-				"bit": "Save (Ctrl+S), then look at the XML tab."
+				"never": "Press **Save** (or Ctrl+S). Arbor writes the tree to `deploy/autos/trees/PickupAndScore.xml`, and that file is what the robot runs. The robot reads it when it starts, so changing a tree needs **no Java and no rebuild**: save, press Start, run it. Click **I did it** once it is saved.",
+				"bit": "Save (Ctrl+S). Saved trees need no rebuild."
 			},
 			"target": {
 				"pane": "arbor",
@@ -125,31 +125,6 @@
 				"hint": "save the tree, then click I did it."
 			},
 			"assist": true
-		},
-		{
-			"title": "Reading the XML",
-			"say": {
-				"never": "Each step is a **tag**, like `<Sleep msec=\"500\"/>`: the tag name is the node, and each `name=\"value\"` is a port. A step that holds others has an opening and a closing tag, with its children between them, like the `Timeout` around the wait for AIM.\n\nThe robot reads this file when it starts, so changing a tree needs **no Java and no rebuild**: save, press Start, run it.",
-				"bit": "Tags are nodes, attributes are ports, nesting is the tree. The robot reads the XML at start, so no rebuild is needed."
-			},
-			"board": {
-				"code": "<Sequence>\n  <FollowPath trajectory=\"Leave\"/>\n  <Timeout msec=\"1500\">\n    <FollowPath trajectory=\"Return\"/>\n  </Timeout>\n</Sequence>",
-				"language": "text",
-				"marks": [
-					{
-						"text": "<FollowPath trajectory=\"Leave\"/>",
-						"label": "one step, its port as an attribute"
-					},
-					{
-						"text": "<Timeout msec=\"1500\">",
-						"label": "opens a step that holds another"
-					},
-					{
-						"text": "</Timeout>",
-						"label": "closes it"
-					}
-				]
-			}
 		},
 		{
 			"title": "Check your work",

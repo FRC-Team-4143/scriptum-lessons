@@ -1927,7 +1927,7 @@
 		{
 			"id": "arbor-basics",
 			"title": "Arbor basics",
-			"summary": "Trees, nodes, ports, saving, and the XML Arbor writes.",
+			"summary": "Trees, nodes, ports, saving, and the Problems panel.",
 			"topic": "Tools",
 			"order": 34,
 			"modules": [

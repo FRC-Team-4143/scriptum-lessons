@@ -3,7 +3,7 @@
 Background: [Arbor](https://github.com/coalman321/Arbor) is the editor we build
 autonomous routines in. An auto is a **behavior tree**: a small tree of steps
 the robot ticks through. Arbor lets you drag the steps together, fill in their
-settings, and saves the result as an XML file the robot runs. The same tool
+settings, and saves the result as a file the robot runs. The same tool
 shows the tree running on the robot, node by node.
 
 This lesson is entirely inside the **Arbor** pane on the right - there's no
@@ -41,8 +41,8 @@ isn't already showing. You'll see:
 5. Make a wait **tunable**: in the tree's properties declare an input port
    (for example `wait_msec` with a default), then use `{wait_msec}` as the
    `Sleep`'s `msec`. On the robot that value shows up on the dashboard.
-6. **Save** (Ctrl+S) and look at the **XML** tab. That is the file the robot
-   runs.
+6. **Save** (Ctrl+S). Arbor writes the tree into `trees/`, and that file is
+   what the robot runs. You never edit it by hand: Arbor is how you change it.
 
 ## Replay a run
 

@@ -160,8 +160,8 @@
 					"bit": "The order is ToPickup, ToScore, AIM, Timeout(wait for AIM), SHOOT, Sleep, AUTO."
 				},
 				{
-					"never": "Did you press Save in Arbor? The check reads the file, not the canvas. Open the XML tab at the bottom to see what was saved.",
-					"bit": "Save in Arbor, then look at the XML tab."
+					"never": "Did you press Save in Arbor? The check reads the saved file, not the canvas, so unsaved changes don't count.",
+					"bit": "Save in Arbor (Ctrl+S), then Verify again."
 				},
 				{
 					"never": "Asking for AIM succeeds at once, so the tree also has to wait for it. The wait is nested three deep: a Timeout (msec 3000) holds a RetryUntilSuccessful (num_attempts -1), which holds IsSystemState with state AIM. Drag each one onto the one above it, not next to it.",

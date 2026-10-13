@@ -1,6 +1,6 @@
 {
 	"title": "Arbor basics",
-	"summary": "Trees, nodes, ports, saving, and the XML Arbor writes.",
+	"summary": "Trees, nodes, ports, saving, and the Problems panel.",
 	"topic": "Tools",
 	"order": 34,
 	"needs": [
@@ -57,8 +57,8 @@
 			}
 		},
 		{
-			"title": "Save, and see the XML",
-			"say": "**Save** (Ctrl+S) writes your changes to the file. Open the **XML** tab at the bottom to see exactly what was saved: that file is what the robot runs. **Problems** lists anything Arbor thinks is wrong.",
+			"title": "Save",
+			"say": "**Save** (Ctrl+S) writes your changes to the tree's file in `trees/`: that file is what the robot runs, and Arbor is how you change it. **Problems** at the bottom lists anything Arbor thinks is wrong.",
 			"target": {
 				"pane": "arbor",
 				"selector": ".toolbar button",
