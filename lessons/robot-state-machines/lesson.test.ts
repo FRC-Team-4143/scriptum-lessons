@@ -9,9 +9,9 @@ import { hasJdk, lessonKit, run } from "../../common/tests/lesson-kit";
 const L = lessonKit(import.meta.url);
 
 describe.skipIf(!hasJdk)("robot-state-machines script checkpoints", () => {
-	test("robot-state-machines: button bindings fail fresh, pass once solved", async () => {
-		await L.roundTrip(["bindings"],
-			["OI.java", "subsystems/shooter/ShooterCommands.java"],
+	test("robot-state-machines: robot states fail fresh, pass once solved", async () => {
+		await L.roundTrip(["robot-states"],
+			["OI.java", "RobotContainer.java"],
 		);
 	}, 30_000);
 });
@@ -27,7 +27,7 @@ describe.skipIf(!hasJdk || !process.env.LESSON_GRADLE)("robot-state-machines com
 				if (solution) {
 					await L.applySolution(project, [
 						"OI.java",
-						"subsystems/shooter/ShooterCommands.java",
+						"RobotContainer.java",
 						"subsystems/shooter/ShooterConstants.java",
 						"subsystems/shooter/ShooterSubsystem.java",
 					]);

@@ -26,7 +26,7 @@ from the tree on the left):
 | Large Text Display | `StatusMessage` | - |
 | Number Bar | `ClimberSpeed` | Range 0-1 |
 | Voltage View | `BatteryVoltage` | Default range (4-13) is fine |
-| Radial Gauge | `GyroHeadingDegrees` | Min/Max Value 0/360, Start/End Angle 0/360 |
+| Radial Gauge | `GyroHeadingRad` | Min/Max Value 0/6.28 (radians, one full turn), Start/End Angle 0/360 (Elastic draws the dial in degrees) |
 | Graph | `IntakeCurrentAmps` | Min 0, Max 45, Graph Color pure white |
 | Match Time | `MatchTimeRemaining` | Red Start Time 15, Yellow Start Time 45 |
 | Boolean Box | `GamePieceLoaded` | - |
@@ -44,7 +44,7 @@ just reads whatever you last sent:
 
 | Widget | Bind to | Settings |
 | --- | --- | --- |
-| Number Slider | `ShooterAngleDegrees` | Min 0, Max 45 |
+| Number Slider | `ShooterAngleRad` | Min 0, Max 0.785 (radians, about 45 degrees) |
 | ComboBox Chooser | `AutoRoutine` | - |
 | Split Button Chooser | `AutoRoutine` | Same topic as the ComboBox Chooser - one chooser, two widgets |
 | Text Display | `AutoDelaySeconds` | Turn on **Show Submit Button**, so it publishes once you hit Enter instead of on every keystroke - checked, not just suggested |

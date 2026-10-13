@@ -1,0 +1,137 @@
+{
+	"title": "Arbor basics",
+	"summary": "Trees, nodes, ports, saving, and the Problems panel.",
+	"topic": "Tools",
+	"order": 34,
+	"needs": [
+		"arbor"
+	],
+	"kind": "concept",
+	"steps": [
+		{
+			"title": "This is Arbor",
+			"say": "Arbor is where we build **autonomous routines**. A routine is a *tree* of steps the robot works through. You drag the steps together here, and Arbor saves them as a file the robot runs.",
+			"close": [
+				"editor",
+				"preview"
+			],
+			"open": [
+				"arbor"
+			],
+			"target": {
+				"pane": "arbor"
+			}
+		},
+		{
+			"title": "Your trees",
+			"say": "This is the **Trees** list: every file in the project's `trees` folder. `Example` is a small tree to read first. **+ New tree** makes your own: give it a name, and let it save in a new file.",
+			"target": {
+				"pane": "arbor",
+				"selector": ".trees-panel .panel-header",
+				"text": "Trees"
+			}
+		},
+		{
+			"title": "The steps you can use",
+			"say": "Below is the **Nodes** list: every step you can use. The robot's own steps (`SetWantedState`, `IsSystemState`, `FollowPath`) are listed here, and the built-in ones (`Sequence`, `Fallback`, `Timeout`, `Sleep`...) come with Arbor. Drag one onto the canvas, or right-click a node and choose **Add child**. The search box finds a node by name.",
+			"target": {
+				"pane": "arbor",
+				"selector": ".panel-header",
+				"text": "Nodes"
+			}
+		},
+		{
+			"title": "The canvas",
+			"say": "The tree itself. The top node is the root. A node with children, like a `Sequence`, runs them from left to right. Click a node to select it.",
+			"target": {
+				"pane": "arbor",
+				"selector": ".canvas"
+			}
+		},
+		{
+			"title": "Ports",
+			"say": "A node's settings are called **ports**. Select a node and fill them in over here: a `SetWantedState` needs the `state` to ask for, a `FollowPath` needs a `trajectory` name, a `Sleep` needs `msec`, how many milliseconds to wait.",
+			"target": {
+				"pane": "arbor",
+				"selector": ".inspector"
+			}
+		},
+		{
+			"title": "Save",
+			"say": "**Save** (Ctrl+S) writes your changes to the tree's file in `trees/`: that file is what the robot runs, and Arbor is how you change it. **Problems** at the bottom lists anything Arbor thinks is wrong.",
+			"target": {
+				"pane": "arbor",
+				"selector": ".toolbar button",
+				"text": "Save"
+			}
+		},
+		{
+			"title": "Live view",
+			"say": "When a robot (or the simulator) is running an auto, Arbor can connect to it from the toolbar. Nodes turn orange while they run, then green for success or red for failure. Not needed for this lesson, but it is how you find out which step an auto got stuck on.",
+			"target": {
+				"pane": "arbor",
+				"selector": ".toolbar"
+			}
+		},
+		{
+			"title": "Replay a run",
+			"say": "Every time the robot runs an auto it records a **log**: every node's status and exactly when it changed. Arbor can play one back, node by node, so you can find out *after* a match where an auto went wrong. On the robot the logs are on the USB stick in `/U/logs/bt`; in simulation they go in the project's `logs/bt` folder. This lesson ships one to try: `sample-logs/ReplayDemo.btlog`.",
+			"diagram": {
+				"mermaid": "flowchart LR\n  R[\"Robot runs an auto\"] --> L[\"log file .btlog · /U/logs/bt or logs/bt\"]\n  L --> D[\"Download it\"]\n  D --> A[\"Arbor: Replay a log file\"]\n  A --> P[\"Play it back node by node\"]",
+				"caption": "Every auto run is recorded; Arbor plays the recording back."
+			},
+			"target": {
+				"pane": "arbor"
+			}
+		},
+		{
+			"title": "Download the log",
+			"say": "Arbor opens a log from **your own computer**, so download it first. In the editor's file list, open the `sample-logs` folder, right-click `ReplayDemo.btlog` and choose **Download**.",
+			"open": [
+				"editor"
+			],
+			"target": {
+				"pane": "editor"
+			}
+		},
+		{
+			"title": "Open it in Arbor",
+			"say": "Back in Arbor, click the **project name** in the top-left corner. Under **Logs**, choose **Replay a log file (.btlog)...** and pick the file you downloaded. Dragging the file onto Arbor works too. The log remembers which tree it ran, so Arbor opens `ReplayDemo` for you (a log only plays if its tree is in the project).",
+			"open": [
+				"arbor"
+			],
+			"target": {
+				"pane": "arbor",
+				"selector": ".toolbar .brand"
+			}
+		},
+		{
+			"title": "Play it back",
+			"say": "A playback bar appears. **Space** plays and pauses, **← and →** step one status change at a time, **Home** and **End** jump to the start and the end, and the menu on the right changes the speed. Dots on the timeline mark where the tree finished. The nodes light up exactly like the live view: orange running, green success, red failure.",
+			"target": {
+				"pane": "arbor"
+			}
+		},
+		{
+			"title": "What went wrong?",
+			"say": "Step through it. The path finished (green) and the robot was asked for AIM (green: asking is instant). Then the tree waited for AIM: **IsSystemState AIM** failed again and again while **RetryUntilSuccessful** kept asking, until the **Timeout** ran out after 1.5 seconds and went red. So the Sequence stopped and failed, and **SHOOT** never ran at all. On a real robot that is your clue: the robot never got aimed, so look at why (no target in view? aiming badly tuned?). The Timeout is what kept the robot from waiting forever; a Fallback around it would give the tree a plan B.",
+			"diagram": {
+				"mermaid": "flowchart TD\n  seq[\"→ Sequence · FAILURE\"]:::failure\n  path[\"FollowPath ToPickup · SUCCESS\"]:::success\n  aim[\"SetWantedState AIM · SUCCESS\"]:::success\n  wait[\"Timeout 1500 · FAILURE\"]:::failure\n  retry[\"RetryUntilSuccessful -1\"]:::running\n  is[\"IsSystemState AIM · FAILURE\"]:::failure\n  shoot[\"SetWantedState SHOOT\"]:::idle\n  seq --> path\n  seq --> aim\n  seq --> wait\n  wait --> retry\n  retry --> is\n  seq --> shoot\n  classDef idle fill:#6b7280,stroke:#9ca3af,color:#fff\n  classDef running fill:#f59e0b,stroke:#b45309,color:#111\n  classDef success fill:#16a34a,stroke:#166534,color:#fff\n  classDef failure fill:#dc2626,stroke:#991b1b,color:#fff",
+				"caption": "The end of the sample run: the path worked, AIM was asked for, the wait for it timed out, so SHOOT never ran."
+			},
+			"target": {
+				"pane": "arbor"
+			}
+		},
+		{
+			"title": "Check your work",
+			"say": "The checkpoints read the trees you've saved. Open **Checkpoints** in the top bar and press **Verify** whenever you like.",
+			"close": [
+				"arbor"
+			],
+			"target": {
+				"pane": "editor"
+			}
+		}
+	]
+}

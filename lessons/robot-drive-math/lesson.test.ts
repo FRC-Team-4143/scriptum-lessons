@@ -11,7 +11,7 @@ const L = lessonKit(import.meta.url);
 
 describe.skipIf(!hasJdk)("robot-drive-math script checkpoints", () => {
 	test("robot-drive-math: every DriveMath checkpoint fails fresh, passes once solved", async () => {
-		await L.roundTrip(["rotations-to-meters", "linear-speed", "angular-speed", "arcade-math", "average"],
+		await L.roundTrip(["radians-to-meters", "linear-speed", "angular-speed", "arcade-math", "average"],
 			["DriveMath.java"],
 		);
 	}, 30_000);
@@ -26,7 +26,7 @@ describe("robot-drive-math: the student creates two methods", () => {
 	test("the starter has no linearSpeed or angularSpeed, but the code already calls them", async () => {
 		const starter = await read("project", ROBOT_SRC, "DriveMath.java");
 		expect(starter).not.toMatch(/static\s+double\s+(linearSpeed|angularSpeed)\s*\(/);
-		for (const kept of ["rotationsToMeters", "arcadeToWheelSpeeds", "average"]) {
+		for (const kept of ["radiansToMeters", "arcadeToWheelSpeeds", "average"]) {
 			expect(starter).toMatch(new RegExp(`static\\s+\\S+\\s+${kept}\\s*\\(`));
 		}
 		const caller = await read(...mech);

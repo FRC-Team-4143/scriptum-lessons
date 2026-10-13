@@ -1,0 +1,89 @@
+{
+	"title": "Seeing what the cameras see",
+	"summary": "Open the Cameras tab and pop a camera out into its own window.",
+	"topic": "Robot",
+	"kind": "concept",
+	"order": 30,
+	"needs": [
+		"driverStation"
+	],
+	"steps": [
+		{
+			"title": "The Cameras tab",
+			"say": {
+				"never": "This robot has two pretend cameras, one on the front and one on the back. They look for **AprilTags**, the square black and white codes on the field walls. The **Cameras** tab in the Driver Station shows you what they see, like the camera view a driver watches at a real match.",
+				"bit": "The robot's two simulated cameras (front and back) stream what they see to the **Cameras** tab, like a driver's camera view at a match."
+			},
+			"open": [
+				"driverStation"
+			],
+			"target": {
+				"selector": "[data-tour='cameras']"
+			},
+			"waitFor": {
+				"target": {
+					"selector": "[data-testid='cameras-panel']"
+				},
+				"hint": {
+					"never": "click the camera icon on the left edge of the Driver Station.",
+					"bit": "click the camera icon."
+				}
+			}
+		},
+		{
+			"title": "Start the robot",
+			"say": {
+				"never": "The cameras only exist while your robot code is running, so the list is empty until you press **Start**. Once the code is running, each camera that is sending pictures shows up here, one line each.",
+				"bit": "Streams only appear while the robot code runs. Press **Start** and they show up in the list."
+			},
+			"target": {
+				"selector": "[data-tour='run']"
+			},
+			"waitFor": {
+				"target": {
+					"selector": "[data-tour='camera-stream']"
+				},
+				"hint": {
+					"never": "press Start, then wait for a camera to appear in the list. The first build takes a little while.",
+					"bit": "press Start and wait for a stream to appear."
+				}
+			}
+		},
+		{
+			"title": "Pop one out",
+			"say": {
+				"never": "Click a camera in the list. It opens in its own small window that floats on top of everything, so you can watch it while you drive or read your code.",
+				"bit": "Click a stream to open it in a floating window."
+			},
+			"target": {
+				"selector": "[data-tour='camera-stream']"
+			},
+			"waitFor": {
+				"target": {
+					"selector": "[data-tour='camera-window']"
+				},
+				"hint": {
+					"never": "click one of the cameras in the list.",
+					"bit": "click a stream."
+				}
+			}
+		},
+		{
+			"title": "Your camera window",
+			"say": {
+				"never": "This is the **processed** picture: what the camera sees, with every AprilTag it found outlined. Drive the robot around and watch tags come and go. Drag the window by its top bar to move it, and drag its bottom-right corner to make it bigger. If you stop and start your code, the window stays put and picks the camera back up.",
+				"bit": "The **processed** view outlines each AprilTag the camera found. Drag the top bar to move it, the corner to resize. It reconnects by itself when you restart your code."
+			},
+			"target": {
+				"selector": "[data-tour='camera-window']"
+			}
+		},
+		{
+			"title": "Turning streams on",
+			"say": {
+				"never": "A camera only streams if the code asks it to. In this project, `SimulationSubsystem` has the line `vision_sim.enableProcessedStream(true);`, which turns on the picture with the tags outlined. `vision_sim.enableRawStream(true);` would add the plain picture as well. Each stream makes the computer draw pictures over and over, so only turn on the ones you want to look at.",
+				"bit": "`vision_sim.enableProcessedStream(true);` in `SimulationSubsystem` turns this on; `enableRawStream(true)` adds the plain picture. Each stream costs computer time, so only enable what you'll watch."
+			}
+		}
+	]
+}

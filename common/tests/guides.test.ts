@@ -12,7 +12,7 @@ const repoRoot = resolve(fileURLToPath(new URL("../..", import.meta.url)));
 const readJson = (path: string) =>
 	JSON.parse(readFileSync(resolve(repoRoot, path), "utf8"));
 
-const PANES = ["editor", "scope", "choreo", "elastic", "preview", "driverStation"];
+const PANES = ["editor", "scope", "choreo", "arbor", "elastic", "preview", "driverStation"];
 const LENGTH = /^-?\d+(?:\.\d+)?(?:px|%)$/;
 
 type Target = {

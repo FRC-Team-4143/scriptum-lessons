@@ -34,6 +34,9 @@ public class SimulationSubsystem extends MwSubsystem<SimulationStates, Simulatio
         ProxyServerThread.getInstance().initializeVisionSimulation(VisionConstants.FIELD_LAYOUT);
     vision_sim.addCamera(VisionConstants.FRONT_CAMERA_NAME, VisionConstants.FRONT_CAMERA_TRANSFORM);
     vision_sim.addCamera(VisionConstants.BACK_CAMERA_NAME, VisionConstants.BACK_CAMERA_TRANSFORM);
+    // Stream what each camera sees, with the tags it found drawn on, to the Cameras tab in the
+    // Driver Station. (enableRawStream(true) would add the plain picture too.)
+    vision_sim.enableProcessedStream(true);
   }
 
   /** This subsystem has no motors or sensors to read. */

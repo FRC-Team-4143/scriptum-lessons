@@ -32,10 +32,10 @@
 				"bit": "PID here is the feedforward guess **plus** a correction that grows with the error."
 			},
 			"board": {
-				"code": "duty = (kV * target_rps + kP * error) / 12.0;",
+				"code": "duty = (kV * target + kP * error) / 12.0;   // target and error in rad/s",
 				"marks": [
 					{
-						"text": "kV * target_rps",
+						"text": "kV * target",
 						"label": "feedforward: the power to hold the speed"
 					},
 					{
@@ -79,8 +79,8 @@
 		{
 			"title": "Find kV",
 			"say": {
-				"never": "Search for `FLYWHEEL_KV`. Set `FLYWHEEL_CONTROL = FEEDFORWARD`. Then try kV values 0.05, then 0.10, then 0.12. Restart each time and watch the graph to see which gets the flywheel closest to its target.",
-				"bit": "Search for `FLYWHEEL_KV`. Set `FLYWHEEL_CONTROL = FEEDFORWARD` and try kV 0.05, 0.10, 0.12, restarting each time."
+				"never": "Search for `FLYWHEEL_KV`. Set `FLYWHEEL_CONTROL = FEEDFORWARD`. Then try kV values 0.008, then 0.016, then 0.0191 (volts per rad/s). Restart each time and watch the graph to see which gets the flywheel closest to its target.",
+				"bit": "Search for `FLYWHEEL_KV`. Set `FLYWHEEL_CONTROL = FEEDFORWARD` and try kV 0.008, 0.016, 0.0191, restarting each time."
 			},
 			"waitFor": {
 				"hint": {
@@ -164,8 +164,8 @@
 		{
 			"title": "Add kP",
 			"say": {
-				"never": "Now switch to `PID` and keep your best kV. Raise `FLYWHEEL_KP` through 0.05, then 0.2, then 1.0. After a shot, the flywheel should now recover faster. Be careful: too big a kP and a real robot starts to buzz.",
-				"bit": "Switch to `PID`, keep your kV, and raise `FLYWHEEL_KP`: 0.05, 0.2, 1.0. Now the dip recovers. Too big and a real robot buzzes."
+				"never": "Now switch to `PID` and keep your best kV. Raise `FLYWHEEL_KP` through 0.008, then 0.032, then 0.16. After a shot, the flywheel should now recover faster. Be careful: too big a kP and a real robot starts to buzz.",
+				"bit": "Switch to `PID`, keep your kV, and raise `FLYWHEEL_KP`: 0.008, 0.032, 0.16. Now the dip recovers. Too big and a real robot buzzes."
 			},
 			"waitFor": {
 				"hint": {

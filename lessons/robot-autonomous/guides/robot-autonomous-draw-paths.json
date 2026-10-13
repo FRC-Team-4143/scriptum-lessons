@@ -52,11 +52,11 @@
 		{
 			"title": "Drive Type: Differential",
 			"say": {
-				"never": "Slide **Drive Type** from Swerve to **Differential**. Set **Trackwidth** to **24** in. Click **I did it** when Drive Type reads Differential.",
-				"bit": "Drive Type to Differential, Trackwidth 24 in."
+				"never": "Slide **Drive Type** from Swerve to **Differential**. Set **Trackwidth** to **0.61 m** (type the unit too). Click **I did it** when Drive Type reads Differential.",
+				"bit": "Drive Type to Differential, Trackwidth 0.61 m."
 			},
 			"waitFor": {
-				"hint": "set Drive Type to Differential and Trackwidth to 24 in, then click I did it."
+				"hint": "set Drive Type to Differential and Trackwidth to 0.61 m, then click I did it."
 			},
 			"assist": true,
 			"target": {
@@ -67,8 +67,8 @@
 		{
 			"title": "Type the robot numbers",
 			"say": {
-				"never": "Type these, pressing **Enter** after each: Mass **50** kg, MOI **7.5** kg m^2, Bumpers **17** in (front, back and sides), Wheel Radius **3** in, Motor Rev / Wheel Rev **8.45**, Motor Max Speed **6000** RPM, Motor Max Torque **1.0** N*m, Wheel COF **1.5**. Click **I did it** when they match, then close the dialog.",
-				"bit": "Mass 50, MOI 7.5, Bumpers 17, Wheel Radius 3, gearing 8.45, 6000 RPM, 1.0 N*m, COF 1.5."
+				"never": "Type these with their units, pressing **Enter** after each: Mass **50 kg**, MOI **7.5 kg m^2**, Bumpers **0.43 m** (front, back and sides), Wheel Radius **0.0762 m**, Motor Rev / Wheel Rev **8.45**, Motor Max Speed **628 rad / s**, Motor Max Torque **1.0 N * m**, Wheel COF **1.5**. Choreo converts each one to the unit it shows, so a number may look different after you press Enter. Click **I did it** when they match, then close the dialog.",
+				"bit": "Mass 50 kg, MOI 7.5 kg m^2, Bumpers 0.43 m, Wheel Radius 0.0762 m, gearing 8.45, 628 rad / s, 1.0 N * m, COF 1.5."
 			},
 			"waitFor": {
 				"hint": "type the robot numbers, then click I did it."
@@ -82,11 +82,11 @@
 		{
 			"title": "The places on the field",
 			"say": {
-				"never": "The project already knows four places, saved as **named poses**: `Start`, `Pickup`, `ScoreSpot` and `Goal`. Your two paths use three of them. The numbers are on the board, in meters and degrees.\n\nThe robot is standing on Pickup when ToScore begins, so **ToScore must start at Pickup**: the same spot as ToPickup's last waypoint. The check allows only a few centimeters of gap.",
+				"never": "The project already knows four places, saved as **named poses**: `Start`, `Pickup`, `ScoreSpot` and `Goal`. Your two paths use three of them. The numbers are on the board, in meters and radians.\n\nThe robot is standing on Pickup when ToScore begins, so **ToScore must start at Pickup**: the same spot as ToPickup's last waypoint. The check allows only a few centimeters of gap.",
 				"bit": "ToPickup: Start to Pickup. ToScore: Pickup to ScoreSpot. The two paths must meet at Pickup."
 			},
 			"board": {
-				"code": "Start      x 1.5   y 1.5   heading 0\nPickup     x 5.5   y 2.5   heading 0\nScoreSpot  x 6.5   y 5.0   heading 90",
+				"code": "Start      x 1.5 m   y 1.5 m   heading 0 rad\nPickup     x 5.5 m   y 2.5 m   heading 0 rad\nScoreSpot  x 6.5 m   y 5.0 m   heading 1.5708 rad",
 				"language": "text",
 				"marks": [
 					{
@@ -110,8 +110,8 @@
 		{
 			"title": "Waypoints and names",
 			"say": {
-				"never": "A path is a list of **waypoints**, and the order in the list is the order the robot drives. A **Pose Waypoint** pins where the robot is and which way it faces. A **Translation Waypoint** pins only the position and lets Choreo choose the heading. A path needs at least three: a start, a point to steer through, an end.\n\nThe **name** matters most of all: your Java loads each path by its name, so the spelling and capital letters must be exact. Rename it in the Choreo pane, not by renaming the file. Then press **Generate**: Choreo works out the schedule and saves the file.",
-				"bit": "Pose waypoint = position and heading, translation waypoint = position only. Order in the list is the driving order. Names must match your Java exactly. Generate saves the path."
+				"never": "A path is a list of **waypoints**, and the order in the list is the order the robot drives. A **Pose Waypoint** pins where the robot is and which way it faces. A **Translation Waypoint** pins only the position and lets Choreo choose the heading. A path needs at least three: a start, a point to steer through, an end.\n\nThe **name** matters most of all: your tree drives each path by its name, so the spelling and capital letters must be exact. Rename it in the Choreo pane, not by renaming the file. Then press **Generate**: Choreo works out the schedule and saves the file.",
+				"bit": "Pose waypoint = position and heading, translation waypoint = position only. Order in the list is the driving order. Names must match your tree exactly. Generate saves the path."
 			}
 		},
 		{
@@ -137,7 +137,7 @@
 		{
 			"title": "Name it ToPickup",
 			"say": {
-				"never": "Click the path's name in the list and type `ToPickup`, then press **Enter**. The spelling and capital letters must be exact, because your Java will load the path by this name. Rename it in the Choreo pane, not by renaming the file. Click **I did it** when it says ToPickup.",
+				"never": "Click the path's name in the list and type `ToPickup`, then press **Enter**. The spelling and capital letters must be exact, because your tree will drive the path by this name. Rename it in the Choreo pane, not by renaming the file. Click **I did it** when it says ToPickup.",
 				"bit": "Rename the path to exactly `ToPickup` (capital T and P)."
 			},
 			"waitFor": {
@@ -175,8 +175,8 @@
 		{
 			"title": "Put it on Start",
 			"say": {
-				"never": "Click the waypoint in the list on the left. Its numbers appear in a panel: type **1.5** in the X box, **1.5** in the Y box and **0** degrees for the heading, pressing **Enter** after each. Click **I did it** when the waypoint sits on the Start spot.",
-				"bit": "Set the first waypoint to x 1.5, y 1.5, heading 0 degrees."
+				"never": "Click the waypoint in the list on the left. Its numbers appear in a panel: type **1.5** in the X box, **1.5** in the Y box and **0 rad** for the heading, pressing **Enter** after each. Click **I did it** when the waypoint sits on the Start spot.",
+				"bit": "Set the first waypoint to x 1.5, y 1.5, heading 0 rad."
 			},
 			"waitFor": {
 				"hint": "set the waypoint to 1.5, 1.5, heading 0, then click I did it."
@@ -253,8 +253,8 @@
 		{
 			"title": "Put it on Pickup",
 			"say": {
-				"never": "Click the last waypoint and type X **5.5**, Y **2.5**, heading **0** degrees. Click **I did it** when it sits on Pickup.",
-				"bit": "Set the last waypoint to x 5.5, y 2.5, heading 0 degrees."
+				"never": "Click the last waypoint and type X **5.5**, Y **2.5**, heading **0 rad**. Click **I did it** when it sits on Pickup.",
+				"bit": "Set the last waypoint to x 5.5, y 2.5, heading 0 rad."
 			},
 			"waitFor": {
 				"hint": "set the end waypoint to 5.5, 2.5, heading 0, then click I did it."
@@ -351,8 +351,8 @@
 		{
 			"title": "Type the three places",
 			"say": {
-				"never": "Click each waypoint in the list and type its numbers. First: X **5.5**, Y **2.5**, heading **0**. Middle: X **6.0**, Y **3.8**. Last: X **6.5**, Y **5.0**, heading **90** degrees (about 1.57 if Choreo asks in radians). Click **I did it** when all three are typed.",
-				"bit": "First 5.5, 2.5 at 0 degrees. Middle 6.0, 3.8. Last 6.5, 5.0 at 90 degrees."
+				"never": "Click each waypoint in the list and type its numbers. First: X **5.5**, Y **2.5**, heading **0 rad**. Middle: X **6.0**, Y **3.8**. Last: X **6.5**, Y **5.0**, heading **1.5708 rad** (pi/2, a quarter turn to the left). Type the **rad** too, so Choreo knows the unit. Click **I did it** when all three are typed.",
+				"bit": "First 5.5, 2.5 at 0 rad. Middle 6.0, 3.8. Last 6.5, 5.0 at 1.5708 rad."
 			},
 			"waitFor": {
 				"hint": "type the three waypoints, then click I did it."
@@ -384,8 +384,8 @@
 		{
 			"title": "Check your work",
 			"say": {
-				"never": "Open the lesson chip and press **Verify**. **Two paths drawn** and **Paths go where they should** should pass now. **Paths named ToPickup and ToScore** also looks at your Java (`Autos.java` has to load them by name), so it passes after the next guide.",
-				"bit": "Press Verify. The naming check also reads your Java, so it passes after the next guide."
+				"never": "Open the lesson chip and press **Verify**. **Two paths drawn** and **Paths go where they should** should pass now. **Paths named ToPickup and ToScore** also looks at your tree (a `FollowPath` has to drive each path by name), so it passes after the next guide.",
+				"bit": "Press Verify. The naming check also reads your tree, so it passes after the next guide."
 			},
 			"target": {
 				"selector": "[data-tour='lesson']"

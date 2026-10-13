@@ -82,7 +82,7 @@
 		{
 			"title": "The controller and the wrap-around",
 			"say": {
-				"never": "To face the goal, the robot needs a turning command that gets smaller as it lines up. A **PID controller** makes that from the **error**: how far the robot's heading is from the direction it wants. It has three terms.\n\n- **P** pushes in proportion to the error: far off, big push.\n- **I** adds up the error that is left over time, to finish the last bit. Too much makes it wind up.\n- **D** reacts to how fast the error is changing, to calm things down before it overshoots.\n\nThe constants hold the three gains. The controller also needs two settings: **headings wrap around** (359 degrees and -1 degree are the same direction, so it should take the short way round), and a **tolerance** (how close counts as aimed). It works in radians.",
+				"never": "To face the goal, the robot needs a turning command that gets smaller as it lines up. A **PID controller** makes that from the **error**: how far the robot's heading is from the direction it wants. It has three terms.\n\n- **P** pushes in proportion to the error: far off, big push.\n- **I** adds up the error that is left over time, to finish the last bit. Too much makes it wind up.\n- **D** reacts to how fast the error is changing, to calm things down before it overshoots.\n\nThe constants hold the three gains. The controller also needs two settings: **headings wrap around** (3.1 rad and -3.1 rad are almost the same direction, so it should take the short way round), and a **tolerance** (how close counts as aimed). It works in radians.",
 				"bit": "A PID turns the error (how far off the heading is) into a turn command: P in proportion, I for leftover error, D to calm it. It needs wrap-around and a tolerance, in radians."
 			}
 		},
@@ -178,8 +178,8 @@
 		{
 			"title": "Configure the PID",
 			"say": {
-				"never": "Two calls on `aim_pid_`, below that comment. `enableContinuousInput(-Math.PI, Math.PI)` makes headings wrap round. `setTolerance(...)` says how close counts as aimed. Give it `Math.toRadians(DrivetrainConstants.AIM_TOLERANCE_DEGREES)`, because the PID works in radians. Click **I did it** when both are written.",
-				"bit": "`aim_pid_.enableContinuousInput(-Math.PI, Math.PI)` and `aim_pid_.setTolerance(...)` in radians."
+				"never": "Two calls on `aim_pid_`, below that comment. `enableContinuousInput(-Math.PI, Math.PI)` makes headings wrap round. `setTolerance(...)` says how close counts as aimed. Give it `DrivetrainConstants.AIM_TOLERANCE_RAD`, which is already in radians, like the PID. Click **I did it** when both are written.",
+				"bit": "`aim_pid_.enableContinuousInput(-Math.PI, Math.PI)` and `aim_pid_.setTolerance(DrivetrainConstants.AIM_TOLERANCE_RAD)`."
 			},
 			"cardAt": "bottom-right",
 			"waitFor": {
@@ -313,8 +313,8 @@
 		{
 			"title": "isAimed",
 			"say": {
-				"never": "Replace `return false;` with one `return` that uses `&&`: the heading error in degrees, `Math.toDegrees(getAimErrorRadians())`, has an absolute value (`Math.abs`) smaller than `DrivetrainConstants.AIM_TOLERANCE_DEGREES`, **and** `Math.abs(drive_.getAngularSpeed())` is smaller than `0.15`. The second part makes sure it has stopped turning. Click **I did it** when it's written.",
-				"bit": "`Math.abs(error in degrees) < AIM_TOLERANCE_DEGREES && Math.abs(drive_.getAngularSpeed()) < 0.15`."
+				"never": "Replace `return false;` with one `return` that uses `&&`: the heading error, `getAimErrorRadians()`, has an absolute value (`Math.abs`) smaller than `DrivetrainConstants.AIM_TOLERANCE_RAD`, **and** `Math.abs(drive_.getAngularSpeed())` is smaller than `0.15`. The second part makes sure it has stopped turning. Click **I did it** when it's written.",
+				"bit": "`Math.abs(getAimErrorRadians()) < AIM_TOLERANCE_RAD && Math.abs(drive_.getAngularSpeed()) < 0.15`."
 			},
 			"cardAt": "bottom-right",
 			"waitFor": {
@@ -328,10 +328,10 @@
 			}
 		},
 		{
-			"title": "Open DrivetrainCommands.java",
+			"title": "Open RobotContainer.java",
 			"say": {
-				"never": "Last, a command so the button can start the state. Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `DrivetrainCommands`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
-				"bit": "Last, a command so the button can start the state. Press **Ctrl+P**, type `DrivetrainCommands` and press Enter. Quick Open finds any file by name."
+				"never": "Last, the robot's own state machine has to ask for the new state. Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `RobotContainer`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "Last, the robot has to ask for the new state. Press **Ctrl+P**, type `RobotContainer` and press Enter. Quick Open finds any file by name."
 			},
 			"open": [
 				"editor"
@@ -350,9 +350,9 @@
 				"target": {
 					"pane": "editor",
 					"selector": ".tabs-container .tab",
-					"text": "DrivetrainCommands.java"
+					"text": "RobotContainer.java"
 				},
-				"hint": "open DrivetrainCommands.java with Ctrl+P.",
+				"hint": "open RobotContainer.java with Ctrl+P.",
 				"skipIfDone": true
 			},
 			"assist": true
@@ -360,8 +360,8 @@
 		{
 			"title": "Find it",
 			"say": {
-				"never": "The command is at the top of the class. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `TODO: return Commands.startEnd` and press **Enter**. The editor scrolls to the right spot and highlights it.",
-				"bit": "The command is at the top of the class. Press **Ctrl+F**, type `TODO: return Commands.startEnd` and press Enter to jump to it."
+				"never": "It's in the switch in updateLogic(). Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `TODO: add a case AIM` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "It's in the switch in updateLogic(). Press **Ctrl+F**, type `TODO: add a case AIM` and press Enter to jump to it."
 			},
 			"target": {
 				"pane": "editor"
@@ -371,18 +371,18 @@
 				"target": {
 					"pane": "editor",
 					"selector": ".view-lines .view-line",
-					"text": "TODO: return Commands.startEnd"
+					"text": "TODO: add a case AIM"
 				},
-				"hint": "find TODO: return Commands.startEnd with Ctrl+F.",
+				"hint": "find add a case AIM with Ctrl+F.",
 				"skipIfDone": true
 			},
 			"assist": true
 		},
 		{
-			"title": "The aim command",
+			"title": "The robot's AIM state",
 			"say": {
-				"never": "This is the same shape as `ShooterCommands.shoot()`. Return `Commands.startEnd(start, end)`: start sets the drivetrain's wanted state to `DriveStates.AIM`, and end sets it back to `DriveStates.ARCADE`. Use `DrivetrainSubsystem.getInstance().setWantedState(...)`. The left bumper is already wired to this command in `OI`. Click **I did it** when it's written.",
-				"bit": "`Commands.startEnd(() -> setWantedState(AIM), () -> setWantedState(ARCADE))` on the drivetrain."
+				"never": "The left bumper already asks the **robot** for `RobotStates.AIM`. Add a `case AIM:` to the switch that asks the drivetrain for `DriveStates.AIM` and the shooter for `ShooterStates.IDLE`, then `break;`. It's the same shape as the `DRIVE` case above it. Click **I did it** when it's written.",
+				"bit": "Add `case AIM:` asking `drive_` for `DriveStates.AIM` and `shooter_` for `ShooterStates.IDLE`, then `break;`. Click **I did it** when it's written."
 			},
 			"cardAt": "bottom-right",
 			"waitFor": {
@@ -392,7 +392,7 @@
 			"target": {
 				"pane": "editor",
 				"selector": ".view-lines .view-line",
-				"text": "TODO: return Commands.startEnd"
+				"text": "TODO: add a case AIM"
 			}
 		},
 		{
@@ -440,7 +440,7 @@
 		{
 			"title": "Try it and tune it",
 			"say": {
-				"never": "Hold the **left bumper** (**E** on the keyboard). The robot should spin toward the goal, which starts about 45 degrees to its left. It probably won't stop in the right place yet, and that's fine.\n\nIf it spins the wrong way, check the sign flip. If nothing happens, check the binding and that the state is `AIM` in AdvantageScope.\n\nThen tune **by hand**, one gain at a time. Start with only P: raise it until the robot turns briskly, lower it if it swings back and forth. If it overshoots, add a little D. Leave I at zero unless it stops just short of the goal. Change one number, Start again, and try again.",
+				"never": "Hold the **left bumper** (**E** on the keyboard). The robot should spin toward the goal, which starts about 0.785 rad (45 degrees) to its left. It probably won't stop in the right place yet, and that's fine.\n\nIf it spins the wrong way, check the sign flip. If nothing happens, check the `AIM` case in `RobotContainer` and that `Robot/State` and the drivetrain's state are `AIM` in AdvantageScope.\n\nThen tune **by hand**, one gain at a time. Start with only P: raise it until the robot turns briskly, lower it if it swings back and forth. If it overshoots, add a little D. Leave I at zero unless it stops just short of the goal. Change one number, Start again, and try again.",
 				"bit": "Hold the left bumper. It should spin toward the goal. If it spins the wrong way, flip the sign. Tune by hand: P first, a little D to stop overshoot, I last."
 			},
 			"target": {

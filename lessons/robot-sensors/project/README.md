@@ -13,9 +13,9 @@ Companion docs page: [Sensors and Feedback](https://docs.marswars.org/docs/softw
 - `Robot.java` is **your code**. `robotPeriodic()` runs all the time, even when disabled, so it is
   the right place to measure things. `autonomousPeriodic()` runs on its own during autonomous.
 - The drivetrain now has sensor methods you can call:
-  - `drive_.getLeftPositionRotations()` / `drive_.getRightPositionRotations()`: how far each side's
-    wheels have turned, in wheel rotations. Forward is positive.
-  - `drive_.getLeftVelocityRps()` / `drive_.getRightVelocityRps()`: how fast, in rotations per second.
+  - `drive_.getLeftPositionRad()` / `drive_.getRightPositionRad()`: how far each side's
+    wheels have turned, as a wheel angle in radians. Forward is positive.
+  - `drive_.getLeftVelocityRadPerSec()` / `drive_.getRightVelocityRadPerSec()`: how fast, in radians per second.
   - `drive_.resetEncoders()`: reset: set both positions back to zero, so the distance starts over.
 
 ## Running it
@@ -44,14 +44,15 @@ Go slower on anything that is new. Finishing every bonus is not expected.
 ## What you need to do
 
 1. **STEP 1: meters.** In `Robot.java`, fill in `left_meters`, `right_meters`, `left_meters_per_second` and
-   `right_meters_per_second`. One wheel rotation moves the robot one wheel circumference:
+   `right_meters_per_second`. A wheel that turns through an angle in radians rolls the robot that angle times the wheel
+   radius (arc length):
 
    ```text
-   meters            = rotations         x (2 x pi x wheel radius)
-   meters per second = rotations per sec x (2 x pi x wheel radius)
+   meters            = radians         x wheel radius
+   meters per second = radians per sec x wheel radius
    ```
 
-   `Math.PI` is pi and `Constants.WHEEL_RADIUS_METERS` is the wheel radius.
+   `Constants.WHEEL_RADIUS_METERS` is the wheel radius.
 2. **STEP 2: the whole robot.** Fill in the three values under it:
 
    ```text

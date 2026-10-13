@@ -34,7 +34,7 @@ describe("robot-computer-vision", () => {
 		expect(photon.name).toBe("photonlib");
 		expect(photon.version).toBe("v2026.2.2");
 		const gradle = readFileSync(join(L.dir, "project", "build.gradle"), "utf8");
-		expect(gradle).toContain("mw-lib-java:26.17.3");
+		expect(gradle).toContain("mw-lib-java:27.0.0");
 	});
 
 	test("the provided pieces the next chunks build on exist", () => {
@@ -52,7 +52,7 @@ describe("robot-computer-vision", () => {
 const AIM_FILES = [
 	"subsystems/drive/DrivetrainConstants.java",
 	"subsystems/drive/DrivetrainSubsystem.java",
-	"subsystems/drive/DrivetrainCommands.java",
+	"RobotContainer.java",
 ];
 
 /** A copy of the project with the whole solution laid over it, then `change` applied. */
@@ -147,7 +147,7 @@ describe("robot-computer-vision checkpoint list", () => {
 		expect(topics).toEqual([
 			"/AdvantageKit/RealOutputs/Check/Localization/Accurate",
 			"/AdvantageKit/RealOutputs/Check/Aim/Settled",
-			"/AdvantageKit/RealOutputs/Check/Aim/OvershootDegrees",
+			"/AdvantageKit/RealOutputs/Check/Aim/OvershootRad",
 		]);
 	});
 
@@ -155,7 +155,7 @@ describe("robot-computer-vision checkpoint list", () => {
 		const src = (f: string) => readFileSync(join(L.dir, "project", "src/main/java/lesson", f), "utf8");
 		expect(src("LocalizationChecks.java")).toContain('"Check/Localization/Accurate"');
 		expect(src("AimChecks.java")).toContain('"Check/Aim/Settled"');
-		expect(src("AimChecks.java")).toContain('"Check/Aim/OvershootDegrees"');
+		expect(src("AimChecks.java")).toContain('"Check/Aim/OvershootRad"');
 		const checks = src("Checks.java");
 		expect(checks).toContain("localization.update()");
 		expect(checks).toContain("aim.update()");

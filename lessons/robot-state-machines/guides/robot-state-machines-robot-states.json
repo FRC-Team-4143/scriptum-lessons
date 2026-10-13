@@ -1,0 +1,71 @@
+{
+	"title": "The robot's state machine",
+	"summary": "RobotContainer is a state machine too: buttons ask the robot, the robot asks the subsystems.",
+	"topic": "Robot",
+	"order": 510,
+	"kind": "mixed",
+	"steps": [
+		{
+			"title": "A machine of machines",
+			"say": {
+				"never": "Each subsystem is a state machine. The **robot** is one more state machine on top of them, sometimes called a *super state machine*. A robot state like `SHOOT` means \"drive normally **and** shoot\", so the robot asks the drivetrain for one state and the shooter for another. A kitchen works the same way: the head chef calls \"dinner service\", and each cook knows what that means for their own station.",
+				"bit": "The robot is a state machine over the subsystems: one robot state asks each subsystem for a state."
+			},
+			"board": {
+				"code": "   buttons / autos\n         |  robot.setWantedState(SHOOT)\n         v\n   RobotContainer   (robot states: IDLE, DRIVE, SHOOT)\n      |                 |\n      v                 v\n   drivetrain        shooter\n   (ARCADE)          (SHOOT)",
+				"language": "text",
+				"marks": [
+					{
+						"text": "RobotContainer",
+						"label": "the robot's state machine"
+					}
+				]
+			}
+		},
+		{
+			"title": "Why one place",
+			"say": {
+				"never": "Anything that uses **more than one** subsystem lives in one place: the robot's state machine. Buttons never talk to subsystems; they only ask the robot for a state. That means the same robot state works for a button in teleop **and** for an autonomous routine, so you write it once.",
+				"bit": "Buttons and autos only ask the robot for a state, so each behaviour is written once."
+			}
+		},
+		{
+			"title": "In your lesson: the robot's states",
+			"say": {
+				"never": "`RobotContainer` already lists the subsystems. Now it also has states: `IDLE` (disabled), `DRIVE` and `SHOOT`. Every loop, before the subsystems run, its `updateLogic` looks at the robot's state and asks each subsystem for the state it needs, with the same `setWantedState` you use everywhere.",
+				"bit": "`RobotContainer.updateLogic` runs first each loop and asks each subsystem for a state."
+			},
+			"board": {
+				"code": "switch (system_state_) {\n    case SHOOT:\n        drive_.setWantedState(DriveStates.ARCADE);\n        shooter_.setWantedState(ShooterStates.SHOOT);\n        break;\n    ...\n}",
+				"marks": [
+					{
+						"text": "system_state_",
+						"label": "the robot's state"
+					},
+					{
+						"text": "shooter_.setWantedState",
+						"label": "ask a subsystem"
+					}
+				]
+			},
+			"assist": true
+		},
+		{
+			"title": "In your lesson: who asks whom",
+			"say": {
+				"never": "`Robot.java` asks for `IDLE` when the robot is disabled and `DRIVE` when teleop starts. Your right bumper will ask for `SHOOT` while it is held. Nobody but `RobotContainer` talks to the shooter.",
+				"bit": "Robot.java asks for IDLE or DRIVE; the right bumper asks for SHOOT; only RobotContainer asks the shooter."
+			},
+			"board": {
+				"code": "public void teleopInit() {\n    container_.setWantedState(RobotStates.DRIVE);\n}",
+				"marks": [
+					{
+						"text": "RobotStates.DRIVE",
+						"label": "a robot state"
+					}
+				]
+			},
+			"assist": true
+		}
+	]
+}

@@ -3,8 +3,8 @@ package frc.robot;
 public final class DriveMath {
   private DriveMath() {}
 
-  public static double rotationsToMeters(double wheel_rotations, double wheel_radius_meters) {
-    return wheel_rotations * 2.0 * Math.PI * wheel_radius_meters;
+  public static double radiansToMeters(double wheel_radians, double wheel_radius_meters) {
+    return wheel_radians * wheel_radius_meters;
   }
 
   public static double linearSpeed(double left_meters_per_second, double right_meters_per_second) {

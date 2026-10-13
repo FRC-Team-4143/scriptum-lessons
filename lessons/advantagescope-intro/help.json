@@ -13,7 +13,7 @@
 			]
 		},
 		{
-			"checkpoint": "flywheel-target-rpm-tunable",
+			"checkpoint": "flywheel-target-velocity-tunable",
 			"guides": [
 				"advantagescope-tuning"
 			]

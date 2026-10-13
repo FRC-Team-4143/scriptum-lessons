@@ -1,0 +1,93 @@
+{
+	"title": "Commands and lambdas",
+	"summary": "startEnd, runOnce, and handing over code to run later.",
+	"topic": "Robot",
+	"order": 510,
+	"steps": [
+		{
+			"title": "A lambda",
+			"say": {
+				"never": "A **lambda** is a tiny method with no name, written `() -> ...`. The key idea: you're *not running it now*. You're handing it over so something else can run it later, like giving someone a note that says \"when I press this button, turn the lights on\".",
+				"bit": "A lambda `() -> ...` is a nameless method you hand over to run later."
+			},
+			"board": {
+				"code": "() -> lights.setOn(true)",
+				"language": "java",
+				"marks": [
+					{
+						"text": "() ->",
+						"label": "a note: no name, no parameters"
+					},
+					{
+						"text": "lights.setOn(true)",
+						"label": "what the note says to do"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: A lambda",
+			"say": {
+				"never": "A **lambda** is a tiny method with no name, written `() -> ...`. The key idea: you're *not running it now*. You're handing it over so something else can run it later, like giving someone a note that says \"when I press this button, ask the robot to shoot\".",
+				"bit": "`() -> ...` is a tiny method with no name. You're not running it now: you're handing it over to run later."
+			},
+			"board": {
+				"code": "() -> robot.setWantedState(RobotStates.SHOOT)",
+				"marks": [
+					{
+						"text": "()",
+						"label": "takes nothing"
+					},
+					{
+						"text": "->",
+						"label": "does this:"
+					}
+				]
+			},
+			"assist": true
+		},
+		{
+			"title": "A command",
+			"say": {
+				"never": "`startEnd` builds a command out of two notes. The first lambda runs when the command **starts** (here: turn the lights on). The second runs when it **ends** (turn them off). When you let go of the button, the command ends.",
+				"bit": "`Commands.startEnd(start, end, requirements)` runs one lambda when the command starts and another when it ends."
+			},
+			"board": {
+				"code": "public static Command flashLights() {\n    return Commands.startEnd(\n        () -> lights.setOn(true),\n        () -> lights.setOn(false),\n        lights);\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "() -> lights.setOn(true)",
+						"label": "runs when it starts"
+					},
+					{
+						"text": "() -> lights.setOn(false)",
+						"label": "runs when it ends"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: A command",
+			"say": {
+				"never": "`startEnd` builds a command out of two notes. The first lambda runs when the command **starts** (here: ask the robot for SHOOT). The second runs when it **ends** (here: ask it for DRIVE again). When you let go of the button, the command ends.",
+				"bit": "`startEnd` runs one lambda when the command starts and another when it ends."
+			},
+			"board": {
+				"code": "driver.rightBumper().whileTrue(Commands.startEnd(\n    () -> robot.setWantedState(RobotStates.SHOOT),\n    () -> robot.setWantedState(RobotStates.DRIVE)));",
+				"marks": [
+					{
+						"text": "Commands.startEnd(",
+						"label": "start, then end"
+					},
+					{
+						"text": "RobotStates.DRIVE",
+						"label": "when the button's released"
+					}
+				]
+			},
+			"assist": true
+		}
+	],
+	"kind": "mixed"
+}

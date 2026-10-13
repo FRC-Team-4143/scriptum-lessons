@@ -59,8 +59,8 @@
 		{
 			"title": "Transitions",
 			"say": {
-				"never": "Turn the comment above into code, one rule at a time. From IDLE, if the driver wants SHOOT, go to SPIN_UP first. From SPIN_UP, go to SHOOT once `flywheel_.isAtSpeed()` is true. From SHOOT, go back to SPIN_UP if `flywheel_.hasDipped()` is true. Anything else, go to IDLE.",
-				"bit": "Turn the comment above it into code: from IDLE, wanting SHOOT goes to SPIN_UP; from SPIN_UP go to SHOOT once `flywheel_.isAtSpeed()`; from SHOOT go back to SPIN_UP if `flywheel_.hasDipped()`; anything else, IDLE."
+				"never": "Turn the comment above into code, as a table. Write `switch (system_state_)` with a `case` for IDLE, SPIN_UP and SHOOT. Inside each one, write `switch (wanted)`. Then fill in the rows: from IDLE, `case SHOOT:` sets `system_state_` to SPIN_UP. From SPIN_UP, `case SHOOT:` sets it to SHOOT only `if (isAtSpeed())`, and `case IDLE:` sets it to IDLE. From SHOOT, `case SHOOT:` goes back to SPIN_UP `if (hasDipped())`, and `case IDLE:` sets it to IDLE. Every inner switch ends with `default: break;`, which means \"ignore anything else\". Don't forget a `break;` after each inner switch too.",
+				"bit": "Turn the comment above it into a table: `switch (system_state_)`, and inside each case `switch (wanted)`. Rows: IDLE wanting SHOOT goes to SPIN_UP; SPIN_UP wanting SHOOT goes to SHOOT once `isAtSpeed()`, wanting IDLE goes to IDLE; SHOOT wanting SHOOT goes back to SPIN_UP if `hasDipped()`, wanting IDLE goes to IDLE. `default: break;` ignores the rest."
 			},
 			"target": {
 				"pane": "editor",

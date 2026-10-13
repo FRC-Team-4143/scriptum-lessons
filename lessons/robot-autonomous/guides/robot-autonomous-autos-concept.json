@@ -1,6 +1,6 @@
 {
-	"title": "Autos = paths + a sequence",
-	"summary": "What an autonomous routine is: Choreo paths, a list of commands, and a pose estimate that is close but not perfect.",
+	"title": "Autos = paths + a tree",
+	"summary": "What an autonomous routine is: Choreo paths, a behavior tree that runs them, and a pose estimate that is close but not perfect.",
 	"topic": "Robot",
 	"order": 528,
 	"steps": [
@@ -14,8 +14,8 @@
 		{
 			"title": "Two jobs",
 			"say": {
-				"never": "The team builds an autonomous in two parts. First you **draw the paths** in Choreo: where the robot drives and how fast. Then you **write the sequence** in Java: which path to drive, when to wait, when to aim, when to shoot. The paths say *where*, the sequence says *in what order*.",
-				"bit": "Two jobs: draw the paths in Choreo (where to drive), then write the sequence in Java (what order to do things in)."
+				"never": "The team builds an autonomous in two parts. First you **draw the paths** in Choreo: where the robot drives and how fast. Then you **build the tree** in Arbor: which path to drive, when to wait, when to aim, when to shoot. The paths say *where*, the tree says *in what order*.",
+				"bit": "Two jobs: draw the paths in Choreo (where to drive), then build the tree in Arbor (what order to do things in)."
 			}
 		},
 		{
@@ -26,22 +26,22 @@
 			}
 		},
 		{
-			"title": "An Auto loads paths by name",
+			"title": "A tree names its paths",
 			"say": {
-				"never": "In the code, a routine is a class that **extends `Auto`**. It starts by naming the paths it needs with `loadTrajectory(\"Name\")`, spelled exactly like the path in Choreo. Later `getTrajectory(\"Name\")` hands the loaded path to a command. Capital letters count: `toPickup` is not `ToPickup`.",
-				"bit": "An `Auto` calls `loadTrajectory(\"Name\")` for each path, spelled exactly like in Choreo, then uses `getTrajectory(\"Name\")`."
+				"never": "In the tree, a `FollowPath` step drives one path. Its `trajectory` port is the path's name, spelled exactly like in Choreo. Before the routine starts, the robot reads the tree, finds every path it names and loads them all, so there is nothing to load by hand. Capital letters count: `toPickup` is not `ToPickup`.",
+				"bit": "A `FollowPath` names its path in the `trajectory` port, spelled exactly like in Choreo. The robot loads every named path before the routine starts."
 			},
 			"board": {
-				"code": "loadTrajectory(\"Leave\");\n// later, inside the commands:\ngetTrajectory(\"Leave\")",
-				"language": "java",
+				"code": "<FollowPath trajectory=\"Leave\"/>",
+				"language": "text",
 				"marks": [
 					{
-						"text": "loadTrajectory(\"Leave\")",
-						"label": "get the path ready, by name"
+						"text": "FollowPath",
+						"label": "drive a path"
 					},
 					{
-						"text": "getTrajectory(\"Leave\")",
-						"label": "hand it to a command"
+						"text": "trajectory=\"Leave\"",
+						"label": "which one, by its Choreo name"
 					}
 				]
 			}
@@ -49,15 +49,15 @@
 		{
 			"title": "The follower does the steering",
 			"say": {
-				"never": "A command called `followPath` plays the trajectory back. 50 times a second it asks: where *should* the robot be right now? Where *is* it? It nudges the left and right wheel speeds to close the gap. That code is `DifferentialPathFollower`, already tuned and provided. You can read it, but you don't have to change it.",
-				"bit": "`followPath` plays the trajectory back, 50 times a second nudging the wheels toward where the robot should be."
+				"never": "A `FollowPath` step asks the robot for `FOLLOW_PATH`, and the drivetrain plays the trajectory back. 50 times a second it asks: where *should* the robot be right now? Where *is* it? It nudges the left and right wheel speeds to close the gap. That code is `DifferentialPathFollower`, already tuned and provided. You can read it, but you don't have to change it. The step succeeds once the robot has arrived.",
+				"bit": "`FollowPath` plays the trajectory back, 50 times a second nudging the wheels toward where the robot should be, and succeeds on arrival."
 			}
 		},
 		{
 			"title": "The sequence",
 			"say": {
-				"never": "Your routine is a list of commands that run one after another. Here: drive the first path, wait a moment as if picking up a game piece, drive the second path, **aim** at the goal with the aim state you built in the Computer Vision lesson, then **shoot**. Aiming comes before shooting, or the shot misses.",
-				"bit": "Drive path one, wait, drive path two, aim, shoot, in that order. Aim before shooting."
+				"never": "Your routine is a **Sequence**: steps that run one after another. Here: drive the first path, wait a moment as if picking up a game piece, drive the second path, **aim** at the goal with the aim state you built in the Computer Vision lesson, then **shoot**. Aiming comes before shooting, or the shot misses. The aim and shoot steps ask the robot for the same states the buttons do, with `SetWantedState`.",
+				"bit": "Drive path one, wait, drive path two, aim, shoot, in a Sequence. Aim and shoot ask the robot for the same states as the buttons."
 			}
 		},
 		{
@@ -70,7 +70,7 @@
 		{
 			"title": "Extra: event markers",
 			"say": {
-				"never": "Choreo can also put **event markers** on a path, like \"Intake Out\" or \"Shoot\". The competition robot uses them to run an action partway along a path. This robot already has the code (`getChoreoEventTimeTrigger`), but this lesson doesn't need markers, so it's a stretch idea in the README.",
+				"never": "Choreo can also put **event markers** on a path, like \"Intake Out\" or \"Shoot\". The competition robot uses them to run an action partway along a path. This lesson doesn't need markers, so they are a stretch idea in the README.",
 				"bit": "Optional: event markers run an action partway along a path. Not needed here."
 			}
 		}

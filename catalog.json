@@ -156,7 +156,7 @@
 				{
 					"id": "flywheel-graph",
 					"title": "Flywheel line graph",
-					"description": "A Line Graph tab plots FlywheelRPM on its left axis.",
+					"description": "A Line Graph tab plots FlywheelVelocity on its left axis.",
 					"verifier": {
 						"type": "script",
 						"path": "lessons/advantagescope-intro/checkpoints/verify/flywheel-graph.sh"
@@ -165,19 +165,19 @@
 				{
 					"id": "flywheel-axis-scale",
 					"title": "Locked axis scale",
-					"description": "The Line Graph's left Y axis is locked to roughly 0-3000.",
+					"description": "The Line Graph's left Y axis is locked to roughly 0-600 rad/s.",
 					"verifier": {
 						"type": "script",
 						"path": "lessons/advantagescope-intro/checkpoints/verify/flywheel-axis-scale.sh"
 					}
 				},
 				{
-					"id": "flywheel-rpm-differentiated",
-					"title": "Differentiated flywheel RPM",
-					"description": "FlywheelRPM also plots on the right axis with the Differentiate filter applied.",
+					"id": "flywheel-velocity-differentiated",
+					"title": "Differentiated flywheel velocity",
+					"description": "FlywheelVelocity also plots on the right axis with the Differentiate filter applied.",
 					"verifier": {
 						"type": "script",
-						"path": "lessons/advantagescope-intro/checkpoints/verify/flywheel-rpm-differentiated.sh"
+						"path": "lessons/advantagescope-intro/checkpoints/verify/flywheel-velocity-differentiated.sh"
 					}
 				},
 				{
@@ -217,14 +217,14 @@
 					}
 				},
 				{
-					"id": "flywheel-target-rpm-tunable",
+					"id": "flywheel-target-velocity-tunable",
 					"title": "Tuned flywheel target",
-					"description": "FlywheelTargetRPM was written from AdvantageScope's Tuning Mode.",
+					"description": "FlywheelTargetVelocity was written from AdvantageScope's Tuning Mode.",
 					"verifier": {
 						"type": "nt4-value",
-						"topic": "/AdvantageKit/RealOutputs/FlywheelTargetRPM",
+						"topic": "/AdvantageKit/RealOutputs/FlywheelTargetVelocity",
 						"check": "differs-from-default",
-						"expected": 3000
+						"expected": 300
 					}
 				}
 			]
@@ -262,7 +262,7 @@
 				{
 					"id": "number-slider-shooter-angle",
 					"title": "Shooter angle number slider",
-					"description": "A Number Slider widget writes ShooterAngleDegrees.",
+					"description": "A Number Slider widget writes ShooterAngleRad.",
 					"verifier": {
 						"type": "script",
 						"path": "lessons/elastic-intro/checkpoints/verify/number-slider-shooter-angle.sh"
@@ -271,10 +271,10 @@
 				{
 					"id": "shooter-angle-live",
 					"title": "Shooter angle live write",
-					"description": "ShooterAngleDegrees was dragged live from Elastic's Number Slider.",
+					"description": "ShooterAngleRad was dragged live from Elastic's Number Slider.",
 					"verifier": {
 						"type": "nt4-value",
-						"topic": "/ShooterAngleDegrees",
+						"topic": "/ShooterAngleRad",
 						"check": "differs-from-default",
 						"expected": 0
 					}
@@ -300,7 +300,7 @@
 				{
 					"id": "radial-gauge-gyro",
 					"title": "Gyro heading radial gauge",
-					"description": "A Radial Gauge widget is bound to GyroHeadingDegrees.",
+					"description": "A Radial Gauge widget is bound to GyroHeadingRad.",
 					"verifier": {
 						"type": "script",
 						"path": "lessons/elastic-intro/checkpoints/verify/radial-gauge-gyro.sh"
@@ -470,6 +470,65 @@
 					"verifier": {
 						"type": "script",
 						"path": "lessons/choreo-intro/checkpoints/verify/generates-successfully.sh"
+					}
+				}
+			]
+		},
+		{
+			"id": "arbor-intro",
+			"order": 10,
+			"track": "Tools",
+			"title": "Arbor",
+			"description": "Build an autonomous routine as a behavior tree: nodes, ports, a Sequence, a Timeout and a tunable value.",
+			"kind": "robot",
+			"subdir": "lessons/arbor-intro/project",
+			"restrictTools": [
+				"arbor"
+			],
+			"checkpoints": [
+				{
+					"id": "new-tree",
+					"title": "Your own tree",
+					"description": "You created a tree of your own and saved it in the trees folder.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/arbor-intro/checkpoints/verify/new-tree.sh"
+					}
+				},
+				{
+					"id": "sequence",
+					"title": "A Sequence of steps",
+					"description": "A Sequence with at least three steps: a SetWantedState, a Sleep and a FollowPath.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/arbor-intro/checkpoints/verify/sequence.sh"
+					}
+				},
+				{
+					"id": "ports",
+					"title": "Ports filled in",
+					"description": "SetWantedState has a state, FollowPath has a trajectory name and Sleep has a time.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/arbor-intro/checkpoints/verify/ports.sh"
+					}
+				},
+				{
+					"id": "fail-handling",
+					"title": "A Timeout and a Fallback",
+					"description": "A step is wrapped in a Timeout, and a Fallback gives the tree a plan B.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/arbor-intro/checkpoints/verify/fail-handling.sh"
+					}
+				},
+				{
+					"id": "tunable",
+					"title": "A tunable value",
+					"description": "The tree declares an input port and a node uses it as {name}, so it can be tuned from the dashboard.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/arbor-intro/checkpoints/verify/tunable.sh"
 					}
 				}
 			]
@@ -1138,12 +1197,12 @@
 			],
 			"checkpoints": [
 				{
-					"id": "rotations-to-meters",
-					"title": "rotationsToMeters",
-					"description": "DriveMath.rotationsToMeters(rotations, radius) converts wheel rotations to meters.",
+					"id": "radians-to-meters",
+					"title": "radiansToMeters",
+					"description": "DriveMath.radiansToMeters(radians, radius) converts a wheel angle in radians to meters.",
 					"verifier": {
 						"type": "script",
-						"path": "lessons/robot-drive-math/checkpoints/verify/rotations-to-meters.sh"
+						"path": "lessons/robot-drive-math/checkpoints/verify/radians-to-meters.sh"
 					}
 				},
 				{
@@ -1256,13 +1315,13 @@
 				{
 					"id": "yaw",
 					"title": "Yaw",
-					"description": "Spin the robot counterclockwise (left). Drive/PoseYawDeg should become clearly positive.",
+					"description": "Spin the robot counterclockwise (left). Drive/PoseYawRad should become clearly positive.",
 					"verifier": {
 						"type": "nt4-value",
-						"topic": "/AdvantageKit/RealOutputs/Check/Drive/PoseYawDeg/Max",
+						"topic": "/AdvantageKit/RealOutputs/Check/Drive/PoseYawRad/Max",
 						"check": "range",
-						"min": 20,
-						"max": 180
+						"min": 0.35,
+						"max": 3.15
 					}
 				},
 				{
@@ -1437,8 +1496,8 @@
 			"id": "robot-state-machines",
 			"order": 26,
 			"track": "FRC Robot",
-			"title": "State Machines and Commands",
-			"description": "Give the shooter a state machine and control it with commands bound to buttons.",
+			"title": "State Machines",
+			"description": "Give the shooter a state machine, and make RobotContainer the robot's own state machine that buttons ask for states.",
 			"kind": "robot",
 			"subdir": "lessons/robot-state-machines/project",
 			"requires": [
@@ -1446,12 +1505,12 @@
 			],
 			"checkpoints": [
 				{
-					"id": "bindings",
-					"title": "Button bindings",
-					"description": "OI binds the right bumper to ShooterCommands.shoot() and A to simulateBallLaunch().",
+					"id": "robot-states",
+					"title": "Robot states",
+					"description": "RobotContainer asks the drivetrain and shooter for the states each robot state needs, the right bumper asks the robot for SHOOT while held, and A simulates a launch.",
 					"verifier": {
 						"type": "script",
-						"path": "lessons/robot-state-machines/checkpoints/verify/bindings.sh"
+						"path": "lessons/robot-state-machines/checkpoints/verify/robot-states.sh"
 					}
 				},
 				{
@@ -1503,8 +1562,8 @@
 				},
 				{
 					"id": "estimate-accurate",
-					"title": "Estimate within 6 cm and 1 degree",
-					"description": "Start fresh, enable Teleop and drive around (W/A/S/D) for at least 5 meters in total, with at least a quarter turn in it, then stop and wait 2 seconds. Once the robot has sat still, your estimate must be within 6 centimeters and 1 degree of where the robot really is. Choose better VISION_XY_STD_METERS and VISION_HEADING_STD_RADIANS if it is not.",
+					"title": "Estimate within 6 cm and 0.017 rad",
+					"description": "Start fresh, enable Teleop and drive around (W/A/S/D) for at least 5 meters in total, with at least a quarter turn in it, then stop and wait 2 seconds. Once the robot has sat still, your estimate must be within 6 centimeters and 0.017 rad (about 1 degree) of where the robot really is. Choose better VISION_XY_STD_METERS and VISION_HEADING_STD_RADIANS if it is not.",
 					"verifier": {
 						"type": "nt4-value",
 						"topic": "/AdvantageKit/RealOutputs/Check/Localization/Accurate",
@@ -1516,7 +1575,7 @@
 				{
 					"id": "aim-state-written",
 					"title": "Aim state written",
-					"description": "DriveStates has AIM, the switch handles it with a PIDController (continuous input) that reads the pose estimate, getAngleToGoal() and isAimed() are written, and DrivetrainCommands.aim() starts and ends the state.",
+					"description": "DriveStates has AIM, the switch handles it with a PIDController (continuous input) that reads the pose estimate, getAngleToGoal() and isAimed() are written, and RobotContainer asks the drivetrain for AIM in the robot's AIM state.",
 					"verifier": {
 						"type": "script",
 						"path": "lessons/robot-computer-vision/checkpoints/verify/aim-state-written.sh"
@@ -1524,8 +1583,8 @@
 				},
 				{
 					"id": "aim-converges",
-					"title": "Aims within 2 degrees",
-					"description": "Start fresh, enable Teleop and hold the left bumper (E). The robot should turn to face the goal and stay within 2 degrees of it for half a second, within 4 seconds. Raise AIM_KP if it stops short.",
+					"title": "Aims within 0.035 rad",
+					"description": "Start fresh, enable Teleop and hold the left bumper (E). The robot should turn to face the goal and stay within 0.035 rad (about 2 degrees) of it for half a second, within 4 seconds. Raise AIM_KP if it stops short.",
 					"verifier": {
 						"type": "nt4-value",
 						"topic": "/AdvantageKit/RealOutputs/Check/Aim/Settled",
@@ -1537,13 +1596,13 @@
 				{
 					"id": "aim-no-overshoot",
 					"title": "No wild overshoot",
-					"description": "On that same aim, the robot must not swing more than 10 degrees past the goal. Lower AIM_KP or add AIM_KD to damp it.",
+					"description": "On that same aim, the robot must not swing more than 0.17 rad (about 10 degrees) past the goal. Lower AIM_KP or add AIM_KD to damp it.",
 					"verifier": {
 						"type": "nt4-value",
-						"topic": "/AdvantageKit/RealOutputs/Check/Aim/OvershootDegrees",
+						"topic": "/AdvantageKit/RealOutputs/Check/Aim/OvershootRad",
 						"check": "range",
 						"min": 0,
-						"max": 10
+						"max": 0.17
 					}
 				}
 			]
@@ -1552,13 +1611,14 @@
 			"id": "robot-autonomous",
 			"order": 28,
 			"track": "FRC Robot",
-			"title": "Choreo Autonomous",
-			"description": "Draw two paths in Choreo, then write the autonomous routine the way the competition robot does: follow the first path, pick up, follow the second path, aim at the goal with the aim state you built, and shoot.",
+			"title": "Autonomous",
+			"description": "Draw two paths in Choreo, then build the autonomous routine as a behavior tree in Arbor, the way the competition robot does: follow the first path, pick up, follow the second path, aim at the goal, and shoot. Then make AIM wait until the robot is really aimed.",
 			"kind": "robot",
 			"subdir": "lessons/robot-autonomous/project",
 			"requires": [
 				"robot-computer-vision",
-				"choreo-intro"
+				"choreo-intro",
+				"arbor-intro"
 			],
 			"checkpoints": [
 				{
@@ -1573,7 +1633,7 @@
 				{
 					"id": "path-names",
 					"title": "Paths named ToPickup and ToScore",
-					"description": "The paths are named ToPickup and ToScore, and Autos.java loads them by those names.",
+					"description": "The paths are named ToPickup and ToScore, and your tree's FollowPath nodes drive them by those names.",
 					"verifier": {
 						"type": "script",
 						"path": "lessons/robot-autonomous/checkpoints/verify/path-names.sh"
@@ -1589,18 +1649,27 @@
 					}
 				},
 				{
-					"id": "auto-sequence",
-					"title": "Autonomous sequence written",
-					"description": "Autos.java drives ToPickup, then ToScore, then aims at the goal (until isAimed), then shoots, in that order.",
+					"id": "auto-tree",
+					"title": "Autonomous tree built",
+					"description": "PickupAndScore.xml is a Sequence: FollowPath ToPickup, then FollowPath ToScore, then SetWantedState AIM and a wait for it (a Timeout holding RetryUntilSuccessful around IsSystemState AIM), then SetWantedState SHOOT, a Sleep, and SetWantedState AUTO.",
 					"verifier": {
 						"type": "script",
-						"path": "lessons/robot-autonomous/checkpoints/verify/auto-sequence.sh"
+						"path": "lessons/robot-autonomous/checkpoints/verify/auto-tree.sh"
+					}
+				},
+				{
+					"id": "aim-step",
+					"title": "AIM waits until aimed",
+					"description": "In RobotContainer's handleStateTransition, asking for AIM puts the robot in the step state AIMING until drive_.isAimed(), and only then in AIM.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/robot-autonomous/checkpoints/verify/aim-step.sh"
 					}
 				},
 				{
 					"id": "reaches-pickup",
 					"title": "Reaches the pickup",
-					"description": "Run Pickup And Score in Auto. The robot, measured by its true position in the simulator, should get within 0.4 meters of the Pickup point.",
+					"description": "Run PickupAndScore in Auto. The robot, measured by its true position in the simulator, should get within 0.4 meters of the Pickup point.",
 					"verifier": {
 						"type": "nt4-value",
 						"topic": "/AdvantageKit/RealOutputs/Check/Drive/DistanceToPickup/Min",
@@ -1611,7 +1680,7 @@
 				{
 					"id": "reaches-score-spot",
 					"title": "Reaches the scoring spot",
-					"description": "Run Pickup And Score in Auto. The robot, measured by its true position, should get within 0.4 meters of the ScoreSpot point.",
+					"description": "Run PickupAndScore in Auto. The robot, measured by its true position, should get within 0.4 meters of the ScoreSpot point.",
 					"verifier": {
 						"type": "nt4-value",
 						"topic": "/AdvantageKit/RealOutputs/Check/Drive/DistanceToScoreSpot/Min",
@@ -1622,18 +1691,18 @@
 				{
 					"id": "aimed-before-shot",
 					"title": "Aims before it shoots",
-					"description": "Every shot should start with the robot truly facing the goal, within 5 degrees. Aim (until isAimed) before you shoot.",
+					"description": "Every shot should start with the robot truly facing the goal, within 0.087 rad (about 5 degrees). AIM has to wait until the robot is aimed before the tree moves on to SHOOT.",
 					"verifier": {
 						"type": "nt4-value",
-						"topic": "/AdvantageKit/RealOutputs/Check/Subsystem/Shooter/AimErrorAtShotDegrees/Max",
+						"topic": "/AdvantageKit/RealOutputs/Check/Subsystem/Shooter/AimErrorAtShotRad/Max",
 						"check": "range",
-						"max": 5
+						"max": 0.087
 					}
 				},
 				{
 					"id": "autos-shoot",
 					"title": "Shoots",
-					"description": "The routine should end by shooting at least once.",
+					"description": "The tree should get as far as shooting at least once.",
 					"verifier": {
 						"type": "nt4-value",
 						"topic": "/AdvantageKit/RealOutputs/Check/Subsystem/Shooter/ShotCount/Max",
@@ -1810,6 +1879,22 @@
 			"path": "lessons/advantagescope-intro/guides/advantagescope-basics.json"
 		},
 		{
+			"id": "camera-streams",
+			"title": "Seeing what the cameras see",
+			"summary": "Open the Cameras tab and pop a camera out into its own window.",
+			"topic": "Robot",
+			"order": 30,
+			"modules": [
+				"robot-computer-vision",
+				"robot-autonomous"
+			],
+			"needs": [
+				"driverStation"
+			],
+			"kind": "concept",
+			"path": "common/guides/camera-streams.json"
+		},
+		{
 			"id": "elastic-basics",
 			"title": "Elastic basics",
 			"summary": "Dashboard tabs, adding widgets, and the connection status.",
@@ -1838,6 +1923,53 @@
 			],
 			"kind": "mixed",
 			"path": "lessons/choreo-intro/guides/choreo-basics.json"
+		},
+		{
+			"id": "arbor-basics",
+			"title": "Arbor basics",
+			"summary": "Trees, nodes, ports, saving, and the Problems panel.",
+			"topic": "Tools",
+			"order": 34,
+			"modules": [
+				"arbor-intro"
+			],
+			"needs": [
+				"arbor"
+			],
+			"kind": "concept",
+			"path": "lessons/arbor-intro/guides/arbor-basics.json"
+		},
+		{
+			"id": "arbor-behavior-trees",
+			"title": "Behavior trees",
+			"summary": "Ticks, RUNNING / SUCCESS / FAILURE, Sequence and Fallback, one tick at a time.",
+			"topic": "Tools",
+			"order": 35,
+			"modules": [
+				"arbor-intro",
+				"robot-autonomous"
+			],
+			"needs": [
+				"arbor"
+			],
+			"kind": "concept",
+			"path": "common/guides/arbor-behavior-trees.json"
+		},
+		{
+			"id": "arbor-trees-more",
+			"title": "Behavior trees: time limits and more",
+			"summary": "Timeout, ReactiveSequence, ParallelDeadline, and tunable values.",
+			"topic": "Tools",
+			"order": 36,
+			"modules": [
+				"arbor-intro",
+				"robot-autonomous"
+			],
+			"needs": [
+				"arbor"
+			],
+			"kind": "concept",
+			"path": "common/guides/arbor-trees-more.json"
 		},
 		{
 			"id": "java-variables",
@@ -2358,7 +2490,7 @@
 		{
 			"id": "robot-sensors-encoders",
 			"title": "Encoders and meters",
-			"summary": "Wheel rotations to distance and speed.",
+			"summary": "Wheel radians to distance and speed.",
 			"topic": "Robot",
 			"order": 410,
 			"modules": [
@@ -2636,7 +2768,7 @@
 		{
 			"id": "robot-control-units",
 			"title": "Getting the units right",
-			"summary": "rad/s to rotations per second to volts to duty cycle.",
+			"summary": "rad/s to volts to duty cycle.",
 			"topic": "Robot",
 			"order": 487,
 			"modules": [
@@ -2688,11 +2820,22 @@
 			"topic": "Robot",
 			"order": 510,
 			"modules": [
-				"robot-state-machines",
-				"robot-autonomous"
+				"robot-state-machines"
 			],
 			"kind": "mixed",
-			"path": "common/guides/robot-state-machines-commands.json"
+			"path": "lessons/robot-state-machines/guides/robot-state-machines-commands.json"
+		},
+		{
+			"id": "robot-state-machines-robot-states",
+			"title": "The robot's state machine",
+			"summary": "RobotContainer is a state machine too: buttons ask the robot, the robot asks the subsystems.",
+			"topic": "Robot",
+			"order": 510,
+			"modules": [
+				"robot-state-machines"
+			],
+			"kind": "mixed",
+			"path": "lessons/robot-state-machines/guides/robot-state-machines-robot-states.json"
 		},
 		{
 			"id": "robot-computer-vision-add-vision",
@@ -2708,8 +2851,8 @@
 		},
 		{
 			"id": "robot-state-machines-bindings",
-			"title": "Buttons to commands",
-			"summary": "whileTrue vs onTrue, then watch the state change.",
+			"title": "Buttons to robot states",
+			"summary": "whileTrue vs onTrue, asking the robot for a state, then watching it change.",
 			"topic": "Robot",
 			"order": 511,
 			"modules": [
@@ -2719,16 +2862,16 @@
 			"path": "lessons/robot-state-machines/guides/robot-state-machines-bindings.json"
 		},
 		{
-			"id": "robot-state-machines-commands-assist",
-			"title": "Write the shooter commands",
-			"summary": "Write shoot() with startEnd and simulateBallLaunch() with runOnce.",
+			"id": "robot-state-machines-robot-states-assist",
+			"title": "Write the robot's states",
+			"summary": "Write the switch in RobotContainer.updateLogic() that asks each subsystem for its state.",
 			"topic": "Robot",
 			"order": 511,
 			"modules": [
 				"robot-state-machines"
 			],
 			"kind": "assist",
-			"path": "lessons/robot-state-machines/guides/robot-state-machines-commands-assist.json"
+			"path": "lessons/robot-state-machines/guides/robot-state-machines-robot-states-assist.json"
 		},
 		{
 			"id": "robot-computer-vision-trust",
@@ -2781,7 +2924,7 @@
 		{
 			"id": "robot-computer-vision-aim-tuning",
 			"title": "Tune kP to reach the goal",
-			"summary": "Raise kP until the robot settles within 2 degrees.",
+			"summary": "Raise kP until the robot settles within 0.035 rad.",
 			"topic": "Robot",
 			"order": 515,
 			"modules": [
@@ -2804,8 +2947,8 @@
 		},
 		{
 			"id": "robot-autonomous-autos-concept",
-			"title": "Autos = paths + a sequence",
-			"summary": "What an autonomous routine is: Choreo paths, a list of commands, and a pose estimate that is close but not perfect.",
+			"title": "Autos = paths + a tree",
+			"summary": "What an autonomous routine is: Choreo paths, a behavior tree that runs them, and a pose estimate that is close but not perfect.",
 			"topic": "Robot",
 			"order": 528,
 			"modules": [
@@ -2830,59 +2973,38 @@
 			"path": "lessons/robot-autonomous/guides/robot-autonomous-draw-paths.json"
 		},
 		{
-			"id": "robot-autonomous-command-lifecycle",
-			"title": "Inside a command",
-			"summary": "Three states, initialize / execute / end, and isFinished as the condition.",
-			"topic": "Robot",
-			"order": 530,
-			"modules": [
-				"robot-autonomous"
-			],
-			"kind": "mixed",
-			"path": "lessons/robot-autonomous/guides/robot-autonomous-command-lifecycle.json"
-		},
-		{
-			"id": "robot-autonomous-command-types",
-			"title": "Kinds of commands",
-			"summary": "runOnce, run, startEnd, waitSeconds and FunctionalCommand, and when to pick each.",
-			"topic": "Robot",
-			"order": 531,
-			"modules": [
-				"robot-autonomous"
-			],
-			"kind": "concept",
-			"path": "lessons/robot-autonomous/guides/robot-autonomous-command-types.json"
-		},
-		{
-			"id": "robot-autonomous-command-decorators",
-			"title": "Dots that change commands",
-			"summary": "withTimeout, until, andThen and alongWith.",
-			"topic": "Robot",
-			"order": 532,
-			"modules": [
-				"robot-autonomous"
-			],
-			"kind": "concept",
-			"path": "lessons/robot-autonomous/guides/robot-autonomous-command-decorators.json"
-		},
-		{
-			"id": "robot-autonomous-write-sequence",
-			"title": "Write the autonomous sequence",
-			"summary": "Load the two paths and put the drive, wait, aim and shoot commands in order.",
+			"id": "robot-autonomous-build-tree",
+			"title": "Build the autonomous tree",
+			"summary": "In Arbor: drive both paths, ask for AIM and wait for it with a time limit, shoot, wait, and stop.",
 			"topic": "Robot",
 			"order": 533,
 			"modules": [
 				"robot-autonomous"
 			],
+			"needs": [
+				"arbor"
+			],
 			"kind": "mixed",
-			"path": "lessons/robot-autonomous/guides/robot-autonomous-write-sequence.json"
+			"path": "lessons/robot-autonomous/guides/robot-autonomous-build-tree.json"
+		},
+		{
+			"id": "robot-autonomous-aim-step",
+			"title": "Make AIM wait until aimed",
+			"summary": "A step state in RobotContainer, so asking for AIM finishes only once the robot faces the goal.",
+			"topic": "Robot",
+			"order": 534,
+			"modules": [
+				"robot-autonomous"
+			],
+			"kind": "mixed",
+			"path": "lessons/robot-autonomous/guides/robot-autonomous-aim-step.json"
 		},
 		{
 			"id": "robot-autonomous-run-and-watch",
 			"title": "Run the autonomous and watch it",
-			"summary": "Run Pickup And Score, plot the checks in AdvantageScope and read a failing one.",
+			"summary": "Run PickupAndScore, watch the tree in Arbor and the checks in AdvantageScope, and read a failing one.",
 			"topic": "Robot",
-			"order": 534,
+			"order": 535,
 			"modules": [
 				"robot-autonomous"
 			],

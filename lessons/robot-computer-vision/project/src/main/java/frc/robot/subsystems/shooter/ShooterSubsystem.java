@@ -81,36 +81,64 @@ public class ShooterSubsystem extends MwSubsystem<ShooterStates, ShooterConstant
   }
 
   /**
-   * Decides which state the shooter is in. MWLib calls this every loop with the state the driver
+   * Decides which state the shooter is in. MWLib calls this every loop with the state the robot
    * WANTS. Set system_state_ to the state we are actually allowed to go to.
    *
-   * <p>Rules: IDLE always goes straight to IDLE. If SHOOT is wanted, you may NOT jump from IDLE to
-   * SHOOT: go IDLE -> SPIN_UP first. From SPIN_UP go to SHOOT once the flywheel isAtSpeed(). From
-   * SHOOT go back to SPIN_UP if the flywheel hasDipped().
+   * <p>Write it as a table: an outer switch on system_state_ (where we are now), and inside each
+   * case an inner switch on wanted (what the robot asked for). Each inner case says where to go.
+   * A request with no case is ignored (default: break;). The rows:
+   *
+   * <ul>
+   *   <li>From IDLE: wanting SHOOT goes to SPIN_UP (never straight to SHOOT).
+   *   <li>From SPIN_UP: wanting SHOOT goes to SHOOT once isAtSpeed(); wanting IDLE goes to IDLE.
+   *   <li>From SHOOT: wanting SHOOT goes back to SPIN_UP if hasDipped(); wanting IDLE goes to IDLE.
+   * </ul>
+   *
+   * <p>Nothing ever asks for SPIN_UP: it is a step the table passes through on the way to SHOOT.
    */
   @Override
   protected void handleStateTransition(ShooterStates wanted) {
-    if (wanted == ShooterStates.IDLE) {
-      system_state_ = ShooterStates.IDLE;
-      return;
-    }
-
-    // The driver wants to shoot. Take one safe step at a time.
+    // A table: where we are (outer switch), then what the robot asked for (inner switch).
     switch (system_state_) {
       case IDLE:
-        system_state_ = ShooterStates.SPIN_UP;
+        switch (wanted) {
+          case SHOOT:
+            system_state_ = ShooterStates.SPIN_UP; // never straight to SHOOT: spin up first
+            break;
+          default:
+            break;
+        }
         break;
       case SPIN_UP:
-        if (isAtSpeed()) {
-          system_state_ = ShooterStates.SHOOT;
+        switch (wanted) {
+          case SHOOT:
+            if (isAtSpeed()) {
+              system_state_ = ShooterStates.SHOOT;
+            }
+            break;
+          case IDLE:
+            system_state_ = ShooterStates.IDLE;
+            break;
+          default:
+            break;
         }
         break;
       case SHOOT:
-        if (hasDipped()) {
-          system_state_ = ShooterStates.SPIN_UP;
+        switch (wanted) {
+          case SHOOT:
+            if (hasDipped()) {
+              system_state_ = ShooterStates.SPIN_UP; // a launch slowed the wheel: spin up again
+            }
+            break;
+          case IDLE:
+            system_state_ = ShooterStates.IDLE;
+            break;
+          default:
+            break;
         }
         break;
       default:
+        system_state_ = ShooterStates.IDLE;
         break;
     }
   }
@@ -175,8 +203,7 @@ public class ShooterSubsystem extends MwSubsystem<ShooterStates, ShooterConstant
    * apply it.
    */
   private void feedforward() {
-    double target_rps = CONSTANTS.SHOOT_VELOCITY / (2.0 * Math.PI);
-    double volts = CONSTANTS.FLYWHEEL_KV * target_rps;
+    double volts = CONSTANTS.FLYWHEEL_KV * CONSTANTS.SHOOT_VELOCITY;
     flywheel_.setTargetDutyCycle(volts / 12.0);
   }
 

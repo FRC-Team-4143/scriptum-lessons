@@ -1,6 +1,6 @@
 {
-	"title": "State Machines and Commands",
-	"description": "Give the shooter a state machine and control it with commands bound to buttons.",
+	"title": "State Machines",
+	"description": "Give the shooter a state machine, and make RobotContainer the robot's own state machine that buttons ask for states.",
 	"kind": "robot",
 	"track": "FRC Robot",
 	"order": 26,
@@ -8,17 +8,16 @@
 		"robot-control-theory"
 	],
 	"guides": [
-		"build-and-run",
-		"robot-state-machines-commands"
+		"build-and-run"
 	],
 	"checkpoints": [
 		{
-			"id": "bindings",
-			"title": "Button bindings",
-			"description": "OI binds the right bumper to ShooterCommands.shoot() and A to simulateBallLaunch().",
+			"id": "robot-states",
+			"title": "Robot states",
+			"description": "RobotContainer asks the drivetrain and shooter for the states each robot state needs, the right bumper asks the robot for SHOOT while held, and A simulates a launch.",
 			"verifier": {
 				"type": "script",
-				"path": "checkpoints/verify/bindings.sh"
+				"path": "checkpoints/verify/robot-states.sh"
 			}
 		},
 		{

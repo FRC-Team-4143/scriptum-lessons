@@ -97,8 +97,8 @@
 		{
 			"title": "Find the value",
 			"say": {
-				"never": "We want to change the flywheel's target speed. Type `FlywheelTargetRPM` in the search box. Look for the one under the **Tuning** table, not the one under AdvantageKit. Only the Tuning one can be changed.",
-				"bit": "Search for `FlywheelTargetRPM` and pick the one under the Tuning table (not AdvantageKit)."
+				"never": "We want to change the flywheel's target speed. Type `FlywheelTargetVelocity` in the search box. Look for the one under the **Tuning** table, not the one under AdvantageKit. Only the Tuning one can be changed.",
+				"bit": "Search for `FlywheelTargetVelocity` and pick the one under the Tuning table (not AdvantageKit)."
 			},
 			"target": {
 				"pane": "scope",
@@ -108,9 +108,9 @@
 				"target": {
 					"pane": "scope",
 					"selector": ".search-results-item",
-					"text": "FlywheelTargetRPM"
+					"text": "FlywheelTargetVelocity"
 				},
-				"hint": "search for FlywheelTargetRPM."
+				"hint": "search for FlywheelTargetVelocity."
 			},
 			"assist": true
 		},
@@ -118,43 +118,43 @@
 			"title": "Jump to it",
 			"say": {
 				"never": "Click the search result that starts with `Tuning/`. The field list scrolls to it.",
-				"bit": "Click the Tuning/FlywheelTargetRPM result."
+				"bit": "Click the Tuning/FlywheelTargetVelocity result."
 			},
 			"target": {
 				"pane": "scope",
 				"selector": ".search-results-item",
-				"text": "Tuning/FlywheelTargetRPM"
+				"text": "Tuning/FlywheelTargetVelocity"
 			},
 			"waitFor": {
 				"target": {
 					"pane": "scope",
 					"selector": ".field-item-label",
-					"text": "FlywheelTargetRPM"
+					"text": "FlywheelTargetVelocity"
 				},
-				"hint": "click the Tuning/FlywheelTargetRPM result."
+				"hint": "click the Tuning/FlywheelTargetVelocity result."
 			},
 			"assist": true
 		},
 		{
 			"title": "Type a new value",
 			"say": {
-				"never": "Click in the box next to **FlywheelTargetRPM**, type a new number (the starting one is 3000, so try 3500), and press **Enter**. The robot now uses your number. Dozer can't read what you typed, so press **I did it** when you've done that, then **Verify** checks it for real.",
-				"bit": "Type a different number than 3000 into the FlywheelTargetRPM box and press Enter. Press I did it when you have."
+				"never": "Click in the box next to **FlywheelTargetVelocity**, type a new number (it is in rad/s and starts at 300, so try 350), and press **Enter**. The robot now uses your number. Dozer can't read what you typed, so press **I did it** when you've done that, then **Verify** checks it for real.",
+				"bit": "Type a different number than 300 into the FlywheelTargetVelocity box and press Enter. Press I did it when you have."
 			},
 			"target": {
 				"pane": "scope",
 				"selector": ".side-bar"
 			},
 			"waitFor": {
-				"hint": "type a new value (not 3000), press Enter, then press I did it."
+				"hint": "type a new value (not 300), press Enter, then press I did it."
 			},
 			"assist": true
 		},
 		{
 			"title": "Check your work",
 			"say": {
-				"never": "Open the lesson chip at the top and press **Verify**. The checker looks at the robot and sees that `FlywheelTargetRPM` is no longer 3000. That proves your change reached the robot. Remember: it forgets the new number when the robot restarts.",
-				"bit": "Press Verify. The check reads FlywheelTargetRPM from the robot and wants it changed from 3000."
+				"never": "Open the lesson chip at the top and press **Verify**. The checker looks at the robot and sees that `FlywheelTargetVelocity` is no longer 300. That proves your change reached the robot. Remember: it forgets the new number when the robot restarts.",
+				"bit": "Press Verify. The check reads FlywheelTargetVelocity from the robot and wants it changed from 300."
 			},
 			"assist": true
 		}

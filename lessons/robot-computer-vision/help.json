@@ -90,8 +90,8 @@
 		},
 		"estimate-accurate": {
 			"why": {
-				"never": "A shot is only as good as the robot's idea of where it is. The estimate has to stay within 6 centimeters and 1 degree even after driving a long way.",
-				"bit": "The estimate must stay within 6 cm and 1 degree of the truth after a long drive."
+				"never": "A shot is only as good as the robot's idea of where it is. The estimate has to stay within 6 centimeters and 0.017 rad (about 1 degree) even after driving a long way.",
+				"bit": "The estimate must stay within 6 cm and 0.017 rad of the truth after a long drive."
 			},
 			"guide": "robot-computer-vision-add-vision",
 			"concept": {
@@ -104,16 +104,16 @@
 					"bit": "Start fresh, drive more than 5 m with a turn, stop, wait 2 s, then Verify. It fails before that."
 				},
 				{
-					"never": "Plot `Subsystem/Localization/PositionErrorMeters` and `HeadingErrorDegrees` in AdvantageScope once you have stopped. Under 0.06 and under 1.0 is a pass. If they are big, the estimator is ignoring the cameras.",
-					"bit": "Plot PositionErrorMeters and HeadingErrorDegrees after stopping. Need under 0.06 m and 1.0 degree."
+					"never": "Plot `Subsystem/Localization/PositionErrorMeters` and `HeadingErrorRad` in AdvantageScope once you have stopped. Under 0.06 and under 0.017 is a pass. If they are big, the estimator is ignoring the cameras.",
+					"bit": "Plot PositionErrorMeters and HeadingErrorRad after stopping. Need under 0.06 m and 0.017 rad."
 				},
 				{
-					"never": "The starter 5.0 for `VISION_XY_STD_METERS` and `VISION_HEADING_STD_RADIANS` barely lets the estimator listen to the cameras, which leaves roughly plain odometry (about 0.15 to 0.6 m and 2 to 10 degrees of drift). Make both much smaller, around 0.2.",
+					"never": "The starter 5.0 for `VISION_XY_STD_METERS` and `VISION_HEADING_STD_RADIANS` barely lets the estimator listen to the cameras, which leaves roughly plain odometry (about 0.15 to 0.6 m and 0.035 to 0.17 rad of drift). Make both much smaller, around 0.2.",
 					"bit": "5.0 means barely listen to the camera. Both constants need to be much smaller, around 0.2."
 				},
 				{
-					"never": "If the estimate lags behind while you drive, you probably passed the time now instead of `solution.timestamp.getSeconds()`. If the position is fine but the heading is 2 to 10 degrees off, the heading number is too large and the camera's heading is being ignored.",
-					"bit": "Lagging while moving: use `solution.timestamp.getSeconds()`. Heading a few degrees off: make the heading number small."
+					"never": "If the estimate lags behind while you drive, you probably passed the time now instead of `solution.timestamp.getSeconds()`. If the position is fine but the heading is 0.035 to 0.17 rad off, the heading number is too large and the camera's heading is being ignored.",
+					"bit": "Lagging while moving: use `solution.timestamp.getSeconds()`. Heading a few hundredths of a radian off: make the heading number small."
 				},
 				"In `LocalizationConstants`: `VISION_XY_STD_METERS = 0.2` and `VISION_HEADING_STD_RADIANS = 0.2`. Press Start, drive more than 5 m with a turn, stop, wait 2 s, Verify."
 			]
@@ -130,8 +130,8 @@
 			},
 			"hints": [
 				{
-					"never": "Work down the TODOs in order: the `AIM` state in `DrivetrainConstants`, then the PID, `getAngleToGoal()`, the switch case and `isAimed()` in `DrivetrainSubsystem`, then `aim()` in `DrivetrainCommands`.",
-					"bit": "The TODOs, in order: `AIM` in the enum, the PID, `getAngleToGoal()`, `case AIM`, `isAimed()`, `aim()`."
+					"never": "Work down the TODOs in order: the `AIM` state in `DrivetrainConstants`, then the PID, `getAngleToGoal()`, the switch case and `isAimed()` in `DrivetrainSubsystem`, then the `AIM` case in `RobotContainer`.",
+					"bit": "The TODOs, in order: `AIM` in the enum, the PID, `getAngleToGoal()`, `case AIM`, `isAimed()`, then `case AIM` in `RobotContainer`."
 				},
 				{
 					"never": "The Verify message tells you which part is missing. Read it: it names the file and the thing to add.",
@@ -142,16 +142,16 @@
 					"bit": "Build the PID from `AIM_KP/KI/KD`, enable continuous input, and subtract the robot's translation from `GOAL`'s."
 				},
 				{
-					"never": "Use `getPose()` (the estimate), not `getTruePose()`. `isAimed()` must use `&&`: small error AND not spinning. `aim()` is `Commands.startEnd(...)` setting AIM and then ARCADE.",
-					"bit": "Aim from `getPose()`, never `getTruePose()`. `isAimed()` uses `&&`. `aim()` is a `startEnd`."
+					"never": "Use `getPose()` (the estimate), not `getTruePose()`. `isAimed()` must use `&&`: small error AND not spinning. In `RobotContainer`, `case AIM:` calls `drive_.setWantedState(DriveStates.AIM);`.",
+					"bit": "Aim from `getPose()`, never `getTruePose()`. `isAimed()` uses `&&`. `RobotContainer` asks for `DriveStates.AIM`."
 				},
-				"Switch case: `case AIM: aim_turn_ = -aim_pid_.calculate(getPose().getRotation().getRadians(), getAngleToGoal().getRadians()); drive_.arcadeDrive(0.0, aim_turn_); break;` and `return Math.abs(Math.toDegrees(getAimErrorRadians())) < DrivetrainConstants.AIM_TOLERANCE_DEGREES && Math.abs(drive_.getAngularSpeed()) < 0.15;`"
+				"Switch case: `case AIM: aim_turn_ = -aim_pid_.calculate(getPose().getRotation().getRadians(), getAngleToGoal().getRadians()); drive_.arcadeDrive(0.0, aim_turn_); break;` and `return Math.abs(getAimErrorRadians()) < DrivetrainConstants.AIM_TOLERANCE_RAD && Math.abs(drive_.getAngularSpeed()) < 0.15;`"
 			]
 		},
 		"aim-converges": {
 			"why": {
-				"never": "To shoot, the robot has to end up pointing at the goal and stay there. The check wants it inside 2 degrees for half a second, within 4 seconds of pressing E.",
-				"bit": "The robot must get inside 2 degrees, stay half a second, within 4 seconds of pressing E."
+				"never": "To shoot, the robot has to end up pointing at the goal and stay there. The check wants it inside 0.035 rad (about 2 degrees) for half a second, within 4 seconds of pressing E.",
+				"bit": "The robot must get inside 0.035 rad, stay half a second, within 4 seconds of pressing E."
 			},
 			"guide": "robot-computer-vision-aim-tuning",
 			"concept": {
@@ -164,15 +164,15 @@
 					"bit": "Fresh Start, Teleop, hold E. If nothing moves, check the state is `AIM`."
 				},
 				{
-					"never": "Spinning the wrong way means the minus sign on the PID output is missing. Plot `AimErrorDegrees`: it should start around 45 and fall toward 0.",
-					"bit": "Wrong way: missing minus on the PID output. `AimErrorDegrees` should start near 45 and fall."
+					"never": "Spinning the wrong way means the minus sign on the PID output is missing. Plot `AimErrorRad`: it should start around 0.785 and fall toward 0.",
+					"bit": "Wrong way: missing minus on the PID output. `AimErrorRad` should start near 0.785 and fall."
 				},
 				{
-					"never": "With the starter `AIM_KP = 0.2` the robot stalls about 6 degrees short and never settles. Raise `AIM_KP` in DrivetrainConstants.",
-					"bit": "kP 0.2 stalls about 6 degrees short. Raise `AIM_KP`."
+					"never": "With the starter `AIM_KP = 0.2` the robot stalls about 0.10 rad (6 degrees) short and never settles. Raise `AIM_KP` in DrivetrainConstants.",
+					"bit": "kP 0.2 stalls about 0.10 rad short. Raise `AIM_KP`."
 				},
 				{
-					"never": "Press Start again after every change, then hold E. Around 1.0 reaches the goal. Make sure E is held the whole time, because the check needs half a second inside 2 degrees within 4 seconds.",
+					"never": "Press Start again after every change, then hold E. Around 1.0 reaches the goal. Make sure E is held the whole time, because the check needs half a second inside 0.035 rad within 4 seconds.",
 					"bit": "Fresh Start after every change. About 1.0 reaches the goal. Keep E held."
 				},
 				"Set `AIM_KP = 2.0` and `AIM_KD = 0.2` in DrivetrainConstants, Start, Teleop, hold E."
@@ -180,8 +180,8 @@
 		},
 		"aim-no-overshoot": {
 			"why": {
-				"never": "A robot that swings wildly past the goal and back wastes time and misses shots. It may go at most 10 degrees past.",
-				"bit": "The robot may swing at most 10 degrees past the goal."
+				"never": "A robot that swings wildly past the goal and back wastes time and misses shots. It may go at most 0.17 rad (about 10 degrees) past.",
+				"bit": "The robot may swing at most 0.17 rad past the goal."
 			},
 			"guide": "robot-computer-vision-aim-damping",
 			"concept": {
@@ -194,8 +194,8 @@
 					"bit": "The worst overshoot is remembered until you press Start again. Start fresh, press E once."
 				},
 				{
-					"never": "Plot `AimErrorDegrees`. It should drop to 0 without going far below it. Overshoot is worse after a long drive, because the robot has farther to turn: a kP of 1.0 with no kD swings about 6 degrees from the start but about 17 after a long turn.",
-					"bit": "Plot `AimErrorDegrees`. kP 1.0 with no kD swings about 17 degrees after a long turn."
+					"never": "Plot `AimErrorRad`. It should drop to 0 without going far below it. Overshoot is worse after a long drive, because the robot has farther to turn: a kP of 1.0 with no kD swings about 0.10 rad from the start but about 0.30 rad after a long turn.",
+					"bit": "Plot `AimErrorRad`. kP 1.0 with no kD swings about 0.30 rad after a long turn."
 				},
 				{
 					"never": "Add damping: raise `AIM_KD`. It pushes against fast turning, so the robot slows before the goal. Try 0.1, 0.2, 0.3.",

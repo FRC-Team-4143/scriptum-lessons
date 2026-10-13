@@ -20,8 +20,8 @@ Companion docs pages: [Control Theory](https://docs.marswars.org/docs/software/t
 - `subsystems/shooter/ShooterSubsystem.java`: `bangBang()` and `feedforward()` (you write these) and
   `runFlywheel()` (it picks the style).
 - Everything from last lesson (the drivetrain and shooter subsystems and their buttons) is already
-  finished. The shooter still reads its buttons directly; next lesson replaces that with a state machine
-  and commands.
+  finished. The shooter still reads its buttons directly; next lesson replaces that with a state machine,
+  and makes the robot itself a state machine that the buttons ask for states.
 - Last lesson the flywheel ran at a fixed power (`SHOOT_DUTY_CYCLE`). That has no idea how fast the
   wheel is actually spinning, so here the shooter gets a **target speed** (`SHOOT_VELOCITY`) and you
   decide how to reach and hold it. This is where velocity control and closed loop control begin.
@@ -50,12 +50,13 @@ AdvantageScope. Each run starts the simulation fresh.
 
 1. **Bang-bang.** Write `bangBang()` in `ShooterSubsystem.java`: duty cycle `1.0` while the flywheel is
    slower than `SHOOT_VELOCITY`, `0.0` otherwise. Run with `FLYWHEEL_CONTROL = BANG_BANG`.
-2. **Feedforward.** Write `feedforward()`: volts = `FLYWHEEL_KV` x speed in rotations per second
-   (`SHOOT_VELOCITY` is in rad/s, so divide by `2 * Math.PI`), then divide by 12 for a duty cycle.
-3. **Find `kV`.** Set `FLYWHEEL_CONTROL = FEEDFORWARD` and try `FLYWHEEL_KV` = `0.05`, `0.10`, `0.12`.
+2. **Feedforward.** Write `feedforward()`: volts = `FLYWHEEL_KV` x `SHOOT_VELOCITY` (both in rad/s),
+   then divide by 12 for a duty cycle.
+3. **Find `kV`.** Set `FLYWHEEL_CONTROL = FEEDFORWARD` and try `FLYWHEEL_KV` = `0.008`, `0.016`, `0.0191`
+   (volts per rad/s).
    Tap **K** and watch the dip.
-4. **Add feedback.** Set `FLYWHEEL_CONTROL = PID`, keep your `kV`, and try `FLYWHEEL_KP` = `0.05`, `0.2`,
-   `1.0`, `3.0`.
+4. **Add feedback.** Set `FLYWHEEL_CONTROL = PID`, keep your `kV`, and try `FLYWHEEL_KP` = `0.008`,
+   `0.032`, `0.16`, `0.48`.
 5. **Pick your final settings.** Reach full speed in under about 1.5 s and recover within about 0.8 s
    after a launch (logged as `Subsystem/Shooter/SpinUpSeconds` and `RecoverySeconds`). Run once more
    with those settings, hold the bumper, and tap **K** once.

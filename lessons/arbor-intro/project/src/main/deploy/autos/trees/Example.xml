@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root BTCPP_format="4" main_tree_to_execute="Example">
+  <BehaviorTree ID="Example">
+    <Sequence>
+      <SetWantedState state="DRIVE"/>
+      <Sleep msec="500"/>
+      <SetWantedState state="IDLE"/>
+    </Sequence>
+  </BehaviorTree>
+</root>

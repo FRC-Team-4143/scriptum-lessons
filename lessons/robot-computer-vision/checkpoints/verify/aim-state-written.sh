@@ -4,8 +4,8 @@ PROJECT="$1"
 DIR="$PROJECT/src/main/java/frc/robot/subsystems/drive"
 CONSTANTS="$DIR/DrivetrainConstants.java"
 DRIVE="$DIR/DrivetrainSubsystem.java"
-CMDS="$DIR/DrivetrainCommands.java"
-for f in "$CONSTANTS" "$DRIVE" "$CMDS"; do
+RC="$PROJECT/src/main/java/frc/robot/RobotContainer.java"
+for f in "$CONSTANTS" "$DRIVE" "$RC"; do
 	if [[ ! -f "$f" ]]; then
 		echo "Can't find $(basename "$f")."
 		exit 1
@@ -53,8 +53,8 @@ if ! code "$DRIVE" | grep -Eq 'boolean[[:space:]]+isAimed[[:space:]]*\([[:space:
 	echo "isAimed() should return true only when the error is small AND the robot has stopped turning (use &&)."
 	exit 1
 fi
-if ! code "$CMDS" | grep -q 'startEnd' || ! code "$CMDS" | grep -Eq '\bAIM\b'; then
-	echo "DrivetrainCommands.aim() should return Commands.startEnd(...) that sets the wanted state to AIM and back to ARCADE."
+if ! code "$RC" | grep -Eq 'case[[:space:]]+(RobotStates\.)?AIM[[:space:]]*:[^}]*drive_\.setWantedState\([[:space:]]*DriveStates\.AIM[[:space:]]*\)'; then
+	echo "In RobotContainer.updateLogic(), add a case AIM: that asks the drivetrain for DriveStates.AIM (drive_.setWantedState(DriveStates.AIM);)."
 	exit 1
 fi
-echo "The AIM state, its PID and its command are all written."
+echo "The AIM state, its PID and the robot's AIM state are all written."

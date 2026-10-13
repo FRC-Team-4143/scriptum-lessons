@@ -11,8 +11,8 @@ if ! grep -Eq 'FLYWHEEL_CONTROL[[:space:]]*=[[:space:]]*FlywheelControl\.PID' <<
 fi
 kv="$(grep -Eo 'FLYWHEEL_KV[[:space:]]*=[[:space:]]*[0-9.]+' <<<"$CODE" | grep -Eo '[0-9.]+$' || echo 0)"
 kp="$(grep -Eo 'FLYWHEEL_KP[[:space:]]*=[[:space:]]*[0-9.]+' <<<"$CODE" | grep -Eo '[0-9.]+$' || echo 0)"
-if ! awk -v kv="$kv" 'BEGIN { exit !(kv >= 0.05) }'; then
-	echo "FLYWHEEL_KV is $kv - feedforward does most of the work, so it needs to be bigger. Try 12 divided by the top speed in rotations per second."
+if ! awk -v kv="$kv" 'BEGIN { exit !(kv >= 0.008) }'; then
+	echo "FLYWHEEL_KV is $kv - feedforward does most of the work, so it needs to be bigger. Try 12 volts divided by the top speed in radians per second (12 / 628 = 0.0191)."
 	exit 1
 fi
 if ! awk -v kp="$kp" 'BEGIN { exit !(kp > 0) }'; then

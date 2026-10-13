@@ -1,10 +1,11 @@
 {
 	"plan": [
 		{
-			"checkpoint": "bindings",
+			"checkpoint": "robot-states",
 			"guides": [
+				"robot-state-machines-robot-states",
 				"robot-state-machines-commands",
-				"robot-state-machines-commands-assist",
+				"robot-state-machines-robot-states-assist",
 				"robot-state-machines-bindings"
 			]
 		},

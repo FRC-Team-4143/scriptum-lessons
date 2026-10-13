@@ -29,7 +29,7 @@
 		{
 			"id": "number-slider-shooter-angle",
 			"title": "Shooter angle number slider",
-			"description": "A Number Slider widget writes ShooterAngleDegrees.",
+			"description": "A Number Slider widget writes ShooterAngleRad.",
 			"verifier": {
 				"type": "script",
 				"path": "checkpoints/verify/number-slider-shooter-angle.sh"
@@ -38,10 +38,10 @@
 		{
 			"id": "shooter-angle-live",
 			"title": "Shooter angle live write",
-			"description": "ShooterAngleDegrees was dragged live from Elastic's Number Slider.",
+			"description": "ShooterAngleRad was dragged live from Elastic's Number Slider.",
 			"verifier": {
 				"type": "nt4-value",
-				"topic": "/ShooterAngleDegrees",
+				"topic": "/ShooterAngleRad",
 				"check": "differs-from-default",
 				"expected": 0
 			}
@@ -67,7 +67,7 @@
 		{
 			"id": "radial-gauge-gyro",
 			"title": "Gyro heading radial gauge",
-			"description": "A Radial Gauge widget is bound to GyroHeadingDegrees.",
+			"description": "A Radial Gauge widget is bound to GyroHeadingRad.",
 			"verifier": {
 				"type": "script",
 				"path": "checkpoints/verify/radial-gauge-gyro.sh"

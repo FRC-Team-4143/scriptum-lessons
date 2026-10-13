@@ -70,10 +70,10 @@ public class DrivetrainSubsystem extends MwSubsystem<DriveStates, DrivetrainCons
     // has been passed. It also knows the robot's pose, for markers that trigger by position.
     event_tracker_ = new ChoreoEventTracker(getSubsystemKey() + "Choreo/Events/", this::getPose);
 
-    // Headings wrap around: 179 degrees and -179 degrees are only 2 degrees apart. Continuous
-    // input tells the PID to take the short way around.
+    // Headings wrap around: 3.1 rad and -3.1 rad are only about 0.08 rad apart. Continuous input
+    // tells the PID to take the short way around.
     aim_pid_.enableContinuousInput(-Math.PI, Math.PI);
-    aim_pid_.setTolerance(Math.toRadians(DrivetrainConstants.AIM_TOLERANCE_DEGREES));
+    aim_pid_.setTolerance(DrivetrainConstants.AIM_TOLERANCE_RAD);
   }
 
   /** The mechanisms this subsystem owns. MWLib reads and writes them for us every loop. */
@@ -120,7 +120,7 @@ public class DrivetrainSubsystem extends MwSubsystem<DriveStates, DrivetrainCons
     }
 
     // Logged every loop (in every state) so you can plot them in AdvantageScope.
-    MwLog.log(getSubsystemKey() + "AimErrorDegrees", Math.toDegrees(getAimErrorRadians()));
+    MwLog.log(getSubsystemKey() + "AimErrorRad", getAimErrorRadians());
     MwLog.log(getSubsystemKey() + "AimOutput", aim_turn_);
     MwLog.log(getSubsystemKey() + "IsAimed", isAimed());
   }
@@ -215,21 +215,20 @@ public class DrivetrainSubsystem extends MwSubsystem<DriveStates, DrivetrainCons
 
   /** True when the robot is facing the goal (within the tolerance) and has stopped turning. */
   public boolean isAimed() {
-    return Math.abs(Math.toDegrees(getAimErrorRadians()))
-            < DrivetrainConstants.AIM_TOLERANCE_DEGREES
+    return Math.abs(getAimErrorRadians()) < DrivetrainConstants.AIM_TOLERANCE_RAD
         && Math.abs(drive_.getAngularSpeed()) < 0.15;
   }
 
   /**
-   * How far the robot REALLY is from facing the goal, in degrees (the simulation knows; positive
+   * How far the robot REALLY is from facing the goal, in radians (the simulation knows; positive
    * means the goal is to the left). Used by the lesson's checks, so a drifting pose estimate cannot
    * fool them.
    */
-  public double getTrueAimErrorDegrees() {
+  public double getTrueAimErrorRad() {
     Pose2d truth = getTruePose();
     Rotation2d to_goal =
         FieldTargets.GOAL.getTranslation().minus(truth.getTranslation()).getAngle();
-    return to_goal.minus(truth.getRotation()).getDegrees();
+    return to_goal.minus(truth.getRotation()).getRadians();
   }
 
   // ---------------------------------------------------------------------------------------------

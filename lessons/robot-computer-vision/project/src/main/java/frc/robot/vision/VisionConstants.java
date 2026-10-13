@@ -31,7 +31,7 @@ public final class VisionConstants {
 
   // A camera picture taken while the robot spins fast is blurred, so the pose it gives is thrown
   // away above this turning speed (radians per second).
-  public static final double MAX_YAW_RATE_RADIANS_PER_SECOND = Math.toRadians(180.0);
+  public static final double MAX_YAW_RATE_RADIANS_PER_SECOND = Math.PI; // half a turn per second
 
   // The simulated cameras work out each pose from one tag only, the best one, and the farther that
   // tag is the worse the pose gets: within about 3 meters it is a few centimeters off, but now and

@@ -1,14 +1,14 @@
 {
 	"title": "Run the autonomous and watch it",
-	"summary": "Run Pickup And Score, plot the checks in AdvantageScope and read a failing one.",
+	"summary": "Run PickupAndScore, watch the tree in Arbor and the checks in AdvantageScope, and read a failing one.",
 	"topic": "Robot",
-	"order": 534,
+	"order": 535,
 	"steps": [
 		{
 			"title": "The job",
 			"say": {
-				"never": "You will run the routine you wrote and watch it in AdvantageScope. The robot picks its routine from a drop-down in **Elastic**, so the job has three parts: 1) start the robot and pick **Pickup And Score** in Elastic, 2) enable in Auto and watch the checks on a graph and on the field, 3) if a check is wrong, read what it says.\n\nYou are done when the four run checkpoints pass. They read the best the robot did since you pressed Start, so one good run is enough.",
-				"bit": "Pick the routine in Elastic, enable in Auto, watch the check numbers in AdvantageScope, then Verify."
+				"never": "You will run the tree you built and watch it. The robot picks its routine from a drop-down in **Elastic**, so the job has three parts: 1) start the robot and pick **PickupAndScore** in Elastic, 2) enable in Auto and watch the tree in Arbor and the checks in AdvantageScope, 3) if a check is wrong, read what it says.\n\nYou are done when the four run checkpoints pass. They read the best the robot did since you pressed Start, so one good run is enough.",
+				"bit": "Pick the routine in Elastic, enable in Auto, watch the tree and the check numbers, then Verify."
 			}
 		},
 		{
@@ -35,8 +35,8 @@
 		{
 			"title": "Picking the autonomous",
 			"say": {
-				"never": "The robot publishes a **chooser**, a drop-down of its routines. **Elastic**, the dashboard on the right, shows it with an **Auto Choices** widget (under SmartDashboard) set to a **ComboBox Chooser**, like in the Elastic lesson.\n\nThe default, Do Nothing, leaves the robot sitting still, so you must choose **Pickup And Score**. Elastic shows **Network Tables: Connected** in the bottom-left once the robot is running.",
-				"bit": "Elastic shows the robot's routine chooser. Pick Pickup And Score, since the default does nothing."
+				"never": "The robot publishes a **chooser**, a drop-down of its routines: one for every tree in `deploy/autos/trees`, named after its file, plus **Do_Nothing**. **Elastic**, the dashboard on the right, shows it with an **Auto Chooser** widget (under SmartDashboard) set to a **ComboBox Chooser**, like in the Elastic lesson.\n\nThe default, Do_Nothing, leaves the robot sitting still, so you must choose **PickupAndScore**. Elastic shows **Network Tables: Connected** in the bottom-left once the robot is running.",
+				"bit": "Elastic shows the robot's routine chooser, one option per tree. Pick PickupAndScore, since the default does nothing."
 			}
 		},
 		{
@@ -63,10 +63,10 @@
 			}
 		},
 		{
-			"title": "Add the Auto Choices chooser",
+			"title": "Add the Auto Chooser",
 			"say": {
-				"never": "Click **Add Widget**, find **Auto Choices** (under **SmartDashboard**) and drag it onto the grid. Then right-click it, choose **Edit Properties** and make sure **Widget Type** is **ComboBox Chooser**. Click **I did it** once it is on the grid.",
-				"bit": "Drag **Auto Choices** onto the grid and set its type to ComboBox Chooser. Click I did it."
+				"never": "Click **Add Widget**, find **Auto Chooser** (under **SmartDashboard**) and drag it onto the grid. Then right-click it, choose **Edit Properties** and make sure **Widget Type** is **ComboBox Chooser**. Click **I did it** once it is on the grid.",
+				"bit": "Drag **Auto Chooser** onto the grid and set its type to ComboBox Chooser. Click I did it."
 			},
 			"target": {
 				"pane": "elastic",
@@ -75,21 +75,21 @@
 			},
 			"cardAt": "bottom-right",
 			"waitFor": {
-				"hint": "drag Auto Choices onto the grid, then click I did it."
+				"hint": "drag Auto Chooser onto the grid, then click I did it."
 			},
 			"assist": true
 		},
 		{
 			"title": "Pick the routine",
 			"say": {
-				"never": "Open the ComboBox Chooser and choose **Pickup And Score**. The default, Do Nothing, would leave the robot sitting still. Click **I did it** once it says Pickup And Score.",
-				"bit": "Choose **Pickup And Score** in the ComboBox Chooser."
+				"never": "Open the ComboBox Chooser and choose **PickupAndScore**. The default, Do_Nothing, would leave the robot sitting still. Click **I did it** once it says PickupAndScore.",
+				"bit": "Choose **PickupAndScore** in the ComboBox Chooser."
 			},
 			"target": {
 				"pane": "elastic"
 			},
 			"waitFor": {
-				"hint": "choose Pickup And Score in the chooser, then click I did it."
+				"hint": "choose PickupAndScore in the chooser, then click I did it."
 			},
 			"assist": true,
 			"cardAt": "bottom-right"
@@ -97,8 +97,8 @@
 		{
 			"title": "What each check key means",
 			"say": {
-				"never": "Each checkpoint reads a number the robot logs. These are the ones to watch:\n\n- **Drive/DistanceToPickup** and **Drive/DistanceToScoreSpot**: how far the robot truly is from each spot, in meters. Each should dip under **0.4 meters** in turn, the pickup first, then the scoring spot.\n- **Drive/TrueAimErrorDegrees**: how many degrees the robot truly is from facing the goal. It should swing to about 0 *before* the shot, and under **5 degrees** when the shot starts.\n- **Subsystem/Shooter/ShotCount**: how many shots were taken. At least 1. **AimErrorAtShotDegrees** next to it is the aim error when the last shot started.\n\nThe checks use the **true** pose, not the robot's estimate, so a small gap between the two is not a problem.",
-				"bit": "Watch: distance to the pickup, then to the scoring spot (each under 0.4 m); true aim error (under 5 degrees at the shot); shot count (at least 1)."
+				"never": "Each checkpoint reads a number the robot logs. These are the ones to watch:\n\n- **Drive/DistanceToPickup** and **Drive/DistanceToScoreSpot**: how far the robot truly is from each spot, in meters. Each should dip under **0.4 meters** in turn, the pickup first, then the scoring spot.\n- **Drive/TrueAimErrorRad**: how many radians the robot truly is from facing the goal. It should swing to about 0 *before* the shot, and be under **0.087 rad** (about 5 degrees) when the shot starts.\n- **Subsystem/Shooter/ShotCount**: how many shots were taken. At least 1. **AimErrorAtShotRad** next to it is the aim error when the last shot started.\n\nThe checks use the **true** pose, not the robot's estimate, so a small gap between the two is not a problem.",
+				"bit": "Watch: distance to the pickup, then to the scoring spot (each under 0.4 m); true aim error (under 0.087 rad at the shot); shot count (at least 1)."
 			}
 		},
 		{
@@ -216,8 +216,8 @@
 		{
 			"title": "Plot the true aim error",
 			"say": {
-				"never": "Drag **Drive/TrueAimErrorDegrees** onto the **Left Axis**. After the second path it should swing to about 0 before the shot. Also look at **Subsystem/Shooter/ShotCount**: it should be at least 1.",
-				"bit": "Drag **Drive/TrueAimErrorDegrees** onto the Left Axis, and look at ShotCount."
+				"never": "Drag **Drive/TrueAimErrorRad** onto the **Left Axis**. After the second path it should swing to about 0 before the shot. Also look at **Subsystem/Shooter/ShotCount**: it should be at least 1.",
+				"bit": "Drag **Drive/TrueAimErrorRad** onto the Left Axis, and look at ShotCount."
 			},
 			"close": [
 				"editor",
@@ -235,17 +235,37 @@
 				"target": {
 					"pane": "scope",
 					"selector": ".line-graph-left.source-list .key-container",
-					"text": "Drive/TrueAimErrorDegrees"
+					"text": "Drive/TrueAimErrorRad"
 				},
-				"hint": "drag Drive/TrueAimErrorDegrees onto the graph."
+				"hint": "drag Drive/TrueAimErrorRad onto the graph."
 			},
 			"assist": true
 		},
 		{
+			"title": "Watch the tree in Arbor",
+			"say": {
+				"never": "Arbor can show the tree while it runs. In the Arbor pane, press **Connect** in the toolbar (the robot's address is already filled in), then run PickupAndScore in Auto again. Each step turns **orange** while it is RUNNING, then **green** for SUCCESS or **red** for FAILURE. A step that stays orange is where the robot is stuck.\n\nAdvantageScope has the same story in numbers: `BehaviorTree/PickupAndScore/Result` says SUCCESS or FAILURE when the tree ends, and `Robot/State` shows each state the tree asked for. Each run is also saved in `logs/bt` as a `.btlog` file that Arbor can replay.",
+				"bit": "In Arbor press Connect, then run again: orange = RUNNING, green = SUCCESS, red = FAILURE. BehaviorTree/PickupAndScore/Result has the result."
+			},
+			"close": [
+				"editor",
+				"preview",
+				"elastic",
+				"scope"
+			],
+			"open": [
+				"arbor"
+			],
+			"target": {
+				"pane": "arbor"
+			},
+			"cardAt": "bottom-right"
+		},
+		{
 			"title": "Reading a failure",
 			"say": {
-				"never": "If **Reaches the pickup** fails, the path or the first command is wrong (wrong path name, no `followPath`). If **Reaches the scoring spot** fails, the second path never ran or wasn't connected to the first. If **Aims before it shoots** fails, the aim command is missing, comes *after* the shot, or has no `.until(...isAimed)`, so it timed out. If **Shoots** fails, the routine ended before reaching `shoot()`. After a fix, press Start again for a clean run.",
-				"bit": "Each failing check points at one missing or misordered command. Fix it and Start again."
+				"never": "If **Reaches the pickup** fails, the first path is wrong (wrong name, or the tree has no `FollowPath` for it). If **Reaches the scoring spot** fails, the second path never ran or wasn't connected to the first. If **Aims before it shoots** fails, the AIM step is missing, comes *after* the shot, or the robot reaches AIM before it is aimed (the AIMING step in RobotContainer). If **Shoots** fails, the tree stopped before the SHOOT step: in Arbor, look for the red step. After a fix, press Start again for a clean run.",
+				"bit": "Each failing check points at one missing or misordered step. In Arbor, the red step is where the tree stopped. Fix it and Start again."
 			}
 		},
 		{

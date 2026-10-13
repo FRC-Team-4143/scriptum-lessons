@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The tree the sample run in sample-logs/ReplayDemo.btlog was recorded from. Arbor only replays a
+     log whose tree is in the open project, so keep this file to try the replay. -->
+<root BTCPP_format="4" main_tree_to_execute="ReplayDemo">
+  <BehaviorTree ID="ReplayDemo">
+    <Sequence>
+      <FollowPath trajectory="ToPickup"/>
+      <SetWantedState state="AIM"/>
+      <Timeout msec="1500">
+        <RetryUntilSuccessful num_attempts="-1">
+          <IsSystemState state="AIM"/>
+        </RetryUntilSuccessful>
+      </Timeout>
+      <SetWantedState state="SHOOT"/>
+    </Sequence>
+  </BehaviorTree>
+</root>

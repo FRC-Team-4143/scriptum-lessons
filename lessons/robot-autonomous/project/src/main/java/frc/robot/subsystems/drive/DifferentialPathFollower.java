@@ -123,7 +123,7 @@ public class DifferentialPathFollower {
     if (distance < CONSTANTS.CHOREO_SETTLE_DEADBAND_METERS) {
       return new double[] {0.0, 0.0};
     }
-    // Angle between where the robot faces and where the goal is, folded into -90..90 degrees (if
+    // Angle between where the robot faces and where the goal is, folded into -pi/2..pi/2 rad (if
     // the goal is behind the robot it simply drives backwards instead of spinning around).
     double bearing = to_goal.getAngle().minus(robot.getRotation()).getRadians();
     boolean backwards = Math.abs(bearing) > Math.PI / 2.0;

@@ -36,11 +36,12 @@ public class ShooterSubsystem extends MwSubsystem<ShooterStates, ShooterConstant
   private double spin_up_seconds_ = 0.0;
   private double shot_distance_from_score_spot_ =
       0.0; // how far from the scoring spot the last shot was
-  // How far from facing the goal (in degrees) the last shot was, and the worst of all the shots so
-  // far. The worst starts at 180 so that "no shot yet" can never look like "aimed well".
+  // How far from facing the goal (in radians) the last shot was, and the worst of all the shots so
+  // far. The worst starts at pi (facing straight away) so that "no shot yet" can never look like
+  // "aimed well".
   private double aim_error_at_shot_ = 0.0;
-  private double worst_aim_error_at_shot_ = NO_SHOT_YET_DEGREES;
-  private static final double NO_SHOT_YET_DEGREES = 180.0;
+  private double worst_aim_error_at_shot_ = NO_SHOT_YET_RAD;
+  private static final double NO_SHOT_YET_RAD = Math.PI;
 
   private ShooterSubsystem() {
     super(ShooterStates.IDLE, new ShooterConstants());
@@ -77,7 +78,7 @@ public class ShooterSubsystem extends MwSubsystem<ShooterStates, ShooterConstant
     shot_count_ = 0;
     shot_distance_from_score_spot_ = 0.0;
     aim_error_at_shot_ = 0.0;
-    worst_aim_error_at_shot_ = NO_SHOT_YET_DEGREES;
+    worst_aim_error_at_shot_ = NO_SHOT_YET_RAD;
   }
 
   /** True when the flywheel is close enough to the target speed. */
@@ -98,36 +99,64 @@ public class ShooterSubsystem extends MwSubsystem<ShooterStates, ShooterConstant
   }
 
   /**
-   * Decides which state the shooter is in. MWLib calls this every loop with the state the driver
+   * Decides which state the shooter is in. MWLib calls this every loop with the state the robot
    * WANTS. Set system_state_ to the state we are actually allowed to go to.
    *
-   * <p>Rules: IDLE always goes straight to IDLE. If SHOOT is wanted, you may NOT jump from IDLE to
-   * SHOOT: go IDLE -> SPIN_UP first. From SPIN_UP go to SHOOT once the flywheel isAtSpeed(). From
-   * SHOOT go back to SPIN_UP if the flywheel hasDipped().
+   * <p>Write it as a table: an outer switch on system_state_ (where we are now), and inside each
+   * case an inner switch on wanted (what the robot asked for). Each inner case says where to go.
+   * A request with no case is ignored (default: break;). The rows:
+   *
+   * <ul>
+   *   <li>From IDLE: wanting SHOOT goes to SPIN_UP (never straight to SHOOT).
+   *   <li>From SPIN_UP: wanting SHOOT goes to SHOOT once isAtSpeed(); wanting IDLE goes to IDLE.
+   *   <li>From SHOOT: wanting SHOOT goes back to SPIN_UP if hasDipped(); wanting IDLE goes to IDLE.
+   * </ul>
+   *
+   * <p>Nothing ever asks for SPIN_UP: it is a step the table passes through on the way to SHOOT.
    */
   @Override
   protected void handleStateTransition(ShooterStates wanted) {
-    if (wanted == ShooterStates.IDLE) {
-      system_state_ = ShooterStates.IDLE;
-      return;
-    }
-
-    // The driver wants to shoot. Take one safe step at a time.
+    // A table: where we are (outer switch), then what the robot asked for (inner switch).
     switch (system_state_) {
       case IDLE:
-        system_state_ = ShooterStates.SPIN_UP;
+        switch (wanted) {
+          case SHOOT:
+            system_state_ = ShooterStates.SPIN_UP; // never straight to SHOOT: spin up first
+            break;
+          default:
+            break;
+        }
         break;
       case SPIN_UP:
-        if (isAtSpeed()) {
-          system_state_ = ShooterStates.SHOOT;
+        switch (wanted) {
+          case SHOOT:
+            if (isAtSpeed()) {
+              system_state_ = ShooterStates.SHOOT;
+            }
+            break;
+          case IDLE:
+            system_state_ = ShooterStates.IDLE;
+            break;
+          default:
+            break;
         }
         break;
       case SHOOT:
-        if (hasDipped()) {
-          system_state_ = ShooterStates.SPIN_UP;
+        switch (wanted) {
+          case SHOOT:
+            if (hasDipped()) {
+              system_state_ = ShooterStates.SPIN_UP; // a launch slowed the wheel: spin up again
+            }
+            break;
+          case IDLE:
+            system_state_ = ShooterStates.IDLE;
+            break;
+          default:
+            break;
         }
         break;
       default:
+        system_state_ = ShooterStates.IDLE;
         break;
     }
   }
@@ -158,9 +187,9 @@ public class ShooterSubsystem extends MwSubsystem<ShooterStates, ShooterConstant
     MwLog.log(getSubsystemKey() + "ShotCount", shot_count_);
     MwLog.log(getSubsystemKey() + "SpinUpSeconds", spin_up_seconds_);
     MwLog.log(getSubsystemKey() + "ShotDistanceFromScoreSpot", shot_distance_from_score_spot_);
-    MwLog.log(getSubsystemKey() + "AimErrorAtShotDegrees", aim_error_at_shot_);
-    // The lesson's check reads this one: the worst aim of any shot, 180 until the first shot.
-    MwLog.log("Check/" + getSubsystemKey() + "AimErrorAtShotDegrees/Max", worst_aim_error_at_shot_);
+    MwLog.log(getSubsystemKey() + "AimErrorAtShotRad", aim_error_at_shot_);
+    // The lesson's check reads this one: the worst aim of any shot, pi until the first shot.
+    MwLog.log("Check/" + getSubsystemKey() + "AimErrorAtShotRad/Max", worst_aim_error_at_shot_);
   }
 
   /** Holds the flywheel at its target speed using whichever control style the constants choose. */
@@ -196,8 +225,7 @@ public class ShooterSubsystem extends MwSubsystem<ShooterStates, ShooterConstant
    * apply it.
    */
   private void feedforward() {
-    double target_rps = CONSTANTS.SHOOT_VELOCITY / (2.0 * Math.PI);
-    double volts = CONSTANTS.FLYWHEEL_KV * target_rps;
+    double volts = CONSTANTS.FLYWHEEL_KV * CONSTANTS.SHOOT_VELOCITY;
     flywheel_.setTargetDutyCycle(volts / 12.0);
   }
 
@@ -216,7 +244,7 @@ public class ShooterSubsystem extends MwSubsystem<ShooterStates, ShooterConstant
                 .getTranslation()
                 .getDistance(FieldTargets.SCORE_SPOT.getTranslation());
         // How far from facing the goal the robot REALLY was when this shot started.
-        aim_error_at_shot_ = Math.abs(DrivetrainSubsystem.getInstance().getTrueAimErrorDegrees());
+        aim_error_at_shot_ = Math.abs(DrivetrainSubsystem.getInstance().getTrueAimErrorRad());
         worst_aim_error_at_shot_ =
             shot_count_ == 1
                 ? aim_error_at_shot_

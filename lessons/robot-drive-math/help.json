@@ -1,7 +1,7 @@
 {
 	"plan": [
 		{
-			"checkpoint": "rotations-to-meters",
+			"checkpoint": "radians-to-meters",
 			"guides": [
 				"robot-drive-math-methods"
 			]

@@ -13,7 +13,7 @@ Companion docs page: [Computer Vision](https://docs.marswars.org/docs/software/t
 ## What you will build
 
 1. **Vision.** Give each camera tag solution to the pose estimator, and choose how much to trust the
-   cameras. When it works, your estimate stays within 6 centimeters and 1 degree of where the robot
+   cameras. When it works, your estimate stays within 6 centimeters and 0.017 rad (about 1 degree) of where the robot
    really is once it has stopped, even after a long drive.
 2. **Aiming.** Add an `AIM` state to the drivetrain. While the driver holds the left bumper, the robot
    turns in place to face the goal at (4.0, 4.0), using your estimate of where it is. You tune a PID so
@@ -21,9 +21,9 @@ Companion docs page: [Computer Vision](https://docs.marswars.org/docs/software/t
 
 ## Before you start
 
-You should have finished **State Machines and Commands**. This lesson starts from that robot, and uses
-the same ideas: a subsystem with states and a `switch` (the drivetrain), commands that start and end a
-state, and the PID tuning from **Control Theory**.
+You should have finished **State Machines**. This lesson starts from that robot, and uses the same
+ideas: a subsystem with states and a `switch` (the drivetrain), the robot's own state machine in
+`RobotContainer` that buttons ask for states, and the PID tuning from **Control Theory**.
 
 ## Two words, in plain terms
 
@@ -48,8 +48,10 @@ Everything is under `src/main/java/frc/robot/`:
   you add the vision measurement** (look for `TODO`).
 - `subsystems/localization/LocalizationConstants.java`: how much to trust the wheels and the cameras.
   **You choose the vision numbers.**
-- `subsystems/drive/DrivetrainSubsystem.java`, `DrivetrainConstants.java`, `DrivetrainCommands.java`:
-  **the aim state, its PID and its command** (look for `TODO (aim`).
+- `subsystems/drive/DrivetrainSubsystem.java`, `DrivetrainConstants.java`: **the aim state and its
+  PID** (look for `TODO (aim`).
+- `RobotContainer.java` and `RobotConstants.java` (its `RobotStates` enum): the robot already has an `AIM` state. You add the
+  `case AIM:` that asks the drivetrain for its new `AIM` state.
 - `subsystems/simulation/SimulationSubsystem.java`: the simulated cameras. Provided; it plays the part of
   the camera computers and sends their tag solutions into MW-Lib's proxy server, the way a real robot's
   cameras do. It points the cameras from the simulator's TRUE position, not from your estimate. (An alert
@@ -57,11 +59,11 @@ Everything is under `src/main/java/frc/robot/`:
 - `vision/VisionConstants.java`: the field layout, the camera mounts and the limits for dropping a
   solution. Provided.
 - `FieldTargets.java`: `START` and `GOAL` on the field.
-- `OI.java`: the left bumper (**E** on the keyboard) already starts `DrivetrainCommands.aim()`.
+- `OI.java`: the left bumper (**E** on the keyboard) already asks the robot for `RobotStates.AIM`.
 
 In AdvantageScope, `Drive/TruePose` is where the simulated robot really is and
 `Subsystem/Localization/Pose` is what your code thinks. `Subsystem/Localization/PositionErrorMeters` and
-`HeadingErrorDegrees` are the difference.
+`HeadingErrorRad` are the difference.
 `Subsystem/Localization/VisibleTags` is the AprilTags the cameras are using right now: drag it onto the
 field's Vision Targets to see them.
 
@@ -75,7 +77,7 @@ A suggested pace. Take short breaks whenever the class needs one.
 | 25 | Part 1: the `addVisionMeasurement(...)` call |
 | 30 | Part 1: choose the trust numbers, drive, plot the error |
 | 15 | The "How much should I trust the camera?" guide and a second try if the check fails |
-| 35 | Part 2: the AIM state, PID, `getAngleToGoal()`, `isAimed()` and the command |
+| 35 | Part 2: the AIM state, PID, `getAngleToGoal()`, `isAimed()` and the robot's AIM state |
 | 25 | Tune `AIM_KP` until it reaches the goal |
 | 20 | Damp the overshoot with `AIM_KD` |
 | 10 | Final clean run and Verify |
@@ -109,9 +111,9 @@ Go slower on anything that is new. The stretch below is optional.
 8. **The case.** Add `case AIM:` to the `switch` in `updateLogic()`: ask the PID for a turn, flip its
    sign, and spin in place with `drive_.arcadeDrive(0.0, turn)`. Reset the PID in the other states.
 9. **`isAimed()`.** True only when the error is small **and** the robot has stopped turning.
-10. **The command.** `DrivetrainCommands.aim()` is a `Commands.startEnd(...)` that sets the wanted
-    state to `AIM` and back to `ARCADE`.
-11. **Tune it.** Start, enable Teleop, hold **E**. Plot `Subsystem/Drivetrain/AimErrorDegrees` and
+10. **The robot's AIM state.** In `RobotContainer.updateLogic()`, add `case AIM:` that asks the
+    drivetrain for `DriveStates.AIM` and the shooter for `ShooterStates.IDLE`.
+11. **Tune it.** Start, enable Teleop, hold **E**. Plot `Subsystem/Drivetrain/AimErrorRad` and
     `AimOutput`, and change `AIM_KP` and `AIM_KD` in `DrivetrainConstants.java`.
 12. **Click Verify.**
 
@@ -120,18 +122,19 @@ Go slower on anything that is new. The stretch below is optional.
 - **Camera tag solutions added.** Reads your `LocalizationSubsystem.java`. It looks for an
   `addVisionMeasurement(...)` call that passes the solution's pose, the solution's own timestamp (`solution.timestamp.getSeconds()`)
   and the standard deviations.
-- **Estimate within 6 cm and 1 degree.** Needs a simulator running. The check watches the robot and only
+- **Estimate within 6 cm and 0.017 rad.** (0.017 rad is about 1 degree.) Needs a simulator running. The check watches the robot and only
   judges after you have **driven more than 5 meters in total, turned at least a quarter circle, and then
   sat still for 1.5 seconds**. It then
   compares your estimate with the true pose. It reads failing until you have done that, so drive, stop,
   wait 2 seconds, then Verify. Start fresh to try again.
 - **Aim state written.** Reads your drivetrain files. It looks for the `AIM` state, a `case AIM:`, a
   `PIDController` built from the `AIM_` constants with continuous input, `getAngleToGoal()` aiming
-  from the estimate (not the true pose), an `isAimed()` with `&&`, and a `startEnd` command.
-- **Aims within 2 degrees.** Needs a simulator running. When you press **E**, the robot has to get
-  within 2 degrees of the goal and **stay there for half a second, within 4 seconds** of the press.
+  from the estimate (not the true pose), an `isAimed()` with `&&`, and a `case AIM:` in `RobotContainer`
+  that asks the drivetrain for `AIM`.
+- **Aims within 0.035 rad.** Needs a simulator running. When you press **E**, the robot has to get
+  within 0.035 rad (about 2 degrees) of the goal and **stay there for half a second, within 4 seconds** of the press.
   The check uses the robot's *true* heading, so the aim is only as good as your estimate.
-- **No wild overshoot.** On the same presses, the robot may not swing more than 10 degrees *past* the
+- **No wild overshoot.** On the same presses, the robot may not swing more than 0.17 rad (about 10 degrees) *past* the
   goal. The check **remembers the worst swing from every press** of **E**, so a bad press stays
   recorded until you press **Start** again. Start fresh and do one clean press with your final numbers.
 

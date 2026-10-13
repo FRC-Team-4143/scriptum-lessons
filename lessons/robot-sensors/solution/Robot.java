@@ -23,14 +23,14 @@ public class Robot extends LoggedRobot {
   public void robotPeriodic() {
     loop_.doControlLoop();
 
-    // The drivetrain reports wheel ROTATIONS. One rotation moves the robot one wheel circumference.
-    double meters_per_rotation = 2.0 * Math.PI * Constants.WHEEL_RADIUS_METERS;
+    // The drivetrain reports wheel angles in RADIANS. Radians times the wheel radius is meters.
+    double radius = Constants.WHEEL_RADIUS_METERS;
 
-    // STEP 1: change the readings from rotations into meters.
-    double left_meters = drive_.getLeftPositionRotations() * meters_per_rotation;
-    double right_meters = drive_.getRightPositionRotations() * meters_per_rotation;
-    double left_meters_per_second = drive_.getLeftVelocityRps() * meters_per_rotation;
-    double right_meters_per_second = drive_.getRightVelocityRps() * meters_per_rotation;
+    // STEP 1: change the readings from radians into meters.
+    double left_meters = drive_.getLeftPositionRad() * radius;
+    double right_meters = drive_.getRightPositionRad() * radius;
+    double left_meters_per_second = drive_.getLeftVelocityRadPerSec() * radius;
+    double right_meters_per_second = drive_.getRightVelocityRadPerSec() * radius;
 
     // STEP 2: describe the whole robot, not just each side.
     double linear_speed = (left_meters_per_second + right_meters_per_second) / 2.0;

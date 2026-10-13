@@ -1,0 +1,61 @@
+{
+	"title": "Arbor",
+	"description": "Build an autonomous routine as a behavior tree: nodes, ports, a Sequence, a Timeout and a tunable value.",
+	"kind": "robot",
+	"track": "Tools",
+	"order": 10,
+	"restrictTools": [
+		"arbor"
+	],
+	"guides": [
+		"arbor-behavior-trees",
+		"arbor-trees-more"
+	],
+	"checkpoints": [
+		{
+			"id": "new-tree",
+			"title": "Your own tree",
+			"description": "You created a tree of your own and saved it in the trees folder.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/new-tree.sh"
+			}
+		},
+		{
+			"id": "sequence",
+			"title": "A Sequence of steps",
+			"description": "A Sequence with at least three steps: a SetWantedState, a Sleep and a FollowPath.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/sequence.sh"
+			}
+		},
+		{
+			"id": "ports",
+			"title": "Ports filled in",
+			"description": "SetWantedState has a state, FollowPath has a trajectory name and Sleep has a time.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/ports.sh"
+			}
+		},
+		{
+			"id": "fail-handling",
+			"title": "A Timeout and a Fallback",
+			"description": "A step is wrapped in a Timeout, and a Fallback gives the tree a plan B.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/fail-handling.sh"
+			}
+		},
+		{
+			"id": "tunable",
+			"title": "A tunable value",
+			"description": "The tree declares an input port and a node uses it as {name}, so it can be tuned from the dashboard.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/tunable.sh"
+			}
+		}
+	]
+}

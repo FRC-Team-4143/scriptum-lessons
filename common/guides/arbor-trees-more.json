@@ -1,0 +1,124 @@
+{
+	"title": "Behavior trees: time limits and more",
+	"summary": "Timeout, ReactiveSequence, ParallelDeadline, and tunable values.",
+	"topic": "Tools",
+	"order": 36,
+	"needs": [
+		"arbor"
+	],
+	"kind": "concept",
+	"steps": [
+		{
+			"title": "Timeout: don't hang forever",
+			"say": "A **Timeout** wraps one step and gives it a time limit in milliseconds. If the step is still RUNNING when time is up, the Timeout **halts** it (back to idle) and answers FAILURE. That turns \"might never finish\" into \"fails after 3 seconds\", which a Fallback can turn into plan B. It is the most useful pattern in an auto.",
+			"diagram": {
+				"mermaid": "flowchart TD\n  fb[\"? Fallback\"]:::idle\n  to[\"Timeout 3 s\"]:::idle\n  aim[\"Aim\"]:::idle\n  backup[\"Backup path\"]:::idle\n  fb --> to\n  to --> aim\n  fb --> backup\n  classDef idle fill:#6b7280,stroke:#9ca3af,color:#fff\n  classDef running fill:#f59e0b,stroke:#b45309,color:#111\n  classDef success fill:#16a34a,stroke:#166534,color:#fff\n  classDef failure fill:#dc2626,stroke:#991b1b,color:#fff",
+				"caption": "A Fallback: a Timeout around Aim, or the Backup path."
+			}
+		},
+		{
+			"title": "0.0 s",
+			"say": "The Timeout ticks Aim and starts a 3 second clock.",
+			"diagram": {
+				"mermaid": "flowchart TD\n  fb[\"? Fallback · RUNNING\"]:::running\n  to[\"Timeout 3 s · RUNNING\"]:::running\n  aim[\"Aim · RUNNING\"]:::running\n  backup[\"Backup path\"]:::idle\n  fb --> to\n  to --> aim\n  fb --> backup\n  classDef idle fill:#6b7280,stroke:#9ca3af,color:#fff\n  classDef running fill:#f59e0b,stroke:#b45309,color:#111\n  classDef success fill:#16a34a,stroke:#166534,color:#fff\n  classDef failure fill:#dc2626,stroke:#991b1b,color:#fff\n  linkStyle 0 stroke:#facc15,stroke-width:4px\n  linkStyle 1 stroke:#facc15,stroke-width:4px",
+				"caption": "Yellow lines are where this tick went; colours are each node's status."
+			}
+		},
+		{
+			"title": "1.5 s",
+			"say": "Aim is still RUNNING, so the Timeout is RUNNING.",
+			"diagram": {
+				"mermaid": "flowchart TD\n  fb[\"? Fallback · RUNNING\"]:::running\n  to[\"Timeout 3 s · RUNNING\"]:::running\n  aim[\"Aim · RUNNING\"]:::running\n  backup[\"Backup path\"]:::idle\n  fb --> to\n  to --> aim\n  fb --> backup\n  classDef idle fill:#6b7280,stroke:#9ca3af,color:#fff\n  classDef running fill:#f59e0b,stroke:#b45309,color:#111\n  classDef success fill:#16a34a,stroke:#166534,color:#fff\n  classDef failure fill:#dc2626,stroke:#991b1b,color:#fff\n  linkStyle 0 stroke:#facc15,stroke-width:4px\n  linkStyle 1 stroke:#facc15,stroke-width:4px",
+				"caption": "Yellow lines are where this tick went; colours are each node's status."
+			}
+		},
+		{
+			"title": "3.0 s",
+			"say": "Time is up. The Timeout halts Aim (back to idle) and answers FAILURE.",
+			"diagram": {
+				"mermaid": "flowchart TD\n  fb[\"? Fallback · RUNNING\"]:::running\n  to[\"Timeout 3 s · FAILURE\"]:::failure\n  aim[\"Aim\"]:::idle\n  backup[\"Backup path\"]:::idle\n  fb --> to\n  to --> aim\n  fb --> backup\n  classDef idle fill:#6b7280,stroke:#9ca3af,color:#fff\n  classDef running fill:#f59e0b,stroke:#b45309,color:#111\n  classDef success fill:#16a34a,stroke:#166534,color:#fff\n  classDef failure fill:#dc2626,stroke:#991b1b,color:#fff\n  linkStyle 0 stroke:#facc15,stroke-width:4px",
+				"caption": "Yellow lines are where this tick went; colours are each node's status."
+			}
+		},
+		{
+			"title": "3.0 s",
+			"say": "The Fallback moves on to plan B: Backup path is RUNNING.",
+			"diagram": {
+				"mermaid": "flowchart TD\n  fb[\"? Fallback · RUNNING\"]:::running\n  to[\"Timeout 3 s · FAILURE\"]:::failure\n  aim[\"Aim\"]:::idle\n  backup[\"Backup path · RUNNING\"]:::running\n  fb --> to\n  to --> aim\n  fb --> backup\n  classDef idle fill:#6b7280,stroke:#9ca3af,color:#fff\n  classDef running fill:#f59e0b,stroke:#b45309,color:#111\n  classDef success fill:#16a34a,stroke:#166534,color:#fff\n  classDef failure fill:#dc2626,stroke:#991b1b,color:#fff\n  linkStyle 2 stroke:#facc15,stroke-width:4px",
+				"caption": "Yellow lines are where this tick went; colours are each node's status."
+			}
+		},
+		{
+			"title": "5.0 s",
+			"say": "Backup path succeeds, so the Fallback reports SUCCESS. A step that hangs can no longer stall the whole auto.",
+			"diagram": {
+				"mermaid": "flowchart TD\n  fb[\"? Fallback · SUCCESS\"]:::success\n  to[\"Timeout 3 s · FAILURE\"]:::failure\n  aim[\"Aim\"]:::idle\n  backup[\"Backup path · SUCCESS\"]:::success\n  fb --> to\n  to --> aim\n  fb --> backup\n  classDef idle fill:#6b7280,stroke:#9ca3af,color:#fff\n  classDef running fill:#f59e0b,stroke:#b45309,color:#111\n  classDef success fill:#16a34a,stroke:#166534,color:#fff\n  classDef failure fill:#dc2626,stroke:#991b1b,color:#fff\n  linkStyle 2 stroke:#facc15,stroke-width:4px",
+				"caption": "Yellow lines are where this tick went; colours are each node's status."
+			}
+		},
+		{
+			"title": "ReactiveSequence: keep checking",
+			"say": "A plain Sequence remembers where it was. A **ReactiveSequence** ticks **all** of its earlier children again on **every** tick. That is what you want for a condition that must stay true the whole time an action runs, like \"drive only while we still hold a game piece\".",
+			"diagram": {
+				"mermaid": "flowchart TD\n  rs[\"→ ReactiveSequence\"]:::idle\n  cond[\"Has game piece?\"]:::idle\n  drive[\"Drive path\"]:::idle\n  rs --> cond\n  rs --> drive\n  classDef idle fill:#6b7280,stroke:#9ca3af,color:#fff\n  classDef running fill:#f59e0b,stroke:#b45309,color:#111\n  classDef success fill:#16a34a,stroke:#166534,color:#fff\n  classDef failure fill:#dc2626,stroke:#991b1b,color:#fff",
+				"caption": "A condition followed by a long action."
+			}
+		},
+		{
+			"title": "Tick 1",
+			"say": "A ReactiveSequence re-checks its earlier children on every tick. Tick 1: the condition passes and Drive path starts.",
+			"diagram": {
+				"mermaid": "flowchart TD\n  rs[\"→ ReactiveSequence · RUNNING\"]:::running\n  cond[\"Has game piece? · SUCCESS\"]:::success\n  drive[\"Drive path · RUNNING\"]:::running\n  rs --> cond\n  rs --> drive\n  classDef idle fill:#6b7280,stroke:#9ca3af,color:#fff\n  classDef running fill:#f59e0b,stroke:#b45309,color:#111\n  classDef success fill:#16a34a,stroke:#166534,color:#fff\n  classDef failure fill:#dc2626,stroke:#991b1b,color:#fff\n  linkStyle 0 stroke:#facc15,stroke-width:4px\n  linkStyle 1 stroke:#facc15,stroke-width:4px",
+				"caption": "Yellow lines are where this tick went; colours are each node's status."
+			}
+		},
+		{
+			"title": "Tick 2",
+			"say": "Tick 2: the condition is asked again even though Drive path is RUNNING. (A plain Sequence would resume at Drive path.)",
+			"diagram": {
+				"mermaid": "flowchart TD\n  rs[\"→ ReactiveSequence · RUNNING\"]:::running\n  cond[\"Has game piece? · SUCCESS\"]:::success\n  drive[\"Drive path · RUNNING\"]:::running\n  rs --> cond\n  rs --> drive\n  classDef idle fill:#6b7280,stroke:#9ca3af,color:#fff\n  classDef running fill:#f59e0b,stroke:#b45309,color:#111\n  classDef success fill:#16a34a,stroke:#166534,color:#fff\n  classDef failure fill:#dc2626,stroke:#991b1b,color:#fff\n  linkStyle 0 stroke:#facc15,stroke-width:4px\n  linkStyle 1 stroke:#facc15,stroke-width:4px",
+				"caption": "Yellow lines are where this tick went; colours are each node's status."
+			}
+		},
+		{
+			"title": "Tick 3",
+			"say": "Tick 3: the game piece is gone. The condition FAILS, Drive path is halted, and the ReactiveSequence reports FAILURE.",
+			"diagram": {
+				"mermaid": "flowchart TD\n  rs[\"→ ReactiveSequence · FAILURE\"]:::failure\n  cond[\"Has game piece? · FAILURE\"]:::failure\n  drive[\"Drive path\"]:::idle\n  rs --> cond\n  rs --> drive\n  classDef idle fill:#6b7280,stroke:#9ca3af,color:#fff\n  classDef running fill:#f59e0b,stroke:#b45309,color:#111\n  classDef success fill:#16a34a,stroke:#166534,color:#fff\n  classDef failure fill:#dc2626,stroke:#991b1b,color:#fff\n  linkStyle 0 stroke:#facc15,stroke-width:4px",
+				"caption": "Yellow lines are where this tick went; colours are each node's status."
+			}
+		},
+		{
+			"title": "ParallelDeadline: at the same time",
+			"say": "A **ParallelDeadline** ticks all its children together. The **first** child is the deadline: when it finishes, all the others are halted and the node reports the deadline's result. \"Drive this path, and drop the intake when the robot passes the marker\" is exactly this: the path is the deadline.",
+			"diagram": {
+				"mermaid": "flowchart TD\n  pd[\"⇉ ParallelDeadline\"]:::idle\n  path[\"Follow path\"]:::idle\n  intake[\"Intake on event\"]:::idle\n  pd --> path\n  pd --> intake\n  classDef idle fill:#6b7280,stroke:#9ca3af,color:#fff\n  classDef running fill:#f59e0b,stroke:#b45309,color:#111\n  classDef success fill:#16a34a,stroke:#166534,color:#fff\n  classDef failure fill:#dc2626,stroke:#991b1b,color:#fff",
+				"caption": "The path is the deadline."
+			}
+		},
+		{
+			"title": "Tick 1",
+			"say": "A ParallelDeadline ticks all of its children together every tick. The first child, Follow path, is the deadline.",
+			"diagram": {
+				"mermaid": "flowchart TD\n  pd[\"⇉ ParallelDeadline · RUNNING\"]:::running\n  path[\"Follow path · RUNNING\"]:::running\n  intake[\"Intake on event · RUNNING\"]:::running\n  pd --> path\n  pd --> intake\n  classDef idle fill:#6b7280,stroke:#9ca3af,color:#fff\n  classDef running fill:#f59e0b,stroke:#b45309,color:#111\n  classDef success fill:#16a34a,stroke:#166534,color:#fff\n  classDef failure fill:#dc2626,stroke:#991b1b,color:#fff\n  linkStyle 0 stroke:#facc15,stroke-width:4px\n  linkStyle 1 stroke:#facc15,stroke-width:4px",
+				"caption": "Yellow lines are where this tick went; colours are each node's status."
+			}
+		},
+		{
+			"title": "Tick 3",
+			"say": "The deadline child finishes: SUCCESS. The others are halted, even though Intake on event never completed.",
+			"diagram": {
+				"mermaid": "flowchart TD\n  pd[\"⇉ ParallelDeadline · SUCCESS\"]:::success\n  path[\"Follow path · SUCCESS\"]:::success\n  intake[\"Intake on event\"]:::idle\n  pd --> path\n  pd --> intake\n  classDef idle fill:#6b7280,stroke:#9ca3af,color:#fff\n  classDef running fill:#f59e0b,stroke:#b45309,color:#111\n  classDef success fill:#16a34a,stroke:#166534,color:#fff\n  classDef failure fill:#dc2626,stroke:#991b1b,color:#fff\n  linkStyle 0 stroke:#facc15,stroke-width:4px",
+				"caption": "Yellow lines are where this tick went; colours are each node's status."
+			}
+		},
+		{
+			"title": "Tunable values",
+			"say": "Any number can be a **tunable**. Instead of typing 500 into a Sleep, declare an input port on the tree with a default (for example `wait_msec`), and write its name in braces in the Sleep's `msec`: `{wait_msec}`. On the robot it shows up on the dashboard, so you can change it at the field without rebuilding. If you misspell the name, the auto refuses to load and tells you which node."
+		},
+		{
+			"title": "Reading the colours in Arbor",
+			"say": "When Arbor is connected to a robot or the simulator, it draws exactly these colours: orange while a node is RUNNING, green for SUCCESS, red for FAILURE. If an auto stops somewhere unexpected, look for the node that is red, or the one that stayed orange. A Sequence that is red with its last children never lit up means an earlier child failed, and the rest were skipped on purpose."
+		}
+	]
+}

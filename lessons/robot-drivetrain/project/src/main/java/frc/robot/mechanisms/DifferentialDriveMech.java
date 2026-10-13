@@ -12,6 +12,7 @@ import com.marswars.mechanisms.MotorConfig;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.system.plant.DCMotor;
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.simulation.DifferentialDrivetrainSim;
 import frc.robot.Constants;
@@ -108,10 +109,14 @@ public class DifferentialDriveMech extends MechBase {
   public void readInputs(double timestamp) {
     if (!MwLog.isReplay()) {
       BaseStatusSignal.refreshAll(signals_);
-      inputs_.leftPositionRotations = left_motors_[0].getPosition().getValueAsDouble();
-      inputs_.rightPositionRotations = right_motors_[0].getPosition().getValueAsDouble();
-      inputs_.leftVelocityRps = left_motors_[0].getVelocity().getValueAsDouble();
-      inputs_.rightVelocityRps = right_motors_[0].getVelocity().getValueAsDouble();
+      inputs_.leftPositionRad =
+          Units.rotationsToRadians(left_motors_[0].getPosition().getValueAsDouble());
+      inputs_.rightPositionRad =
+          Units.rotationsToRadians(right_motors_[0].getPosition().getValueAsDouble());
+      inputs_.leftVelocityRadPerSec =
+          Units.rotationsToRadians(left_motors_[0].getVelocity().getValueAsDouble());
+      inputs_.rightVelocityRadPerSec =
+          Units.rotationsToRadians(right_motors_[0].getVelocity().getValueAsDouble());
 
       if (IS_SIM) {
         updateSimulation();
@@ -199,15 +204,11 @@ public class DifferentialDriveMech extends MechBase {
         sim_.getRightVelocityMetersPerSecond() * RIGHT_SCALE
             + JITTER_METERS_PER_SECOND * noise_.nextGaussian();
 
-    double wheel_circumference = 2.0 * Math.PI * Constants.WHEEL_RADIUS_METERS;
+    // Meters divided by the wheel radius is wheel radians; times the gear ratio is motor radians.
+    double motor_rad_per_meter = Constants.GEAR_RATIO / Constants.WHEEL_RADIUS_METERS;
+    pushSimState(left_motors_, left_meters * motor_rad_per_meter, left_speed * motor_rad_per_meter);
     pushSimState(
-        left_motors_,
-        left_meters / wheel_circumference * Constants.GEAR_RATIO,
-        left_speed / wheel_circumference * Constants.GEAR_RATIO);
-    pushSimState(
-        right_motors_,
-        right_meters / wheel_circumference * Constants.GEAR_RATIO,
-        right_speed / wheel_circumference * Constants.GEAR_RATIO);
+        right_motors_, right_meters * motor_rad_per_meter, right_speed * motor_rad_per_meter);
   }
 
   /** Puts the simulated robot back at the origin with fresh (zeroed) encoders. */
@@ -241,11 +242,12 @@ public class DifferentialDriveMech extends MechBase {
   }
 
   private static void pushSimState(
-      CommonTalon[] motors, double motor_rotations, double motor_rotations_per_second) {
+      CommonTalon[] motors, double motor_rad, double motor_rad_per_sec) {
+    // The TalonFX simulator counts in rotations, so convert only here, at the very edge.
     for (CommonTalon motor : motors) {
       var sim_state = ((TalonFX) motor).getSimState();
-      sim_state.setRawRotorPosition(motor_rotations);
-      sim_state.setRotorVelocity(motor_rotations_per_second);
+      sim_state.setRawRotorPosition(Units.radiansToRotations(motor_rad));
+      sim_state.setRotorVelocity(Units.radiansToRotations(motor_rad_per_sec));
     }
   }
 
