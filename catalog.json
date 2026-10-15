@@ -1075,7 +1075,9 @@
 			"kind": "robot",
 			"subdir": "lessons/robot-drivetrain/project",
 			"requires": [
-				"git-basics"
+				"git-basics",
+				"advantagescope-intro",
+				"elastic-intro"
 			],
 			"checkpoints": [
 				{
