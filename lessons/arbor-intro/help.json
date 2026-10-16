@@ -3,31 +3,34 @@
 		{
 			"checkpoint": "new-tree",
 			"guides": [
-				"arbor-basics"
+				"arbor-basics",
+				"arbor-intro-new-tree"
 			]
 		},
 		{
 			"checkpoint": "sequence",
 			"guides": [
-				"arbor-behavior-trees"
+				"arbor-behavior-trees",
+				"arbor-intro-sequence"
 			]
 		},
 		{
 			"checkpoint": "ports",
 			"guides": [
-				"arbor-basics"
+				"arbor-intro-settings"
 			]
 		},
 		{
 			"checkpoint": "fail-handling",
 			"guides": [
-				"arbor-trees-more"
+				"arbor-trees-more",
+				"arbor-intro-plan-b"
 			]
 		},
 		{
 			"checkpoint": "tunable",
 			"guides": [
-				"arbor-trees-more"
+				"arbor-intro-tunable"
 			]
 		}
 	]
