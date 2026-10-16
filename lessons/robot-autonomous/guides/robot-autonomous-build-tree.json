@@ -113,7 +113,7 @@
 		{
 			"title": "Ask for AIM, then wait for it",
 			"say": {
-				"never": "Add a `SetWantedState` to the Sequence after the second path (right-click the Sequence, **Add child…**) and type `AIM` in its **state** setting.\n\nAfter it, add a `Timeout` and set its **msec** to `3000`. Right-click the top of the Timeout's frame, choose **Add child…** and add a `RetryUntilSuccessful`; set its **num_attempts** to `-1` (keep trying). Then right-click the RetryUntilSuccessful, **Add child…**, `IsSystemState`, and set its **state** to `AIM`. Click **I did it** when the Timeout holds the wait for AIM.",
+				"never": "Add a `SetWantedState` to the Sequence after the second path (right-click the Sequence, **Add child…**) and choose `AIM` from its **state** list.\n\nAfter it, add a `Timeout` and set its **msec** to `3000`. Right-click the top of the Timeout's frame, choose **Add child…** and add a `RetryUntilSuccessful`; set its **num_attempts** to `-1` (keep trying). Then right-click the RetryUntilSuccessful, **Add child…**, `IsSystemState`, and choose `AIM` from its **state** list. Click **I did it** when the Timeout holds the wait for AIM.",
 				"bit": "Add SetWantedState AIM, then Timeout (msec 3000) > RetryUntilSuccessful (num_attempts -1) > IsSystemState AIM."
 			},
 			"target": {

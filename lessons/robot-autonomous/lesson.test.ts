@@ -112,15 +112,23 @@ describe("robot-autonomous behavior trees", () => {
 		expect(nodes).toContain("RobotStateNodes.register(");
 	});
 
-	test("nodes.xml names the robot states a tree may ask for, and RobotStates has them", () => {
+	test("nodes.xml's state enums match RobotStates, so Arbor's drop-downs offer exactly what the robot reads", () => {
 		const states = [...java("RobotConstants.java").matchAll(/^\s{4}([A-Z_]+),?$/gm)].map((m) => m[1]);
 		const nodes = readFileSync(join(autos, "nodes.xml"), "utf8");
-		const askable = nodes.match(/Robot state to request: ([A-Z_, ]+?) or ([A-Z_]+)</);
-		expect(askable).not.toBeNull();
-		for (const state of [...askable![1].split(", "), askable![2]]) expect(states).toContain(state);
-		// the step state is picked by the robot, never asked for
-		expect(askable![0]).not.toContain("AIMING");
+		const values = (type: string) => {
+			const block = nodes.match(new RegExp(`<Enum type="${type}">([\\s\\S]*?)</Enum>`));
+			expect(block, `an <Enum type="${type}"> in nodes.xml`).not.toBeNull();
+			return [...block![1].matchAll(/<Value name="([A-Z_]+)"/g)].map((m) => m[1]);
+		};
+		// IsSystemState can check any state the robot is in, so its list is all of them.
+		expect(values("RobotState").sort()).toEqual([...states].sort());
+		// SetWantedState asks for a state; the step state AIMING is picked by the robot, never asked for.
+		const askable = values("WantedState");
+		for (const state of askable) expect(states).toContain(state);
+		expect(askable).not.toContain("AIMING");
 		expect(states).toContain("AIMING");
+		expect(nodes).toMatch(/<Action ID="SetWantedState">\s*<input_port name="state" type="WantedState">/);
+		expect(nodes).toMatch(/<Condition ID="IsSystemState">\s*<input_port name="state" type="RobotState">/);
 	});
 
 	test("the Arbor project points at the trees and the simulator's live view", () => {

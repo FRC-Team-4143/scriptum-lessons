@@ -71,8 +71,8 @@
 		{
 			"title": "Pick a state",
 			"say": {
-				"never": "Click in the **state** box and type `AIM` (in capitals). The states this robot knows are `IDLE`, `DRIVE`, `AIM`, `SHOOT` and `AUTO`. The box on the canvas now shows `state: AIM`.",
-				"bit": "Type `AIM` in **state**."
+				"never": "Click the **state** box. It's a list: choose `AIM`. The list only has the states this robot knows (`IDLE`, `DRIVE`, `SHOOT`, `AIM` and `AUTO`), so you can't misspell one. The box on the canvas now shows `state: AIM`.",
+				"bit": "Choose `AIM` from the **state** list."
 			},
 			"target": {
 				"pane": "arbor",

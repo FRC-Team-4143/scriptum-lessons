@@ -84,8 +84,8 @@
 		{
 			"title": "Add the plan B",
 			"say": {
-				"never": "Right-click the **Fallback** box, choose **Add child…** and add a **SetWantedState**. Select it and type `IDLE` in **state**. If the path fails or runs out of time, the robot stops safely instead of being stuck.",
-				"bit": "Fallback → **Add child…** → SetWantedState with state `IDLE`."
+				"never": "Right-click the **Fallback** box, choose **Add child…** and add a **SetWantedState**. Select it and choose `IDLE` from its **state** list. If the path fails or runs out of time, the robot stops safely instead of being stuck.",
+				"bit": "Fallback → **Add child…** → SetWantedState with state `IDLE` (from the list)."
 			},
 			"target": {
 				"pane": "arbor",
