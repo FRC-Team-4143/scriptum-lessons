@@ -1,0 +1,108 @@
+{
+	"title": "Make your own tree",
+	"summary": "Create a tree, give it a first step, and save it.",
+	"topic": "Tools",
+	"order": 37,
+	"kind": "mixed",
+	"steps": [
+		{
+			"title": "Your own tree",
+			"say": {
+				"never": "A **tree** is one autonomous routine, saved as its own file. You'll make a new one called `MyFirstAuto`, put a **Sequence** at the top (the step that runs the others in order), and save it.",
+				"bit": "Make a tree called `MyFirstAuto`, start it with a Sequence, save."
+			},
+			"target": {
+				"pane": "arbor"
+			},
+			"cardAt": "bottom-right"
+		},
+		{
+			"title": "Click + New tree",
+			"say": {
+				"never": "Click **+ New tree**, at the top of the **Trees** list on the left.",
+				"bit": "Click **+ New tree**."
+			},
+			"target": {
+				"pane": "arbor",
+				"selector": ".trees-panel button",
+				"text": "+ New tree"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "arbor",
+					"selector": ".modal"
+				},
+				"hint": "click + New tree.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Name it",
+			"say": {
+				"never": "Type `MyFirstAuto` in the **Tree ID** box. Leave **A new file** picked, so it gets a file of its own. Then click **Create**.",
+				"bit": "Type `MyFirstAuto`, keep **A new file**, click **Create**."
+			},
+			"target": {
+				"pane": "arbor",
+				"selector": ".modal input[placeholder^='e.g.']"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "arbor",
+					"selector": ".tree-item",
+					"text": "MyFirstAuto"
+				},
+				"hint": "name it MyFirstAuto and click Create.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Start with a Sequence",
+			"say": {
+				"never": "The canvas is empty. In the **Nodes** list, find the one called just **Sequence** (not AsyncSequence or ReactiveSequence) and **drag** it onto the canvas. It becomes the top of your tree. (You can type `Sequence` in the search box above the list to find it.)",
+				"bit": "Drag **Sequence** (the plain one) from Nodes onto the canvas."
+			},
+			"target": {
+				"pane": "arbor",
+				"selector": ".palette-item[title^='Ticks children in order until one fails']"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "arbor",
+					"selector": ".bt-node",
+					"text": "Sequence"
+				},
+				"hint": "drag Sequence onto the canvas.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Save it",
+			"say": {
+				"never": "Press **Save** at the top (or **Ctrl+S**). The little dot next to the file name disappears once it's saved. Until you save, nothing is written to the file the robot runs, and a new tree that was never saved is gone if the page reloads.",
+				"bit": "**Save** (Ctrl+S). The dot by the file name goes away."
+			},
+			"target": {
+				"pane": "arbor",
+				"selector": ".toolbar button",
+				"text": "Save"
+			},
+			"cardAt": "bottom-left",
+			"waitFor": {
+				"target": {
+					"pane": "arbor",
+					"selector": ".dirty-dot"
+				},
+				"hint": "press Save or Ctrl+S.",
+				"gone": true
+			},
+			"assist": true
+		}
+	]
+}

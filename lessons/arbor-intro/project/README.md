@@ -21,7 +21,8 @@ isn't already showing. You'll see:
   box at the top. `SetWantedState`, `IsSystemState` and `FollowPath` are the
   robot's own; the rest (`Sequence`, `Fallback`, `Timeout`, `Sleep`...) are built in.
 - **The canvas** (middle): the tree. Click a node to select it.
-- **Properties** (right): the selected node's settings, called *ports*.
+- **Properties** (right): the selected step's settings. Arbor heads them **Ports**, which is
+  just its word for settings.
 - **Problems / XML / Live log** (bottom): mistakes Arbor found, the XML it
   will save, and the robot's live view.
 
@@ -31,16 +32,16 @@ isn't already showing. You'll see:
 2. Build a **Sequence** of at least three steps. Drag nodes onto the canvas
    (or use the right-click menu, **Add child**): a `SetWantedState`, a
    `Sleep`, and a `FollowPath`.
-3. Fill in their ports in the Properties panel: `state` (for example
+3. Fill in their settings in the Properties panel: `state` (for example
    `AIM`), `msec` for the `Sleep`, and `trajectory` (any name, like
    `ToScore`).
 4. Protect a step that might never finish: right-click it, **Wrap in...**
    a `Timeout`, and give it a number of milliseconds. Then wrap the whole
    thing in a `Fallback` whose second child is another `SetWantedState`, so
    something sensible happens if the first part fails.
-5. Make a wait **tunable**: in the tree's properties declare an input port
-   (for example `wait_msec` with a default), then use `{wait_msec}` as the
-   `Sleep`'s `msec`. On the robot that value shows up on the dashboard.
+5. Make a wait **tunable**: click an empty part of the canvas to select the tree, and under
+   its own settings (the heading *SubTree interface*) click **+ Add port**: name it `wait_msec`
+   with a default of `500`. Then type `{wait_msec}`, with the braces, as the `Sleep`'s `msec`. On the robot that value shows up on the dashboard.
 6. **Save** (Ctrl+S). Arbor writes the tree into `trees/`, and that file is
    what the robot runs. You never edit it by hand: Arbor is how you change it.
 

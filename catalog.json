@@ -479,7 +479,7 @@
 			"order": 10,
 			"track": "Tools",
 			"title": "Arbor",
-			"description": "Build an autonomous routine as a behavior tree: nodes, ports, a Sequence, a Timeout and a tunable value.",
+			"description": "Build an autonomous routine as a behavior tree: steps and their settings, a Sequence, a Timeout and a tunable value.",
 			"kind": "robot",
 			"subdir": "lessons/arbor-intro/project",
 			"restrictTools": [
@@ -506,7 +506,7 @@
 				},
 				{
 					"id": "ports",
-					"title": "Ports filled in",
+					"title": "Settings filled in",
 					"description": "SetWantedState has a state, FollowPath has a trajectory name and Sleep has a time.",
 					"verifier": {
 						"type": "script",
@@ -525,7 +525,7 @@
 				{
 					"id": "tunable",
 					"title": "A tunable value",
-					"description": "The tree declares an input port and a node uses it as {name}, so it can be tuned from the dashboard.",
+					"description": "The tree has a setting of its own, and a step uses it as {name}, so it can be tuned from the dashboard.",
 					"verifier": {
 						"type": "script",
 						"path": "lessons/arbor-intro/checkpoints/verify/tunable.sh"
@@ -1974,6 +1974,42 @@
 			"path": "common/guides/arbor-trees-more.json"
 		},
 		{
+			"id": "arbor-intro-new-tree",
+			"title": "Make your own tree",
+			"summary": "Create a tree, give it a first step, and save it.",
+			"topic": "Tools",
+			"order": 37,
+			"modules": [
+				"arbor-intro"
+			],
+			"kind": "mixed",
+			"path": "lessons/arbor-intro/guides/arbor-intro-new-tree.json"
+		},
+		{
+			"id": "arbor-intro-sequence",
+			"title": "Add the steps",
+			"summary": "Put a SetWantedState, a Sleep and a FollowPath under the Sequence.",
+			"topic": "Tools",
+			"order": 38,
+			"modules": [
+				"arbor-intro"
+			],
+			"kind": "mixed",
+			"path": "lessons/arbor-intro/guides/arbor-intro-sequence.json"
+		},
+		{
+			"id": "arbor-intro-settings",
+			"title": "Fill in the settings",
+			"summary": "Tell each step what to do: which state, how long, which path.",
+			"topic": "Tools",
+			"order": 39,
+			"modules": [
+				"arbor-intro"
+			],
+			"kind": "mixed",
+			"path": "lessons/arbor-intro/guides/arbor-intro-settings.json"
+		},
+		{
 			"id": "java-variables",
 			"title": "What is a variable?",
 			"summary": "Type, name and value, the four types you'll use most, and constants.",
@@ -1985,6 +2021,30 @@
 			],
 			"kind": "mixed",
 			"path": "common/guides/java-variables.json"
+		},
+		{
+			"id": "arbor-intro-plan-b",
+			"title": "A time limit and a plan B",
+			"summary": "Wrap the path in a Timeout, then add a Fallback with a plan B.",
+			"topic": "Tools",
+			"order": 41,
+			"modules": [
+				"arbor-intro"
+			],
+			"kind": "mixed",
+			"path": "lessons/arbor-intro/guides/arbor-intro-plan-b.json"
+		},
+		{
+			"id": "arbor-intro-tunable",
+			"title": "A value you can tune",
+			"summary": "Give the tree a setting of its own and use it in the Sleep.",
+			"topic": "Tools",
+			"order": 42,
+			"modules": [
+				"arbor-intro"
+			],
+			"kind": "mixed",
+			"path": "lessons/arbor-intro/guides/arbor-intro-tunable.json"
 		},
 		{
 			"id": "git-branches",

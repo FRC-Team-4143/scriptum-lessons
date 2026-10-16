@@ -1,0 +1,141 @@
+{
+	"title": "A value you can tune",
+	"summary": "Give the tree a setting of its own and use it in the Sleep.",
+	"topic": "Tools",
+	"order": 42,
+	"kind": "mixed",
+	"steps": [
+		{
+			"title": "Change it without editing",
+			"say": {
+				"never": "At a competition you might want the robot to wait a bit longer, without editing the tree. A **tunable** is a value the drivers can change from the dashboard. You'll make the Sleep's time tunable in two parts: give the **tree** a setting of its own, then tell the Sleep to use it.",
+				"bit": "A tunable can be changed from the dashboard. Give the tree a setting, then use it in the Sleep."
+			},
+			"target": {
+				"pane": "arbor",
+				"selector": ".canvas"
+			},
+			"cardAt": "bottom-right"
+		},
+		{
+			"title": "Select the tree itself",
+			"say": {
+				"never": "Click an **empty** part of the canvas, away from every box. The panel on the right now shows the tree, `MyFirstAuto`, instead of a step.",
+				"bit": "Click empty canvas; the panel shows `MyFirstAuto`."
+			},
+			"target": {
+				"pane": "arbor",
+				"selector": ".canvas"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "arbor",
+					"selector": ".inspector .inspector-type",
+					"text": "MyFirstAuto"
+				},
+				"hint": "click an empty part of the canvas.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "The tree's own settings",
+			"say": {
+				"never": "Find this heading. Arbor words it in programmer language, *SubTree interface - ports callers can remap*, but it just means **the tree's own settings**. Click **+ Add port** under it to add one.",
+				"bit": "This heading = the tree's own settings. Click **+ Add port**."
+			},
+			"target": {
+				"pane": "arbor",
+				"selector": ".inspector .section-title",
+				"text": "SubTree interface"
+			},
+			"cardAt": "bottom-left",
+			"waitFor": {
+				"target": {
+					"pane": "arbor",
+					"selector": ".inspector input[placeholder='name']"
+				},
+				"hint": "click + Add port.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Name and default",
+			"say": {
+				"never": "A new row appears. Leave the first menu on **in**. Type `wait_msec` in **name** and `500` in **default** (the value it has until someone changes it). You can leave **type** and **description** empty.",
+				"bit": "Leave **in**; name `wait_msec`; default `500`."
+			},
+			"target": {
+				"pane": "arbor",
+				"selector": ".inspector input[placeholder='name']"
+			},
+			"cardAt": "bottom-left",
+			"waitFor": {
+				"hint": {
+					"never": "name it wait_msec with a default of 500.",
+					"bit": "name it wait_msec with a default of 500."
+				}
+			},
+			"assist": true
+		},
+		{
+			"title": "Use it in the Sleep",
+			"say": {
+				"never": "Click the **Sleep** box. In its **msec**, replace `500` with `{wait_msec}`, with the curly braces. The braces mean \"use the tree's setting called wait_msec\" instead of a fixed number.",
+				"bit": "Select **Sleep**; set **msec** to `{wait_msec}` (with braces)."
+			},
+			"target": {
+				"pane": "arbor",
+				"selector": ".bt-node",
+				"text": "Sleep"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "arbor",
+					"selector": ".bt-node-port",
+					"text": "{wait_msec}"
+				},
+				"hint": "type {wait_msec} in the Sleep's msec."
+			},
+			"assist": true
+		},
+		{
+			"title": "Spell it the same",
+			"say": {
+				"never": "The name inside the braces must match the tree's setting exactly. If it doesn't, the robot refuses to load the auto, and says which box is wrong, so you'd find out at once.",
+				"bit": "The braces name must match exactly, or the auto won't load."
+			},
+			"target": {
+				"pane": "arbor",
+				"selector": ".canvas"
+			},
+			"cardAt": "bottom-right",
+			"assist": true
+		},
+		{
+			"title": "Save it",
+			"say": {
+				"never": "Press **Save** at the top (or **Ctrl+S**). The little dot next to the file name disappears once it's saved. Until you save, nothing is written to the file the robot runs, and a new tree that was never saved is gone if the page reloads.",
+				"bit": "**Save** (Ctrl+S). The dot by the file name goes away."
+			},
+			"target": {
+				"pane": "arbor",
+				"selector": ".toolbar button",
+				"text": "Save"
+			},
+			"cardAt": "bottom-left",
+			"waitFor": {
+				"target": {
+					"pane": "arbor",
+					"selector": ".dirty-dot"
+				},
+				"hint": "press Save or Ctrl+S.",
+				"gone": true
+			},
+			"assist": true
+		}
+	]
+}

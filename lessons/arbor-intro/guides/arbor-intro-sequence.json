@@ -1,0 +1,135 @@
+{
+	"title": "Add the steps",
+	"summary": "Put a SetWantedState, a Sleep and a FollowPath under the Sequence.",
+	"topic": "Tools",
+	"order": 38,
+	"kind": "mixed",
+	"steps": [
+		{
+			"title": "Three steps in order",
+			"say": {
+				"never": "A **Sequence** runs the boxes under it from **left to right**, one after another. You'll add three: a **SetWantedState** (ask the robot for a state, like pressing a button), a **Sleep** (wait a moment) and a **FollowPath** (drive a path).",
+				"bit": "Add SetWantedState, Sleep and FollowPath under the Sequence, left to right."
+			},
+			"target": {
+				"pane": "arbor",
+				"selector": ".canvas"
+			},
+			"cardAt": "bottom-right"
+		},
+		{
+			"title": "Add a SetWantedState",
+			"say": {
+				"never": "Right-click the **Sequence** box on the canvas. In the menu, choose **Add child…**. A list pops up with a search box: type `SetWantedState` and press **Enter**. The new step appears under the Sequence, to the right of the others.",
+				"bit": "Right-click the Sequence → **Add child…** → type `SetWantedState` → Enter."
+			},
+			"target": {
+				"pane": "arbor",
+				"selector": ".bt-node",
+				"text": "Sequence"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "arbor",
+					"selector": ".bt-node",
+					"text": "SetWantedState"
+				},
+				"hint": "add a SetWantedState under the Sequence."
+			},
+			"assist": true
+		},
+		{
+			"title": "Add a Sleep",
+			"say": {
+				"never": "Right-click the **Sequence** box on the canvas. In the menu, choose **Add child…**. A list pops up with a search box: type `Sleep` and press **Enter**. The new step appears under the Sequence, to the right of the others. Same as before: right-click the Sequence, **Add child…**, then type `Sleep`.",
+				"bit": "Right-click the Sequence → **Add child…** → type `Sleep` → Enter. Same again, `Sleep`."
+			},
+			"target": {
+				"pane": "arbor",
+				"selector": ".bt-node",
+				"text": "Sequence"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "arbor",
+					"selector": ".bt-node",
+					"text": "Sleep"
+				},
+				"hint": "add a Sleep under the Sequence."
+			},
+			"assist": true
+		},
+		{
+			"title": "Add a FollowPath",
+			"say": {
+				"never": "Right-click the **Sequence** box on the canvas. In the menu, choose **Add child…**. A list pops up with a search box: type `FollowPath` and press **Enter**. The new step appears under the Sequence, to the right of the others. One more time, with `FollowPath`.",
+				"bit": "Right-click the Sequence → **Add child…** → type `FollowPath` → Enter. Once more, `FollowPath`."
+			},
+			"target": {
+				"pane": "arbor",
+				"selector": ".bt-node",
+				"text": "Sequence"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "arbor",
+					"selector": ".bt-node",
+					"text": "FollowPath"
+				},
+				"hint": "add a FollowPath under the Sequence."
+			},
+			"assist": true
+		},
+		{
+			"title": "Another way to add",
+			"say": {
+				"never": "You can also drag a step from the **Nodes** list and drop it on a box on the canvas, or click a box and then **double-click** a step in the list. All three ways do the same thing.",
+				"bit": "Or drag from Nodes onto a box, or select a box and double-click a step."
+			},
+			"target": {
+				"pane": "arbor",
+				"selector": ".palette-panel"
+			},
+			"cardAt": "bottom-right",
+			"assist": true
+		},
+		{
+			"title": "The orange numbers",
+			"say": {
+				"never": "An orange number on a box means Arbor found a problem with it. Right now it's because the steps have empty settings. The next guide fills them in.",
+				"bit": "Orange numbers = problems; empty settings for now. Next guide fixes them."
+			},
+			"target": {
+				"pane": "arbor",
+				"selector": ".canvas"
+			},
+			"cardAt": "bottom-right",
+			"assist": true
+		},
+		{
+			"title": "Save it",
+			"say": {
+				"never": "Press **Save** at the top (or **Ctrl+S**). The little dot next to the file name disappears once it's saved. Until you save, nothing is written to the file the robot runs, and a new tree that was never saved is gone if the page reloads.",
+				"bit": "**Save** (Ctrl+S). The dot by the file name goes away."
+			},
+			"target": {
+				"pane": "arbor",
+				"selector": ".toolbar button",
+				"text": "Save"
+			},
+			"cardAt": "bottom-left",
+			"waitFor": {
+				"target": {
+					"pane": "arbor",
+					"selector": ".dirty-dot"
+				},
+				"hint": "press Save or Ctrl+S.",
+				"gone": true
+			},
+			"assist": true
+		}
+	]
+}

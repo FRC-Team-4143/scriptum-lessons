@@ -1,6 +1,6 @@
 {
 	"title": "Arbor",
-	"description": "Build an autonomous routine as a behavior tree: nodes, ports, a Sequence, a Timeout and a tunable value.",
+	"description": "Build an autonomous routine as a behavior tree: steps and their settings, a Sequence, a Timeout and a tunable value.",
 	"kind": "robot",
 	"track": "Tools",
 	"order": 10,
@@ -32,7 +32,7 @@
 		},
 		{
 			"id": "ports",
-			"title": "Ports filled in",
+			"title": "Settings filled in",
 			"description": "SetWantedState has a state, FollowPath has a trajectory name and Sleep has a time.",
 			"verifier": {
 				"type": "script",
@@ -51,7 +51,7 @@
 		{
 			"id": "tunable",
 			"title": "A tunable value",
-			"description": "The tree declares an input port and a node uses it as {name}, so it can be tuned from the dashboard.",
+			"description": "The tree has a setting of its own, and a step uses it as {name}, so it can be tuned from the dashboard.",
 			"verifier": {
 				"type": "script",
 				"path": "checkpoints/verify/tunable.sh"

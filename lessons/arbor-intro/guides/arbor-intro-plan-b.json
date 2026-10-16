@@ -1,0 +1,140 @@
+{
+	"title": "A time limit and a plan B",
+	"summary": "Wrap the path in a Timeout, then add a Fallback with a plan B.",
+	"topic": "Tools",
+	"order": 41,
+	"kind": "mixed",
+	"steps": [
+		{
+			"title": "What if it never finishes?",
+			"say": {
+				"never": "A **FollowPath** keeps going until the robot reaches the end of the path. If something blocks the robot, that might be never, and the whole auto gets stuck. You'll fix that in two moves: a **Timeout** gives the path a time limit, and a **Fallback** gives the tree a plan B for when the time runs out.",
+				"bit": "Timeout = time limit on the path. Fallback = plan B when it fails."
+			},
+			"target": {
+				"pane": "arbor",
+				"selector": ".canvas"
+			},
+			"cardAt": "bottom-right"
+		},
+		{
+			"title": "Wrap the path in a Timeout",
+			"say": {
+				"never": "Right-click the **FollowPath** box. Choose **Wrap in…**, type `Timeout` and press **Enter**. A purple frame appears around the FollowPath: that's the Timeout, holding the step it watches.",
+				"bit": "Right-click FollowPath → **Wrap in…** → `Timeout` → Enter."
+			},
+			"target": {
+				"pane": "arbor",
+				"selector": ".bt-node",
+				"text": "FollowPath"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "arbor",
+					"selector": ".bt-frame-header",
+					"text": "Timeout"
+				},
+				"hint": "wrap the FollowPath in a Timeout."
+			},
+			"assist": true
+		},
+		{
+			"title": "Set the time limit",
+			"say": {
+				"never": "Click the top of the purple frame (where it says **Timeout**) to select it. On the right, type `3000` in **msec**: three seconds. If the path takes longer, the Timeout stops it and reports a failure.",
+				"bit": "Select the Timeout, type `3000` in **msec**."
+			},
+			"target": {
+				"pane": "arbor",
+				"selector": ".bt-frame-header",
+				"text": "Timeout"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"hint": {
+					"never": "set the Timeout's msec to 3000.",
+					"bit": "set the Timeout's msec to 3000."
+				}
+			},
+			"assist": true
+		},
+		{
+			"title": "Wrap it in a Fallback",
+			"say": {
+				"never": "Now right-click the top of the Timeout frame, choose **Wrap in…**, type `Fallback` and press **Enter**. A **Fallback** tries the boxes under it in order and stops at the first one that works.",
+				"bit": "Right-click the Timeout's header → **Wrap in…** → `Fallback`."
+			},
+			"target": {
+				"pane": "arbor",
+				"selector": ".bt-frame-header",
+				"text": "Timeout"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "arbor",
+					"selector": ".bt-node",
+					"text": "Fallback"
+				},
+				"hint": "wrap the Timeout in a Fallback."
+			},
+			"assist": true
+		},
+		{
+			"title": "Add the plan B",
+			"say": {
+				"never": "Right-click the **Fallback** box, choose **Add child…** and add a **SetWantedState**. Select it and type `IDLE` in **state**. If the path fails or runs out of time, the robot stops safely instead of being stuck.",
+				"bit": "Fallback → **Add child…** → SetWantedState with state `IDLE`."
+			},
+			"target": {
+				"pane": "arbor",
+				"selector": ".bt-node",
+				"text": "Fallback"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"hint": {
+					"never": "add a SetWantedState under the Fallback and set its state.",
+					"bit": "add a SetWantedState under the Fallback and set its state."
+				}
+			},
+			"assist": true
+		},
+		{
+			"title": "What it does now",
+			"say": {
+				"never": "Read it left to right: the Fallback tries the Timeout first (drive the path, at most 3 seconds). Only if that fails does it try plan B, stopping safely. The guide **Behavior trees: time limits and more** shows this tick by tick. If part of the tree is off the edge of the canvas, press the **⛶** button at the bottom-left of the canvas to fit the whole tree on screen.",
+				"bit": "Try the path (max 3 s); if it fails, plan B. Tree off the edge? Press **⛶** (bottom-left) to fit it."
+			},
+			"target": {
+				"pane": "arbor",
+				"selector": ".canvas"
+			},
+			"cardAt": "bottom-right",
+			"assist": true
+		},
+		{
+			"title": "Save it",
+			"say": {
+				"never": "Press **Save** at the top (or **Ctrl+S**). The little dot next to the file name disappears once it's saved. Until you save, nothing is written to the file the robot runs, and a new tree that was never saved is gone if the page reloads.",
+				"bit": "**Save** (Ctrl+S). The dot by the file name goes away."
+			},
+			"target": {
+				"pane": "arbor",
+				"selector": ".toolbar button",
+				"text": "Save"
+			},
+			"cardAt": "bottom-left",
+			"waitFor": {
+				"target": {
+					"pane": "arbor",
+					"selector": ".dirty-dot"
+				},
+				"hint": "press Save or Ctrl+S.",
+				"gone": true
+			},
+			"assist": true
+		}
+	]
+}
