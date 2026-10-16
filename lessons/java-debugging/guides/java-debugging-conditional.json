@@ -147,6 +147,19 @@
 			"assist": true
 		},
 		{
+			"title": "Where Watch is",
+			"say": {
+				"never": "**Watch** is the section under Variables in the **Run and Debug** panel. Click the **+** on its title bar (it shows when your mouse is over it), type an expression like `states[i] == wanted`, and press **Enter**.",
+				"bit": "**Watch** is under Variables: hover its title, click **+**, type an expression."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": ".debug-watch"
+			},
+			"cardAt": "bottom-right",
+			"assist": true
+		},
+		{
 			"title": "Your turn",
 			"say": {
 				"never": "Debug `Main`, write down `i`, and fix `lowestVolts`. Then do `StateLog.countState`: stop inside its loop and watch `states[i] == wanted` and `states[i].equals(wanted)`.",

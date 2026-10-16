@@ -142,6 +142,32 @@
 			"assist": true
 		},
 		{
+			"title": "Where Call Stack is",
+			"say": {
+				"never": "While the program is frozen, **Call Stack** in the **Run and Debug** panel lists the methods that led here, newest on top. Click one to jump to it and see *its* variables.",
+				"bit": "**Call Stack** (left) lists who called whom; click one to see its variables."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": ".debug-call-stack"
+			},
+			"cardAt": "bottom-right",
+			"assist": true
+		},
+		{
+			"title": "Where Pause is",
+			"say": {
+				"never": "When the program is stuck, the debug toolbar shows **Pause** (two bars) where Continue usually is. Press it to freeze the program wherever it is right now.",
+				"bit": "Stuck? Press **Pause** (two bars) on the toolbar."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": ".debug-toolbar .action-label[aria-label^='Pause']"
+			},
+			"cardAt": "bottom-right",
+			"assist": true
+		},
+		{
 			"title": "Your turn",
 			"say": {
 				"never": "Your turn! Fix `pointsFor`, run `Main` again, then pause the stuck program and fix `countValid`. When it's all done, `Main` prints all seven lines.",
