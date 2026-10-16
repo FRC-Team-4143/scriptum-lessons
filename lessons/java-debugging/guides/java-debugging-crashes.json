@@ -1,0 +1,186 @@
+{
+	"title": "Crashes and stuck programs",
+	"summary": "Read a stack trace, and pause a program that never finishes.",
+	"topic": "Java",
+	"order": 333,
+	"kind": "mixed",
+	"steps": [
+		{
+			"title": "Read it from the top",
+			"say": {
+				"never": "When a program crashes, Java prints a **stack trace**. The first line says *what* went wrong. Each `at` line below it is a method that was running, starting with the one that crashed and going back to `main`. The number after the file name is the line. Click it to jump there.",
+				"bit": "Line 1 is what went wrong; each `at` line is a method, crash first, with its line number."
+			},
+			"board": {
+				"code": "Exception in thread \"main\" java.lang.ArithmeticException: / by zero\n    at Pizza.slicesEach(Pizza.java:4)\n    at Party.plan(Party.java:9)\n    at Main.main(Main.java:3)",
+				"language": "text",
+				"marks": [
+					{
+						"text": "/ by zero",
+						"label": "what went wrong"
+					},
+					{
+						"text": "Pizza.java:4",
+						"label": "where: file and line"
+					}
+				]
+			}
+		},
+		{
+			"title": "The call stack",
+			"say": {
+				"never": "While the debugger is paused, the **Call Stack** section on the left shows the same list: which method called which to get here. Click any of them to see that method's variables at that moment.",
+				"bit": "**Call Stack** shows who called whom; click one to see its variables."
+			},
+			"board": {
+				"code": "CALL STACK\n  Pizza.slicesEach   Pizza.java:4\n  Party.plan         Party.java:9\n  Main.main          Main.java:3",
+				"language": "text",
+				"marks": [
+					{
+						"text": "Party.plan",
+						"label": "click to see its variables"
+					}
+				]
+			}
+		},
+		{
+			"title": "Fix the cause",
+			"say": {
+				"never": "It's tempting to wrap the crashing line in `try`/`catch` so the error goes away. That just hides it: the answer is still wrong, only quieter. Find *why* the bad value happened, and fix that.",
+				"bit": "Don't hide a crash with try/catch; fix why the bad value happens."
+			},
+			"board": {
+				"code": "try {\n    each = slices / people;\n} catch (ArithmeticException e) {\n    each = 0;   // the crash is gone, the bug isn't\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "each = 0;",
+						"label": "hides the real problem"
+					}
+				]
+			}
+		},
+		{
+			"title": "Pause",
+			"say": {
+				"never": "A program stuck in a loop never crashes. It just never finishes. Start it with **Debug**, wait a second, then press **Pause** (‖) on the toolbar. The debugger stops wherever the program is *right now* and highlights the line. Step a few times and watch which variables change and which don't.",
+				"bit": "A stuck program: Debug it, press **Pause** (‖), then step and watch what never changes."
+			},
+			"board": {
+				"code": "int i = 0;\nwhile (i < 10) {\n    if (skip[i]) {\n        continue;   // jumps back up, i never changes\n    }\n    i++;\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "continue;",
+						"label": "jumps straight back to while"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Read it from the top",
+			"say": {
+				"never": "`Main` crashes with `Index 3 out of bounds for length 3`, thrown in `Scoring.pointsFor`. `POINTS` has 3 boxes, numbered 0, 1 and 2, but levels are numbered 1, 2 and 3. So which box should level 1 use?",
+				"bit": "`POINTS` has boxes 0-2, levels are 1-3. Which box is level 1?"
+			},
+			"board": {
+				"code": "return POINTS[level];",
+				"marks": [
+					{
+						"text": "POINTS[level]",
+						"label": "level 3 asks for box 3"
+					}
+				]
+			},
+			"assist": true
+		},
+		{
+			"title": "In your lesson: Pause",
+			"say": {
+				"never": "Once the crash is fixed, `Main` gets stuck in `Cleaner.countValid`. Pause it, then step a few times. When `readings[i]` is below 0, `continue` jumps back to the top, and the `i++` at the bottom never runs.",
+				"bit": "On a negative reading, `continue` skips `i++`, so `i` never moves."
+			},
+			"board": {
+				"code": "if (readings[i] < 0) {\n    continue;\n}",
+				"marks": [
+					{
+						"text": "continue;",
+						"label": "skips the i++ below"
+					}
+				]
+			},
+			"assist": true
+		},
+		{
+			"title": "Open Scoring.java",
+			"say": {
+				"never": "Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `Scoring`, then press **Enter**. It finds any file by its name.",
+				"bit": "Press **Ctrl+P**, type `Scoring` and press Enter."
+			},
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "Scoring.java"
+				},
+				"hint": "open Scoring.java with Ctrl+P.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Where Call Stack is",
+			"say": {
+				"never": "While the program is frozen, **Call Stack** in the **Run and Debug** panel lists the methods that led here, newest on top. Click one to jump to it and see *its* variables.",
+				"bit": "**Call Stack** (left) lists who called whom; click one to see its variables."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": ".debug-call-stack"
+			},
+			"cardAt": "bottom-right",
+			"assist": true
+		},
+		{
+			"title": "Where Pause is",
+			"say": {
+				"never": "When the program is stuck, the debug toolbar shows **Pause** (two bars) where Continue usually is. Press it to freeze the program wherever it is right now.",
+				"bit": "Stuck? Press **Pause** (two bars) on the toolbar."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": ".debug-toolbar .action-label[aria-label^='Pause']"
+			},
+			"cardAt": "bottom-right",
+			"assist": true
+		},
+		{
+			"title": "Your turn",
+			"say": {
+				"never": "Your turn! Fix `pointsFor`, run `Main` again, then pause the stuck program and fix `countValid`. When it's all done, `Main` prints all seven lines.",
+				"bit": "Fix pointsFor, then countValid."
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"hint": {
+					"never": "fix Scoring and Cleaner.",
+					"bit": "fix Scoring and Cleaner."
+				}
+			},
+			"assist": true
+		}
+	]
+}

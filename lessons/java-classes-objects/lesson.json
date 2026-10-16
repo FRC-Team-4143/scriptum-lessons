@@ -3,7 +3,7 @@
 	"description": "Build a small BankAccount class: fields, a constructor, and encapsulation - objects that protect their own state instead of exposing raw data to be mutated directly.",
 	"kind": "plain-java",
 	"track": "Java Programming",
-	"order": 17,
+	"order": 18,
 	"requires": [
 		"java-methods"
 	],
