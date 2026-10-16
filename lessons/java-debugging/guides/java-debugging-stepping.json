@@ -1,0 +1,156 @@
+{
+	"title": "Stepping in and out",
+	"summary": "Follow a call into a method, and come back out.",
+	"topic": "Java",
+	"order": 331,
+	"kind": "mixed",
+	"steps": [
+		{
+			"title": "Over or into",
+			"say": {
+				"never": "When the paused line calls a method, you have a choice. **Step Over** runs the whole method in one go and stops on the next line. **Step Into** (the down arrow) goes *inside* the method, so you can watch it work line by line.",
+				"bit": "Step Over runs a called method in one go; Step Into goes inside it."
+			},
+			"board": {
+				"code": "double price = 20.0;\ndouble total = addTax(price);   // Step Into goes inside addTax",
+				"language": "java",
+				"marks": [
+					{
+						"text": "addTax(price)",
+						"label": "Step Into lands in here"
+					}
+				]
+			}
+		},
+		{
+			"title": "Step out",
+			"say": {
+				"never": "Once you've seen enough inside a method, **Step Out** (the up arrow) finishes the rest of it and stops back where it was called. Now you can see what it handed back.",
+				"bit": "Step Out finishes the method and returns to the caller."
+			},
+			"board": {
+				"code": "↓ Step Into   ↑ Step Out",
+				"language": "text",
+				"marks": [
+					{
+						"text": "↑ Step Out",
+						"label": "back to the caller"
+					}
+				]
+			}
+		},
+		{
+			"title": "Whole numbers divide whole",
+			"say": {
+				"never": "Remember integer division? When both sides are `int`, Java throws away the fraction: `3 / 4` is `0`, not `0.75`. In the debugger you see it straight away, because the result is `0` before anything else happens.",
+				"bit": "`int / int` drops the fraction: `3 / 4` is 0."
+			},
+			"board": {
+				"code": "int slices = 3;\nint people = 4;\nint each = slices / people;   // 0, not 0.75",
+				"language": "java",
+				"marks": [
+					{
+						"text": "slices / people",
+						"label": "both ints, so the fraction is lost"
+					}
+				]
+			}
+		},
+		{
+			"title": "A method gets a copy",
+			"say": {
+				"never": "When you pass a number into a method, the method gets its own **copy**. Changing the copy doesn't change the caller's variable. The debugger shows this clearly: inside, the copy changes. Step out, and the original never moved.",
+				"bit": "A method gets a copy of each number; changing it doesn't change the caller's variable."
+			},
+			"board": {
+				"code": "static void addPoint(int score) {\n    score = score + 1;   // only the copy changes\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "score = score + 1;",
+						"label": "the caller's score is untouched"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Over or into",
+			"say": {
+				"never": "In `Accuracy.percent`, step into the call from `Main`, then look at `made` and `attempted` in Variables. Step over the `return` line. What does `made / attempted` work out to, before the `* 100`?",
+				"bit": "Step into `percent`; what is `made / attempted` before the `* 100`?"
+			},
+			"board": {
+				"code": "return made / attempted * 100;",
+				"marks": [
+					{
+						"text": "made / attempted",
+						"label": "both ints"
+					}
+				]
+			},
+			"assist": true
+		},
+		{
+			"title": "In your lesson: A method gets a copy",
+			"say": {
+				"never": "In `Odometry`, step into `addLeg` and watch `total` get bigger. Then **Step Out** and look at `total` in `totalDistance`. It's still 0. So `addLeg` needs to *hand back* the new total (`return` it), and `totalDistance` needs to keep what it's handed.",
+				"bit": "`addLeg` changes only its copy. Return the new total, and keep it in `totalDistance`."
+			},
+			"board": {
+				"code": "addLeg(total, legs[i]);",
+				"marks": [
+					{
+						"text": "addLeg(total, legs[i]);",
+						"label": "what comes back is thrown away"
+					}
+				]
+			},
+			"assist": true
+		},
+		{
+			"title": "Open Accuracy.java",
+			"say": {
+				"never": "Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `Accuracy`, then press **Enter**. It finds any file by its name.",
+				"bit": "Press **Ctrl+P**, type `Accuracy` and press Enter."
+			},
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "Accuracy.java"
+				},
+				"hint": "open Accuracy.java with Ctrl+P.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Your turn",
+			"say": {
+				"never": "Your turn! Fix `percent` so it keeps the fraction, then fix `Odometry.totalDistance`. Debug again to check each one.",
+				"bit": "Fix percent, then totalDistance."
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"hint": {
+					"never": "fix Accuracy and Odometry.",
+					"bit": "fix Accuracy and Odometry."
+				}
+			},
+			"assist": true
+		}
+	]
+}

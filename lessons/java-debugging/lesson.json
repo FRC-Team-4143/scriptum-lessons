@@ -1,0 +1,75 @@
+{
+	"title": "Debugging",
+	"description": "Fix a match-log program that compiles and runs but gives wrong answers, using the debugger: breakpoints, stepping in and out, the Variables pane, conditional breakpoints, the call stack and the Pause button.",
+	"kind": "plain-java",
+	"track": "Java Programming",
+	"order": 17,
+	"requires": [
+		"java-methods"
+	],
+	"checkpoints": [
+		{
+			"id": "first-breakpoint",
+			"title": "Your first breakpoint",
+			"description": "averageSpeed adds every speed, and Answers.LOOP_RUNS_BEFORE_FIX says how many times the old loop ran.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/first-breakpoint.sh"
+			}
+		},
+		{
+			"id": "step-into",
+			"title": "Step into a method",
+			"description": "Accuracy.percent returns real percentages instead of 0.0.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/step-into.sh"
+			}
+		},
+		{
+			"id": "step-out",
+			"title": "Step out again",
+			"description": "totalDistance adds up every leg instead of staying at 0.0.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/step-out.sh"
+			}
+		},
+		{
+			"id": "conditional-breakpoint",
+			"title": "Conditional breakpoint",
+			"description": "Answers.MISSING_SAMPLE_INDEX is where the -1 is, and lowestVolts skips missed readings.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/conditional-breakpoint.sh"
+			}
+		},
+		{
+			"id": "string-compare",
+			"title": "Watching a comparison",
+			"description": "countState counts matching strings, even ones built while the program runs.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/string-compare.sh"
+			}
+		},
+		{
+			"id": "stack-trace",
+			"title": "Read the stack trace",
+			"description": "Scoring stops crashing, and each level is worth the right points.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/stack-trace.sh"
+			}
+		},
+		{
+			"id": "pause-a-hang",
+			"title": "Pause a stuck program",
+			"description": "countValid finishes, and counts the real readings.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/pause-a-hang.sh"
+			}
+		}
+	]
+}

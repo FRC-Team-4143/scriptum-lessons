@@ -1,0 +1,161 @@
+{
+	"title": "Conditional breakpoints and watches",
+	"summary": "Stop only when something is wrong, and watch a comparison.",
+	"topic": "Java",
+	"order": 332,
+	"kind": "mixed",
+	"steps": [
+		{
+			"title": "Stop only when it matters",
+			"say": {
+				"never": "A breakpoint in a loop that runs 500 times stops 500 times. A **conditional breakpoint** stops only when a condition you type is true. **Right-click** the red dot, choose **Edit Breakpoint**, type a condition, and press **Enter**. The dot gets a little **=** in it.",
+				"bit": "Right-click the dot, **Edit Breakpoint**, type a condition: it stops only when that's true."
+			},
+			"board": {
+				"code": "for (int day = 0; day < 365; day++) {\n    double temp = readings[day];   // condition: temp > 100\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "temp > 100",
+						"label": "stops only on a hot day"
+					}
+				]
+			}
+		},
+		{
+			"title": "Watch",
+			"say": {
+				"never": "The **Watch** section (under Variables) shows anything you type, even a whole expression. Click **+**, type something like `a == b`, and press **Enter**. It updates every time the program pauses.",
+				"bit": "Add expressions to **Watch** with +; they update at every pause."
+			},
+			"board": {
+				"code": "WATCH\n  first == second: false\n  first.equals(second): true",
+				"language": "text",
+				"marks": [
+					{
+						"text": "first == second: false",
+						"label": "same words, different objects"
+					}
+				]
+			}
+		},
+		{
+			"title": "Two ways to be equal",
+			"say": {
+				"never": "For `String`s, `==` asks \"is this the **same object** in memory?\" `.equals` asks \"do they **say the same thing**?\" Two strings can say exactly the same thing and still be different objects, especially strings built while the program runs. To compare what strings say, always use `.equals`.",
+				"bit": "`==` on strings asks \"same object?\"; `.equals` asks \"same text?\". Use `.equals`."
+			},
+			"board": {
+				"code": "String a = \"go\".toUpperCase();\nString b = \"GO\";\na == b        // false: two objects\na.equals(b)   // true: same text",
+				"language": "java",
+				"marks": [
+					{
+						"text": "a == b",
+						"label": "compares objects"
+					},
+					{
+						"text": "a.equals(b)",
+						"label": "compares text"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Stop only when it matters",
+			"say": {
+				"never": "In `Battery.lowestVolts`, put a breakpoint inside the loop and give it the condition `millivolts[i] < 0`. Debug `Main`. It stops once, on the bad reading. Read `i` in Variables: that's the number for `Answers.MISSING_SAMPLE_INDEX`. Then make the loop skip readings below 0. Think about what happens if the *first* reading is the bad one.",
+				"bit": "Condition `millivolts[i] < 0`, read `i`, write it in Answers, then skip negatives (even the first one)."
+			},
+			"board": {
+				"code": "if (millivolts[i] < lowest) {",
+				"marks": [
+					{
+						"text": "millivolts[i] < lowest",
+						"label": "-1 is lower than any real reading"
+					}
+				]
+			},
+			"assist": true
+		},
+		{
+			"title": "Open Battery.java",
+			"say": {
+				"never": "Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `Battery`, then press **Enter**. It finds any file by its name.",
+				"bit": "Press **Ctrl+P**, type `Battery` and press Enter."
+			},
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "Battery.java"
+				},
+				"hint": "open Battery.java with Ctrl+P.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Find it",
+			"say": {
+				"never": "Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `if (millivolts[i] < lowest) {` and press **Enter**. The editor jumps to it.",
+				"bit": "Press **Ctrl+F**, type `if (millivolts[i] < lowest) {` and press Enter."
+			},
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "if (millivolts[i] < lowest) {"
+				},
+				"hint": "find if (millivolts[i] < lowest) { with Ctrl+F.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Breakpoint, then a condition",
+			"say": {
+				"never": "Put a breakpoint on this line, then right-click the red dot, choose **Edit Breakpoint**, type `millivolts[i] < 0` and press **Enter**.",
+				"bit": "Breakpoint here, then Edit Breakpoint → `millivolts[i] < 0`."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "if (millivolts[i] < lowest) {"
+			},
+			"cardAt": "bottom-right",
+			"assist": true
+		},
+		{
+			"title": "Your turn",
+			"say": {
+				"never": "Debug `Main`, write down `i`, and fix `lowestVolts`. Then do `StateLog.countState`: stop inside its loop and watch `states[i] == wanted` and `states[i].equals(wanted)`.",
+				"bit": "Fix lowestVolts, then use Watch on countState."
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"hint": {
+					"never": "fix Battery and StateLog.",
+					"bit": "fix Battery and StateLog."
+				}
+			},
+			"assist": true
+		}
+	]
+}

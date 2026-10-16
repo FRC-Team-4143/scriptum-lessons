@@ -56,7 +56,10 @@ Three tracks, in curriculum order (each lesson's `track` and `order` are in its 
   `nodes.xml` palette). Arbor opens `deploy/autos` on its own only when that folder already exists as the
   workspace container starts, so the README tells the student to use *Open project* after loading.
 - **Java Programming**: `hello-world` through `java-inheritance`, each
-  module locked until its prerequisite is complete.
+  module locked until its prerequisite is complete. `java-debugging` (Debugging) sits after
+  `java-methods` as a side branch (nothing requires it): a program that compiles but has seven
+  bugs, one per debugger skill (breakpoints, step into/out, conditional breakpoints, watches, the
+  call stack, Pause). Its verify scripts run Java under `timeout 5`, since one bug is an endless loop.
 - **FRC Robot**: a differential-drive robot that uses [MWLib](https://github.com/FRC-Team-4143/MW-Lib)
   from the first lesson. The seven modules follow the training lessons, one after another, and each
   starts from the previous module's finished robot:
