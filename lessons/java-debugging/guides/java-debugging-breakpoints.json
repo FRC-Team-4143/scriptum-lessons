@@ -148,13 +148,17 @@
 		{
 			"title": "Put a breakpoint here",
 			"say": {
-				"never": "Click just left of this line's number so a red dot appears.",
-				"bit": "Put a breakpoint on this line."
+				"never": "Click in this narrow strip, just left of the line number **7**. A **red dot** appears: that's your breakpoint. (Click the dot again if you ever want to remove it.)",
+				"bit": "Click just left of the **7** for a red dot."
 			},
 			"target": {
 				"pane": "editor",
-				"selector": ".view-lines .view-line",
-				"text": "sum += speeds[i];"
+				"selector": ".margin-view-overlays .line-numbers",
+				"text": "7",
+				"region": {
+					"left": "-20px",
+					"width": "20px"
+				}
 			},
 			"cardAt": "bottom-right",
 			"assist": true

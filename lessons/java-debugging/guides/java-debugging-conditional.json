@@ -131,13 +131,17 @@
 		{
 			"title": "Breakpoint, then a condition",
 			"say": {
-				"never": "Put a breakpoint on this line, then right-click the red dot, choose **Edit Breakpoint**, type `millivolts[i] < 0` and press **Enter**.",
-				"bit": "Breakpoint here, then Edit Breakpoint → `millivolts[i] < 0`."
+				"never": "Click in this narrow strip, just left of the line number **9**, so a red dot appears. Then right-click the red dot, choose **Edit Breakpoint**, type `millivolts[i] < 0` and press **Enter**.",
+				"bit": "Red dot left of the **9**, then right-click it → **Edit Breakpoint** → `millivolts[i] < 0`."
 			},
 			"target": {
 				"pane": "editor",
-				"selector": ".view-lines .view-line",
-				"text": "if (millivolts[i] < lowest) {"
+				"selector": ".margin-view-overlays .line-numbers",
+				"text": "9",
+				"region": {
+					"left": "-20px",
+					"width": "20px"
+				}
 			},
 			"cardAt": "bottom-right",
 			"assist": true
