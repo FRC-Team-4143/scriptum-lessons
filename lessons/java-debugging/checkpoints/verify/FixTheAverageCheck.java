@@ -1,4 +1,4 @@
-public class FirstBreakpointCheck {
+public class FixTheAverageCheck {
     static void fail(String message) {
         System.out.println(message);
         System.exit(1);
@@ -18,11 +18,6 @@ public class FirstBreakpointCheck {
     }
 
     static void check() {
-        if (Answers.LOOP_RUNS_BEFORE_FIX != MatchLog.SPEEDS.length - 1) {
-            fail("Answers.LOOP_RUNS_BEFORE_FIX is " + Answers.LOOP_RUNS_BEFORE_FIX
-                + ". Count how many times the breakpoint inside averageSpeed's loop stops, with the loop as it was before your fix"
-                + " (put the old loop back for a minute if you need to).");
-        }
         double got = SpeedMath.averageSpeed(new double[] {1.0, 2.0, 3.0, 4.0});
         if (!near(got, 2.5)) {
             fail("averageSpeed of {1.0, 2.0, 3.0, 4.0} was " + got + ", expected 2.5. Is every speed added to sum?");

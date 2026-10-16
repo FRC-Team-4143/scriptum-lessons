@@ -9,7 +9,7 @@ trap 'rm -rf "$WORK"' EXIT
 # endless loop) can't get in its way.
 cp "$PROJECT"/src/*.java "$WORK"/ 2>/dev/null || true
 rm -f "$WORK/Main.java"
-cp "$HERE/ConditionalBreakpointCheck.java" "$WORK"/
+cp "$HERE/SkipMissingReadingsCheck.java" "$WORK"/
 
 cd "$WORK"
 if ! javac ./*.java > compile.log 2>&1; then
@@ -17,7 +17,7 @@ if ! javac ./*.java > compile.log 2>&1; then
 	exit 1
 fi
 set +e
-timeout 5 java ConditionalBreakpointCheck > run.log 2>&1
+timeout 5 java SkipMissingReadingsCheck > run.log 2>&1
 status=$?
 set -e
 if [ "$status" -eq 124 ]; then

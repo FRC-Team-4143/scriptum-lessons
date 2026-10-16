@@ -8,7 +8,7 @@ public class Scoring {
     }
 
     // The points from every cycle added together.
-    // BUG (checkpoint 6): this crashes the program. Read the stack trace.
+    // BUG (Read the stack trace): this crashes the program. Read the stack trace.
     public static int totalPoints(int[] levels) {
         int total = 0;
         for (int i = 0; i < levels.length; i++) {

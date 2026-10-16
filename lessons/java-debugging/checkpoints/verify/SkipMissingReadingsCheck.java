@@ -1,4 +1,4 @@
-public class ConditionalBreakpointCheck {
+public class SkipMissingReadingsCheck {
     static void fail(String message) {
         System.out.println(message);
         System.exit(1);
@@ -18,12 +18,6 @@ public class ConditionalBreakpointCheck {
     }
 
     static void check() {
-        int[] log = MatchLog.batteryMillivolts();
-        int index = Answers.MISSING_SAMPLE_INDEX;
-        if (index < 0 || index >= log.length || log[index] != -1) {
-            fail("Answers.MISSING_SAMPLE_INDEX is " + index + ", but that isn't where the -1 is."
-                + " Put a breakpoint inside lowestVolts' loop, make it conditional (millivolts[i] < 0), and read i when it stops.");
-        }
         double got = Battery.lowestVolts(new int[] {12400, 11800, 12100});
         if (!near(got, 11.8)) {
             fail("lowestVolts of {12400, 11800, 12100} was " + got + ", expected 11.8.");

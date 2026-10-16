@@ -9,10 +9,12 @@ const L = lessonKit(import.meta.url);
 describe.skipIf(!hasJdk)("java-debugging checkpoints", () => {
 	test("every checkpoint fails fresh, passes once solved", async () => {
 		await L.roundTrip([
-			"first-breakpoint",
+			"count-the-stops",
+			"fix-the-average",
 			"step-into",
 			"step-out",
-			"conditional-breakpoint",
+			"find-the-missing-reading",
+			"skip-missing-readings",
 			"string-compare",
 			"stack-trace",
 			"pause-a-hang",

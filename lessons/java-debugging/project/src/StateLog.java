@@ -1,6 +1,6 @@
 public class StateLog {
     // How many entries in states are the same as wanted.
-    // BUG (checkpoint 5): the log has three "INTAKE"s, but this counts 0. The debugger
+    // BUG (Watching a comparison): the log has three "INTAKE"s, but this counts 0. The debugger
     // shows the two strings looking exactly the same...
     public static int countState(String[] states, String wanted) {
         int count = 0;

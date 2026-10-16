@@ -9,12 +9,21 @@
 	],
 	"checkpoints": [
 		{
-			"id": "first-breakpoint",
-			"title": "Your first breakpoint",
-			"description": "averageSpeed adds every speed, and Answers.LOOP_RUNS_BEFORE_FIX says how many times the old loop ran.",
+			"id": "count-the-stops",
+			"title": "Count the stops",
+			"description": "Answers.LOOP_RUNS_BEFORE_FIX is how many times the breakpoint in averageSpeed's loop stopped, before the fix.",
 			"verifier": {
 				"type": "script",
-				"path": "checkpoints/verify/first-breakpoint.sh"
+				"path": "checkpoints/verify/count-the-stops.sh"
+			}
+		},
+		{
+			"id": "fix-the-average",
+			"title": "Fix the average",
+			"description": "averageSpeed adds every speed, not all but the last.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/fix-the-average.sh"
 			}
 		},
 		{
@@ -36,12 +45,21 @@
 			}
 		},
 		{
-			"id": "conditional-breakpoint",
-			"title": "Conditional breakpoint",
-			"description": "Answers.MISSING_SAMPLE_INDEX is where the -1 is, and lowestVolts skips missed readings.",
+			"id": "find-the-missing-reading",
+			"title": "Find the missing reading",
+			"description": "Answers.MISSING_SAMPLE_INDEX is where the -1 is in the battery log, found with a conditional breakpoint.",
 			"verifier": {
 				"type": "script",
-				"path": "checkpoints/verify/conditional-breakpoint.sh"
+				"path": "checkpoints/verify/find-the-missing-reading.sh"
+			}
+		},
+		{
+			"id": "skip-missing-readings",
+			"title": "Skip the missing readings",
+			"description": "lowestVolts skips readings below 0, even when the first one is missing.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/skip-missing-readings.sh"
 			}
 		},
 		{

@@ -1,7 +1,7 @@
 {
 	"plan": [
 		{
-			"checkpoint": "first-breakpoint",
+			"checkpoint": "count-the-stops",
 			"guides": [
 				"java-debugging-breakpoints"
 			]
@@ -13,7 +13,7 @@
 			]
 		},
 		{
-			"checkpoint": "conditional-breakpoint",
+			"checkpoint": "find-the-missing-reading",
 			"guides": [
 				"java-debugging-conditional"
 			]
@@ -26,7 +26,19 @@
 		}
 	],
 	"checkpoints": {
-		"first-breakpoint": {
+		"count-the-stops": {
+			"hints": [
+				{
+					"never": "Put the breakpoint on `sum += speeds[i];`, debug Main, and press **Continue** each time it stops. Count every stop until the program finishes.",
+					"bit": "Breakpoint in the loop, Continue until done, count the stops."
+				},
+				{
+					"never": "Watch `i` in Variables. It starts at 0. The biggest `i` you see, plus one, is the number of stops.",
+					"bit": "Biggest `i` + 1 = stops."
+				}
+			]
+		},
+		"fix-the-average": {
 			"hints": [
 				{
 					"never": "Watch `i` each time the breakpoint stops. The last speed is `speeds[7]`. Does `i` ever get to 7?",
@@ -62,12 +74,20 @@
 				}
 			]
 		},
-		"conditional-breakpoint": {
+		"find-the-missing-reading": {
 			"hints": [
 				{
 					"never": "Right-click the red dot, choose **Edit Breakpoint**, type `millivolts[i] < 0` and press Enter. It stops only on the bad reading.",
 					"bit": "Edit Breakpoint → `millivolts[i] < 0`."
 				},
+				{
+					"never": "When it stops, read `i` in Variables. That's the index. Write it in `Answers.java`.",
+					"bit": "Read `i` when it stops; that's the index."
+				}
+			]
+		},
+		"skip-missing-readings": {
+			"hints": [
 				{
 					"never": "Skip readings below 0 with `continue`. Then think about where `lowest` starts: if the first reading is -1, starting from it breaks everything.",
 					"bit": "Skip negatives, and don't start `lowest` at a -1."

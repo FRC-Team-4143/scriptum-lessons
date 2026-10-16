@@ -4,7 +4,8 @@
 
 Code that compiles isn't the same as code that works. This program reads the log from a
 practice match and prints a summary. It compiles, it runs, and it's wrong. Every method under
-`src/` (apart from `MatchLog` and `Main`) has one bug, marked with a `BUG` comment.
+`src/` (apart from `MatchLog` and `Main`) has one bug, marked with a `BUG` comment that
+names its checkpoint.
 
 Reading code and guessing only gets you so far. A **debugger** lets you freeze the program on any
 line and look inside: what's in every variable, which method called which, and what happens one
@@ -58,8 +59,10 @@ bugs in order: the crash in step 6 and the stuck loop in step 7 stop `Main` befo
 
 1. **Your first breakpoint: `SpeedMath.averageSpeed`.** The average is too low. Put a breakpoint
    on the `sum += speeds[i];` line and start **Debug**. Each time it stops, look at `i` in
-   Variables and press **Continue**. **Before you fix anything,** write how many times it
-   stopped in `Answers.LOOP_RUNS_BEFORE_FIX`. Then fix the loop.
+   Variables and press **Continue**. This step has two checkpoints:
+   - **Count the stops:** *before you fix anything,* write how many times it stopped in
+     `Answers.LOOP_RUNS_BEFORE_FIX`.
+   - **Fix the average:** then fix the loop so it adds every speed.
 2. **Step into a method: `Accuracy.percent`.** It always says 0.0. Put a breakpoint on the
    `Shot accuracy` line in `Main`, debug, then press **Step Into** to go inside `percent`.
    What does `made / attempted` come out as?
@@ -69,8 +72,9 @@ bugs in order: the crash in step 6 and the stuck loop in step 7 stop `Main` befo
 4. **A conditional breakpoint: `Battery.lowestVolts`.** It reports a negative voltage, because one of the
    500 readings is `-1`, meaning the sensor missed that tick. Pressing **Continue** 500 times
    would take forever. Right-click your breakpoint, choose **Edit Breakpoint**, and give it the
-   condition `millivolts[i] < 0`, so it stops *only* on the bad reading. Write that `i` in
-   `Answers.MISSING_SAMPLE_INDEX`, then make `lowestVolts` skip readings below 0.
+   condition `millivolts[i] < 0`, so it stops *only* on the bad reading. Two checkpoints:
+   - **Find the missing reading:** write that `i` in `Answers.MISSING_SAMPLE_INDEX`.
+   - **Skip the missing readings:** make `lowestVolts` skip readings below 0.
 5. **Watching a comparison: `StateLog.countState`.** The log has three `"INTAKE"`s, but it counts 0.
    Stop inside the loop. In the **Watch** section, add `states[i]`, `wanted` and
    `states[i] == wanted`. They look the same, so why is it `false`? (For strings, `==` asks

@@ -5,7 +5,7 @@ public class Odometry {
     }
 
     // How far the robot drove in all of its legs together.
-    // BUG (checkpoint 3): it always says 0.0. Step into addLeg, then step out again,
+    // BUG (Step out again): it always says 0.0. Step into addLeg, then step out again,
     // and watch what happens to total.
     public static double totalDistance(double[] legs) {
         double total = 0.0;
