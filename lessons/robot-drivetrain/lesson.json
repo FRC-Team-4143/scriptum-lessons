@@ -5,7 +5,9 @@
 	"track": "FRC Robot",
 	"order": 20,
 	"requires": [
-		"git-basics"
+		"git-basics",
+		"advantagescope-intro",
+		"elastic-intro"
 	],
 	"guides": [
 		"build-and-run",
