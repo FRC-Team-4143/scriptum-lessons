@@ -1,0 +1,173 @@
+{
+	"title": "Fill in the settings",
+	"summary": "Tell each step what to do: which state, how long, which path.",
+	"topic": "Tools",
+	"order": 39,
+	"kind": "mixed",
+	"steps": [
+		{
+			"title": "Every step has settings",
+			"say": {
+				"never": "A step needs details. **SetWantedState** needs *which* state. **Sleep** needs *how long*. **FollowPath** needs *which* path. You fill them in on the right, and they show up on the box under its name.",
+				"bit": "Each step needs details: which state, how long, which path."
+			},
+			"target": {
+				"pane": "arbor",
+				"selector": ".canvas"
+			},
+			"board": {
+				"code": "SetWantedState    state: AIM\nSleep             msec: 500\nFollowPath        trajectory: ToScore",
+				"language": "text",
+				"marks": [
+					{
+						"text": "state: AIM",
+						"label": "which state"
+					},
+					{
+						"text": "msec: 500",
+						"label": "how long, in milliseconds"
+					}
+				]
+			},
+			"cardAt": "bottom-right"
+		},
+		{
+			"title": "Click the SetWantedState",
+			"say": {
+				"never": "Click the **SetWantedState** box on the canvas to select it.",
+				"bit": "Select the **SetWantedState** box."
+			},
+			"target": {
+				"pane": "arbor",
+				"selector": ".bt-node",
+				"text": "SetWantedState"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "arbor",
+					"selector": ".inspector .inspector-type",
+					"text": "SetWantedState"
+				},
+				"hint": "click the SetWantedState box.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "The settings panel",
+			"say": {
+				"never": "The panel on the right shows the box you selected. Under the heading **Ports** is one line for each setting. *Ports* is just Arbor's word for a step's settings.",
+				"bit": "Right panel: under **Ports** (Arbor's word for settings), one line per setting."
+			},
+			"target": {
+				"pane": "arbor",
+				"selector": ".inspector .section-title",
+				"text": "Ports"
+			},
+			"cardAt": "bottom-left",
+			"assist": true
+		},
+		{
+			"title": "Pick a state",
+			"say": {
+				"never": "Click in the **state** box and type `AIM` (in capitals). The states this robot knows are `IDLE`, `DRIVE`, `AIM`, `SHOOT` and `AUTO`. The box on the canvas now shows `state: AIM`.",
+				"bit": "Type `AIM` in **state**."
+			},
+			"target": {
+				"pane": "arbor",
+				"selector": ".inspector .port-field",
+				"text": "state"
+			},
+			"cardAt": "bottom-left",
+			"waitFor": {
+				"target": {
+					"pane": "arbor",
+					"selector": ".bt-node-port",
+					"text": "state"
+				},
+				"hint": "type a state, like AIM."
+			},
+			"assist": true
+		},
+		{
+			"title": "How long to sleep",
+			"say": {
+				"never": "Now click the **Sleep** box and type `500` in **msec**. That's milliseconds: 1000 is one second, so 500 is half a second.",
+				"bit": "Select **Sleep**, type `500` in **msec** (half a second)."
+			},
+			"target": {
+				"pane": "arbor",
+				"selector": ".bt-node",
+				"text": "Sleep"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "arbor",
+					"selector": ".bt-node-port",
+					"text": "msec"
+				},
+				"hint": "select the Sleep and type 500 in msec."
+			},
+			"assist": true
+		},
+		{
+			"title": "Which path",
+			"say": {
+				"never": "Last, click the **FollowPath** box and type a path name in **trajectory**, like `ToScore`. On the real robot this must match a path drawn in Choreo exactly.",
+				"bit": "Select **FollowPath**, type `ToScore` in **trajectory**."
+			},
+			"target": {
+				"pane": "arbor",
+				"selector": ".bt-node",
+				"text": "FollowPath"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "arbor",
+					"selector": ".bt-node-port",
+					"text": "trajectory"
+				},
+				"hint": "select the FollowPath and type a path name."
+			},
+			"assist": true
+		},
+		{
+			"title": "The Problems list",
+			"say": {
+				"never": "**Problems**, at the bottom, lists anything still missing. Arbor's messages are technical: `input port \"msec\" is not set` just means \"the msec setting is empty\". When the list says **No problems found**, every setting is filled in.",
+				"bit": "Problems lists what's missing; `input port \"x\" is not set` = the x setting is empty."
+			},
+			"target": {
+				"pane": "arbor",
+				"selector": ".bottom-panel"
+			},
+			"cardAt": "top-right",
+			"assist": true
+		},
+		{
+			"title": "Save it",
+			"say": {
+				"never": "Press **Save** at the top (or **Ctrl+S**). The little dot next to the file name disappears once it's saved. Until you save, nothing is written to the file the robot runs, and a new tree that was never saved is gone if the page reloads.",
+				"bit": "**Save** (Ctrl+S). The dot by the file name goes away."
+			},
+			"target": {
+				"pane": "arbor",
+				"selector": ".toolbar button",
+				"text": "Save"
+			},
+			"cardAt": "bottom-left",
+			"waitFor": {
+				"target": {
+					"pane": "arbor",
+					"selector": ".dirty-dot"
+				},
+				"hint": "press Save or Ctrl+S.",
+				"gone": true
+			},
+			"assist": true
+		}
+	]
+}

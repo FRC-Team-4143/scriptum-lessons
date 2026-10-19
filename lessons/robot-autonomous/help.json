@@ -110,8 +110,8 @@
 					"bit": "Rename the paths to exactly ToPickup and ToScore in Choreo."
 				},
 				{
-					"never": "In Arbor, select each FollowPath and look at its trajectory port. One should say ToPickup and one ToScore. Did you save the tree after changing it?",
-					"bit": "Each FollowPath's trajectory port: ToPickup and ToScore. Save."
+					"never": "In Arbor, select each FollowPath and look at its trajectory setting. One should say ToPickup and one ToScore. Did you save the tree after changing it?",
+					"bit": "Each FollowPath's trajectory setting: ToPickup and ToScore. Save."
 				},
 				{
 					"never": "Spelling must match the Choreo name exactly. `toPickup` or `To Pickup` won't find the file.",

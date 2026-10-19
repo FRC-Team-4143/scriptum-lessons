@@ -27,30 +27,28 @@
 			"say": "This is the **Trees** list: every file in the project's `trees` folder. `Example` is a small tree to read first. **+ New tree** makes your own: give it a name, and let it save in a new file.",
 			"target": {
 				"pane": "arbor",
-				"selector": ".trees-panel .panel-header",
-				"text": "Trees"
+				"selector": ".trees-panel"
 			}
 		},
 		{
 			"title": "The steps you can use",
-			"say": "Below is the **Nodes** list: every step you can use. The robot's own steps (`SetWantedState`, `IsSystemState`, `FollowPath`) are listed here, and the built-in ones (`Sequence`, `Fallback`, `Timeout`, `Sleep`...) come with Arbor. Drag one onto the canvas, or right-click a node and choose **Add child**. The search box finds a node by name.",
+			"say": "Below is the **Nodes** list: every step you can use. The robot's own steps (`SetWantedState`, `IsSystemState`, `FollowPath`) are listed here, and the built-in ones (`Sequence`, `Fallback`, `Timeout`, `Sleep`...) come with Arbor. Drag one onto the canvas, or right-click a box on the canvas and choose **Add child**. The search box finds a step by name.",
 			"target": {
 				"pane": "arbor",
-				"selector": ".panel-header",
-				"text": "Nodes"
+				"selector": ".palette-panel"
 			}
 		},
 		{
 			"title": "The canvas",
-			"say": "The tree itself. The top node is the root. A node with children, like a `Sequence`, runs them from left to right. Click a node to select it.",
+			"say": "The tree itself. Each box is one step. The top box is where the tree starts. A box with boxes under it, like a `Sequence`, runs them from left to right. Click a box to select it.",
 			"target": {
 				"pane": "arbor",
 				"selector": ".canvas"
 			}
 		},
 		{
-			"title": "Ports",
-			"say": "A node's settings are called **ports**. Select a node and fill them in over here: a `SetWantedState` needs the `state` to ask for, a `FollowPath` needs a `trajectory` name, a `Sleep` needs `msec`, how many milliseconds to wait.",
+			"title": "Settings",
+			"say": "Most steps need details: a `SetWantedState` needs the `state` to ask for, a `FollowPath` needs a `trajectory` (path) name, and a `Sleep` needs `msec`, how many milliseconds to wait. Select a box and fill them in over here. Arbor heads the list **Ports**, which is just its word for a step's settings.",
 			"target": {
 				"pane": "arbor",
 				"selector": ".inspector"

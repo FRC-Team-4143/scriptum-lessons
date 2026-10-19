@@ -129,10 +129,10 @@ describe("arbor-intro", () => {
 
 	test("a tunable must be declared and used", async () => {
 		await withTrees({ "A.xml": GOOD.replace(/<TreeNodesModel>[\s\S]*<\/TreeNodesModel>/, "") }, (p) => {
-			expect(L.verify(p, "tunable").text).toContain("Declare a tunable");
+			expect(L.verify(p, "tunable").text).toContain("Make a tunable");
 		});
 		await withTrees({ "A.xml": GOOD.replace('msec="{wait_msec}"', 'msec="500"') }, (p) => {
-			expect(L.verify(p, "tunable").text).toContain("nothing uses it");
+			expect(L.verify(p, "tunable").text).toContain("no step uses it");
 		});
 	});
 });

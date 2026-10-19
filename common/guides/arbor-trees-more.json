@@ -114,7 +114,7 @@
 		},
 		{
 			"title": "Tunable values",
-			"say": "Any number can be a **tunable**. Instead of typing 500 into a Sleep, declare an input port on the tree with a default (for example `wait_msec`), and write its name in braces in the Sleep's `msec`: `{wait_msec}`. On the robot it shows up on the dashboard, so you can change it at the field without rebuilding. If you misspell the name, the auto refuses to load and tells you which node."
+			"say": "Any number can be **tunable**: changeable from the dashboard at the field, without editing the tree. Give the tree a setting of its own with a default, for example `wait_msec` = 500 (Arbor calls a tree's settings *ports*). Then, instead of typing 500 into a Sleep's `msec`, type the setting's name in braces: `{wait_msec}`. If you misspell the name, the auto refuses to load and tells you which box."
 		},
 		{
 			"title": "Reading the colours in Arbor",

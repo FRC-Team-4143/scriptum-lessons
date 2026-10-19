@@ -38,16 +38,21 @@
 		{
 			"title": "Open Arbor",
 			"say": {
-				"never": "This is **Arbor**. In the **Trees** list, click **PickupAndScore** to open the tree. You'll see a Sequence with one step under it: `FollowPath` with the trajectory `ToPickup`. Click **I did it** when the tree is open.",
+				"never": "This is **Arbor**. In the **Trees** list on the left, click **PickupAndScore** to open the tree. You'll see a Sequence with one step under it: `FollowPath`, whose `trajectory` setting is `ToPickup`.",
 				"bit": "Open **PickupAndScore** from the Trees list."
 			},
 			"target": {
 				"pane": "arbor",
-				"selector": ".trees-panel .panel-header",
-				"text": "Trees"
+				"selector": ".trees-panel"
 			},
 			"waitFor": {
-				"hint": "open PickupAndScore, then click I did it."
+				"target": {
+					"pane": "arbor",
+					"selector": ".tree-item.active",
+					"text": "PickupAndScore"
+				},
+				"hint": "click PickupAndScore in the Trees list.",
+				"skipIfDone": true
 			},
 			"assist": true,
 			"close": [
@@ -62,26 +67,53 @@
 			]
 		},
 		{
-			"title": "Path, wait, path",
+			"title": "A short wait",
 			"say": {
-				"never": "From the **Nodes** list, drag a `Sleep` under the Sequence, after the first `FollowPath`. Select it and set its `msec` port to `500` in the panel on the right.\n\nThen drag in a second `FollowPath` after the Sleep and set its `trajectory` port to `ToScore`, spelled exactly like the path in Choreo. Click **I did it** when both are there.",
-				"bit": "Add Sleep (msec 500) and a second FollowPath (trajectory ToScore) after the first path."
+				"never": "Right-click the **Sequence** box, choose **Add child…**, type `Sleep` and press **Enter**. The Sleep lands after the first `FollowPath`. Select it and type `500` in its **msec** setting on the right: half a second, a stand-in for picking up the game piece.",
+				"bit": "Sequence → **Add child…** → `Sleep`; set **msec** to `500`."
 			},
 			"target": {
 				"pane": "arbor",
-				"selector": ".panel-header",
-				"text": "Nodes"
+				"selector": ".bt-node",
+				"text": "Sequence"
 			},
+			"cardAt": "bottom-right",
 			"waitFor": {
-				"hint": "add the Sleep and the second FollowPath, then click I did it."
+				"target": {
+					"pane": "arbor",
+					"selector": ".bt-node-port",
+					"text": "msec"
+				},
+				"hint": "add a Sleep under the Sequence and set msec to 500."
 			},
-			"assist": true,
-			"cardAt": "bottom-right"
+			"assist": true
+		},
+		{
+			"title": "The second path",
+			"say": {
+				"never": "Do the same with a **FollowPath**: right-click the Sequence, **Add child…**, `FollowPath`. Select it and type `ToScore` in its **trajectory** setting, spelled exactly like the path in Choreo.",
+				"bit": "Sequence → **Add child…** → `FollowPath`; **trajectory** `ToScore`."
+			},
+			"target": {
+				"pane": "arbor",
+				"selector": ".bt-node",
+				"text": "Sequence"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "arbor",
+					"selector": ".bt-node-port",
+					"text": "ToScore"
+				},
+				"hint": "add a FollowPath with trajectory ToScore."
+			},
+			"assist": true
 		},
 		{
 			"title": "Ask for AIM, then wait for it",
 			"say": {
-				"never": "Drag a `SetWantedState` into the Sequence after the second path and set its `state` port to `AIM`.\n\nAfter it, add a `Timeout` with `msec` `3000`. Drag a `RetryUntilSuccessful` **onto the Timeout**, so it becomes the Timeout's child, and set its `num_attempts` to `-1`. Then drag an `IsSystemState` onto the RetryUntilSuccessful and set its `state` to `AIM`. Click **I did it** when the Timeout holds the wait for AIM.",
+				"never": "Add a `SetWantedState` to the Sequence after the second path (right-click the Sequence, **Add child…**) and type `AIM` in its **state** setting.\n\nAfter it, add a `Timeout` and set its **msec** to `3000`. Right-click the top of the Timeout's frame, choose **Add child…** and add a `RetryUntilSuccessful`; set its **num_attempts** to `-1` (keep trying). Then right-click the RetryUntilSuccessful, **Add child…**, `IsSystemState`, and set its **state** to `AIM`. Click **I did it** when the Timeout holds the wait for AIM.",
 				"bit": "Add SetWantedState AIM, then Timeout (msec 3000) > RetryUntilSuccessful (num_attempts -1) > IsSystemState AIM."
 			},
 			"target": {
@@ -113,7 +145,7 @@
 		{
 			"title": "Save it",
 			"say": {
-				"never": "Press **Save** (or Ctrl+S). Arbor writes the tree to `deploy/autos/trees/PickupAndScore.xml`, and that file is what the robot runs. The robot reads it when it starts, so changing a tree needs **no Java and no rebuild**: save, press Start, run it. Click **I did it** once it is saved.",
+				"never": "Press **Save** (or Ctrl+S). The dot next to the file name goes away. Arbor writes the tree to `deploy/autos/trees/PickupAndScore.xml`, and that file is what the robot runs. The robot reads it when it starts, so changing a tree needs **no Java and no rebuild**: save, press Start, run it.",
 				"bit": "Save (Ctrl+S). Saved trees need no rebuild."
 			},
 			"target": {
@@ -122,7 +154,12 @@
 				"text": "Save"
 			},
 			"waitFor": {
-				"hint": "save the tree, then click I did it."
+				"target": {
+					"pane": "arbor",
+					"selector": ".dirty-dot"
+				},
+				"hint": "press Save or Ctrl+S.",
+				"gone": true
 			},
 			"assist": true
 		},
