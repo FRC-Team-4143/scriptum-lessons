@@ -1,0 +1,48 @@
+{
+	"title": "Lambdas & Functional Interfaces",
+	"description": "Wire up a robot's buttons and joystick the way real robot code does: write speed filters as lambdas, build new behavior out of old, and bind buttons to actions with method references.",
+	"kind": "plain-java",
+	"track": "Java Advanced",
+	"order": 32,
+	"recommends": [
+		"java-interfaces"
+	],
+	"checkpoints": [
+		{
+			"id": "speed-filters",
+			"title": "Speed filters",
+			"description": "SpeedFilter is a @FunctionalInterface with double apply(double speed), and Filters.half(), invert() and deadband(threshold) return lambdas.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/speed-filters.sh"
+			}
+		},
+		{
+			"id": "chain",
+			"title": "Chain two filters",
+			"description": "Filters.chain(first, second) returns a lambda that runs first, then runs second on the result.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/chain.sh"
+			}
+		},
+		{
+			"id": "bindings",
+			"title": "Button bindings",
+			"description": "ButtonBoard.onTrue remembers a condition and an action, and poll() runs the action once each time its condition goes from false to true.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/bindings.sh"
+			}
+		},
+		{
+			"id": "method-refs",
+			"title": "Wire up the robot",
+			"description": "RobotBindings binds A, B and X with method references and a lambda, and driveSpeed() is a DoubleSupplier that reads the stick every time.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/method-refs.sh"
+			}
+		}
+	]
+}

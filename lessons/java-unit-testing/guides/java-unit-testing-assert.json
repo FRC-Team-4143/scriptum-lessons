@@ -1,0 +1,182 @@
+{
+	"title": "Writing a test",
+	"summary": "A test calls your code with a known input and checks the answer with assertEquals.",
+	"topic": "Java",
+	"order": 531,
+	"kind": "mixed",
+	"steps": [
+		{
+			"title": {
+				"never": "Code that checks code",
+				"bit": "Code that checks code"
+			},
+			"say": {
+				"never": "How do you know a method works? So far you ran `Main` and read the output yourself. A **unit test** does the reading for you: it calls one method with an input you picked and checks the answer is the one you expected. Write it once and it re-checks your code every time you run it, forever.",
+				"bit": "A **unit test** calls one method with a known input and checks the answer automatically."
+			},
+			"board": {
+				"code": "@Test\nvoid freezingIs32Fahrenheit() {\n    Assertions.assertEquals(32.0, Temperature.toFahrenheit(0.0), 0.0001);\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "@Test",
+						"label": "marks it as a test"
+					},
+					{
+						"text": "32.0",
+						"label": "what you expect"
+					},
+					{
+						"text": "Temperature.toFahrenheit(0.0)",
+						"label": "what the code really gives"
+					}
+				]
+			}
+		},
+		{
+			"title": {
+				"never": "Expected first, then actual",
+				"bit": "Expected, actual, tolerance"
+			},
+			"say": {
+				"never": "`assertEquals` takes the answer you **expect** first, then the **actual** answer from the code. If they differ, the test **FAILS** and says \"expected 32.0 but was 0.0\". Decimals are almost never exactly equal (0.1 + 0.2 is 0.30000000000000004!), so for a `double` add a third number, the **tolerance**: how close counts as equal.",
+				"bit": "`assertEquals(expected, actual, tolerance)`. Decimals need a tolerance, like `0.0001`."
+			},
+			"board": {
+				"code": "Assertions.assertEquals(212.0, Temperature.toFahrenheit(100.0), 0.0001);\nAssertions.assertTrue(Temperature.isBelowFreezing(-5.0));\nAssertions.assertFalse(Temperature.isBelowFreezing(20.0));",
+				"language": "java",
+				"marks": [
+					{
+						"text": "0.0001",
+						"label": "tolerance"
+					},
+					{
+						"text": "assertTrue",
+						"label": "for a boolean answer"
+					}
+				]
+			}
+		},
+		{
+			"title": {
+				"never": "One idea per test",
+				"bit": "One idea per test"
+			},
+			"say": {
+				"never": "Give each test a name that says what it proves, like `freezingIs32Fahrenheit`. When one fails, the name tells you what broke before you even read the code. A test can hold a few asserts, but they should all check the same idea.",
+				"bit": "Name each test after what it proves; keep one idea per test."
+			},
+			"board": {
+				"code": "@Test\nvoid boilingIs212Fahrenheit() { ... }\n\n@Test\nvoid belowZeroIsFreezing() { ... }",
+				"language": "java",
+				"marks": [
+					{
+						"text": "boilingIs212Fahrenheit",
+						"label": "the name is the story"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Code that checks code",
+			"say": {
+				"never": "`DriveMathTest` already has one worked example: full speed goes through `deadband` unchanged. Copy its shape for new tests. What should a tiny joystick wobble, like `0.05` with a threshold of `0.1`, come out as? What about full speed backwards?",
+				"bit": "Copy the worked example's shape. Test a small value, a negative one, and the edge."
+			},
+			"board": {
+				"code": "@Test\nvoid deadbandKeepsFullSpeed() {\n    Assertions.assertEquals(1.0, DriveMath.deadband(1.0, 0.1), 0.0001);\n}",
+				"marks": [
+					{
+						"text": "DriveMath.deadband(1.0, 0.1)",
+						"label": "the code under test"
+					}
+				]
+			},
+			"assist": true
+		},
+		{
+			"title": "Open DriveMathTest.java",
+			"say": {
+				"never": "Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `DriveMathTest`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "Press **Ctrl+P**, type `DriveMathTest` and press Enter."
+			},
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "DriveMathTest.java"
+				},
+				"hint": "open DriveMathTest.java with Ctrl+P.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Find it",
+			"say": {
+				"never": "It may be further down. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `TODO (deadband)` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "Press **Ctrl+F**, type `TODO (deadband)` and press Enter to jump to it."
+			},
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "TODO (deadband)"
+				},
+				"hint": "find TODO (deadband) with Ctrl+F.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Your turn",
+			"say": {
+				"never": "Your turn! Add `@Test` methods for `deadband` below the TODO. Each one calls `DriveMath.deadband` and checks the answer with `Assertions.assertEquals`.",
+				"bit": "Add deadband tests below the TODO."
+			},
+			"waitFor": {
+				"hint": {
+					"never": "write a few deadband tests.",
+					"bit": "write a few deadband tests."
+				}
+			},
+			"cardAt": "bottom-right",
+			"assist": true
+		},
+		{
+			"title": "Run it",
+			"say": {
+				"never": "Open `Main.java` and click the **Run** button, the little triangle (▷) at its top right. Every test prints **PASS** or **FAIL** in the terminal at the bottom.",
+				"bit": "Run `Main` (▷). Each test prints PASS or FAIL in the terminal."
+			},
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "top-right",
+			"waitFor": {
+				"hint": {
+					"never": "run the tests and read the PASS and FAIL lines.",
+					"bit": "run the tests and read the output."
+				}
+			},
+			"assist": true
+		}
+	]
+}

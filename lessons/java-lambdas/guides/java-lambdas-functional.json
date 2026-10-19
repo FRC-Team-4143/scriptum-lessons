@@ -1,0 +1,197 @@
+{
+	"title": "Lambdas: code in a variable",
+	"summary": "A functional interface has one method; a lambda is a short way to write it.",
+	"topic": "Java",
+	"order": 521,
+	"kind": "mixed",
+	"steps": [
+		{
+			"title": "One job, one method",
+			"say": {
+				"never": "Some interfaces promise just **one** method. A greeter only has to greet. That kind is called a **functional interface**, and `@FunctionalInterface` on top asks Java to make sure it stays that way: add a second method and it won't compile.",
+				"bit": "A **functional interface** has exactly one method. `@FunctionalInterface` makes Java check that."
+			},
+			"board": {
+				"code": "@FunctionalInterface\npublic interface Greeter {\n    String greet(String name);\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "@FunctionalInterface",
+						"label": "Java checks: one method only"
+					},
+					{
+						"text": "String greet(String name);",
+						"label": "the one job"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: One job, one method",
+			"say": {
+				"never": "`SpeedFilter` has one job: take a speed and hand back a new speed. So it's a functional interface with one method, `apply`. Like any interface method, it ends in a semicolon with no body.",
+				"bit": "`SpeedFilter` is a functional interface with one method: `double apply(double speed);`"
+			},
+			"board": {
+				"code": "@FunctionalInterface\npublic interface SpeedFilter {\n    double apply(double speed);\n}",
+				"marks": [
+					{
+						"text": "double apply(double speed);",
+						"label": "speed in, speed out"
+					}
+				]
+			},
+			"assist": true
+		},
+		{
+			"title": "A lambda",
+			"say": {
+				"never": "Writing a whole class just to greet people politely is a lot of typing. A **lambda** does it in one line. Read `name -> \"Hello, \" + name` as \"given a *name*, hand back Hello plus the name\". The arrow `->` splits the input from the answer. Making the lambda doesn't run it. It runs each time you call `greet`.",
+				"bit": "A **lambda**: `input -> answer`. It's a whole implementation of the one method, and it runs only when called."
+			},
+			"board": {
+				"code": "Greeter polite = name -> \"Hello, \" + name;\nGreeter loud = name -> \"HEY \" + name.toUpperCase();\n\nSystem.out.println(polite.greet(\"Ava\"));",
+				"language": "java",
+				"marks": [
+					{
+						"text": "name ->",
+						"label": "the input"
+					},
+					{
+						"text": "\"Hello, \" + name",
+						"label": "the answer it hands back"
+					},
+					{
+						"text": "polite.greet(\"Ava\")",
+						"label": "runs it now"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: A lambda",
+			"say": {
+				"never": "Each method in `Filters` hands back a lambda instead of a number. `half()` returns a filter that, given a speed, hands back half of it. `invert()` is the same idea with the sign flipped.",
+				"bit": "`half()` returns `speed -> speed * 0.5`. Write `invert()` the same way."
+			},
+			"board": {
+				"code": "public static SpeedFilter half() {\n    return speed -> speed * 0.5;\n}",
+				"marks": [
+					{
+						"text": "speed -> speed * 0.5",
+						"label": "a whole SpeedFilter in one line"
+					}
+				]
+			},
+			"assist": true
+		},
+		{
+			"title": "Bigger lambdas",
+			"say": {
+				"never": "When the answer needs an `if`, give the lambda a body in `{ }` and use `return`, like a small method. A lambda can also use the variables around it, like `maxLength` here: it remembers that value for later, even after `shortened` has finished.",
+				"bit": "Need an `if`? Use `{ }` and `return`. A lambda can also use variables from around it."
+			},
+			"board": {
+				"code": "public static Greeter shortened(int maxLength) {\n    return name -> {\n        if (name.length() > maxLength) {\n            return name.substring(0, maxLength);\n        }\n        return name;\n    };\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "maxLength",
+						"label": "remembered by the lambda"
+					},
+					{
+						"text": "return name -> {",
+						"label": "a lambda with a body"
+					},
+					{
+						"text": "};",
+						"label": "the lambda ends, then the return line does"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Bigger lambdas",
+			"say": {
+				"never": "`deadband(threshold)` returns a lambda with a body. If the speed is closer to zero than `threshold` (use `Math.abs(speed)` so small negative speeds count too), hand back `0.0`. Otherwise hand back the speed unchanged. That stops a robot creeping when the stick isn't quite centered.",
+				"bit": "`deadband`: a `{ }` lambda that returns `0.0` when `Math.abs(speed) < threshold`, else `speed`."
+			},
+			"board": {
+				"code": "public static SpeedFilter deadband(double threshold) {\n    return speed -> {\n        // 0.0 if Math.abs(speed) < threshold\n        // otherwise speed\n    };\n}",
+				"marks": [
+					{
+						"text": "threshold",
+						"label": "remembered by the lambda"
+					}
+				]
+			},
+			"assist": true
+		},
+		{
+			"title": "Open SpeedFilter.java",
+			"say": {
+				"never": "Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `SpeedFilter`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "Press **Ctrl+P**, type `SpeedFilter` and press Enter."
+			},
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "SpeedFilter.java"
+				},
+				"hint": "open SpeedFilter.java with Ctrl+P.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Find it",
+			"say": {
+				"never": "It may be further down. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `public interface SpeedFilter` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "Press **Ctrl+F**, type `public interface SpeedFilter` and press Enter to jump to it."
+			},
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "public interface SpeedFilter"
+				},
+				"hint": "find public interface SpeedFilter with Ctrl+F.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Your turn",
+			"say": {
+				"never": "Your turn! Put `@FunctionalInterface` above the interface and declare `double apply(double speed);` inside it. Then open `Filters.java` and write `half()`, `invert()` and `deadband()`.",
+				"bit": "Write SpeedFilter, then half, invert and deadband in Filters."
+			},
+			"waitFor": {
+				"hint": {
+					"never": "write SpeedFilter and the three filters.",
+					"bit": "write SpeedFilter and the three filters."
+				}
+			},
+			"cardAt": "bottom-right",
+			"assist": true
+		}
+	]
+}

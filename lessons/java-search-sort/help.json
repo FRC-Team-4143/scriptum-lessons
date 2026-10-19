@@ -1,0 +1,28 @@
+{
+	"plan": [
+		{
+			"checkpoint": "linear-search",
+			"guides": [
+				"java-search-sort-searching"
+			]
+		},
+		{
+			"checkpoint": "binary-search",
+			"guides": [
+				"java-search-sort-searching"
+			]
+		},
+		{
+			"checkpoint": "sort-by-hand",
+			"guides": [
+				"java-search-sort-by-hand"
+			]
+		},
+		{
+			"checkpoint": "rankings",
+			"guides": [
+				"java-search-sort-comparator"
+			]
+		}
+	]
+}

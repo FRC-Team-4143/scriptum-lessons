@@ -1,0 +1,35 @@
+{
+	"plan": [
+		{
+			"checkpoint": "scout-entry",
+			"guides": [
+				"java-exceptions-throw"
+			]
+		},
+		{
+			"checkpoint": "bad-line",
+			"guides": [
+				"java-exceptions-custom"
+			]
+		},
+		{
+			"checkpoint": "parse-line",
+			"guides": [
+				"java-exceptions-custom",
+				"java-exceptions-catch"
+			]
+		},
+		{
+			"checkpoint": "parse-all",
+			"guides": [
+				"java-exceptions-catch"
+			]
+		},
+		{
+			"checkpoint": "safe-auto",
+			"guides": [
+				"java-exceptions-catch"
+			]
+		}
+	]
+}

@@ -1,0 +1,172 @@
+{
+	"title": "Stacks: newest first",
+	"summary": "A stack takes things off in the reverse order they went on: push, pop and peek on an ArrayDeque.",
+	"topic": "Java",
+	"order": 581,
+	"kind": "mixed",
+	"steps": [
+		{
+			"title": "A pile of plates",
+			"say": {
+				"never": "Think of a pile of plates in the cafeteria. You put a clean plate on **top**, and the next person takes the plate off the **top**. The plate that went on last comes off first. That shape is called a **stack**, and people say it's \"last in, first out\". A web browser's Back button is a stack too: it takes you to the newest page you left, then the one before that.",
+				"bit": "A **stack** is last in, first out: you add on top and take from the top. Think Back button."
+			},
+			"board": {
+				"code": "visited: home  ->  schedule  ->  match 12\n\nBack:   match 12 comes off, you see schedule\nBack:   schedule comes off, you see home",
+				"language": "text",
+				"marks": [
+					{
+						"text": "match 12 comes off",
+						"label": "newest page first"
+					}
+				]
+			}
+		},
+		{
+			"title": "push, pop and peek",
+			"say": {
+				"never": "Java's `ArrayDeque` can be a stack. `push(x)` puts `x` on top. `pop()` takes the top item off and hands it back. `peek()` looks at the top item without taking it off. `isEmpty()` tells you if there's anything there at all. Check it before you `pop`: popping an empty stack crashes the program.",
+				"bit": "`push` adds on top, `pop` removes and returns the top, `peek` just looks. `pop` on an empty deque throws, so check `isEmpty()` first."
+			},
+			"board": {
+				"code": "ArrayDeque<String> pages = new ArrayDeque<>();\npages.push(\"home\");\npages.push(\"schedule\");\nSystem.out.println(pages.peek()); // schedule\nString back = pages.pop();        // schedule, and it's gone\nSystem.out.println(pages.size()); // 1",
+				"language": "java",
+				"marks": [
+					{
+						"text": "pages.push(\"schedule\");",
+						"label": "goes on top"
+					},
+					{
+						"text": "pages.pop();",
+						"label": "the top comes off"
+					},
+					{
+						"text": "pages.peek()",
+						"label": "look, don't take"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: push, pop and peek",
+			"say": {
+				"never": "`SettingHistory` is the dashboard's Undo button. Its `history_` stack holds every value the setting used to have, with the newest on top. When the coach changes the setting, the value it had *before* the change goes on the stack. Undo takes the top one back off.",
+				"bit": "`history_` stacks old values, newest on top. `set` saves the old one; `undo` brings the top one back."
+			},
+			"board": {
+				"code": "public class SettingHistory {\n    protected double current_;\n    // history_ goes here\n\n    public void set(double value) {\n        // save the old value first\n        current_ = value;\n    }\n}",
+				"marks": [
+					{
+						"text": "// save the old value first",
+						"label": "push before you overwrite"
+					}
+				]
+			},
+			"assist": true
+		},
+		{
+			"title": "Matching pairs with a stack",
+			"say": {
+				"never": "Stacks are great at checking things that nest, like brackets inside brackets. Read left to right. Every time something opens, push it. Every time something closes, it has to match whatever is on **top** right now, because the newest thing that opened must close first. If something closes when the stack is empty, or things are still open at the end, it's wrong.",
+				"bit": "To check nesting: push each opener, and each closer must match the top. Empty-stack closers and leftovers at the end both mean unbalanced."
+			},
+			"board": {
+				"code": "<b> <i> hi </i> </b>   good: </i> matches <i> on top\n<b> <i> hi </b> </i>   bad:  </b> but <i> is on top",
+				"language": "text",
+				"marks": [
+					{
+						"text": "bad:",
+						"label": "closed in the wrong order"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Matching pairs with a stack",
+			"say": {
+				"never": "`AutoParser.isBalanced` does the same job for an auto typed as text, like `seq(drive[2.0], par{intake, shoot})`. There are three kinds of bracket: `( )`, `[ ]` and `{ }`. A `char` is one character, written in single quotes like `'('`, and `text.toCharArray()` lets a for-each loop visit them one by one. A stack of `Character` holds the brackets still open.",
+				"bit": "Loop with `for (char c : text.toCharArray())`, keep open brackets in an `ArrayDeque<Character>`, and compare each closer to the top."
+			},
+			"board": {
+				"code": "public static boolean isBalanced(String text) {\n    // a stack of the brackets still open\n    for (char c : text.toCharArray()) {\n        // opener? closer? something else?\n    }\n    // anything still open?\n}",
+				"marks": [
+					{
+						"text": "text.toCharArray()",
+						"label": "one char at a time"
+					},
+					{
+						"text": "// anything still open?",
+						"label": "leftovers mean false"
+					}
+				]
+			},
+			"assist": true
+		},
+		{
+			"title": "Open SettingHistory.java",
+			"say": {
+				"never": "Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `SettingHistory`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "Press **Ctrl+P**, type `SettingHistory` and press Enter."
+			},
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "SettingHistory.java"
+				},
+				"hint": "open SettingHistory.java with Ctrl+P.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Find it",
+			"say": {
+				"never": "Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `public void set(double value)` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "Press **Ctrl+F**, type `public void set(double value)` and press Enter to jump to it."
+			},
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "public void set(double value)"
+				},
+				"hint": "find public void set(double value) with Ctrl+F.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Your turn",
+			"say": {
+				"never": "Your turn! Add the import and the `history_` field, then write `set`, `undo` and `undoCount`. When **Undo with a stack** passes, open `AutoParser.java` and write `isBalanced` the same way: push openers, match closers against the top.",
+				"bit": "Write SettingHistory, then AutoParser.isBalanced."
+			},
+			"waitFor": {
+				"hint": {
+					"never": "write SettingHistory and AutoParser.",
+					"bit": "write SettingHistory and AutoParser."
+				}
+			},
+			"cardAt": "bottom-right",
+			"assist": true
+		}
+	]
+}

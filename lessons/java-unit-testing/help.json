@@ -1,0 +1,22 @@
+{
+	"plan": [
+		{
+			"checkpoint": "deadband-tests",
+			"guides": [
+				"java-unit-testing-assert"
+			]
+		},
+		{
+			"checkpoint": "clamp-tests",
+			"guides": [
+				"java-unit-testing-edges"
+			]
+		},
+		{
+			"checkpoint": "find-the-bug",
+			"guides": [
+				"java-unit-testing-red-green"
+			]
+		}
+	]
+}

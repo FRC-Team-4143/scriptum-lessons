@@ -1,0 +1,151 @@
+{
+	"title": "Queues: oldest first",
+	"summary": "A queue hands things out in the order they arrived: offer and poll on an ArrayDeque.",
+	"topic": "Java",
+	"order": 582,
+	"kind": "mixed",
+	"steps": [
+		{
+			"title": "Waiting in line",
+			"say": {
+				"never": "At a food truck, you join the line at the **back**, and the person at the **front** gets served next. Whoever arrived first is served first. That shape is called a **queue**, and people say it's \"first in, first out\". It's the opposite of a stack, where the newest thing comes out first.",
+				"bit": "A **queue** is first in, first out: join at the back, leave from the front. A stack is the reverse."
+			},
+			"board": {
+				"code": "joins:   Ana, then Ben, then Cy\nserved:  Ana, then Ben, then Cy     (a queue)\nstack:   Cy,  then Ben, then Ana    (newest first)",
+				"language": "text",
+				"marks": [
+					{
+						"text": "(a queue)",
+						"label": "same order as they came"
+					}
+				]
+			}
+		},
+		{
+			"title": "offer and poll",
+			"say": {
+				"never": "The same `ArrayDeque` can be a queue. Use `offer(x)` to add `x` at the **back**, and `poll()` to take the item at the **front** off and hand it back. Unlike `pop`, `poll` doesn't crash on an empty queue: it hands back `null`, which means \"nothing\". `peek()` looks at the front without taking it.",
+				"bit": "`offer` adds at the back, `poll` removes and returns the front (or `null` when empty), `peek` looks at the front."
+			},
+			"board": {
+				"code": "ArrayDeque<String> orders = new ArrayDeque<>();\norders.offer(\"tacos\");\norders.offer(\"nachos\");\nSystem.out.println(orders.poll()); // tacos\nSystem.out.println(orders.poll()); // nachos\nSystem.out.println(orders.poll()); // null: line is empty",
+				"language": "java",
+				"marks": [
+					{
+						"text": "orders.offer(\"nachos\");",
+						"label": "joins at the back"
+					},
+					{
+						"text": "// tacos",
+						"label": "first in, first out"
+					},
+					{
+						"text": "// null: line is empty",
+						"label": "no crash, just null"
+					}
+				]
+			}
+		},
+		{
+			"title": "Don't mix the ends",
+			"say": {
+				"never": "Here's the trap. `push` and `pop` both work at the **front**. If you add with `push` and take with `poll`, the newest item comes out first, and your queue has quietly turned into a stack. For a queue, stick to the pair `offer` + `poll`.",
+				"bit": "`push` adds at the front, so `push` + `poll` behaves like a stack. Use `offer` + `poll` for a queue."
+			},
+			"board": {
+				"code": "orders.push(\"tacos\");\norders.push(\"nachos\");\norders.poll();  // nachos! the newest order",
+				"language": "java",
+				"marks": [
+					{
+						"text": "// nachos! the newest order",
+						"label": "a stack by accident"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Don't mix the ends",
+			"say": {
+				"never": "`AutoQueue` holds the steps of an auto routine, like *drive to note*, *intake*, *shoot*. They have to run in the order they were added, so the deque is used as a queue. When no steps are left, `nextStep()` hands back the word `\"done\"` instead of `null`.",
+				"bit": "`AutoQueue` runs steps in the order added. `nextStep()` returns `\"done\"` when the queue is empty."
+			},
+			"board": {
+				"code": "public String nextStep() {\n    // nothing left? say \"done\"\n    // otherwise take the front step off\n}",
+				"marks": [
+					{
+						"text": "// nothing left? say \"done\"",
+						"label": "check empty first"
+					}
+				]
+			},
+			"assist": true
+		},
+		{
+			"title": "Open AutoQueue.java",
+			"say": {
+				"never": "Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `AutoQueue`, then press **Enter**.",
+				"bit": "Press **Ctrl+P**, type `AutoQueue` and press Enter."
+			},
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "AutoQueue.java"
+				},
+				"hint": "open AutoQueue.java with Ctrl+P.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Find it",
+			"say": {
+				"never": "Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `public class AutoQueue` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "Press **Ctrl+F**, type `public class AutoQueue` and press Enter to jump to it."
+			},
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "public class AutoQueue"
+				},
+				"hint": "find public class AutoQueue with Ctrl+F.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Your turn",
+			"say": {
+				"never": "Your turn! Add `import java.util.ArrayDeque;` at the top and the `steps_` field. Then write `addStep`, `nextStep` and `stepsLeft`. Click **Run** and check the auto's steps print in the order `Main` added them.",
+				"bit": "Add the field, then write addStep, nextStep and stepsLeft."
+			},
+			"waitFor": {
+				"hint": {
+					"never": "write AutoQueue.",
+					"bit": "write AutoQueue."
+				}
+			},
+			"cardAt": "bottom-right",
+			"assist": true
+		}
+	]
+}

@@ -1,0 +1,174 @@
+{
+	"title": "Tests that catch bugs",
+	"summary": "Good tests try the edges: zero, negatives, exactly-on-the-line values and both sides.",
+	"topic": "Java",
+	"order": 532,
+	"kind": "mixed",
+	"steps": [
+		{
+			"title": {
+				"never": "A test that can't fail is useless",
+				"bit": "Tests must be able to fail"
+			},
+			"say": {
+				"never": "A test only helps if it would **fail** when the code is wrong. That's how this lesson grades you: the checker plants a bug in the code, one at a time, and runs your tests. If all your tests still pass, they missed that bug. Your job is to write tests that catch every one.",
+				"bit": "The checker plants bugs; your tests have to fail on every one of them."
+			},
+			"board": {
+				"code": "// Correct:\nreturn age >= 13 && age <= 19;\n\n// Planted bug: is 19 a teenager?\nreturn age >= 13 && age < 19;",
+				"language": "java",
+				"marks": [
+					{
+						"text": "age < 19",
+						"label": "a tiny bug"
+					}
+				]
+			}
+		},
+		{
+			"title": {
+				"never": "Bugs hide at the edges",
+				"bit": "Test the edges"
+			},
+			"say": {
+				"never": "Most bugs live at the **edges**. Test a normal value, and then: zero, a negative number, a value exactly **on** the line (19, not just 25), and a value on each side of it. One test from the middle passes almost every buggy version.",
+				"bit": "Test a normal value plus zero, negatives, exactly-on-the-line, and both sides."
+			},
+			"board": {
+				"code": "Assertions.assertTrue(Age.isTeenager(15));\nAssertions.assertTrue(Age.isTeenager(19));\nAssertions.assertFalse(Age.isTeenager(20));\nAssertions.assertFalse(Age.isTeenager(12));",
+				"language": "java",
+				"marks": [
+					{
+						"text": "isTeenager(19)",
+						"label": "exactly on the line"
+					},
+					{
+						"text": "isTeenager(20)",
+						"label": "just past it"
+					}
+				]
+			}
+		},
+		{
+			"title": {
+				"never": "Work out the answer yourself",
+				"bit": "Work the answer out yourself"
+			},
+			"say": {
+				"never": "Get the expected value from a calculator or from the rules, **not** by running the code and copying what it prints. If the code is wrong, copying its answer just writes the bug into your test.",
+				"bit": "Get expected values from the rules, not from the code's own output."
+			},
+			"board": {
+				"code": "// 3 feet is 36 inches, worked out by hand:\nAssertions.assertEquals(36.0, Units.feetToInches(3.0), 0.0001);",
+				"language": "java",
+				"marks": [
+					{
+						"text": "36.0",
+						"label": "from the rules"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Bugs hide at the edges",
+			"say": {
+				"never": "For `clamp`, try a value below `min`, one above `max`, and one in between. For `inchesToMeters`, 1 inch is 0.0254 m: try a whole number, a value with a fraction like `2.5`, and a negative distance. If a checkpoint names a bug that slipped through, that's a hint about which edge to add.",
+				"bit": "clamp: below, above, inside. inchesToMeters: whole, fraction, negative."
+			},
+			"board": {
+				"code": "@Test\nvoid clampRaisesValuesBelowMin() {\n    // value, min, max\n    ...\n}",
+				"marks": [
+					{
+						"text": "clampRaisesValuesBelowMin",
+						"label": "one edge per test"
+					}
+				]
+			},
+			"assist": true
+		},
+		{
+			"title": "Open DriveMathTest.java",
+			"say": {
+				"never": "Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `DriveMathTest`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "Press **Ctrl+P**, type `DriveMathTest` and press Enter."
+			},
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "DriveMathTest.java"
+				},
+				"hint": "open DriveMathTest.java with Ctrl+P.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Find it",
+			"say": {
+				"never": "It may be further down. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `TODO (clamp)` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "Press **Ctrl+F**, type `TODO (clamp)` and press Enter to jump to it."
+			},
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "TODO (clamp)"
+				},
+				"hint": "find TODO (clamp) with Ctrl+F.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Your turn",
+			"say": {
+				"never": "Your turn! Add tests for `clamp` under its TODO, then for `inchesToMeters` under the next one. Run them, and verify each checkpoint.",
+				"bit": "Add clamp tests, then inchesToMeters tests."
+			},
+			"waitFor": {
+				"hint": {
+					"never": "write the clamp and inchesToMeters tests.",
+					"bit": "write the clamp and inchesToMeters tests."
+				}
+			},
+			"cardAt": "bottom-right",
+			"assist": true
+		},
+		{
+			"title": "Run it",
+			"say": {
+				"never": "Open `Main.java` and click the **Run** button, the little triangle (▷) at its top right. Every test prints **PASS** or **FAIL** in the terminal at the bottom.",
+				"bit": "Run `Main` (▷). Each test prints PASS or FAIL in the terminal."
+			},
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "top-right",
+			"waitFor": {
+				"hint": {
+					"never": "run the tests and read the PASS and FAIL lines.",
+					"bit": "run the tests and read the output."
+				}
+			},
+			"assist": true
+		}
+	]
+}

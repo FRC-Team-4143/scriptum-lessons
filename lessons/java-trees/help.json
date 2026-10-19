@@ -1,0 +1,78 @@
+{
+	"plan": [
+		{
+			"checkpoint": "bst-insert",
+			"guides": [
+				"java-trees-bst"
+			]
+		},
+		{
+			"checkpoint": "in-order",
+			"guides": [
+				"java-trees-walk"
+			]
+		},
+		{
+			"checkpoint": "height",
+			"guides": [
+				"java-trees-walk"
+			],
+			"intro": {
+				"never": "Height is one more walk down the tree: ask each side how tall it is, and add one for the node you're standing on.",
+				"bit": "Height = 1 + the taller side; an empty side is 0."
+			}
+		},
+		{
+			"checkpoint": "auto-tree",
+			"guides": [
+				"java-trees-many-children"
+			]
+		}
+	],
+	"checkpoints": {
+		"bst-insert": {
+			"guide": "java-trees-bst",
+			"hints": [
+				{
+					"never": "Write a helper that takes a node. If the node is null, you've found the empty spot: make a new TeamNode there and return it. Otherwise go left or right, and save what comes back into node.left_ or node.right_.",
+					"bit": "Helper: null means make a new node; otherwise recurse left or right and assign the result back."
+				},
+				{
+					"never": "In insert, set root_ to whatever the helper returns. That's how the very first team becomes the root.",
+					"bit": "root_ = helper(root_, team)."
+				}
+			]
+		},
+		"in-order": {
+			"guide": "java-trees-walk",
+			"hints": [
+				{
+					"never": "Make one list in inOrder, then pass it to a helper. The helper adds the left side, then node.team_, then the right side. A null node adds nothing.",
+					"bit": "One list, a helper: left, add self, right."
+				}
+			]
+		},
+		"height": {
+			"guide": "java-trees-walk",
+			"hints": [
+				{
+					"never": "A null node has height 0. Any other node is 1 plus the bigger of its two sides. Math.max(a, b) gives the bigger one.",
+					"bit": "null is 0; else 1 + Math.max(left, right)."
+				}
+			]
+		},
+		"auto-tree": {
+			"guide": "java-trees-many-children",
+			"hints": [
+				{
+					"never": "A node with no children is one action. A group has no actions of its own: add up countActions() from each child with a for-each loop.",
+					"bit": "No children is 1; otherwise sum the children."
+				},
+				{
+					"never": "For depth, find the deepest child with a loop and add 1 for this node. With no children the loop finds nothing, so the answer is just 1.",
+					"bit": "1 + the deepest child's depth (0 if there are none)."
+				}
+			]
+		}
+	}
+}

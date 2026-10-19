@@ -66,6 +66,9 @@
 			"kind": "git",
 			"subdir": "lessons/git-basics/project",
 			"setupScript": "lessons/git-basics/checkpoints/setup.sh",
+			"recommends": [
+				"editor-basics"
+			],
 			"checkpoints": [
 				{
 					"id": "first-commit",
@@ -536,7 +539,7 @@
 		{
 			"id": "hello-world",
 			"order": 10,
-			"track": "Java Programming",
+			"track": "Java Basics",
 			"title": "Hello, World",
 			"description": "Basic java hello world project",
 			"kind": "plain-java",
@@ -556,12 +559,12 @@
 		{
 			"id": "java-variables",
 			"order": 11,
-			"track": "Java Programming",
+			"track": "Java Basics",
 			"title": "Variables",
 			"description": "Declare variables, define a constant, and define your first enum.",
 			"kind": "plain-java",
 			"subdir": "lessons/java-variables/project",
-			"requires": [
+			"recommends": [
 				"hello-world"
 			],
 			"checkpoints": [
@@ -615,12 +618,12 @@
 		{
 			"id": "java-operators",
 			"order": 12,
-			"track": "Java Programming",
+			"track": "Java Basics",
 			"title": "Operators",
 			"description": "Do arithmetic, conversions, and comparisons with Java's operators.",
 			"kind": "plain-java",
 			"subdir": "lessons/java-operators/project",
-			"requires": [
+			"recommends": [
 				"java-variables"
 			],
 			"checkpoints": [
@@ -683,12 +686,12 @@
 		{
 			"id": "java-conditions",
 			"order": 13,
-			"track": "Java Programming",
+			"track": "Java Basics",
 			"title": "Conditions",
 			"description": "Write if/else chains and switch statements.",
 			"kind": "plain-java",
 			"subdir": "lessons/java-conditions/project",
-			"requires": [
+			"recommends": [
 				"java-operators"
 			],
 			"checkpoints": [
@@ -742,12 +745,12 @@
 		{
 			"id": "java-loops",
 			"order": 14,
-			"track": "Java Programming",
+			"track": "Java Basics",
 			"title": "Loops",
 			"description": "Write for loops instead of the dangerous while loop.",
 			"kind": "plain-java",
 			"subdir": "lessons/java-loops/project",
-			"requires": [
+			"recommends": [
 				"java-conditions"
 			],
 			"checkpoints": [
@@ -783,12 +786,12 @@
 		{
 			"id": "java-arrays",
 			"order": 15,
-			"track": "Java Programming",
+			"track": "Java Basics",
 			"title": "Arrays",
 			"description": "Write methods that take and return arrays.",
 			"kind": "plain-java",
 			"subdir": "lessons/java-arrays/project",
-			"requires": [
+			"recommends": [
 				"java-loops"
 			],
 			"checkpoints": [
@@ -851,12 +854,12 @@
 		{
 			"id": "java-methods",
 			"order": 16,
-			"track": "Java Programming",
+			"track": "Java Basics",
 			"title": "Methods",
 			"description": "Write reusable methods, build new methods on top of them instead of copy-pasting, and practice on a few programming-course classics.",
 			"kind": "plain-java",
 			"subdir": "lessons/java-methods/project",
-			"requires": [
+			"recommends": [
 				"java-arrays"
 			],
 			"checkpoints": [
@@ -919,12 +922,12 @@
 		{
 			"id": "java-classes-objects",
 			"order": 17,
-			"track": "Java Programming",
+			"track": "Java Basics",
 			"title": "Classes & Objects",
 			"description": "Build a small BankAccount class: fields, a constructor, and encapsulation - objects that protect their own state instead of exposing raw data to be mutated directly.",
 			"kind": "plain-java",
 			"subdir": "lessons/java-classes-objects/project",
-			"requires": [
+			"recommends": [
 				"java-methods"
 			],
 			"checkpoints": [
@@ -969,12 +972,12 @@
 		{
 			"id": "java-recursion",
 			"order": 18,
-			"track": "Java Programming",
+			"track": "Java Basics",
 			"title": "Recursion",
 			"description": "Solve a few problems you already solved with loops, using recursion instead - methods that call themselves down to a base case.",
 			"kind": "plain-java",
 			"subdir": "lessons/java-recursion/project",
-			"requires": [
+			"recommends": [
 				"java-methods"
 			],
 			"checkpoints": [
@@ -1019,12 +1022,12 @@
 		{
 			"id": "java-inheritance",
 			"order": 19,
-			"track": "Java Programming",
+			"track": "Java Basics",
 			"title": "Inheritance",
 			"description": "Extend the BankAccount class from Classes & Objects with two subclasses - one that adds a new method, one that overrides an existing one.",
 			"kind": "plain-java",
 			"subdir": "lessons/java-inheritance/project",
-			"requires": [
+			"recommends": [
 				"java-classes-objects"
 			],
 			"checkpoints": [
@@ -1078,6 +1081,11 @@
 				"git-basics",
 				"advantagescope-intro",
 				"elastic-intro"
+			],
+			"recommends": [
+				"editor-basics",
+				"java-variables",
+				"java-operators"
 			],
 			"checkpoints": [
 				{
@@ -1138,6 +1146,9 @@
 			"requires": [
 				"robot-drivetrain"
 			],
+			"recommends": [
+				"java-conditions"
+			],
 			"checkpoints": [
 				{
 					"id": "deadband-and-ifs",
@@ -1196,6 +1207,11 @@
 			"subdir": "lessons/robot-drive-math/project",
 			"requires": [
 				"robot-sensors"
+			],
+			"recommends": [
+				"java-loops",
+				"java-arrays",
+				"java-methods"
 			],
 			"checkpoints": [
 				{
@@ -1292,6 +1308,9 @@
 			"requires": [
 				"robot-drive-math"
 			],
+			"recommends": [
+				"java-classes-objects"
+			],
 			"checkpoints": [
 				{
 					"id": "oi-class",
@@ -1350,6 +1369,9 @@
 			"subdir": "lessons/robot-subsystems/project",
 			"requires": [
 				"robot-odometry"
+			],
+			"recommends": [
+				"java-inheritance"
 			],
 			"checkpoints": [
 				{
@@ -1710,6 +1732,617 @@
 						"topic": "/AdvantageKit/RealOutputs/Check/Subsystem/Shooter/ShotCount/Max",
 						"check": "range",
 						"min": 1
+					}
+				}
+			]
+		},
+		{
+			"id": "java-interfaces",
+			"order": 30,
+			"track": "Java Advanced",
+			"title": "Interfaces & Polymorphism",
+			"description": "Add up a robot's battery draw: write an interface every part promises to follow, an abstract class that shares code between mechanisms, and loops that treat motors, LEDs and intakes all the same way.",
+			"kind": "plain-java",
+			"subdir": "lessons/java-interfaces/project",
+			"recommends": [
+				"java-inheritance"
+			],
+			"checkpoints": [
+				{
+					"id": "power-user",
+					"title": "The PowerUser interface",
+					"description": "PowerUser declares getName() and getAmps(), and Motor and LedStrip implement it.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-interfaces/checkpoints/verify/power-user.sh"
+					}
+				},
+				{
+					"id": "mechanism",
+					"title": "An abstract Mechanism",
+					"description": "Mechanism is an abstract class that implements PowerUser and holds the shared name code; Intake extends it.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-interfaces/checkpoints/verify/mechanism.sh"
+					}
+				},
+				{
+					"id": "total-amps",
+					"title": "Total amps",
+					"description": "PowerBudget.totalAmps adds up getAmps() for every PowerUser in an array, whatever kind it is.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-interfaces/checkpoints/verify/total-amps.sh"
+					}
+				},
+				{
+					"id": "biggest-user",
+					"title": "Biggest user",
+					"description": "PowerBudget.biggestUser returns the name of the part drawing the most amps, or \"none\" for an empty array.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-interfaces/checkpoints/verify/biggest-user.sh"
+					}
+				}
+			]
+		},
+		{
+			"id": "java-collections",
+			"order": 31,
+			"track": "Java Advanced",
+			"title": "Collections",
+			"description": "Keep score at a competition: a list of match scores, a set of every team your scouts saw, and a map from team number to total points. Learn which collection fits which job.",
+			"kind": "plain-java",
+			"subdir": "lessons/java-collections/project",
+			"recommends": [
+				"java-classes-objects"
+			],
+			"checkpoints": [
+				{
+					"id": "match-scores",
+					"title": "A list of scores",
+					"description": "ScoreList keeps scores in an ArrayList<Integer>: addScore, count, average (0.0 when empty) and best (0 when empty).",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-collections/checkpoints/verify/match-scores.sh"
+					}
+				},
+				{
+					"id": "teams-seen",
+					"title": "A set of teams",
+					"description": "TeamsSeen keeps team numbers in a HashSet<Integer>, so countTeams() counts a team once even when it is added twice.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-collections/checkpoints/verify/teams-seen.sh"
+					}
+				},
+				{
+					"id": "team-totals",
+					"title": "A map of totals",
+					"description": "TeamTotals keeps a HashMap<Integer, Integer> from team number to total points; addMatch adds to the total and totalFor returns 0 for an unknown team.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-collections/checkpoints/verify/team-totals.sh"
+					}
+				},
+				{
+					"id": "top-team",
+					"title": "Top team",
+					"description": "TeamTotals.topTeam() returns the team with the highest total, the lower team number on a tie, or -1 with no matches.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-collections/checkpoints/verify/top-team.sh"
+					}
+				}
+			]
+		},
+		{
+			"id": "java-lambdas",
+			"order": 32,
+			"track": "Java Advanced",
+			"title": "Lambdas & Functional Interfaces",
+			"description": "Wire up a robot's buttons and joystick the way real robot code does: write speed filters as lambdas, build new behavior out of old, and bind buttons to actions with method references.",
+			"kind": "plain-java",
+			"subdir": "lessons/java-lambdas/project",
+			"recommends": [
+				"java-interfaces"
+			],
+			"checkpoints": [
+				{
+					"id": "speed-filters",
+					"title": "Speed filters",
+					"description": "SpeedFilter is a @FunctionalInterface with double apply(double speed), and Filters.half(), invert() and deadband(threshold) return lambdas.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-lambdas/checkpoints/verify/speed-filters.sh"
+					}
+				},
+				{
+					"id": "chain",
+					"title": "Chain two filters",
+					"description": "Filters.chain(first, second) returns a lambda that runs first, then runs second on the result.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-lambdas/checkpoints/verify/chain.sh"
+					}
+				},
+				{
+					"id": "bindings",
+					"title": "Button bindings",
+					"description": "ButtonBoard.onTrue remembers a condition and an action, and poll() runs the action once each time its condition goes from false to true.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-lambdas/checkpoints/verify/bindings.sh"
+					}
+				},
+				{
+					"id": "method-refs",
+					"title": "Wire up the robot",
+					"description": "RobotBindings binds A, B and X with method references and a lambda, and driveSpeed() is a DoubleSupplier that reads the stick every time.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-lambdas/checkpoints/verify/method-refs.sh"
+					}
+				}
+			]
+		},
+		{
+			"id": "java-unit-testing",
+			"order": 33,
+			"track": "Java Advanced",
+			"title": "Unit Testing",
+			"description": "Write tests that prove robot math works: check a deadband, a clamp and a unit conversion with @Test and assertEquals, then catch a real shooter bug with a test before you fix it.",
+			"kind": "plain-java",
+			"subdir": "lessons/java-unit-testing/project",
+			"recommends": [
+				"java-methods"
+			],
+			"checkpoints": [
+				{
+					"id": "deadband-tests",
+					"title": "Test deadband",
+					"description": "Your DriveMathTest tests pass on the real deadband and catch every buggy version the checker plants.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-unit-testing/checkpoints/verify/deadband-tests.sh"
+					}
+				},
+				{
+					"id": "clamp-tests",
+					"title": "Test clamp",
+					"description": "Your tests catch a clamp that forgets either end of the range, or mixes up min and max.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-unit-testing/checkpoints/verify/clamp-tests.sh"
+					}
+				},
+				{
+					"id": "conversion-tests",
+					"title": "Test inchesToMeters",
+					"description": "Your tests catch a wrong conversion factor, a dropped fraction and a lost minus sign.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-unit-testing/checkpoints/verify/conversion-tests.sh"
+					}
+				},
+				{
+					"id": "find-the-bug",
+					"title": "Find the bug",
+					"description": "ShooterMathTest has a test that fails on the buggy isAtSpeed, and ShooterMath is fixed so every test passes.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-unit-testing/checkpoints/verify/find-the-bug.sh"
+					}
+				}
+			]
+		},
+		{
+			"id": "java-exceptions",
+			"order": 34,
+			"track": "Java Advanced",
+			"title": "Exceptions",
+			"description": "Read messy scouting text without crashing: throw an exception when the numbers can't be right, write your own checked exception, skip and count the bad lines, and make sure the robot always stops when an auto step fails.",
+			"kind": "plain-java",
+			"subdir": "lessons/java-exceptions/project",
+			"recommends": [
+				"java-classes-objects"
+			],
+			"checkpoints": [
+				{
+					"id": "scout-entry",
+					"title": "Refuse bad numbers",
+					"description": "The ScoutEntry constructor throws an IllegalArgumentException, with a message, for a team or match of 0 or less, or negative points.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-exceptions/checkpoints/verify/scout-entry.sh"
+					}
+				},
+				{
+					"id": "bad-line",
+					"title": "Your own exception",
+					"description": "BadLineException is a checked exception (it extends Exception) that keeps its message and the line number it was made with.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-exceptions/checkpoints/verify/bad-line.sh"
+					}
+				},
+				{
+					"id": "parse-line",
+					"title": "Read one line",
+					"description": "ScoutParser.parseLine turns \"team,match,points\" into a ScoutEntry, and throws a BadLineException for anything it can't read.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-exceptions/checkpoints/verify/parse-line.sh"
+					}
+				},
+				{
+					"id": "parse-all",
+					"title": "Skip and count",
+					"description": "ScoutParser.parseAll reads every line, catching BadLineException to record a bad line's number and keep going. Blank lines are skipped.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-exceptions/checkpoints/verify/parse-all.sh"
+					}
+				},
+				{
+					"id": "safe-auto",
+					"title": "Always stop",
+					"description": "SafeAuto.runStep returns true when a step finishes and false when it throws, and stops the drivetrain in a finally block either way.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-exceptions/checkpoints/verify/safe-auto.sh"
+					}
+				}
+			]
+		},
+		{
+			"id": "java-generics",
+			"order": 35,
+			"track": "Java Advanced",
+			"title": "Generics",
+			"description": "Write code once and use it for any type: a Pair that holds a team and its nickname, a RingBuffer that keeps the last few sensor readings, and methods that work on a list of anything, or anything that can be compared.",
+			"kind": "plain-java",
+			"subdir": "lessons/java-generics/project",
+			"recommends": [
+				"java-collections"
+			],
+			"checkpoints": [
+				{
+					"id": "pair",
+					"title": "A generic Pair",
+					"description": "Pair<A, B> holds two values of any two types: Pair(A first, B second), getFirst() and getSecond().",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-generics/checkpoints/verify/pair.sh"
+					}
+				},
+				{
+					"id": "ring-buffer",
+					"title": "A RingBuffer of anything",
+					"description": "RingBuffer<T> keeps only the newest capacity items: add drops the oldest when it's full; size, get (0 = oldest) and latest (null when empty).",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-generics/checkpoints/verify/ring-buffer.sh"
+					}
+				},
+				{
+					"id": "last-or-default",
+					"title": "A generic method",
+					"description": "ListTools.lastOrDefault is <T> T lastOrDefault(List<T> items, T fallback): the last item, or fallback for an empty list.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-generics/checkpoints/verify/last-or-default.sh"
+					}
+				},
+				{
+					"id": "bounded-max",
+					"title": "A bounded type",
+					"description": "ListTools.max is <T extends Comparable<T>> T max(List<T> items): the biggest item by compareTo, the first one on a tie, or null for an empty list.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-generics/checkpoints/verify/bounded-max.sh"
+					}
+				}
+			]
+		},
+		{
+			"id": "java-big-o",
+			"order": 36,
+			"track": "Java Advanced",
+			"title": "Big-O & Efficiency",
+			"description": "Count the steps your code takes. Sort snippets into O(1), O(log n), O(n) and O(n²), then speed up a scouting app's duplicate-team check from millions of steps to a few thousand with a HashSet.",
+			"kind": "plain-java",
+			"subdir": "lessons/java-big-o/project",
+			"recommends": [
+				"java-collections"
+			],
+			"checkpoints": [
+				{
+					"id": "classify",
+					"title": "Classify the snippets",
+					"description": "Every snippet in Answers.java is marked CONSTANT, LOG_N, LINEAR or N_SQUARED correctly.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-big-o/checkpoints/verify/classify.sh"
+					}
+				},
+				{
+					"id": "latest-and-best",
+					"title": "One step, one pass",
+					"description": "ScoutStats.latest returns the last score in one look (O(1)) and ScoutStats.best returns the highest in one pass (O(n)); both return 0 for an empty list.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-big-o/checkpoints/verify/latest-and-best.sh"
+					}
+				},
+				{
+					"id": "fast-duplicates",
+					"title": "A fast duplicate check",
+					"description": "Duplicates.hasDuplicate gives the same answer as hasDuplicateSlow, but looks at each team only once by using a HashSet (O(n) instead of O(n²)).",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-big-o/checkpoints/verify/fast-duplicates.sh"
+					}
+				},
+				{
+					"id": "teams-in-both",
+					"title": "Teams at both events",
+					"description": "EventOverlap.teamsInBoth counts the different teams that appear in both lists, in O(n + m) steps.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-big-o/checkpoints/verify/teams-in-both.sh"
+					}
+				}
+			]
+		},
+		{
+			"id": "java-search-sort",
+			"order": 37,
+			"track": "Java Advanced",
+			"title": "Searching & Sorting",
+			"description": "Find a team in a long list, first one item at a time and then by halving with binary search. Sort scouted teams by score with a sort you write yourself, then rank them the way real code does, with List.sort and a Comparator.",
+			"kind": "plain-java",
+			"subdir": "lessons/java-search-sort/project",
+			"recommends": [
+				"java-big-o"
+			],
+			"checkpoints": [
+				{
+					"id": "linear-search",
+					"title": "Linear search",
+					"description": "Search.indexOf returns the index of the first matching team, or -1, and stops looking as soon as it finds one.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-search-sort/checkpoints/verify/linear-search.sh"
+					}
+				},
+				{
+					"id": "binary-search",
+					"title": "Binary search",
+					"description": "Search.binarySearch finds a team in a sorted list, or returns -1, in about log2(n) looks, with a loop you write yourself.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-search-sort/checkpoints/verify/binary-search.sh"
+					}
+				},
+				{
+					"id": "sort-by-hand",
+					"title": "Sort it yourself",
+					"description": "Sorting.sortByScore puts an array of teams in order, highest score first, with a selection or insertion sort written by hand.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-search-sort/checkpoints/verify/sort-by-hand.sh"
+					}
+				},
+				{
+					"id": "rankings",
+					"title": "Rankings with a Comparator",
+					"description": "Sorting.rankings returns a new list ranked by score, highest first, with ties going to the lower team number, and leaves the list it was given alone.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-search-sort/checkpoints/verify/rankings.sh"
+					}
+				}
+			]
+		},
+		{
+			"id": "java-stacks-queues",
+			"order": 38,
+			"track": "Java Advanced",
+			"title": "Stacks & Queues",
+			"description": "Give the dashboard an Undo button, catch bracket typos in a typed-in auto, run auto steps in order, and build the indexer's line of game pieces by hand. Learn when the newest thing comes out first and when the oldest does.",
+			"kind": "plain-java",
+			"subdir": "lessons/java-stacks-queues/project",
+			"recommends": [
+				"java-collections"
+			],
+			"checkpoints": [
+				{
+					"id": "undo-stack",
+					"title": "Undo with a stack",
+					"description": "SettingHistory keeps old values in an ArrayDeque used as a stack: set saves the old value, undo goes back to the newest saved one (and does nothing when there is none), undoCount counts them.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-stacks-queues/checkpoints/verify/undo-stack.sh"
+					}
+				},
+				{
+					"id": "brackets",
+					"title": "Balanced brackets",
+					"description": "AutoParser.isBalanced uses a stack to check that every ( [ { in an auto string is closed by its own kind of bracket, in the right order.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-stacks-queues/checkpoints/verify/brackets.sh"
+					}
+				},
+				{
+					"id": "step-queue",
+					"title": "Auto steps in a queue",
+					"description": "AutoQueue keeps steps in an ArrayDeque used as a queue: nextStep returns the oldest step first, and \"done\" when none are left.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-stacks-queues/checkpoints/verify/step-queue.sh"
+					}
+				},
+				{
+					"id": "indexer",
+					"title": "A queue by hand",
+					"description": "IndexerQueue is a fixed-size queue built on a plain array: load refuses when full, fire returns the oldest piece (or \"empty\"), and the slots wrap round to the start.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-stacks-queues/checkpoints/verify/indexer.sh"
+					}
+				}
+			]
+		},
+		{
+			"id": "java-trees",
+			"order": 39,
+			"track": "Java Advanced",
+			"title": "Trees",
+			"description": "Keep every team at the event in a binary search tree that stays sorted as you add to it, then count the actions in an auto shaped like the robot's behavior trees. Recursion does the walking.",
+			"kind": "plain-java",
+			"subdir": "lessons/java-trees/project",
+			"recommends": [
+				"java-recursion",
+				"java-stacks-queues"
+			],
+			"checkpoints": [
+				{
+					"id": "bst-insert",
+					"title": "Insert and find",
+					"description": "TeamTree.insert puts lower team numbers to the left and higher ones to the right (no repeats); contains and size work on any tree.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-trees/checkpoints/verify/bst-insert.sh"
+					}
+				},
+				{
+					"id": "in-order",
+					"title": "In order",
+					"description": "TeamTree.inOrder returns every team, lowest number first, by visiting left, node, right.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-trees/checkpoints/verify/in-order.sh"
+					}
+				},
+				{
+					"id": "height",
+					"title": "Height",
+					"description": "TeamTree.height counts the nodes on the longest path from the root down: 0 for an empty tree, 1 for one team.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-trees/checkpoints/verify/height.sh"
+					}
+				},
+				{
+					"id": "auto-tree",
+					"title": "An auto tree",
+					"description": "AutoNode.countActions counts the nodes with no children, and AutoNode.depth measures the longest path down, in a tree where a node can have any number of children.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-trees/checkpoints/verify/auto-tree.sh"
+					}
+				}
+			]
+		},
+		{
+			"id": "java-graphs",
+			"order": 40,
+			"track": "Java Advanced",
+			"title": "Graphs",
+			"description": "Map the field as waypoints joined by lanes, then search it: find out whether the robot can get somewhere at all, the path with the fewest hops, and which waypoints a blocked lane cuts off.",
+			"kind": "plain-java",
+			"subdir": "lessons/java-graphs/project",
+			"recommends": [
+				"java-trees"
+			],
+			"checkpoints": [
+				{
+					"id": "field-map",
+					"title": "The field map",
+					"description": "FieldMap keeps a Map<String, List<String>> of waypoints. connect(a, b) joins two waypoints both ways, once, and neighbors() never returns null.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-graphs/checkpoints/verify/field-map.sh"
+					}
+				},
+				{
+					"id": "can-reach",
+					"title": "Can the robot get there?",
+					"description": "PathFinder.canReach searches the map, remembering where it has been, and says whether one waypoint can be reached from another.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-graphs/checkpoints/verify/can-reach.sh"
+					}
+				},
+				{
+					"id": "shortest-path",
+					"title": "Fewest hops",
+					"description": "PathFinder.shortestPath uses a breadth-first search to return a path with the fewest hops, or an empty list when there isn't one.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-graphs/checkpoints/verify/shortest-path.sh"
+					}
+				},
+				{
+					"id": "cut-off",
+					"title": "Cut off",
+					"description": "PathFinder.unreachable lists, in alphabetical order, every waypoint the robot can't get to from where it starts.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-graphs/checkpoints/verify/cut-off.sh"
+					}
+				}
+			]
+		},
+		{
+			"id": "java-design-patterns",
+			"order": 41,
+			"track": "Java Advanced",
+			"title": "Design Patterns",
+			"description": "Use three named shapes for classes on a pretend robot: swap drive modes with Strategy, tell the LEDs and intake about a game piece with Observer, and build the right auto from its name with Factory.",
+			"kind": "plain-java",
+			"subdir": "lessons/java-design-patterns/project",
+			"recommends": [
+				"java-interfaces",
+				"java-lambdas"
+			],
+			"checkpoints": [
+				{
+					"id": "drive-modes",
+					"title": "Two drive modes",
+					"description": "TankDrive and ArcadeDrive implement DriveMode; arcade mixes forward and turn and clamps each side between -1 and 1.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-design-patterns/checkpoints/verify/drive-modes.sh"
+					}
+				},
+				{
+					"id": "swap-modes",
+					"title": "Swap the strategy",
+					"description": "Drivetrain holds a DriveMode, drives with whichever one it has, and switches with setMode (ignoring null).",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-design-patterns/checkpoints/verify/swap-modes.sh"
+					}
+				},
+				{
+					"id": "listeners",
+					"title": "Tell the listeners",
+					"description": "BeamBreak adds and removes listeners, and update() tells each of them, in order, only when the reading changes.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-design-patterns/checkpoints/verify/listeners.sh"
+					}
+				},
+				{
+					"id": "auto-factory",
+					"title": "The auto factory",
+					"description": "AutoFactory.create builds a new auto from a dashboard name, ignoring case and spaces, with Do nothing for anything it doesn't know.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-design-patterns/checkpoints/verify/auto-factory.sh"
 					}
 				}
 			]
@@ -2792,6 +3425,42 @@
 			"path": "lessons/robot-control-theory/guides/robot-control-tuning.json"
 		},
 		{
+			"id": "java-interfaces-contract",
+			"title": "Interfaces: a promise",
+			"summary": "An interface lists methods; implements is a class promising to have them.",
+			"topic": "Java",
+			"order": 501,
+			"modules": [
+				"java-interfaces"
+			],
+			"kind": "mixed",
+			"path": "lessons/java-interfaces/guides/java-interfaces-contract.json"
+		},
+		{
+			"id": "java-interfaces-abstract",
+			"title": "Abstract classes",
+			"summary": "Share code between subclasses and leave a method for each of them to write.",
+			"topic": "Java",
+			"order": 502,
+			"modules": [
+				"java-interfaces"
+			],
+			"kind": "mixed",
+			"path": "lessons/java-interfaces/guides/java-interfaces-abstract.json"
+		},
+		{
+			"id": "java-interfaces-polymorphism",
+			"title": "One loop, every kind",
+			"summary": "Loop over PowerUsers and let each object answer for itself.",
+			"topic": "Java",
+			"order": 503,
+			"modules": [
+				"java-interfaces"
+			],
+			"kind": "mixed",
+			"path": "lessons/java-interfaces/guides/java-interfaces-polymorphism.json"
+		},
+		{
 			"id": "robot-state-machines-states",
 			"title": "States and transitions",
 			"summary": "IDLE, SPIN_UP, SHOOT, and the rules between them.",
@@ -2840,6 +3509,18 @@
 			"path": "lessons/robot-state-machines/guides/robot-state-machines-robot-states.json"
 		},
 		{
+			"id": "java-collections-list",
+			"title": "Lists: ArrayList",
+			"summary": "A list that grows as you add to it, and why it holds Integer instead of int.",
+			"topic": "Java",
+			"order": 511,
+			"modules": [
+				"java-collections"
+			],
+			"kind": "mixed",
+			"path": "lessons/java-collections/guides/java-collections-list.json"
+		},
+		{
 			"id": "robot-computer-vision-add-vision",
 			"title": "Add the camera measurement",
 			"summary": "Give each camera tag solution to the pose estimator, then see how close the estimate gets.",
@@ -2876,6 +3557,18 @@
 			"path": "lessons/robot-state-machines/guides/robot-state-machines-robot-states-assist.json"
 		},
 		{
+			"id": "java-collections-set",
+			"title": "Sets: HashSet",
+			"summary": "A collection with no repeats, and how to pick a list, a set or a map.",
+			"topic": "Java",
+			"order": 512,
+			"modules": [
+				"java-collections"
+			],
+			"kind": "mixed",
+			"path": "lessons/java-collections/guides/java-collections-set.json"
+		},
+		{
 			"id": "robot-computer-vision-trust",
 			"title": "How much should I trust the camera?",
 			"summary": "What the standard deviations, the timestamp and the heading do to the estimate.",
@@ -2898,6 +3591,18 @@
 			],
 			"kind": "assist",
 			"path": "lessons/robot-state-machines/guides/robot-state-machines-shooter-states-assist.json"
+		},
+		{
+			"id": "java-collections-map",
+			"title": "Maps: HashMap",
+			"summary": "Look up a value by its key, start missing keys at a default, and loop over every key.",
+			"topic": "Java",
+			"order": 513,
+			"modules": [
+				"java-collections"
+			],
+			"kind": "mixed",
+			"path": "lessons/java-collections/guides/java-collections-map.json"
 		},
 		{
 			"id": "robot-computer-vision-aim",
@@ -2948,6 +3653,42 @@
 			"path": "lessons/robot-computer-vision/guides/robot-computer-vision-aim-damping.json"
 		},
 		{
+			"id": "java-lambdas-functional",
+			"title": "Lambdas: code in a variable",
+			"summary": "A functional interface has one method; a lambda is a short way to write it.",
+			"topic": "Java",
+			"order": 521,
+			"modules": [
+				"java-lambdas"
+			],
+			"kind": "mixed",
+			"path": "lessons/java-lambdas/guides/java-lambdas-functional.json"
+		},
+		{
+			"id": "java-lambdas-chain",
+			"title": "Behavior from behavior",
+			"summary": "A method can take lambdas in and hand a new lambda back.",
+			"topic": "Java",
+			"order": 522,
+			"modules": [
+				"java-lambdas"
+			],
+			"kind": "mixed",
+			"path": "lessons/java-lambdas/guides/java-lambdas-chain.json"
+		},
+		{
+			"id": "java-lambdas-bindings",
+			"title": "Buttons, suppliers and method references",
+			"summary": "Runnable and BooleanSupplier bind buttons to actions; method references name a method to run later.",
+			"topic": "Java",
+			"order": 523,
+			"modules": [
+				"java-lambdas"
+			],
+			"kind": "mixed",
+			"path": "lessons/java-lambdas/guides/java-lambdas-bindings.json"
+		},
+		{
 			"id": "robot-autonomous-autos-concept",
 			"title": "Autos = paths + a tree",
 			"summary": "What an autonomous routine is: Choreo paths, a behavior tree that runs them, and a pose estimate that is close but not perfect.",
@@ -2973,6 +3714,42 @@
 			],
 			"kind": "mixed",
 			"path": "lessons/robot-autonomous/guides/robot-autonomous-draw-paths.json"
+		},
+		{
+			"id": "java-unit-testing-assert",
+			"title": "Writing a test",
+			"summary": "A test calls your code with a known input and checks the answer with assertEquals.",
+			"topic": "Java",
+			"order": 531,
+			"modules": [
+				"java-unit-testing"
+			],
+			"kind": "mixed",
+			"path": "lessons/java-unit-testing/guides/java-unit-testing-assert.json"
+		},
+		{
+			"id": "java-unit-testing-edges",
+			"title": "Tests that catch bugs",
+			"summary": "Good tests try the edges: zero, negatives, exactly-on-the-line values and both sides.",
+			"topic": "Java",
+			"order": 532,
+			"modules": [
+				"java-unit-testing"
+			],
+			"kind": "mixed",
+			"path": "lessons/java-unit-testing/guides/java-unit-testing-edges.json"
+		},
+		{
+			"id": "java-unit-testing-red-green",
+			"title": "Test first, then fix",
+			"summary": "Write a failing test that shows the bug, then fix the code until it passes.",
+			"topic": "Java",
+			"order": 533,
+			"modules": [
+				"java-unit-testing"
+			],
+			"kind": "mixed",
+			"path": "lessons/java-unit-testing/guides/java-unit-testing-red-green.json"
 		},
 		{
 			"id": "robot-autonomous-build-tree",
@@ -3012,6 +3789,294 @@
 			],
 			"kind": "mixed",
 			"path": "lessons/robot-autonomous/guides/robot-autonomous-run-and-watch.json"
+		},
+		{
+			"id": "java-exceptions-throw",
+			"title": "Throwing an exception",
+			"summary": "When a value can't be right, throw an exception instead of quietly keeping it.",
+			"topic": "Java",
+			"order": 541,
+			"modules": [
+				"java-exceptions"
+			],
+			"kind": "mixed",
+			"path": "lessons/java-exceptions/guides/java-exceptions-throw.json"
+		},
+		{
+			"id": "java-exceptions-custom",
+			"title": "Your own exception",
+			"summary": "Make an exception class of your own, and learn checked from unchecked.",
+			"topic": "Java",
+			"order": 542,
+			"modules": [
+				"java-exceptions"
+			],
+			"kind": "mixed",
+			"path": "lessons/java-exceptions/guides/java-exceptions-custom.json"
+		},
+		{
+			"id": "java-exceptions-catch",
+			"title": "Catch it and keep going",
+			"summary": "try and catch handle an exception; finally runs no matter what.",
+			"topic": "Java",
+			"order": 543,
+			"modules": [
+				"java-exceptions"
+			],
+			"kind": "mixed",
+			"path": "lessons/java-exceptions/guides/java-exceptions-catch.json"
+		},
+		{
+			"id": "java-generics-class",
+			"title": "A generic class",
+			"summary": "Give a class a type parameter, like <T>, so one class works for any type.",
+			"topic": "Java",
+			"order": 551,
+			"modules": [
+				"java-generics"
+			],
+			"kind": "mixed",
+			"path": "lessons/java-generics/guides/java-generics-class.json"
+		},
+		{
+			"id": "java-generics-method",
+			"title": "A generic method",
+			"summary": "A method can have its own type parameter, so it works on a list of anything.",
+			"topic": "Java",
+			"order": 552,
+			"modules": [
+				"java-generics"
+			],
+			"kind": "mixed",
+			"path": "lessons/java-generics/guides/java-generics-method.json"
+		},
+		{
+			"id": "java-generics-bounded",
+			"title": "A bounded type",
+			"summary": "<T extends Comparable<T>> lets a generic method compare its items.",
+			"topic": "Java",
+			"order": 553,
+			"modules": [
+				"java-generics"
+			],
+			"kind": "mixed",
+			"path": "lessons/java-generics/guides/java-generics-bounded.json"
+		},
+		{
+			"id": "java-big-o-steps",
+			"title": "Counting steps",
+			"summary": "Count how many times code looks at an item, and see O(1) and O(n).",
+			"topic": "Java",
+			"order": 561,
+			"modules": [
+				"java-big-o"
+			],
+			"kind": "mixed",
+			"path": "lessons/java-big-o/guides/java-big-o-steps.json"
+		},
+		{
+			"id": "java-big-o-growth",
+			"title": "How steps grow",
+			"summary": "Loops inside loops are O(n²), halving is O(log n), and Big-O keeps only the shape.",
+			"topic": "Java",
+			"order": 562,
+			"modules": [
+				"java-big-o"
+			],
+			"kind": "mixed",
+			"path": "lessons/java-big-o/guides/java-big-o-growth.json"
+		},
+		{
+			"id": "java-big-o-hashset",
+			"title": "Trade a loop for a HashSet",
+			"summary": "Turn an O(n²) check into O(n) by remembering what you've seen in a HashSet.",
+			"topic": "Java",
+			"order": 563,
+			"modules": [
+				"java-big-o"
+			],
+			"kind": "mixed",
+			"path": "lessons/java-big-o/guides/java-big-o-hashset.json"
+		},
+		{
+			"id": "java-search-sort-searching",
+			"title": "Linear and binary search",
+			"summary": "Check items one by one, or halve a sorted list with every look.",
+			"topic": "Java",
+			"order": 571,
+			"modules": [
+				"java-search-sort"
+			],
+			"kind": "mixed",
+			"path": "lessons/java-search-sort/guides/java-search-sort-searching.json"
+		},
+		{
+			"id": "java-search-sort-by-hand",
+			"title": "Sorting by hand",
+			"summary": "Selection sort and insertion sort, and how to swap two items.",
+			"topic": "Java",
+			"order": 572,
+			"modules": [
+				"java-search-sort"
+			],
+			"kind": "mixed",
+			"path": "lessons/java-search-sort/guides/java-search-sort-by-hand.json"
+		},
+		{
+			"id": "java-search-sort-comparator",
+			"title": "Sorting with a Comparator",
+			"summary": "Let List.sort do the work, and say what order you want with a Comparator.",
+			"topic": "Java",
+			"order": 573,
+			"modules": [
+				"java-search-sort"
+			],
+			"kind": "mixed",
+			"path": "lessons/java-search-sort/guides/java-search-sort-comparator.json"
+		},
+		{
+			"id": "java-stacks-queues-stack",
+			"title": "Stacks: newest first",
+			"summary": "A stack takes things off in the reverse order they went on: push, pop and peek on an ArrayDeque.",
+			"topic": "Java",
+			"order": 581,
+			"modules": [
+				"java-stacks-queues"
+			],
+			"kind": "mixed",
+			"path": "lessons/java-stacks-queues/guides/java-stacks-queues-stack.json"
+		},
+		{
+			"id": "java-stacks-queues-queue",
+			"title": "Queues: oldest first",
+			"summary": "A queue hands things out in the order they arrived: offer and poll on an ArrayDeque.",
+			"topic": "Java",
+			"order": 582,
+			"modules": [
+				"java-stacks-queues"
+			],
+			"kind": "mixed",
+			"path": "lessons/java-stacks-queues/guides/java-stacks-queues-queue.json"
+		},
+		{
+			"id": "java-stacks-queues-by-hand",
+			"title": "A queue by hand",
+			"summary": "Build a fixed-size queue on a plain array, with a front index, a count and % to wrap round.",
+			"topic": "Java",
+			"order": 583,
+			"modules": [
+				"java-stacks-queues"
+			],
+			"kind": "mixed",
+			"path": "lessons/java-stacks-queues/guides/java-stacks-queues-by-hand.json"
+		},
+		{
+			"id": "java-trees-bst",
+			"title": "Binary search trees",
+			"summary": "Smaller goes left, bigger goes right: inserting and finding by walking down one path, with recursion.",
+			"topic": "Java",
+			"order": 591,
+			"modules": [
+				"java-trees"
+			],
+			"kind": "mixed",
+			"path": "lessons/java-trees/guides/java-trees-bst.json"
+		},
+		{
+			"id": "java-trees-walk",
+			"title": "Walking a whole tree",
+			"summary": "Visit every node with left, node, right recursion to get a sorted list, and measure height from the bottom up.",
+			"topic": "Java",
+			"order": 592,
+			"modules": [
+				"java-trees"
+			],
+			"kind": "mixed",
+			"path": "lessons/java-trees/guides/java-trees-walk.json"
+		},
+		{
+			"id": "java-trees-many-children",
+			"title": "Trees with many children",
+			"summary": "A node with a list of children, like a behavior tree: count the leaves and find the depth with a loop inside recursion.",
+			"topic": "Java",
+			"order": 593,
+			"modules": [
+				"java-trees"
+			],
+			"kind": "mixed",
+			"path": "lessons/java-trees/guides/java-trees-many-children.json"
+		},
+		{
+			"id": "java-graphs-adjacency",
+			"title": "Graphs and adjacency lists",
+			"summary": "A graph is spots joined by links; an adjacency list maps each spot to its neighbors.",
+			"topic": "Java",
+			"order": 601,
+			"modules": [
+				"java-graphs"
+			],
+			"kind": "mixed",
+			"path": "lessons/java-graphs/guides/java-graphs-adjacency.json"
+		},
+		{
+			"id": "java-graphs-dfs",
+			"title": "Searching a graph",
+			"summary": "Visit neighbors of neighbors, and remember where you've been so loops don't trap you.",
+			"topic": "Java",
+			"order": 602,
+			"modules": [
+				"java-graphs"
+			],
+			"kind": "mixed",
+			"path": "lessons/java-graphs/guides/java-graphs-dfs.json"
+		},
+		{
+			"id": "java-graphs-bfs",
+			"title": "Fewest hops: breadth-first search",
+			"summary": "A queue visits everything 1 hop away, then 2, then 3, so the first time you reach a node is the shortest way.",
+			"topic": "Java",
+			"order": 603,
+			"modules": [
+				"java-graphs"
+			],
+			"kind": "mixed",
+			"path": "lessons/java-graphs/guides/java-graphs-bfs.json"
+		},
+		{
+			"id": "java-design-patterns-strategy",
+			"title": "Strategy: swap how it works",
+			"summary": "Hold a job behind an interface, so a different class can be swapped in without changing the code that uses it.",
+			"topic": "Java",
+			"order": 611,
+			"modules": [
+				"java-design-patterns"
+			],
+			"kind": "mixed",
+			"path": "lessons/java-design-patterns/guides/java-design-patterns-strategy.json"
+		},
+		{
+			"id": "java-design-patterns-observer",
+			"title": "Observer: tell everyone who's listening",
+			"summary": "Keep a list of listeners and call each one when something changes, so the thing that changes doesn't need to know who cares.",
+			"topic": "Java",
+			"order": 612,
+			"modules": [
+				"java-design-patterns"
+			],
+			"kind": "mixed",
+			"path": "lessons/java-design-patterns/guides/java-design-patterns-observer.json"
+		},
+		{
+			"id": "java-design-patterns-factory",
+			"title": "Factory: build the right object from a name",
+			"summary": "One method turns a name into the right object, so the rest of the code never has to know which classes exist.",
+			"topic": "Java",
+			"order": 613,
+			"modules": [
+				"java-design-patterns"
+			],
+			"kind": "mixed",
+			"path": "lessons/java-design-patterns/guides/java-design-patterns-factory.json"
 		}
 	]
 }

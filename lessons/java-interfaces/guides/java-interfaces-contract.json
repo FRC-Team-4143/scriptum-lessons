@@ -1,0 +1,168 @@
+{
+	"title": "Interfaces: a promise",
+	"summary": "An interface lists methods; implements is a class promising to have them.",
+	"topic": "Java",
+	"order": 501,
+	"kind": "mixed",
+	"steps": [
+		{
+			"title": "A promise, not a class",
+			"say": {
+				"never": "A wall charger doesn't care whether you plug in a phone, a tablet or headphones. It only needs the thing to *be chargeable*. In Java that idea is an **interface**: a list of methods with no code inside them. It says \"anything that signs up will have these methods\".",
+				"bit": "An **interface** lists methods with no bodies. It's a promise: every class that signs up will have these methods."
+			},
+			"board": {
+				"code": "public interface Chargeable {\n    String getLabel();\n    int getBatteryPercent();\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "interface",
+						"label": "not a class"
+					},
+					{
+						"text": "int getBatteryPercent();",
+						"label": "no body, just a semicolon"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: A promise, not a class",
+			"say": {
+				"never": "`PowerUser` is the promise for this lesson: anything that draws current from the battery has a name and an amount of amps. Each method ends with a semicolon instead of `{ }`, because the interface doesn't say *how*, only *what*.",
+				"bit": "`PowerUser` promises `getName()` and `getAmps()`. Semicolons, no bodies."
+			},
+			"board": {
+				"code": "public interface PowerUser {\n    String getName();\n    double getAmps();\n}",
+				"marks": [
+					{
+						"text": "double getAmps();",
+						"label": "every PowerUser has this"
+					}
+				]
+			},
+			"assist": true
+		},
+		{
+			"title": "Signing up with implements",
+			"say": {
+				"never": "A class signs the promise with `implements`. Now it *has to* write every method the interface lists, or Java won't compile it. `@Override` on each one tells Java \"this is one of the promised methods\", so a typo in the name becomes an error instead of a silent bug.",
+				"bit": "`implements Chargeable` signs the promise. The class must write every listed method; mark each with `@Override`."
+			},
+			"board": {
+				"code": "public class Headphones implements Chargeable {\n    protected int percent_;\n\n    @Override\n    public int getBatteryPercent() {\n        return percent_;\n    }\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "implements Chargeable",
+						"label": "signs the promise"
+					},
+					{
+						"text": "@Override",
+						"label": "one of the promised methods"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Signing up with implements",
+			"say": {
+				"never": "`Motor` signs up with `implements PowerUser`, then keeps the promise by writing `getName()` and `getAmps()`. They just hand back the fields the constructor already filled in.",
+				"bit": "`Motor implements PowerUser` and writes both methods, returning its fields."
+			},
+			"board": {
+				"code": "public class Motor implements PowerUser {\n    @Override\n    public double getAmps() {\n        return amps_;\n    }\n}",
+				"marks": [
+					{
+						"text": "implements PowerUser",
+						"label": "Motor is a PowerUser"
+					}
+				]
+			},
+			"assist": true
+		},
+		{
+			"title": "One type, many classes",
+			"say": {
+				"never": "Here's the payoff. A variable of type `Chargeable` can hold headphones, a phone or anything else that signed up, and you can call the promised methods on it without knowing which one it really is.",
+				"bit": "A `Chargeable` variable can hold any class that implements it."
+			},
+			"board": {
+				"code": "Chargeable thing = new Headphones();\nSystem.out.println(thing.getBatteryPercent());",
+				"language": "java",
+				"marks": [
+					{
+						"text": "Chargeable thing",
+						"label": "the promise, not the class"
+					}
+				]
+			}
+		},
+		{
+			"title": "Open PowerUser.java",
+			"say": {
+				"never": "Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `PowerUser`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "Press **Ctrl+P**, type `PowerUser` and press Enter."
+			},
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "PowerUser.java"
+				},
+				"hint": "open PowerUser.java with Ctrl+P.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Find it",
+			"say": {
+				"never": "It may be further down. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `public interface PowerUser` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "Press **Ctrl+F**, type `public interface PowerUser` and press Enter to jump to it."
+			},
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "public interface PowerUser"
+				},
+				"hint": "find public interface PowerUser with Ctrl+F.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Your turn",
+			"say": {
+				"never": "Your turn! Inside the braces, declare `String getName();` and `double getAmps();`. Then open `Motor.java` and `LedStrip.java`, add `implements PowerUser` to each, and write their two methods.",
+				"bit": "Declare the two methods here, then implement them in Motor and LedStrip."
+			},
+			"waitFor": {
+				"hint": {
+					"never": "write PowerUser, Motor and LedStrip.",
+					"bit": "write PowerUser, Motor and LedStrip."
+				}
+			},
+			"cardAt": "bottom-right",
+			"assist": true
+		}
+	]
+}

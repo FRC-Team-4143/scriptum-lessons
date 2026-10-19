@@ -1,0 +1,48 @@
+{
+	"title": "Stacks & Queues",
+	"description": "Give the dashboard an Undo button, catch bracket typos in a typed-in auto, run auto steps in order, and build the indexer's line of game pieces by hand. Learn when the newest thing comes out first and when the oldest does.",
+	"kind": "plain-java",
+	"track": "Java Advanced",
+	"order": 38,
+	"recommends": [
+		"java-collections"
+	],
+	"checkpoints": [
+		{
+			"id": "undo-stack",
+			"title": "Undo with a stack",
+			"description": "SettingHistory keeps old values in an ArrayDeque used as a stack: set saves the old value, undo goes back to the newest saved one (and does nothing when there is none), undoCount counts them.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/undo-stack.sh"
+			}
+		},
+		{
+			"id": "brackets",
+			"title": "Balanced brackets",
+			"description": "AutoParser.isBalanced uses a stack to check that every ( [ { in an auto string is closed by its own kind of bracket, in the right order.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/brackets.sh"
+			}
+		},
+		{
+			"id": "step-queue",
+			"title": "Auto steps in a queue",
+			"description": "AutoQueue keeps steps in an ArrayDeque used as a queue: nextStep returns the oldest step first, and \"done\" when none are left.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/step-queue.sh"
+			}
+		},
+		{
+			"id": "indexer",
+			"title": "A queue by hand",
+			"description": "IndexerQueue is a fixed-size queue built on a plain array: load refuses when full, fire returns the oldest piece (or \"empty\"), and the slots wrap round to the start.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/indexer.sh"
+			}
+		}
+	]
+}

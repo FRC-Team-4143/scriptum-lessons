@@ -1,0 +1,151 @@
+{
+	"title": "Strategy: swap how it works",
+	"summary": "Hold a job behind an interface, so a different class can be swapped in without changing the code that uses it.",
+	"topic": "Java",
+	"order": 611,
+	"kind": "mixed",
+	"steps": [
+		{
+			"title": "One job, many ways",
+			"say": {
+				"never": "A maps app can plan your trip by car, by bike or on foot. The app doesn't have three copies of its code. It holds one **strategy** for working out the route, and you swap which one it uses. In Java, the strategy is an interface, each way of doing the job is a class that implements it, and the code that uses it only ever talks to the interface.",
+				"bit": "**Strategy**: an interface for the job, one class per way of doing it, and code that only knows the interface."
+			},
+			"board": {
+				"code": "public interface RouteStyle {\n    double minutes(double km);\n}\n\npublic class ByBike implements RouteStyle {\n    @Override\n    public double minutes(double km) {\n        return km * 4.0;\n    }\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "RouteStyle",
+						"label": "the job"
+					},
+					{
+						"text": "implements RouteStyle",
+						"label": "one way to do it"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: One job, many ways",
+			"say": {
+				"never": "`DriveMode` is the job: turn a `Gamepad` reading into `WheelSpeeds`. `TankDrive` and `ArcadeDrive` are two ways of doing it. Each one needs `implements DriveMode`, a `getName()`, and a `calculate(Gamepad pad)` that builds a `new WheelSpeeds(left, right)`. For arcade, work out both sides, then keep each one between `-1.0` and `1.0` with `Math.max` and `Math.min`.",
+				"bit": "`TankDrive` and `ArcadeDrive` implement `DriveMode`: `getName()` and `calculate(pad)`. Arcade clamps each side."
+			},
+			"board": {
+				"code": "public class ArcadeDrive implements DriveMode {\n    @Override\n    public WheelSpeeds calculate(Gamepad pad) {\n        // forward + turn, forward - turn, each clamped\n    }\n}",
+				"marks": [
+					{
+						"text": "implements DriveMode",
+						"label": "one strategy"
+					}
+				]
+			},
+			"assist": true
+		},
+		{
+			"title": "Hold it by its interface",
+			"say": {
+				"never": "The code that *uses* a strategy keeps it in a field whose type is the interface, not a class. Then any strategy fits in that field, and a setter can swap it while the program runs. The method that does the work just calls the interface's method. It never asks \"which one are you?\", so a brand-new strategy written next year works without changing a line.",
+				"bit": "Keep the strategy in a field of the interface type, swap it with a setter, and just call its method."
+			},
+			"board": {
+				"code": "public class MapsApp {\n    protected RouteStyle style_;\n\n    public void setStyle(RouteStyle style) {\n        style_ = style;\n    }\n\n    public double tripMinutes(double km) {\n        return style_.minutes(km);\n    }\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "RouteStyle style_",
+						"label": "any strategy fits here"
+					},
+					{
+						"text": "style_.minutes(km)",
+						"label": "no idea which one, and no need"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Hold it by its interface",
+			"say": {
+				"never": "`Drivetrain` keeps its strategy in `mode_`. The constructor and `setMode` fill it in (but `setMode(null)` leaves it alone). `getModeName()` and `drive(pad)` just ask `mode_`. No `instanceof`, no `if` on the name.",
+				"bit": "`Drivetrain`: set `mode_` (ignore null), then `getModeName()` and `drive(pad)` ask `mode_`."
+			},
+			"board": {
+				"code": "public WheelSpeeds drive(Gamepad pad) {\n    // ask the current mode to calculate\n}",
+				"marks": [
+					{
+						"text": "drive(Gamepad pad)",
+						"label": "whatever mode it has"
+					}
+				]
+			},
+			"assist": true
+		},
+		{
+			"title": "Open Drivetrain.java",
+			"say": {
+				"never": "Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `Drivetrain`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "Press **Ctrl+P**, type `Drivetrain` and press Enter."
+			},
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "Drivetrain.java"
+				},
+				"hint": "open Drivetrain.java with Ctrl+P.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Find it",
+			"say": {
+				"never": "It may be further down. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `public WheelSpeeds drive(Gamepad pad)` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "Press **Ctrl+F**, type `public WheelSpeeds drive(Gamepad pad)` and press Enter to jump to it."
+			},
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "public WheelSpeeds drive(Gamepad pad)"
+				},
+				"hint": "find public WheelSpeeds drive(Gamepad pad) with Ctrl+F.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Your turn",
+			"say": {
+				"never": "Your turn! Finish `TankDrive` and `ArcadeDrive` first, then the four parts of `Drivetrain`: the constructor, `setMode`, `getModeName` and `drive`.",
+				"bit": "Write the two drive modes, then Drivetrain."
+			},
+			"waitFor": {
+				"hint": {
+					"never": "write TankDrive, ArcadeDrive and Drivetrain.",
+					"bit": "write TankDrive, ArcadeDrive and Drivetrain."
+				}
+			},
+			"cardAt": "bottom-right",
+			"assist": true
+		}
+	]
+}

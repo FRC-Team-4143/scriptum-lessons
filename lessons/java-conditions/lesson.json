@@ -2,9 +2,9 @@
 	"title": "Conditions",
 	"description": "Write if/else chains and switch statements.",
 	"kind": "plain-java",
-	"track": "Java Programming",
+	"track": "Java Basics",
 	"order": 13,
-	"requires": [
+	"recommends": [
 		"java-operators"
 	],
 	"checkpoints": [

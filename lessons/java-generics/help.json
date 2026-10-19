@@ -1,0 +1,28 @@
+{
+	"plan": [
+		{
+			"checkpoint": "pair",
+			"guides": [
+				"java-generics-class"
+			]
+		},
+		{
+			"checkpoint": "ring-buffer",
+			"guides": [
+				"java-generics-class"
+			]
+		},
+		{
+			"checkpoint": "last-or-default",
+			"guides": [
+				"java-generics-method"
+			]
+		},
+		{
+			"checkpoint": "bounded-max",
+			"guides": [
+				"java-generics-bounded"
+			]
+		}
+	]
+}

@@ -1,0 +1,176 @@
+{
+	"title": "A generic class",
+	"summary": "Give a class a type parameter, like <T>, so one class works for any type.",
+	"topic": "Java",
+	"order": 551,
+	"kind": "mixed",
+	"steps": [
+		{
+			"title": "A blank for a type",
+			"say": {
+				"never": "You already use generic classes: `ArrayList<Integer>` and `ArrayList<String>` are the same class holding different things. You can write your own. After the class name, put a **type parameter** in angle brackets, like `<T>`. `T` is a blank that stands for \"some type, chosen later\". Inside the class, use `T` anywhere you'd write a type: a field, a parameter, a return type.",
+				"bit": "A **type parameter** `<T>` after the class name is a blank for a type. Use `T` for fields, parameters and return types."
+			},
+			"board": {
+				"code": "public class Box<T> {\n    protected T contents_;\n\n    public Box(T contents) {\n        contents_ = contents;\n    }\n\n    public T open() {\n        return contents_;\n    }\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "<T>",
+						"label": "the blank"
+					},
+					{
+						"text": "protected T contents_;",
+						"label": "whatever type it is"
+					},
+					{
+						"text": "public T open()",
+						"label": "hands back that same type"
+					}
+				]
+			}
+		},
+		{
+			"title": "Filling in the blank",
+			"say": {
+				"never": "When you *use* the class, you fill in the blank: `Box<String>` is a box of text, `Box<Integer>` a box of whole numbers. Java now knows what comes out, so `open()` gives a `String` with no extra work, and putting the wrong type in is an error before the program even runs. Like with `ArrayList`, the blank takes a class, so write `Integer` and `Double`, not `int` and `double`.",
+				"bit": "`Box<String>` fills in T. Java checks the types for you. Use `Integer`/`Double`, not `int`/`double`."
+			},
+			"board": {
+				"code": "Box<String> lunch = new Box<>(\"sandwich\");\nString food = lunch.open();\n\nBox<Integer> parts = new Box<>(12);\nint count = parts.open();",
+				"language": "java",
+				"marks": [
+					{
+						"text": "Box<String>",
+						"label": "T is String here"
+					},
+					{
+						"text": "Box<Integer>",
+						"label": "and Integer here"
+					}
+				]
+			}
+		},
+		{
+			"title": "More than one blank",
+			"say": {
+				"never": "A class can have several type parameters, separated by commas. Each is its own blank, so the two values can be different types. By habit they're single capital letters: `T` for \"type\", `K` and `V` for \"key\" and \"value\", or just `A` and `B`.",
+				"bit": "Several blanks: `<K, V>`. Each one can be a different type."
+			},
+			"board": {
+				"code": "public class Label<K, V> {\n    protected K key_;\n    protected V value_;\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "<K, V>",
+						"label": "two blanks"
+					},
+					{
+						"text": "protected V value_;",
+						"label": "the second type"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: More than one blank",
+			"say": {
+				"never": "`Pair<A, B>` holds two values that belong together: a team number and its nickname (`Pair<Integer, String>`), or a distance and a flywheel speed (`Pair<Double, Double>`). Its first value is type `A` and its second is type `B`.",
+				"bit": "`Pair<A, B>`: a field of type A, one of type B, a constructor and two getters."
+			},
+			"board": {
+				"code": "public class Pair<A, B> {",
+				"marks": [
+					{
+						"text": "<A, B>",
+						"label": "first and second types"
+					}
+				]
+			},
+			"assist": true
+		},
+		{
+			"title": "In your lesson: A blank for a type",
+			"say": {
+				"never": "`RingBuffer<T>` keeps the last few things added, of any type: gyro headings (`RingBuffer<Double>`) or alerts (`RingBuffer<String>`). Inside, an `ArrayList<T>` holds them. When it's full, `add` removes the oldest one, at index 0, before adding the new one at the end. `get` and `latest` return a `T`.",
+				"bit": "`RingBuffer<T>` stores an `ArrayList<T>`; `add` drops index 0 when full; `get` and `latest` return T."
+			},
+			"board": {
+				"code": "protected ArrayList<T> items_ = new ArrayList<>();",
+				"marks": [
+					{
+						"text": "ArrayList<T>",
+						"label": "a list of whatever T is"
+					}
+				]
+			},
+			"assist": true
+		},
+		{
+			"title": "Open Pair.java",
+			"say": {
+				"never": "Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `Pair`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "Press **Ctrl+P**, type `Pair` and press Enter."
+			},
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "Pair.java"
+				},
+				"hint": "open Pair.java with Ctrl+P.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Find it",
+			"say": {
+				"never": "It may be further down. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `public class Pair` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "Press **Ctrl+F**, type `public class Pair` and press Enter to jump to it."
+			},
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "public class Pair"
+				},
+				"hint": "find public class Pair with Ctrl+F.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Your turn",
+			"say": {
+				"never": "Your turn! Add `<A, B>` after `Pair`, then the two fields, the constructor and `getFirst()` and `getSecond()`. After that, open `RingBuffer.java`, add `<T>` and write its methods.",
+				"bit": "Write Pair<A, B>, then RingBuffer<T>."
+			},
+			"waitFor": {
+				"hint": {
+					"never": "make Pair and RingBuffer generic.",
+					"bit": "make Pair and RingBuffer generic."
+				}
+			},
+			"cardAt": "bottom-right",
+			"assist": true
+		}
+	]
+}

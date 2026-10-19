@@ -1,0 +1,147 @@
+{
+	"title": "Sorting by hand",
+	"summary": "Selection sort and insertion sort, and how to swap two items.",
+	"topic": "Java",
+	"order": 572,
+	"kind": "mixed",
+	"steps": [
+		{
+			"title": "Selection sort",
+			"say": {
+				"never": "Sort a hand of cards, smallest first, like this: look through *all* the cards, pick out the smallest, and put it in the first spot. Then look through the rest for the next smallest and put it in the second spot. Keep going. Each pass **selects** one card, which is why it's called **selection sort**. It's a loop inside a loop, so it's O(n²): fine for 40 teams, slow for a million.",
+				"bit": "**Selection sort**: for each spot, find the smallest of what's left and swap it in. O(n²)."
+			},
+			"board": {
+				"code": "for (int i = 0; i < cards.length; i++) {\n    int smallest = i;\n    for (int k = i + 1; k < cards.length; k++) {\n        if (cards[k] < cards[smallest]) {\n            smallest = k;\n        }\n    }\n    // swap cards[i] and cards[smallest]\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "int smallest = i;",
+						"label": "best so far"
+					},
+					{
+						"text": "for (int k = i + 1; k < cards.length; k++)",
+						"label": "only the cards not placed yet"
+					}
+				]
+			}
+		},
+		{
+			"title": "Swapping needs a spare hand",
+			"say": {
+				"never": "To swap two items you need a spare variable. If you write `a[0] = a[1]` first, the old `a[0]` is gone for good. So park it in a temporary variable, copy the other one over, then put the parked one back.",
+				"bit": "Swap with a temp: save one, overwrite it, put the saved one in the other spot."
+			},
+			"board": {
+				"code": "int temp = cards[0];\ncards[0] = cards[3];\ncards[3] = temp;",
+				"language": "java",
+				"marks": [
+					{
+						"text": "int temp = cards[0];",
+						"label": "park it first"
+					}
+				]
+			}
+		},
+		{
+			"title": "Insertion sort",
+			"say": {
+				"never": "Another way: pick up cards one at a time. Each new card slides left past every card bigger than it, until it sits in the right spot. The cards to its left are always already sorted. That's **insertion sort**. It's also O(n²) at worst, but on a list that is nearly sorted already it's very quick.",
+				"bit": "**Insertion sort**: take each item and slide it left until it fits. O(n²) worst case, fast on nearly sorted data."
+			},
+			"board": {
+				"code": "for (int i = 1; i < cards.length; i++) {\n    int card = cards[i];\n    int k = i - 1;\n    while (k >= 0 && cards[k] > card) {\n        cards[k + 1] = cards[k];\n        k--;\n    }\n    cards[k + 1] = card;\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "cards[k + 1] = cards[k];",
+						"label": "shift a bigger card right"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Sorting by hand",
+			"say": {
+				"never": "`sortByScore` sorts an array of `TeamScore`s, but **highest** score first, so you're looking for the biggest instead of the smallest. Compare scores with `getScore()`, and move whole `TeamScore` objects around, not just the numbers. A swap's spare variable is a `TeamScore` too. Pick either sort; both pass.",
+				"bit": "Highest first: find the biggest `getScore()`, and swap whole `TeamScore` objects."
+			},
+			"board": {
+				"code": "public static void sortByScore(TeamScore[] teams) {\n}",
+				"marks": [
+					{
+						"text": "TeamScore[] teams",
+						"label": "sort this array in place"
+					}
+				]
+			},
+			"assist": true
+		},
+		{
+			"title": "Open Sorting.java",
+			"say": {
+				"never": "Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `Sorting`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "Press **Ctrl+P**, type `Sorting` and press Enter."
+			},
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "Sorting.java"
+				},
+				"hint": "open Sorting.java with Ctrl+P.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Find it",
+			"say": {
+				"never": "Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `public static void sortByScore` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "Press **Ctrl+F**, type `public static void sortByScore` and press Enter to jump to it."
+			},
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "public static void sortByScore"
+				},
+				"hint": "find public static void sortByScore with Ctrl+F.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Your turn",
+			"say": {
+				"never": "Your turn! Write a selection sort or an insertion sort inside `sortByScore`, so the highest score ends up at index 0.",
+				"bit": "Write sortByScore, highest score first."
+			},
+			"waitFor": {
+				"hint": {
+					"never": "write sortByScore.",
+					"bit": "write sortByScore."
+				}
+			},
+			"cardAt": "bottom-right",
+			"assist": true
+		}
+	]
+}

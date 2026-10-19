@@ -1,0 +1,48 @@
+{
+	"title": "Interfaces & Polymorphism",
+	"description": "Add up a robot's battery draw: write an interface every part promises to follow, an abstract class that shares code between mechanisms, and loops that treat motors, LEDs and intakes all the same way.",
+	"kind": "plain-java",
+	"track": "Java Advanced",
+	"order": 30,
+	"recommends": [
+		"java-inheritance"
+	],
+	"checkpoints": [
+		{
+			"id": "power-user",
+			"title": "The PowerUser interface",
+			"description": "PowerUser declares getName() and getAmps(), and Motor and LedStrip implement it.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/power-user.sh"
+			}
+		},
+		{
+			"id": "mechanism",
+			"title": "An abstract Mechanism",
+			"description": "Mechanism is an abstract class that implements PowerUser and holds the shared name code; Intake extends it.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/mechanism.sh"
+			}
+		},
+		{
+			"id": "total-amps",
+			"title": "Total amps",
+			"description": "PowerBudget.totalAmps adds up getAmps() for every PowerUser in an array, whatever kind it is.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/total-amps.sh"
+			}
+		},
+		{
+			"id": "biggest-user",
+			"title": "Biggest user",
+			"description": "PowerBudget.biggestUser returns the name of the part drawing the most amps, or \"none\" for an empty array.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/biggest-user.sh"
+			}
+		}
+	]
+}

@@ -1,0 +1,134 @@
+{
+	"title": "Graphs and adjacency lists",
+	"summary": "A graph is spots joined by links; an adjacency list maps each spot to its neighbors.",
+	"topic": "Java",
+	"order": 601,
+	"kind": "mixed",
+	"steps": [
+		{
+			"title": "Spots and links",
+			"say": {
+				"never": "Think of a bus map. Each stop is a dot, and a line joins two stops when a bus drives straight between them. That's a **graph**: **nodes** (the stops) joined by **edges** (the lines). Unlike a tree, there's no top and no parent. Any stop can join any number of others, and lines can go round in a loop.",
+				"bit": "A **graph** is nodes joined by edges. No root, no parents, and loops are allowed."
+			},
+			"board": {
+				"code": "Mall --- Park --- School\n  \\                /\n   '-- Library --'",
+				"language": "text",
+				"marks": [
+					{
+						"text": "Park",
+						"label": "a node"
+					},
+					{
+						"text": "---",
+						"label": "an edge"
+					}
+				]
+			}
+		},
+		{
+			"title": "A list of neighbors",
+			"say": {
+				"never": "How do you store a graph? Give every node a list of the nodes it touches, its **neighbors**. A `Map` does that well: the key is the node's name, and the value is its `List` of neighbors. This is called an **adjacency list** (\"adjacent\" means \"next to\"). An edge that goes both ways is written down twice: once in each node's list.",
+				"bit": "An **adjacency list** is `Map<String, List<String>>`: each node to its neighbors. A two-way edge goes in both lists."
+			},
+			"board": {
+				"code": "Map<String, List<String>> busMap = new HashMap<>();\nbusMap.put(\"Park\", new ArrayList<>());\nbusMap.put(\"Mall\", new ArrayList<>());\n\nbusMap.get(\"Park\").add(\"Mall\");\nbusMap.get(\"Mall\").add(\"Park\");",
+				"language": "java",
+				"marks": [
+					{
+						"text": "Map<String, List<String>>",
+						"label": "name -> neighbors"
+					},
+					{
+						"text": "busMap.get(\"Mall\").add(\"Park\");",
+						"label": "the other way too"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: A list of neighbors",
+			"say": {
+				"never": "In `FieldMap`, `neighbors_` is the adjacency list for the field. `addWaypoint` makes an empty list for a new waypoint, but only if it isn't there yet (`containsKey` tells you). `connect(a, b)` makes sure both waypoints exist, then adds each one to the other's list, unless the list already `contains` it.",
+				"bit": "`addWaypoint`: new empty list if not `containsKey`. `connect`: add both, then each to the other's list, skipping duplicates."
+			},
+			"board": {
+				"code": "public void connect(String a, String b) {\n    // make sure a and b are on the map\n    // put b in a's list (unless it's already there)\n    // put a in b's list (unless it's already there)\n}",
+				"marks": [
+					{
+						"text": "connect(String a, String b)",
+						"label": "a lane goes both ways"
+					}
+				]
+			},
+			"assist": true
+		},
+		{
+			"title": "Open FieldMap.java",
+			"say": {
+				"never": "Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `FieldMap`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "Press **Ctrl+P**, type `FieldMap` and press Enter."
+			},
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "FieldMap.java"
+				},
+				"hint": "open FieldMap.java with Ctrl+P.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Find it",
+			"say": {
+				"never": "It may be further down. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `public void connect(String a, String b)` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "Press **Ctrl+F**, type `public void connect(String a, String b)` and press Enter to jump to it."
+			},
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "public void connect(String a, String b)"
+				},
+				"hint": "find public void connect(String a, String b) with Ctrl+F.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Your turn",
+			"say": {
+				"never": "Your turn! Write `addWaypoint`, `connect` and `neighbors`. Remember that `neighbors` hands back an empty list, never `null`, for a waypoint that isn't on the map.",
+				"bit": "Write addWaypoint, connect and neighbors."
+			},
+			"waitFor": {
+				"hint": {
+					"never": "write addWaypoint, connect and neighbors.",
+					"bit": "write addWaypoint, connect and neighbors."
+				}
+			},
+			"cardAt": "bottom-right",
+			"assist": true
+		}
+	]
+}

@@ -1,0 +1,49 @@
+{
+	"title": "Trees",
+	"description": "Keep every team at the event in a binary search tree that stays sorted as you add to it, then count the actions in an auto shaped like the robot's behavior trees. Recursion does the walking.",
+	"kind": "plain-java",
+	"track": "Java Advanced",
+	"order": 39,
+	"recommends": [
+		"java-recursion",
+		"java-stacks-queues"
+	],
+	"checkpoints": [
+		{
+			"id": "bst-insert",
+			"title": "Insert and find",
+			"description": "TeamTree.insert puts lower team numbers to the left and higher ones to the right (no repeats); contains and size work on any tree.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/bst-insert.sh"
+			}
+		},
+		{
+			"id": "in-order",
+			"title": "In order",
+			"description": "TeamTree.inOrder returns every team, lowest number first, by visiting left, node, right.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/in-order.sh"
+			}
+		},
+		{
+			"id": "height",
+			"title": "Height",
+			"description": "TeamTree.height counts the nodes on the longest path from the root down: 0 for an empty tree, 1 for one team.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/height.sh"
+			}
+		},
+		{
+			"id": "auto-tree",
+			"title": "An auto tree",
+			"description": "AutoNode.countActions counts the nodes with no children, and AutoNode.depth measures the longest path down, in a tree where a node can have any number of children.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/auto-tree.sh"
+			}
+		}
+	]
+}

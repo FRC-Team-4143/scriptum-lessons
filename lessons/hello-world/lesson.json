@@ -2,7 +2,7 @@
 	"title": "Hello, World",
 	"description": "Basic java hello world project",
 	"kind": "plain-java",
-	"track": "Java Programming",
+	"track": "Java Basics",
 	"order": 10,
 	"checkpoints": [
 		{

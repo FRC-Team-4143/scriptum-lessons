@@ -1,0 +1,172 @@
+{
+	"title": "Sorting with a Comparator",
+	"summary": "Let List.sort do the work, and say what order you want with a Comparator.",
+	"topic": "Java",
+	"order": 573,
+	"kind": "mixed",
+	"steps": [
+		{
+			"title": "Java already knows how to sort",
+			"say": {
+				"never": "Writing a sort by hand teaches you how it works, but real code uses Java's own: `list.sort(...)`. It's O(n log n), much faster than O(n²) on big lists, and it's been tested by millions of programs. What it *can't* know is what order you want. You tell it with a **`Comparator`**: an object that looks at two items and says which comes first.",
+				"bit": "Use `list.sort(comparator)`: O(n log n) and well tested. The **Comparator** says which of two items comes first."
+			}
+		},
+		{
+			"title": "Building a Comparator",
+			"say": {
+				"never": "The easy way to make one is `Comparator.comparingInt(...)`, given a method that pulls out a number. `Song::getSeconds` means \"call `getSeconds()` on each song\". That sorts shortest first. Add `.reversed()` for longest first. Remember `import java.util.Comparator;` at the top.",
+				"bit": "`Comparator.comparingInt(Song::getSeconds)` sorts by that number, smallest first; `.reversed()` flips it."
+			},
+			"board": {
+				"code": "playlist.sort(Comparator.comparingInt(Song::getSeconds).reversed());",
+				"language": "java",
+				"marks": [
+					{
+						"text": "Song::getSeconds",
+						"label": "what to compare"
+					},
+					{
+						"text": ".reversed()",
+						"label": "biggest first"
+					}
+				]
+			}
+		},
+		{
+			"title": "Breaking ties",
+			"say": {
+				"never": "Two songs the same length? Without a rule, either could come first. `.thenComparing(...)` adds a second rule that only matters when the first one ties. Here, songs the same length go in alphabetical order by title. Ties matter at a competition: everyone should get the *same* pick list from the same data.",
+				"bit": "`.thenComparing(...)` adds a tie-breaker that is only used when the first rule ties."
+			},
+			"board": {
+				"code": "Comparator<Song> order = Comparator.comparingInt(Song::getSeconds)\n    .thenComparing(Song::getTitle);",
+				"language": "java",
+				"marks": [
+					{
+						"text": ".thenComparing(Song::getTitle)",
+						"label": "only used on a tie"
+					}
+				]
+			}
+		},
+		{
+			"title": "Copy before you sort",
+			"say": {
+				"never": "`sort` changes the list it's called on. If someone handed you that list, they might not want it shuffled, and a list made with `List.of(...)` can't be changed at all: sorting it crashes. So make your own copy with `new ArrayList<>(...)` and sort that.",
+				"bit": "`sort` changes the list in place, so copy with `new ArrayList<>(list)` first."
+			},
+			"board": {
+				"code": "List<Song> mine = new ArrayList<>(playlist);\nmine.sort(order);",
+				"language": "java",
+				"marks": [
+					{
+						"text": "new ArrayList<>(playlist)",
+						"label": "a copy you're allowed to change"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Sorting with a Comparator",
+			"say": {
+				"never": "`rankings` copies the list, sorts the copy and returns it. The order: by `getScore`, highest first, then by `getTeam`, lowest first on a tie. Watch out: `.reversed()` flips *everything* before it, so put it right after the score rule, before you add the team-number tie-breaker. Use `thenComparingInt` for a number.",
+				"bit": "Copy, then sort by score reversed, then by team number. Put `.reversed()` before the tie-breaker."
+			},
+			"board": {
+				"code": "public static List<TeamScore> rankings(List<TeamScore> teams) {\n    return teams;\n}",
+				"marks": [
+					{
+						"text": "return teams;",
+						"label": "return a sorted copy instead"
+					}
+				]
+			},
+			"assist": true
+		},
+		{
+			"title": "Open Sorting.java",
+			"say": {
+				"never": "Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `Sorting`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "Press **Ctrl+P**, type `Sorting` and press Enter."
+			},
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "Sorting.java"
+				},
+				"hint": "open Sorting.java with Ctrl+P.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Find it",
+			"say": {
+				"never": "Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `public static List<TeamScore> rankings` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "Press **Ctrl+F**, type `public static List<TeamScore> rankings` and press Enter to jump to it."
+			},
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "public static List<TeamScore> rankings"
+				},
+				"hint": "find public static List<TeamScore> rankings with Ctrl+F.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Your turn",
+			"say": {
+				"never": "Your turn! Import `java.util.ArrayList` and `java.util.Comparator`, then write `rankings`: copy, sort the copy with your Comparator, return the copy.",
+				"bit": "Write rankings with a copy and a Comparator."
+			},
+			"waitFor": {
+				"hint": {
+					"never": "write rankings.",
+					"bit": "write rankings."
+				}
+			},
+			"cardAt": "bottom-right",
+			"assist": true
+		},
+		{
+			"title": "Run it",
+			"say": {
+				"never": "Click the **Run** button, the little triangle (▷) at the top right of `Main.java`. The terminal at the bottom shows how many looks each search took, and both sorted lists.",
+				"bit": "Click **Run** (▷) at the top right of `Main.java` and read the output."
+			},
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "top-right",
+			"waitFor": {
+				"hint": {
+					"never": "run the program and read what it prints.",
+					"bit": "run the program and read the output."
+				}
+			},
+			"assist": true
+		}
+	]
+}

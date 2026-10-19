@@ -1,0 +1,201 @@
+{
+	"title": "Lists: ArrayList",
+	"summary": "A list that grows as you add to it, and why it holds Integer instead of int.",
+	"topic": "Java",
+	"order": 511,
+	"kind": "mixed",
+	"steps": [
+		{
+			"title": "A list that grows",
+			"say": {
+				"never": "An array is a row of boxes, and you pick how many when you make it. That's a problem when you don't know how many things are coming, like songs added to a playlist. An **ArrayList** is a list that grows: `add` puts a new item on the end, `size()` tells you how many there are, and `get(0)` reads the first one.",
+				"bit": "An **ArrayList** grows as you `add`. `size()` counts the items; `get(i)` reads one by index."
+			},
+			"board": {
+				"code": "ArrayList<String> playlist = new ArrayList<>();\nplaylist.add(\"Eye of the Tiger\");\nplaylist.add(\"Thunderstruck\");\nSystem.out.println(playlist.size());  // 2\nSystem.out.println(playlist.get(0));  // Eye of the Tiger",
+				"language": "java",
+				"marks": [
+					{
+						"text": "new ArrayList<>()",
+						"label": "starts empty"
+					},
+					{
+						"text": "playlist.add(",
+						"label": "goes on the end"
+					},
+					{
+						"text": "playlist.size()",
+						"label": "how many right now"
+					}
+				]
+			}
+		},
+		{
+			"title": "Integer, not int",
+			"say": {
+				"never": "The type in the angle brackets says what the list holds. Lists can only hold **objects**, and `int` is a plain number, not an object. So Java gives every plain type an object twin: `Integer` for `int`, `Double` for `double`. You write `ArrayList<Integer>`, then add and read plain `int`s; Java wraps and unwraps them for you. That's called **boxing**.",
+				"bit": "Collections hold objects, so write `Integer`, not `int`. Java boxes and unboxes for you."
+			},
+			"board": {
+				"code": "ArrayList<Integer> lap_seconds = new ArrayList<>();\nlap_seconds.add(31);          // the int 31 is boxed\nint first = lap_seconds.get(0); // and unboxed\n// ArrayList<int> won't compile",
+				"language": "java",
+				"marks": [
+					{
+						"text": "<Integer>",
+						"label": "the object twin of int"
+					},
+					{
+						"text": "ArrayList<int>",
+						"label": "not allowed"
+					}
+				]
+			}
+		},
+		{
+			"title": "Bringing it in with import",
+			"say": {
+				"never": "`ArrayList` isn't part of the core language. It lives in Java's library, in a package called `java.util`. An `import` line at the very top of the file tells Java where to find it. `import java.util.*;` brings in everything from that package at once.",
+				"bit": "`import java.util.ArrayList;` at the top of the file, or `import java.util.*;` for all of it."
+			},
+			"board": {
+				"code": "import java.util.ArrayList;\n\npublic class Playlist {\n    protected ArrayList<String> songs_ = new ArrayList<>();\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "import java.util.ArrayList;",
+						"label": "before the class"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: A list that grows",
+			"say": {
+				"never": "`ScoreList` keeps one team's match scores in an `ArrayList<Integer>` called `scores_`. Import it at the top, add the field, and then `addScore` is one line and `count()` just returns the list's size.",
+				"bit": "Import `ArrayList`, add `scores_`, then `addScore` adds and `count()` returns `size()`."
+			},
+			"board": {
+				"code": "import java.util.ArrayList;\n\npublic class ScoreList {\n    protected ArrayList<Integer> scores_ = new ArrayList<>();\n\n    public void addScore(int score) {\n        scores_.add(score);\n    }\n}",
+				"marks": [
+					{
+						"text": "ArrayList<Integer>",
+						"label": "scores, match by match"
+					},
+					{
+						"text": "scores_.add(score);",
+						"label": "on the end"
+					}
+				]
+			},
+			"assist": true
+		},
+		{
+			"title": "Visiting every item",
+			"say": {
+				"never": "A **for-each loop** works on a list just like on an array. `for (int lap : lap_seconds)` reads as \"for each lap in lap_seconds\". It visits the items in order, with no index to count. You can loop with plain `int` even though the list holds `Integer`s.",
+				"bit": "`for (int lap : lap_seconds)` visits every item in order."
+			},
+			"board": {
+				"code": "int fastest = lap_seconds.get(0);\nfor (int lap : lap_seconds) {\n    if (lap < fastest) {\n        fastest = lap;\n    }\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "for (int lap : lap_seconds)",
+						"label": "each item in turn"
+					},
+					{
+						"text": "lap_seconds.get(0)",
+						"label": "start with the first"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Visiting every item",
+			"say": {
+				"never": "`average()` adds every score with a for-each loop and divides by `scores_.size()`. Cast the total to `double` first, or the decimals vanish. `best()` starts with `scores_.get(0)` and keeps the biggest. Both have to check `scores_.isEmpty()` first, because an empty list has no item 0 and you can't divide by zero.",
+				"bit": "`average()`: total ÷ size, as a `double`. `best()`: keep the biggest. Check `isEmpty()` first."
+			},
+			"board": {
+				"code": "if (scores_.isEmpty()) {\n    return 0.0;\n}\nreturn (double) total / scores_.size();",
+				"marks": [
+					{
+						"text": "scores_.isEmpty()",
+						"label": "no scores yet"
+					},
+					{
+						"text": "(double)",
+						"label": "keep the decimals"
+					}
+				]
+			},
+			"assist": true
+		},
+		{
+			"title": "Open ScoreList.java",
+			"say": {
+				"never": "Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `ScoreList`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "Press **Ctrl+P**, type `ScoreList` and press Enter."
+			},
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "ScoreList.java"
+				},
+				"hint": "open ScoreList.java with Ctrl+P.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Find it",
+			"say": {
+				"never": "It may be further down. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `public class ScoreList` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "Press **Ctrl+F**, type `public class ScoreList` and press Enter to jump to it."
+			},
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "public class ScoreList"
+				},
+				"hint": "find public class ScoreList with Ctrl+F.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Your turn",
+			"say": {
+				"never": "Your turn! Add the import and the `scores_` field, then write `addScore`, `count`, `average` and `best`.",
+				"bit": "Import, add scores_, write the four methods."
+			},
+			"waitFor": {
+				"hint": {
+					"never": "finish ScoreList.",
+					"bit": "finish ScoreList."
+				}
+			},
+			"cardAt": "bottom-right",
+			"assist": true
+		}
+	]
+}

@@ -4,7 +4,7 @@
 
 All the code lives in `src/Main.java`. Fill in each method and click **Run** any time to see its output in the terminal.
 
-More depth: the team docs page [Arrays](https://frc-team-4143.github.io/docs/software/java/arrays).
+More depth: the team docs page [Arrays](https://frc-team-4143.github.io/docs/software/java/basics/arrays).
 
 ## What you need to do
 

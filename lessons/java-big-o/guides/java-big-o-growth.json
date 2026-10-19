@@ -1,0 +1,147 @@
+{
+	"title": "How steps grow",
+	"summary": "Loops inside loops are O(n²), halving is O(log n), and Big-O keeps only the shape.",
+	"topic": "Java",
+	"order": 562,
+	"kind": "mixed",
+	"steps": [
+		{
+			"title": "A loop inside a loop",
+			"say": {
+				"never": "A loop *inside* another loop multiplies. Say you want to know whether any two students in a class of `n` share a birthday, so you compare every student with every other student. The outer loop runs `n` times, and *each time* the inner loop runs `n` times. That's `n × n` steps, written **O(n²)**, \"n squared\". Double the class and the work goes up four times.",
+				"bit": "Nested loops over the same list multiply: **O(n²)**. Double `n`, four times the steps."
+			},
+			"board": {
+				"code": "for (int i = 0; i < n; i++) {\n    for (int k = 0; k < n; k++) {\n        compare(students[i], students[k]);\n    }\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "for (int k = 0; k < n; k++)",
+						"label": "n steps, every time round"
+					}
+				]
+			}
+		},
+		{
+			"title": "Halving: O(log n)",
+			"say": {
+				"never": "Some code throws away half of what's left at every step. Think of guessing a number from 1 to 1000 when someone says \"higher\" or \"lower\": each guess cuts the range in half, so about 10 guesses always find it. Double the range to 2000 and you need just *one* more guess. That's **O(log n)**, \"log n\". It barely grows at all.",
+				"bit": "Halving what's left each step is **O(log n)**: double `n`, one more step."
+			},
+			"board": {
+				"code": "int range = 1000;\nint guesses = 0;\nwhile (range > 1) {\n    range = range / 2;\n    guesses++;\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "range = range / 2;",
+						"label": "half is gone each time"
+					}
+				]
+			}
+		},
+		{
+			"title": "Keep only the shape",
+			"say": {
+				"never": "Big-O ignores small details. Two loops one *after* the other are `n + n` steps: still a straight line, so still O(n). A loop that always runs 7 times is O(1), even when the list is huge, because it never runs more. And watch for **hidden loops**: `contains()` on an `ArrayList` checks the list item by item, so it is a loop even though you can't see one.",
+				"bit": "Drop the constants: `2n` is O(n), a fixed 7 steps is O(1). `ArrayList.contains` is a hidden O(n) loop."
+			},
+			"board": {
+				"code": "for (int i = 0; i < 7; i++) {\n    days[i] = 0;\n}\nboolean here = names.contains(\"Ada\");",
+				"language": "java",
+				"marks": [
+					{
+						"text": "i < 7",
+						"label": "always 7: O(1)"
+					},
+					{
+						"text": "names.contains(\"Ada\")",
+						"label": "a hidden loop"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: How steps grow",
+			"say": {
+				"never": "Each snippet in `Answers.java` is in a comment above its answer. For each one, ask: **if n doubled, what would happen to the steps?** The same: `CONSTANT`. One more step: `LOG_N`. Double: `LINEAR`. Four times: `N_SQUARED`. Look out for a loop that doesn't depend on `n`, two loops in a row, and a `contains()` call.",
+				"bit": "For each snippet, ask what doubling `n` does to the steps, then pick from `BigO`."
+			},
+			"board": {
+				"code": "public static final BigO SNIPPET_A = BigO.NOT_SURE;",
+				"marks": [
+					{
+						"text": "BigO.NOT_SURE",
+						"label": "replace with your answer"
+					}
+				]
+			},
+			"assist": true
+		},
+		{
+			"title": "Open Answers.java",
+			"say": {
+				"never": "Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `Answers`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "Press **Ctrl+P**, type `Answers` and press Enter."
+			},
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "Answers.java"
+				},
+				"hint": "open Answers.java with Ctrl+P.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Find it",
+			"say": {
+				"never": "Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `SNIPPET_A` and press **Enter**. The editor scrolls to the first answer and highlights it.",
+				"bit": "Press **Ctrl+F**, type `SNIPPET_A` and press Enter to jump to it."
+			},
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "SNIPPET_A"
+				},
+				"hint": "find SNIPPET_A with Ctrl+F.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Your turn",
+			"say": {
+				"never": "Your turn! Read each snippet, then change its `NOT_SURE` to `BigO.CONSTANT`, `BigO.LOG_N`, `BigO.LINEAR` or `BigO.N_SQUARED`. Run **Verify**: it tells you which snippet to look at again.",
+				"bit": "Answer all eight snippets, then Verify."
+			},
+			"waitFor": {
+				"hint": {
+					"never": "pick an answer for every snippet.",
+					"bit": "answer every snippet."
+				}
+			},
+			"cardAt": "bottom-right",
+			"assist": true
+		}
+	]
+}

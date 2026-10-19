@@ -1,0 +1,155 @@
+{
+	"title": "A queue by hand",
+	"summary": "Build a fixed-size queue on a plain array, with a front index, a count and % to wrap round.",
+	"topic": "Java",
+	"order": 583,
+	"kind": "mixed",
+	"steps": [
+		{
+			"title": "A row of slots",
+			"say": {
+				"never": "`ArrayDeque` does a lot for you. To see how, you'll build a queue yourself out of a plain array. The array is a row of slots that never grows. You need two numbers to keep track of it: **front**, the slot whose item comes out next, and **count**, how many items are in. The back of the line is always `count` slots after the front.",
+				"bit": "An array queue needs a `front` index and a `count`. The next free slot is `front + count`."
+			},
+			"board": {
+				"code": "slots:   [ Ana ][ Ben ][ Cy  ][     ]\n            ^front              ^next free\nfront = 0, count = 3, next free = 0 + 3 = 3",
+				"language": "text",
+				"marks": [
+					{
+						"text": "^front",
+						"label": "comes out next"
+					},
+					{
+						"text": "next free = 0 + 3 = 3",
+						"label": "front + count"
+					}
+				]
+			}
+		},
+		{
+			"title": "Wrapping round with %",
+			"say": {
+				"never": "When Ana leaves, front moves to slot 1. Now there's a free slot at 0, but `front + count` points past the end of the array. The fix is to **wrap round**, like the hand of a clock going from 12 back to 1. The `%` operator gives the remainder after dividing: `4 % 4` is `0`, `5 % 4` is `1`. So `(front + count) % slots.length` always lands inside the array.",
+				"bit": "Wrap an index with `% length`: `(front + count) % length` for the back, `(front + 1) % length` to move the front."
+			},
+			"board": {
+				"code": "int seats = 4;\nint seat = 3;\nseat = (seat + 1) % seats;  // 0, back to the start\nseat = (seat + 1) % seats;  // 1",
+				"language": "java",
+				"marks": [
+					{
+						"text": "% seats;  // 0",
+						"label": "wraps round"
+					}
+				]
+			}
+		},
+		{
+			"title": "Full and empty",
+			"say": {
+				"never": "A fixed row of slots can fill up. Before you add, check whether `count` already equals the array's `length`. If it does, refuse. Before you take, check whether `count` is `0`. If it is, there's nothing to take. Taking an item means: read the front slot, move front along one (wrapping round), and make count one smaller.",
+				"bit": "Full when count == length; empty when count == 0. Taking reads the front slot, then moves front and lowers count."
+			},
+			"board": {
+				"code": "4 seats on a ride, front = 2, count = 4\n\nadd Dee?   count == length (4 == 4)  -> full, wait for the next ride\ntake one:  read seat 2, front -> 3, count -> 3\ntake one:  read seat 3, front -> 0 (wrapped), count -> 2",
+				"language": "text",
+				"marks": [
+					{
+						"text": "count == length (4 == 4)",
+						"label": "every seat taken"
+					},
+					{
+						"text": "front -> 0 (wrapped)",
+						"label": "% at work"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Full and empty",
+			"say": {
+				"never": "`IndexerQueue` is the robot's indexer: a few slots between the intake and the shooter. Pieces load at the back and the shooter fires the one at the front. The fields are already there: `slots_` is the array, `front_` is the slot that fires next and `count_` is how many pieces are loaded. Don't import anything from `java.util` here: the whole point is to do it by hand.",
+				"bit": "`slots_`, `front_` and `count_` are given. `load` adds at the back, `fire` takes the front. No `java.util`."
+			},
+			"board": {
+				"code": "public class IndexerQueue {\n    protected String[] slots_;\n    protected int front_; // the slot holding the piece that fires next\n    protected int count_; // how many pieces are loaded\n}",
+				"marks": [
+					{
+						"text": "protected int front_;",
+						"label": "fires next"
+					},
+					{
+						"text": "protected int count_;",
+						"label": "how many loaded"
+					}
+				]
+			},
+			"assist": true
+		},
+		{
+			"title": "Open IndexerQueue.java",
+			"say": {
+				"never": "Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `IndexerQueue`, then press **Enter**.",
+				"bit": "Press **Ctrl+P**, type `IndexerQueue` and press Enter."
+			},
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "IndexerQueue.java"
+				},
+				"hint": "open IndexerQueue.java with Ctrl+P.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Find it",
+			"say": {
+				"never": "Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `public boolean load(String piece)` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "Press **Ctrl+F**, type `public boolean load(String piece)` and press Enter to jump to it."
+			},
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "public boolean load(String piece)"
+				},
+				"hint": "find public boolean load(String piece) with Ctrl+F.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Your turn",
+			"say": {
+				"never": "Your turn! Make the array in the constructor, then write `isFull`, `load` and `fire`. Work out where the back of the line is from `front_` and `count_`, and wrap it round with `%`. Click **Run** and watch note C get refused, then load once a slot is free.",
+				"bit": "Write the constructor, isFull, load and fire, wrapping with %."
+			},
+			"waitFor": {
+				"hint": {
+					"never": "write IndexerQueue.",
+					"bit": "write IndexerQueue."
+				}
+			},
+			"cardAt": "bottom-right",
+			"assist": true
+		}
+	]
+}

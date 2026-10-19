@@ -1,0 +1,134 @@
+{
+	"title": "Behavior from behavior",
+	"summary": "A method can take lambdas in and hand a new lambda back.",
+	"topic": "Java",
+	"order": 522,
+	"kind": "mixed",
+	"steps": [
+		{
+			"title": "Lambdas wait",
+			"say": {
+				"never": "Making a lambda is like writing a recipe card: nothing gets cooked yet. The code inside only runs when someone calls its method. Here, nothing prints on the first line. It prints on the last one.",
+				"bit": "Creating a lambda runs nothing. Its code runs each time its method is called."
+			},
+			"board": {
+				"code": "Greeter noisy = name -> {\n    System.out.println(\"running!\");\n    return name.toUpperCase();\n};\n// Nothing has printed yet.\nnoisy.greet(\"Ava\"); // now it prints",
+				"language": "java",
+				"marks": [
+					{
+						"text": "noisy.greet(\"Ava\")",
+						"label": "the lambda runs here"
+					}
+				]
+			}
+		},
+		{
+			"title": "Lambdas in, lambda out",
+			"say": {
+				"never": "Since a lambda is a value, a method can take one as a parameter and hand a new one back. `twice` takes any greeter and returns a greeter that runs it two times. The new lambda calls the old one *inside* its body, so it still doesn't run anything until someone calls `greet`.",
+				"bit": "A method can take a lambda and return a new lambda that calls it."
+			},
+			"board": {
+				"code": "public static Greeter twice(Greeter greeter) {\n    return name -> greeter.greet(greeter.greet(name));\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "Greeter greeter",
+						"label": "behavior comes in"
+					},
+					{
+						"text": "greeter.greet(greeter.greet(name))",
+						"label": "inner one runs first"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Lambdas in, lambda out",
+			"say": {
+				"never": "`chain(first, second)` returns a new filter. Given a speed, it runs `first` on it, then runs `second` on that answer. Write it inside out: `first.apply(speed)` goes inside `second.apply( )`. Don't call `apply` outside the lambda: there's no speed yet when `chain` runs.",
+				"bit": "`chain` returns a lambda that calls `second.apply(...)` on `first.apply(speed)`."
+			},
+			"board": {
+				"code": "public static SpeedFilter chain(SpeedFilter first, SpeedFilter second) {\n    return speed -> ...;\n}",
+				"marks": [
+					{
+						"text": "SpeedFilter first, SpeedFilter second",
+						"label": "two filters in"
+					},
+					{
+						"text": "return speed ->",
+						"label": "one new filter out"
+					}
+				]
+			},
+			"assist": true
+		},
+		{
+			"title": "Open Filters.java",
+			"say": {
+				"never": "Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `Filters`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "Press **Ctrl+P**, type `Filters` and press Enter."
+			},
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "Filters.java"
+				},
+				"hint": "open Filters.java with Ctrl+P.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Find it",
+			"say": {
+				"never": "It may be further down. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `public static SpeedFilter chain` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "Press **Ctrl+F**, type `public static SpeedFilter chain` and press Enter to jump to it."
+			},
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "public static SpeedFilter chain"
+				},
+				"hint": "find public static SpeedFilter chain with Ctrl+F.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Your turn",
+			"say": {
+				"never": "Your turn! Make `chain` return a lambda that runs `first`, then `second` on the result. `chain(half(), invert())` should turn `0.8` into `-0.4`.",
+				"bit": "Write chain."
+			},
+			"waitFor": {
+				"hint": {
+					"never": "write Filters.chain.",
+					"bit": "write Filters.chain."
+				}
+			},
+			"cardAt": "bottom-right",
+			"assist": true
+		}
+	]
+}

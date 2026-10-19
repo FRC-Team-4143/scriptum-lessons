@@ -13,8 +13,8 @@ One folder per lesson, and everything about a lesson is inside it:
 
 ```text
 lessons/<id>/
-  lesson.json            title, description, kind, track, order, requires, checkpoints,
-                         and which shared guides the lesson uses
+  lesson.json            title, description, kind, track, order, requires, recommends,
+                         checkpoints, and which shared guides the lesson uses
   project/               the starter files students get (copied into their workspace)
   checkpoints/           verify scripts (verify/<checkpoint id>.sh) and an optional setup.sh
   guides/<guide id>.json this lesson's Dozer guides: title, summary, topic, order, steps
@@ -44,9 +44,16 @@ help only when they're needed. Don't edit it by hand; the tests fail when it is 
 Paths in `lesson.json` (`checkpoints/verify/x.sh`, `setupScript`) are relative to the lesson's
 folder; the generated `catalog.json` makes them relative to the repo.
 
+`requires` locks a lesson until those lessons are complete. `recommends` never locks anything: it
+lists lessons worth doing first (the Java Basics a robot lesson uses, for example). Scriptum's
+roadmap builds its path from the FRC Robot lessons: each robot lesson's `requires` and `recommends`,
+and theirs in turn, come just before it, so a student meets each tool and Java idea right before the
+robot lesson that needs it. Lessons on no robot lesson's path (Java Advanced, Recursion) are shown
+as optional extra practice.
+
 ## What's here
 
-Three tracks, in curriculum order (each lesson's `track` and `order` are in its `lesson.json`):
+Four tracks, in curriculum order (each lesson's `track` and `order` are in its `lesson.json`):
 
 - **Tools**: `editor-basics` (Meet the Editor: files, folders, saving, the terminal, for someone
   who has never used a code editor), then git, AdvantageScope, Elastic, Choreo and Arbor introductions.
@@ -55,8 +62,21 @@ Three tracks, in curriculum order (each lesson's `track` and `order` are in its 
   (the starter `Example.xml` never counts). The project ships the Arbor project files (`bt_project.json`, a
   `nodes.xml` palette). Arbor opens `deploy/autos` on its own only when that folder already exists as the
   workspace container starts, so the README tells the student to use *Open project* after loading.
-- **Java Programming**: `hello-world` through `java-inheritance`, each
-  module locked until its prerequisite is complete.
+- **Java Basics**: `hello-world` through `java-inheritance`. Each lesson `recommends` the one before
+  it instead of requiring it, so nothing in Java locks: every lesson ships the code it builds on, and
+  a student who already knows some Java can open just the lesson they need. Scriptum shows the
+  unfinished recommended lessons before it loads one. Java Advanced works the same way.
+- **Java Advanced**: college-course ideas made small for high school, after Java Basics:
+  `java-interfaces` (Interfaces & Polymorphism: a robot battery budget), `java-collections`
+  (Collections: `ArrayList`, `HashMap`, `HashSet` with scouting data), `java-lambdas` (Lambdas &
+  Functional Interfaces: speed filters and button bindings), `java-unit-testing` (Unit Testing),
+  `java-exceptions`, `java-generics`, `java-big-o` (Big-O & Efficiency), `java-search-sort`
+  (Searching & Sorting), `java-stacks-queues`, `java-trees`, `java-graphs` and `java-design-patterns`.
+  The workspace has no JUnit, so `java-unit-testing` ships a small JUnit-style `@Test`/`Assertions`/
+  `TestRunner` in its project, and its checkpoints run the student's tests against buggy versions of
+  the code (mutants under `checkpoints/verify/`): a test only counts if it catches the bug.
+  These verify scripts compile every file except `Main.java`, so a checkpoint doesn't depend on
+  unfinished parts of the lesson it doesn't use.
 - **FRC Robot**: a differential-drive robot that uses [MWLib](https://github.com/FRC-Team-4143/MW-Lib)
   from the first lesson. The seven modules follow the training lessons, one after another, and each
   starts from the previous module's finished robot:

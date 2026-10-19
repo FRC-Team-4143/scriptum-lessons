@@ -1,0 +1,152 @@
+{
+	"title": "A bounded type",
+	"summary": "<T extends Comparable<T>> lets a generic method compare its items.",
+	"topic": "Java",
+	"order": 553,
+	"kind": "mixed",
+	"steps": [
+		{
+			"title": "When any type is too many",
+			"say": {
+				"never": "With a plain `<T>`, Java knows nothing about `T`, so it can't let you call `compareTo` on it: not every type can be compared. A **bound** narrows the blank. `<T extends Comparable<T>>` means \"any type T, as long as a T can be compared with another T\". `Integer`, `Double` and `String` all qualify, so they're all allowed.",
+				"bit": "A **bound**, `<T extends Comparable<T>>`, allows only types that can be compared, so you can call `compareTo`."
+			},
+			"board": {
+				"code": "public static <T extends Comparable<T>> boolean inOrder(T a, T b) {\n    return a.compareTo(b) <= 0;\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "T extends Comparable<T>",
+						"label": "only comparable types"
+					},
+					{
+						"text": "a.compareTo(b)",
+						"label": "allowed because of the bound"
+					}
+				]
+			}
+		},
+		{
+			"title": "Reading compareTo",
+			"say": {
+				"never": "`a.compareTo(b)` answers with a number. **Negative** means `a` comes before `b` (it's smaller). **Zero** means they're equal. **Positive** means `a` comes after `b` (it's bigger). For numbers that's size; for `String`s it's alphabetical order. Compare the answer with 0, never with 1 or -1, since the number can be any size.",
+				"bit": "`compareTo`: negative = smaller, 0 = equal, positive = bigger. Compare it with 0."
+			},
+			"board": {
+				"code": "Integer speed = 40;\nspeed.compareTo(25);      // positive: 40 is bigger\n\"arm\".compareTo(\"wrist\"); // negative: arm comes first",
+				"language": "java",
+				"marks": [
+					{
+						"text": "positive",
+						"label": "a is bigger"
+					},
+					{
+						"text": "negative",
+						"label": "a comes first"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: When any type is too many",
+			"say": {
+				"never": "`max` finds the biggest item in a list of anything comparable: the best score, the longest distance, the last auto name alphabetically. Remember the first item as the best so far. Then replace it only when an item is *bigger* (`compareTo` is more than 0), so a tie keeps the first one. Return `null` for an empty list.",
+				"bit": "`max`: start with the first item; swap only when `compareTo` is more than 0; `null` if empty."
+			},
+			"board": {
+				"code": "public static Object max(List<Object> items) {",
+				"marks": [
+					{
+						"text": "Object",
+						"label": "replace these with T"
+					}
+				]
+			},
+			"assist": true
+		},
+		{
+			"title": "Open ListTools.java",
+			"say": {
+				"never": "Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `ListTools`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "Press **Ctrl+P**, type `ListTools` and press Enter."
+			},
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "ListTools.java"
+				},
+				"hint": "open ListTools.java with Ctrl+P.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Find it",
+			"say": {
+				"never": "It may be further down. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `public static Object max` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "Press **Ctrl+F**, type `public static Object max` and press Enter to jump to it."
+			},
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "public static Object max"
+				},
+				"hint": "find public static Object max with Ctrl+F.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Your turn",
+			"say": {
+				"never": "Your turn! Change the line to `public static <T extends Comparable<T>> T max(List<T> items)` and write the loop.",
+				"bit": "Make max generic with the bound, then write it."
+			},
+			"waitFor": {
+				"hint": {
+					"never": "write max.",
+					"bit": "write max."
+				}
+			},
+			"cardAt": "bottom-right",
+			"assist": true
+		},
+		{
+			"title": "Run it",
+			"say": {
+				"never": "Click the **Run** button, the little triangle (▷) at the top right of `Main.java`. What your program prints appears in the terminal at the bottom. The same few classes handle headings, alerts, teams, autos and scores.",
+				"bit": "Click **Run** (▷) at the top right of `Main.java`. The output appears in the terminal at the bottom."
+			},
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "top-right",
+			"waitFor": {
+				"hint": {
+					"never": "run the program and read what it prints.",
+					"bit": "run the program and read the output."
+				}
+			},
+			"assist": true
+		}
+	]
+}

@@ -1,0 +1,151 @@
+{
+	"title": "Trees with many children",
+	"summary": "A node with a list of children, like a behavior tree: count the leaves and find the depth with a loop inside recursion.",
+	"topic": "Java",
+	"order": 593,
+	"kind": "mixed",
+	"steps": [
+		{
+			"title": "Any number of children",
+			"say": {
+				"never": "Not every tree has just a left and a right. Think of folders on a computer: a folder can hold any number of folders and files, and a file holds nothing. In Java, a node like that keeps its children in a **list**. A node whose list is empty is a **leaf**, the end of a branch.",
+				"bit": "A general tree keeps its children in a list. An empty list means the node is a **leaf**."
+			},
+			"board": {
+				"code": "public class Folder {\n    protected String name_;\n    protected ArrayList<Folder> inside_ = new ArrayList<>();\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "ArrayList<Folder> inside_",
+						"label": "a list of the same kind of node"
+					}
+				]
+			}
+		},
+		{
+			"title": "Your robot's autos are trees",
+			"say": {
+				"never": "The robot's autos are **behavior trees**, the kind you build in Arbor. A **Sequence** node runs its children one after another. A **Parallel** node runs them at the same time. The leaves are **actions**, like \"drive to note\" or \"shoot\": the only parts that move the robot. The groups just decide when the actions run.",
+				"bit": "Behavior trees: Sequence and Parallel are groups; the leaves are the actions."
+			},
+			"board": {
+				"code": "Sequence: two-piece auto\n├── shoot preload\n├── Parallel: grab\n│   ├── drive to note\n│   └── run intake\n└── shoot",
+				"language": "text",
+				"marks": [
+					{
+						"text": "Parallel: grab",
+						"label": "a group"
+					},
+					{
+						"text": "run intake",
+						"label": "an action (no children)"
+					}
+				]
+			}
+		},
+		{
+			"title": "A loop inside the recursion",
+			"say": {
+				"never": "With two children you call yourself twice: once left, once right. With a list of children, you call yourself once **for each child**, using a for-each loop, and combine what they hand back. The base case is a node with no children: the loop has nothing to visit, so decide what a lone leaf should answer.",
+				"bit": "Recurse on each child in a for-each loop and combine the answers. A leaf's empty list is the base case."
+			},
+			"board": {
+				"code": "int countFolders() {\n    int total = 1;                 // this folder\n    for (Folder f : inside_) {\n        total += f.countFolders(); // each one counts its own\n    }\n    return total;\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "for (Folder f : inside_) {",
+						"label": "once per child"
+					},
+					{
+						"text": "f.countFolders()",
+						"label": "the child counts its own tree"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: A loop inside the recursion",
+			"say": {
+				"never": "`AutoNode` has a `name_` and a `children_` list, and `add` already hooks children on. You write two methods. `countActions()` counts only the leaves: a node with no children is 1 action, and a group counts whatever its children count. `depth()` is like height: this node is 1, plus the deepest child.",
+				"bit": "`countActions`: a leaf is 1, a group sums its children. `depth`: 1 + the deepest child."
+			},
+			"board": {
+				"code": "public class AutoNode {\n    protected String name_;\n    protected ArrayList<AutoNode> children_ = new ArrayList<>();\n\n    public int countActions() {\n        // a leaf is 1 action; a group adds up its children\n    }\n}",
+				"marks": [
+					{
+						"text": "children_",
+						"label": "empty for an action"
+					}
+				]
+			},
+			"assist": true
+		},
+		{
+			"title": "Open AutoNode.java",
+			"say": {
+				"never": "Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `AutoNode`, then press **Enter**.",
+				"bit": "Press **Ctrl+P**, type `AutoNode` and press Enter."
+			},
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "AutoNode.java"
+				},
+				"hint": "open AutoNode.java with Ctrl+P.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Find it",
+			"say": {
+				"never": "Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `public int countActions()` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "Press **Ctrl+F**, type `public int countActions()` and press Enter to jump to it."
+			},
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "public int countActions()"
+				},
+				"hint": "find public int countActions() with Ctrl+F.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Your turn",
+			"say": {
+				"never": "Your turn! Write `countActions` and `depth`, each with a for-each loop over `children_` that calls the same method on every child. Click **Run**: the two-piece auto in `Main` should have 6 actions.",
+				"bit": "Write countActions and depth with a loop over children_."
+			},
+			"waitFor": {
+				"hint": {
+					"never": "write countActions and depth.",
+					"bit": "write countActions and depth."
+				}
+			},
+			"cardAt": "bottom-right",
+			"assist": true
+		}
+	]
+}

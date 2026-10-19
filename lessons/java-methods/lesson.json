@@ -2,9 +2,9 @@
 	"title": "Methods",
 	"description": "Write reusable methods, build new methods on top of them instead of copy-pasting, and practice on a few programming-course classics.",
 	"kind": "plain-java",
-	"track": "Java Programming",
+	"track": "Java Basics",
 	"order": 16,
-	"requires": [
+	"recommends": [
 		"java-arrays"
 	],
 	"guides": [
