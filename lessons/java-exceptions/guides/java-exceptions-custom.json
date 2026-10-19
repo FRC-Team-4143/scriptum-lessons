@@ -1,0 +1,151 @@
+{
+	"title": "Your own exception",
+	"summary": "Make an exception class of your own, and learn checked from unchecked.",
+	"topic": "Java",
+	"order": 542,
+	"kind": "mixed",
+	"steps": [
+		{
+			"title": "Your own kind of problem",
+			"say": {
+				"never": "Java's exceptions are just classes, so you can write your own. A name like `OutOfPaperException` says exactly what went wrong, and the class can carry extra facts, like which printer ran out. It **extends** `Exception`, and its constructor hands the message to `Exception` with `super(message)`, so `getMessage()` works for free.",
+				"bit": "Your own exception `extends Exception`, passes its message on with `super(message)`, and can keep extra fields."
+			},
+			"board": {
+				"code": "public class OutOfPaperException extends Exception {\n    protected String printer_;\n\n    public OutOfPaperException(String message, String printer) {\n        super(message);\n        printer_ = printer;\n    }\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "extends Exception",
+						"label": "it's an exception"
+					},
+					{
+						"text": "super(message);",
+						"label": "getMessage() returns this"
+					},
+					{
+						"text": "printer_ = printer;",
+						"label": "an extra fact"
+					}
+				]
+			}
+		},
+		{
+			"title": "Checked or unchecked",
+			"say": {
+				"never": "There are two families. An exception that extends `RuntimeException` is **unchecked**: Java lets you ignore it, because it usually means a bug in the code. One that extends plain `Exception` is **checked**: Java *checks* that every method that might throw it either catches it or warns its own callers by writing `throws` after its brackets. Use a checked one for a problem that will really happen, like a scout's typo, so nobody can forget to handle it.",
+				"bit": "`extends RuntimeException` = unchecked. `extends Exception` = checked: callers must catch it or say `throws`."
+			},
+			"board": {
+				"code": "public void print(String page) throws OutOfPaperException {\n    if (sheets_ == 0) {\n        throw new OutOfPaperException(\"no paper\", name_);\n    }\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "throws OutOfPaperException",
+						"label": "the warning to callers"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Your own kind of problem",
+			"say": {
+				"never": "`BadLineException` means \"I couldn't read this line of scouting text\". It starts out as an unchecked `RuntimeException`, so change it to extend `Exception`. Then give it a `line_number_` field, so the code that catches it can say *which* line was bad.",
+				"bit": "Make `BadLineException` extend `Exception`, call `super(message)`, and keep the line number."
+			},
+			"board": {
+				"code": "public class BadLineException extends RuntimeException {",
+				"marks": [
+					{
+						"text": "RuntimeException",
+						"label": "change this to Exception"
+					}
+				]
+			},
+			"assist": true
+		},
+		{
+			"title": "In your lesson: Checked or unchecked",
+			"say": {
+				"never": "`parseLine` already says `throws BadLineException`, so once the exception is checked, Java is happy. When a line isn't exactly three pieces, `parseLine` throws a `new BadLineException(...)` with a message and the `line_number` it was given.",
+				"bit": "`parseLine` already says `throws BadLineException`; throw one for a line it can't read."
+			},
+			"board": {
+				"code": "public static ScoutEntry parseLine(String line, int line_number) throws BadLineException {",
+				"marks": [
+					{
+						"text": "throws BadLineException",
+						"label": "already written for you"
+					}
+				]
+			},
+			"assist": true
+		},
+		{
+			"title": "Open BadLineException.java",
+			"say": {
+				"never": "Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `BadLineException`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "Press **Ctrl+P**, type `BadLineException` and press Enter."
+			},
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "BadLineException.java"
+				},
+				"hint": "open BadLineException.java with Ctrl+P.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Find it",
+			"say": {
+				"never": "It may be further down. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `public class BadLineException` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "Press **Ctrl+F**, type `public class BadLineException` and press Enter to jump to it."
+			},
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "public class BadLineException"
+				},
+				"hint": "find public class BadLineException with Ctrl+F.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Your turn",
+			"say": {
+				"never": "Your turn! Change `RuntimeException` to `Exception`. Add the `protected int line_number_` field. In the constructor, call `super(message);` first, then store `line_number`. Make `getLineNumber()` return the field.",
+				"bit": "Extend Exception, add line_number_, call super(message) and return the field."
+			},
+			"waitFor": {
+				"hint": {
+					"never": "finish BadLineException.",
+					"bit": "finish BadLineException."
+				}
+			},
+			"cardAt": "bottom-right",
+			"assist": true
+		}
+	]
+}

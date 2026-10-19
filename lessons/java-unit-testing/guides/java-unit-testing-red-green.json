@@ -1,0 +1,158 @@
+{
+	"title": "Test first, then fix",
+	"summary": "Write a failing test that shows the bug, then fix the code until it passes.",
+	"topic": "Java",
+	"order": 533,
+	"kind": "mixed",
+	"steps": [
+		{
+			"title": {
+				"never": "Red, then green",
+				"bit": "Red, then green"
+			},
+			"say": {
+				"never": "When you find a bug, don't fix it yet. First write a test that shows it: the test should **FAIL** (red). Then fix the code until the test **PASSES** (green). Now the bug can never sneak back in, because that test would catch it. Pros call this **test-driven development**.",
+				"bit": "Write a failing test for the bug first (red), then fix the code (green)."
+			},
+			"board": {
+				"code": "// The bug: a bus 5 minutes EARLY counts as late.\npublic static boolean isLate(int minutes_off) {\n    return minutes_off != 0;\n}\n\n@Test\nvoid earlyIsNotLate() {\n    Assertions.assertFalse(Bus.isLate(-5));\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "minutes_off != 0",
+						"label": "the bug"
+					},
+					{
+						"text": "Bus.isLate(-5)",
+						"label": "FAILS until it's fixed"
+					}
+				]
+			}
+		},
+		{
+			"title": {
+				"never": "Why test before fixing?",
+				"bit": "Why test first?"
+			},
+			"say": {
+				"never": "If you fix first, you never saw a test fail, so you don't know your test can catch the bug at all. Seeing red first proves the test works. Then seeing green proves the fix works.",
+				"bit": "Red proves the test can catch the bug; green proves the fix works."
+			},
+			"board": {
+				"code": "FAIL earlyIsNotLate: expected false but was true\n...fix the code...\nPASS earlyIsNotLate",
+				"language": "text",
+				"marks": [
+					{
+						"text": "FAIL",
+						"label": "red: the bug is real"
+					},
+					{
+						"text": "PASS",
+						"label": "green: fixed"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Red, then green",
+			"say": {
+				"never": "`ShooterMath.isAtSpeed` says whether the flywheel is close enough to the target speed to shoot. Read it carefully. It's right when the wheel is a bit too fast, but what about when it's still spinning up and way too **slow**? Write tests for both sides, run them and watch one FAIL. Then fix `ShooterMath.java`.",
+				"bit": "Test isAtSpeed on both sides of the target, watch one FAIL, then fix ShooterMath."
+			},
+			"board": {
+				"code": "return current_rpm - target_rpm <= tolerance_rpm;",
+				"marks": [
+					{
+						"text": "current_rpm - target_rpm",
+						"label": "negative when too slow"
+					}
+				]
+			},
+			"assist": true
+		},
+		{
+			"title": "Open ShooterMathTest.java",
+			"say": {
+				"never": "Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `ShooterMathTest`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "Press **Ctrl+P**, type `ShooterMathTest` and press Enter."
+			},
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "ShooterMathTest.java"
+				},
+				"hint": "open ShooterMathTest.java with Ctrl+P.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Find it",
+			"say": {
+				"never": "It may be further down. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `TODO (find the bug)` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "Press **Ctrl+F**, type `TODO (find the bug)` and press Enter to jump to it."
+			},
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "TODO (find the bug)"
+				},
+				"hint": "find TODO (find the bug) with Ctrl+F.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Your turn",
+			"say": {
+				"never": "Your turn! Add tests for `isAtSpeed` under the TODO and run them. When one FAILS, open `ShooterMath.java` and fix the bug, then run again until everything passes.",
+				"bit": "Write isAtSpeed tests, see one fail, then fix ShooterMath."
+			},
+			"waitFor": {
+				"hint": {
+					"never": "write a test that fails, then fix ShooterMath.",
+					"bit": "write a test that fails, then fix ShooterMath."
+				}
+			},
+			"cardAt": "bottom-right",
+			"assist": true
+		},
+		{
+			"title": "Run it",
+			"say": {
+				"never": "Open `Main.java` and click the **Run** button, the little triangle (▷) at its top right. Every test prints **PASS** or **FAIL** in the terminal at the bottom.",
+				"bit": "Run `Main` (▷). Each test prints PASS or FAIL in the terminal."
+			},
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "top-right",
+			"waitFor": {
+				"hint": {
+					"never": "run the tests and read the PASS and FAIL lines.",
+					"bit": "run the tests and read the output."
+				}
+			},
+			"assist": true
+		}
+	]
+}

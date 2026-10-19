@@ -1,0 +1,48 @@
+{
+	"title": "Graphs",
+	"description": "Map the field as waypoints joined by lanes, then search it: find out whether the robot can get somewhere at all, the path with the fewest hops, and which waypoints a blocked lane cuts off.",
+	"kind": "plain-java",
+	"track": "Java Advanced",
+	"order": 40,
+	"recommends": [
+		"java-trees"
+	],
+	"checkpoints": [
+		{
+			"id": "field-map",
+			"title": "The field map",
+			"description": "FieldMap keeps a Map<String, List<String>> of waypoints. connect(a, b) joins two waypoints both ways, once, and neighbors() never returns null.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/field-map.sh"
+			}
+		},
+		{
+			"id": "can-reach",
+			"title": "Can the robot get there?",
+			"description": "PathFinder.canReach searches the map, remembering where it has been, and says whether one waypoint can be reached from another.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/can-reach.sh"
+			}
+		},
+		{
+			"id": "shortest-path",
+			"title": "Fewest hops",
+			"description": "PathFinder.shortestPath uses a breadth-first search to return a path with the fewest hops, or an empty list when there isn't one.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/shortest-path.sh"
+			}
+		},
+		{
+			"id": "cut-off",
+			"title": "Cut off",
+			"description": "PathFinder.unreachable lists, in alphabetical order, every waypoint the robot can't get to from where it starts.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/cut-off.sh"
+			}
+		}
+	]
+}

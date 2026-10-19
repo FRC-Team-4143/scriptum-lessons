@@ -1,0 +1,289 @@
+{
+	"title": "Buttons, suppliers and method references",
+	"summary": "Runnable and BooleanSupplier bind buttons to actions; method references name a method to run later.",
+	"topic": "Java",
+	"order": 523,
+	"kind": "mixed",
+	"steps": [
+		{
+			"title": "Java's ready-made shapes",
+			"say": {
+				"never": "You don't have to write a new interface for every lambda. Java comes with ready-made ones in `java.util.function`. The name tells you the shape. A `Runnable` takes nothing and hands back nothing: it just *does* something (`run()`). A `BooleanSupplier` takes nothing and hands back true or false (`getAsBoolean()`). A `DoubleSupplier` hands back a number (`getAsDouble()`). A `Consumer` takes a value and keeps nothing. A `Function` takes a value and hands one back.",
+				"bit": "Built-ins: `Runnable` (`run()`), `BooleanSupplier`, `DoubleSupplier`, `Supplier<T>`, `Consumer<T>`, `Function<T, R>`."
+			},
+			"board": {
+				"code": "Runnable beep = () -> System.out.println(\"beep\");\nBooleanSupplier isLate = () -> clock.getHour() > 22;\nDoubleSupplier temperature = () -> thermometer.read();\nConsumer<String> shout = text -> System.out.println(text + \"!\");\nFunction<String, Integer> size = text -> text.length();",
+				"language": "java",
+				"marks": [
+					{
+						"text": "()",
+						"label": "nothing goes in"
+					},
+					{
+						"text": "Runnable",
+						"label": "does something, hands back nothing"
+					},
+					{
+						"text": "BooleanSupplier",
+						"label": "hands back true or false"
+					},
+					{
+						"text": "Function<String, Integer>",
+						"label": "String in, Integer out"
+					}
+				]
+			}
+		},
+		{
+			"title": "Only on the way down",
+			"say": {
+				"never": "A robot checks its buttons about 50 times a second. If the action ran every time the button *is* down, one press would run it dozens of times. So you remember what the button was last time, and act only when it's down now but wasn't before. That moment is called a **rising edge**. A doorbell works the same way: one ring per push, however long you hold it.",
+				"bit": "Act on the **rising edge**: true now, false last time. Then remember the value."
+			},
+			"board": {
+				"code": "boolean pushed = doorbell.getAsBoolean();\nif (pushed && !wasPushed) {\n    ring.run();\n}\nwasPushed = pushed;",
+				"language": "java",
+				"marks": [
+					{
+						"text": "pushed && !wasPushed",
+						"label": "down now, up last time"
+					},
+					{
+						"text": "wasPushed = pushed;",
+						"label": "remember for next time"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Only on the way down",
+			"say": {
+				"never": "`onTrue` only *remembers* the pair: add a `new Binding(condition, action)` to `bindings_`. `poll()` loops over every binding. Ask its `condition_` for `getAsBoolean()`. If that's true and `was_true_` is false, call `action_.run()`. Then save the value in `was_true_`, pressed or not.",
+				"bit": "`onTrue`: `bindings_.add(new Binding(...))`. `poll`: per binding, run `action_` on a rising edge, then update `was_true_`."
+			},
+			"board": {
+				"code": "public void poll() {\n    for (Binding binding : bindings_) {\n        // read binding.condition_ now\n        // rising edge? binding.action_.run();\n        // binding.was_true_ = ...\n    }\n}",
+				"marks": [
+					{
+						"text": "for (Binding binding : bindings_)",
+						"label": "every button that was bound"
+					}
+				]
+			},
+			"assist": true
+		},
+		{
+			"title": "Open ButtonBoard.java",
+			"say": {
+				"never": "Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `ButtonBoard`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "Press **Ctrl+P**, type `ButtonBoard` and press Enter."
+			},
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "ButtonBoard.java"
+				},
+				"hint": "open ButtonBoard.java with Ctrl+P.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Find it",
+			"say": {
+				"never": "It may be further down. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `public void poll()` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "Press **Ctrl+F**, type `public void poll()` and press Enter to jump to it."
+			},
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "public void poll()"
+				},
+				"hint": "find public void poll() with Ctrl+F.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Your turn",
+			"say": {
+				"never": "Your turn! Write `onTrue` and `poll()`. Remember: `onTrue` never runs the action itself.",
+				"bit": "Write onTrue and poll."
+			},
+			"waitFor": {
+				"hint": {
+					"never": "write onTrue and poll.",
+					"bit": "write onTrue and poll."
+				}
+			},
+			"cardAt": "bottom-right",
+			"assist": true
+		},
+		{
+			"title": "Method references",
+			"say": {
+				"never": "Lots of lambdas just call one method that already exists, like `() -> speaker.beep()`. Java has a shorter way to say that: `speaker::beep`. Read `::` as \"the method called\". There are no parentheses after `beep`, because you're not calling it now. You're naming it so it can be called later. `Math::abs` works the same way for a method that takes a number.",
+				"bit": "`object::method` is short for a lambda that just calls that method. No `()`: it's named, not called."
+			},
+			"board": {
+				"code": "Runnable beep = speaker::beep;       // () -> speaker.beep()\nBooleanSupplier late = clock::isLate; // () -> clock.isLate()\nDoubleUnaryOperator size = Math::abs; // x -> Math.abs(x)",
+				"language": "java",
+				"marks": [
+					{
+						"text": "speaker::beep",
+						"label": "named now, run later"
+					},
+					{
+						"text": "Math::abs",
+						"label": "works for static methods too"
+					}
+				]
+			}
+		},
+		{
+			"title": "Read it fresh every time",
+			"say": {
+				"never": "A `DoubleSupplier` doesn't hold a number. It holds *how to get* one. Each `getAsDouble()` runs the lambda again, so you get today's temperature, not the one from when the program started. If a lambda needs to pass a value to the method, like `setVolume(3)`, write a normal lambda instead of a method reference.",
+				"bit": "A supplier reads a fresh value on every call. Need to pass a number? Use a lambda, not `::`."
+			},
+			"board": {
+				"code": "DoubleSupplier temperature = () -> thermometer.read();\ntemperature.getAsDouble(); // reads it now\ntemperature.getAsDouble(); // reads it again\n\nRunnable quiet = () -> speaker.setVolume(3);",
+				"language": "java",
+				"marks": [
+					{
+						"text": "getAsDouble()",
+						"label": "runs the lambda each time"
+					},
+					{
+						"text": "() -> speaker.setVolume(3)",
+						"label": "needs a value, so a lambda"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Method references",
+			"say": {
+				"never": "`controller_.a()` hands back true or false and takes nothing, so `controller_::a` is a `BooleanSupplier`. `intake_.run()` takes nothing and hands back nothing, so `intake_::run` is a `Runnable`. Bind B to `intake_::stop` the same way. X needs `setPower(EJECT_POWER)`, which takes a number, so it gets a lambda. Then make `driveSpeed()` return a lambda that reads the stick, flips its sign and passes it through `stick_filter_`.",
+				"bit": "`buttons_.onTrue(controller_::a, intake_::run);`, the same for B, a lambda for X, and a stick-reading lambda in `driveSpeed()`."
+			},
+			"board": {
+				"code": "public void configureBindings() {\n    buttons_.onTrue(controller_::a, intake_::run);\n    // B stops the intake\n    // X: () -> intake_.setPower(EJECT_POWER)\n}",
+				"marks": [
+					{
+						"text": "controller_::a",
+						"label": "when: a BooleanSupplier"
+					},
+					{
+						"text": "intake_::run",
+						"label": "what: a Runnable"
+					}
+				]
+			},
+			"assist": true
+		},
+		{
+			"title": "Open RobotBindings.java",
+			"say": {
+				"never": "Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `RobotBindings`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "Press **Ctrl+P**, type `RobotBindings` and press Enter."
+			},
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "RobotBindings.java"
+				},
+				"hint": "open RobotBindings.java with Ctrl+P.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Find it",
+			"say": {
+				"never": "It may be further down. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `public void configureBindings()` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "Press **Ctrl+F**, type `public void configureBindings()` and press Enter to jump to it."
+			},
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "public void configureBindings()"
+				},
+				"hint": "find public void configureBindings() with Ctrl+F.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Your turn",
+			"say": {
+				"never": "Your turn! Write the three `onTrue` lines in `configureBindings()`, then replace the `() -> 0.0` in `driveSpeed()` with a lambda that reads `controller_.getLeftY()` every time.",
+				"bit": "Bind A, B and X, then write driveSpeed."
+			},
+			"waitFor": {
+				"hint": {
+					"never": "wire up the buttons and the stick.",
+					"bit": "wire up the buttons and the stick."
+				}
+			},
+			"cardAt": "bottom-right",
+			"assist": true
+		},
+		{
+			"title": "Run it",
+			"say": {
+				"never": "Click the **Run** button, the little triangle (▷) at the top right of `Main.java`. What your program prints appears in the terminal at the bottom. Watch the Intake column change only on the loop where a button goes down.",
+				"bit": "Click **Run** (▷) at the top right of `Main.java`. The output appears in the terminal at the bottom."
+			},
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "top-right",
+			"waitFor": {
+				"hint": {
+					"never": "run the program and read what it prints.",
+					"bit": "run the program and read the output."
+				}
+			},
+			"assist": true
+		}
+	]
+}

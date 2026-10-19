@@ -1,0 +1,138 @@
+{
+	"title": "Throwing an exception",
+	"summary": "When a value can't be right, throw an exception instead of quietly keeping it.",
+	"topic": "Java",
+	"order": 541,
+	"kind": "mixed",
+	"steps": [
+		{
+			"title": "When something can't be right",
+			"say": {
+				"never": "Sometimes a method gets a value that makes no sense, like a thermostat told to heat the room to 99 degrees. Keeping it would cause trouble later, far from where the mistake happened. Instead the method can **throw an exception**: an object that means \"stop, something is wrong here\". `throw new IllegalArgumentException(\"...\")` is the one Java uses for a bad argument. The text in the brackets is the **message** that explains what went wrong.",
+				"bit": "For a value that can't be right, `throw new IllegalArgumentException(\"message\")` instead of keeping it."
+			},
+			"board": {
+				"code": "public void setTarget(int degrees) {\n    if (degrees < 10 || degrees > 30) {\n        throw new IllegalArgumentException(\"target must be 10 to 30, got \" + degrees);\n    }\n    target_ = degrees;\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "throw new IllegalArgumentException",
+						"label": "stop: bad argument"
+					},
+					{
+						"text": "\"target must be 10 to 30, got \" + degrees",
+						"label": "the message"
+					},
+					{
+						"text": "target_ = degrees;",
+						"label": "only reached when it's fine"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: When something can't be right",
+			"say": {
+				"never": "A `ScoutEntry` is one line of scouting: team, match and points. Team 0 doesn't exist, there is no match 0, and nobody scores -5 points. So the constructor checks each number *before* it stores anything, and throws an `IllegalArgumentException` for one that can't be right. Zero points is fine: some matches go badly.",
+				"bit": "`ScoutEntry` throws for team or match of 0 or less, or negative points, before it stores them."
+			},
+			"board": {
+				"code": "public ScoutEntry(int team, int match, int points) {\n    // check team, match and points first\n    team_ = team;\n}",
+				"marks": [
+					{
+						"text": "// check team, match and points first",
+						"label": "one if per rule"
+					}
+				]
+			},
+			"assist": true
+		},
+		{
+			"title": "What a throw does",
+			"say": {
+				"never": "`throw` ends the method right there, like `return`, but nothing is handed back. The exception travels to whoever called the method, then to whoever called *that*, and so on. If no code along the way **catches** it, the program stops and prints the exception's name, its message and the lines it passed through. You'll learn to catch it in a later guide.",
+				"bit": "`throw` ends the method and travels up through the callers. Nobody catches it? The program stops and prints it."
+			},
+			"board": {
+				"code": "Exception in thread \"main\" java.lang.IllegalArgumentException: target must be 10 to 30, got 99\n    at Thermostat.setTarget(Thermostat.java:4)\n    at Main.main(Main.java:6)",
+				"language": "text",
+				"marks": [
+					{
+						"text": "IllegalArgumentException",
+						"label": "what kind"
+					},
+					{
+						"text": "Thermostat.java:4",
+						"label": "where it was thrown"
+					}
+				]
+			}
+		},
+		{
+			"title": "Open ScoutEntry.java",
+			"say": {
+				"never": "Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `ScoutEntry`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "Press **Ctrl+P**, type `ScoutEntry` and press Enter."
+			},
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "ScoutEntry.java"
+				},
+				"hint": "open ScoutEntry.java with Ctrl+P.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Find it",
+			"say": {
+				"never": "It may be further down. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `public ScoutEntry(int team` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "Press **Ctrl+F**, type `public ScoutEntry(int team` and press Enter to jump to it."
+			},
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "public ScoutEntry(int team"
+				},
+				"hint": "find public ScoutEntry(int team with Ctrl+F.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Your turn",
+			"say": {
+				"never": "Your turn! At the top of the constructor, before `team_ = team;`, add one `if` for each rule. Each one throws an `IllegalArgumentException` with a message that says which number was wrong and what it was.",
+				"bit": "Add an `if` and a `throw` for each rule, before the fields are set."
+			},
+			"waitFor": {
+				"hint": {
+					"never": "make the ScoutEntry constructor refuse bad numbers.",
+					"bit": "make the ScoutEntry constructor refuse bad numbers."
+				}
+			},
+			"cardAt": "bottom-right",
+			"assist": true
+		}
+	]
+}

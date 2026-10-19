@@ -1,0 +1,134 @@
+{
+	"title": "Factory: build the right object from a name",
+	"summary": "One method turns a name into the right object, so the rest of the code never has to know which classes exist.",
+	"topic": "Java",
+	"order": 613,
+	"kind": "mixed",
+	"steps": [
+		{
+			"title": "Order by name",
+			"say": {
+				"never": "At a pizza shop, you say \"pepperoni\" and a pizza comes out. You don't go into the kitchen and pick the ingredients. A **factory** is a method like that kitchen: you hand it a name, and it builds the right object and hands it back. Its return type is an interface, so the caller only knows \"I got a pizza\", not which class it was. Each call builds a fresh one with `new`.",
+				"bit": "**Factory**: a method takes a name and returns a new object of the right class, typed as the interface."
+			},
+			"board": {
+				"code": "public static Pizza make(String order) {\n    switch (order) {\n        case \"pepperoni\":\n            return new Pepperoni();\n        case \"veggie\":\n            return new Veggie();\n        default:\n            return new Cheese();\n    }\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "public static Pizza make",
+						"label": "hands back the interface"
+					},
+					{
+						"text": "default:",
+						"label": "any other name"
+					}
+				]
+			}
+		},
+		{
+			"title": "Tidy the name first",
+			"say": {
+				"never": "People type names in all sorts of ways: `\"Pepperoni\"`, `\"PEPPERONI\"`, `\" pepperoni \"`. Tidy the name before you match it. `trim()` cuts spaces off both ends, and `toLowerCase()` makes every letter small. Both give back a *new* string, so use what they return. And watch out for `null`: calling a method on `null` crashes, so check for it first.",
+				"bit": "`trim()` and `toLowerCase()` tidy the name (they return a new string). Check `null` before calling either."
+			},
+			"board": {
+				"code": "if (order == null) {\n    // no order at all\n}\nString tidy = order.trim().toLowerCase();\n// \" PEPPERONI \" is now \"pepperoni\"",
+				"language": "java",
+				"marks": [
+					{
+						"text": "trim()",
+						"label": "drop spaces at the ends"
+					},
+					{
+						"text": "toLowerCase()",
+						"label": "all small letters"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Tidy the name first",
+			"say": {
+				"never": "`AutoFactory.create(name)` turns the dashboard's choice into an `Auto`. Handle `null` first, then tidy the name and match it against the four names in the comment. Anything else gets a `DoNothingAuto`, the safe choice. Every match builds a new object, and nothing ever returns `null`.",
+				"bit": "`create`: null check, tidy, match four names, `DoNothingAuto` for anything else. Always `new`, never `null`."
+			},
+			"board": {
+				"code": "public static Auto create(String name) {\n    // null? the safe auto\n    // tidy the name, then match it\n}",
+				"marks": [
+					{
+						"text": "create(String name)",
+						"label": "name in, auto out"
+					}
+				]
+			},
+			"assist": true
+		},
+		{
+			"title": "Open AutoFactory.java",
+			"say": {
+				"never": "Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `AutoFactory`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "Press **Ctrl+P**, type `AutoFactory` and press Enter."
+			},
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "AutoFactory.java"
+				},
+				"hint": "open AutoFactory.java with Ctrl+P.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Find it",
+			"say": {
+				"never": "It may be further down. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `public static Auto create(String name)` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "Press **Ctrl+F**, type `public static Auto create(String name)` and press Enter to jump to it."
+			},
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "public static Auto create(String name)"
+				},
+				"hint": "find public static Auto create(String name) with Ctrl+F.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Your turn",
+			"say": {
+				"never": "Your turn! Write `create`. A `switch` on the tidied name works well, or a chain of `if` and `.equals(...)`. (Don't compare strings with `==`.)",
+				"bit": "Write create."
+			},
+			"waitFor": {
+				"hint": {
+					"never": "write AutoFactory.create.",
+					"bit": "write AutoFactory.create."
+				}
+			},
+			"cardAt": "bottom-right",
+			"assist": true
+		}
+	]
+}

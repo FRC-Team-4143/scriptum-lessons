@@ -1,0 +1,48 @@
+{
+	"title": "Unit Testing",
+	"description": "Write tests that prove robot math works: check a deadband, a clamp and a unit conversion with @Test and assertEquals, then catch a real shooter bug with a test before you fix it.",
+	"kind": "plain-java",
+	"track": "Java Advanced",
+	"order": 33,
+	"recommends": [
+		"java-methods"
+	],
+	"checkpoints": [
+		{
+			"id": "deadband-tests",
+			"title": "Test deadband",
+			"description": "Your DriveMathTest tests pass on the real deadband and catch every buggy version the checker plants.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/deadband-tests.sh"
+			}
+		},
+		{
+			"id": "clamp-tests",
+			"title": "Test clamp",
+			"description": "Your tests catch a clamp that forgets either end of the range, or mixes up min and max.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/clamp-tests.sh"
+			}
+		},
+		{
+			"id": "conversion-tests",
+			"title": "Test inchesToMeters",
+			"description": "Your tests catch a wrong conversion factor, a dropped fraction and a lost minus sign.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/conversion-tests.sh"
+			}
+		},
+		{
+			"id": "find-the-bug",
+			"title": "Find the bug",
+			"description": "ShooterMathTest has a test that fails on the buggy isAtSpeed, and ShooterMath is fixed so every test passes.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/find-the-bug.sh"
+			}
+		}
+	]
+}

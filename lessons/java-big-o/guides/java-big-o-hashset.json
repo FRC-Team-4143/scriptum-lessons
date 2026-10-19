@@ -1,0 +1,155 @@
+{
+	"title": "Trade a loop for a HashSet",
+	"summary": "Turn an O(n²) check into O(n) by remembering what you've seen in a HashSet.",
+	"topic": "Java",
+	"order": 563,
+	"kind": "mixed",
+	"steps": [
+		{
+			"title": "Remember instead of re-checking",
+			"say": {
+				"never": "Picture a sign-in sheet at the shop door. To spot someone signing in twice, you *could* compare every name with every other name: O(n²). Or you could read the names once, top to bottom, and keep a pile of names you've already read. For each new name, ask the pile \"have I seen you?\". If yes, it's a repeat. If not, add it to the pile and carry on.",
+				"bit": "Instead of comparing every pair, walk the list once and remember what you've seen."
+			}
+		},
+		{
+			"title": "A HashSet answers in one step",
+			"say": {
+				"never": "That only helps if asking the pile is quick. A `HashSet` is: it files each item by a code worked out from its value, so `contains()` goes straight to the right place, about one step however many items it holds. Compare `ArrayList.contains`, which checks item by item. One loop with a HashSet inside is `n × 1` = **O(n)**.",
+				"bit": "`HashSet.contains` and `add` are about O(1), so one loop using them is O(n)."
+			},
+			"board": {
+				"code": "HashSet<String> signed_in = new HashSet<>();\nfor (String name : sheet) {\n    if (signed_in.contains(name)) {\n        System.out.println(name + \" signed in twice\");\n    }\n    signed_in.add(name);\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "signed_in.contains(name)",
+						"label": "about one step"
+					},
+					{
+						"text": "signed_in.add(name);",
+						"label": "remember it for later"
+					}
+				]
+			}
+		},
+		{
+			"title": "Building a set from a list",
+			"say": {
+				"never": "You can also make a set from a whole list at once: `new HashSet<>(list)`. It looks at every item once, so that's O(n), and it drops repeats for you. That's handy when you need to ask \"is this in the other list?\" many times: turn the other list into a set first.",
+				"bit": "`new HashSet<>(list)` is one O(n) pass and drops repeats."
+			},
+			"board": {
+				"code": "HashSet<String> members = new HashSet<>(roster);\nboolean on_team = members.contains(\"Ada\");",
+				"language": "java",
+				"marks": [
+					{
+						"text": "new HashSet<>(roster)",
+						"label": "one pass over roster"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Trade a loop for a HashSet",
+			"say": {
+				"never": "`hasDuplicate` is the sign-in sheet: one loop over the teams, a HashSet of the teams seen so far, and `return true` the moment one is already in it. `teamsInBoth` needs one event's teams in a set, then one loop over the other event. Collect the shared teams in a *second* set, so a team listed twice only counts once. Remember `import java.util.HashSet;` at the top.",
+				"bit": "`hasDuplicate`: one loop plus a seen-set. `teamsInBoth`: set of one event, loop the other, collect matches in a set."
+			},
+			"board": {
+				"code": "public static boolean hasDuplicate(List<Integer> teams) {\n    return false;\n}",
+				"marks": [
+					{
+						"text": "hasDuplicate",
+						"label": "look at each team once"
+					}
+				]
+			},
+			"assist": true
+		},
+		{
+			"title": "Open Duplicates.java",
+			"say": {
+				"never": "Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `Duplicates`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "Press **Ctrl+P**, type `Duplicates` and press Enter."
+			},
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "Duplicates.java"
+				},
+				"hint": "open Duplicates.java with Ctrl+P.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Find it",
+			"say": {
+				"never": "Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `public static boolean hasDuplicate(` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "Press **Ctrl+F**, type `public static boolean hasDuplicate(` and press Enter to jump to it."
+			},
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "public static boolean hasDuplicate("
+				},
+				"hint": "find public static boolean hasDuplicate( with Ctrl+F.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Your turn",
+			"say": {
+				"never": "Your turn! Write `hasDuplicate` with one loop and a HashSet. Then open `EventOverlap.java` and write `teamsInBoth` the same way.",
+				"bit": "Write hasDuplicate, then teamsInBoth."
+			},
+			"waitFor": {
+				"hint": {
+					"never": "write hasDuplicate and teamsInBoth.",
+					"bit": "write hasDuplicate and teamsInBoth."
+				}
+			},
+			"cardAt": "bottom-right",
+			"assist": true
+		},
+		{
+			"title": "Run it",
+			"say": {
+				"never": "Click the **Run** button, the little triangle (▷) at the top right of `Main.java`. The terminal at the bottom shows how many looks the slow check took, and how many yours took.",
+				"bit": "Click **Run** (▷) at the top right of `Main.java` and compare the two look counts."
+			},
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "top-right",
+			"waitFor": {
+				"hint": {
+					"never": "run the program and compare the two counts.",
+					"bit": "run it and compare the counts."
+				}
+			},
+			"assist": true
+		}
+	]
+}

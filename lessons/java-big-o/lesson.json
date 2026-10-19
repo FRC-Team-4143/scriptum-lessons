@@ -1,0 +1,48 @@
+{
+	"title": "Big-O & Efficiency",
+	"description": "Count the steps your code takes. Sort snippets into O(1), O(log n), O(n) and O(n²), then speed up a scouting app's duplicate-team check from millions of steps to a few thousand with a HashSet.",
+	"kind": "plain-java",
+	"track": "Java Advanced",
+	"order": 36,
+	"recommends": [
+		"java-collections"
+	],
+	"checkpoints": [
+		{
+			"id": "classify",
+			"title": "Classify the snippets",
+			"description": "Every snippet in Answers.java is marked CONSTANT, LOG_N, LINEAR or N_SQUARED correctly.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/classify.sh"
+			}
+		},
+		{
+			"id": "latest-and-best",
+			"title": "One step, one pass",
+			"description": "ScoutStats.latest returns the last score in one look (O(1)) and ScoutStats.best returns the highest in one pass (O(n)); both return 0 for an empty list.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/latest-and-best.sh"
+			}
+		},
+		{
+			"id": "fast-duplicates",
+			"title": "A fast duplicate check",
+			"description": "Duplicates.hasDuplicate gives the same answer as hasDuplicateSlow, but looks at each team only once by using a HashSet (O(n) instead of O(n²)).",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/fast-duplicates.sh"
+			}
+		},
+		{
+			"id": "teams-in-both",
+			"title": "Teams at both events",
+			"description": "EventOverlap.teamsInBoth counts the different teams that appear in both lists, in O(n + m) steps.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/teams-in-both.sh"
+			}
+		}
+	]
+}

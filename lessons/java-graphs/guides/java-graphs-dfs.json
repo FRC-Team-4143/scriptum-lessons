@@ -1,0 +1,134 @@
+{
+	"title": "Searching a graph",
+	"summary": "Visit neighbors of neighbors, and remember where you've been so loops don't trap you.",
+	"topic": "Java",
+	"order": 602,
+	"kind": "mixed",
+	"steps": [
+		{
+			"title": "Explore, and remember",
+			"say": {
+				"never": "Picture exploring a building you've never seen. You walk into a room, note every door, and pick one to try. To be sure you don't walk in circles forever, you chalk an X on each room as you enter. If a room already has an X, you turn around. Searching a graph works the same way. The X is a `Set` of nodes you've **visited**.",
+				"bit": "Search by visiting neighbors of what you've reached. Keep a **visited** `Set`, or a loop traps you."
+			},
+			"board": {
+				"code": "Set<String> chalked = new HashSet<>();\nif (chalked.contains(room)) {\n    // been here: turn around\n}\nchalked.add(room);",
+				"language": "java",
+				"marks": [
+					{
+						"text": "Set<String> chalked",
+						"label": "rooms with an X on them"
+					},
+					{
+						"text": "chalked.contains(room)",
+						"label": "been here already?"
+					}
+				]
+			}
+		},
+		{
+			"title": "A stack of doors to try",
+			"say": {
+				"never": "Keep the doors you still have to try on a **stack**, like a pile of plates: `push` puts one on top, `pop` takes the top one off. Pop a room, skip it if it's chalked, chalk it, and push each of its doors. When the pile is empty, you've seen every room you can get to. Going as deep as you can before backing up is called a **depth-first search**. Java's `ArrayDeque` makes a good stack.",
+				"bit": "A **depth-first search**: `push` the start; loop `pop`, skip if visited, mark it, `push` its neighbors."
+			},
+			"board": {
+				"code": "Deque<String> doors = new ArrayDeque<>();\ndoors.push(\"Lobby\");\nwhile (!doors.isEmpty()) {\n    String room = doors.pop();\n    // skip it if chalked, chalk it, push its doors\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "doors.push(\"Lobby\");",
+						"label": "start here"
+					},
+					{
+						"text": "doors.pop()",
+						"label": "the newest door first"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: A stack of doors to try",
+			"say": {
+				"never": "`canReach` is that search. Start at `from`, and if you ever pop `to`, the answer is `true`. If the stack runs out first, it's `false`. Check the edge cases first: a waypoint not on the map (use `containsKey`) can't reach or be reached. `unreachable` can use the same search: when it ends, every waypoint *not* in the visited set is cut off.",
+				"bit": "`canReach`: search from `from`, `true` if you pop `to`. `unreachable`: search from `start`, list what isn't visited, sorted."
+			},
+			"board": {
+				"code": "public static boolean canReach(Map<String, List<String>> field, String from, String to) {\n    // not on the map? false\n    // search from 'from', with a visited set\n    // popped 'to'? true\n}",
+				"marks": [
+					{
+						"text": "canReach",
+						"label": "true if any path exists"
+					}
+				]
+			},
+			"assist": true
+		},
+		{
+			"title": "Open PathFinder.java",
+			"say": {
+				"never": "Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `PathFinder`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "Press **Ctrl+P**, type `PathFinder` and press Enter."
+			},
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "PathFinder.java"
+				},
+				"hint": "open PathFinder.java with Ctrl+P.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Find it",
+			"say": {
+				"never": "It may be further down. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `public static boolean canReach(` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "Press **Ctrl+F**, type `public static boolean canReach(` and press Enter to jump to it."
+			},
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "public static boolean canReach("
+				},
+				"hint": "find public static boolean canReach( with Ctrl+F.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Your turn",
+			"say": {
+				"never": "Your turn! Write `canReach`. Then write `unreachable` further down: one search from `start`, then every waypoint the search never visited, put in order with `Collections.sort`.",
+				"bit": "Write canReach, then unreachable."
+			},
+			"waitFor": {
+				"hint": {
+					"never": "write canReach and unreachable.",
+					"bit": "write canReach and unreachable."
+				}
+			},
+			"cardAt": "bottom-right",
+			"assist": true
+		}
+	]
+}

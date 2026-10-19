@@ -2,9 +2,9 @@
 	"title": "Recursion",
 	"description": "Solve a few problems you already solved with loops, using recursion instead - methods that call themselves down to a base case.",
 	"kind": "plain-java",
-	"track": "Java Programming",
+	"track": "Java Basics",
 	"order": 19,
-	"requires": [
+	"recommends": [
 		"java-methods"
 	],
 	"guides": [

@@ -8,7 +8,7 @@ encapsulation), a different object. Fill in `src/BankAccount.java`;
 `src/Main.java` already creates a couple of accounts and moves money
 between them, so click **Run** any time to see it in action.
 
-More depth: the team docs page [Classes & Objects](https://frc-team-4143.github.io/docs/software/java/classes-objs).
+More depth: the team docs page [Classes & Objects](https://frc-team-4143.github.io/docs/software/java/basics/classes-objs).
 
 ## What you need to do
 

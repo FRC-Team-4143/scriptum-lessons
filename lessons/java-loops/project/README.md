@@ -4,7 +4,7 @@
 
 All the code lives in `src/Main.java`. Fill in each method and click **Run** any time to see its output in the terminal. Use `for` loops (team standard: no `while`).
 
-More depth: the team docs page [Loops](https://frc-team-4143.github.io/docs/software/java/loops).
+More depth: the team docs page [Loops](https://frc-team-4143.github.io/docs/software/java/basics/loops).
 
 ## What you need to do
 

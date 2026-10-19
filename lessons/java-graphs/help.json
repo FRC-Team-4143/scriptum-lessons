@@ -1,0 +1,94 @@
+{
+	"plan": [
+		{
+			"checkpoint": "field-map",
+			"guides": [
+				"java-graphs-adjacency"
+			]
+		},
+		{
+			"checkpoint": "can-reach",
+			"guides": [
+				"java-graphs-dfs"
+			]
+		},
+		{
+			"checkpoint": "shortest-path",
+			"guides": [
+				"java-graphs-bfs"
+			]
+		},
+		{
+			"checkpoint": "cut-off",
+			"guides": [
+				"java-graphs-dfs"
+			]
+		}
+	],
+	"checkpoints": {
+		"field-map": {
+			"guide": "java-graphs-adjacency",
+			"hints": [
+				{
+					"never": "A lane goes both ways. After connect(a, b), a's list should hold b, and b's list should hold a.",
+					"bit": "connect adds to both lists."
+				},
+				{
+					"never": "Before you add a name to a list, ask the list whether it already has it: list.contains(name).",
+					"bit": "Skip the add when the list already contains it."
+				},
+				{
+					"never": "addWaypoint should only make a new empty list when the map doesn't have that key yet. Check with neighbors_.containsKey(name).",
+					"bit": "Guard addWaypoint with containsKey so it never wipes a list."
+				}
+			]
+		},
+		"can-reach": {
+			"guide": "java-graphs-dfs",
+			"hints": [
+				{
+					"never": "Put from on a stack. Then, while the stack isn't empty, pop one waypoint, and push every neighbor of it.",
+					"bit": "push from; loop: pop, then push its neighbors."
+				},
+				{
+					"never": "If the check says your search never finishes, it's going round a loop. Keep a Set of visited waypoints, and skip any waypoint that's already in it.",
+					"bit": "A visited Set stops the search going round loops."
+				},
+				{
+					"never": "Check the edges first: if from or to isn't a key in the map, return false.",
+					"bit": "Not on the map: false."
+				}
+			]
+		},
+		"shortest-path": {
+			"guide": "java-graphs-bfs",
+			"hints": [
+				{
+					"never": "A stack goes deep first, so it can find a long way round. A queue (addLast to join, removeFirst to take) visits everything 1 hop away before anything 2 hops away.",
+					"bit": "Use a queue, not a stack."
+				},
+				{
+					"never": "Keep a Map from each waypoint to the waypoint you came from. Put from in it first. A neighbor that's already a key has been seen, so skip it.",
+					"bit": "A came-from Map is the trail and the visited set at once."
+				},
+				{
+					"never": "To build the path, start at to and keep looking up where you came from until you get back to from. Add each one with path.add(0, name) so the list ends up start-first.",
+					"bit": "Walk the trail back from to, adding to the front."
+				}
+			]
+		},
+		"cut-off": {
+			"guide": "java-graphs-dfs",
+			"hints": [
+				{
+					"never": "Do one search from start and keep its visited Set. Then loop over field.keySet(): every waypoint that isn't in visited is cut off.",
+					"bit": "One search, then the keys not in visited."
+				},
+				{
+					"never": "The answer has to be in alphabetical order. Collections.sort(list) does that.",
+					"bit": "Collections.sort before you return."
+				}
+			]
+		}
+	}
+}

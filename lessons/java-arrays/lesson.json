@@ -2,9 +2,9 @@
 	"title": "Arrays",
 	"description": "Write methods that take and return arrays.",
 	"kind": "plain-java",
-	"track": "Java Programming",
+	"track": "Java Basics",
 	"order": 15,
-	"requires": [
+	"recommends": [
 		"java-loops"
 	],
 	"guides": [

@@ -1,0 +1,57 @@
+{
+	"title": "Exceptions",
+	"description": "Read messy scouting text without crashing: throw an exception when the numbers can't be right, write your own checked exception, skip and count the bad lines, and make sure the robot always stops when an auto step fails.",
+	"kind": "plain-java",
+	"track": "Java Advanced",
+	"order": 34,
+	"recommends": [
+		"java-classes-objects"
+	],
+	"checkpoints": [
+		{
+			"id": "scout-entry",
+			"title": "Refuse bad numbers",
+			"description": "The ScoutEntry constructor throws an IllegalArgumentException, with a message, for a team or match of 0 or less, or negative points.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/scout-entry.sh"
+			}
+		},
+		{
+			"id": "bad-line",
+			"title": "Your own exception",
+			"description": "BadLineException is a checked exception (it extends Exception) that keeps its message and the line number it was made with.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/bad-line.sh"
+			}
+		},
+		{
+			"id": "parse-line",
+			"title": "Read one line",
+			"description": "ScoutParser.parseLine turns \"team,match,points\" into a ScoutEntry, and throws a BadLineException for anything it can't read.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/parse-line.sh"
+			}
+		},
+		{
+			"id": "parse-all",
+			"title": "Skip and count",
+			"description": "ScoutParser.parseAll reads every line, catching BadLineException to record a bad line's number and keep going. Blank lines are skipped.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/parse-all.sh"
+			}
+		},
+		{
+			"id": "safe-auto",
+			"title": "Always stop",
+			"description": "SafeAuto.runStep returns true when a step finishes and false when it throws, and stops the drivetrain in a finally block either way.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/safe-auto.sh"
+			}
+		}
+	]
+}

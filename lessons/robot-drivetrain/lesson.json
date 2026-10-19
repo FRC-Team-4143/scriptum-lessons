@@ -9,6 +9,11 @@
 		"advantagescope-intro",
 		"elastic-intro"
 	],
+	"recommends": [
+		"editor-basics",
+		"java-variables",
+		"java-operators"
+	],
 	"guides": [
 		"build-and-run",
 		"java-variables"

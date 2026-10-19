@@ -1,0 +1,22 @@
+{
+	"plan": [
+		{
+			"checkpoint": "power-user",
+			"guides": [
+				"java-interfaces-contract"
+			]
+		},
+		{
+			"checkpoint": "mechanism",
+			"guides": [
+				"java-interfaces-abstract"
+			]
+		},
+		{
+			"checkpoint": "total-amps",
+			"guides": [
+				"java-interfaces-polymorphism"
+			]
+		}
+	]
+}

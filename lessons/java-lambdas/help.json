@@ -1,0 +1,22 @@
+{
+	"plan": [
+		{
+			"checkpoint": "speed-filters",
+			"guides": [
+				"java-lambdas-functional"
+			]
+		},
+		{
+			"checkpoint": "chain",
+			"guides": [
+				"java-lambdas-chain"
+			]
+		},
+		{
+			"checkpoint": "bindings",
+			"guides": [
+				"java-lambdas-bindings"
+			]
+		}
+	]
+}

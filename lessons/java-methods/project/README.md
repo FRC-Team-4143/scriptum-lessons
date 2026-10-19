@@ -8,7 +8,7 @@ modifiers, return type, name, and parameter list. `main` is empty too;
 call your methods from there to try them out, the same way you tested code
 directly in `main` in previous lessons.
 
-More depth: the team docs page [Methods](https://frc-team-4143.github.io/docs/software/java/methods).
+More depth: the team docs page [Methods](https://frc-team-4143.github.io/docs/software/java/basics/methods).
 
 ## What you need to do
 

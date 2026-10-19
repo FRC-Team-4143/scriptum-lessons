@@ -1,0 +1,168 @@
+{
+	"title": "Binary search trees",
+	"summary": "Smaller goes left, bigger goes right: inserting and finding by walking down one path, with recursion.",
+	"topic": "Java",
+	"order": 591,
+	"kind": "mixed",
+	"steps": [
+		{
+			"title": "Smaller left, bigger right",
+			"say": {
+				"never": "Picture a guessing game: \"I'm thinking of a number. Is it more or less than 50?\" Each answer throws away half the numbers. A **binary search tree** stores numbers so you can play that game. Each node holds one number. Everything smaller goes somewhere down its **left** side, and everything bigger goes down its **right** side. To find a number you start at the top and go left or right at each node. You never have to look at the other side.",
+				"bit": "A **binary search tree**: each node has a left side (all smaller) and a right side (all bigger). Finding means walking one path down."
+			},
+			"board": {
+				"code": "            50\n          /    \\\n        20      80\n       /  \\       \\\n     10    35      95\n\nfind 35: 35 < 50, go left; 35 > 20, go right; found!",
+				"language": "text",
+				"marks": [
+					{
+						"text": "35 < 50, go left",
+						"label": "skip the whole right side"
+					}
+				]
+			}
+		},
+		{
+			"title": "A node that links to nodes",
+			"say": {
+				"never": "In Java, each node is an object with a number and two **links**: fields that hold other nodes of the same class. A link that holds `null` means \"nothing down this way\". The tree itself only needs to remember the top node, called the **root**.",
+				"bit": "A node class has fields of its own type for its children; `null` means no child. The tree keeps a link to the root."
+			},
+			"board": {
+				"code": "public class Locker {\n    protected int number_;\n    protected Locker smaller_;  // null: nothing there\n    protected Locker bigger_;\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "protected Locker smaller_;",
+						"label": "a Locker inside a Locker"
+					}
+				]
+			}
+		},
+		{
+			"title": "Walking down with recursion",
+			"say": {
+				"never": "Here's the neat part. The left side of a node is a whole tree on its own, just smaller. So a method that searches a tree can look at one node, then **call itself** on the left or right side. The **base case**, where it stops, is reaching `null`: you walked off the bottom, so the number isn't there.",
+				"bit": "Each side is a smaller tree, so recurse into it. Base case: a `null` link."
+			},
+			"board": {
+				"code": "has(spot, number):\n    spot is null?           -> no, it isn't here   (base case)\n    number == spot's number -> yes, found it\n    number is smaller       -> ask has(smaller side, number)\n    otherwise               -> ask has(bigger side, number)",
+				"language": "text",
+				"marks": [
+					{
+						"text": "(base case)",
+						"label": "where it stops"
+					},
+					{
+						"text": "has(smaller side, number)",
+						"label": "the same question, one level down"
+					}
+				]
+			}
+		},
+		{
+			"title": "Inserting: hand back the node",
+			"say": {
+				"never": "Adding a number works the same way: walk down until you hit `null`. That empty spot is where the new node goes. The trick is to make the method **return** the node for the spot it was given. At `null` it returns a brand-new node. Everywhere else it returns the node it already had. The node above saves what comes back into its left or right link, and that's how the new node gets hooked on.",
+				"bit": "Recursive insert returns the node for its spot: a new node at `null`, otherwise the same node, with the caller storing the result in its link."
+			},
+			"board": {
+				"code": "Locker addBelow(Locker spot, int number) {\n    if (spot == null) return new Locker(number);  // the empty spot\n    if (number < spot.number_) spot.smaller_ = addBelow(spot.smaller_, number);\n    // ...and the same for bigger\n    return spot;\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "spot.smaller_ = addBelow(",
+						"label": "save what comes back"
+					},
+					{
+						"text": "return spot;",
+						"label": "this spot doesn't change"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Inserting: hand back the node",
+			"say": {
+				"never": "In `TeamTree`, the node class is `TeamNode`, with `team_`, `left_` and `right_`. Write a **helper** for each job: a `private` method that takes a `TeamNode` and calls itself. The public method just starts it at `root_`. For insert, store what the helper returns back into `root_`, so the first team becomes the root. A team that's already there goes neither left nor right, so it isn't added twice.",
+				"bit": "Write private helpers that take a `TeamNode`; the public methods start them at `root_`. Equal teams aren't added again."
+			},
+			"board": {
+				"code": "public class TeamTree {\n    protected TeamNode root_; // null while the tree is empty\n\n    public void insert(int team) {\n        // start a helper at root_\n    }\n}",
+				"marks": [
+					{
+						"text": "protected TeamNode root_;",
+						"label": "the top of the tree"
+					}
+				]
+			},
+			"assist": true
+		},
+		{
+			"title": "Open TeamTree.java",
+			"say": {
+				"never": "Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `TeamTree`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "Press **Ctrl+P**, type `TeamTree` and press Enter."
+			},
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "TeamTree.java"
+				},
+				"hint": "open TeamTree.java with Ctrl+P.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Find it",
+			"say": {
+				"never": "Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `public void insert(int team)` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "Press **Ctrl+F**, type `public void insert(int team)` and press Enter to jump to it."
+			},
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "public void insert(int team)"
+				},
+				"hint": "find public void insert(int team) with Ctrl+F.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Your turn",
+			"say": {
+				"never": "Your turn! Write `insert`, `contains` and `size`, each with a helper that calls itself on `node.left_` and `node.right_`. For `size`, a `null` node counts as 0 teams. Click **Run** and check `Main` counts 8 teams, not 9.",
+				"bit": "Write insert, contains and size with recursive helpers."
+			},
+			"waitFor": {
+				"hint": {
+					"never": "write insert, contains and size.",
+					"bit": "write insert, contains and size."
+				}
+			},
+			"cardAt": "bottom-right",
+			"assist": true
+		}
+	]
+}

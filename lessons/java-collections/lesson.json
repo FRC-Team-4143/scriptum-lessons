@@ -1,0 +1,48 @@
+{
+	"title": "Collections",
+	"description": "Keep score at a competition: a list of match scores, a set of every team your scouts saw, and a map from team number to total points. Learn which collection fits which job.",
+	"kind": "plain-java",
+	"track": "Java Advanced",
+	"order": 31,
+	"recommends": [
+		"java-classes-objects"
+	],
+	"checkpoints": [
+		{
+			"id": "match-scores",
+			"title": "A list of scores",
+			"description": "ScoreList keeps scores in an ArrayList<Integer>: addScore, count, average (0.0 when empty) and best (0 when empty).",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/match-scores.sh"
+			}
+		},
+		{
+			"id": "teams-seen",
+			"title": "A set of teams",
+			"description": "TeamsSeen keeps team numbers in a HashSet<Integer>, so countTeams() counts a team once even when it is added twice.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/teams-seen.sh"
+			}
+		},
+		{
+			"id": "team-totals",
+			"title": "A map of totals",
+			"description": "TeamTotals keeps a HashMap<Integer, Integer> from team number to total points; addMatch adds to the total and totalFor returns 0 for an unknown team.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/team-totals.sh"
+			}
+		},
+		{
+			"id": "top-team",
+			"title": "Top team",
+			"description": "TeamTotals.topTeam() returns the team with the highest total, the lower team number on a tie, or -1 with no matches.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/top-team.sh"
+			}
+		}
+	]
+}

@@ -4,7 +4,7 @@
 //   bun run index --check    fail if catalog.json is out of date (the tests do this)
 //
 // A lesson is one folder, lessons/<id>/, holding everything about it:
-//   lesson.json      title, kind, track, order, requires, checkpoints, shared guides it uses
+//   lesson.json      title, kind, track, order, requires, recommends, checkpoints, shared guides it uses
 //   project/         the starter files students get
 //   checkpoints/     verify scripts, setup.sh
 //   guides/<id>.json this lesson's Dozer guides (title, summary, topic, order, steps)
@@ -89,12 +89,15 @@ export function buildCatalog(root: string): Built {
 		for (const required of (file.requires as string[] | undefined) ?? []) {
 			if (!lessonIds.has(required)) problem(`${dir}: requires "${required}", which isn't a lesson`);
 		}
+		for (const recommended of (file.recommends as string[] | undefined) ?? []) {
+			if (!lessonIds.has(recommended)) problem(`${dir}: recommends "${recommended}", which isn't a lesson`);
+		}
 		return {
 			...pick(file, ["order", "track", "title", "description", "kind"]),
 			id,
 			subdir: `${dir}/project`,
 			...(setup ? { setupScript: `${dir}/${setup}` } : {}),
-			...pick(file, ["requires", "showScope", "restrictTools"]),
+			...pick(file, ["requires", "recommends", "showScope", "restrictTools"]),
 			checkpoints,
 		};
 	});

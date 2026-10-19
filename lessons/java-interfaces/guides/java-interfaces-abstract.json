@@ -1,0 +1,147 @@
+{
+	"title": "Abstract classes",
+	"summary": "Share code between subclasses and leave a method for each of them to write.",
+	"topic": "Java",
+	"order": 502,
+	"kind": "mixed",
+	"steps": [
+		{
+			"title": "Halfway between",
+			"say": {
+				"never": "An interface has no code at all. A normal class has all of it. An **abstract class** is in between: it can hold shared fields and methods, but leave some methods for its subclasses to write. You can't make one with `new`, because it isn't finished. Only its subclasses are.",
+				"bit": "An **abstract class** shares code but leaves some methods unwritten. You can't `new` it, only its subclasses."
+			},
+			"board": {
+				"code": "public abstract class Gadget implements Chargeable {\n    protected String label_;\n\n    @Override\n    public String getLabel() {\n        return label_;\n    }\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "abstract",
+						"label": "not finished on purpose"
+					},
+					{
+						"text": "getLabel()",
+						"label": "shared by every gadget"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Halfway between",
+			"say": {
+				"never": "Every mechanism has a name, so `Mechanism` keeps the name code once. It *doesn't* write `getAmps()`, because an intake and a climber draw power in completely different ways. Java allows that only because the class is `abstract`.",
+				"bit": "`Mechanism` keeps the shared name code and leaves `getAmps()` to each subclass."
+			},
+			"board": {
+				"code": "public abstract class Mechanism implements PowerUser {\n    protected String name_;\n}",
+				"marks": [
+					{
+						"text": "abstract",
+						"label": "getAmps() is left for subclasses"
+					}
+				]
+			},
+			"assist": true
+		},
+		{
+			"title": "Calling a method you didn't write",
+			"say": {
+				"never": "An abstract class can even *call* the method it left out. When the program runs, Java uses whichever subclass the object really is. So a shared method like this works for every gadget, now and later.",
+				"bit": "Shared code can call the missing method; the real subclass answers at run time."
+			},
+			"board": {
+				"code": "public boolean isLow() {\n    return getBatteryPercent() < 20;\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "getBatteryPercent()",
+						"label": "each subclass's own version"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Calling a method you didn't write",
+			"say": {
+				"never": "`isOverLimit` calls `getAmps()`, which `Mechanism` never wrote. On an `Intake` it uses the intake's `getAmps()`. Then `Intake` only writes what's special about it: `extends Mechanism`, a constructor that calls `super(name)`, and its own `getAmps()`.",
+				"bit": "`isOverLimit` calls `getAmps()`; `Intake` extends `Mechanism`, calls `super(name)` and writes `getAmps()`."
+			},
+			"board": {
+				"code": "public class Intake extends Mechanism {\n    public Intake(String name) {\n        super(name);\n    }\n}",
+				"marks": [
+					{
+						"text": "super(name);",
+						"label": "Mechanism stores the name"
+					}
+				]
+			},
+			"assist": true
+		},
+		{
+			"title": "Open Mechanism.java",
+			"say": {
+				"never": "Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `Mechanism`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "Press **Ctrl+P**, type `Mechanism` and press Enter."
+			},
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "Mechanism.java"
+				},
+				"hint": "open Mechanism.java with Ctrl+P.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Find it",
+			"say": {
+				"never": "It may be further down. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `public class Mechanism` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "Press **Ctrl+F**, type `public class Mechanism` and press Enter to jump to it."
+			},
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "public class Mechanism"
+				},
+				"hint": "find public class Mechanism with Ctrl+F.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Your turn",
+			"say": {
+				"never": "Your turn! Make this `public abstract class Mechanism implements PowerUser`, then add the name field, constructor, `getName()` and `isOverLimit`. After that, finish `Intake.java`.",
+				"bit": "Write Mechanism, then Intake."
+			},
+			"waitFor": {
+				"hint": {
+					"never": "build Mechanism and Intake.",
+					"bit": "build Mechanism and Intake."
+				}
+			},
+			"cardAt": "bottom-right",
+			"assist": true
+		}
+	]
+}

@@ -7,6 +7,9 @@
 	"requires": [
 		"robot-odometry"
 	],
+	"recommends": [
+		"java-inheritance"
+	],
 	"guides": [
 		"build-and-run",
 		"robot-odometry-oi"

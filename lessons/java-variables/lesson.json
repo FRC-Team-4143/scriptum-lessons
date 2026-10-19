@@ -2,9 +2,9 @@
 	"title": "Variables",
 	"description": "Declare variables, define a constant, and define your first enum.",
 	"kind": "plain-java",
-	"track": "Java Programming",
+	"track": "Java Basics",
 	"order": 11,
-	"requires": [
+	"recommends": [
 		"hello-world"
 	],
 	"guides": [

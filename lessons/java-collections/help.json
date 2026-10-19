@@ -1,0 +1,22 @@
+{
+	"plan": [
+		{
+			"checkpoint": "match-scores",
+			"guides": [
+				"java-collections-list"
+			]
+		},
+		{
+			"checkpoint": "teams-seen",
+			"guides": [
+				"java-collections-set"
+			]
+		},
+		{
+			"checkpoint": "team-totals",
+			"guides": [
+				"java-collections-map"
+			]
+		}
+	]
+}

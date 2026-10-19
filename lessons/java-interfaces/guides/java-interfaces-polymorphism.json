@@ -1,0 +1,148 @@
+{
+	"title": "One loop, every kind",
+	"summary": "Loop over PowerUsers and let each object answer for itself.",
+	"topic": "Java",
+	"order": 503,
+	"kind": "mixed",
+	"steps": [
+		{
+			"title": "Many shapes",
+			"say": {
+				"never": "**Polymorphism** means \"many shapes\". An array of `Chargeable` can hold headphones, a phone and a tablet at once. When you call `getBatteryPercent()` on each one, each object runs *its own* version. Your loop never asks what kind it is.",
+				"bit": "Call the promised method on each item; every object runs its own version."
+			},
+			"board": {
+				"code": "int lowCount = 0;\nfor (Chargeable thing : gadgets) {\n    if (thing.getBatteryPercent() < 20) {\n        lowCount++;\n    }\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "for (Chargeable thing : gadgets)",
+						"label": "visits every item"
+					},
+					{
+						"text": "thing.getBatteryPercent()",
+						"label": "each one answers for itself"
+					}
+				]
+			}
+		},
+		{
+			"title": "The for-each loop",
+			"say": {
+				"never": "`for (Chargeable thing : gadgets)` reads as \"for each Chargeable *thing* in *gadgets*\". It visits the items in order, with no index to count and no way to run off the end of the array.",
+				"bit": "`for (Type item : array)` visits each item in order, no index needed."
+			},
+			"board": {
+				"code": "for (String name : names) {\n    System.out.println(name);\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "String name",
+						"label": "the current item"
+					},
+					{
+						"text": "names",
+						"label": "the array"
+					}
+				]
+			}
+		},
+		{
+			"title": "Don't ask what it is",
+			"say": {
+				"never": "It's tempting to write `if (thing instanceof Phone)`. Don't. Then every new kind of gadget means editing this loop. If you only call the promised methods, a brand-new class works the moment it says `implements`.",
+				"bit": "No `instanceof` checks: only call the promised methods, so new classes just work."
+			},
+			"board": {
+				"code": "// Avoid this:\nif (thing instanceof Phone) { ... }",
+				"language": "java",
+				"marks": [
+					{
+						"text": "instanceof",
+						"label": "breaks when a new kind arrives"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Many shapes",
+			"say": {
+				"never": "`totalAmps` keeps a running total and adds each user's `getAmps()`. `biggestUser` remembers the biggest so far, starting with the first one, and swaps only when it finds one that is strictly bigger, so a tie keeps the first. Check for an empty array before you look at `users[0]`.",
+				"bit": "`totalAmps`: running total. `biggestUser`: remember the biggest so far; check for an empty array first."
+			},
+			"board": {
+				"code": "for (PowerUser user : users) {\n    total += user.getAmps();\n}",
+				"marks": [
+					{
+						"text": "user.getAmps()",
+						"label": "a motor, LEDs or an intake"
+					}
+				]
+			},
+			"assist": true
+		},
+		{
+			"title": "Open PowerBudget.java",
+			"say": {
+				"never": "Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `PowerBudget`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "Press **Ctrl+P**, type `PowerBudget` and press Enter."
+			},
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "PowerBudget.java"
+				},
+				"hint": "open PowerBudget.java with Ctrl+P.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Your turn",
+			"say": {
+				"never": "Your turn! Write `totalAmps`, then `biggestUser`. When they work, run `Main` and look at the robot's power budget.",
+				"bit": "Write totalAmps and biggestUser, then run Main."
+			},
+			"waitFor": {
+				"hint": {
+					"never": "write both PowerBudget methods.",
+					"bit": "write both PowerBudget methods."
+				}
+			},
+			"cardAt": "bottom-right",
+			"assist": true
+		},
+		{
+			"title": "Run it",
+			"say": {
+				"never": "Click the **Run** button, the little triangle (▷) at the top right of `Main.java`. What your program prints appears in the terminal at the bottom.",
+				"bit": "Click **Run** (▷) at the top right of `Main.java`. The output appears in the terminal at the bottom."
+			},
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "top-right",
+			"waitFor": {
+				"hint": {
+					"never": "run the program and read what it prints.",
+					"bit": "run the program and read the output."
+				}
+			},
+			"assist": true
+		}
+	]
+}

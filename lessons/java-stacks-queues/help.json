@@ -1,0 +1,82 @@
+{
+	"plan": [
+		{
+			"checkpoint": "undo-stack",
+			"guides": [
+				"java-stacks-queues-stack"
+			]
+		},
+		{
+			"checkpoint": "brackets",
+			"guides": [
+				"java-stacks-queues-stack"
+			],
+			"intro": {
+				"never": "Same stack idea, new job: every opening bracket goes on the stack, and every closing bracket has to match the one on top.",
+				"bit": "Push each opener; each closer must match the top."
+			}
+		},
+		{
+			"checkpoint": "step-queue",
+			"guides": [
+				"java-stacks-queues-queue"
+			]
+		},
+		{
+			"checkpoint": "indexer",
+			"guides": [
+				"java-stacks-queues-by-hand"
+			]
+		}
+	],
+	"checkpoints": {
+		"undo-stack": {
+			"guide": "java-stacks-queues-stack",
+			"hints": [
+				{
+					"never": "In set, save the value the setting has *before* you change it. Push current_ first, then put the new value in current_.",
+					"bit": "Push the old current_ before overwriting it."
+				},
+				{
+					"never": "undo has to check first: if the history is empty there is nothing to go back to, so it does nothing. pop() on an empty ArrayDeque crashes.",
+					"bit": "Guard undo with isEmpty(); pop() throws on an empty deque."
+				}
+			]
+		},
+		"brackets": {
+			"guide": "java-stacks-queues-stack",
+			"hints": [
+				{
+					"never": "Look at one character at a time. An opening bracket gets pushed. A closing bracket pops the top one and checks that they are the same kind.",
+					"bit": "Push openers; on a closer, pop and compare kinds."
+				},
+				{
+					"never": "Two ways to be wrong are easy to miss: a closing bracket when the stack is already empty, and brackets still left on the stack when the text ends.",
+					"bit": "Closer on an empty stack is false; so is anything left open at the end."
+				}
+			]
+		},
+		"step-queue": {
+			"guide": "java-stacks-queues-queue",
+			"hints": [
+				{
+					"never": "A queue adds at the back and takes from the front. Use offer to add and poll to take. push and pop work at the same end, so they would run the newest step first.",
+					"bit": "offer + poll for a queue; push + pop would make it a stack."
+				}
+			]
+		},
+		"indexer": {
+			"guide": "java-stacks-queues-by-hand",
+			"hints": [
+				{
+					"never": "The back of the line is count_ slots after front_. When that runs off the end of the array, wrap it round with % slots_.length.",
+					"bit": "back = (front_ + count_) % slots_.length."
+				},
+				{
+					"never": "After fire takes the front piece, front_ moves one slot along (wrapping round the same way) and count_ goes down by one.",
+					"bit": "fire: front_ = (front_ + 1) % length, count_--."
+				}
+			]
+		}
+	}
+}

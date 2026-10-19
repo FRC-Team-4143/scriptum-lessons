@@ -1,0 +1,198 @@
+{
+	"title": "Maps: HashMap",
+	"summary": "Look up a value by its key, start missing keys at a default, and loop over every key.",
+	"topic": "Java",
+	"order": 513,
+	"kind": "mixed",
+	"steps": [
+		{
+			"title": "Look it up by key",
+			"say": {
+				"never": "A phone's contact list doesn't make you scroll to item number 37. You type a name and get the number. A **HashMap** is that: it stores pairs, a **key** and its **value**. `put(key, value)` saves a pair, and `get(key)` finds the value for that key. Putting the same key again replaces the old value.",
+				"bit": "A **HashMap** stores key → value pairs. `put` saves one; `get(key)` finds it."
+			},
+			"board": {
+				"code": "HashMap<String, Integer> ages = new HashMap<>();\nages.put(\"Ada\", 15);\nages.put(\"Lin\", 16);\nages.put(\"Ada\", 16);               // replaces 15\nSystem.out.println(ages.get(\"Ada\")); // 16",
+				"language": "java",
+				"marks": [
+					{
+						"text": "HashMap<String, Integer>",
+						"label": "key type, value type"
+					},
+					{
+						"text": "ages.get(\"Ada\")",
+						"label": "look up by key"
+					}
+				]
+			}
+		},
+		{
+			"title": "When the key isn't there",
+			"say": {
+				"never": "Asking for a key that was never put gives back `null`, which means \"nothing\". Turning `null` into an `int` crashes the program. `getOrDefault(key, 0)` is safer: it gives the value if the key is there, and `0` if it isn't. `containsKey(key)` just asks whether it's there. Together they make counting easy.",
+				"bit": "A missing key gives `null`. Use `getOrDefault(key, 0)`, or check `containsKey` first."
+			},
+			"board": {
+				"code": "HashMap<String, Integer> votes = new HashMap<>();\nfor (String pick : picks) {\n    votes.put(pick, votes.getOrDefault(pick, 0) + 1);\n}\nboolean any_pizza = votes.containsKey(\"pizza\");",
+				"language": "java",
+				"marks": [
+					{
+						"text": "votes.getOrDefault(pick, 0)",
+						"label": "0 the first time"
+					},
+					{
+						"text": "containsKey",
+						"label": "is the key there?"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: When the key isn't there",
+			"say": {
+				"never": "`TeamTotals` maps each team number to its total points: a `HashMap<Integer, Integer>`. `totalFor` returns `getOrDefault(team, 0)`, so an unknown team has 0 points. Then `addMatch` puts the old total plus the new points back in.",
+				"bit": "`totalFor`: `getOrDefault(team, 0)`. `addMatch`: put old total + points."
+			},
+			"board": {
+				"code": "protected HashMap<Integer, Integer> totals_ = new HashMap<>();\n\npublic void addMatch(int team, int points) {\n    totals_.put(team, totalFor(team) + points);\n}",
+				"marks": [
+					{
+						"text": "HashMap<Integer, Integer>",
+						"label": "team -> total"
+					},
+					{
+						"text": "totalFor(team) + points",
+						"label": "0 for a new team"
+					}
+				]
+			},
+			"assist": true
+		},
+		{
+			"title": "Visiting every key",
+			"say": {
+				"never": "`keySet()` hands you every key in the map, and a for-each loop visits them. Then `get` reads each value. A HashMap has **no order**, so the keys can come out in any order. If two values tie, decide the winner with a rule, so the answer is the same every time.",
+				"bit": "`for (String name : ages.keySet())` visits every key, in no set order."
+			},
+			"board": {
+				"code": "String oldest = \"\";\nint oldest_age = -1;\nfor (String name : ages.keySet()) {\n    int age = ages.get(name);\n    if (age > oldest_age) {\n        oldest = name;\n        oldest_age = age;\n    }\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "ages.keySet()",
+						"label": "every key"
+					},
+					{
+						"text": "ages.get(name)",
+						"label": "its value"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Visiting every key",
+			"say": {
+				"never": "`topTeam()` loops over `totals_.keySet()` and remembers the best team and its total so far. Start the best team at `-1`, so an empty map returns `-1`. Swap when a total is bigger, *or* when it ties and the team number is lower. Store each total in an `int` before comparing.",
+				"bit": "Loop over `keySet()`, keep the best; on a tie keep the lower number; `-1` when empty."
+			},
+			"board": {
+				"code": "int top_team = -1;\nint top_total = 0;\nfor (int team : totals_.keySet()) {\n    int total = totals_.get(team);\n}",
+				"marks": [
+					{
+						"text": "int top_team = -1;",
+						"label": "the answer when empty"
+					},
+					{
+						"text": "totals_.keySet()",
+						"label": "every team"
+					}
+				]
+			},
+			"assist": true
+		},
+		{
+			"title": "Open TeamTotals.java",
+			"say": {
+				"never": "Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `TeamTotals`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "Press **Ctrl+P**, type `TeamTotals` and press Enter."
+			},
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "TeamTotals.java"
+				},
+				"hint": "open TeamTotals.java with Ctrl+P.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Find it",
+			"say": {
+				"never": "It may be further down. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `public class TeamTotals` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "Press **Ctrl+F**, type `public class TeamTotals` and press Enter to jump to it."
+			},
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "public class TeamTotals"
+				},
+				"hint": "find public class TeamTotals with Ctrl+F.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Your turn",
+			"say": {
+				"never": "Your turn! Add the import and the `totals_` field, then write `addMatch` and `totalFor`. Verify **A map of totals**, then write `topTeam`.",
+				"bit": "Write addMatch and totalFor, verify, then topTeam."
+			},
+			"waitFor": {
+				"hint": {
+					"never": "finish TeamTotals.",
+					"bit": "finish TeamTotals."
+				}
+			},
+			"cardAt": "bottom-right",
+			"assist": true
+		},
+		{
+			"title": "Run it",
+			"say": {
+				"never": "Click the **Run** button, the little triangle (▷) at the top right of `Main.java`. What your program prints appears in the terminal at the bottom.",
+				"bit": "Click **Run** (▷) at the top right of `Main.java`. The output appears in the terminal at the bottom."
+			},
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "top-right",
+			"waitFor": {
+				"hint": {
+					"never": "run the program and read what it prints.",
+					"bit": "run the program and read the output."
+				}
+			},
+			"assist": true
+		}
+	]
+}

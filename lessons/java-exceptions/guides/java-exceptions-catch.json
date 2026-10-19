@@ -1,0 +1,207 @@
+{
+	"title": "Catch it and keep going",
+	"summary": "try and catch handle an exception; finally runs no matter what.",
+	"topic": "Java",
+	"order": 543,
+	"kind": "mixed",
+	"steps": [
+		{
+			"title": "try and catch",
+			"say": {
+				"never": "Put code that might throw inside a `try { }` block. After it, a `catch` block says which kind of exception you can handle. If the try block throws that kind, Java jumps straight to the catch block and the program carries on. If nothing is thrown, the catch block is skipped. `Integer.parseInt(\"12\")` turns text into a number, but `Integer.parseInt(\"twelve\")` throws a `NumberFormatException`, so it's a good thing to try.",
+				"bit": "`try { ... } catch (SomeException e) { ... }`: if the try block throws that kind, the catch block runs instead of a crash."
+			},
+			"board": {
+				"code": "try {\n    int laps = Integer.parseInt(typed);\n    System.out.println(\"Running \" + laps + \" laps\");\n} catch (NumberFormatException e) {\n    System.out.println(\"That's not a number: \" + typed);\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "Integer.parseInt(typed)",
+						"label": "might throw"
+					},
+					{
+						"text": "catch (NumberFormatException e)",
+						"label": "runs only if it does"
+					}
+				]
+			}
+		},
+		{
+			"title": "Catch one, throw another",
+			"say": {
+				"never": "Sometimes the best thing a catch block can do is throw a *better* exception: one that says what went wrong in your program's own words. The caller then only has to handle one kind. Catch blocks can be stacked; Java uses the first one that fits.",
+				"bit": "A catch block can throw your own exception instead, so callers handle just one kind. Stack catch blocks; the first match wins."
+			},
+			"board": {
+				"code": "try {\n    volume_ = Integer.parseInt(text);\n} catch (NumberFormatException e) {\n    throw new BadSettingException(\"volume isn't a number: \" + text);\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "throw new BadSettingException",
+						"label": "the program's own words"
+					}
+				]
+			}
+		},
+		{
+			"title": "Keep going in a loop",
+			"say": {
+				"never": "Put the `try` *inside* a loop and one bad item can't stop the rest. The catch block notes the problem, the loop moves on to the next item, and at the end you know how many went wrong.",
+				"bit": "A try inside a loop: catch, count it, carry on with the next item."
+			},
+			"board": {
+				"code": "int broken = 0;\nfor (String text : settings) {\n    try {\n        apply(text);\n    } catch (BadSettingException e) {\n        broken++;\n    }\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "broken++;",
+						"label": "note it"
+					},
+					{
+						"text": "for (String text : settings)",
+						"label": "the loop keeps going"
+					}
+				]
+			}
+		},
+		{
+			"title": "finally always runs",
+			"say": {
+				"never": "A `finally` block goes after the catch blocks. It runs every time: when the try block finishes, when it throws, and even when it hits a `return`. That makes it the place for clean-up that must never be skipped, like turning the oven off.",
+				"bit": "`finally` runs whether the try block finishes, throws or returns: the place for clean-up."
+			},
+			"board": {
+				"code": "try {\n    oven_.bake(cake);\n} catch (RuntimeException e) {\n    System.out.println(\"Baking failed\");\n} finally {\n    oven_.turnOff();\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "finally",
+						"label": "every time"
+					},
+					{
+						"text": "oven_.turnOff();",
+						"label": "never skipped"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Catch one, throw another",
+			"say": {
+				"never": "In `parseLine`, the three `Integer.parseInt` calls and `new ScoutEntry(...)` go in a try block. Catch the `NumberFormatException` and the `IllegalArgumentException`, and throw a `BadLineException` from each. (A `NumberFormatException` is a kind of `IllegalArgumentException`, so if you write both, the `NumberFormatException` catch goes first.) Then in `parseAll`, the try goes inside the loop: catch `BadLineException`, record the line number, and keep going.",
+				"bit": "`parseLine`: catch the two exceptions and throw `BadLineException`. `parseAll`: try inside the loop, catch, `addBadLine`, keep going."
+			},
+			"board": {
+				"code": "for (int i = 0; i < lines.length; i++) {\n    // line number i + 1: skip it if blank, otherwise parse it\n}",
+				"marks": [
+					{
+						"text": "i + 1",
+						"label": "lines count from 1"
+					}
+				]
+			},
+			"assist": true
+		},
+		{
+			"title": "In your lesson: finally always runs",
+			"say": {
+				"never": "`SafeAuto.runStep` runs one auto step. If the gyro is unplugged, the step throws after it has already started the wheels. Without `finally`, the robot would keep driving across the field. Return `true` from the try block, `false` from the catch block, and call `drive.stop()` in `finally`.",
+				"bit": "`runStep`: return true from try, false from catch, `drive.stop()` in finally."
+			},
+			"board": {
+				"code": "public static boolean runStep(AutoStep step, Drivetrain drive) {",
+				"marks": [
+					{
+						"text": "boolean",
+						"label": "did the step work?"
+					}
+				]
+			},
+			"assist": true
+		},
+		{
+			"title": "Open ScoutParser.java",
+			"say": {
+				"never": "Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `ScoutParser`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "Press **Ctrl+P**, type `ScoutParser` and press Enter."
+			},
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "ScoutParser.java"
+				},
+				"hint": "open ScoutParser.java with Ctrl+P.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Find it",
+			"say": {
+				"never": "It may be further down. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `public static ScoutEntry parseLine` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "Press **Ctrl+F**, type `public static ScoutEntry parseLine` and press Enter to jump to it."
+			},
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "public static ScoutEntry parseLine"
+				},
+				"hint": "find public static ScoutEntry parseLine with Ctrl+F.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Your turn",
+			"say": {
+				"never": "Your turn! Write `parseLine`, then `parseAll` below it. After that, open `SafeAuto.java` and write `runStep` with try, catch and finally.",
+				"bit": "Write parseLine and parseAll, then SafeAuto.runStep."
+			},
+			"waitFor": {
+				"hint": {
+					"never": "write parseLine, parseAll and runStep.",
+					"bit": "write parseLine, parseAll and runStep."
+				}
+			},
+			"cardAt": "bottom-right",
+			"assist": true
+		},
+		{
+			"title": "Run it",
+			"say": {
+				"never": "Click the **Run** button, the little triangle (▷) at the top right of `Main.java`. What your program prints appears in the terminal at the bottom. Check which lines were skipped, and that the drive speed is 0.0 after both steps.",
+				"bit": "Click **Run** (▷) at the top right of `Main.java`. The output appears in the terminal at the bottom."
+			},
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "top-right",
+			"waitFor": {
+				"hint": {
+					"never": "run the program and read what it prints.",
+					"bit": "run the program and read the output."
+				}
+			},
+			"assist": true
+		}
+	]
+}

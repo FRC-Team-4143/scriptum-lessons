@@ -1,0 +1,138 @@
+{
+	"title": "A generic method",
+	"summary": "A method can have its own type parameter, so it works on a list of anything.",
+	"topic": "Java",
+	"order": 552,
+	"kind": "mixed",
+	"steps": [
+		{
+			"title": "A method with its own blank",
+			"say": {
+				"never": "Sometimes only one method needs a type blank, not the whole class. Put the type parameter just before the return type: `public static <T> T middle(List<T> items)`. Read it as \"for any type T, take a list of T and give back one T\". The `<T>` comes first so Java knows what `T` means in the rest of the line.",
+				"bit": "`<T>` before the return type gives one method its own type parameter."
+			},
+			"board": {
+				"code": "public static <T> T middle(List<T> items) {\n    return items.get(items.size() / 2);\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "<T>",
+						"label": "declares the blank"
+					},
+					{
+						"text": "T middle",
+						"label": "returns a T"
+					},
+					{
+						"text": "List<T> items",
+						"label": "takes a list of T"
+					}
+				]
+			}
+		},
+		{
+			"title": "Java fills it in",
+			"say": {
+				"never": "When you call a generic method, you don't write the type. Java looks at what you passed in and works out `T` itself. Pass a `List<String>` and you get a `String` back; pass a `List<Integer>` and you get an `Integer`. One method, every kind of list.",
+				"bit": "Java works out T from the arguments: a `List<String>` in, a `String` out."
+			},
+			"board": {
+				"code": "List<String> drivers = List.of(\"Ana\", \"Ben\", \"Cal\");\nString pick = middle(drivers);\n\nList<Integer> laps = List.of(3, 7, 9, 12);\nInteger lap = middle(laps);",
+				"language": "java",
+				"marks": [
+					{
+						"text": "String pick",
+						"label": "T is String"
+					},
+					{
+						"text": "Integer lap",
+						"label": "T is Integer"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: A method with its own blank",
+			"say": {
+				"never": "`lastOrDefault` gives back the last item in a list, or a `fallback` you pass in when the list is empty. Both the list and the fallback use the same `T`, so Java makes sure they match: a list of autos and a default auto name, or a list of scores and a default score. The starter uses `Object`, which loses the type, so change it to `<T>`.",
+				"bit": "`<T> T lastOrDefault(List<T> items, T fallback)`: the last item, or `fallback` when the list is empty."
+			},
+			"board": {
+				"code": "public static Object lastOrDefault(List<Object> items, Object fallback) {",
+				"marks": [
+					{
+						"text": "Object",
+						"label": "replace these with T"
+					}
+				]
+			},
+			"assist": true
+		},
+		{
+			"title": "Open ListTools.java",
+			"say": {
+				"never": "Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `ListTools`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "Press **Ctrl+P**, type `ListTools` and press Enter."
+			},
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "ListTools.java"
+				},
+				"hint": "open ListTools.java with Ctrl+P.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Find it",
+			"say": {
+				"never": "It may be further down. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `public static Object lastOrDefault` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "Press **Ctrl+F**, type `public static Object lastOrDefault` and press Enter to jump to it."
+			},
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "public static Object lastOrDefault"
+				},
+				"hint": "find public static Object lastOrDefault with Ctrl+F.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Your turn",
+			"say": {
+				"never": "Your turn! Change the line to `public static <T> T lastOrDefault(List<T> items, T fallback)`. Then, if the list is empty, return `fallback`. Otherwise return the item at the last index, which is `size() - 1`.",
+				"bit": "Make lastOrDefault generic and write its body."
+			},
+			"waitFor": {
+				"hint": {
+					"never": "write lastOrDefault.",
+					"bit": "write lastOrDefault."
+				}
+			},
+			"cardAt": "bottom-right",
+			"assist": true
+		}
+	]
+}

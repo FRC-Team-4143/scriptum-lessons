@@ -1,0 +1,48 @@
+{
+	"title": "Generics",
+	"description": "Write code once and use it for any type: a Pair that holds a team and its nickname, a RingBuffer that keeps the last few sensor readings, and methods that work on a list of anything, or anything that can be compared.",
+	"kind": "plain-java",
+	"track": "Java Advanced",
+	"order": 35,
+	"recommends": [
+		"java-collections"
+	],
+	"checkpoints": [
+		{
+			"id": "pair",
+			"title": "A generic Pair",
+			"description": "Pair<A, B> holds two values of any two types: Pair(A first, B second), getFirst() and getSecond().",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/pair.sh"
+			}
+		},
+		{
+			"id": "ring-buffer",
+			"title": "A RingBuffer of anything",
+			"description": "RingBuffer<T> keeps only the newest capacity items: add drops the oldest when it's full; size, get (0 = oldest) and latest (null when empty).",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/ring-buffer.sh"
+			}
+		},
+		{
+			"id": "last-or-default",
+			"title": "A generic method",
+			"description": "ListTools.lastOrDefault is <T> T lastOrDefault(List<T> items, T fallback): the last item, or fallback for an empty list.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/last-or-default.sh"
+			}
+		},
+		{
+			"id": "bounded-max",
+			"title": "A bounded type",
+			"description": "ListTools.max is <T extends Comparable<T>> T max(List<T> items): the biggest item by compareTo, the first one on a tie, or null for an empty list.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/bounded-max.sh"
+			}
+		}
+	]
+}

@@ -1,0 +1,143 @@
+{
+	"title": "Counting steps",
+	"summary": "Count how many times code looks at an item, and see O(1) and O(n).",
+	"topic": "Java",
+	"order": 561,
+	"kind": "mixed",
+	"steps": [
+		{
+			"title": "Count the looks",
+			"say": {
+				"never": "How fast is a piece of code? Seconds depend on the computer, so programmers count **steps** instead: here, how many times the code looks at an item in a list. A playlist has `n` songs. Asking for the song at a spot, like `songs.get(4)`, is one look. A list can jump straight to any spot, so it's one look whether the playlist has 10 songs or 10,000.",
+				"bit": "Measure speed in **steps**, not seconds: how many items the code looks at. `get(i)` on a list is one step, however long the list is."
+			},
+			"board": {
+				"code": "String first = songs.get(0);\nString fifth = songs.get(4);",
+				"language": "java",
+				"marks": [
+					{
+						"text": "songs.get(4)",
+						"label": "one look, any list size"
+					}
+				]
+			}
+		},
+		{
+			"title": "O(1): the same, however big",
+			"say": {
+				"never": "Code that takes the same number of steps no matter how big `n` is, is called **O(1)**, said \"order one\" or **constant time**. Grabbing the first song is O(1). So is grabbing the last one, because you can work out where the end is: the list's `size()` tells you, without looking at any songs.",
+				"bit": "Same steps for any `n` is **O(1)**, constant time. `size()` doesn't look at items, so jumping to the end is O(1) too."
+			},
+			"board": {
+				"code": "int count = songs.size();\nString middle = songs.get(count / 2);",
+				"language": "java",
+				"marks": [
+					{
+						"text": "songs.size()",
+						"label": "no songs looked at"
+					}
+				]
+			}
+		},
+		{
+			"title": "O(n): one look per item",
+			"say": {
+				"never": "Now find the longest song. There's no way to know without checking every one, so a loop looks at each song once. Double the playlist and the loop does double the work. That straight-line growth is **O(n)**, \"order n\" or **linear time**.",
+				"bit": "One look per item is **O(n)**, linear: double `n`, double the steps."
+			},
+			"board": {
+				"code": "int longest = 0;\nfor (int seconds : lengths) {\n    longest = Math.max(longest, seconds);\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "for (int seconds : lengths)",
+						"label": "runs n times"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Counting steps",
+			"say": {
+				"never": "`latest` wants the most recent score, which is the last one in the list. Don't loop to get there: work out its spot from `size()` and jump straight to it. That's O(1). Check for an empty list first, because an empty list has no last spot. `best` has to see every score, so it's one loop: O(n). The checker counts your looks on a list of 1500 scores.",
+				"bit": "`latest`: check empty, then jump to the last spot (O(1)). `best`: one loop over every score (O(n))."
+			},
+			"board": {
+				"code": "public static int latest(List<Integer> scores) {\n    return -1;\n}",
+				"marks": [
+					{
+						"text": "latest",
+						"label": "one look, not a loop"
+					}
+				]
+			},
+			"assist": true
+		},
+		{
+			"title": "Open ScoutStats.java",
+			"say": {
+				"never": "Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `ScoutStats`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "Press **Ctrl+P**, type `ScoutStats` and press Enter."
+			},
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "ScoutStats.java"
+				},
+				"hint": "open ScoutStats.java with Ctrl+P.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Find it",
+			"say": {
+				"never": "Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `public static int latest` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "Press **Ctrl+F**, type `public static int latest` and press Enter to jump to it."
+			},
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "public static int latest"
+				},
+				"hint": "find public static int latest with Ctrl+F.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Your turn",
+			"say": {
+				"never": "Your turn! Write `latest` so it returns `0` for an empty list and otherwise jumps straight to the last score. Then write `best` with one loop that remembers the highest score so far.",
+				"bit": "Write latest (O(1)) and best (O(n))."
+			},
+			"waitFor": {
+				"hint": {
+					"never": "write latest and best.",
+					"bit": "write latest and best."
+				}
+			},
+			"cardAt": "bottom-right",
+			"assist": true
+		}
+	]
+}

@@ -1,0 +1,49 @@
+{
+	"title": "Design Patterns",
+	"description": "Use three named shapes for classes on a pretend robot: swap drive modes with Strategy, tell the LEDs and intake about a game piece with Observer, and build the right auto from its name with Factory.",
+	"kind": "plain-java",
+	"track": "Java Advanced",
+	"order": 41,
+	"recommends": [
+		"java-interfaces",
+		"java-lambdas"
+	],
+	"checkpoints": [
+		{
+			"id": "drive-modes",
+			"title": "Two drive modes",
+			"description": "TankDrive and ArcadeDrive implement DriveMode; arcade mixes forward and turn and clamps each side between -1 and 1.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/drive-modes.sh"
+			}
+		},
+		{
+			"id": "swap-modes",
+			"title": "Swap the strategy",
+			"description": "Drivetrain holds a DriveMode, drives with whichever one it has, and switches with setMode (ignoring null).",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/swap-modes.sh"
+			}
+		},
+		{
+			"id": "listeners",
+			"title": "Tell the listeners",
+			"description": "BeamBreak adds and removes listeners, and update() tells each of them, in order, only when the reading changes.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/listeners.sh"
+			}
+		},
+		{
+			"id": "auto-factory",
+			"title": "The auto factory",
+			"description": "AutoFactory.create builds a new auto from a dashboard name, ignoring case and spaces, with Do nothing for anything it doesn't know.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/auto-factory.sh"
+			}
+		}
+	]
+}

@@ -4,6 +4,9 @@
 	"kind": "git",
 	"track": "Tools",
 	"order": 5,
+	"recommends": [
+		"editor-basics"
+	],
 	"setupScript": "checkpoints/setup.sh",
 	"checkpoints": [
 		{

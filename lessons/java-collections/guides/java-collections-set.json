@@ -1,0 +1,137 @@
+{
+	"title": "Sets: HashSet",
+	"summary": "A collection with no repeats, and how to pick a list, a set or a map.",
+	"topic": "Java",
+	"order": 512,
+	"kind": "mixed",
+	"steps": [
+		{
+			"title": "No repeats allowed",
+			"say": {
+				"never": "Think of a sticker collection. Getting the same sticker twice doesn't make your collection bigger. A **HashSet** works the same way: adding something that's already in it changes nothing. `contains` asks \"is it in there?\" and gets an answer fast, even with thousands of items. A set doesn't keep any order.",
+				"bit": "A **HashSet** ignores repeats. `contains` is fast; there's no order."
+			},
+			"board": {
+				"code": "HashSet<String> stickers = new HashSet<>();\nstickers.add(\"robot\");\nstickers.add(\"rocket\");\nstickers.add(\"robot\");                 // already there\nSystem.out.println(stickers.size());     // 2\nSystem.out.println(stickers.contains(\"rocket\")); // true",
+				"language": "java",
+				"marks": [
+					{
+						"text": "stickers.add(\"robot\");                 // already there",
+						"label": "changes nothing"
+					},
+					{
+						"text": "stickers.contains(",
+						"label": "is it in there?"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: No repeats allowed",
+			"say": {
+				"never": "Scouts write down the same team many times, once per match. `TeamsSeen` keeps the team numbers in a `HashSet<Integer>`, so each team counts once. Import `java.util.HashSet`, add the `teams_` field, and each method is one line: `add`, `contains` and `size()`.",
+				"bit": "`TeamsSeen` uses a `HashSet<Integer>`: `add`, `contains`, `size()`."
+			},
+			"board": {
+				"code": "protected HashSet<Integer> teams_ = new HashSet<>();",
+				"marks": [
+					{
+						"text": "HashSet<Integer>",
+						"label": "each team once"
+					}
+				]
+			},
+			"assist": true
+		},
+		{
+			"title": "List, set or map?",
+			"say": {
+				"never": "Picking the right collection makes the code short. Ask one question. Does the **order** matter, or can the same thing appear **twice**? Use a list. Do you only care **whether** something is there? Use a set. Do you **look things up** by a key, like a name or a number? Use a map, which is the next guide.",
+				"bit": "Order or repeats: list. Is it there?: set. Look up by key: map."
+			},
+			"board": {
+				"code": "ArrayList  -> lap times, in order\nHashSet    -> which badges I've earned\nHashMap    -> phone book: name -> number",
+				"marks": [
+					{
+						"text": "ArrayList",
+						"label": "order, repeats"
+					},
+					{
+						"text": "HashSet",
+						"label": "yes or no"
+					},
+					{
+						"text": "HashMap",
+						"label": "look it up"
+					}
+				]
+			}
+		},
+		{
+			"title": "Open TeamsSeen.java",
+			"say": {
+				"never": "Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `TeamsSeen`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "Press **Ctrl+P**, type `TeamsSeen` and press Enter."
+			},
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "TeamsSeen.java"
+				},
+				"hint": "open TeamsSeen.java with Ctrl+P.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Find it",
+			"say": {
+				"never": "It may be further down. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `public class TeamsSeen` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "Press **Ctrl+F**, type `public class TeamsSeen` and press Enter to jump to it."
+			},
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "public class TeamsSeen"
+				},
+				"hint": "find public class TeamsSeen with Ctrl+F.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Your turn",
+			"say": {
+				"never": "Your turn! Add the import and the `teams_` field, then write `addTeam`, `hasSeen` and `countTeams`.",
+				"bit": "Import, add teams_, write the three methods."
+			},
+			"waitFor": {
+				"hint": {
+					"never": "finish TeamsSeen.",
+					"bit": "finish TeamsSeen."
+				}
+			},
+			"cardAt": "bottom-right",
+			"assist": true
+		}
+	]
+}

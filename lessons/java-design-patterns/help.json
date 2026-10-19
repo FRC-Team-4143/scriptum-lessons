@@ -1,0 +1,90 @@
+{
+	"plan": [
+		{
+			"checkpoint": "drive-modes",
+			"guides": [
+				"java-design-patterns-strategy"
+			]
+		},
+		{
+			"checkpoint": "swap-modes",
+			"guides": [
+				"java-design-patterns-strategy"
+			]
+		},
+		{
+			"checkpoint": "listeners",
+			"guides": [
+				"java-design-patterns-observer"
+			]
+		},
+		{
+			"checkpoint": "auto-factory",
+			"guides": [
+				"java-design-patterns-factory"
+			]
+		}
+	],
+	"checkpoints": {
+		"drive-modes": {
+			"guide": "java-design-patterns-strategy",
+			"hints": [
+				{
+					"never": "Each class needs \"implements DriveMode\" on its class line, then the two methods the interface lists: getName() and calculate(Gamepad pad).",
+					"bit": "implements DriveMode, then getName() and calculate()."
+				},
+				{
+					"never": "Arcade: work out forward + turn and forward - turn first. Then clamp each one: Math.max(-1.0, Math.min(1.0, speed)) keeps a number between -1 and 1.",
+					"bit": "Clamp each side with Math.max and Math.min."
+				}
+			]
+		},
+		"swap-modes": {
+			"guide": "java-design-patterns-strategy",
+			"hints": [
+				{
+					"never": "drive(pad) shouldn't do any math itself. It hands pad to mode_.calculate(pad) and returns what comes back.",
+					"bit": "drive returns mode_.calculate(pad)."
+				},
+				{
+					"never": "In setMode, only change mode_ when the new mode isn't null.",
+					"bit": "Guard setMode with mode != null."
+				}
+			]
+		},
+		"listeners": {
+			"guide": "java-design-patterns-observer",
+			"hints": [
+				{
+					"never": "If the listeners hear something every loop, update is telling them even when nothing changed. Compare beam_blocked with has_piece_ first.",
+					"bit": "Only notify when beam_blocked != has_piece_."
+				},
+				{
+					"never": "Save the new value in has_piece_ before the loop that calls onChange, so a listener that calls hasPiece() sees the new value.",
+					"bit": "Set has_piece_, then notify."
+				},
+				{
+					"never": "A for-each loop visits every listener in the order they were added: for (PieceListener listener : listeners_) { listener.onChange(has_piece_); }",
+					"bit": "for-each over listeners_, calling onChange."
+				}
+			]
+		},
+		"auto-factory": {
+			"guide": "java-design-patterns-factory",
+			"hints": [
+				{
+					"never": "Check for null before anything else. Calling trim() on null crashes.",
+					"bit": "null check first."
+				},
+				{
+					"never": "Tidy the name with name.trim().toLowerCase() and match the tidied one, so \"  LEAVE \" counts as \"leave\".",
+					"bit": "Match on name.trim().toLowerCase()."
+				},
+				{
+					"never": "Strings are compared with .equals(...) or a switch, never with ==. And every answer should use new, so each call gets its own auto.",
+					"bit": "equals or switch, and always new."
+				}
+			]
+		}
+	}
+}

@@ -1,0 +1,141 @@
+{
+	"title": "Linear and binary search",
+	"summary": "Check items one by one, or halve a sorted list with every look.",
+	"topic": "Java",
+	"order": 571,
+	"kind": "mixed",
+	"steps": [
+		{
+			"title": "One at a time",
+			"say": {
+				"never": "Looking for a friend's name in a jumbled pile of sign-up sheets? You check them one at a time from the top, and stop the moment you find it. That's **linear search**. If the name isn't there, you only know after checking every sheet, so the worst case is `n` looks: O(n). In code it's a loop with a `return` inside, plus a `return -1` after the loop for \"not found\".",
+				"bit": "**Linear search**: check each item in turn, return the index as soon as it matches, `-1` after the loop. O(n)."
+			},
+			"board": {
+				"code": "for (int i = 0; i < names.size(); i++) {\n    if (names.get(i).equals(\"Ada\")) {\n        return i;\n    }\n}\nreturn -1;",
+				"language": "java",
+				"marks": [
+					{
+						"text": "return i;",
+						"label": "stop as soon as it's found"
+					},
+					{
+						"text": "return -1;",
+						"label": "checked them all: not here"
+					}
+				]
+			}
+		},
+		{
+			"title": "Halve it every time",
+			"say": {
+				"never": "If the list is **sorted**, you can do much better. Play \"guess my number from 1 to 100\": guess 50. \"Higher!\" Now you know it's 51 to 100, so half the numbers are gone with one guess. Guess the middle of what's left, again and again. That's **binary search**. 100 numbers take at most 7 guesses, and 1000 take about 10: O(log n). It only works because the list is in order.",
+				"bit": "**Binary search** on a sorted list: look at the middle, throw away the half it can't be in, repeat. O(log n)."
+			}
+		},
+		{
+			"title": "Two fences: lo and hi",
+			"say": {
+				"never": "In code, keep two indexes, like fences: `lo` and `hi`. The thing you want can only be between them. Look at the middle index, `(lo + hi) / 2`. Too small? Move `lo` to just *after* the middle. Too big? Move `hi` to just *before* it. When `lo` passes `hi` there's nothing left between the fences, so it isn't there. Moving one *past* the middle matters: if you set `lo = mid`, the loop can get stuck forever.",
+				"bit": "Keep `lo` and `hi`; check `mid = (lo + hi) / 2`; move `lo = mid + 1` or `hi = mid - 1`; stop when `lo > hi`."
+			},
+			"board": {
+				"code": "int lo = 0;\nint hi = prices.length - 1;\nwhile (lo <= hi) {\n    int mid = (lo + hi) / 2;\n    if (prices[mid] == want) return mid;\n    if (prices[mid] < want) lo = mid + 1;\n    else hi = mid - 1;\n}\nreturn -1;",
+				"language": "java",
+				"marks": [
+					{
+						"text": "int mid = (lo + hi) / 2;",
+						"label": "the middle of what's left"
+					},
+					{
+						"text": "lo = mid + 1;",
+						"label": "throw away the left half"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Linear and binary search",
+			"say": {
+				"never": "`indexOf` is the sign-up-sheet search over a `List<Integer>` of team numbers: return the first index that matches, so a team listed twice gives the earlier spot. `binarySearch` gets a list sorted smallest first, and uses `sorted.get(...)` and `sorted.size()` instead of an array. The checker counts your looks: about 13 for 4000 teams is fine, but checking every team is not.",
+				"bit": "`indexOf`: first match or -1. `binarySearch`: the lo/hi loop on a `List`, with `get` and `size`."
+			},
+			"board": {
+				"code": "public static int binarySearch(List<Integer> sorted, int team) {\n    return -1;\n}",
+				"marks": [
+					{
+						"text": "List<Integer> sorted",
+						"label": "smallest team number first"
+					}
+				]
+			},
+			"assist": true
+		},
+		{
+			"title": "Open Search.java",
+			"say": {
+				"never": "Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `Search`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "Press **Ctrl+P**, type `Search` and press Enter."
+			},
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "Search.java"
+				},
+				"hint": "open Search.java with Ctrl+P.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Find it",
+			"say": {
+				"never": "Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `public static int indexOf` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "Press **Ctrl+F**, type `public static int indexOf` and press Enter to jump to it."
+			},
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "public static int indexOf"
+				},
+				"hint": "find public static int indexOf with Ctrl+F.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Your turn",
+			"say": {
+				"never": "Your turn! Write `indexOf` first: one loop, `return i` on a match, `return -1` after the loop. Then write `binarySearch` with `low`, `high` and a `while` loop.",
+				"bit": "Write indexOf, then binarySearch."
+			},
+			"waitFor": {
+				"hint": {
+					"never": "write indexOf and binarySearch.",
+					"bit": "write both searches."
+				}
+			},
+			"cardAt": "bottom-right",
+			"assist": true
+		}
+	]
+}

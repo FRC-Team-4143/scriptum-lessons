@@ -1,0 +1,29 @@
+{
+	"plan": [
+		{
+			"checkpoint": "classify",
+			"guides": [
+				"java-big-o-steps",
+				"java-big-o-growth"
+			]
+		},
+		{
+			"checkpoint": "latest-and-best",
+			"guides": [
+				"java-big-o-steps"
+			]
+		},
+		{
+			"checkpoint": "fast-duplicates",
+			"guides": [
+				"java-big-o-hashset"
+			]
+		},
+		{
+			"checkpoint": "teams-in-both",
+			"guides": [
+				"java-big-o-hashset"
+			]
+		}
+	]
+}

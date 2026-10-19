@@ -1,0 +1,134 @@
+{
+	"title": "Observer: tell everyone who's listening",
+	"summary": "Keep a list of listeners and call each one when something changes, so the thing that changes doesn't need to know who cares.",
+	"topic": "Java",
+	"order": 612,
+	"kind": "mixed",
+	"steps": [
+		{
+			"title": "Subscribe and get told",
+			"say": {
+				"never": "When you subscribe to a channel, the channel doesn't know you personally. It keeps a list of subscribers, and when a new video goes up, it tells everyone on the list. That's the **Observer** pattern. The thing being watched keeps a `List` of **listeners**. Anyone can add themselves. When something changes, it calls a method on every listener in the list.",
+				"bit": "**Observer**: keep a `List` of listeners; on a change, call each one."
+			},
+			"board": {
+				"code": "public class Channel {\n    protected List<UploadListener> fans_ = new ArrayList<>();\n\n    public void subscribe(UploadListener fan) {\n        fans_.add(fan);\n    }\n\n    public void upload(String title) {\n        for (UploadListener fan : fans_) {\n            fan.newVideo(title);\n        }\n    }\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "List<UploadListener> fans_",
+						"label": "everyone listening"
+					},
+					{
+						"text": "fan.newVideo(title);",
+						"label": "tell each one"
+					}
+				]
+			}
+		},
+		{
+			"title": "Only when it changes",
+			"say": {
+				"never": "A sensor is read about 50 times a second. If it told its listeners on every read, the LEDs would hear \"you have a piece\" 50 times a second. So remember the last value, and only tell the listeners when the new reading is *different*. Update the remembered value before you tell anyone, so a listener that asks \"what's the value now?\" gets the new answer.",
+				"bit": "Tell listeners only when the value changes, and save the new value before telling them."
+			},
+			"board": {
+				"code": "boolean raining = gauge.isWet();\nif (raining != was_raining_) {\n    was_raining_ = raining;\n    // now tell every listener\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "raining != was_raining_",
+						"label": "different from last time?"
+					},
+					{
+						"text": "was_raining_ = raining;",
+						"label": "save it first"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Only when it changes",
+			"say": {
+				"never": "`BeamBreak` is the thing being watched, and `PieceListener` is the listener's interface. `addListener` and `removeListener` change `listeners_`. `update(beam_blocked)` compares the reading with `has_piece_`. If they're the same, do nothing. If not, save the new value in `has_piece_`, then loop over `listeners_` and call `onChange(has_piece_)` on each.",
+				"bit": "`addListener`/`removeListener` edit `listeners_`. `update`: on a change, save `has_piece_`, then `onChange` each listener."
+			},
+			"board": {
+				"code": "public void update(boolean beam_blocked) {\n    // same as has_piece_? tell nobody\n    // otherwise save it, then tell every listener\n}",
+				"marks": [
+					{
+						"text": "update(boolean beam_blocked)",
+						"label": "every robot loop"
+					}
+				]
+			},
+			"assist": true
+		},
+		{
+			"title": "Open BeamBreak.java",
+			"say": {
+				"never": "Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `BeamBreak`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "Press **Ctrl+P**, type `BeamBreak` and press Enter."
+			},
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "BeamBreak.java"
+				},
+				"hint": "open BeamBreak.java with Ctrl+P.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Find it",
+			"say": {
+				"never": "It may be further down. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `public void update(boolean beam_blocked)` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "Press **Ctrl+F**, type `public void update(boolean beam_blocked)` and press Enter to jump to it."
+			},
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "public void update(boolean beam_blocked)"
+				},
+				"hint": "find public void update(boolean beam_blocked) with Ctrl+F.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Your turn",
+			"say": {
+				"never": "Your turn! Write `addListener`, `removeListener` and `update`. Then look in `Main`: the LEDs and the intake sign up with lambdas, because `PieceListener` has just one method.",
+				"bit": "Write addListener, removeListener and update."
+			},
+			"waitFor": {
+				"hint": {
+					"never": "write addListener, removeListener and update.",
+					"bit": "write addListener, removeListener and update."
+				}
+			},
+			"cardAt": "bottom-right",
+			"assist": true
+		}
+	]
+}
