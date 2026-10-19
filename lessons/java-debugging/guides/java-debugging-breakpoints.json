@@ -1,0 +1,349 @@
+{
+	"title": "Your first breakpoint",
+	"summary": "Freeze the program on a line and look at every variable.",
+	"topic": "Java",
+	"order": 330,
+	"kind": "mixed",
+	"steps": [
+		{
+			"title": "Freeze frame",
+			"say": {
+				"never": "A **debugger** lets you pause a running program on any line you choose, like pausing a video. While it's paused you can see the value of every variable. Then you move forward one line at a time and watch what changes.",
+				"bit": "A debugger pauses the program on a line you pick, so you can look at every variable and move one line at a time."
+			},
+			"board": {
+				"code": "int temp = 60;\nwhile (temp < 70) {\n    temp += 3;          // <- stop here each time\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "temp += 3;",
+						"label": "a breakpoint here pauses every time round"
+					}
+				]
+			}
+		},
+		{
+			"title": "Breakpoints",
+			"say": {
+				"never": "A **breakpoint** is where the program pauses. Click in the narrow space just **left of a line number** and a **red dot** appears. When the program reaches that line, it stops *before* running it. Click the dot again to remove it.",
+				"bit": "Click left of a line number for a red dot: the program stops before running that line."
+			},
+			"board": {
+				"code": "   7  ●   temp += 3;",
+				"language": "text",
+				"marks": [
+					{
+						"text": "●",
+						"label": "the breakpoint: click left of the line number"
+					}
+				]
+			}
+		},
+		{
+			"title": "Debug, not Run",
+			"say": {
+				"never": "Breakpoints only work when you start the program with **Debug** instead of Run. Above `public static void main` there's a tiny **Run | Debug**: click **Debug**. Or click the little arrow next to ▷ at the top right and pick **Debug Java**.",
+				"bit": "Start with **Debug** (above `main`, or the arrow next to ▷), not Run."
+			},
+			"board": {
+				"code": "Run | Debug\npublic static void main(String[] args) {",
+				"language": "text",
+				"marks": [
+					{
+						"text": "Debug",
+						"label": "click this one"
+					}
+				]
+			}
+		},
+		{
+			"title": "Open SpeedMath.java",
+			"say": {
+				"never": "Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `SpeedMath`, then press **Enter**. It finds any file by its name.",
+				"bit": "Press **Ctrl+P**, type `SpeedMath` and press Enter."
+			},
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "SpeedMath.java"
+				},
+				"hint": "open SpeedMath.java with Ctrl+P.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Find it",
+			"say": {
+				"never": "Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `sum += speeds[i];` and press **Enter**. The editor jumps to it.",
+				"bit": "Press **Ctrl+F**, type `sum += speeds[i];` and press Enter."
+			},
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "sum += speeds[i];"
+				},
+				"hint": "find sum += speeds[i]; with Ctrl+F.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Put a breakpoint here",
+			"say": {
+				"never": "Click in this narrow strip, just left of the line number **7**. A **red dot** appears: that's your breakpoint. (Click the dot again if you ever want to remove it.)",
+				"bit": "Click just left of the **7** for a red dot."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": ".margin-view-overlays .line-numbers",
+				"text": "7",
+				"region": {
+					"left": "-20px",
+					"width": "20px"
+				}
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".margin .codicon-debug-breakpoint"
+				},
+				"hint": "click left of the line number for a red dot.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Open Main.java",
+			"say": {
+				"never": "Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `Main`, then press **Enter**. It finds any file by its name.",
+				"bit": "Press **Ctrl+P**, type `Main` and press Enter."
+			},
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "Main.java"
+				},
+				"hint": "open Main.java with Ctrl+P.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Click Debug",
+			"say": {
+				"never": "Look just above `public static void main`. There's a tiny grey **Run | Debug**. Click **Debug**, not Run: breakpoints only work when you start the program this way. (If you don't see it, click the little arrow next to ▷ at the top right and pick **Debug Java**.)",
+				"bit": "Click the small **Debug** above `main` (not Run)."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": ".codelens-decoration a",
+				"text": "Debug"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".debug-toolbar"
+				},
+				"hint": "click Debug above public static void main.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "It stopped!",
+			"say": {
+				"never": "The program is now **frozen**. The **yellow line** is where it stopped. Careful: the yellow line has **not run yet**. It's the *next* thing the program will do. Nothing moves until you tell it to.",
+				"bit": "Frozen. The yellow line is next to run; it hasn't run yet."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": ".debug-top-stack-frame-line"
+			},
+			"cardAt": "top-right",
+			"assist": true
+		},
+		{
+			"title": "The debug toolbar",
+			"say": {
+				"never": "This little bar appeared at the top when debugging started. Its buttons control the frozen program. Rest your mouse on any button to see its name. Use these buttons, not the F-keys: in a browser, F5 reloads the whole page.",
+				"bit": "This toolbar controls the frozen program. Use the buttons, not F-keys."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": ".debug-toolbar"
+			},
+			"cardAt": "bottom-right",
+			"assist": true
+		},
+		{
+			"title": "Continue",
+			"say": {
+				"never": "**Continue** (the ▷ with a bar) unfreezes the program. It runs until it reaches a breakpoint again, then freezes again.",
+				"bit": "**Continue**: run to the next breakpoint."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": ".debug-toolbar .action-label[aria-label^='Continue']"
+			},
+			"cardAt": "bottom-right",
+			"assist": true
+		},
+		{
+			"title": "Step Over",
+			"say": {
+				"never": "**Step Over** (the curved arrow) runs **just one line**, then freezes again. It's how you go through code slowly and watch each change.",
+				"bit": "**Step Over**: run one line."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": ".debug-toolbar .action-label[aria-label^='Step Over']"
+			},
+			"cardAt": "bottom-right",
+			"assist": true
+		},
+		{
+			"title": "Stop",
+			"say": {
+				"never": "**Stop** (the square) ends the program right away. Use it when you've seen enough.",
+				"bit": "**Stop**: end the program."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": ".debug-toolbar .action-label[aria-label^='Stop']"
+			},
+			"cardAt": "bottom-right",
+			"assist": true
+		},
+		{
+			"title": "Where the variables are",
+			"say": {
+				"never": "On the left is the **Run and Debug** panel. Its first section, **Variables**, lists every variable and its value *right now*, at the frozen moment. (If you can't see it, click the bug-and-triangle icon in the bar at the far left.)",
+				"bit": "**Variables** (left, in Run and Debug) shows every value right now."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": ".debug-variables"
+			},
+			"cardAt": "bottom-right",
+			"assist": true
+		},
+		{
+			"title": "Open Local",
+			"say": {
+				"never": "**Local** means \"the variables inside the method we're frozen in\". It starts closed. Click the little **>** next to **Local** to open it.",
+				"bit": "Click the **>** next to **Local** to open it."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": ".debug-variables .monaco-list-row[aria-label='Scope Local']"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".debug-variables .monaco-list-row[aria-label^='i, value']"
+				},
+				"hint": "open Local by clicking its arrow.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Read the values",
+			"say": {
+				"never": "Now you can see inside the program. `i = 0` means this is the **first** time round the loop. `sum` is what's been added up so far. `speeds` holds 8 numbers: click its **>** to see them all.",
+				"bit": "`i` is which time round the loop; `sum` is the total so far; open `speeds` to see all 8."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": ".debug-variables .monaco-list-row[aria-label^='i, value']"
+			},
+			"cardAt": "bottom-right",
+			"assist": true
+		},
+		{
+			"title": "Hover works too",
+			"say": {
+				"never": "You can also rest your mouse on a variable in the code, like `sum` on this line, and a little box shows its value.",
+				"bit": "Hover a variable in the code to see its value."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "sum += speeds[i];"
+			},
+			"cardAt": "bottom-right",
+			"assist": true
+		},
+		{
+			"title": "Continue and watch i",
+			"say": {
+				"never": "Press **Continue**. The program runs once more round the loop and stops here again. Look at `i` in Variables: it went up by one. Keep pressing **Continue** and **count the stops**, until the program finishes and the toolbar disappears.",
+				"bit": "Keep pressing **Continue**, watch `i`, and count the stops until the toolbar goes away."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": ".debug-toolbar .action-label[aria-label^='Continue']"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"hint": {
+					"never": "count the stops until the program finishes.",
+					"bit": "count the stops until the program finishes."
+				}
+			},
+			"assist": true
+		},
+		{
+			"title": "Count the stops",
+			"say": {
+				"never": "The log has **8** speeds, numbered 0 to 7. How many stops did you count? What was the biggest `i` you saw? Write the number of stops in `Answers.java` as `LOOP_RUNS_BEFORE_FIX`, *before* you fix the loop. Then fix the loop so it adds every speed.",
+				"bit": "Write the count in Answers.java, then fix the loop."
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"hint": {
+					"never": "write the count and fix the loop.",
+					"bit": "write the count and fix the loop."
+				}
+			},
+			"assist": true
+		}
+	]
+}

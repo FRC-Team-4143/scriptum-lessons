@@ -57,6 +57,11 @@ Four tracks, in curriculum order (each lesson's `track` and `order` are in its `
 
 - **Tools**: `editor-basics` (Meet the Editor: files, folders, saving, the terminal, for someone
   who has never used a code editor), then git, AdvantageScope, Elastic, Choreo and Arbor introductions.
+  `java-debugging` (Debugging) is a Tools lesson too, but it's off the roadmap (it `recommends`
+  `java-methods`, and Unit 0 only takes tools whose recommendations are tools): a program that compiles
+  but has seven bugs and nine checkpoints, one bug per debugger skill (breakpoints, step into/out,
+  conditional breakpoints, watches, the call stack, Pause). Its verify scripts run Java under
+  `timeout 5`, since one bug is an endless loop.
   `arbor-intro` is a tool lesson like `choreo-intro` (`restrictTools: ["arbor"]`, no Java): the student builds a
   behavior tree in Arbor, and five script checkpoints read the XML it saves in `src/main/deploy/autos/trees`
   (the starter `Example.xml` never counts). The project ships the Arbor project files (`bt_project.json`, a

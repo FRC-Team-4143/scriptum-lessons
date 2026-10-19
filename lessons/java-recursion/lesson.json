@@ -3,7 +3,7 @@
 	"description": "Solve a few problems you already solved with loops, using recursion instead - methods that call themselves down to a base case.",
 	"kind": "plain-java",
 	"track": "Java Basics",
-	"order": 18,
+	"order": 19,
 	"recommends": [
 		"java-methods"
 	],

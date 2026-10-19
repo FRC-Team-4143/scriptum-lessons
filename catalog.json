@@ -920,8 +920,103 @@
 			]
 		},
 		{
-			"id": "java-classes-objects",
+			"id": "java-debugging",
 			"order": 17,
+			"track": "Tools",
+			"title": "Debugging",
+			"description": "Fix a match-log program that compiles and runs but gives wrong answers, using the debugger: breakpoints, stepping in and out, the Variables pane, conditional breakpoints, the call stack and the Pause button.",
+			"kind": "plain-java",
+			"subdir": "lessons/java-debugging/project",
+			"recommends": [
+				"java-methods"
+			],
+			"checkpoints": [
+				{
+					"id": "count-the-stops",
+					"title": "Count the stops",
+					"description": "Answers.LOOP_RUNS_BEFORE_FIX is how many times the breakpoint in averageSpeed's loop stopped, before the fix.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-debugging/checkpoints/verify/count-the-stops.sh"
+					}
+				},
+				{
+					"id": "fix-the-average",
+					"title": "Fix the average",
+					"description": "averageSpeed adds every speed, not all but the last.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-debugging/checkpoints/verify/fix-the-average.sh"
+					}
+				},
+				{
+					"id": "step-into",
+					"title": "Step into a method",
+					"description": "Accuracy.percent returns real percentages instead of 0.0.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-debugging/checkpoints/verify/step-into.sh"
+					}
+				},
+				{
+					"id": "step-out",
+					"title": "Step out again",
+					"description": "totalDistance adds up every leg instead of staying at 0.0.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-debugging/checkpoints/verify/step-out.sh"
+					}
+				},
+				{
+					"id": "find-the-missing-reading",
+					"title": "Find the missing reading",
+					"description": "Answers.MISSING_SAMPLE_INDEX is where the -1 is in the battery log, found with a conditional breakpoint.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-debugging/checkpoints/verify/find-the-missing-reading.sh"
+					}
+				},
+				{
+					"id": "skip-missing-readings",
+					"title": "Skip the missing readings",
+					"description": "lowestVolts skips readings below 0, even when the first one is missing.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-debugging/checkpoints/verify/skip-missing-readings.sh"
+					}
+				},
+				{
+					"id": "string-compare",
+					"title": "Watching a comparison",
+					"description": "countState counts matching strings, even ones built while the program runs.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-debugging/checkpoints/verify/string-compare.sh"
+					}
+				},
+				{
+					"id": "stack-trace",
+					"title": "Read the stack trace",
+					"description": "Scoring stops crashing, and each level is worth the right points.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-debugging/checkpoints/verify/stack-trace.sh"
+					}
+				},
+				{
+					"id": "pause-a-hang",
+					"title": "Pause a stuck program",
+					"description": "countValid finishes, and counts the real readings.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-debugging/checkpoints/verify/pause-a-hang.sh"
+					}
+				}
+			]
+		},
+		{
+			"id": "java-classes-objects",
+			"order": 18,
 			"track": "Java Basics",
 			"title": "Classes & Objects",
 			"description": "Build a small BankAccount class: fields, a constructor, and encapsulation - objects that protect their own state instead of exposing raw data to be mutated directly.",
@@ -971,7 +1066,7 @@
 		},
 		{
 			"id": "java-recursion",
-			"order": 18,
+			"order": 19,
 			"track": "Java Basics",
 			"title": "Recursion",
 			"description": "Solve a few problems you already solved with loops, using recursion instead - methods that call themselves down to a base case.",
@@ -1021,7 +1116,7 @@
 		},
 		{
 			"id": "java-inheritance",
-			"order": 19,
+			"order": 20,
 			"track": "Java Basics",
 			"title": "Inheritance",
 			"description": "Extend the BankAccount class from Classes & Objects with two subclasses - one that adds a new method, one that overrides an existing one.",
@@ -3037,6 +3132,54 @@
 			],
 			"kind": "mixed",
 			"path": "lessons/java-classes-objects/guides/java-classes-encapsulation.json"
+		},
+		{
+			"id": "java-debugging-breakpoints",
+			"title": "Your first breakpoint",
+			"summary": "Freeze the program on a line and look at every variable.",
+			"topic": "Java",
+			"order": 330,
+			"modules": [
+				"java-debugging"
+			],
+			"kind": "mixed",
+			"path": "lessons/java-debugging/guides/java-debugging-breakpoints.json"
+		},
+		{
+			"id": "java-debugging-stepping",
+			"title": "Stepping in and out",
+			"summary": "Follow a call into a method, and come back out.",
+			"topic": "Java",
+			"order": 331,
+			"modules": [
+				"java-debugging"
+			],
+			"kind": "mixed",
+			"path": "lessons/java-debugging/guides/java-debugging-stepping.json"
+		},
+		{
+			"id": "java-debugging-conditional",
+			"title": "Conditional breakpoints and watches",
+			"summary": "Stop only when something is wrong, and watch a comparison.",
+			"topic": "Java",
+			"order": 332,
+			"modules": [
+				"java-debugging"
+			],
+			"kind": "mixed",
+			"path": "lessons/java-debugging/guides/java-debugging-conditional.json"
+		},
+		{
+			"id": "java-debugging-crashes",
+			"title": "Crashes and stuck programs",
+			"summary": "Read a stack trace, and pause a program that never finishes.",
+			"topic": "Java",
+			"order": 333,
+			"modules": [
+				"java-debugging"
+			],
+			"kind": "mixed",
+			"path": "lessons/java-debugging/guides/java-debugging-crashes.json"
 		},
 		{
 			"id": "java-recursion-recipe",
