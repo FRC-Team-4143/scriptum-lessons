@@ -75,7 +75,7 @@
 			"title": "Replay a run",
 			"say": "Every time the robot runs an auto it records a **log**: every node's status and exactly when it changed. Arbor can play one back, node by node, so you can find out *after* a match where an auto went wrong. On the robot the logs are on the USB stick in `/U/logs/bt`; in simulation they go in the project's `logs/bt` folder. This lesson ships one to try: `sample-logs/ReplayDemo.btlog`.",
 			"diagram": {
-				"mermaid": "flowchart LR\n  R[\"Robot runs an auto\"] --> L[\"log file .btlog · /U/logs/bt or logs/bt\"]\n  L --> D[\"Download it\"]\n  D --> A[\"Arbor: Replay a log file\"]\n  A --> P[\"Play it back node by node\"]",
+				"mermaid": "flowchart LR\n  R[\"Robot runs an auto\"] --> L[\"log file .btlog · /U/logs/bt or logs/bt\"]\n  L --> A[\"Arbor: Replay a log file\"]\n  A --> P[\"Play it back node by node\"]",
 				"caption": "Every auto run is recorded; Arbor plays the recording back."
 			},
 			"target": {
@@ -83,24 +83,30 @@
 			}
 		},
 		{
-			"title": "Download the log",
-			"say": "Arbor opens a log from **your own computer**, so download it first. In the editor's file list, open the `sample-logs` folder, right-click `ReplayDemo.btlog` and choose **Download**.",
-			"open": [
-				"editor"
-			],
-			"target": {
-				"pane": "editor"
-			}
-		},
-		{
-			"title": "Open it in Arbor",
-			"say": "Back in Arbor, click the **project name** in the top-left corner. Under **Logs**, choose **Replay a log file (.btlog)...** and pick the file you downloaded. Dragging the file onto Arbor works too. The log remembers which tree it ran, so Arbor opens `ReplayDemo` for you (a log only plays if its tree is in the project).",
+			"title": "Open the log browser",
+			"say": "In Arbor, click the **project name** in the top-left corner. Under **Logs**, choose **Replay a log file (.btlog)...**. A file browser opens, showing the files in your workspace.",
 			"open": [
 				"arbor"
 			],
 			"target": {
 				"pane": "arbor",
 				"selector": ".toolbar .brand"
+			}
+		},
+		{
+			"title": "Find sample-logs",
+			"say": "The browser starts in the Arbor project folder, `src/main/deploy/autos`. The sample log is at the top of your project, so click **↑ Up** four times, until you see `sample-logs`, then click it. (Or type `/workspace/project/sample-logs` in the folder box and press **Enter**.) Simulator runs save their logs in `logs/bt`, next to it.",
+			"target": {
+				"pane": "arbor",
+				"selector": "form.browse"
+			}
+		},
+		{
+			"title": "Replay it",
+			"say": "Click `ReplayDemo.btlog`, then **Replay**. The log remembers which tree it ran, so Arbor opens `ReplayDemo` for you (a log only plays if its tree is in the project). A log from the robot's USB stick is on your own computer instead: drag it onto Arbor to play it.",
+			"target": {
+				"pane": "arbor",
+				"selector": "form.browse"
 			}
 		},
 		{

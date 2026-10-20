@@ -53,10 +53,12 @@ match. On the robot the logs are in `/U/logs/bt` (on the USB stick); in simulati
 `logs/bt` folder. This lesson ships one to try: `sample-logs/ReplayDemo.btlog`, recorded from the
 `ReplayDemo` tree.
 
-1. Arbor opens a log from **your own computer**, so first download it: in the editor's file list,
-   right-click `sample-logs/ReplayDemo.btlog` and choose **Download**.
-2. In Arbor, click the **project name** in the top-left corner and choose **Replay a log file
-   (.btlog)...**, then pick the file you downloaded. (Dragging the file onto Arbor works too.)
+1. In Arbor, click the **project name** in the top-left corner and choose **Replay a log file
+   (.btlog)...**. A file browser opens, showing the files in your workspace.
+2. It starts in the Arbor project folder (`src/main/deploy/autos`). Click **↑ Up** four times, until
+   you see `sample-logs`, open it, click `ReplayDemo.btlog`, and press **Replay**. (Or type
+   `/workspace/project/sample-logs` in the folder box and press Enter.) A log from the robot's USB
+   stick is on your own computer instead: drag it onto Arbor to play it.
 3. Arbor opens `ReplayDemo` and shows a playback bar: **Space** plays and pauses, **← / →** step one
    change at a time, **Home / End** jump to the start and end, and the menu on the right sets the
    speed.
