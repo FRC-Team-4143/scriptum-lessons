@@ -1,4 +1,4 @@
-// arbor-intro: the five checks read the trees the student saves in deploy/autos/trees. The starter
+// arbor-intro: the seven checks read the trees the student saves in deploy/autos/trees. The starter
 // Example.xml never counts; comments and attribute order don't matter.
 import { describe, expect, test } from "bun:test";
 import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
@@ -17,10 +17,17 @@ const GOOD = `<?xml version="1.0" encoding="UTF-8"?>
           <SetWantedState state="AIM"/>
           <Sleep msec="{wait_msec}"/>
           <FollowPath trajectory="ToScore"/>
+          <SubTree ID="AimAndShoot"/>
         </Sequence>
       </Timeout>
       <SetWantedState state="IDLE"/>
     </Fallback>
+  </BehaviorTree>
+  <BehaviorTree ID="AimAndShoot">
+    <Sequence>
+      <SetWantedState state="AIM"/>
+      <SetWantedState state="SHOOT"/>
+    </Sequence>
   </BehaviorTree>
   <TreeNodesModel>
     <SubTree ID="MyFirstAuto">
@@ -42,7 +49,7 @@ async function withTrees(files: Record<string, string>, check: (project: string)
 	}
 }
 
-const ALL = ["new-tree", "sequence", "ports", "fail-handling", "tunable"];
+const ALL = ["new-tree", "sequence", "ports", "fail-handling", "tunable", "subtree", "main-tree"];
 
 describe("arbor-intro", () => {
 	test("the starter project fails every check and ships the example tree and palette", async () => {
@@ -91,7 +98,11 @@ describe("arbor-intro", () => {
 	});
 
 	test("a Sequence with two steps is too short, and a missing Sequence is said so", async () => {
-		const two = GOOD.replace('<FollowPath trajectory="ToScore"/>', "").replace('<SetWantedState state="IDLE"/>', "");
+		const two = GOOD.replace('<FollowPath trajectory="ToScore"/>', "")
+			.replace('<SetWantedState state="IDLE"/>', "")
+			.replace('<SubTree ID="AimAndShoot"/>', "")
+			// The Sequence check counts steps across all your trees, so leave AimAndShoot out too.
+			.replace(/<BehaviorTree ID="AimAndShoot">[\s\S]*?<\/BehaviorTree>/, "");
 		await withTrees({ "A.xml": two }, (p) => {
 			const r = L.verify(p, "sequence");
 			expect(r.exitCode).not.toBe(0);
@@ -135,4 +146,49 @@ describe("arbor-intro", () => {
 			expect(L.verify(p, "tunable").text).toContain("no step uses it");
 		});
 	});
+
+	test("a SubTree must name a tree of yours that has steps, and a tree's own settings don't count as one", async () => {
+		const noUse = GOOD.replace('<SubTree ID="AimAndShoot"/>', "");
+		await withTrees({ "A.xml": noUse }, (p) => {
+			// The <SubTree ID="MyFirstAuto"> in TreeNodesModel is the tree's own settings, not a use.
+			expect(L.verify(p, "subtree").text).toContain("Use a tree inside another");
+		});
+		await withTrees({ "A.xml": GOOD.replace('<SubTree ID="AimAndShoot"/>', '<SubTree ID="Nope"/>') }, (p) => {
+			expect(L.verify(p, "subtree").text).toContain("no tree with that name");
+		});
+		const empty = GOOD.replace(/<BehaviorTree ID="AimAndShoot">[\s\S]*?<\/BehaviorTree>/, '<BehaviorTree ID="AimAndShoot"/>');
+		await withTrees({ "A.xml": empty }, (p) => {
+			expect(L.verify(p, "subtree").text).toContain("has no steps yet");
+		});
+		// Saved by mistake in a file that came with the lesson: say how to move it.
+		const lessonFile = '<root BTCPP_format="4" main_tree_to_execute="Example"><BehaviorTree ID="Example"><Sleep msec="1"/></BehaviorTree><BehaviorTree ID="AimAndShoot"><Sequence><SetWantedState state="AIM"/></Sequence></BehaviorTree></root>';
+		await withTrees({ "A.xml": GOOD.replace(/<BehaviorTree ID="AimAndShoot">[\s\S]*?<\/BehaviorTree>/, ""), "Example.xml": lessonFile }, (p) => {
+			const r = L.verify(p, "subtree");
+			expect(r.exitCode).not.toBe(0);
+			expect(r.text).toContain("Move to file");
+		});
+		// The SubTree can live in a file of its own.
+		const [mainFile, subFile] = [
+			GOOD.replace(/<BehaviorTree ID="AimAndShoot">[\s\S]*?<\/BehaviorTree>/, ""),
+			'<root BTCPP_format="4"><BehaviorTree ID="AimAndShoot"><Sequence><SetWantedState state="AIM"/></Sequence></BehaviorTree></root>',
+		];
+		await withTrees({ "A.xml": mainFile, "B.xml": subFile }, (p) => {
+			expect(L.verify(p, "subtree").exitCode).toBe(0);
+		});
+	});
+
+	test("the main tree must be set, be in its own file, and be the auto rather than a SubTree", async () => {
+		await withTrees({ "A.xml": GOOD.replace(' main_tree_to_execute="MyFirstAuto"', "") }, (p) => {
+			expect(L.verify(p, "main-tree").text).toContain("Set as main tree of file");
+		});
+		await withTrees({ "A.xml": GOOD.replace('main_tree_to_execute="MyFirstAuto"', 'main_tree_to_execute="AimAndShoot"') }, (p) => {
+			const r = L.verify(p, "main-tree");
+			expect(r.exitCode).not.toBe(0);
+			expect(r.text).toContain("it's a SubTree");
+		});
+		await withTrees({ "A.xml": GOOD.replace('main_tree_to_execute="MyFirstAuto"', 'main_tree_to_execute="Gone"') }, (p) => {
+			expect(L.verify(p, "main-tree").text).toContain("isn't in it");
+		});
+	});
 });
+

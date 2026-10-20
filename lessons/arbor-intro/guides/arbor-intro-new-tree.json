@@ -1,6 +1,6 @@
 {
 	"title": "Make your own tree",
-	"summary": "Create a tree, give it a first step, and save it.",
+	"summary": "Create a tree, give it a root node, and save it.",
 	"topic": "Tools",
 	"order": 37,
 	"kind": "mixed",
@@ -8,8 +8,8 @@
 		{
 			"title": "Your own tree",
 			"say": {
-				"never": "A **tree** is one autonomous routine, saved as its own file. You'll make a new one called `MyFirstAuto`, put a **Sequence** at the top (the step that runs the others in order), and save it.",
-				"bit": "Make a tree called `MyFirstAuto`, start it with a Sequence, save."
+				"never": "A **tree** is one autonomous routine, saved in a file. You'll make a new one called `MyFirstAuto`, give it a **root node** (the one node at the very top, that everything else hangs under), and save it.",
+				"bit": "Make a tree called `MyFirstAuto`, give it a root node, save."
 			},
 			"target": {
 				"pane": "arbor"
@@ -61,14 +61,47 @@
 			"assist": true
 		},
 		{
-			"title": "Start with a Sequence",
+			"title": "The root node",
 			"say": {
-				"never": "The canvas is empty. In the **Nodes** list, find the one called just **Sequence** (not AsyncSequence or ReactiveSequence) and **drag** it onto the canvas. It becomes the top of your tree. (You can type `Sequence` in the search box above the list to find it.)",
-				"bit": "Drag **Sequence** (the plain one) from Nodes onto the canvas."
+				"never": "A tree has exactly **one** node at the top: its **root node**. Every other step hangs underneath it. To run several steps in a row, the root is a **Sequence**, the node that runs its children in order. Your new tree is empty, so the canvas offers to add one.",
+				"bit": "Every tree has one **root node** at the top. Yours will be a **Sequence**."
+			},
+			"target": {
+				"pane": "arbor"
+			},
+			"cardAt": "bottom-right"
+		},
+		{
+			"title": "Click Add root node",
+			"say": {
+				"never": "In the middle of the empty canvas, click **Add root node**. A list of nodes pops up.",
+				"bit": "Click **Add root node**."
 			},
 			"target": {
 				"pane": "arbor",
-				"selector": ".palette-item[title^='Ticks children in order until one fails']"
+				"selector": ".canvas-hint button",
+				"text": "Add root node"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "arbor",
+					"selector": ".picker"
+				},
+				"hint": "click Add root node.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Pick Sequence",
+			"say": {
+				"never": "Type `Sequence` and pick the one called just **Sequence** (not AsyncSequence or ReactiveSequence). It becomes your tree's root node. (Dragging **Sequence** from the Nodes list onto the canvas does the same.)",
+				"bit": "Type `Sequence`, pick the plain **Sequence**."
+			},
+			"target": {
+				"pane": "arbor",
+				"selector": ".picker"
 			},
 			"cardAt": "bottom-right",
 			"waitFor": {
@@ -77,7 +110,7 @@
 					"selector": ".bt-node",
 					"text": "Sequence"
 				},
-				"hint": "drag Sequence onto the canvas.",
+				"hint": "pick Sequence as the root node.",
 				"skipIfDone": true
 			},
 			"assist": true

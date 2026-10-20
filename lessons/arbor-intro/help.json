@@ -32,6 +32,18 @@
 			"guides": [
 				"arbor-intro-tunable"
 			]
+		},
+		{
+			"checkpoint": "subtree",
+			"guides": [
+				"arbor-intro-subtree"
+			]
+		},
+		{
+			"checkpoint": "main-tree",
+			"guides": [
+				"arbor-intro-main-tree"
+			]
 		}
 	]
 }

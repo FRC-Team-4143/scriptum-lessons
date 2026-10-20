@@ -1,0 +1,86 @@
+{
+	"title": "Which tree runs?",
+	"summary": "Mark MyFirstAuto as the main tree of its file.",
+	"topic": "Tools",
+	"order": 44,
+	"kind": "mixed",
+	"steps": [
+		{
+			"title": "Two trees, one file",
+			"say": {
+				"never": "`trees/my_first_auto.xml` now holds two trees: the auto, and `AimAndShoot`. When the robot runs this file, which one does it start? The one marked as the file's **main tree**. Only the auto should be: `AimAndShoot` runs because the auto uses it.",
+				"bit": "A file can hold several trees. The robot runs the one marked **main**."
+			},
+			"target": {
+				"pane": "arbor"
+			},
+			"cardAt": "bottom-right"
+		},
+		{
+			"title": "Right-click MyFirstAuto",
+			"say": {
+				"never": "**Right-click** `MyFirstAuto` in the Trees list. A menu opens.",
+				"bit": "Right-click **MyFirstAuto** in Trees."
+			},
+			"target": {
+				"pane": "arbor",
+				"selector": ".tree-item",
+				"text": "MyFirstAuto"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "arbor",
+					"selector": ".tree-menu"
+				},
+				"hint": "right-click MyFirstAuto in the Trees list.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Set as main tree",
+			"say": {
+				"never": "Choose **Set as main tree of file**. A small **main** badge appears next to MyFirstAuto.",
+				"bit": "**Set as main tree of file**. Look for the **main** badge."
+			},
+			"target": {
+				"pane": "arbor",
+				"selector": ".tree-menu button",
+				"text": "Set as main tree of file"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "arbor",
+					"selector": ".tree-item.active .main-badge"
+				},
+				"hint": "choose Set as main tree of file.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Save it",
+			"say": {
+				"never": "Press **Save** (or **Ctrl+S**). The file now says which tree to run (`main_tree_to_execute` in the XML), so the robot runs your auto.",
+				"bit": "**Save** (Ctrl+S)."
+			},
+			"target": {
+				"pane": "arbor",
+				"selector": ".toolbar button",
+				"text": "Save"
+			},
+			"cardAt": "bottom-left",
+			"waitFor": {
+				"target": {
+					"pane": "arbor",
+					"selector": ".dirty-dot"
+				},
+				"hint": "press Save or Ctrl+S.",
+				"gone": true
+			},
+			"assist": true
+		}
+	]
+}

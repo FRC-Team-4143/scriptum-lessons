@@ -482,7 +482,7 @@
 			"order": 10,
 			"track": "Tools",
 			"title": "Arbor",
-			"description": "Build an autonomous routine as a behavior tree: steps and their settings, a Sequence, a Timeout and a tunable value.",
+			"description": "Build an autonomous routine as a behavior tree: a root node, steps and their settings, a Sequence, a Timeout, a tunable value, a SubTree, and the main tree the robot runs.",
 			"kind": "robot",
 			"subdir": "lessons/arbor-intro/project",
 			"restrictTools": [
@@ -532,6 +532,24 @@
 					"verifier": {
 						"type": "script",
 						"path": "lessons/arbor-intro/checkpoints/verify/tunable.sh"
+					}
+				},
+				{
+					"id": "subtree",
+					"title": "A SubTree",
+					"description": "One of your trees uses another tree of yours as a SubTree, and that tree has steps in it.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/arbor-intro/checkpoints/verify/subtree.sh"
+					}
+				},
+				{
+					"id": "main-tree",
+					"title": "The main tree",
+					"description": "Your tree file marks the auto itself (not a SubTree) as its main tree, the one the robot runs.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/arbor-intro/checkpoints/verify/main-tree.sh"
 					}
 				}
 			]
@@ -2704,7 +2722,7 @@
 		{
 			"id": "arbor-intro-new-tree",
 			"title": "Make your own tree",
-			"summary": "Create a tree, give it a first step, and save it.",
+			"summary": "Create a tree, give it a root node, and save it.",
 			"topic": "Tools",
 			"order": 37,
 			"modules": [
@@ -2773,6 +2791,30 @@
 			],
 			"kind": "mixed",
 			"path": "lessons/arbor-intro/guides/arbor-intro-tunable.json"
+		},
+		{
+			"id": "arbor-intro-subtree",
+			"title": "A tree inside a tree",
+			"summary": "Make a small tree and use it inside MyFirstAuto as a SubTree.",
+			"topic": "Tools",
+			"order": 43,
+			"modules": [
+				"arbor-intro"
+			],
+			"kind": "mixed",
+			"path": "lessons/arbor-intro/guides/arbor-intro-subtree.json"
+		},
+		{
+			"id": "arbor-intro-main-tree",
+			"title": "Which tree runs?",
+			"summary": "Mark MyFirstAuto as the main tree of its file.",
+			"topic": "Tools",
+			"order": 44,
+			"modules": [
+				"arbor-intro"
+			],
+			"kind": "mixed",
+			"path": "lessons/arbor-intro/guides/arbor-intro-main-tree.json"
 		},
 		{
 			"id": "git-branches",
