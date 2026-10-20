@@ -53,8 +53,8 @@ isn't already showing. You'll see:
    any auto can use it. (Shortcut for next time: right-click a node, **Extract to SubTree**.)
 7. Mark the tree the robot runs. `trees/my_first_auto.xml` now holds two trees, and the robot starts the
    file's **main tree**. Right-click `MyFirstAuto` in the Trees list and choose **Set as main
-   tree of file**: a **main** badge appears. (`AimAndShoot` shouldn't be the main one; it runs
-   because MyFirstAuto uses it.)
+   tree of file** (or tick **Main tree of its file** in the Properties panel): a **main** badge
+   appears. (`AimAndShoot` shouldn't be the main one; it runs because MyFirstAuto uses it.)
 8. **Save** (Ctrl+S). Arbor writes the trees into `trees/`, and that file is
    what the robot runs. You never edit it by hand: Arbor is how you change it.
 

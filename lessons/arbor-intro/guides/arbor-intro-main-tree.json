@@ -41,7 +41,7 @@
 		{
 			"title": "Set as main tree",
 			"say": {
-				"never": "Choose **Set as main tree of file**. A small **main** badge appears next to MyFirstAuto.",
+				"never": "Choose **Set as main tree of file**. A small **main** badge appears next to MyFirstAuto. (Another way: with the tree selected, tick **Main tree of its file** at the top of the Properties panel.)",
 				"bit": "**Set as main tree of file**. Look for the **main** badge."
 			},
 			"target": {
