@@ -29,7 +29,10 @@ isn't already showing. You'll see:
 ## What to do
 
 1. Click **+ New tree**, call it `MyFirstAuto`, and save it in a new file.
-2. Build a **Sequence** of at least three steps. Drag nodes onto the canvas
+   A tree has exactly one node at the top, its **root node**, and every
+   other step hangs underneath it. On the empty canvas, click **Add root
+   node** and pick **Sequence** (the node that runs its children in order).
+2. Build that **Sequence** up to at least three steps. Drag nodes onto it
    (or use the right-click menu, **Add child**): a `SetWantedState`, a
    `Sleep`, and a `FollowPath`.
 3. Fill in their settings in the Properties panel: `state` (for example
@@ -42,7 +45,17 @@ isn't already showing. You'll see:
 5. Make a wait **tunable**: click an empty part of the canvas to select the tree, and under
    its own settings (the heading *SubTree interface*) click **+ Add port**: name it `wait_msec`
    with a default of `500`. Then type `{wait_msec}`, with the braces, as the `Sleep`'s `msec`. On the robot that value shows up on the dashboard.
-6. **Save** (Ctrl+S). Arbor writes the tree into `trees/`, and that file is
+6. Reuse steps with a **SubTree**: click **+ New tree**, call it `AimAndShoot`, and save it in
+   **an existing file**: `trees/my_first_auto.xml`, the file Arbor made for MyFirstAuto (the
+   list starts on another one). Give it a root **Sequence** with a `SetWantedState`
+   `AIM` and a `SetWantedState` `SHOOT`. Then open `MyFirstAuto` again and **drag** `AimAndShoot`
+   from the Trees list onto its Sequence. It becomes one step that runs the whole small tree, and
+   any auto can use it. (Shortcut for next time: right-click a node, **Extract to SubTree**.)
+7. Mark the tree the robot runs. `trees/my_first_auto.xml` now holds two trees, and the robot starts the
+   file's **main tree**. Right-click `MyFirstAuto` in the Trees list and choose **Set as main
+   tree of file** (or tick **Main tree of its file** in the Properties panel): a **main** badge
+   appears. (`AimAndShoot` shouldn't be the main one; it runs because MyFirstAuto uses it.)
+8. **Save** (Ctrl+S). Arbor writes the trees into `trees/`, and that file is
    what the robot runs. You never edit it by hand: Arbor is how you change it.
 
 ## Replay a run
