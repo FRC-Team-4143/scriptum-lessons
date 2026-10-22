@@ -1,6 +1,6 @@
 {
 	"title": "Arbor",
-	"description": "Build an autonomous routine as a behavior tree: a root node, steps and their settings, a Sequence, a Timeout, a tunable value, a SubTree, and the main tree the robot runs.",
+	"description": "Build an autonomous routine as a behavior tree: a root node, steps and their settings, a Sequence, a Timeout, a tunable value, a SubTree, and the main tree the robot runs, then replay a run that failed and find out why.",
 	"kind": "robot",
 	"track": "Tools",
 	"order": 10,
@@ -73,6 +73,15 @@
 			"verifier": {
 				"type": "script",
 				"path": "checkpoints/verify/main-tree.sh"
+			}
+		},
+		{
+			"id": "replay",
+			"title": "Read the replay",
+			"description": "sample-logs/Answers.java says when FollowPath finished, which node failed the auto, and which node never ran.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/replay.sh"
 			}
 		}
 	]

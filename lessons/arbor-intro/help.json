@@ -44,6 +44,12 @@
 			"guides": [
 				"arbor-intro-main-tree"
 			]
+		},
+		{
+			"checkpoint": "replay",
+			"guides": [
+				"arbor-intro-replay"
+			]
 		}
 	]
 }
