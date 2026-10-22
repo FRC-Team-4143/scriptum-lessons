@@ -4,8 +4,9 @@ The MARS/WARS Scriptum lessons catalog, served to a Scriptum deployment by
 pointing its `LESSONS_CATALOG_REPO` environment variable at this repo — no
 Scriptum rebuild or redeploy needed to add or edit a lesson, just a commit here.
 
-See [Authoring Lesson Modules](https://github.com/FRC-Team-4143/scriptum/blob/main/docs/lessons/authoring-modules.md)
-in the Scriptum repo for the full schema reference this repo follows.
+See [Authoring Lesson Modules](https://github.com/FRC-Team-4143/marswars-apps/blob/main/apps/scriptum/docs/lessons/authoring-modules.md)
+for the full schema reference this repo follows. It lives with Scriptum in the team's private
+`marswars-apps` repo, so you need to be a member of the FRC-Team-4143 organization to open it.
 
 ## Layout
 
@@ -83,7 +84,7 @@ Four tracks, in curriculum order (each lesson's `track` and `order` are in its `
   These verify scripts compile every file except `Main.java`, so a checkpoint doesn't depend on
   unfinished parts of the lesson it doesn't use.
 - **FRC Robot**: a differential-drive robot that uses [MWLib](https://github.com/FRC-Team-4143/MW-Lib)
-  from the first lesson. The seven modules follow the training lessons, one after another, and each
+  from the first lesson. The nine modules follow the training lessons, one after another, and each
   starts from the previous module's finished robot:
   `robot-drivetrain` (Motors and Drivetrains), `robot-sensors` (Sensors and Feedback),
   `robot-drive-math` (Drive Math and Methods), `robot-odometry` (Objects and Odometry),
