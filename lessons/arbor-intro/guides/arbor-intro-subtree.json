@@ -1,0 +1,164 @@
+{
+	"title": "A tree inside a tree",
+	"summary": "Make a small tree and use it inside MyFirstAuto as a SubTree.",
+	"topic": "Tools",
+	"order": 43,
+	"kind": "mixed",
+	"steps": [
+		{
+			"title": "Reuse a piece",
+			"say": {
+				"never": "Lots of autos do the same thing partway through: aim, then shoot. Instead of building those steps again in every auto, put them in a small tree of their own, `AimAndShoot`, and drop it into any auto as a single step: a **SubTree**. Fix it once and every auto that uses it gets the fix.",
+				"bit": "Put steps you reuse in a small tree, and use it in other trees as a **SubTree**."
+			},
+			"target": {
+				"pane": "arbor"
+			},
+			"cardAt": "bottom-right"
+		},
+		{
+			"title": "Click + New tree",
+			"say": {
+				"never": "Click **+ New tree** at the top of the **Trees** list.",
+				"bit": "Click **+ New tree**."
+			},
+			"target": {
+				"pane": "arbor",
+				"selector": ".trees-panel button",
+				"text": "+ New tree"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "arbor",
+					"selector": ".modal"
+				},
+				"hint": "click + New tree.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Name it, same file",
+			"say": {
+				"never": "Type `AimAndShoot` as the **Tree ID**. This time pick **An existing file**, and in the list choose `trees/my_first_auto.xml` (the file Arbor made for MyFirstAuto), so both trees live together. Careful: the list starts on another file. Then click **Create**.",
+				"bit": "`AimAndShoot`, **An existing file**: `trees/my_first_auto.xml`, **Create**."
+			},
+			"target": {
+				"pane": "arbor",
+				"selector": ".modal input[placeholder^='e.g.']"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "arbor",
+					"selector": ".tree-item",
+					"text": "AimAndShoot"
+				},
+				"hint": "name it AimAndShoot, save it in trees/my_first_auto.xml, and click Create.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Give it steps",
+			"say": {
+				"never": "Give `AimAndShoot` a root node: **Add root node**, then **Sequence**. Under it add a `SetWantedState` with state `AIM`, then another with `SHOOT`.",
+				"bit": "Root **Sequence**, then `SetWantedState` AIM and `SetWantedState` SHOOT."
+			},
+			"target": {
+				"pane": "arbor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "arbor",
+					"selector": ".bt-node",
+					"text": "SetWantedState"
+				},
+				"hint": "give AimAndShoot a Sequence with two SetWantedState steps.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Back to MyFirstAuto",
+			"say": {
+				"never": "Click **MyFirstAuto** in the Trees list to open it again.",
+				"bit": "Open **MyFirstAuto**."
+			},
+			"target": {
+				"pane": "arbor",
+				"selector": ".tree-item",
+				"text": "MyFirstAuto"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "arbor",
+					"selector": ".tree-item.active",
+					"text": "MyFirstAuto"
+				},
+				"hint": "click MyFirstAuto in the Trees list.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Drag it in",
+			"say": {
+				"never": "Now **drag** `AimAndShoot` from the Trees list onto the **Sequence** in MyFirstAuto. It joins the Sequence as one step: a SubTree node with `AimAndShoot` on it. (It's also in the Nodes list, under **SubTrees**.)",
+				"bit": "Drag `AimAndShoot` from Trees onto MyFirstAuto's Sequence."
+			},
+			"target": {
+				"pane": "arbor",
+				"selector": ".tree-item",
+				"text": "AimAndShoot"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "arbor",
+					"selector": ".bt-node",
+					"text": "AimAndShoot"
+				},
+				"hint": "drag AimAndShoot onto the Sequence.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Look inside",
+			"say": {
+				"never": "The SubTree node is locked here: you change `AimAndShoot` in its own tab, and every tree that uses it sees the change. Double-click the node to open it. (Next time, there's a shortcut: right-click a node in a tree and **Extract to SubTree** moves it and its children into a new tree for you.)",
+				"bit": "Double-click a SubTree to open it. **Extract to SubTree** makes one from existing steps."
+			},
+			"target": {
+				"pane": "arbor"
+			},
+			"cardAt": "bottom-right"
+		},
+		{
+			"title": "Save it",
+			"say": {
+				"never": "Press **Save** (or **Ctrl+S**). The dot next to the file name goes away once it's saved.",
+				"bit": "**Save** (Ctrl+S)."
+			},
+			"target": {
+				"pane": "arbor",
+				"selector": ".toolbar button",
+				"text": "Save"
+			},
+			"cardAt": "bottom-left",
+			"waitFor": {
+				"target": {
+					"pane": "arbor",
+					"selector": ".dirty-dot"
+				},
+				"hint": "press Save or Ctrl+S.",
+				"gone": true
+			},
+			"assist": true
+		}
+	]
+}
