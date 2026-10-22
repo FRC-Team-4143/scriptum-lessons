@@ -1,0 +1,115 @@
+{
+	"title": "Replay a run",
+	"summary": "Play back a log of an auto that failed, and find out why.",
+	"topic": "Tools",
+	"order": 43,
+	"kind": "mixed",
+	"needs": [
+		"arbor"
+	],
+	"steps": [
+		{
+			"title": "Read a replay",
+			"say": "A robot's logs tell you what an auto really did. Here you'll replay a run that went wrong, step through it node by node, and write down what you find in `sample-logs/Answers.java`.",
+			"target": {
+				"pane": "arbor"
+			}
+		},
+		{
+			"title": "Replay a run",
+			"say": "Every time the robot runs an auto it records a **log**: every node's status and exactly when it changed. Arbor can play one back, node by node, so you can find out *after* a match where an auto went wrong. On the robot the logs are on the USB stick in `/U/logs/bt`; in simulation they go in the project's `logs/bt` folder. This lesson ships one to try: `sample-logs/ReplayDemo.btlog`.",
+			"diagram": {
+				"mermaid": "flowchart LR\n  R[\"Robot runs an auto\"] --> L[\"log file .btlog · /U/logs/bt or logs/bt\"]\n  L --> A[\"Arbor: Replay a log file\"]\n  A --> P[\"Play it back node by node\"]",
+				"caption": "Every auto run is recorded; Arbor plays the recording back."
+			},
+			"target": {
+				"pane": "arbor"
+			}
+		},
+		{
+			"title": "Open the log browser",
+			"say": "In Arbor, click the **project name** in the top-left corner. Under **Logs**, choose **Replay a log file (.btlog)...**. A file browser opens, showing the files in your workspace.",
+			"open": [
+				"arbor"
+			],
+			"target": {
+				"pane": "arbor",
+				"selector": ".toolbar .brand"
+			}
+		},
+		{
+			"title": "Find sample-logs",
+			"say": "The browser starts in the Arbor project folder, `src/main/deploy/autos`. The sample log is at the top of your project, so click **↑ Up** four times, until you see `sample-logs`, then click it. (Or type `/workspace/project/sample-logs` in the folder box and press **Enter**.) Simulator runs save their logs in `logs/bt`, next to it.",
+			"target": {
+				"pane": "arbor",
+				"selector": "form.browse"
+			}
+		},
+		{
+			"title": "Replay it",
+			"say": "Click `ReplayDemo.btlog`, then **Replay**. The log remembers which tree it ran, so Arbor opens `ReplayDemo` for you (a log only plays if its tree is in the project). A log from the robot's USB stick is on your own computer instead: drag it onto Arbor to play it.",
+			"target": {
+				"pane": "arbor",
+				"selector": "form.browse"
+			}
+		},
+		{
+			"title": "Play it back",
+			"say": "A playback bar appears. **Space** plays and pauses, **← and →** step one status change at a time, **Home** and **End** jump to the start and the end, and the menu on the right changes the speed. Dots on the timeline mark where the tree finished. The nodes light up exactly like the live view: orange running, green success, red failure.",
+			"target": {
+				"pane": "arbor"
+			}
+		},
+		{
+			"title": "What went wrong?",
+			"say": "Step through the whole run with **→** and watch the colors: orange is running, green is success, red is failure, and a node that never runs stays grey. Keep an eye on the time next to the playback bar. Three things to find: **when** FollowPath finished, **which node's failure** stopped the Sequence, and **which node never ran**.",
+			"target": {
+				"pane": "arbor"
+			}
+		},
+		{
+			"title": "Open Answers.java",
+			"say": "Press **Ctrl+P**, type `Answers` and press **Enter**. It opens `sample-logs/Answers.java`, next to the log.",
+			"open": [
+				"editor"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "Answers.java"
+				},
+				"hint": "open Answers.java with Ctrl+P.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Write your answers",
+			"say": "Change only the values after the `=` signs. The time is in seconds, like `1.75`. The other two are names from the list at the top, like `Node.FOLLOW_PATH`. Then save with **Ctrl+S**.",
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"hint": "fill in the three answers and save."
+			},
+			"assist": true
+		},
+		{
+			"title": "Check them",
+			"say": "Open **Checkpoints** in the top bar and press **Verify** on **Read the replay**. If one is wrong it says which, with a clue. Switch back to Arbor and replay that part again.",
+			"target": {
+				"pane": "editor"
+			},
+			"assist": true,
+			"waitFor": {
+				"hint": "press Verify on Read the replay."
+			}
+		}
+	]
+}

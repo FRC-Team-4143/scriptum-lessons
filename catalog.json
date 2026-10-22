@@ -482,7 +482,7 @@
 			"order": 10,
 			"track": "Tools",
 			"title": "Arbor",
-			"description": "Build an autonomous routine as a behavior tree: steps and their settings, a Sequence, a Timeout and a tunable value.",
+			"description": "Build an autonomous routine as a behavior tree: steps and their settings, a Sequence, a Timeout and a tunable value, then replay a run that failed and find out why.",
 			"kind": "robot",
 			"subdir": "lessons/arbor-intro/project",
 			"restrictTools": [
@@ -532,6 +532,15 @@
 					"verifier": {
 						"type": "script",
 						"path": "lessons/arbor-intro/checkpoints/verify/tunable.sh"
+					}
+				},
+				{
+					"id": "replay",
+					"title": "Read the replay",
+					"description": "sample-logs/Answers.java says when FollowPath finished, which node failed the auto, and which node never ran.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/arbor-intro/checkpoints/verify/replay.sh"
 					}
 				}
 			]
@@ -2773,6 +2782,21 @@
 			],
 			"kind": "mixed",
 			"path": "lessons/arbor-intro/guides/arbor-intro-tunable.json"
+		},
+		{
+			"id": "arbor-intro-replay",
+			"title": "Replay a run",
+			"summary": "Play back a log of an auto that failed, and find out why.",
+			"topic": "Tools",
+			"order": 43,
+			"modules": [
+				"arbor-intro"
+			],
+			"needs": [
+				"arbor"
+			],
+			"kind": "mixed",
+			"path": "lessons/arbor-intro/guides/arbor-intro-replay.json"
 		},
 		{
 			"id": "git-branches",

@@ -4,7 +4,7 @@ import { describe, expect, test } from "bun:test";
 import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { lessonKit } from "../../common/tests/lesson-kit";
+import { hasJdk, lessonKit } from "../../common/tests/lesson-kit";
 
 const L = lessonKit(import.meta.url);
 
@@ -135,4 +135,67 @@ describe("arbor-intro", () => {
 			expect(L.verify(p, "tunable").text).toContain("no step uses it");
 		});
 	});
+});
+
+// The replay checkpoint grades sample-logs/Answers.java against what ReplayDemo.btlog recorded:
+// FollowPath done at 2.420 s, the Timeout failed the Sequence, SetWantedState SHOOT never ran.
+describe.skipIf(!hasJdk)("arbor-intro replay answers", () => {
+	const STARTER = join(import.meta.dir, "project/sample-logs/Answers.java");
+
+	async function withAnswers(seconds: string, failed: string, neverRan: string, check: (project: string) => void) {
+		const project = await mkdtemp(join(tmpdir(), "arbor-replay-"));
+		try {
+			const text = (await readFile(STARTER, "utf8"))
+				.replace("FOLLOW_PATH_DONE_SECONDS = 0;", `FOLLOW_PATH_DONE_SECONDS = ${seconds};`)
+				.replace("FAILED_THE_AUTO = Node.NOT_ANSWERED;", `FAILED_THE_AUTO = Node.${failed};`)
+				.replace("NEVER_RAN = Node.NOT_ANSWERED;", `NEVER_RAN = Node.${neverRan};`);
+			await mkdir(join(project, "sample-logs"), { recursive: true });
+			await writeFile(join(project, "sample-logs/Answers.java"), text);
+			check(project);
+		} finally {
+			await rm(project, { recursive: true, force: true });
+		}
+	}
+
+	test("the starter fails and says what to do", () => {
+		const r = L.verify(join(import.meta.dir, "project"), "replay");
+		expect(r.exitCode).not.toBe(0);
+		expect(r.text).toContain("Answer the three questions");
+	}, 30_000);
+
+	test("the right answers pass, read to a tenth of a second either way", async () => {
+		for (const seconds of ["2.42", "2.4", "2.5", "2.33"]) {
+			await withAnswers(seconds, "TIMEOUT", "SET_WANTED_STATE_SHOOT", (p) => {
+				const r = L.verify(p, "replay");
+				expect(r.exitCode, `${seconds}: ${r.text}`).toBe(0);
+				expect(r.text).toContain("why didn't it aim");
+			});
+		}
+	}, 30_000);
+
+	test("each plausible mistake gets its own clue", async () => {
+		const cases: [string, string, string, string][] = [
+			["2420", "TIMEOUT", "SET_WANTED_STATE_SHOOT", "milliseconds"],
+			["3.94", "TIMEOUT", "SET_WANTED_STATE_SHOOT", "FollowPath turns green"],
+			["2.42", "NOT_ANSWERED", "NOT_ANSWERED", "FAILED_THE_AUTO"],
+			["2.42", "IS_SYSTEM_STATE", "SET_WANTED_STATE_SHOOT", "RetryUntilSuccessful just asked it again"],
+			["2.42", "SET_WANTED_STATE_SHOOT", "SET_WANTED_STATE_SHOOT", "SHOOT never ran, so it couldn't fail"],
+			["2.42", "FOLLOW_PATH", "SET_WANTED_STATE_SHOOT", "that one finished fine"],
+			["2.42", "TIMEOUT", "NOT_ANSWERED", "NEVER_RAN"],
+			["2.42", "TIMEOUT", "IS_SYSTEM_STATE", "did run at some point"],
+		];
+		for (const [seconds, failed, neverRan, clue] of cases) {
+			await withAnswers(seconds, failed, neverRan, (p) => {
+				const r = L.verify(p, "replay");
+				expect(r.exitCode, `${seconds} ${failed} ${neverRan}`).not.toBe(0);
+				expect(r.text, `${seconds} ${failed} ${neverRan}`).toContain(clue);
+			});
+		}
+	}, 30_000);
+
+	test("a typo in Answers.java is reported as not compiling", async () => {
+		await withAnswers("2.42", "TIMEOUT", "SHOOT", (p) => {
+			expect(L.verify(p, "replay").text).toContain("doesn't compile");
+		});
+	}, 30_000);
 });

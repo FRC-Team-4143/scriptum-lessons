@@ -62,9 +62,13 @@ match. On the robot the logs are in `/U/logs/bt` (on the USB stick); in simulati
 3. Arbor opens `ReplayDemo` and shows a playback bar: **Space** plays and pauses, **← / →** step one
    change at a time, **Home / End** jump to the start and end, and the menu on the right sets the
    speed.
-4. Work out why the auto failed: which node went red, and which one never ran?
+4. Work out why the auto failed. Step through the whole run and answer the three questions in
+   `sample-logs/Answers.java` (next to the log): when FollowPath finished, which node's failure
+   stopped the Sequence, and which node never ran. Save it, and the **Read the replay** checkpoint
+   checks your answers.
 
 ## Checking your work
 
 Click **Checkpoints** in the top bar and run **Verify** whenever you want. The
-checkpoints read the files you've saved in `src/main/deploy/autos/trees`.
+checkpoints read the files you've saved in `src/main/deploy/autos/trees`, and the last one,
+**Read the replay**, reads `sample-logs/Answers.java`.
