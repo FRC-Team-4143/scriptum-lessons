@@ -195,7 +195,7 @@
 		{
 			"title": "Estimate versus truth",
 			"say": {
-				"never": "The **2D Field** is a map of the field from above. **Drive/Pose** is your estimate: where your code thinks the robot is. **Drive/TruePose** is the truth: the simulator secretly knows where the robot really is. A real robot has no TruePose, which is why drift matters. Real robots fix it with cameras and a gyro.",
+				"never": "The **2D Field** is a map of the field from above. **Drive/Pose** is your estimate: where your code thinks the robot is. **Drive/TruePose** is the truth: the simulator secretly knows where the robot really is. A real robot has no TruePose, which is why drift matters. Your heading comes from the gyro, so it stays right; the distance still drifts a little. Cameras fix the rest, in a later lesson.",
 				"bit": "Drive/Pose is your estimate; Drive/TruePose is where the simulated robot really is."
 			}
 		},

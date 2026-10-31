@@ -1,6 +1,6 @@
 {
 	"title": "Objects and Odometry",
-	"description": "Write an abstract OI class, then use WPILib kinematics and a pose estimator to track where the robot is.",
+	"description": "Write an abstract OI class, then use WPILib kinematics, a NavX gyro and a pose estimator to track where the robot is.",
 	"kind": "robot",
 	"track": "FRC Robot",
 	"order": 23,
@@ -40,7 +40,7 @@
 		{
 			"id": "yaw",
 			"title": "Yaw",
-			"description": "Spin the robot counterclockwise (left). Drive/PoseYawRad should become clearly positive.",
+			"description": "Write getWheelYaw() and getYaw() (from the gyro), then spin the robot counterclockwise (left). Drive/PoseYawRad should become clearly positive.",
 			"verifier": {
 				"type": "nt4-value",
 				"topic": "/AdvantageKit/RealOutputs/Check/Drive/PoseYawRad/Max",
