@@ -21,6 +21,23 @@ Companion docs page: [Objects and Odometry](https://docs.marswars.org/docs/softw
   and `inputs_.gyroConnected`. In the simulator the NavX reports the simulated robot's real heading.
 - `DriveMath.java` and the other drivetrain methods are finished from last lesson.
 
+### About the NavX
+
+The NavX is an **IMU** (Inertial Measurement Unit): a gyroscope (how fast it's turning), an
+accelerometer (speeding up, and which way is down) and a magnetometer (a compass, which robots
+rarely use because motors confuse it) on one board. It reports three angles: **yaw** (turning left
+and right, our heading), **pitch** (nose up or down) and **roll** (tipping side to side).
+
+The drivetrain creates it with `new AHRS(NavXComType.kMXP_SPI)`, which talks to it through the
+MXP port. On a real robot:
+
+- **Hold the robot still while it boots.** The NavX calibrates at power-on.
+- **Mount it flat and solid**, near the middle of the robot.
+- **Check it's connected.** `isConnected()` is false when it's unplugged, and that's why `getYaw()`
+  has a backup.
+- **Watch the sign.** The NavX's own `getYaw()` counts clockwise. The code uses `getRotation2d()`,
+  which counts counterclockwise like the rest of WPILib.
+
 ## Session plan (about 3 hours)
 
 A suggested pace that adds up to the 3 hour session. Take short breaks whenever the class needs one.
