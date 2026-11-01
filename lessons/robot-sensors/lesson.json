@@ -26,7 +26,7 @@
 		{
 			"id": "linear-speed",
 			"title": "Linear speed",
-			"description": "Drive both sides forward at full speed. Robot/LinearSpeed should read about 5.5 m/s.",
+			"description": "Drive both sides forward at full speed. Robot/LinearSpeed should read about 5.9 m/s.",
 			"verifier": {
 				"type": "nt4-value",
 				"topic": "/AdvantageKit/RealOutputs/Check/Robot/LinearSpeed/Max",
@@ -50,13 +50,13 @@
 		{
 			"id": "drive-two-meters",
 			"title": "Drive 2 meters",
-			"description": "Run Auto and let the robot stop. Robot/Distance should read about 2 meters (it coasts a little past, to about 2.5).",
+			"description": "Run Auto and let the robot stop. Robot/Distance should read about 2 meters (it coasts a little past, to about 2.7).",
 			"verifier": {
 				"type": "nt4-value",
 				"topic": "/AdvantageKit/RealOutputs/Robot/Distance",
 				"check": "range",
 				"min": 1.95,
-				"max": 2.8
+				"max": 3.0
 			}
 		}
 	]

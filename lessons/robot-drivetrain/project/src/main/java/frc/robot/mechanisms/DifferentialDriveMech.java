@@ -57,7 +57,7 @@ public class DifferentialDriveMech extends MechBase {
   private static final double SCRUB_VOLTS_PER_METER_PER_SECOND = 4.5; // how hard turning drags
   private static final double SUPPLY_VOLTS = 12.0; // battery voltage
   private static final double CURRENT_LIMIT_AMPS = 120.0; // per motor, like the TalonFX default
-  private static final DCMotor DRIVE_MOTOR = DCMotor.getKrakenX60(1);
+  private static final DCMotor DRIVE_MOTOR = DCMotor.getFalcon500(1);
   private double last_true_left_meters_ = 0.0;
   private double last_true_right_meters_ = 0.0;
   private double measured_left_meters_ = 0.0;
@@ -83,7 +83,7 @@ public class DifferentialDriveMech extends MechBase {
     int motors_per_side = Math.max(left_configs.size(), right_configs.size());
     sim_ =
         new DifferentialDrivetrainSim(
-            DCMotor.getKrakenX60(motors_per_side),
+            DCMotor.getFalcon500(motors_per_side),
             Constants.GEAR_RATIO,
             7.5, // how hard the robot is to spin (kg*m^2)
             Constants.ROBOT_MASS_KG,

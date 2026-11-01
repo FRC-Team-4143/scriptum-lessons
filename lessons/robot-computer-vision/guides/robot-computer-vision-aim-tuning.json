@@ -119,8 +119,8 @@
 		{
 			"title": "First run: kP is too low",
 			"say": {
-				"never": "Hold **E** (the left bumper) for a few seconds. With the starter `AIM_KP = 0.2`, the error falls and then stops about 0.10 rad (6 degrees) short of 0 while the output has faded to almost nothing. The motors need a minimum push to get the wheels moving, and a tiny error times a tiny kP isn't enough. That's called steady-state error. It never gets inside 0.035 rad, so it never settles. Click **I did it** once you've seen it stall.",
-				"bit": "Hold **E**. With kP 0.2 the error stalls about 0.10 rad short. Click I did it when you've seen it."
+				"never": "Hold **E** (the left bumper) for a few seconds. With the starter `AIM_KP = 0.2`, the error falls and then stops about 0.09 rad (5 degrees) short of 0 while the output has faded to almost nothing. The motors need a minimum push to get the wheels moving, and a tiny error times a tiny kP isn't enough. That's called steady-state error. It never gets inside 0.035 rad, so it never settles. Click **I did it** once you've seen it stall.",
+				"bit": "Hold **E**. With kP 0.2 the error stalls about 0.09 rad short. Click I did it when you've seen it."
 			},
 			"cardAt": "bottom-right",
 			"waitFor": {
