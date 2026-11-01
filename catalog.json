@@ -1651,15 +1651,6 @@
 			],
 			"checkpoints": [
 				{
-					"id": "robot-states",
-					"title": "Robot states",
-					"description": "RobotContainer asks the drivetrain and shooter for the states each robot state needs, the right bumper asks the robot for SHOOT while held, and A simulates a launch.",
-					"verifier": {
-						"type": "script",
-						"path": "lessons/robot-state-machines/checkpoints/verify/robot-states.sh"
-					}
-				},
-				{
 					"id": "spin-up-first",
 					"title": "Spins up before shooting",
 					"description": "Hold the right bumper until the shooter reaches SHOOT. It must pass through SPIN_UP first (IDLE cannot jump to SHOOT).",
@@ -1669,6 +1660,15 @@
 						"check": "range",
 						"min": 0.05,
 						"max": 1.6
+					}
+				},
+				{
+					"id": "robot-states",
+					"title": "Robot states",
+					"description": "RobotContainer asks the drivetrain and shooter for the states each robot state needs, the right bumper asks the robot for SHOOT while held, and A simulates a launch.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/robot-state-machines/checkpoints/verify/robot-states.sh"
 					}
 				},
 				{
@@ -3816,7 +3816,7 @@
 		{
 			"id": "robot-state-machines-robot-states-assist",
 			"title": "Write the robot's states",
-			"summary": "Write the switch in RobotContainer.updateLogic() that asks each subsystem for its state.",
+			"summary": "Delete the temporary test line, then finish the switch in RobotContainer.updateLogic().",
 			"topic": "Robot",
 			"order": 511,
 			"modules": [
@@ -3852,7 +3852,7 @@
 		{
 			"id": "robot-state-machines-shooter-states-assist",
 			"title": "Write the shooter's states",
-			"summary": "Write handleStateTransition and the switch in updateLogic.",
+			"summary": "Finish the switch in updateLogic and the table in handleStateTransition.",
 			"topic": "Robot",
 			"order": 512,
 			"modules": [

@@ -25,6 +25,11 @@ public abstract class OI {
     return MathUtil.applyDeadband(driver_controller_.getLeftX(), 0.1);
   }
 
+  /** TEMPORARY, for testing the shooter in Part 1. Delete this method in Part 2. */
+  public static boolean getTestShootButton() {
+    return driver_controller_.getHID().getRightBumperButton();
+  }
+
   /** Connects buttons to robot states. Robot calls this once at startup. */
   public static void configureBindings() {
     DriverStation.silenceJoystickConnectionWarning(true);

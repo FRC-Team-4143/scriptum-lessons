@@ -12,15 +12,6 @@
 	],
 	"checkpoints": [
 		{
-			"id": "robot-states",
-			"title": "Robot states",
-			"description": "RobotContainer asks the drivetrain and shooter for the states each robot state needs, the right bumper asks the robot for SHOOT while held, and A simulates a launch.",
-			"verifier": {
-				"type": "script",
-				"path": "checkpoints/verify/robot-states.sh"
-			}
-		},
-		{
 			"id": "spin-up-first",
 			"title": "Spins up before shooting",
 			"description": "Hold the right bumper until the shooter reaches SHOOT. It must pass through SPIN_UP first (IDLE cannot jump to SHOOT).",
@@ -30,6 +21,15 @@
 				"check": "range",
 				"min": 0.05,
 				"max": 1.6
+			}
+		},
+		{
+			"id": "robot-states",
+			"title": "Robot states",
+			"description": "RobotContainer asks the drivetrain and shooter for the states each robot state needs, the right bumper asks the robot for SHOOT while held, and A simulates a launch.",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/robot-states.sh"
 			}
 		},
 		{

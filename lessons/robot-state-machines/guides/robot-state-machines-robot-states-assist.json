@@ -1,6 +1,6 @@
 {
 	"title": "Write the robot's states",
-	"summary": "Write the switch in RobotContainer.updateLogic() that asks each subsystem for its state.",
+	"summary": "Delete the temporary test line, then finish the switch in RobotContainer.updateLogic().",
 	"topic": "Robot",
 	"order": 511,
 	"kind": "assist",
@@ -59,8 +59,8 @@
 		{
 			"title": "Your turn",
 			"say": {
-				"never": "Your turn! Write a `switch (system_state_)` with one `case` for each robot state, like the drivetrain's switch. In each case, ask the drivetrain and the shooter for the state that robot state needs, using `setWantedState`. The comment above lists all six lines.",
-				"bit": "Write a `switch (system_state_)`: one `case` per robot state, each asking `drive_` and `shooter_` for a state with `setWantedState`."
+				"never": "First, delete the temporary line at the bottom of this method, the one that uses `OI.getTestShootButton()`, and delete `getTestShootButton()` from `OI.java` too. Buttons should ask the robot, and only the robot asks the shooter.\n\nThen add to the `switch (system_state_)`. `case IDLE:` is done for you, so just above it add `case DRIVE:` and `case SHOOT:`. In each one, ask the drivetrain and the shooter for the state that robot state needs, using `setWantedState`. The comment above lists the four lines. End each case with `break;`.",
+				"bit": "Delete the temporary `getTestShootButton()` line here and the method in `OI.java`. Above `case IDLE:`, add `case DRIVE:` and `case SHOOT:`, each asking `drive_` and `shooter_` for a state with `setWantedState`."
 			},
 			"target": {
 				"pane": "editor",
