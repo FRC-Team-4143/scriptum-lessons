@@ -319,9 +319,9 @@ public class DifferentialDriveMech extends MechBase {
       inputs_.rightVelocityRadPerSec =
           Units.rotationsToRadians(right_motors_[0].getVelocity().getValueAsDouble());
 
-      // getRotation2d() counts counterclockwise as positive, like the rest of WPILib. (The NavX's
-      // own getYaw() counts the other way, clockwise, so it is not used here.)
-      inputs_.gyroYawRad = gyro_.getRotation2d().getRadians();
+      // getYaw() wraps at -180 to 180 degrees, but it counts clockwise as positive. The minus sign
+      // makes counterclockwise positive, like the rest of WPILib.
+      inputs_.gyroYawRad = Units.degreesToRadians(-gyro_.getYaw());
       inputs_.gyroConnected = gyro_.isConnected();
 
       if (IS_SIM) {
