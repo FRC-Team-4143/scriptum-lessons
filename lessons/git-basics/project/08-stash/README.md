@@ -13,15 +13,15 @@ work on a shelf so you can switch away, and brings it back afterwards.
 
 1. Click the repository name in the bottom-left corner (just left of the
    branch name) and choose **08-stash**.
-2. Put your unfinished work on the shelf: in Source Control, scroll to the
-   **08-stash** row and click its **...** menu. Choose **Stash**, then **Stash**
+2. Put your unfinished work on the shelf: in Source Control, point at the
+   **CHANGES** heading and click its **...** menu. Choose **Stash**, then **Stash**
    in the second menu. Press **Enter** when it asks for a stash message.
 3. Click the branch name in the bottom-left, switch to `develop` and fix the
-   typo ("Teh" should be "The"). Save, then scroll down in Source Control to
-   find `Notes.md` under the **08-stash** row. Stage it with **+**, write a
+   typo ("Teh" should be "The"). Save, then find `Notes.md` in Source Control.
+   Stage it with **+**, write a
    message and press **Commit**.
 4. Switch back to `issue-21-new-motor`.
-5. Take your work off the shelf: the **...** menu on the **08-stash** row,
+5. Take your work off the shelf: the **...** menu on the **CHANGES** heading,
    **Stash**, then **Pop Latest Stash**.
 
 Don't commit your unfinished work on `issue-21-new-motor`. Run **Verify** when

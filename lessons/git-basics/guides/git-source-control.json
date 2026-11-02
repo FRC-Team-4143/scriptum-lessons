@@ -35,12 +35,37 @@
 		{
 			"title": "One repository per folder",
 			"say": {
-				"never": "Each numbered folder in this lesson is its own **repository**, which is just a project folder that git is watching. Each one has its own row in Source Control, with its own message box and **Commit** button. Start with **01-first-commit**.",
-				"bit": "Each numbered folder in this lesson is its own repository, so each one gets its own section here. Start with **01-first-commit**."
+				"never": "Each numbered folder in this lesson is its own **repository**, which is just a project folder that git is watching. Source Control shows one at a time, with its own message box and **Commit** button: the one named in the bottom-left corner. Start with **01-first-commit**.",
+				"bit": "Each numbered folder is its own repository, and Source Control shows the one named in the bottom-left corner. Start with **01-first-commit**."
 			},
 			"target": {
 				"pane": "editor",
 				"selector": ".scm-view"
+			},
+			"assist": true
+		},
+		{
+			"title": "Pick the repository",
+			"say": {
+				"never": "Look at the very bottom of the window. The name just left of the branch is the repository you're working on. Click it and choose **01-first-commit** from the list at the top.",
+				"bit": "Bottom-left, click the repository name and choose **01-first-commit**."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": "[id='status.scm.provider']"
+			},
+			"cardAt": "bottom-left",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": "[id='status.scm.provider']",
+					"text": "01-first-commit"
+				},
+				"hint": {
+					"never": "pick 01-first-commit in the bottom-left corner.",
+					"bit": "pick 01-first-commit in the bottom-left corner."
+				},
+				"skipIfDone": true
 			},
 			"assist": true
 		},

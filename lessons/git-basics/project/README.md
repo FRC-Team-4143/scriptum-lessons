@@ -10,17 +10,13 @@ and menus. You don't need the terminal.
   window, the repository name sits just left of the branch name. Click it and
   choose the folder you're working on. Your choice stays until you change it,
   even if you open a file from another folder, so pick again for each exercise.
-  Reloading the page clears it, so check the name after a reload.
-  Don't see a name there yet? Open any file in the folder, or click the folder's
-  row in Source Control, and it appears.
+  After reloading the page it follows the file you open, so pick again.
 - **The branch name beside it** is the branch of the repository you picked.
   Click it to switch branches or make a new one.
-- **Source Control** (the branch icon on the left) has one row per folder, with
-  that folder's message box and **Commit** button under it. Scroll the list to
-  reach the later folders.
-- **Each row has its own ...** menu (More Actions), with Branch, Pull, Push and
-  Stash. It always works on its own folder, so use the one on the row of the
-  folder you picked.
+- **Source Control** (the branch icon on the left) shows only the repository you
+  picked: its changes, message box, **Commit** button and Graph.
+- **The ... on the CHANGES heading** (More Actions) has Branch, Pull, Push and
+  Stash. Point at the heading to see it. It works on the repository you picked.
 
 There's no GitHub account or login here. If anything asks you to sign in to
 GitHub, click **Cancel**. Each exercise has a shared copy (`origin`), kept out

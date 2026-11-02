@@ -8,5 +8,6 @@
 		"commit": true,
 		"publish": false,
 		"sync": false
-	}
+	},
+	"scm.repositories.selectionMode": "single"
 }

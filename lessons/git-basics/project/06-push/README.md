@@ -16,8 +16,8 @@ Send your branch to `origin`:
 1. Click the repository name in the bottom-left corner (just left of the
    branch name) and choose **06-push**.
 2. Make sure the branch name beside it says `issue-18-team-colors`.
-3. In Source Control, scroll to the **06-push** row and click its **...** menu.
-   Choose **Pull, Push**, then **Push to...**, and pick `origin`.
+3. In Source Control, point at the **CHANGES** heading and click its **...**
+   menu. Choose **Pull, Push**, then **Push to...**, and pick `origin`.
 
 Run **Verify** when you're done.
 

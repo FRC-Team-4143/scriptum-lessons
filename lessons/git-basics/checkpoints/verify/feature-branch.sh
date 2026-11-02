@@ -9,7 +9,7 @@ if [ -z "$branch" ]; then
 	near="$(git for-each-ref --format='%(refname:short)' refs/heads \
 		| grep -iE '^issue-?12([^0-9]|$)' | head -n1 || true)"
 	if [ -n "$near" ]; then
-		echo "$near doesn't count: branch names are all lowercase letters, numbers and hyphens, like issue-12-turbo-boost. Rename it with ... > Branch > Rename Branch... on the 02-feature-branch row."
+		echo "$near doesn't count: branch names are all lowercase letters, numbers and hyphens, like issue-12-turbo-boost. Pick 02-feature-branch in the bottom-left, then rename it with the ... on the CHANGES heading: Branch, Rename Branch..."
 		exit 1
 	fi
 	echo "No branch named issue-12-<short-description> found."
