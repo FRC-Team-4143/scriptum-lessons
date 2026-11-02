@@ -58,10 +58,27 @@ insert_before_last_brace() {
 	mv "$tmp" "$file"
 }
 
+# Every exercise gets a hidden "origin": a bare repository kept outside the
+# project, so it doesn't clutter the file tree and behaves like GitHub without
+# needing an account. Exercises 6 and 7 use it. The others leave it empty, but
+# still need it: in a repo with no remote, the editor's Publish Branch and cloud
+# icons offer to create a repository on the student's own GitHub; with one
+# remote they push there instead.
+ORIGINS="${SCRIPTUM_ORIGINS:-$HOME/.cache/scriptum-git-origins}"
+mkdir -p "$ORIGINS"
+
+add_hidden_origin() {
+	local name="$1"
+	rm -rf "$ORIGINS/$name.git"
+	git init -q --bare -b main "$ORIGINS/$name.git"
+	git remote add origin "$ORIGINS/$name.git"
+}
+
 # --- 1. First commit ---------------------------------------------------
 (
 	cd "$ROOT/01-first-commit"
 	git init -q -b main
+	add_hidden_origin 01-first-commit
 	git add -A
 	bot_commit "Add roster file"
 	git tag -f lesson-start >/dev/null
@@ -71,6 +88,7 @@ insert_before_last_brace() {
 (
 	cd "$ROOT/02-feature-branch"
 	git init -q -b main
+	add_hidden_origin 02-feature-branch
 	git add -A
 	bot_commit "Initial FEATURES.md"
 	git branch develop
@@ -81,6 +99,7 @@ insert_before_last_brace() {
 (
 	cd "$ROOT/03-merge"
 	git init -q -b main
+	add_hidden_origin 03-merge
 	git add -A
 	bot_commit "Initial robot constants"
 	git branch develop
@@ -97,6 +116,7 @@ insert_before_last_brace() {
 (
 	cd "$ROOT/04-merge-conflict"
 	git init -q -b main
+	add_hidden_origin 04-merge-conflict
 	git add -A
 	bot_commit "Initial robot constants"
 	git branch develop
@@ -119,6 +139,7 @@ insert_before_last_brace() {
 (
 	cd "$ROOT/05-rebase"
 	git init -q -b main
+	add_hidden_origin 05-rebase
 	git add -A
 	bot_commit "Initial LED colors and robot map"
 	git branch develop
@@ -137,13 +158,7 @@ insert_before_last_brace() {
 	git checkout -q issue-15-led-colors
 )
 
-# --- 6, 7. Push and pull: a hidden local "origin" -----------------------------
-# The shared copy students push to is a bare repository kept outside the
-# project (in a hidden folder), so it doesn't clutter the file tree and
-# behaves like GitHub without needing an account.
-ORIGINS="${SCRIPTUM_ORIGINS:-$HOME/.cache/scriptum-git-origins}"
-mkdir -p "$ORIGINS"
-
+# --- 6, 7. Push and pull ------------------------------------------------------
 teammate_commit() {
 	local msg="$1" d
 	d="$(next_date)"
@@ -159,9 +174,7 @@ teammate_commit() {
 	git add -A
 	bot_commit "Initial team colors"
 	git branch develop
-	rm -rf "$ORIGINS/06-push.git"
-	git init -q --bare -b main "$ORIGINS/06-push.git"
-	git remote add origin "$ORIGINS/06-push.git"
+	add_hidden_origin 06-push
 	git push -q -u origin main develop
 	git checkout -q -b issue-18-team-colors develop
 	printf 'Secondary: gold\n' >> TeamColors.txt
@@ -176,9 +189,7 @@ teammate_commit() {
 	git add -A
 	bot_commit "Initial practice schedule"
 	git branch develop
-	rm -rf "$ORIGINS/07-pull.git"
-	git init -q --bare -b main "$ORIGINS/07-pull.git"
-	git remote add origin "$ORIGINS/07-pull.git"
+	add_hidden_origin 07-pull
 	git push -q -u origin main develop
 	git tag -f lesson-develop-before >/dev/null
 	# A teammate pushes to develop on origin. Our copy doesn't know yet.
@@ -200,6 +211,7 @@ teammate_commit() {
 (
 	cd "$ROOT/08-stash"
 	git init -q -b main
+	add_hidden_origin 08-stash
 	git add -A
 	bot_commit "Initial pit notes"
 	git branch develop

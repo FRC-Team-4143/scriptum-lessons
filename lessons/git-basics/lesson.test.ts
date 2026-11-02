@@ -8,7 +8,7 @@
 // when git-basics moved from the bundled catalog to this repo - see
 // Scriptum's docs/decisions/044-remote-catalog-checkpoints.md.
 import { describe, expect, test } from "bun:test";
-import { cp, mkdtemp, rm } from "node:fs/promises";
+import { cp, mkdtemp, rm, stat } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { basename, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -25,7 +25,12 @@ const GIT_ENV = [
 ];
 
 function run(cwd: string, args: string[]): { exitCode: number; text: string } {
-	const result = Bun.spawnSync(args, { cwd, stdout: "pipe", stderr: "pipe" });
+	const result = Bun.spawnSync(args, {
+		cwd,
+		env: process.env,
+		stdout: "pipe",
+		stderr: "pipe",
+	});
 	const text = `${result.stdout.toString()}${result.stderr.toString()}`;
 	return { exitCode: result.exitCode ?? 1, text };
 }
@@ -109,6 +114,62 @@ describe("git-basics lesson", () => {
 			requireOk(git(dir, "add", "-A"), "git add");
 			requireOk(git(dir, "commit", "-m", "wip"), "git commit");
 			expect(verify(project, "first-commit").exitCode).not.toBe(0);
+		} finally {
+			await rm(project, { recursive: true, force: true });
+		}
+	});
+
+	test("every exercise has one hidden local origin, so nothing can publish to GitHub", async () => {
+		const project = await makeProject();
+		try {
+			for (const name of [
+				"01-first-commit",
+				"02-feature-branch",
+				"03-merge",
+				"04-merge-conflict",
+				"05-rebase",
+				"06-push",
+				"07-pull",
+				"08-stash",
+			]) {
+				const remotes = git(join(project, name), "remote", "-v");
+				requireOk(remotes, `remotes of ${name}`);
+				const lines = remotes.text.trim().split("\n");
+				expect(lines).toHaveLength(2);
+				expect(lines[0]).toContain(`${basename(project)}-origins/${name}.git`);
+				const origin = lines[0]?.split(/\s+/)[1] ?? "";
+				expect((await stat(origin)).isDirectory()).toBe(true);
+			}
+		} finally {
+			await rm(project, { recursive: true, force: true });
+		}
+	});
+
+	test("feature-branch names the branch when capitals are why it didn't count", async () => {
+		const project = await makeProject();
+		try {
+			const dir = join(project, "02-feature-branch");
+			requireOk(
+				git(dir, "checkout", "-b", "issue-12-Trynumber4", "develop"),
+				"create branch",
+			);
+			const result = verify(project, "feature-branch");
+			expect(result.exitCode).not.toBe(0);
+			expect(result.text).toContain("issue-12-Trynumber4 doesn't count");
+			expect(result.text).toContain("lowercase");
+		} finally {
+			await rm(project, { recursive: true, force: true });
+		}
+	});
+
+	test("a missing exercise folder says so instead of a raw cd error", async () => {
+		const project = await makeProject();
+		try {
+			await rm(join(project, "06-push"), { recursive: true, force: true });
+			const result = verify(project, "push");
+			expect(result.exitCode).not.toBe(0);
+			expect(result.text).toContain("The 06-push folder is missing");
+			expect(result.text).not.toContain("line 4");
 		} finally {
 			await rm(project, { recursive: true, force: true });
 		}

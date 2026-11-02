@@ -19,23 +19,72 @@
 			]
 		},
 		{
-			"title": "Pick the repository",
+			"title": "Open Source Control",
 			"say": {
-				"never": "Open **Source Control** (the branch icon on the left). Each exercise folder has its own section there. Click **08-stash** so the buttons and menus work on that folder.",
-				"bit": "In Source Control, click **08-stash** so the buttons act on it."
+				"never": "Click the **Source Control** icon on the left: the one that looks like a branch. It has one row per exercise folder.",
+				"bit": "Open **Source Control** on the left."
 			},
 			"target": {
 				"pane": "editor",
-				"selector": ".scm-view"
+				"selector": ".activitybar .action-label[aria-label^='Source Control']"
 			},
-			"cardAt": "top-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".scm-view .scm-provider"
+				},
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Open the folder",
+			"say": {
+				"never": "Press **Ctrl+P**, type `08-stash/README` and press **Enter**. Opening a file from the folder makes its name show up in the bottom-left corner.",
+				"bit": "**Ctrl+P**, `08-stash/README`, **Enter**."
+			},
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": "[id='status.scm.provider']"
+				},
+				"hint": {
+					"never": "open a file in 08-stash.",
+					"bit": "open a file in 08-stash."
+				},
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Pick the repository",
+			"say": {
+				"never": "Look at the very bottom of the window. The name just left of the branch is the repository you're working on. Click it and choose **08-stash** from the list at the top.",
+				"bit": "Bottom-left, click the repository name and choose **08-stash**."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": "[id='status.scm.provider']"
+			},
+			"cardAt": "bottom-left",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": "[id='status.scm.provider']",
+					"text": "08-stash"
+				},
+				"hint": {
+					"never": "pick 08-stash in the bottom-left corner.",
+					"bit": "pick 08-stash in the bottom-left."
+				}
+			},
 			"assist": true
 		},
 		{
 			"title": "Try to switch",
 			"say": {
-				"never": "Click the branch name in the bottom-left and pick `develop`. Git refuses and says your local changes would be overwritten. That's exactly the problem a stash solves. Close the message and carry on.",
-				"bit": "Try switching to `develop` from the branch name (bottom-left). Git refuses: your changes would be overwritten."
+				"never": "Click the branch name in the bottom-left and pick `develop`. A message says your local changes would be overwritten. That's exactly the problem a stash solves. Press **Cancel**. Don't press **Force Checkout**: it throws your work away.",
+				"bit": "Click the branch name, pick `develop`, and see the warning. Press **Cancel**, not **Force Checkout**."
 			},
 			"board": {
 				"code": "switch to develop\n-> error: your local changes would be overwritten",
@@ -55,26 +104,130 @@
 			"assist": true
 		},
 		{
-			"title": "Stash, fix, come back",
+			"title": "Find its row",
 			"say": {
-				"never": "In Source Control, open **...**, then **Stash**, then **Stash**: your changes go on the shelf. Now switch to `develop`. Change \"Teh\" to \"The\" in `Notes.md`, save, stage it with **+** and press **Commit**. Switch back to `issue-21-new-motor`, then open **...**, **Stash**, **Pop Latest Stash** to take your work off the shelf.",
-				"bit": "**...**, Stash, Stash; switch to `develop`, fix the typo and Commit; switch back; **...**, Stash, Pop Latest Stash."
+				"never": "In Source Control, scroll the list until you can see the **08-stash** row.",
+				"bit": "Scroll to the **08-stash** row."
 			},
-			"board": {
-				"code": "1. ... > Stash > Stash\n2. switch to develop, fix Teh -> The, Commit\n3. switch back to issue-21-new-motor\n4. ... > Stash > Pop Latest Stash",
-				"language": "text",
-				"marks": [
-					{
-						"text": "Pop Latest Stash",
-						"label": "your unfinished work comes back"
-					}
-				]
-			},
-			"cardAt": "top-right",
 			"target": {
 				"pane": "editor",
 				"selector": ".scm-view"
 			},
+			"cardAt": "top-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".scm-view .monaco-list-row[aria-label^='08-stash']"
+				},
+				"hint": {
+					"never": "scroll to the 08-stash row.",
+					"bit": "scroll to the 08-stash row."
+				},
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Open the ... menu",
+			"say": {
+				"never": "On the **08-stash** row, click the **...** button (More Actions). Each row has its own, and it always works on that folder.",
+				"bit": "Click **...** on the 08-stash row."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": ".scm-view .monaco-list-row[aria-label^='08-stash'] .action-label[aria-label='More Actions...']"
+			},
+			"cardAt": "top-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".monaco-menu .action-label",
+					"text": "Stash"
+				},
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Stash your work",
+			"say": {
+				"never": "Point at **Stash** in the menu, then click **Stash** at the top of the second menu. When it asks for a stash message, just press **Enter**. Your changes go on the shelf.",
+				"bit": "**Stash**, **Stash**, then **Enter** at the message box."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": ".monaco-menu .action-label",
+				"text": "Stash"
+			},
+			"cardAt": "top-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": "[id='status.scm.0']",
+					"text": "*"
+				},
+				"gone": true,
+				"hint": {
+					"never": "stash your work.",
+					"bit": "stash your work."
+				}
+			},
+			"assist": true
+		},
+		{
+			"title": "Fix it on develop",
+			"say": {
+				"never": "Click the branch name in the bottom-left and switch to `develop`. Change \"Teh\" to \"The\" in `Notes.md` and save. Scroll down in Source Control to find `Notes.md` under the **08-stash** row, stage it with **+**, then type a message and press **Commit**.",
+				"bit": "Switch to `develop`, fix \"Teh\" in `Notes.md`, save, **+**, **Commit**."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": "[id='status.scm.0']"
+			},
+			"cardAt": "bottom-left",
+			"waitFor": {
+				"hint": {
+					"never": "fix the typo and commit it on develop.",
+					"bit": "fix the typo and commit it on develop."
+				}
+			},
+			"assist": true
+		},
+		{
+			"title": "Back to your branch",
+			"say": {
+				"never": "Click the branch name again and switch back to `issue-21-new-motor`.",
+				"bit": "Switch back to `issue-21-new-motor`."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": "[id='status.scm.0']"
+			},
+			"cardAt": "bottom-left",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": "[id='status.scm.0']",
+					"text": "issue-21-new-motor"
+				},
+				"hint": {
+					"never": "switch back to issue-21-new-motor.",
+					"bit": "switch back to issue-21-new-motor."
+				}
+			},
+			"assist": true
+		},
+		{
+			"title": "Off the shelf",
+			"say": {
+				"never": "On the **08-stash** row, open **...**, then **Stash**, then **Pop Latest Stash**. Your unfinished work is back.",
+				"bit": "**...** on the row, **Stash**, **Pop Latest Stash**."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": ".scm-view .monaco-list-row[aria-label^='08-stash'] .action-label[aria-label='More Actions...']"
+			},
+			"cardAt": "top-right",
 			"assist": true
 		},
 		{

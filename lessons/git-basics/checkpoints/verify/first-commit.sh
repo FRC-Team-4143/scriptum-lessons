@@ -4,10 +4,10 @@
 # non-zero = failed; the last printed line becomes the student-facing hint.
 set -euo pipefail
 PROJECT="$1"
-cd "$PROJECT/01-first-commit"
+cd "$PROJECT/01-first-commit" 2>/dev/null || { echo "The 01-first-commit folder is missing. Use Start over in the lesson chip."; exit 1; }
 
 if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
-	echo "01-first-commit isn't a git repository. Use Reset to start over."
+	echo "01-first-commit isn't a git repository. Use Start over in the lesson chip."
 	exit 1
 fi
 

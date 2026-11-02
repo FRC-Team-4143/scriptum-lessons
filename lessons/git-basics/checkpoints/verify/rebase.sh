@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 PROJECT="$1"
-cd "$PROJECT/05-rebase"
+cd "$PROJECT/05-rebase" 2>/dev/null || { echo "The 05-rebase folder is missing. Use Start over in the lesson chip."; exit 1; }
 
 if [ -d .git/rebase-merge ] || [ -d .git/rebase-apply ]; then
 	echo "A rebase is still in progress - finish it or abort it, then try again."

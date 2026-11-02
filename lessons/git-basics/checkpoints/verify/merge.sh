@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 PROJECT="$1"
-cd "$PROJECT/03-merge"
+cd "$PROJECT/03-merge" 2>/dev/null || { echo "The 03-merge folder is missing. Use Start over in the lesson chip."; exit 1; }
 
 if ! git merge-base --is-ancestor issue-7-auto-distance develop 2>/dev/null; then
 	echo "issue-7-auto-distance hasn't been merged into develop yet."

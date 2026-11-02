@@ -5,18 +5,22 @@ commit. There's an imaginary issue #12: "Add a turbo boost feature."
 
 ## Task
 
-1. Create a branch off `develop` named `issue-12-<short-description>`
+1. Click the repository name in the bottom-left corner (just left of the
+   branch name) and choose **02-feature-branch**.
+2. Create a branch off `develop` named `issue-12-<short-description>`
    (e.g. `issue-12-turbo-boost`) — the number has to be 12, the words after
-   it are up to you. Click the branch name in the bottom-left corner,
-   choose **Create new branch from...**, type the name and pick `develop` as
-   the starting point.
-2. Add at least two lines to `FEATURES.md` describing the feature.
-3. Make **at least two separate commits** on your branch (not one commit
+   it are up to you, in lowercase letters and numbers with hyphens between
+   words. Click the branch name in the bottom-left corner,
+   choose **Create new branch from...**, pick `develop` as the starting point,
+   then type the name and press **Enter**.
+3. Add at least two lines to `FEATURES.md` describing the feature.
+4. Make **at least two separate commits** on your branch (not one commit
    with everything in it).
-4. Leave `main` and `develop` alone — don't commit directly to either.
+5. Leave `main` and `develop` alone — don't commit directly to either.
 
-Each commit: save, stage with **+**, write a message, press **Commit**.
-Run **Verify** from the Checkpoints panel when you're done.
+Each commit: save, then under the **02-feature-branch** row in Source Control
+stage with **+**, write a message and press **Commit**.
+Run **Verify** from Checkpoints when you're done.
 
 ## You're done when
 

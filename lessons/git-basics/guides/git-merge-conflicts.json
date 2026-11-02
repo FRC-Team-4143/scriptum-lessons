@@ -30,28 +30,157 @@
 			"assist": true
 		},
 		{
+			"title": "Open Source Control",
+			"say": {
+				"never": "Click the **Source Control** icon on the left: the one that looks like a branch. It has one row per exercise folder.",
+				"bit": "Open **Source Control** on the left."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": ".activitybar .action-label[aria-label^='Source Control']"
+			},
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".scm-view .scm-provider"
+				},
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Open the folder",
+			"say": {
+				"never": "Press **Ctrl+P**, type `04-merge-conflict/README` and press **Enter**. Opening a file from the folder makes its name show up in the bottom-left corner.",
+				"bit": "**Ctrl+P**, `04-merge-conflict/README`, **Enter**."
+			},
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": "[id='status.scm.provider']"
+				},
+				"hint": {
+					"never": "open a file in 04-merge-conflict.",
+					"bit": "open a file in 04-merge-conflict."
+				},
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
 			"title": "Pick the repository",
 			"say": {
-				"never": "Open **Source Control** (the branch icon on the left). Each exercise folder has its own section there. Click **04-merge-conflict** so the buttons and menus work on that folder.",
-				"bit": "In Source Control, click **04-merge-conflict** so the buttons act on it."
+				"never": "Look at the very bottom of the window. The name just left of the branch is the repository you're working on. Click it and choose **04-merge-conflict** from the list at the top.",
+				"bit": "Bottom-left, click the repository name and choose **04-merge-conflict**."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": "[id='status.scm.provider']"
+			},
+			"cardAt": "bottom-left",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": "[id='status.scm.provider']",
+					"text": "04-merge-conflict"
+				},
+				"hint": {
+					"never": "pick 04-merge-conflict in the bottom-left corner.",
+					"bit": "pick 04-merge-conflict in the bottom-left."
+				}
+			},
+			"assist": true
+		},
+		{
+			"title": "Stand on develop",
+			"say": {
+				"never": "The branch name beside it now belongs to that repository. It should say `develop`. If it says something else, click it and pick `develop`.",
+				"bit": "The branch beside it should say `develop`. If not, click it and pick `develop`."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": "[id='status.scm.0']"
+			},
+			"cardAt": "bottom-left",
+			"assist": true
+		},
+		{
+			"title": "Find its row",
+			"say": {
+				"never": "In Source Control, scroll the list until you can see the **04-merge-conflict** row.",
+				"bit": "Scroll to the **04-merge-conflict** row."
 			},
 			"target": {
 				"pane": "editor",
 				"selector": ".scm-view"
 			},
 			"cardAt": "top-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".scm-view .monaco-list-row[aria-label^='04-merge-conflict']"
+				},
+				"hint": {
+					"never": "scroll to the 04-merge-conflict row.",
+					"bit": "scroll to the 04-merge-conflict row."
+				},
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Open the ... menu",
+			"say": {
+				"never": "On the **04-merge-conflict** row, click the **...** button (More Actions). Each row has its own, and it always works on that folder.",
+				"bit": "Click **...** on the 04-merge-conflict row."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": ".scm-view .monaco-list-row[aria-label^='04-merge-conflict'] .action-label[aria-label='More Actions...']"
+			},
+			"cardAt": "top-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".monaco-menu .action-label",
+					"text": "Branch"
+				},
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Branch, then Merge...",
+			"say": {
+				"never": "Point at **Branch** in the menu. A second menu opens beside it. Click **Merge...** there.",
+				"bit": "**Branch**, then **Merge...**."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": ".monaco-menu .action-label",
+				"text": "Branch"
+			},
+			"cardAt": "top-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".quick-input-widget .monaco-list-row",
+					"text": "issue-9-max-speed"
+				},
+				"skipIfDone": true
+			},
 			"assist": true
 		},
 		{
 			"title": "Start the merge",
 			"say": {
-				"never": "Check the branch name in the bottom-left says `develop`. Then open the **...** menu in Source Control, choose **Branch**, then **Merge...**, and pick `issue-9-max-speed`. Git reports a **conflict**, and `Constants.java` appears under **Merge Changes**.",
-				"bit": "On `develop`: **...** menu, Branch, Merge..., `issue-9-max-speed`. Git reports a conflict in `Constants.java`."
+				"never": "Click `issue-9-max-speed` in the list at the top. Git reports a **conflict**, and `Constants.java` appears under **Merge Changes**.",
+				"bit": "Pick `issue-9-max-speed`. `Constants.java` appears under **Merge Changes**."
 			},
-			"cardAt": "top-right",
 			"target": {
 				"pane": "editor",
-				"selector": ".scm-view"
+				"selector": ".quick-input-widget .monaco-list-row",
+				"text": "issue-9-max-speed"
 			},
 			"waitFor": {
 				"hint": {
@@ -171,13 +300,13 @@
 		{
 			"title": "Finish the merge",
 			"say": {
-				"never": "Save the file. Under **Merge Changes**, hover `Constants.java` and press the **+** to say it's resolved. Then press **Commit**: the message box is already filled in with a merge message, so just accept it.",
-				"bit": "Save, stage `Constants.java` with **+**, then press **Commit** (the merge message is pre-filled)."
+				"never": "Save the file. Under **Merge Changes**, hover `Constants.java` and press the **+** to say it's resolved. Then press **Continue**: during a merge it takes the place of **Commit**. The message box is already filled in with a merge message, so just accept it.",
+				"bit": "Save, **+** on `Constants.java`, then **Continue** (it replaces Commit during a merge)."
 			},
 			"cardAt": "top-right",
 			"target": {
 				"pane": "editor",
-				"selector": ".scm-view"
+				"selector": ".scm-view .monaco-list-row[aria-label^='04-merge-conflict']"
 			},
 			"waitFor": {
 				"hint": {
