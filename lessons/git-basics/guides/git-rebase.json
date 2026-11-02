@@ -66,7 +66,7 @@
 		{
 			"title": "Open Source Control",
 			"say": {
-				"never": "Click the **Source Control** icon on the left: the one that looks like a branch. It has one row per exercise folder.",
+				"never": "Click the **Source Control** icon on the left: the one that looks like a branch.",
 				"bit": "Open **Source Control** on the left."
 			},
 			"target": {
@@ -76,26 +76,7 @@
 			"waitFor": {
 				"target": {
 					"pane": "editor",
-					"selector": ".scm-view .scm-provider"
-				},
-				"skipIfDone": true
-			},
-			"assist": true
-		},
-		{
-			"title": "Open the folder",
-			"say": {
-				"never": "Press **Ctrl+P**, type `05-rebase/README` and press **Enter**. Opening a file from the folder makes its name show up in the bottom-left corner.",
-				"bit": "**Ctrl+P**, `05-rebase/README`, **Enter**."
-			},
-			"waitFor": {
-				"target": {
-					"pane": "editor",
-					"selector": "[id='status.scm.provider']"
-				},
-				"hint": {
-					"never": "open a file in 05-rebase.",
-					"bit": "open a file in 05-rebase."
+					"selector": ".scm-view"
 				},
 				"skipIfDone": true
 			},
@@ -104,7 +85,7 @@
 		{
 			"title": "Pick the repository",
 			"say": {
-				"never": "Look at the very bottom of the window. The name just left of the branch is the repository you're working on. Click it and choose **05-rebase** from the list at the top.",
+				"never": "Look at the very bottom of the window. The name just left of the branch is the repository you're working on. Click it and choose **05-rebase** from the list at the top. Source Control now shows only that repository.",
 				"bit": "Bottom-left, click the repository name and choose **05-rebase**."
 			},
 			"target": {
@@ -139,45 +120,20 @@
 			"assist": true
 		},
 		{
-			"title": "Find its row",
-			"say": {
-				"never": "In Source Control, scroll the list until you can see the **05-rebase** row.",
-				"bit": "Scroll to the **05-rebase** row."
-			},
-			"target": {
-				"pane": "editor",
-				"selector": ".scm-view"
-			},
-			"cardAt": "top-right",
-			"waitFor": {
-				"target": {
-					"pane": "editor",
-					"selector": ".scm-view .monaco-list-row[aria-label^='05-rebase']"
-				},
-				"hint": {
-					"never": "scroll to the 05-rebase row.",
-					"bit": "scroll to the 05-rebase row."
-				},
-				"skipIfDone": true
-			},
-			"assist": true
-		},
-		{
 			"title": "Open the ... menu",
 			"say": {
-				"never": "On the **05-rebase** row, click the **...** button (More Actions). Each row has its own, and it always works on that folder.",
-				"bit": "Click **...** on the 05-rebase row."
+				"never": "Point at the **CHANGES** heading in Source Control. A **...** button (More Actions) appears at its right end. Click it. It works on the repository you picked.",
+				"bit": "Point at **CHANGES** and click its **...**."
 			},
 			"target": {
 				"pane": "editor",
-				"selector": ".scm-view .monaco-list-row[aria-label^='05-rebase'] .action-label[aria-label='More Actions...']"
+				"selector": ".pane-header[aria-label^='Changes']"
 			},
 			"cardAt": "top-right",
 			"waitFor": {
 				"target": {
 					"pane": "editor",
-					"selector": ".monaco-menu .action-label",
-					"text": "Branch"
+					"selector": ".pane-header[aria-label^='Changes'] .monaco-dropdown.active"
 				},
 				"skipIfDone": true
 			},
@@ -188,11 +144,6 @@
 			"say": {
 				"never": "Point at **Branch** in the menu. A second menu opens beside it. Click **Rebase Branch...** there.",
 				"bit": "**Branch**, then **Rebase Branch...**."
-			},
-			"target": {
-				"pane": "editor",
-				"selector": ".monaco-menu .action-label",
-				"text": "Branch"
 			},
 			"cardAt": "top-right",
 			"waitFor": {

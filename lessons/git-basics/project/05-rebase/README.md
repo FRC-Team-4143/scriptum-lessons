@@ -11,8 +11,8 @@ Rebase your branch onto the latest `develop`, instead of merging:
 1. Click the repository name in the bottom-left corner (just left of the
    branch name) and choose **05-rebase**.
 2. Make sure the branch name beside it says `issue-15-led-colors`.
-3. In Source Control, find the **05-rebase** row and click its **...** menu.
-   Choose **Branch**, then **Rebase Branch...**, and pick `develop`.
+3. In Source Control, point at the **CHANGES** heading and click its **...**
+   menu. Choose **Branch**, then **Rebase Branch...**, and pick `develop`.
 
 If there's nothing to resolve, this just replays your commit on top of the
 new `develop`. (This scenario is set up so it rebases cleanly — no conflict

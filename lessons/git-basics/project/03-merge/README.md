@@ -12,8 +12,8 @@ time to bring it in.
 1. Click the repository name in the bottom-left corner (just left of the
    branch name) and choose **03-merge**.
 2. Make sure the branch name beside it says `develop`.
-3. In Source Control, find the **03-merge** row and click its **...** menu.
-   Choose **Branch**, then **Merge...**, and pick `issue-7-auto-distance`.
+3. In Source Control, point at the **CHANGES** heading and click its **...**
+   menu. Choose **Branch**, then **Merge...**, and pick `issue-7-auto-distance`.
 
 Don't touch `main`. Run **Verify** when you're done.
 

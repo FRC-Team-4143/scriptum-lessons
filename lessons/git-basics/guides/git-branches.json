@@ -41,7 +41,7 @@
 		{
 			"title": "Open Source Control",
 			"say": {
-				"never": "Click the **Source Control** icon on the left: the one that looks like a branch. It has one row per exercise folder.",
+				"never": "Click the **Source Control** icon on the left: the one that looks like a branch.",
 				"bit": "Open **Source Control** on the left."
 			},
 			"target": {
@@ -51,26 +51,7 @@
 			"waitFor": {
 				"target": {
 					"pane": "editor",
-					"selector": ".scm-view .scm-provider"
-				},
-				"skipIfDone": true
-			},
-			"assist": true
-		},
-		{
-			"title": "Open the folder",
-			"say": {
-				"never": "Press **Ctrl+P**, type `02-feature-branch/README` and press **Enter**. Opening a file from the folder makes its name show up in the bottom-left corner.",
-				"bit": "**Ctrl+P**, `02-feature-branch/README`, **Enter**."
-			},
-			"waitFor": {
-				"target": {
-					"pane": "editor",
-					"selector": "[id='status.scm.provider']"
-				},
-				"hint": {
-					"never": "open a file in 02-feature-branch.",
-					"bit": "open a file in 02-feature-branch."
+					"selector": ".scm-view"
 				},
 				"skipIfDone": true
 			},
@@ -79,7 +60,7 @@
 		{
 			"title": "Pick the repository",
 			"say": {
-				"never": "Look at the very bottom of the window. The name just left of the branch is the repository you're working on. Click it and choose **02-feature-branch** from the list at the top.",
+				"never": "Look at the very bottom of the window. The name just left of the branch is the repository you're working on. Click it and choose **02-feature-branch** from the list at the top. Source Control now shows only that repository.",
 				"bit": "Bottom-left, click the repository name and choose **02-feature-branch**."
 			},
 			"target": {
@@ -134,7 +115,7 @@
 		{
 			"title": "Two commits",
 			"say": {
-				"never": "The exercise wants **two separate** commits: small commits, each with a clear message, tell the story of the work. Edit `FEATURES.md` and save. Then, under the **02-feature-branch** row in Source Control, stage it with the **+**, write a message in the box and press **Commit**. Change the file again and repeat with a new message.",
+				"never": "The exercise wants **two separate** commits: small commits, each with a clear message, tell the story of the work. Edit `FEATURES.md` and save. Then, in Source Control, stage it with the **+**, write a message in the box and press **Commit**. Change the file again and repeat with a new message.",
 				"bit": "The exercise wants **two separate** commits: edit, save, stage with **+**, message, **Commit**, then do it again."
 			},
 			"board": {

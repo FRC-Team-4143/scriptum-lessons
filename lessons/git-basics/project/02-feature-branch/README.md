@@ -18,7 +18,7 @@ commit. There's an imaginary issue #12: "Add a turbo boost feature."
    with everything in it).
 5. Leave `main` and `develop` alone — don't commit directly to either.
 
-Each commit: save, then under the **02-feature-branch** row in Source Control
+Each commit: save, then in Source Control
 stage with **+**, write a message and press **Commit**.
 Run **Verify** from Checkpoints when you're done.
 

@@ -5,8 +5,10 @@ see it in the **Graph** in Source Control).
 
 ## Task
 
-1. Open `roster.txt` and add your name on its own line.
-2. Save, then open Source Control. Under the **01-first-commit** row, stage the
+1. Click the repository name in the bottom-left corner (just left of the
+   branch name) and choose **01-first-commit**.
+2. Open `roster.txt` and add your name on its own line.
+3. Save, then open Source Control. Stage the
    change with the **+** next to `roster.txt`, write a real commit message in
    the box (not "update" or "wip" — say what you did, e.g.
    `Add my name to the roster`) and press **Commit**.

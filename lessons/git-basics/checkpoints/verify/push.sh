@@ -21,7 +21,7 @@ fi
 
 remote_tip="$(git --git-dir="$origin" rev-parse --verify -q refs/heads/issue-18-team-colors || true)"
 if [ -z "$remote_tip" ]; then
-	echo "origin doesn't have issue-18-team-colors yet. Use the ... menu on the 06-push row in Source Control: Pull, Push, Push to..., origin."
+	echo "origin doesn't have issue-18-team-colors yet. Pick 06-push in the bottom-left, then use the ... on the CHANGES heading in Source Control: Pull, Push, Push to..., origin."
 	exit 1
 fi
 if [ "$remote_tip" != "$local_tip" ]; then

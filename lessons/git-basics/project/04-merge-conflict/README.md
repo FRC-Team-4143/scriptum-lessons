@@ -9,7 +9,7 @@ conflict.
 1. Click the repository name in the bottom-left corner (just left of the
    branch name) and choose **04-merge-conflict**.
 2. Make sure the branch name beside it says `develop`. Then, in Source Control,
-   find the **04-merge-conflict** row and click its **...** menu. Choose
+   point at the **CHANGES** heading and click its **...** menu. Choose
    **Branch**, then **Merge...**, and pick `issue-9-max-speed`.
 3. Git will stop and mark the conflict in `Constants.java`. Open the file —
    VSCodium shows the two versions with **Accept Current Change**, **Accept

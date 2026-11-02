@@ -52,10 +52,10 @@
 			},
 			"hints": [
 				{
-					"never": "Click the repository name in the bottom-left corner, next to the branch name, and choose **06-push**. Then use the **...** on its row in Source Control to send the branch to the shared copy.",
-					"bit": "Pick 06-push in the bottom-left, then push to origin from the ... on its row."
+					"never": "Click the repository name in the bottom-left corner, next to the branch name, and choose **06-push**. Then use the **...** on the **CHANGES** heading in Source Control to send the branch to the shared copy.",
+					"bit": "Pick 06-push in the bottom-left, then push to origin from the ... on the CHANGES heading."
 				},
-				"On the **06-push** row, click **...**, then **Pull, Push**, then **Push to...**, and choose `origin`.",
+				"Point at the **CHANGES** heading, click **...**, then **Pull, Push**, then **Push to...**, and choose `origin`.",
 				"Make sure the branch name in the bottom-left says `issue-18-team-colors` first, then Verify.",
 				"Stuck? The same thing typed in the terminal (Ctrl+`) is `cd 06-push` then `git push origin issue-18-team-colors`."
 			]
@@ -67,10 +67,10 @@
 			},
 			"hints": [
 				{
-					"never": "Click the repository name in the bottom-left corner and choose **07-pull**. You must be on `develop`. Then use the **...** on its row in Source Control to get the new commits.",
-					"bit": "Pick 07-pull in the bottom-left, be on develop, then pull from the ... on its row."
+					"never": "Click the repository name in the bottom-left corner and choose **07-pull**. You must be on `develop`. Then use the **...** on the **CHANGES** heading in Source Control to get the new commits.",
+					"bit": "Pick 07-pull in the bottom-left, be on develop, then pull from the ... on the CHANGES heading."
 				},
-				"On the **07-pull** row, click **...**, then **Pull, Push**, then **Pull**.",
+				"Point at the **CHANGES** heading, click **...**, then **Pull, Push**, then **Pull**.",
 				"If the branch name says something other than `develop`, click it and switch to `develop` first.",
 				"Stuck? In the terminal (Ctrl+`): `cd 07-pull`, then `git pull origin develop`."
 			]
@@ -82,11 +82,11 @@
 			},
 			"hints": [
 				{
-					"never": "First pick **08-stash** with the repository name in the bottom-left corner. The order is: shelve your work, fix the typo on develop, come back, take your work off the shelf. All of it is in the **...** on its row and the branch name.",
+					"never": "First pick **08-stash** with the repository name in the bottom-left corner. The order is: shelve your work, fix the typo on develop, come back, take your work off the shelf. All of it is in the **...** on the **CHANGES** heading and the branch name.",
 					"bit": "Pick 08-stash in the bottom-left. Stash, fix on develop, return, pop."
 				},
-				"On the **08-stash** row, click **...**, **Stash**, **Stash**, and press **Enter** at the message box. Switch to `develop` with the branch name (bottom-left), fix the typo, save, **+**, **Commit**. Switch back to `issue-21-new-motor`, then **...**, **Stash**, **Pop Latest Stash**.",
-				"Don't commit your unfinished work on issue-21-new-motor. If you did, undo it with the **...** on the row: **Commit**, **Undo Last Commit**, and start again."
+				"Point at the **CHANGES** heading, click **...**, **Stash**, **Stash**, and press **Enter** at the message box. Switch to `develop` with the branch name (bottom-left), fix the typo, save, **+**, **Commit**. Switch back to `issue-21-new-motor`, then **...**, **Stash**, **Pop Latest Stash**.",
+				"Don't commit your unfinished work on issue-21-new-motor. If you did, undo it with the **...** on the **CHANGES** heading: **Commit**, **Undo Last Commit**, and start again."
 			]
 		}
 	}
