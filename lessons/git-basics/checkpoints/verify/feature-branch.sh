@@ -1,11 +1,17 @@
 #!/usr/bin/env bash
 set -euo pipefail
 PROJECT="$1"
-cd "$PROJECT/02-feature-branch"
+cd "$PROJECT/02-feature-branch" 2>/dev/null || { echo "The 02-feature-branch folder is missing. Use Start over in the lesson chip."; exit 1; }
 
 branch="$(git for-each-ref --format='%(refname:short)' refs/heads \
 	| grep -E '^issue-12-[a-z0-9]+(-[a-z0-9]+)*$' | head -n1 || true)"
 if [ -z "$branch" ]; then
+	near="$(git for-each-ref --format='%(refname:short)' refs/heads \
+		| grep -iE '^issue-?12([^0-9]|$)' | head -n1 || true)"
+	if [ -n "$near" ]; then
+		echo "$near doesn't count: branch names are all lowercase letters, numbers and hyphens, like issue-12-turbo-boost. Rename it with ... > Branch > Rename Branch... on the 02-feature-branch row."
+		exit 1
+	fi
 	echo "No branch named issue-12-<short-description> found."
 	exit 1
 fi

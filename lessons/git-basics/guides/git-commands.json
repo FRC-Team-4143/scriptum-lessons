@@ -73,7 +73,7 @@
 		{
 			"title": "commit",
 			"say": {
-				"never": "`git commit` **saves the snapshot** of everything you staged, with a message. The `-m` means \"here comes my message\". **The button:** type your message in the box at the top of Source Control and press the blue **Commit** button.",
+				"never": "`git commit` **saves the snapshot** of everything you staged, with a message. The `-m` means \"here comes my message\". **The button:** type your message in the box under the folder's row in Source Control and press the blue **Commit** button.",
 				"bit": "`git commit -m` saves the staged snapshot with a message. **Button:** write the message in the box and press **Commit**."
 			},
 			"board": {
@@ -121,7 +121,7 @@
 		{
 			"title": "merge",
 			"say": {
-				"never": "`git merge` **brings another branch's work into the one you're on**. First move to the branch that should receive the work. **The button:** in Source Control, click the **...** (more actions) menu, then **Branch**, then **Merge...**, and pick the branch to bring in.",
+				"never": "`git merge` **brings another branch's work into the one you're on**. First move to the branch that should receive the work. **The button:** on the folder's row in Source Control, click the **...** (more actions) menu, then **Branch**, then **Merge...**, and pick the branch to bring in.",
 				"bit": "`git merge` brings another branch's commits into your current branch. **Button:** Source Control **...** menu, then Branch, then Merge."
 			},
 			"board": {
@@ -139,13 +139,13 @@
 			],
 			"target": {
 				"pane": "editor",
-				"selector": ".scm-view"
+				"selector": ".scm-view .scm-provider .action-label[aria-label='More Actions...']"
 			}
 		},
 		{
 			"title": "push and pull",
 			"say": {
-				"never": "The **remote** is the shared copy of the project (on GitHub). `git push` **sends** your commits there so teammates can see them. `git pull` **fetches** their new commits and brings them into your branch. **The button:** in Source Control, click **...**, then **Pull, Push**, and choose **Pull**, **Push** or **Push to...**. (In this lesson the blue Publish Branch and Sync buttons are hidden, so use that menu.)",
+				"never": "The **remote** is the shared copy of the project (on GitHub). `git push` **sends** your commits there so teammates can see them. `git pull` **fetches** their new commits and brings them into your branch. **The button:** on the folder's row in Source Control, click **...**, then **Pull, Push**, and choose **Pull**, **Push** or **Push to...**. (This lesson uses that menu, not the little cloud icons.)",
 				"bit": "`git push` uploads your commits to the remote (`origin`); `git pull` downloads and merges others'. **Button:** **...** menu, then Pull, Push (Pull, Push or Push to...)."
 			},
 			"board": {
@@ -167,13 +167,13 @@
 			],
 			"target": {
 				"pane": "editor",
-				"selector": "[id='status.scm.1']"
+				"selector": ".scm-view .scm-provider .action-label[aria-label='More Actions...']"
 			}
 		},
 		{
 			"title": "stash",
 			"say": {
-				"never": "`git stash` puts your **unfinished** changes on a shelf and gives you a clean folder, so you can switch branches. `git stash pop` takes them back off the shelf. **The button:** in Source Control, click **...**, then **Stash**, then **Stash**. To get them back, **...**, **Stash**, **Pop Latest Stash**.",
+				"never": "`git stash` puts your **unfinished** changes on a shelf and gives you a clean folder, so you can switch branches. `git stash pop` takes them back off the shelf. **The button:** on the folder's row in Source Control, click **...**, then **Stash**, then **Stash**, and press **Enter** at the message box. To get them back, **...**, **Stash**, **Pop Latest Stash**.",
 				"bit": "`git stash` shelves uncommitted changes so you can switch branches; `git stash pop` restores them. **Button:** Source Control **...** menu, then Stash."
 			},
 			"board": {
@@ -191,7 +191,7 @@
 			],
 			"target": {
 				"pane": "editor",
-				"selector": ".scm-view"
+				"selector": ".scm-view .scm-provider .action-label[aria-label='More Actions...']"
 			}
 		},
 		{

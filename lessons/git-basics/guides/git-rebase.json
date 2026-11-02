@@ -64,28 +64,157 @@
 			}
 		},
 		{
+			"title": "Open Source Control",
+			"say": {
+				"never": "Click the **Source Control** icon on the left: the one that looks like a branch. It has one row per exercise folder.",
+				"bit": "Open **Source Control** on the left."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": ".activitybar .action-label[aria-label^='Source Control']"
+			},
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".scm-view .scm-provider"
+				},
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Open the folder",
+			"say": {
+				"never": "Press **Ctrl+P**, type `05-rebase/README` and press **Enter**. Opening a file from the folder makes its name show up in the bottom-left corner.",
+				"bit": "**Ctrl+P**, `05-rebase/README`, **Enter**."
+			},
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": "[id='status.scm.provider']"
+				},
+				"hint": {
+					"never": "open a file in 05-rebase.",
+					"bit": "open a file in 05-rebase."
+				},
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
 			"title": "Pick the repository",
 			"say": {
-				"never": "Open **Source Control** (the branch icon on the left). Each exercise folder has its own section there. Click **05-rebase** so the buttons and menus work on that folder.",
-				"bit": "In Source Control, click **05-rebase** so the buttons act on it."
+				"never": "Look at the very bottom of the window. The name just left of the branch is the repository you're working on. Click it and choose **05-rebase** from the list at the top.",
+				"bit": "Bottom-left, click the repository name and choose **05-rebase**."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": "[id='status.scm.provider']"
+			},
+			"cardAt": "bottom-left",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": "[id='status.scm.provider']",
+					"text": "05-rebase"
+				},
+				"hint": {
+					"never": "pick 05-rebase in the bottom-left corner.",
+					"bit": "pick 05-rebase in the bottom-left."
+				}
+			},
+			"assist": true
+		},
+		{
+			"title": "Stand on issue-15-led-colors",
+			"say": {
+				"never": "The branch name beside it now belongs to that repository. It should say `issue-15-led-colors`. If it says something else, click it and pick `issue-15-led-colors`.",
+				"bit": "The branch beside it should say `issue-15-led-colors`. If not, click it and pick `issue-15-led-colors`."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": "[id='status.scm.0']"
+			},
+			"cardAt": "bottom-left",
+			"assist": true
+		},
+		{
+			"title": "Find its row",
+			"say": {
+				"never": "In Source Control, scroll the list until you can see the **05-rebase** row.",
+				"bit": "Scroll to the **05-rebase** row."
 			},
 			"target": {
 				"pane": "editor",
 				"selector": ".scm-view"
 			},
 			"cardAt": "top-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".scm-view .monaco-list-row[aria-label^='05-rebase']"
+				},
+				"hint": {
+					"never": "scroll to the 05-rebase row.",
+					"bit": "scroll to the 05-rebase row."
+				},
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Open the ... menu",
+			"say": {
+				"never": "On the **05-rebase** row, click the **...** button (More Actions). Each row has its own, and it always works on that folder.",
+				"bit": "Click **...** on the 05-rebase row."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": ".scm-view .monaco-list-row[aria-label^='05-rebase'] .action-label[aria-label='More Actions...']"
+			},
+			"cardAt": "top-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".monaco-menu .action-label",
+					"text": "Branch"
+				},
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Branch, then Rebase Branch...",
+			"say": {
+				"never": "Point at **Branch** in the menu. A second menu opens beside it. Click **Rebase Branch...** there.",
+				"bit": "**Branch**, then **Rebase Branch...**."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": ".monaco-menu .action-label",
+				"text": "Branch"
+			},
+			"cardAt": "top-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".quick-input-widget .monaco-list-row",
+					"text": "develop"
+				},
+				"skipIfDone": true
+			},
 			"assist": true
 		},
 		{
 			"title": "Your turn",
 			"say": {
-				"never": "Check the branch name in the bottom-left says `issue-15-led-colors`. Then open the **...** menu in Source Control, choose **Branch**, then **Rebase Branch...**, and pick `develop`. Look at the Graph: it should be one straight line.",
-				"bit": "On `issue-15-led-colors`: **...** menu, Branch, Rebase Branch..., `develop`. The Graph should be one straight line."
+				"never": "Click `develop` in the list at the top. Then look at the Graph: it should be one straight line.",
+				"bit": "Pick `develop`. The Graph should be one straight line."
 			},
-			"cardAt": "top-right",
 			"target": {
 				"pane": "editor",
-				"selector": ".scm-view"
+				"selector": ".quick-input-widget .monaco-list-row",
+				"text": "develop"
 			},
 			"waitFor": {
 				"hint": {

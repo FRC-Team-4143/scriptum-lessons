@@ -9,9 +9,11 @@ Look at the **Graph** in Source Control if you want to see its commits.
 Merge `issue-7-auto-distance` into `develop` — the feature is done, it's
 time to bring it in.
 
-1. Make sure the branch name in the bottom-left says `develop`.
-2. In Source Control, open the **...** menu, choose **Branch**, then
-   **Merge...**, and pick `issue-7-auto-distance`.
+1. Click the repository name in the bottom-left corner (just left of the
+   branch name) and choose **03-merge**.
+2. Make sure the branch name beside it says `develop`.
+3. In Source Control, find the **03-merge** row and click its **...** menu.
+   Choose **Branch**, then **Merge...**, and pick `issue-7-auto-distance`.
 
 Don't touch `main`. Run **Verify** when you're done.
 

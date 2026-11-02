@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 PROJECT="$1"
-cd "$PROJECT/08-stash"
+cd "$PROJECT/08-stash" 2>/dev/null || { echo "The 08-stash folder is missing. Use Start over in the lesson chip."; exit 1; }
 
 # 1. The typo fix is a commit on develop.
 if [ "$(git rev-list --count lesson-main-start..develop)" -lt 1 ]; then

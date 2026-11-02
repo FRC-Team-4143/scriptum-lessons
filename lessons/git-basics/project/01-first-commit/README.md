@@ -6,12 +6,13 @@ see it in the **Graph** in Source Control).
 ## Task
 
 1. Open `roster.txt` and add your name on its own line.
-2. Save, then open Source Control. Stage the change with the **+** next to
-   `roster.txt`, write a real commit message (not "update" or "wip" — say what
-   you did, e.g. `Add my name to the roster`) and press **Commit**.
+2. Save, then open Source Control. Under the **01-first-commit** row, stage the
+   change with the **+** next to `roster.txt`, write a real commit message in
+   the box (not "update" or "wip" — say what you did, e.g.
+   `Add my name to the roster`) and press **Commit**.
 
-That's it. Click **Checkpoints** in the top bar and run **Verify** when
-you're done.
+That's it. Open the lesson chip at the top, choose **Checkpoints** and run
+**Verify** when you're done.
 
 ## You're done when
 

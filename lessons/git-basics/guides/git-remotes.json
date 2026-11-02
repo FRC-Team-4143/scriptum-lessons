@@ -19,28 +19,157 @@
 			]
 		},
 		{
+			"title": "Open Source Control",
+			"say": {
+				"never": "Click the **Source Control** icon on the left: the one that looks like a branch. It has one row per exercise folder.",
+				"bit": "Open **Source Control** on the left."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": ".activitybar .action-label[aria-label^='Source Control']"
+			},
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".scm-view .scm-provider"
+				},
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Open the folder",
+			"say": {
+				"never": "Press **Ctrl+P**, type `06-push/README` and press **Enter**. Opening a file from the folder makes its name show up in the bottom-left corner.",
+				"bit": "**Ctrl+P**, `06-push/README`, **Enter**."
+			},
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": "[id='status.scm.provider']"
+				},
+				"hint": {
+					"never": "open a file in 06-push.",
+					"bit": "open a file in 06-push."
+				},
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
 			"title": "Pick the repository",
 			"say": {
-				"never": "Open **Source Control** (the branch icon on the left). Each exercise folder has its own section there. Click **06-push** so the buttons and menus work on that folder.",
-				"bit": "In Source Control, click **06-push** so the buttons act on it."
+				"never": "Look at the very bottom of the window. The name just left of the branch is the repository you're working on. Click it and choose **06-push** from the list at the top.",
+				"bit": "Bottom-left, click the repository name and choose **06-push**."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": "[id='status.scm.provider']"
+			},
+			"cardAt": "bottom-left",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": "[id='status.scm.provider']",
+					"text": "06-push"
+				},
+				"hint": {
+					"never": "pick 06-push in the bottom-left corner.",
+					"bit": "pick 06-push in the bottom-left."
+				}
+			},
+			"assist": true
+		},
+		{
+			"title": "Stand on issue-18-team-colors",
+			"say": {
+				"never": "The branch name beside it now belongs to that repository. It should say `issue-18-team-colors`. If it says something else, click it and pick `issue-18-team-colors`.",
+				"bit": "The branch beside it should say `issue-18-team-colors`. If not, click it and pick `issue-18-team-colors`."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": "[id='status.scm.0']"
+			},
+			"cardAt": "bottom-left",
+			"assist": true
+		},
+		{
+			"title": "Find its row",
+			"say": {
+				"never": "In Source Control, scroll the list until you can see the **06-push** row.",
+				"bit": "Scroll to the **06-push** row."
 			},
 			"target": {
 				"pane": "editor",
 				"selector": ".scm-view"
 			},
 			"cardAt": "top-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".scm-view .monaco-list-row[aria-label^='06-push']"
+				},
+				"hint": {
+					"never": "scroll to the 06-push row.",
+					"bit": "scroll to the 06-push row."
+				},
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Open the ... menu",
+			"say": {
+				"never": "On the **06-push** row, click the **...** button (More Actions). Each row has its own, and it always works on that folder.",
+				"bit": "Click **...** on the 06-push row."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": ".scm-view .monaco-list-row[aria-label^='06-push'] .action-label[aria-label='More Actions...']"
+			},
+			"cardAt": "top-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".monaco-menu .action-label",
+					"text": "Pull, Push"
+				},
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Pull, Push, then Push to...",
+			"say": {
+				"never": "Point at **Pull, Push** in the menu. A second menu opens beside it. Click **Push to...** there. If a pop-up asks whether to \"periodically run git fetch\", click **No**.",
+				"bit": "**Pull, Push**, then **Push to...**. Say **No** to any git fetch pop-up."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": ".monaco-menu .action-label",
+				"text": "Pull, Push"
+			},
+			"cardAt": "top-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".quick-input-widget .monaco-list-row",
+					"text": "origin"
+				},
+				"skipIfDone": true
+			},
 			"assist": true
 		},
 		{
 			"title": "Push",
 			"say": {
-				"never": "Check the branch name in the bottom-left says `issue-18-team-colors`. Open the **...** menu in Source Control, choose **Pull, Push**, then **Push to...**, and pick `origin`.",
-				"bit": "On `issue-18-team-colors`: **...** menu, Pull, Push, Push to..., `origin`."
+				"never": "Click `origin` in the list at the top. That sends your branch to the shared copy.",
+				"bit": "Pick `origin`."
 			},
-			"cardAt": "top-right",
 			"target": {
 				"pane": "editor",
-				"selector": ".scm-view"
+				"selector": ".quick-input-widget .monaco-list-row",
+				"text": "origin"
 			},
 			"waitFor": {
 				"hint": {
@@ -51,16 +180,86 @@
 			"assist": true
 		},
 		{
-			"title": "Pull",
+			"title": "Pick the next repository",
 			"say": {
-				"never": "Now click **07-pull** in Source Control and check the branch is `develop`. Open the **...** menu, choose **Pull, Push**, then **Pull**. Open `Schedule.txt`: your teammate's line is there.",
-				"bit": "Click **07-pull** (on `develop`): **...** menu, Pull, Push, **Pull**. `Schedule.txt` gets your teammate's line."
+				"never": "Now click the repository name in the bottom-left corner again and choose **07-pull**. The branch name beside it should say `develop`.",
+				"bit": "Bottom-left: choose **07-pull**. It should be on `develop`."
 			},
-			"cardAt": "top-right",
+			"target": {
+				"pane": "editor",
+				"selector": "[id='status.scm.provider']"
+			},
+			"cardAt": "bottom-left",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": "[id='status.scm.provider']",
+					"text": "07-pull"
+				},
+				"hint": {
+					"never": "pick 07-pull in the bottom-left corner.",
+					"bit": "pick 07-pull in the bottom-left."
+				}
+			},
+			"assist": true
+		},
+		{
+			"title": "Find its row",
+			"say": {
+				"never": "In Source Control, scroll the list until you can see the **07-pull** row.",
+				"bit": "Scroll to the **07-pull** row."
+			},
 			"target": {
 				"pane": "editor",
 				"selector": ".scm-view"
 			},
+			"cardAt": "top-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".scm-view .monaco-list-row[aria-label^='07-pull']"
+				},
+				"hint": {
+					"never": "scroll to the 07-pull row.",
+					"bit": "scroll to the 07-pull row."
+				},
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Open the ... menu",
+			"say": {
+				"never": "On the **07-pull** row, click the **...** button (More Actions). Each row has its own, and it always works on that folder.",
+				"bit": "Click **...** on the 07-pull row."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": ".scm-view .monaco-list-row[aria-label^='07-pull'] .action-label[aria-label='More Actions...']"
+			},
+			"cardAt": "top-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".monaco-menu .action-label",
+					"text": "Pull, Push"
+				},
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Pull",
+			"say": {
+				"never": "Point at **Pull, Push**, then click **Pull** in the second menu. Open `Schedule.txt`: your teammate's line is there.",
+				"bit": "**Pull, Push**, then **Pull**. Your teammate's line is in `Schedule.txt`."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": ".monaco-menu .action-label",
+				"text": "Pull, Push"
+			},
+			"cardAt": "top-right",
 			"waitFor": {
 				"hint": {
 					"never": "pull into develop in 07-pull.",

@@ -35,7 +35,7 @@
 		{
 			"title": "One repository per folder",
 			"say": {
-				"never": "Each numbered folder in this lesson is its own **repository**, which is just a project folder that git is watching. Each one gets its own section in Source Control. Start with **01-first-commit**.",
+				"never": "Each numbered folder in this lesson is its own **repository**, which is just a project folder that git is watching. Each one has its own row in Source Control, with its own message box and **Commit** button. Start with **01-first-commit**.",
 				"bit": "Each numbered folder in this lesson is its own repository, so each one gets its own section here. Start with **01-first-commit**."
 			},
 			"target": {
@@ -189,7 +189,7 @@
 		{
 			"title": "Which branch am I on?",
 			"say": {
-				"never": "A **branch** is your own separate line of work. The bottom-left corner shows which branch you're on. Click it to switch branches or make a new one. Our branches are named like `issue-12-add-turbo-boost`, which says what the work is for.",
+				"never": "A **branch** is your own separate line of work. The bottom-left corner shows which repository you're in and, next to it, which branch you're on. Click the repository name to pick another folder, and the branch name to switch branches or make a new one. Our branches are named like `issue-12-add-turbo-boost`, which says what the work is for.",
 				"bit": "The bottom-left corner always shows your current branch. Click it to switch branches or make a new one. Our feature branches are named like `issue-12-add-turbo-boost`."
 			},
 			"target": {

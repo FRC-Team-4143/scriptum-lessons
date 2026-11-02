@@ -43,28 +43,157 @@
 			}
 		},
 		{
-			"title": "Pick the repository",
+			"title": "Open Source Control",
 			"say": {
-				"never": "Open **Source Control** (the branch icon on the left). Each exercise folder has its own section there. Click **03-merge** so the buttons and menus work on that folder.",
-				"bit": "In Source Control, click **03-merge** so the buttons act on it."
+				"never": "Click the **Source Control** icon on the left: the one that looks like a branch. It has one row per exercise folder.",
+				"bit": "Open **Source Control** on the left."
 			},
 			"target": {
 				"pane": "editor",
-				"selector": ".scm-view"
+				"selector": ".activitybar .action-label[aria-label^='Source Control']"
 			},
-			"cardAt": "top-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".scm-view .scm-provider"
+				},
+				"skipIfDone": true
+			},
 			"assist": true
 		},
 		{
-			"title": "Your turn",
+			"title": "Open the folder",
 			"say": {
-				"never": "Check the branch name in the bottom-left says `develop`. Then open the **...** menu in Source Control, choose **Branch**, then **Merge...**, and pick `issue-7-auto-distance`. Look at `Constants.java` afterwards: `AUTO_DISTANCE_METERS` is there.",
-				"bit": "On `develop`: **...** menu, Branch, Merge..., `issue-7-auto-distance`. Then `AUTO_DISTANCE_METERS` is in `Constants.java`."
+				"never": "Press **Ctrl+P**, type `03-merge/README` and press **Enter**. Opening a file from the folder makes its name show up in the bottom-left corner.",
+				"bit": "**Ctrl+P**, `03-merge/README`, **Enter**."
 			},
-			"cardAt": "top-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": "[id='status.scm.provider']"
+				},
+				"hint": {
+					"never": "open a file in 03-merge.",
+					"bit": "open a file in 03-merge."
+				},
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Pick the repository",
+			"say": {
+				"never": "Look at the very bottom of the window. The name just left of the branch is the repository you're working on. Click it and choose **03-merge** from the list at the top.",
+				"bit": "Bottom-left, click the repository name and choose **03-merge**."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": "[id='status.scm.provider']"
+			},
+			"cardAt": "bottom-left",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": "[id='status.scm.provider']",
+					"text": "03-merge"
+				},
+				"hint": {
+					"never": "pick 03-merge in the bottom-left corner.",
+					"bit": "pick 03-merge in the bottom-left."
+				}
+			},
+			"assist": true
+		},
+		{
+			"title": "Stand on develop",
+			"say": {
+				"never": "The branch name beside it now belongs to that repository. It should say `develop`. If it says something else, click it and pick `develop`.",
+				"bit": "The branch beside it should say `develop`. If not, click it and pick `develop`."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": "[id='status.scm.0']"
+			},
+			"cardAt": "bottom-left",
+			"assist": true
+		},
+		{
+			"title": "Find its row",
+			"say": {
+				"never": "In Source Control, scroll the list until you can see the **03-merge** row.",
+				"bit": "Scroll to the **03-merge** row."
+			},
 			"target": {
 				"pane": "editor",
 				"selector": ".scm-view"
+			},
+			"cardAt": "top-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".scm-view .monaco-list-row[aria-label^='03-merge']"
+				},
+				"hint": {
+					"never": "scroll to the 03-merge row.",
+					"bit": "scroll to the 03-merge row."
+				},
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Open the ... menu",
+			"say": {
+				"never": "On the **03-merge** row, click the **...** button (More Actions). Each row has its own, and it always works on that folder.",
+				"bit": "Click **...** on the 03-merge row."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": ".scm-view .monaco-list-row[aria-label^='03-merge'] .action-label[aria-label='More Actions...']"
+			},
+			"cardAt": "top-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".monaco-menu .action-label",
+					"text": "Branch"
+				},
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Branch, then Merge...",
+			"say": {
+				"never": "Point at **Branch** in the menu. A second menu opens beside it. Click **Merge...** there.",
+				"bit": "**Branch**, then **Merge...**."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": ".monaco-menu .action-label",
+				"text": "Branch"
+			},
+			"cardAt": "top-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".quick-input-widget .monaco-list-row",
+					"text": "issue-7-auto-distance"
+				},
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Pick the feature",
+			"say": {
+				"never": "A list of branches drops down at the top. Click `issue-7-auto-distance`. Then open `Constants.java` in **03-merge**: `AUTO_DISTANCE_METERS` is there now.",
+				"bit": "Pick `issue-7-auto-distance`. Then `AUTO_DISTANCE_METERS` is in `Constants.java`."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": ".quick-input-widget .monaco-list-row",
+				"text": "issue-7-auto-distance"
 			},
 			"waitFor": {
 				"hint": {

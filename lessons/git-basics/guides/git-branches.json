@@ -24,8 +24,8 @@
 		{
 			"title": "Name it",
 			"say": {
-				"never": "Your branch starts from `develop`, so it begins with the team's latest finished work. Name it after what you're working on, in the pattern `issue-<number>-<what it does>`, like `issue-12-turbo-boost`.",
-				"bit": "Start from `develop` and name it `issue-<number>-<what it does>`."
+				"never": "Your branch starts from `develop`, so it begins with the team's latest finished work. Name it after what you're working on, in the pattern `issue-<number>-<what it does>`, all lowercase with hyphens between words, like `issue-12-turbo-boost`.",
+				"bit": "Start from `develop` and name it `issue-<number>-<what it does>`, all lowercase."
 			},
 			"board": {
 				"code": "issue-<number>-<what it does>\nissue-12-turbo-boost",
@@ -39,23 +39,72 @@
 			}
 		},
 		{
-			"title": "Pick the repository",
+			"title": "Open Source Control",
 			"say": {
-				"never": "Open **Source Control** (the branch icon on the left). Each exercise folder has its own section there. Click **02-feature-branch** so the buttons and menus work on that folder.",
-				"bit": "In Source Control, click **02-feature-branch** so the buttons act on it."
+				"never": "Click the **Source Control** icon on the left: the one that looks like a branch. It has one row per exercise folder.",
+				"bit": "Open **Source Control** on the left."
 			},
 			"target": {
 				"pane": "editor",
-				"selector": ".scm-view"
+				"selector": ".activitybar .action-label[aria-label^='Source Control']"
 			},
-			"cardAt": "top-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".scm-view .scm-provider"
+				},
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Open the folder",
+			"say": {
+				"never": "Press **Ctrl+P**, type `02-feature-branch/README` and press **Enter**. Opening a file from the folder makes its name show up in the bottom-left corner.",
+				"bit": "**Ctrl+P**, `02-feature-branch/README`, **Enter**."
+			},
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": "[id='status.scm.provider']"
+				},
+				"hint": {
+					"never": "open a file in 02-feature-branch.",
+					"bit": "open a file in 02-feature-branch."
+				},
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Pick the repository",
+			"say": {
+				"never": "Look at the very bottom of the window. The name just left of the branch is the repository you're working on. Click it and choose **02-feature-branch** from the list at the top.",
+				"bit": "Bottom-left, click the repository name and choose **02-feature-branch**."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": "[id='status.scm.provider']"
+			},
+			"cardAt": "bottom-left",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": "[id='status.scm.provider']",
+					"text": "02-feature-branch"
+				},
+				"hint": {
+					"never": "pick 02-feature-branch in the bottom-left corner.",
+					"bit": "pick 02-feature-branch in the bottom-left."
+				}
+			},
 			"assist": true
 		},
 		{
 			"title": "Your turn",
 			"say": {
-				"never": "Click the branch name in the bottom-left corner and choose **Create new branch from...**. Type your branch name (starting with `issue-12-`), press **Enter**, then pick `develop` as the starting point.",
-				"bit": "Click the branch name (bottom-left), **Create new branch from...**, name it `issue-12-...`, start from `develop`."
+				"never": "Click the branch name in the bottom-left corner, next to the repository name, and choose **Create new branch from...**. Pick `develop` as the starting point. Then type your branch name (starting with `issue-12-`, all lowercase) and press **Enter**.",
+				"bit": "Branch name, **Create new branch from...**, `develop`, then type `issue-12-...` in lowercase and **Enter**."
 			},
 			"cardAt": "top-right",
 			"target": {
@@ -85,7 +134,7 @@
 		{
 			"title": "Two commits",
 			"say": {
-				"never": "The exercise wants **two separate** commits: small commits, each with a clear message, tell the story of the work. Edit `FEATURES.md` and save, stage it with the **+**, write a message and press **Commit**. Then change the file again and repeat with a new message.",
+				"never": "The exercise wants **two separate** commits: small commits, each with a clear message, tell the story of the work. Edit `FEATURES.md` and save. Then, under the **02-feature-branch** row in Source Control, stage it with the **+**, write a message in the box and press **Commit**. Change the file again and repeat with a new message.",
 				"bit": "The exercise wants **two separate** commits: edit, save, stage with **+**, message, **Commit**, then do it again."
 			},
 			"board": {
