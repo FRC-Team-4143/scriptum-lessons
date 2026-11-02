@@ -1,14 +1,14 @@
 {
 	"title": "Which way is it facing?",
-	"summary": "Yaw: working out the robot's heading from the wheels.",
+	"summary": "Yaw: the robot's heading, from the wheels and from the NavX gyro.",
 	"topic": "Robot",
 	"order": 441,
 	"steps": [
 		{
 			"title": "Yaw: which way it faces",
 			"say": {
-				"never": "**Yaw** is which way the robot is facing, as an angle. This robot has no compass, so it works the angle out from the wheels: if the right side has driven farther than the left, the robot has turned left.\n\nIn this guide you will open `DifferentialDriveMech.java`, find `getYaw()`, and make it turn the two wheel distances into an angle. Press **Verify** in the lesson chip when you are done. It reads your Java and tells you which line it wanted if something is missing.",
-				"bit": "Yaw is the heading angle, worked out from how far each side has driven. You will fill in `getYaw()`, then press **Verify**."
+				"never": "**Yaw** is which way the robot is facing, as an angle. You will work it out two ways. First from the wheels: if the right side has driven farther than the left, the robot has turned left. Then from the **NavX gyro**, a sensor plugged into the roboRIO that measures turning directly.\n\nIn this guide you will open `DifferentialDriveMech.java` and fill in two methods, `getWheelYaw()` and `getYaw()`. Press **Verify** in the lesson chip when you are done. It reads your Java and tells you which line it wanted if something is missing.",
+				"bit": "Yaw is the heading angle. You will fill in `getWheelYaw()` (from the wheels) and `getYaw()` (from the gyro), then press **Verify**."
 			}
 		},
 		{
@@ -42,10 +42,10 @@
 			"assist": true
 		},
 		{
-			"title": "Find getYaw",
+			"title": "Find getWheelYaw",
 			"say": {
-				"never": "Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `getYaw` and press **Enter**. The editor scrolls to the right spot and highlights it.",
-				"bit": "Press **Ctrl+F**, type `getYaw` and press Enter to jump to it."
+				"never": "Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `getWheelYaw` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "Press **Ctrl+F**, type `getWheelYaw` and press Enter to jump to it."
 			},
 			"target": {
 				"pane": "editor"
@@ -55,9 +55,9 @@
 				"target": {
 					"pane": "editor",
 					"selector": ".view-lines .view-line",
-					"text": "public Rotation2d getYaw"
+					"text": "public Rotation2d getWheelYaw"
 				},
-				"hint": "find getYaw with Ctrl+F.",
+				"hint": "find getWheelYaw with Ctrl+F.",
 				"skipIfDone": true
 			},
 			"assist": true
@@ -70,10 +70,41 @@
 			}
 		},
 		{
+			"title": "Write getWheelYaw",
+			"say": {
+				"never": "Inside `getWheelYaw()`, under the TODO comment, write two things. First a `double radians` that holds right distance minus left distance, divided by `Constants.TRACK_WIDTH_METERS`. Then **replace** the placeholder `return new Rotation2d();` with a return of a new `Rotation2d` built from `radians`. Replace the old return rather than adding a second one: a method can only return once.\n\nClick **I did it** when both are written.",
+				"bit": "Under the TODO in `getWheelYaw()`, compute `radians` from `getRightMeters()`, `getLeftMeters()` and the track width, then replace the placeholder return with `new Rotation2d(radians)`."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "public Rotation2d getWheelYaw"
+			},
+			"cardAt": "bottom-right",
+			"assist": true,
+			"waitFor": {
+				"hint": "write the radians line and the new return, then click I did it."
+			}
+		},
+		{
+			"title": "Why a gyro?",
+			"say": {
+				"never": "Wheels slide a little whenever the robot turns, and every slip turns into a heading error. A tiny error in heading sends every later meter the wrong way: 0.087 radians off puts you almost a meter sideways after 10 m.\n\nA **gyro** measures turning directly, so wheel slip can't fool it. This robot has a **NavX** in the roboRIO's top (MXP) port. The code already reads it every loop into `inputs_.gyroYawRad` (radians, counterclockwise positive, like `Rotation2d`) and `inputs_.gyroConnected` (true when it is plugged in and answering).",
+				"bit": "Wheel yaw drifts when wheels slip. The NavX gyro measures turning directly; its reading is already in `inputs_.gyroYawRad`, and `inputs_.gyroConnected` says whether it is answering."
+			}
+		},
+		{
+			"title": "What's an IMU?",
+			"say": {
+				"never": "The NavX is an **IMU**, an Inertial Measurement Unit: three sensors on one board. A **gyroscope** measures how fast it's turning; adding that up gives the angle. An **accelerometer** measures speeding up, and which way is down. A **magnetometer** is a compass, but motors confuse it, so robots rarely use it.\n\nIt reports three angles. **Yaw** is turning left and right: that's our heading. **Pitch** is nose up or down, and **roll** is tipping side to side.\n\nOn a real robot, keep it still while it boots (it calibrates then), mount it flat and solid, and remember the NavX's own `getYaw()` counts clockwise, which is why the code uses `getRotation2d()`.",
+				"bit": "The NavX is an IMU: gyro, accelerometer, magnetometer. Yaw is our heading; pitch and roll are tipping. Keep it still at boot and mount it flat."
+			}
+		},
+		{
 			"title": "Write getYaw",
 			"say": {
-				"never": "Inside `getYaw()`, under the TODO comment, write two things. First a `double radians` that holds right distance minus left distance, divided by `Constants.TRACK_WIDTH_METERS`. Then **replace** the placeholder `return new Rotation2d();` with a return of a new `Rotation2d` built from `radians`. Replace the old return rather than adding a second one: a method can only return once.\n\nClick **I did it** when both are written.",
-				"bit": "Under the TODO, compute `radians` from `getRightMeters()`, `getLeftMeters()` and the track width, then replace the placeholder return with `new Rotation2d(radians)`."
+				"never": "Just below `getWheelYaw()` is `getYaw()`. This is the heading the rest of the robot uses, so it should come from the gyro. Under its TODO, write an `if`: when `inputs_.gyroConnected` is true, return `new Rotation2d(inputs_.gyroYawRad)`. After the `if`, return `backupYaw()` instead. `backupYaw()` is written for you, just below: if the gyro gets unplugged, it carries on from the gyro's last heading using the wheels, so the heading doesn't suddenly jump. Replace the placeholder return.\n\nClick **I did it** when it is written.",
+				"bit": "In `getYaw()`: if `inputs_.gyroConnected`, return `new Rotation2d(inputs_.gyroYawRad)`; otherwise return `backupYaw()`. Replace the placeholder return."
 			},
 			"target": {
 				"pane": "editor",
@@ -83,13 +114,13 @@
 			"cardAt": "bottom-right",
 			"assist": true,
 			"waitFor": {
-				"hint": "write the radians line and the new return, then click I did it."
+				"hint": "write the if and the two returns in getYaw, then click I did it."
 			}
 		},
 		{
 			"title": "Why nothing shows yet",
 			"say": {
-				"never": "Yaw doesn't show up anywhere on its own yet. The pose estimator in the next guide, **Where is the robot?**, calls `getYaw()` and logs it as `Drive/PoseYawRad`. Open that guide to wire it in and watch the yaw change.",
+				"never": "Yaw doesn't show up anywhere on its own yet. The pose estimator in the next guide, **Where is the robot?**, calls `getYaw()` and logs it as `Drive/PoseYawRad`. Open that guide to wire it in and watch the yaw change. `Drive/WheelYawRad` and `Drive/GyroYawRad` are logged too, so you can compare the two.",
 				"bit": "Yaw only shows up through the pose estimator. Do **Where is the robot?** next to wire it in."
 			}
 		}

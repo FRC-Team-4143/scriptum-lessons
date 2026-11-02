@@ -1,6 +1,6 @@
 {
 	"about": {
-		"never": "This lesson is about knowing where the robot is. First you move the controller code into its own class, OI. Then you use WPILib's kinematics and pose estimator to turn wheel movement into the robot's speed, heading and position on the field, and finally you use that position to drive to a spot in autonomous. The lesson's README lists each job.",
+		"never": "This lesson is about knowing where the robot is. First you move the controller code into its own class, OI. Then you use WPILib's kinematics and pose estimator to turn wheel movement and the NavX gyro into the robot's speed, heading and position on the field, and finally you use that position to drive to a spot in autonomous. The lesson's README lists each job.",
 		"bit": "Write the OI class, then use WPILib kinematics and a pose estimator so the robot knows its speed, heading and position, and drive to x = 3 m in Auto."
 	},
 	"plan": [
@@ -80,12 +80,16 @@
 			]
 		},
 		"yaw": {
-			"why": "The pose needs a heading, and this robot works it out from how far each side has driven.",
+			"why": "The pose needs a heading. The NavX gyro measures it directly; the wheels give a backup that drifts.",
 			"guide": "robot-odometry-yaw",
 			"hints": [
 				{
-					"never": "Spinning left makes the right side go farther than the left. Which of the two is subtracted from the other, and what do you divide by?",
-					"bit": "Yaw is (right - left) divided by the track width, in radians."
+					"never": "Spinning left makes the right side go farther than the left. In `getWheelYaw()`, which of the two is subtracted from the other, and what do you divide by?",
+					"bit": "Wheel yaw is (right - left) divided by the track width, in radians."
+				},
+				{
+					"never": "`getYaw()` is the one the pose estimator uses. Where does the gyro's reading already live, and what tells you whether the gyro is answering?",
+					"bit": "`getYaw()`: if `inputs_.gyroConnected`, return `new Rotation2d(inputs_.gyroYawRad)`; otherwise `backupYaw()`."
 				},
 				{
 					"never": "The yaw doesn't reach the log until `updatePose()` feeds it to the estimator. Did you write both lines in `updatePose()`?",
@@ -95,7 +99,7 @@
 					"never": "Spin the robot to the left for a few seconds, then Verify. Spinning right makes the angle negative.",
 					"bit": "Hold the left stick to the left for a few seconds, then Verify."
 				},
-				"`double radians = (getRightMeters() - getLeftMeters()) / Constants.TRACK_WIDTH_METERS; return new Rotation2d(radians);`, then `pose_estimator_.update(getYaw(), getLeftMeters(), getRightMeters()); pose_ = pose_estimator_.getEstimatedPosition();` in `updatePose()`."
+				"In `getWheelYaw()`: `double radians = (getRightMeters() - getLeftMeters()) / Constants.TRACK_WIDTH_METERS; return new Rotation2d(radians);`. In `getYaw()`: `if (inputs_.gyroConnected) { return new Rotation2d(inputs_.gyroYawRad); } return backupYaw();`. Then `pose_estimator_.update(getYaw(), getLeftMeters(), getRightMeters()); pose_ = pose_estimator_.getEstimatedPosition();` in `updatePose()`."
 			]
 		},
 		"pose-auto": {

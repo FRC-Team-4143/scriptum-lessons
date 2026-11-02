@@ -9,6 +9,10 @@ import com.ctre.phoenix6.sim.ChassisReference;
 import com.marswars.logging.MwLog;
 import com.marswars.mechanisms.MechBase;
 import com.marswars.mechanisms.MotorConfig;
+import com.studica.frc.AHRS;
+import com.studica.frc.AHRS.NavXComType;
+import edu.wpi.first.hal.SimDouble;
+import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
@@ -18,6 +22,7 @@ import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.simulation.DifferentialDrivetrainSim;
+import edu.wpi.first.wpilibj.simulation.SimDeviceSim;
 import frc.robot.FieldTargets;
 import frc.robot.subsystems.drive.DriveMath;
 import frc.robot.subsystems.drive.DrivetrainConstants;
@@ -45,6 +50,19 @@ public class DifferentialDriveMech extends MechBase {
   private final DriveInputsAutoLogged inputs_ = new DriveInputsAutoLogged();
 
   private final DifferentialDrivetrainSim sim_;
+
+  // The NavX gyro, plugged into the roboRIO's MXP port (the wide port on top). It measures which
+  // way the robot faces directly, so wheel slip can't fool it.
+  private final AHRS gyro_ = new AHRS(NavXComType.kMXP_SPI);
+  // The NavX has no physics of its own in simulation, so updateSimulation() writes the simulated
+  // robot's heading into it. "navX-Sensor[4]" is the name the NavX library gives its simulated
+  // device on the MXP port.
+  private final SimDouble sim_gyro_yaw_ =
+      IS_SIM ? new SimDeviceSim("navX-Sensor[4]").getDouble("Yaw") : null;
+  // Where the backup heading starts from: the last heading the gyro gave, and what the wheels said
+  // at that moment. See backupYaw().
+  private Rotation2d backup_start_yaw_ = new Rotation2d();
+  private Rotation2d backup_start_wheel_yaw_ = new Rotation2d();
 
   // Simulated sensor imperfections (simulation only). The seed is fixed so every student sees the
   // same robot.
@@ -139,6 +157,7 @@ public class DifferentialDriveMech extends MechBase {
    * here. (In simulation it also puts the simulated robot back at the start.)
    */
   public void resetEncoders() {
+    Rotation2d heading_before_reset = getYaw();
     if (IS_SIM) {
       // The simulation feeds the motors their position every loop, so it has to be the one that
       // starts over. Telling the motors "you are at zero" with setPosition() would be undone on the
@@ -153,6 +172,9 @@ public class DifferentialDriveMech extends MechBase {
     inputs_.rightPositionRad = 0.0;
     inputs_.leftVelocityRadPerSec = 0.0;
     inputs_.rightVelocityRadPerSec = 0.0;
+    // The wheels count from zero again, so the backup heading starts over from here.
+    backup_start_yaw_ = heading_before_reset;
+    backup_start_wheel_yaw_ = new Rotation2d();
     just_reset_ = true;
   }
 
@@ -214,10 +236,30 @@ public class DifferentialDriveMech extends MechBase {
         new DifferentialDriveWheelSpeeds(getLeftMetersPerSecond(), getRightMetersPerSecond()));
   }
 
-  /** Which way the robot faces, worked out from how far each side has driven. */
-  public Rotation2d getYaw() {
+  /**
+   * Which way the robot faces, worked out from how far each side has driven since the encoders were
+   * last reset. Wheels slip, so this drifts: backupYaw() uses it only while the gyro is unplugged.
+   */
+  public Rotation2d getWheelYaw() {
     return new Rotation2d(
         (getRightMeters() - getLeftMeters()) / DrivetrainConstants.TRACK_WIDTH_METERS);
+  }
+
+  /** Which way the robot faces, from the NavX gyro (or from the wheels if it is unplugged). */
+  public Rotation2d getYaw() {
+    if (inputs_.gyroConnected) {
+      return new Rotation2d(inputs_.gyroYawRad);
+    }
+    return backupYaw();
+  }
+
+  /**
+   * The heading to use while the gyro is unplugged: the last heading it gave, plus however far the
+   * wheels say the robot has turned since. Starting over from the wheels alone would jump the
+   * heading back to whatever the wheels have counted since the last reset.
+   */
+  private Rotation2d backupYaw() {
+    return backup_start_yaw_.plus(getWheelYaw().minus(backup_start_wheel_yaw_));
   }
 
   /** The kinematics object for this chassis (it knows the track width). */
@@ -233,6 +275,7 @@ public class DifferentialDriveMech extends MechBase {
    * @param new_pose where the robot is now, in field coordinates
    */
   public void resetPose(Pose2d new_pose) {
+    Rotation2d heading_before_reset = getYaw();
     if (IS_SIM) {
       // The simulation owns the wheel positions (see resetEncoders), so it is the one that moves.
       resetSimulation(new_pose);
@@ -244,6 +287,9 @@ public class DifferentialDriveMech extends MechBase {
     inputs_.rightPositionRad = 0.0;
     inputs_.leftVelocityRadPerSec = 0.0;
     inputs_.rightVelocityRadPerSec = 0.0;
+    // The wheels count from zero again, so the backup heading starts over from here.
+    backup_start_yaw_ = heading_before_reset;
+    backup_start_wheel_yaw_ = new Rotation2d();
     just_reset_ = true;
   }
 
@@ -293,11 +339,21 @@ public class DifferentialDriveMech extends MechBase {
           Units.rotationsToRadians(right_motors_[0].getVelocity().getValueAsDouble());
       }
 
+      // getRotation2d() counts counterclockwise as positive, like the rest of WPILib. (The NavX's
+      // own getYaw() counts the other way, clockwise, so it is not used here.)
+      inputs_.gyroYawRad = gyro_.getRotation2d().getRadians();
+      inputs_.gyroConnected = gyro_.isConnected();
+
       if (IS_SIM) {
         updateSimulation();
       }
     }
     Logger.processInputs(getLoggingKey() + "Inputs", inputs_);
+    if (inputs_.gyroConnected) {
+      // Keep the backup heading ready in case the gyro gets unplugged.
+      backup_start_yaw_ = new Rotation2d(inputs_.gyroYawRad);
+      backup_start_wheel_yaw_ = getWheelYaw();
+    }
   }
 
   @Override
@@ -310,6 +366,10 @@ public class DifferentialDriveMech extends MechBase {
   public void logData() {
     MwLog.log(getLoggingKey() + "LeftOutput", left_request_.Output);
     MwLog.log(getLoggingKey() + "RightOutput", right_request_.Output);
+    // Both headings, to compare: the gyro's, and the one worked out from the wheels.
+    MwLog.log(getLoggingKey() + "GyroYawRad", inputs_.gyroYawRad);
+    MwLog.log(getLoggingKey() + "WheelYawRad", getWheelYaw().getRadians());
+    MwLog.log(getLoggingKey() + "GyroConnected", inputs_.gyroConnected);
     ChassisSpeeds speeds = getChassisSpeeds();
     MwLog.log(getLoggingKey() + "ChassisSpeeds", speeds);
     MwLog.log(getLoggingKey() + "LinearSpeed", speeds.vxMetersPerSecond);
@@ -370,6 +430,9 @@ public class DifferentialDriveMech extends MechBase {
 
     sim_.setInputs(left_volts, right_volts);
     sim_.update(0.020);
+    // The gyro reads the simulated robot's real heading. A NavX reports yaw in degrees from -180 to
+    // 180, counting clockwise as positive, so the counterclockwise heading is flipped and wrapped.
+    sim_gyro_yaw_.set(MathUtil.inputModulus(-sim_.getHeading().getDegrees(), -180.0, 180.0));
 
     // Real encoders are not perfect, so the simulated ones are not either. Each wheel reads a tiny
     // bit
@@ -408,6 +471,10 @@ public class DifferentialDriveMech extends MechBase {
   /** Puts the simulated robot at a pose, standing still, with fresh (zeroed) encoders. */
   private void resetSimulation(Pose2d where) {
     sim_.setPose(where);
+    // The gyro starts over too, facing the same way as the simulated robot. The next reading would
+    // say the same, but setting it now means a reset right before a read sees it straight away.
+    sim_gyro_yaw_.set(MathUtil.inputModulus(-sim_.getHeading().getDegrees(), -180.0, 180.0));
+    inputs_.gyroYawRad = sim_.getHeading().getRadians();
     sim_.setInputs(0.0, 0.0);
     // Start counting from wherever the simulation says the wheels are now (zero in most versions of
     // WPILib, but this does not depend on it).

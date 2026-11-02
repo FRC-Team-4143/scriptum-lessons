@@ -90,7 +90,7 @@ public class LocalizationSubsystem extends MwSubsystem<LocalizationStates, Local
   /** Runs every 20 ms: add up the wheel movement, then use any new camera measurements. */
   @Override
   public void updateLogic(double timestamp) {
-    // Odometry: the heading (from the wheels, standing in for a gyro) and how far each side drove.
+    // Odometry: the heading (from the NavX gyro) and how far each side drove.
     pose_estimator_.update(drive_.getYaw(), drive_.getLeftMeters(), drive_.getRightMeters());
 
     // Vision: the latest tag solutions from the proxy server. (This also logs them, under

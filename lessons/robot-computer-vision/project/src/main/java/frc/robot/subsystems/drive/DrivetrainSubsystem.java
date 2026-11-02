@@ -143,7 +143,7 @@ public class DrivetrainSubsystem extends MwSubsystem<DriveStates, DrivetrainCons
     return RobotBase.isSimulation() ? drive_.getTruePose() : getPose();
   }
 
-  /** Which way the robot faces, worked out from the wheels (this plays the part of a gyro). */
+  /** Which way the robot faces, from the NavX gyro (or the wheels if it is unplugged). */
   public Rotation2d getYaw() {
     return drive_.getYaw();
   }
