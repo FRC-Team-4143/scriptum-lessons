@@ -1220,6 +1220,18 @@
 					}
 				},
 				{
+					"id": "drives-straight",
+					"title": "Drives straight",
+					"description": "Fix the right side in Constants.java, then push forward at full speed (W). Drive/TrueSpeed, how fast the robot really moves forward, should reach about 5.9 m/s. If the robot spins instead, a motor's inverted setting is wrong.",
+					"verifier": {
+						"type": "nt4-value",
+						"topic": "/AdvantageKit/RealOutputs/Check/Drive/TrueSpeed/Max",
+						"check": "range",
+						"min": 3,
+						"max": 6.5
+					}
+				},
+				{
 					"id": "drives-forward",
 					"title": "Drives forward",
 					"description": "Push the left stick forward (W) until both sides hit full speed.",
@@ -1284,7 +1296,7 @@
 				{
 					"id": "linear-speed",
 					"title": "Linear speed",
-					"description": "Drive both sides forward at full speed. Robot/LinearSpeed should read about 5.9 m/s.",
+					"description": "Drive both sides forward at full speed. Robot/LinearSpeed should read about 5.9 m/s. If it reads about 50, GEAR_RATIO isn't set yet.",
 					"verifier": {
 						"type": "nt4-value",
 						"topic": "/AdvantageKit/RealOutputs/Check/Robot/LinearSpeed/Max",
@@ -3392,6 +3404,18 @@
 			"path": "lessons/robot-drivetrain/guides/robot-drivetrain-arcade.json"
 		},
 		{
+			"id": "robot-drivetrain-inversion",
+			"title": "Why the robot spins: motor inversion",
+			"summary": "The two sides are mirror images, so one motor must be inverted.",
+			"topic": "Robot",
+			"order": 390,
+			"modules": [
+				"robot-drivetrain"
+			],
+			"kind": "mixed",
+			"path": "lessons/robot-drivetrain/guides/robot-drivetrain-inversion.json"
+		},
+		{
 			"id": "robot-sensors-encoders",
 			"title": "Encoders and meters",
 			"summary": "Wheel radians to distance and speed.",
@@ -3438,6 +3462,18 @@
 			],
 			"kind": "mixed",
 			"path": "lessons/robot-sensors/guides/robot-sensors-bang-bang.json"
+		},
+		{
+			"id": "robot-sensors-gear-ratio",
+			"title": "The gear ratio",
+			"summary": "The encoder measures the motor, so the gearbox has to be in your numbers.",
+			"topic": "Robot",
+			"order": 414,
+			"modules": [
+				"robot-sensors"
+			],
+			"kind": "mixed",
+			"path": "lessons/robot-sensors/guides/robot-sensors-gear-ratio.json"
 		},
 		{
 			"id": "robot-drive-math-methods",

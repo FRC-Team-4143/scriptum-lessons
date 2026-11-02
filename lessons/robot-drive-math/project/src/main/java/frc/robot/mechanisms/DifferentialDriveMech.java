@@ -56,6 +56,9 @@ public class DifferentialDriveMech extends MechBase {
   private static final double SUPPLY_VOLTS = 12.0; // battery voltage
   private static final double CURRENT_LIMIT_AMPS = 120.0; // per motor, like the TalonFX default
   private static final DCMotor DRIVE_MOTOR = DCMotor.getFalcon500(1);
+  // The gearbox really on the robot. The physics always uses this one, so a wrong GEAR_RATIO in the
+  // constants makes the sensors read wrong, just like on a real robot.
+  private static final double REAL_GEAR_RATIO = 8.46;
   private double last_true_left_meters_ = 0.0;
   private double last_true_right_meters_ = 0.0;
   private double measured_left_meters_ = 0.0;
@@ -82,7 +85,7 @@ public class DifferentialDriveMech extends MechBase {
     sim_ =
         new DifferentialDrivetrainSim(
             DCMotor.getFalcon500(motors_per_side),
-            Constants.GEAR_RATIO,
+            REAL_GEAR_RATIO,
             7.5, // how hard the robot is to spin (kg*m^2)
             Constants.ROBOT_MASS_KG,
             Constants.WHEEL_RADIUS_METERS,
@@ -263,8 +266,13 @@ public class DifferentialDriveMech extends MechBase {
     // wheels, so it believes a turning robot is stalled and cuts its output (to about 4 V). The
     // current limit is applied below instead, to the current the physics model really sees.
     double supply_volts = DriverStation.isEnabled() ? SUPPLY_VOLTS : 0.0;
-    double left_volts = left_request_.Output * supply_volts;
-    double right_volts = right_request_.Output * supply_volts;
+    // The right motor is mounted facing the other way from the left, so only the right one should
+    // be marked inverted. If the constants have that wrong, the wheel really does turn the wrong
+    // way here, just like on a real robot, while its encoder still counts up as commanded.
+    double left_direction = left_inverted_[0] ? -1.0 : 1.0;
+    double right_direction = right_inverted_[0] ? 1.0 : -1.0;
+    double left_volts = left_direction * left_request_.Output * supply_volts;
+    double right_volts = right_direction * right_request_.Output * supply_volts;
 
     // Friction, which the physics model leaves out. The first few volts on each side only break
     // the wheels loose, so a stick that rests a hair off center does not creep. And turning drags
@@ -305,10 +313,15 @@ public class DifferentialDriveMech extends MechBase {
             + JITTER_METERS_PER_SECOND * noise_.nextGaussian();
 
     // Meters divided by the wheel radius is wheel radians; times the gear ratio is motor radians.
-    double motor_rad_per_meter = Constants.GEAR_RATIO / Constants.WHEEL_RADIUS_METERS;
-    pushSimState(left_motors_, left_meters * motor_rad_per_meter, left_speed * motor_rad_per_meter);
+    double motor_rad_per_meter = REAL_GEAR_RATIO / Constants.WHEEL_RADIUS_METERS;
     pushSimState(
-        right_motors_, right_meters * motor_rad_per_meter, right_speed * motor_rad_per_meter);
+        left_motors_,
+        left_direction * left_meters * motor_rad_per_meter,
+        left_direction * left_speed * motor_rad_per_meter);
+    pushSimState(
+        right_motors_,
+        right_direction * right_meters * motor_rad_per_meter,
+        right_direction * right_speed * motor_rad_per_meter);
   }
 
   /** Puts the simulated robot back at the origin with fresh (zeroed) encoders. */
@@ -330,7 +343,7 @@ public class DifferentialDriveMech extends MechBase {
   /** Keeps the current through one motor under the limit, like the TalonFX's stator limit. */
   private static double limitCurrent(double volts, double wheel_meters_per_second) {
     double motor_rad_per_sec =
-        wheel_meters_per_second / Constants.WHEEL_RADIUS_METERS * Constants.GEAR_RATIO;
+        wheel_meters_per_second / Constants.WHEEL_RADIUS_METERS * REAL_GEAR_RATIO;
     double back_emf = motor_rad_per_sec / DRIVE_MOTOR.KvRadPerSecPerVolt;
     double window = CURRENT_LIMIT_AMPS * DRIVE_MOTOR.rOhms;
     return Math.max(back_emf - window, Math.min(back_emf + window, volts));

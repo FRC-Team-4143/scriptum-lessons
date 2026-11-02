@@ -153,16 +153,20 @@ has to be made in every module (`lessons/robot-*/project/`):
 - Modules 1-4 keep the chassis numbers in `Constants.java`; from `robot-subsystems` on that file is gone
   and they live in `subsystems/drive/DrivetrainConstants.java` (static fields, read as
   `DrivetrainConstants.WHEEL_RADIUS_METERS`). The wheel radius (0.0762 m) and track width (0.61 m)
-  are the real robot's; the gear ratio and mass are still placeholders.
+  and gear ratio (8.46) are the real robot's; the mass is still a placeholder.
+- The mech's simulation models how the robot is really built: `REAL_GEAR_RATIO` in the physics, and a
+  right motor mounted facing the other way. So wrong constants misbehave like on a real robot. Two
+  lessons start wrong on purpose: `robot-drivetrain` has the right motor not inverted (the robot spins)
+  and `robot-sensors` has `GEAR_RATIO` at 1.0 (readings about 8.5 times too high).
 - The shooter uses the real flywheel's wheel radius (0.0762 m) and mass (2.3 kg). In `robot-subsystems`
   the flywheel runs at a fixed duty cycle (`SHOOT_DUTY_CYCLE`, 0.5) and the drivetrain has no state
   switch; velocity control (`SHOOT_VELOCITY`) first appears in `robot-control-theory` and the
   states-plus-`switch` drivetrain in `robot-state-machines`. In `robot-control-theory` the flywheel starts in bang-bang mode with untuned gains on purpose; that
-  lesson's task is to write bang-bang and feedforward, then tune PID (`kV` about 0.0191 and `kP` about 0.032,
+  lesson's task is to write bang-bang and feedforward, then tune PID (`kV` about 0.0187 and `kP` about 0.032,
   both per rad/s, works). `lessons/robot-control-theory/solution/` is the finished version.
 - `robot-autonomous` (Autonomous, about 3 hours) starts from the finished `robot-computer-vision` robot
   (the `LocalizationSubsystem` with the vision call written at std devs 0.3/0.3, the vision stack and
-  PhotonLib, and the aim state tuned at 2.0/0/0.2; `DrivetrainSubsystem.getPose()` is the vision-corrected
+  PhotonLib, and the aim state tuned at 2.0/0/0.3; `DrivetrainSubsystem.getPose()` is the vision-corrected
   estimate and `resetPose(Pose2d)` resets both the mech and Localization). Students draw two
   Choreo paths (`ToPickup`, `ToScore`) in the Choreo pane, then write `Autos.java`: follow, wait, follow,
   aim until `isAimed`, shoot. `FieldTargets.java` has the field poses (the same as the named poses in

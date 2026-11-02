@@ -1,0 +1,110 @@
+{
+	"title": "The gear ratio",
+	"summary": "The encoder measures the motor, so the gearbox has to be in your numbers.",
+	"topic": "Robot",
+	"order": 414,
+	"steps": [
+		{
+			"title": "A number that's too good",
+			"say": {
+				"never": "When a reading looks amazing, be suspicious. A sensor that says a robot does 50 meters per second is saying it crosses the whole field in a third of a second. Checking whether a number makes sense is one of the most useful habits in robotics.",
+				"bit": "If a reading looks impossible, it probably is. Check that numbers make sense."
+			}
+		},
+		{
+			"title": "Gearboxes",
+			"say": {
+				"never": "A motor spins very fast but not very hard. A **gearbox** trades speed for strength: think of a low gear on a bike, where your legs go around many times for each turn of the wheel. A **ratio** of 3:1 means the input turns 3 times for every 1 turn of the output.",
+				"bit": "A gearbox trades speed for strength. At 3:1 the input turns 3 times per 1 output turn."
+			},
+			"board": {
+				"code": "gear ratio 3:1\n\nmotor turns 30 times\nwheel turns 30 / 3 = 10 times",
+				"language": "text",
+				"marks": [
+					{
+						"text": "30 / 3",
+						"label": "divide by the ratio to get to the wheel"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: GEAR_RATIO",
+			"say": {
+				"never": "Your encoder sits inside the motor, so it counts motor turns. The drivetrain divides by `GEAR_RATIO` to give you wheel turns. It's `1.0` right now, which divides by nothing, so every wheel number comes out as big as the motor's. Our gearbox is 8.46:1.",
+				"bit": "The drivetrain divides encoder readings by `GEAR_RATIO`. At `1.0` the wheel numbers are as big as the motor's. Our gearbox is 8.46:1."
+			},
+			"board": {
+				"code": "wheel reading = motor reading / GEAR_RATIO\n\nGEAR_RATIO 1.0:   about 50 m/s  (wrong)\nour gearbox:      8.46 : 1",
+				"language": "text",
+				"marks": [
+					{
+						"text": "motor reading / GEAR_RATIO",
+						"label": "done for you in the drivetrain"
+					},
+					{
+						"text": "8.46 : 1",
+						"label": "the real number"
+					}
+				]
+			},
+			"assist": true
+		},
+		{
+			"title": "Open Constants.java",
+			"say": {
+				"never": "Hold down **Ctrl** and tap **P**. Type `Constants`, then press **Enter**. This is where the robot's numbers live.",
+				"bit": "Press **Ctrl+P**, type `Constants` and press Enter."
+			},
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "Constants.java"
+				},
+				"hint": "open Constants.java with Ctrl+P.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Set the real number",
+			"say": {
+				"never": "Find `GEAR_RATIO` and change `1.0` to our gearbox's number, 8.46. You can delete the comment above it that says it isn't right yet. Save with **Ctrl+S**.",
+				"bit": "Change `GEAR_RATIO` from `1.0` to 8.46 and save."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "GEAR_RATIO"
+			},
+			"cardAt": "bottom-right",
+			"assist": true
+		},
+		{
+			"title": "Check it",
+			"say": {
+				"never": "Press **Start** again, enable Teleop and hold **W**. `Robot/LinearSpeed` should now level off at about 5.9 meters per second.",
+				"bit": "Press **Start** again and hold **W**. `Robot/LinearSpeed` should level off at about 5.9 m/s."
+			},
+			"target": {
+				"selector": "[data-tour='mode']"
+			},
+			"cardAt": "top-right"
+		}
+	],
+	"kind": "mixed"
+}

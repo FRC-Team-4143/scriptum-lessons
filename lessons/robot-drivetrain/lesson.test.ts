@@ -9,6 +9,20 @@ import { hasJdk, lessonKit, ROBOT_SRC } from "../../common/tests/lesson-kit";
 
 const L = lessonKit(import.meta.url);
 
+describe("robot-drivetrain starts with the right motor not inverted", () => {
+	const line = (text: string) => text.split("\n").find((l) => l.includes("RIGHT_MOTORS")) ?? "";
+
+	test("the starter leaves it wrong, so the robot spins until the student fixes it", async () => {
+		const text = await readFile(new URL("./project/src/main/java/frc/robot/Constants.java", import.meta.url), "utf8");
+		expect(line(text)).toContain("motor(2, false)");
+	});
+
+	test("the solution inverts it", async () => {
+		const text = await readFile(new URL("./solution/Constants.java", import.meta.url), "utf8");
+		expect(line(text)).toContain("motor(2, true)");
+	});
+});
+
 describe.skipIf(!hasJdk)("robot-drivetrain script checkpoints", () => {
 	test("robot-drivetrain: teleop-code fails fresh, passes once solved", async () => {
 		await L.roundTrip(["teleop-code"], ["Robot.java"]);
