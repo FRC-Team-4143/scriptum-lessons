@@ -6,13 +6,19 @@ All the code lives in `src/Main.java`. Click **Run** any time to see your output
 
 More depth: the team docs page [Variables](https://frc-team-4143.github.io/docs/software/java/basics/vars-dt).
 
+## Which names matter
+
+- **Variables inside `main`:** only the printed line is checked, so name them
+  how you like (team standard: `snake_case`, lowercase words joined by
+  underscores, like `team_number`).
+- **Constants and enums:** the checkpoints look them up by name, so use exactly
+  the names below.
+
 ## What you need to do
 
 1. **Store four facts in local variables.** Inside `main`, declare one
    variable for each row below, choosing the datatype shown, and declare and
-   assign on the same line. Team standard: local variables are
-   `snake_case` (lowercase words joined by underscores, like `team_number`).
-   The checkpoint reads what gets printed, not your variable names.
+   assign on the same line.
 
    | Datatype | Value | Printed key |
    | --- | --- | --- |
@@ -34,8 +40,7 @@ More depth: the team docs page [Variables](https://frc-team-4143.github.io/docs/
    :::
 
 3. **Add four named values to the `Main` class itself**, outside of `main`.
-   The checkpoints look these up by name via reflection, so use exactly
-   these names. Team standard: constants are `final` /
+   Use exactly these names. Team standard: constants are `final` /
    `SCREAMING_SNAKE_CASE`, enum type names are `UpperCamelCase` like classes (the enum's values are `SCREAMING_SNAKE_CASE`).
    - `String TEAM_NAME` - a `public static final` constant equal to
      `"Team 4143"`.
@@ -46,7 +51,18 @@ More depth: the team docs page [Variables](https://frc-team-4143.github.io/docs/
 
    Define both enums as nested types inside `Main`, not as their own
    top-level types - they're only used by `Main`, so they belong there.
-4. **Run it** and compare your output against the table, then verify.
+4. **Run it** and compare your output with this, then verify. The starter
+   code already prints the last two lines, to show your constants. They look
+   wrong until you fill in the constants in step 3.
+
+   ```text
+   Team number: 4143
+   Pi: 3.14
+   Robot is on: true
+   Message: I am a string!
+   Team name: Team 4143
+   Max speed: 5.0
+   ```
 
 ## Checking your work
 

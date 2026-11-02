@@ -23,8 +23,12 @@ public class TeamNameConstantCheck {
             System.exit(1);
             return;
         }
+        if ("".equals(value)) {
+            System.out.println("TEAM_NAME is still empty (\"\"). Put \"Team 4143\" between the quotes.");
+            System.exit(1);
+        }
         if (!"Team 4143".equals(value)) {
-            System.out.println("TEAM_NAME is " + value + ", expected \"Team 4143\".");
+            System.out.println("TEAM_NAME is \"" + value + "\", expected \"Team 4143\".");
             System.exit(1);
         }
         System.out.println("TEAM_NAME constant looks good.");
