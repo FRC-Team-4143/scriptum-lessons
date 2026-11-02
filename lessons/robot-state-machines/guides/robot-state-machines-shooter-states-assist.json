@@ -1,6 +1,6 @@
 {
 	"title": "Write the shooter's states",
-	"summary": "Write handleStateTransition and the switch in updateLogic.",
+	"summary": "Finish the switch in updateLogic and the table in handleStateTransition.",
 	"topic": "Robot",
 	"order": 512,
 	"kind": "assist",
@@ -38,8 +38,8 @@
 		{
 			"title": "Find it",
 			"say": {
-				"never": "First the rules for moving between states. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `write the transitions` and press **Enter**. The editor scrolls to the right spot and highlights it.",
-				"bit": "First the rules for moving between states. Press **Ctrl+F**, type `write the transitions` and press Enter to jump to it."
+				"never": "First, what each state does. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `add a case for SPIN_UP` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "First, what each state does. Press **Ctrl+F**, type `add a case for SPIN_UP` and press Enter to jump to it."
 			},
 			"target": {
 				"pane": "editor"
@@ -49,44 +49,9 @@
 				"target": {
 					"pane": "editor",
 					"selector": ".view-lines .view-line",
-					"text": "write the transitions described above"
+					"text": "add a case for SPIN_UP"
 				},
-				"hint": "find write the transitions with Ctrl+F.",
-				"skipIfDone": true
-			},
-			"assist": true
-		},
-		{
-			"title": "Transitions",
-			"say": {
-				"never": "Turn the comment above into code, as a table. Write `switch (system_state_)` with a `case` for IDLE, SPIN_UP and SHOOT. Inside each one, write `switch (wanted)`. Then fill in the rows: from IDLE, `case SHOOT:` sets `system_state_` to SPIN_UP. From SPIN_UP, `case SHOOT:` sets it to SHOOT only `if (isAtSpeed())`, and `case IDLE:` sets it to IDLE. From SHOOT, `case SHOOT:` goes back to SPIN_UP `if (hasDipped())`, and `case IDLE:` sets it to IDLE. Every inner switch ends with `default: break;`, which means \"ignore anything else\". Don't forget a `break;` after each inner switch too.",
-				"bit": "Turn the comment above it into a table: `switch (system_state_)`, and inside each case `switch (wanted)`. Rows: IDLE wanting SHOOT goes to SPIN_UP; SPIN_UP wanting SHOOT goes to SHOOT once `isAtSpeed()`, wanting IDLE goes to IDLE; SHOOT wanting SHOOT goes back to SPIN_UP if `hasDipped()`, wanting IDLE goes to IDLE. `default: break;` ignores the rest."
-			},
-			"target": {
-				"pane": "editor",
-				"selector": ".view-lines .view-line",
-				"text": "write the transitions described above"
-			},
-			"cardAt": "bottom-right",
-			"assist": true
-		},
-		{
-			"title": "Find it",
-			"say": {
-				"never": "Then what each state does. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `write a switch (system_state_)` and press **Enter**. The editor scrolls to the right spot and highlights it.",
-				"bit": "Then what each state does. Press **Ctrl+F**, type `write a switch (system_state_)` and press Enter to jump to it."
-			},
-			"target": {
-				"pane": "editor"
-			},
-			"cardAt": "bottom-right",
-			"waitFor": {
-				"target": {
-					"pane": "editor",
-					"selector": ".view-lines .view-line",
-					"text": "write a switch (system_state_)"
-				},
-				"hint": "find write a switch (system_state_) with Ctrl+F.",
+				"hint": "find add a case for SPIN_UP with Ctrl+F.",
 				"skipIfDone": true
 			},
 			"assist": true
@@ -94,16 +59,60 @@
 		{
 			"title": "The switch",
 			"say": {
-				"never": "Write a `switch` with one `case` for each state. IDLE stops both motors. SPIN_UP calls `runFlywheel()` and leaves the roller stopped. SHOOT calls `runFlywheel()` and also runs the roller at `CONSTANTS.INDEX_DUTY_CYCLE`. The three lines are listed in the comment.",
-				"bit": "One `case` per state, with the three lines the comment lists. IDLE stops both motors, SPIN_UP calls `runFlywheel()`, SHOOT also runs the roller at `CONSTANTS.INDEX_DUTY_CYCLE`."
+				"never": "`case IDLE:` is already written below the comment, and it stops both motors. Just above it, add `case SPIN_UP:`, which calls `runFlywheel()` and stops the roller, then `case SHOOT:`, which calls `runFlywheel()` and runs the roller at `CONSTANTS.INDEX_DUTY_CYCLE`. End each case with `break;`.",
+				"bit": "Above `case IDLE:`, add `case SPIN_UP:` (`runFlywheel()`, roller stopped) and `case SHOOT:` (`runFlywheel()`, roller at `CONSTANTS.INDEX_DUTY_CYCLE`). End each with `break;`."
 			},
 			"target": {
 				"pane": "editor",
 				"selector": ".view-lines .view-line",
-				"text": "write a switch (system_state_)"
+				"text": "add a case for SPIN_UP"
 			},
 			"cardAt": "bottom-right",
 			"assist": true
+		},
+		{
+			"title": "Find it",
+			"say": {
+				"never": "Now the rules for moving between states. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `write the SPIN_UP` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "Now the rules for moving between states. Press **Ctrl+F**, type `write the SPIN_UP` and press Enter to jump to it."
+			},
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "write the SPIN_UP and SHOOT rows"
+				},
+				"hint": "find write the SPIN_UP with Ctrl+F.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Transitions",
+			"say": {
+				"never": "The `IDLE` row below the comment shows the shape of the table: a `case` for where the shooter is, and inside it `switch (wanted)`. Add the other two rows the same way, just before the outer `default:`. From SPIN_UP, `case SHOOT:` sets `system_state_` to SHOOT only `if (isAtSpeed())`, and `case IDLE:` sets it to IDLE. From SHOOT, `case SHOOT:` goes back to SPIN_UP `if (hasDipped())`, and `case IDLE:` sets it to IDLE. Every inner switch ends with `default: break;`, which means \"ignore anything else\". Don't forget a `break;` after each inner switch too.",
+				"bit": "Copy the `IDLE` row's shape, before the outer `default:`. SPIN_UP wanting SHOOT goes to SHOOT once `isAtSpeed()`, wanting IDLE goes to IDLE; SHOOT wanting SHOOT goes back to SPIN_UP if `hasDipped()`, wanting IDLE goes to IDLE. `default: break;` ignores the rest."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "write the SPIN_UP and SHOOT rows"
+			},
+			"cardAt": "bottom-right",
+			"assist": true
+		},
+		{
+			"title": "Test the shooter",
+			"say": {
+				"never": "A temporary line in `RobotContainer.java` lets the right bumper ask the shooter directly, so you can test it now. Press **Start**, enable **Teleop** and hold **U**. In AdvantageScope, the shooter's `State` should go `SPIN_UP`, then `SHOOT`. Then press **Verify** in the lesson chip: **Spins up before shooting** should pass.",
+				"bit": "Start, enable Teleop, hold **U**: the shooter's `State` goes `SPIN_UP`, then `SHOOT`. Press **Verify**: **Spins up before shooting** should pass."
+			},
+			"assist": true,
+			"cardAt": "bottom-right"
 		}
 	]
 }

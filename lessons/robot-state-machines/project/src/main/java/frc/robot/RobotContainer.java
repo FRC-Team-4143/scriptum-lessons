@@ -37,10 +37,9 @@ public class RobotContainer extends MwSuperStateMachine<RobotStates, RobotConsta
    * Asks each subsystem for the state the robot's current state needs. Runs every loop, before the
    * subsystems.
    *
-   * <p>TODO: write a switch (system_state_) with a case for each robot state:
+   * <p>TODO (Part 2): add the DRIVE and SHOOT cases to the switch. The IDLE case is done for you:
    *
    * <ul>
-   *   <li>IDLE: drive_ wants DriveStates.IDLE, shooter_ wants ShooterStates.IDLE
    *   <li>DRIVE: drive_ wants DriveStates.ARCADE, shooter_ wants ShooterStates.IDLE
    *   <li>SHOOT: drive_ wants DriveStates.ARCADE, shooter_ wants ShooterStates.SHOOT
    * </ul>
@@ -48,5 +47,17 @@ public class RobotContainer extends MwSuperStateMachine<RobotStates, RobotConsta
    * Ask with setWantedState, for example drive_.setWantedState(DriveStates.ARCADE);
    */
   @Override
-  protected void updateLogic(double timestamp) {}
+  protected void updateLogic(double timestamp) {
+    switch (system_state_) {
+      case IDLE:
+      default:
+        drive_.setWantedState(DriveStates.IDLE);
+        shooter_.setWantedState(ShooterStates.IDLE);
+        break;
+    }
+
+    // TEMPORARY, for Part 1: the right bumper asks the shooter directly, so you can test it now.
+    // In Part 2, delete this line. Buttons should ask the robot, and only the robot asks the shooter.
+    shooter_.setWantedState(OI.getTestShootButton() ? ShooterStates.SHOOT : ShooterStates.IDLE);
+  }
 }

@@ -35,8 +35,9 @@ A suggested pace that adds up to the 3 hour session. Take short breaks whenever 
 | Minutes | What to do |
 | --- | --- |
 | 25 | Read about the state diagram, boolean logic and lambdas |
-| 35 | Part 1: transitions |
-| 30 | Part 1: what each state does |
+| 20 | Part 1: what each state does |
+| 30 | Part 1: transitions |
+| 15 | Part 1: test the shooter |
 | 25 | Part 2: the robot's state machine |
 | 20 | The robot's states |
 | 20 | Bind the buttons |
@@ -49,26 +50,35 @@ Go slower on anything that is new. Finishing every bonus is not expected.
 
 **Part 1: the state machine**
 
-1. **`handleStateTransition()`** in `ShooterSubsystem.java`. Set `system_state_` to the state the shooter
-   is allowed to be in. Write it as a **table**: a `switch` on `system_state_` (where the shooter is), and
-   inside each case a `switch` on `wanted` (what the robot asked for). The rows are in the comment above
-   the method. A request with no row is ignored, which is how you forbid a move.
-2. **`updateLogic()`.** Write a `switch` with a case for each state: `IDLE` stops everything,
-   `SPIN_UP` runs only the flywheel, `SHOOT` runs the flywheel and the roller.
+1. **`updateLogic()`** in `ShooterSubsystem.java`. This `switch` says what the motors do in each state.
+   `IDLE` is done for you. Add `SPIN_UP`, which runs only the flywheel, and `SHOOT`, which runs the
+   flywheel and the roller.
+2. **`handleStateTransition()`.** This sets `system_state_` to the state the shooter is allowed to be
+   in. It's written as a **table**: a `switch` on `system_state_` (where the shooter is), and inside each
+   case a `switch` on `wanted` (what the robot asked for). The `IDLE` row is done for you. Copy its shape
+   for `SPIN_UP` and `SHOOT`, using the rows in the comment above the method. A request with no row is
+   ignored, which is how you forbid a move.
+3. **Test the shooter.** A temporary line in `RobotContainer.java` lets the right bumper ask the shooter
+   directly. Start, enable Teleop and hold **U**. The shooter's `State` should go `SPIN_UP`, then `SHOOT`.
+   Click **Verify**: **Spins up before shooting** should pass. The robot won't drive yet: that comes in
+   Part 2.
 
 **Part 2: the robot's state machine**
 
-3. **`updateLogic()`** in `RobotContainer.java`: a `switch (system_state_)` with a case for each
-   robot state. Each case asks the drivetrain (`drive_`) and the shooter (`shooter_`) for a state
+4. **Delete the temporary code**: the `shooter_.setWantedState(OI.getTestShootButton() ...)` line in
+   `RobotContainer.java`, and `getTestShootButton()` in `OI.java`. Buttons should ask the robot for a
+   state, not reach into a subsystem.
+5. **`updateLogic()`** in `RobotContainer.java`. `IDLE` is done for you. Add a case for `DRIVE` and a
+   case for `SHOOT`. Each one asks the drivetrain (`drive_`) and the shooter (`shooter_`) for a state
    with `setWantedState(...)`. The comment above the method lists them.
-4. **Bind the buttons** in `OI.java`. The right bumper: `whileTrue(Commands.startEnd(...))`, asking
+6. **Bind the buttons** in `OI.java`. The right bumper: `whileTrue(Commands.startEnd(...))`, asking
    the robot for `SHOOT` when it starts and `DRIVE` when it ends. **A**: `onTrue(Commands.runOnce(...))`
    that calls the shooter's `simulateBallLaunch()`.
-5. **Try it.** Start, enable Teleop, hold **U**. Watch `Robot/State` go to `SHOOT`, and the shooter's
+7. **Try it.** Start, enable Teleop, hold **U**. Watch `Robot/State` go to `SHOOT`, and the shooter's
    `State` go `SPIN_UP` then `SHOOT`. Tap **K**: it falls back to `SPIN_UP`, then returns to `SHOOT`.
-6. **Why bother?** The button never talks to the shooter. Later, an autonomous routine will ask the
+8. **Why bother?** The button no longer talks to the shooter. Later, an autonomous routine will ask the
    robot for the same `SHOOT` state, so shooting is written once.
-7. **Click Verify.**
+9. **Click Verify.**
 
 Stuck on a step? Open **Dozer**: he can explain the idea or walk you through it.
 

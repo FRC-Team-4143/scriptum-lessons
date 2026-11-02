@@ -32,6 +32,11 @@ if ! code "$RC" | grep -Eq 'drive_\.setWantedState\([[:space:]]*DriveStates\.ARC
 	exit 1
 fi
 
+if code "$RC" | grep -q 'getTestShootButton'; then
+	echo "In RobotContainer.updateLogic(): delete the temporary line that uses OI.getTestShootButton()."
+	exit 1
+fi
+
 # OI: hold the right bumper for SHOOT, let go for DRIVE; A simulates a launch.
 if ! code "$OI" | grep -Eq 'rightBumper\(\)[[:space:]]*\.whileTrue\([[:space:]]*Commands\.startEnd\([^;]*setWantedState\([[:space:]]*RobotStates\.SHOOT[[:space:]]*\)[^;]*setWantedState\([[:space:]]*RobotStates\.DRIVE[[:space:]]*\)'; then
 	echo "In OI.configureBindings(): driver_controller_.rightBumper().whileTrue(Commands.startEnd("

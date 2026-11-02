@@ -99,8 +99,22 @@ public class ShooterSubsystem extends MwSubsystem<ShooterStates, ShooterConstant
    */
   @Override
   protected void handleStateTransition(ShooterStates wanted) {
-    // TODO: write the transitions described above.
-    system_state_ = ShooterStates.IDLE;
+    // The IDLE row is done for you, so you can see the shape of the table.
+    // TODO: write the SPIN_UP and SHOOT rows described above, just before the default.
+    switch (system_state_) {
+      case IDLE:
+        switch (wanted) {
+          case SHOOT:
+            system_state_ = ShooterStates.SPIN_UP; // never straight to SHOOT: spin up first
+            break;
+          default:
+            break;
+        }
+        break;
+      default:
+        system_state_ = ShooterStates.IDLE;
+        break;
+    }
   }
 
   /** Runs every 20 ms. Decide what each mechanism does in the current state. */
@@ -108,10 +122,17 @@ public class ShooterSubsystem extends MwSubsystem<ShooterStates, ShooterConstant
   public void updateLogic(double timestamp) {
     trackShots();
 
-    // TODO: write a switch (system_state_) with a case for each state:
-    //   IDLE:    flywheel_.setTargetDutyCycle(0.0) and roller_.setTargetDutyCycle(0.0)
+    // The IDLE case is done for you.
+    // TODO: add a case for SPIN_UP and a case for SHOOT, just above case IDLE:
     //   SPIN_UP: runFlywheel() (from last lesson), roller stopped
     //   SHOOT:   runFlywheel(), and roller_.setTargetDutyCycle(CONSTANTS.INDEX_DUTY_CYCLE)
+    switch (system_state_) {
+      case IDLE:
+      default:
+        flywheel_.setTargetDutyCycle(0.0);
+        roller_.setTargetDutyCycle(0.0);
+        break;
+    }
 
     MwLog.log(getSubsystemKey() + "FlywheelVelocity", flywheel_.getCurrentVelocity());
     MwLog.log(getSubsystemKey() + "FlywheelTarget", CONSTANTS.SHOOT_VELOCITY);

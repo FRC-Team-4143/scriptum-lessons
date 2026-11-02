@@ -1,19 +1,19 @@
 {
 	"plan": [
 		{
+			"checkpoint": "spin-up-first",
+			"guides": [
+				"robot-state-machines-states",
+				"robot-state-machines-shooter-states-assist"
+			]
+		},
+		{
 			"checkpoint": "robot-states",
 			"guides": [
 				"robot-state-machines-robot-states",
 				"robot-state-machines-commands",
 				"robot-state-machines-robot-states-assist",
 				"robot-state-machines-bindings"
-			]
-		},
-		{
-			"checkpoint": "spin-up-first",
-			"guides": [
-				"robot-state-machines-states",
-				"robot-state-machines-shooter-states-assist"
 			]
 		}
 	]
