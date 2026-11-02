@@ -79,7 +79,7 @@ public class ShooterConstants extends MwConstants {
   // =============================================================================
 
   private static MotorConfig flywheelConfig(int can_id, double k_v, double k_p) {
-    MotorConfig config = baseConfig(can_id, false);
+    MotorConfig config = baseConfig(can_id, true);
     // The motor controller's velocity gains (used by the PID style). Our gains are per rad/s, but
     // the TalonFX counts in rotations per second, and one rotation is 2 * PI radians.
     config.getAsFXConfig().Slot1.kV = k_v * 2.0 * Math.PI;
@@ -88,7 +88,7 @@ public class ShooterConstants extends MwConstants {
   }
 
   private static MotorConfig rollerConfig(int can_id) {
-    return baseConfig(can_id, false);
+    return baseConfig(can_id, true);
   }
 
   private static MotorConfig baseConfig(int can_id, boolean inverted) {

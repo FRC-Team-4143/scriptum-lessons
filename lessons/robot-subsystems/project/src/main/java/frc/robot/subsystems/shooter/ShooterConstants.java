@@ -51,11 +51,11 @@ public class ShooterConstants extends MwConstants {
   // =============================================================================
 
   private static MotorConfig flywheelConfig(int can_id) {
-    return baseConfig(can_id, false);
+    return baseConfig(can_id, true);
   }
 
   private static MotorConfig rollerConfig(int can_id) {
-    return baseConfig(can_id, false);
+    return baseConfig(can_id, true);
   }
 
   private static MotorConfig baseConfig(int can_id, boolean inverted) {

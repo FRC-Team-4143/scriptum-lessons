@@ -95,7 +95,8 @@ public class ShooterSubsystem extends MwSubsystem<ShooterStates, ShooterConstant
 
   /** Pretends a game piece was just launched, which pushes back on the flywheel. */
   public void simulateBallLaunch() {
-    flywheel_.applyLoadTorque(CONSTANTS.BALL_LOAD_TORQUE);
+    // Negative because the flywheel motor is inverted. Only the simulator uses this.
+    flywheel_.applyLoadTorque(-CONSTANTS.BALL_LOAD_TORQUE);
   }
 
   /**
