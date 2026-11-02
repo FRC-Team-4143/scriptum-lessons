@@ -13,9 +13,12 @@ public final class Checks {
           "Subsystem/Shooter/FlywheelVelocity",
           "Subsystem/Shooter/RollerDuty");
 
+  private static final SafeFeedCheck challenge = new SafeFeedCheck();
+
   private Checks() {}
 
   public static void update() {
     checks.update();
+    challenge.update();
   }
 }

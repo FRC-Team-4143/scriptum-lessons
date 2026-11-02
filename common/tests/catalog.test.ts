@@ -33,7 +33,7 @@ describe("repo layout", () => {
 		const dir = join(repoRoot, "lessons", id);
 		expect(existsSync(join(dir, "lesson.json"))).toBe(true);
 		expect(statSync(join(dir, "project")).isDirectory()).toBe(true);
-		const known = new Set(["lesson.json", "lesson.test.ts", "project", "checkpoints", "guides", "help.json", "solution"]);
+		const known = new Set(["lesson.json", "lesson.test.ts", "project", "checkpoints", "guides", "help.json", "solution", "challenge"]);
 		const unknown = readdirSync(dir).filter((name) => !known.has(name));
 		expect(unknown, "files Scriptum would never read: a misspelled folder?").toEqual([]);
 	});

@@ -17,7 +17,7 @@ if ! grep -q 'getLeftY()' <<<"$CODE" || ! grep -q 'getLeftX()' <<<"$CODE"; then
 	echo "Arcade drive reads forward from controller_.getLeftY() and turn from controller_.getLeftX()."
 	exit 1
 fi
-if ! grep -Eq '=[[:space:]]*[A-Za-z_][A-Za-z0-9_]*[[:space:]]*\+[[:space:]]*[A-Za-z_]' <<<"$CODE" || ! grep -Eq '=[[:space:]]*[A-Za-z_][A-Za-z0-9_]*[[:space:]]*-[[:space:]]*[A-Za-z_]' <<<"$CODE"; then
+if ! grep -Eq '=[[:space:]]*\(?[[:space:]]*[A-Za-z_][A-Za-z0-9_]*[[:space:]]*\+[[:space:]]*[A-Za-z_]' <<<"$CODE" || ! grep -Eq '=[[:space:]]*\(?[[:space:]]*[A-Za-z_][A-Za-z0-9_]*[[:space:]]*-[[:space:]]*[A-Za-z_]' <<<"$CODE"; then
 	echo "Use arithmetic for arcade drive: left_speed = forward + turn; right_speed = forward - turn;"
 	exit 1
 fi
