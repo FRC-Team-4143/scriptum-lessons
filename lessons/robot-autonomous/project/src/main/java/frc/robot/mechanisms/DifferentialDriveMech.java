@@ -368,7 +368,7 @@ public class DifferentialDriveMech extends MechBase {
     MwLog.log(getLoggingKey() + "RightOutput", right_request_.Output);
     // Both headings, to compare: the gyro's, and the one worked out from the wheels.
     MwLog.log(getLoggingKey() + "GyroYawRad", inputs_.gyroYawRad);
-    MwLog.log(getLoggingKey() + "WheelYawRad", getWheelYaw().getRadians());
+    MwLog.log(getLoggingKey() + "WheelYawRad", MathUtil.angleModulus(getWheelYaw().getRadians()));
     MwLog.log(getLoggingKey() + "GyroConnected", inputs_.gyroConnected);
     ChassisSpeeds speeds = getChassisSpeeds();
     MwLog.log(getLoggingKey() + "ChassisSpeeds", speeds);
