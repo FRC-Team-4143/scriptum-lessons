@@ -70,7 +70,7 @@ clean slate.
 
 ## Checking your work
 
-Click **Checkpoints** in the top bar and run **Verify** whenever you want.
+Open the lesson chip at the top, choose **Checkpoints** and run **Verify** whenever you want.
 Most checkpoints here look at whatever you last saved in your Elastic layout
 (see the note above), so they work any time, robot running or not. For the
 Number Slider, Radial Gauge, Graph, and Match Time widgets, the checkpoint
