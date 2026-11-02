@@ -40,13 +40,13 @@ public class ShooterConstants extends MwConstants {
   public final FlywheelControl FLYWHEEL_CONTROL = FlywheelControl.PID;
 
   // Feedforward: volts needed just to HOLD a speed, per (radian per second). A first guess is
-  // 12 volts divided by the flywheel's top speed in radians per second (12 / 628 = 0.0191).
-  public final double FLYWHEEL_KV = 0.0191;
+  // 12 volts divided by the flywheel's top speed in radians per second (12 / 642 = 0.0187).
+  public final double FLYWHEEL_KV = 0.0187;
   // Feedback: extra volts for every (radian per second) of speed ERROR.
   public final double FLYWHEEL_KP = 0.032;
 
   public final int FLYWHEEL_MOTOR_ID = 20;
-  public final double FLYWHEEL_GEAR_RATIO = 1.0; // motor turns for every 1 flywheel turn
+  public final double FLYWHEEL_GEAR_RATIO = 1.04; // motor turns for every 1 flywheel turn
   public final double FLYWHEEL_RADIUS = Units.inchesToMeters(3.0);
   public final double FLYWHEEL_MASS = 2.3; // kg, approximate
   // A solid wheel is harder to spin the heavier and wider it is: 1/2 * mass * radius^2 (kg*m^2).
@@ -68,7 +68,7 @@ public class ShooterConstants extends MwConstants {
   // =============================================================================
 
   public final int ROLLER_MOTOR_ID = 21;
-  public final double ROLLER_GEAR_RATIO = 3.0;
+  public final double ROLLER_GEAR_RATIO = 4.0;
   public final double ROLLER_INERTIA = 0.0005; // kg*m^2, used by the simulation
 
   public final MotorConfig ROLLER_MOTOR_CONFIG = rollerConfig(ROLLER_MOTOR_ID);
@@ -79,7 +79,7 @@ public class ShooterConstants extends MwConstants {
   // =============================================================================
 
   private static MotorConfig flywheelConfig(int can_id, double k_v, double k_p) {
-    MotorConfig config = baseConfig(can_id, false);
+    MotorConfig config = baseConfig(can_id, true);
     // The motor controller's velocity gains (used by the PID style). Our gains are per rad/s, but
     // the TalonFX counts in rotations per second, and one rotation is 2 * PI radians.
     config.getAsFXConfig().Slot1.kV = k_v * 2.0 * Math.PI;
@@ -88,13 +88,13 @@ public class ShooterConstants extends MwConstants {
   }
 
   private static MotorConfig rollerConfig(int can_id) {
-    return baseConfig(can_id, false);
+    return baseConfig(can_id, true);
   }
 
   private static MotorConfig baseConfig(int can_id, boolean inverted) {
     MotorConfig config = new MotorConfig();
     config.can_id = can_id;
-    config.motor_type = TalonMotorType.X60;
+    config.motor_type = TalonMotorType.FALCON500;
     config.getAsFXConfig().MotorOutput.Inverted =
         inverted ? InvertedValue.Clockwise_Positive : InvertedValue.CounterClockwise_Positive;
     return config;

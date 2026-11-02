@@ -1284,7 +1284,7 @@
 				{
 					"id": "linear-speed",
 					"title": "Linear speed",
-					"description": "Drive both sides forward at full speed. Robot/LinearSpeed should read about 5.5 m/s.",
+					"description": "Drive both sides forward at full speed. Robot/LinearSpeed should read about 5.9 m/s.",
 					"verifier": {
 						"type": "nt4-value",
 						"topic": "/AdvantageKit/RealOutputs/Check/Robot/LinearSpeed/Max",
@@ -1308,13 +1308,13 @@
 				{
 					"id": "drive-two-meters",
 					"title": "Drive 2 meters",
-					"description": "Run Auto and let the robot stop. Robot/Distance should read about 2 meters (it coasts a little past, to about 2.5).",
+					"description": "Run Auto and let the robot stop. Robot/Distance should read about 2 meters (it coasts a little past, to about 2.7).",
 					"verifier": {
 						"type": "nt4-value",
 						"topic": "/AdvantageKit/RealOutputs/Robot/Distance",
 						"check": "range",
 						"min": 1.95,
-						"max": 2.8
+						"max": 3
 					}
 				}
 			]
@@ -1408,7 +1408,7 @@
 				{
 					"id": "smoothed-speed",
 					"title": "Smoothed speed",
-					"description": "Drive forward at full speed in Teleop. Robot/SmoothedSpeed should read about 5 m/s.",
+					"description": "Drive forward at full speed in Teleop. Robot/SmoothedSpeed should read about 6 m/s.",
 					"verifier": {
 						"type": "nt4-value",
 						"topic": "/AdvantageKit/RealOutputs/Check/Robot/SmoothedSpeed/Max",
@@ -1446,7 +1446,7 @@
 				{
 					"id": "chassis-speeds",
 					"title": "Chassis speeds",
-					"description": "Drive forward at full speed. Drive/LinearSpeed (from kinematics) should read about 5 m/s.",
+					"description": "Drive forward at full speed. Drive/LinearSpeed (from kinematics) should read about 6 m/s.",
 					"verifier": {
 						"type": "nt4-value",
 						"topic": "/AdvantageKit/RealOutputs/Check/Drive/LinearSpeed/Max",
@@ -1470,13 +1470,13 @@
 				{
 					"id": "pose-auto",
 					"title": "Drive to x = 3 m",
-					"description": "Run Auto and let the robot stop. Drive/PoseX should read about 3 meters.",
+					"description": "Run Auto and let the robot stop. Drive/PoseX should read about 3 meters (it coasts a little past, to about 3.7).",
 					"verifier": {
 						"type": "nt4-value",
 						"topic": "/AdvantageKit/RealOutputs/Drive/PoseX",
 						"check": "range",
 						"min": 2.95,
-						"max": 3.9
+						"max": 4.2
 					}
 				}
 			]
@@ -1603,13 +1603,13 @@
 				{
 					"id": "spin-up-time",
 					"title": "Fast spin-up",
-					"description": "With your final settings, hold the right bumper. The flywheel should reach its speed in under about 1.5 seconds.",
+					"description": "With your final settings, hold the right bumper. The flywheel should reach its speed in under about 2 seconds.",
 					"verifier": {
 						"type": "nt4-value",
 						"topic": "/AdvantageKit/RealOutputs/Subsystem/Shooter/SpinUpSeconds",
 						"check": "range",
 						"min": 0.05,
-						"max": 1.6
+						"max": 2.1
 					}
 				},
 				{
@@ -1627,13 +1627,13 @@
 				{
 					"id": "recovers-from-launch",
 					"title": "Recovers after a launch",
-					"description": "Hold the right bumper until the flywheel is at speed, then tap A. It should get back to speed in under about 0.8 seconds.",
+					"description": "Hold the right bumper until the flywheel is at speed, then tap A. It should get back to speed in under about 1 second.",
 					"verifier": {
 						"type": "nt4-value",
 						"topic": "/AdvantageKit/RealOutputs/Subsystem/Shooter/RecoverySeconds",
 						"check": "range",
 						"min": 0.01,
-						"max": 0.8
+						"max": 1
 					}
 				}
 			]
@@ -1668,7 +1668,7 @@
 						"topic": "/AdvantageKit/RealOutputs/Subsystem/Shooter/SpinUpSeconds",
 						"check": "range",
 						"min": 0.05,
-						"max": 1.6
+						"max": 2.1
 					}
 				},
 				{

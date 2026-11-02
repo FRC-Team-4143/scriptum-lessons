@@ -168,14 +168,14 @@
 					"bit": "Wrong way: missing minus on the PID output. `AimErrorRad` should start near 0.785 and fall."
 				},
 				{
-					"never": "With the starter `AIM_KP = 0.2` the robot stalls about 0.10 rad (6 degrees) short and never settles. Raise `AIM_KP` in DrivetrainConstants.",
-					"bit": "kP 0.2 stalls about 0.10 rad short. Raise `AIM_KP`."
+					"never": "With the starter `AIM_KP = 0.2` the robot stalls about 0.09 rad (5 degrees) short and never settles. Raise `AIM_KP` in DrivetrainConstants.",
+					"bit": "kP 0.2 stalls about 0.09 rad short. Raise `AIM_KP`."
 				},
 				{
 					"never": "Press Start again after every change, then hold E. Around 1.0 reaches the goal. Make sure E is held the whole time, because the check needs half a second inside 0.035 rad within 4 seconds.",
 					"bit": "Fresh Start after every change. About 1.0 reaches the goal. Keep E held."
 				},
-				"Set `AIM_KP = 2.0` and `AIM_KD = 0.2` in DrivetrainConstants, Start, Teleop, hold E."
+				"Set `AIM_KP = 2.0` and `AIM_KD = 0.3` in DrivetrainConstants, Start, Teleop, hold E."
 			]
 		},
 		"aim-no-overshoot": {
@@ -194,8 +194,8 @@
 					"bit": "The worst overshoot is remembered until you press Start again. Start fresh, press E once."
 				},
 				{
-					"never": "Plot `AimErrorRad`. It should drop to 0 without going far below it. Overshoot is worse after a long drive, because the robot has farther to turn: a kP of 1.0 with no kD swings about 0.10 rad from the start but about 0.30 rad after a long turn.",
-					"bit": "Plot `AimErrorRad`. kP 1.0 with no kD swings about 0.30 rad after a long turn."
+					"never": "Plot `AimErrorRad`. It should drop to 0 without going far below it. Overshoot is worse after a long drive, because the robot has farther to turn: a kP of 1.0 with no kD swings about 0.20 rad from the start but about 0.38 rad after a long turn.",
+					"bit": "Plot `AimErrorRad`. kP 1.0 with no kD swings about 0.38 rad after a long turn."
 				},
 				{
 					"never": "Add damping: raise `AIM_KD`. It pushes against fast turning, so the robot slows before the goal. Try 0.1, 0.2, 0.3.",
@@ -205,7 +205,7 @@
 					"never": "A very large kP (around 6) wobbles and never settles, so it will fail the settle check too. Keep kP moderate and let kD do the braking.",
 					"bit": "kP around 6 wobbles forever. Keep kP moderate and use kD."
 				},
-				"`AIM_KP = 2.0`, `AIM_KI = 0.0`, `AIM_KD = 0.2` settles in about half a second with almost no overshoot. Press Start, enable Teleop, hold E once."
+				"`AIM_KP = 2.0`, `AIM_KI = 0.0`, `AIM_KD = 0.3` settles with almost no overshoot. Press Start, enable Teleop, hold E once."
 			]
 		}
 	}

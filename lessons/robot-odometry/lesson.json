@@ -28,7 +28,7 @@
 		{
 			"id": "chassis-speeds",
 			"title": "Chassis speeds",
-			"description": "Drive forward at full speed. Drive/LinearSpeed (from kinematics) should read about 5 m/s.",
+			"description": "Drive forward at full speed. Drive/LinearSpeed (from kinematics) should read about 6 m/s.",
 			"verifier": {
 				"type": "nt4-value",
 				"topic": "/AdvantageKit/RealOutputs/Check/Drive/LinearSpeed/Max",
@@ -52,13 +52,13 @@
 		{
 			"id": "pose-auto",
 			"title": "Drive to x = 3 m",
-			"description": "Run Auto and let the robot stop. Drive/PoseX should read about 3 meters.",
+			"description": "Run Auto and let the robot stop. Drive/PoseX should read about 3 meters (it coasts a little past, to about 3.7).",
 			"verifier": {
 				"type": "nt4-value",
 				"topic": "/AdvantageKit/RealOutputs/Drive/PoseX",
 				"check": "range",
 				"min": 2.95,
-				"max": 3.9
+				"max": 4.2
 			}
 		}
 	]

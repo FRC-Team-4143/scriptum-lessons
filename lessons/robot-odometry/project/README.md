@@ -35,8 +35,8 @@ MXP port. On a real robot:
 - **Mount it flat and solid**, near the middle of the robot.
 - **Check it's connected.** `isConnected()` is false when it's unplugged, and that's why `getYaw()`
   has a backup.
-- **Watch the sign.** The NavX's own `getYaw()` counts clockwise. The code uses `getRotation2d()`,
-  which counts counterclockwise like the rest of WPILib.
+- **Watch the sign.** The NavX's `getYaw()` wraps at -180 to 180 degrees, but it counts clockwise.
+  The code flips it with a minus sign, so counterclockwise is positive like the rest of WPILib.
 
 ## Session plan (about 3 hours)
 

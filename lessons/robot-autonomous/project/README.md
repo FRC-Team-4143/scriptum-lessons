@@ -82,8 +82,8 @@ Go slower on anything that is new. The stretch ideas at the end are not expected
    | MOI | 7.5 kg m^2 |
    | Bumpers (front, back, sides) | 0.43 m |
    | Wheel Radius | 0.0762 m |
-   | Motor Rev / Wheel Rev | 8.45 |
-   | Motor Max Speed | 628 rad / s |
+   | Motor Rev / Wheel Rev | 8.46 |
+   | Motor Max Speed | 668 rad / s |
    | Motor Max Torque | 1.0 N*m |
    | Wheel COF | 1.5 |
 

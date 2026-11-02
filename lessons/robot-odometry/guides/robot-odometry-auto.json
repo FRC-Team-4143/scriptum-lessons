@@ -166,8 +166,8 @@
 		{
 			"title": "Why it coasts past 3 m",
 			"say": {
-				"never": "It likely stopped a little past 3 meters. The code cuts the power the moment x reaches 3.0, but the robot keeps rolling for a moment, just like it did in the bang-bang lesson. Press **Verify** in the lesson chip to check that x is about 3 m.",
-				"bit": "It stops slightly past 3 m because it keeps rolling when the power cuts. Press **Verify**."
+				"never": "It likely stopped at about 3.7 meters. The code cuts the power the moment x reaches 3.0, but the robot keeps rolling for a moment, just like it did in the bang-bang lesson. Press **Verify** in the lesson chip to check that x is about 3 m.",
+				"bit": "It stops at about 3.7 m because it keeps rolling when the power cuts. Press **Verify**."
 			}
 		}
 	],

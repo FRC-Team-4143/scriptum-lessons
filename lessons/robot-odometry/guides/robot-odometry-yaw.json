@@ -96,7 +96,7 @@
 		{
 			"title": "What's an IMU?",
 			"say": {
-				"never": "The NavX is an **IMU**, an Inertial Measurement Unit: three sensors on one board. A **gyroscope** measures how fast it's turning; adding that up gives the angle. An **accelerometer** measures speeding up, and which way is down. A **magnetometer** is a compass, but motors confuse it, so robots rarely use it.\n\nIt reports three angles. **Yaw** is turning left and right: that's our heading. **Pitch** is nose up or down, and **roll** is tipping side to side.\n\nOn a real robot, keep it still while it boots (it calibrates then), mount it flat and solid, and remember the NavX's own `getYaw()` counts clockwise, which is why the code uses `getRotation2d()`.",
+				"never": "The NavX is an **IMU**, an Inertial Measurement Unit: three sensors on one board. A **gyroscope** measures how fast it's turning; adding that up gives the angle. An **accelerometer** measures speeding up, and which way is down. A **magnetometer** is a compass, but motors confuse it, so robots rarely use it.\n\nIt reports three angles. **Yaw** is turning left and right: that's our heading. **Pitch** is nose up or down, and **roll** is tipping side to side.\n\nOn a real robot, keep it still while it boots (it calibrates then), mount it flat and solid, and remember the NavX's `getYaw()` counts clockwise, which is why the code flips it with a minus sign.",
 				"bit": "The NavX is an IMU: gyro, accelerometer, magnetometer. Yaw is our heading; pitch and roll are tipping. Keep it still at boot and mount it flat."
 			}
 		},

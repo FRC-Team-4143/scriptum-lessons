@@ -78,7 +78,7 @@ public class DifferentialDriveMech extends MechBase {
   private static final double SCRUB_VOLTS_PER_METER_PER_SECOND = 4.5; // how hard turning drags
   private static final double SUPPLY_VOLTS = 12.0; // battery voltage
   private static final double CURRENT_LIMIT_AMPS = 120.0; // per motor, like the TalonFX default
-  private static final DCMotor DRIVE_MOTOR = DCMotor.getKrakenX60(1);
+  private static final DCMotor DRIVE_MOTOR = DCMotor.getFalcon500(1);
   private double last_true_left_meters_ = 0.0;
   private double last_true_right_meters_ = 0.0;
   private double measured_left_meters_ = 0.0;
@@ -111,7 +111,7 @@ public class DifferentialDriveMech extends MechBase {
     int motors_per_side = Math.max(left_configs.size(), right_configs.size());
     sim_ =
         new DifferentialDrivetrainSim(
-            DCMotor.getKrakenX60(motors_per_side),
+            DCMotor.getFalcon500(motors_per_side),
             Constants.GEAR_RATIO,
             7.5, // how hard the robot is to spin (kg*m^2)
             Constants.ROBOT_MASS_KG,
@@ -314,9 +314,9 @@ public class DifferentialDriveMech extends MechBase {
       inputs_.rightVelocityRadPerSec =
           Units.rotationsToRadians(right_motors_[0].getVelocity().getValueAsDouble());
 
-      // getRotation2d() counts counterclockwise as positive, like the rest of WPILib. (The NavX's
-      // own getYaw() counts the other way, clockwise, so it is not used here.)
-      inputs_.gyroYawRad = gyro_.getRotation2d().getRadians();
+      // getYaw() wraps at -180 to 180 degrees, but it counts clockwise as positive. The minus sign
+      // makes counterclockwise positive, like the rest of WPILib.
+      inputs_.gyroYawRad = Units.degreesToRadians(-gyro_.getYaw());
       inputs_.gyroConnected = gyro_.isConnected();
 
       if (IS_SIM) {
@@ -344,7 +344,7 @@ public class DifferentialDriveMech extends MechBase {
     MwLog.log(getLoggingKey() + "RightOutput", right_request_.Output);
     // Both headings, to compare: the gyro's, and the one worked out from the wheels.
     MwLog.log(getLoggingKey() + "GyroYawRad", inputs_.gyroYawRad);
-    MwLog.log(getLoggingKey() + "WheelYawRad", getWheelYaw().getRadians());
+    MwLog.log(getLoggingKey() + "WheelYawRad", MathUtil.angleModulus(getWheelYaw().getRadians()));
     MwLog.log(getLoggingKey() + "GyroConnected", inputs_.gyroConnected);
     MwLog.log(getLoggingKey() + "Pose", pose_);
     MwLog.log(getLoggingKey() + "PoseX", pose_.getX());

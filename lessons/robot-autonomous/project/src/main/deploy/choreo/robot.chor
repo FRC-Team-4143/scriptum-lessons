@@ -93,16 +93,16 @@
       "val": 7.5
     },
     "gearing": {
-      "exp": "8.45",
-      "val": 8.45
+      "exp": "8.46",
+      "val": 8.46
     },
     "radius": {
       "exp": "0.0762 m",
       "val": 0.0762
     },
     "vmax": {
-      "exp": "628 rad / s",
-      "val": 628.0
+      "exp": "668 rad / s",
+      "val": 668.0
     },
     "tmax": {
       "exp": "1.0 N * m",

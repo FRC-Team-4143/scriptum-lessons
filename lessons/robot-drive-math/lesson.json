@@ -89,7 +89,7 @@
 		{
 			"id": "smoothed-speed",
 			"title": "Smoothed speed",
-			"description": "Drive forward at full speed in Teleop. Robot/SmoothedSpeed should read about 5 m/s.",
+			"description": "Drive forward at full speed in Teleop. Robot/SmoothedSpeed should read about 6 m/s.",
 			"verifier": {
 				"type": "nt4-value",
 				"topic": "/AdvantageKit/RealOutputs/Check/Robot/SmoothedSpeed/Max",

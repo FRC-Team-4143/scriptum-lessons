@@ -79,8 +79,8 @@
 		{
 			"title": "Find kV",
 			"say": {
-				"never": "Search for `FLYWHEEL_KV`. Set `FLYWHEEL_CONTROL = FEEDFORWARD`. Then try kV values 0.008, then 0.016, then 0.0191 (volts per rad/s). Restart each time and watch the graph to see which gets the flywheel closest to its target.",
-				"bit": "Search for `FLYWHEEL_KV`. Set `FLYWHEEL_CONTROL = FEEDFORWARD` and try kV 0.008, 0.016, 0.0191, restarting each time."
+				"never": "Search for `FLYWHEEL_KV`. Set `FLYWHEEL_CONTROL = FEEDFORWARD`. Then try kV values 0.008, then 0.016, then 0.0187 (volts per rad/s). Restart each time and watch the graph to see which gets the flywheel closest to its target.",
+				"bit": "Search for `FLYWHEEL_KV`. Set `FLYWHEEL_CONTROL = FEEDFORWARD` and try kV 0.008, 0.016, 0.0187, restarting each time."
 			},
 			"waitFor": {
 				"hint": {
@@ -179,8 +179,8 @@
 		{
 			"title": "Measure it",
 			"say": {
-				"never": "Aim for a recovery under about 0.8 seconds. Look at **AdvantageScope**, the graphing tool. Type `RecoverySeconds` in its search box. Find **Subsystem/Shooter/RecoverySeconds** in the list and drag it with your mouse onto the **Right Axis** of the graph. Then move the robot and watch the line change.",
-				"bit": "Aim for a recovery under about 0.8 seconds. In AdvantageScope, search for `RecoverySeconds`, then drag **Subsystem/Shooter/RecoverySeconds** onto the **Right Axis**."
+				"never": "Aim for a recovery under about 1 second. Look at **AdvantageScope**, the graphing tool. Type `RecoverySeconds` in its search box. Find **Subsystem/Shooter/RecoverySeconds** in the list and drag it with your mouse onto the **Right Axis** of the graph. Then move the robot and watch the line change.",
+				"bit": "Aim for a recovery under about 1 second. In AdvantageScope, search for `RecoverySeconds`, then drag **Subsystem/Shooter/RecoverySeconds** onto the **Right Axis**."
 			},
 			"close": [
 				"editor",
