@@ -25,32 +25,32 @@ public class LocalVariablesCheck {
 
         if (!printed.contains("Team number: 4143")) {
             System.out.println(
-                "Didn't find \"Team number: 4143\" in the printed output - "
-                    + "declare int team_number = 4143; and print it."
+                "Didn't find the line \"Team number: 4143\" in what your program printed. "
+                    + "Print it exactly: the label, a colon, one space, then the value."
             );
             System.exit(1);
             return;
         }
         if (!printed.contains("Pi: 3.14")) {
             System.out.println(
-                "Didn't find \"Pi: 3.14\" in the printed output - "
-                    + "declare double pi = 3.14; and print it."
+                "Didn't find the line \"Pi: 3.14\" in what your program printed. "
+                    + "Print it exactly: the label, a colon, one space, then the value."
             );
             System.exit(1);
             return;
         }
         if (!printed.contains("Robot is on: true")) {
             System.out.println(
-                "Didn't find \"Robot is on: true\" in the printed output - "
-                    + "declare boolean robot_is_on = true; and print it."
+                "Didn't find the line \"Robot is on: true\" in what your program printed. "
+                    + "Print it exactly: the label, a colon, one space, then the value."
             );
             System.exit(1);
             return;
         }
         if (!printed.contains("Message: I am a string!")) {
             System.out.println(
-                "Didn't find \"Message: I am a string!\" in the printed output - "
-                    + "declare String message = \"I am a string!\"; and print it."
+                "Didn't find the line \"Message: I am a string!\" in what your program printed. "
+                    + "Print it exactly: the label, a colon, one space, then the value."
             );
             System.exit(1);
             return;

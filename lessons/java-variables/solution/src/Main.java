@@ -12,5 +12,7 @@ public class Main {
         System.out.println("Pi: " + pi);
         System.out.println("Robot is on: " + robot_is_on);
         System.out.println("Message: " + message);
+        System.out.println("Team name: " + TEAM_NAME);
+        System.out.println("Max speed: " + MAX_SPEED);
     }
 }

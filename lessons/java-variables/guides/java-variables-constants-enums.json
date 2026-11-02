@@ -28,8 +28,8 @@
 		{
 			"title": "In your lesson: A constant",
 			"say": {
-				"never": "A **constant** is a value that never changes, so it's marked `final`. `static` puts it on the class itself, so it must be written *outside* `main`, up near the top of the file. Capital letters with underscores tell every reader \"this one never changes\".",
-				"bit": "A constant is a value that never changes. `static` makes it belong to the class, so it's declared **outside** `main`."
+				"never": "In your lesson, `MAX_SPEED` is a constant: the robot's top speed, `5.0`. It's `static final`, written outside `main`, and named in capitals, just like `TEAM_NAME`.",
+				"bit": "`MAX_SPEED` is a constant: `static final`, outside `main`, in capitals."
 			},
 			"board": {
 				"code": "public static final double MAX_SPEED = 5.0;",
@@ -234,6 +234,76 @@
 				"pane": "editor",
 				"selector": ".view-lines .view-line",
 				"text": "define an enum named Alliance"
+			},
+			"cardAt": "bottom-right",
+			"assist": true
+		},
+		{
+			"title": "Find it",
+			"say": {
+				"never": "It may be further down. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `define an enum named MatchPeriod` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "It may be further down. Press **Ctrl+F**, type `define an enum named MatchPeriod` and press Enter to jump to it."
+			},
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "define an enum named MatchPeriod"
+				},
+				"hint": "find define an enum named MatchPeriod with Ctrl+F.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Your second enum",
+			"say": {
+				"never": "Write the next enum under this comment: `enum MatchPeriod { AUTONOMOUS, TELEOP, ENDGAME }`. It's the same shape as `Alliance`, with three values.",
+				"bit": "Write `enum MatchPeriod { AUTONOMOUS, TELEOP, ENDGAME }` under this comment."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "define an enum named MatchPeriod"
+			},
+			"cardAt": "bottom-right",
+			"assist": true
+		},
+		{
+			"title": "Find it",
+			"say": {
+				"never": "It may be further down. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `MAX_SPEED =` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "It may be further down. Press **Ctrl+F**, type `MAX_SPEED =` and press Enter to jump to it."
+			},
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "MAX_SPEED ="
+				},
+				"hint": "find MAX_SPEED = with Ctrl+F.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Your last constant",
+			"say": {
+				"never": "This line has the wrong value. Change `0.0` to `5.0`. No quotes this time, because it's a number.",
+				"bit": "Change `0.0` to `5.0`. No quotes, because it's a number."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "MAX_SPEED ="
 			},
 			"cardAt": "bottom-right",
 			"assist": true
