@@ -1,0 +1,124 @@
+{
+	"title": "Why the robot spins: motor inversion",
+	"summary": "The two sides are mirror images, so one motor must be inverted.",
+	"topic": "Robot",
+	"order": 390,
+	"steps": [
+		{
+			"title": "Mirror images",
+			"say": {
+				"never": "Hold your two hands out in front of you with your thumbs up. Now curl your fingers on both hands. One hand curls clockwise and the other counterclockwise. A robot's two drive motors are like that: they face opposite ways, so the same command turns one wheel forward and the other backward.",
+				"bit": "The drive motors face opposite ways, so the same command turns one wheel forward and the other backward."
+			},
+			"board": {
+				"code": "same number to both motors\n\nleft motor:   wheel goes forward\nright motor:  wheel goes backward\n\nresult:       the robot spins",
+				"language": "text",
+				"marks": [
+					{
+						"text": "same number to both motors",
+						"label": "what your code asks for"
+					},
+					{
+						"text": "the robot spins",
+						"label": "what the robot does"
+					}
+				]
+			}
+		},
+		{
+			"title": "What inverted means",
+			"say": {
+				"never": "**Inverted** is a setting on the motor controller. It flips the direction the motor turns for a positive number. Your code never has to know: positive still means forward on both sides. This is why you check it once for each robot, and why a robot that spins when you ask it to go straight is usually not a code bug.",
+				"bit": "**Inverted** flips which way a motor turns for a positive number, so positive means forward on both sides."
+			},
+			"board": {
+				"code": "a fan that blows the wrong way:\n  not inverted:  positive blows at you\n  inverted:      positive blows away from you",
+				"language": "text",
+				"marks": [
+					{
+						"text": "inverted",
+						"label": "same number, opposite direction"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Inverted",
+			"say": {
+				"never": "In `Constants.java`, each motor is written as `motor(can id, inverted)`. The left motor has ID 1 and the right motor has ID 2. Right now they have the same setting, and that's why your robot spins. One of them has to change, and it's the side that's mounted facing the other way. On our robot that's the right side.",
+				"bit": "In `Constants.java`, each motor is `motor(can id, inverted)`. Both sides have the same setting now; the right side is the one to change."
+			},
+			"board": {
+				"code": "motor(can id, inverted)\n\nleft side:   ID 1, stays as it is\nright side:  ID 2, this one faces the other way",
+				"language": "text",
+				"marks": [
+					{
+						"text": "inverted",
+						"label": "true or false"
+					},
+					{
+						"text": "ID 2",
+						"label": "the one to change"
+					}
+				]
+			},
+			"assist": true
+		},
+		{
+			"title": "Open Constants.java",
+			"say": {
+				"never": "Hold down **Ctrl** and tap **P**. Type `Constants`, then press **Enter**. This is where the robot's numbers live.",
+				"bit": "Press **Ctrl+P**, type `Constants` and press Enter."
+			},
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "Constants.java"
+				},
+				"hint": "open Constants.java with Ctrl+P.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Flip the right side",
+			"say": {
+				"never": "Find the line for `RIGHT_MOTORS`. Change its inverted setting, the `false`, to `true`. Leave the left side alone. Save with **Ctrl+S**.",
+				"bit": "On the `RIGHT_MOTORS` line, change `false` to `true` and save."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "RIGHT_MOTORS"
+			},
+			"cardAt": "bottom-right",
+			"assist": true
+		},
+		{
+			"title": "Drive it",
+			"say": {
+				"never": "Press **Start** again, because a changed setting needs a fresh build. Enable Teleop and push both sticks forward (**W** and **Arrow Up**). The robot should now drive straight, and `Drive/TrueSpeed` should climb.",
+				"bit": "Press **Start** again, enable Teleop and push both sticks forward. It should drive straight now."
+			},
+			"target": {
+				"selector": "[data-tour='mode']"
+			},
+			"cardAt": "top-right"
+		}
+	],
+	"kind": "mixed"
+}

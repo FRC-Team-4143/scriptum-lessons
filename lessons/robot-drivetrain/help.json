@@ -9,6 +9,12 @@
 			]
 		},
 		{
+			"checkpoint": "drives-straight",
+			"guides": [
+				"robot-drivetrain-inversion"
+			]
+		},
+		{
 			"checkpoint": "turns-in-place",
 			"guides": [
 				"robot-drivetrain-arcade"
@@ -42,6 +48,20 @@
 				},
 				"`left_speed = forward + turn;` and `right_speed = forward - turn;`."
 			]
+		},
+		"drives-straight": {
+			"hints": [
+				{
+					"never": "Push forward and watch the robot on the 2D Field. Does it drive straight or spin? If it spins, the two sides are pushing opposite ways even though your code asks for the same thing.",
+					"bit": "If it spins while both outputs are positive, one motor's inverted setting is wrong."
+				},
+				{
+					"never": "Open `Constants.java`. Each motor is `motor(can id, inverted)`. The two sides are mirror images, so they shouldn't both have the same setting. Which side is mounted facing the other way?",
+					"bit": "In `Constants.java`, the two sides shouldn't have the same `inverted` setting."
+				},
+				"The right motor is the one that's inverted: change the `false` in `RIGHT_MOTORS` to `true`, then press Start again. If you changed `LEFT_MOTORS`, put it back to `false`."
+			],
+			"guide": "robot-drivetrain-inversion"
 		}
 	}
 }

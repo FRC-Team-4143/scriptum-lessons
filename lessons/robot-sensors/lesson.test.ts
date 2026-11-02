@@ -9,6 +9,18 @@ import { hasJdk, lessonKit, ROBOT_SRC } from "../../common/tests/lesson-kit";
 
 const L = lessonKit(import.meta.url);
 
+describe("robot-sensors starts with the gear ratio wrong", () => {
+	const ratio = async (path: string) => {
+		const text = await readFile(new URL(path, import.meta.url), "utf8");
+		return text.match(/GEAR_RATIO = ([\d.]+);/)?.[1];
+	};
+
+	test("the starter says 1.0 and the solution has the real gearbox", async () => {
+		expect(await ratio("./project/src/main/java/frc/robot/Constants.java")).toBe("1.0");
+		expect(await ratio("./solution/Constants.java")).toBe("8.46");
+	});
+});
+
 describe.skipIf(!hasJdk)("robot-sensors script checkpoints", () => {
 	test("robot-sensors: deadband fails fresh, passes once the constant (in Constants.java) and ifs are written", async () => {
 		await L.roundTrip(["deadband"], ["Robot.java", "Constants.java"]);

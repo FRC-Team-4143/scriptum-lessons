@@ -10,8 +10,8 @@ import java.util.List;
 public final class Constants {
   private Constants() {}
 
-  // The chassis. The wheel radius and track width are the real robot's. The gear ratio and mass are
-  // still placeholders until they are measured.
+  // The chassis. The wheel radius, gear ratio and track width are the real robot's. The mass is
+  // still a placeholder until it is measured.
   public static final double WHEEL_RADIUS_METERS = Units.inchesToMeters(3.0);
   public static final double GEAR_RATIO = 8.46; // motor turns for every 1 wheel turn
   public static final double TRACK_WIDTH_METERS =
@@ -22,7 +22,7 @@ public final class Constants {
   // robot
   // with more motors per side could simply add to its list.
   public static final List<MotorConfig> LEFT_MOTORS = List.of(motor(1, false));
-  public static final List<MotorConfig> RIGHT_MOTORS = List.of(motor(2, true));
+  public static final List<MotorConfig> RIGHT_MOTORS = List.of(motor(2, false));
 
   /** Builds the settings for one drive motor: its CAN id and whether it spins backwards. */
   private static MotorConfig motor(int can_id, boolean inverted) {

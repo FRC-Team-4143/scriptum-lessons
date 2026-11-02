@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class LessonLoop extends SubsystemManager {
   private final LessonChecks checks =
-      new LessonChecks("Drive/LeftOutput", "Drive/RightOutput")
+      new LessonChecks("Drive/LeftOutput", "Drive/RightOutput", "Drive/TrueSpeed")
           .spread("Drive/Turn", "Drive/LeftOutput", "Drive/RightOutput");
 
   public LessonLoop(SubsystemIoBase mech) {

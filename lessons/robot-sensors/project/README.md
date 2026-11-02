@@ -33,7 +33,7 @@ A suggested pace that adds up to the 3 hour session. Take short breaks whenever 
 | --- | --- |
 | 20 | Read about conditions and constants |
 | 35 | Steps 1-2: meters, speeds and distance |
-| 25 | Step 3: graph and check your numbers |
+| 25 | Step 3: graph and check your numbers, then fix the gear ratio |
 | 35 | Step 4: the deadband (in `Constants.java` and `Robot.java`) |
 | 40 | Step 5: bang-bang driving, then the "Think about it" discussion |
 | 15 | Verify |
@@ -62,7 +62,13 @@ Go slower on anything that is new. Finishing every bonus is not expected.
    ```
 
    The track width is `Constants.TRACK_WIDTH_METERS`.
-3. **Check them in AdvantageScope.** Drive forward, then spin in place, and watch the numbers.
+3. **Check them in AdvantageScope.** Drive forward flat out and watch `Robot/LinearSpeed`. It reads
+   about 50 m/s, far too fast for a real robot! Your math is fine. The encoder sits inside the
+   **motor**, and the drivetrain divides by `GEAR_RATIO` to get to the wheel. `GEAR_RATIO` in
+   `Constants.java` is still `1.0`, which says the motor and wheel turn together. On our robot the
+   gearbox is **8.46:1**: the motor turns 8.46 times for every 1 turn of the wheel. Set `GEAR_RATIO` to
+   the real number, press **Start** again and check: full speed should now read about 5.9 m/s. Then
+   spin in place and watch `Robot/AngularSpeed`.
 4. **STEP 4: add a deadband.** Add a `DEADBAND` constant of `0.1` to `Constants.java`. Then, in
    `teleopPeriodic()`, use an `if` on `forward` and another on `turn`: if the absolute value
    (`Math.abs(...)`) is less than `Constants.DEADBAND`, set it to `0.0`.
