@@ -21,6 +21,8 @@ public class LessonLoop extends SubsystemManager {
           "Drive/PoseX",
           "Drive/PoseYawRad");
 
+  private final WaypointTourCheck challenge = new WaypointTourCheck();
+
   public LessonLoop(SubsystemIoBase mech) {
     super(BuildConstants.class);
     registerSubsystem(
@@ -52,5 +54,6 @@ public class LessonLoop extends SubsystemManager {
   public void doControlLoop() {
     super.doControlLoop();
     checks.update();
+    challenge.update();
   }
 }

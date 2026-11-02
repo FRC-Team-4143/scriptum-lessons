@@ -1266,6 +1266,16 @@
 						"min": 1.5,
 						"max": 2
 					}
+				},
+				{
+					"id": "challenge-driver-sticks",
+					"title": "Challenge: Driver-friendly sticks",
+					"description": "Optional, for students who want more. Teleop squares each stick but keeps its sign, and past full power shrinks both sides together so the robot can still turn. See \"Advanced challenge\" in the README.",
+					"optional": true,
+					"verifier": {
+						"type": "script",
+						"path": "lessons/robot-drivetrain/checkpoints/verify/challenge-driver-sticks.sh"
+					}
 				}
 			]
 		},
@@ -1327,6 +1337,19 @@
 						"check": "range",
 						"min": 1.95,
 						"max": 3
+					}
+				},
+				{
+					"id": "challenge-stop-on-mark",
+					"title": "Challenge: Stop on the mark",
+					"description": "Optional, for students who want more. Run Auto. The robot really stops within 3 centimeters of 2 meters, and gets there in under 2.5 seconds. Bang-bang can't do it. See \"Advanced challenge\" in the README.",
+					"optional": true,
+					"verifier": {
+						"type": "nt4-value",
+						"topic": "/AdvantageKit/RealOutputs/Check/Challenge/StopOnMark",
+						"check": "range",
+						"min": 1,
+						"max": 1
 					}
 				}
 			]
@@ -1428,6 +1451,16 @@
 						"min": 3,
 						"max": 6.5
 					}
+				},
+				{
+					"id": "challenge-smooth-launch",
+					"title": "Challenge: Smooth launch",
+					"description": "Optional, for students who want more. DriveMath.smoothStick(targets, speedUpStep, slowDownStep) limits how fast a stick value can change, one loop at a time, and stops on zero before reversing. See \"Advanced challenge\" in the README.",
+					"optional": true,
+					"verifier": {
+						"type": "script",
+						"path": "lessons/robot-drive-math/checkpoints/verify/challenge-smooth-launch.sh"
+					}
 				}
 			]
 		},
@@ -1489,6 +1522,19 @@
 						"check": "range",
 						"min": 2.95,
 						"max": 4.2
+					}
+				},
+				{
+					"id": "challenge-waypoint-tour",
+					"title": "Challenge: Waypoint tour",
+					"description": "Optional, for students who want more. Run Auto. The robot drives to (2.0, 1.0), then to (3.5, -1.0), and stops there, in under 10 seconds, measured by its true position. See \"Advanced challenge\" in the README.",
+					"optional": true,
+					"verifier": {
+						"type": "nt4-value",
+						"topic": "/AdvantageKit/RealOutputs/Check/Challenge/WaypointTour",
+						"check": "range",
+						"min": 1,
+						"max": 1
 					}
 				}
 			]
@@ -1570,6 +1616,19 @@
 						"min": 0.3,
 						"max": 1
 					}
+				},
+				{
+					"id": "challenge-safe-feed",
+					"title": "Challenge: Intake and safe feed",
+					"description": "Optional, for students who want more. A new IntakeSubsystem you build from scratch runs on B, the roller only feeds a fast flywheel, and the intake waits while the shooter feeds. See \"Advanced challenge\" in the README.",
+					"optional": true,
+					"verifier": {
+						"type": "nt4-value",
+						"topic": "/AdvantageKit/RealOutputs/Check/Challenge/SafeFeed",
+						"check": "range",
+						"min": 1,
+						"max": 1
+					}
 				}
 			]
 		},
@@ -1647,6 +1706,16 @@
 						"min": 0.01,
 						"max": 1
 					}
+				},
+				{
+					"id": "challenge-own-pid",
+					"title": "Challenge: Write your own PID",
+					"description": "Optional, for students who want more. FlywheelPid.java is a PID with feedforward that you write yourself, with anti-windup and no derivative kick, and ShooterSubsystem uses it. See \"Advanced challenge\" in the README.",
+					"optional": true,
+					"verifier": {
+						"type": "script",
+						"path": "lessons/robot-control-theory/checkpoints/verify/challenge-own-pid.sh"
+					}
 				}
 			]
 		},
@@ -1693,6 +1762,19 @@
 						"check": "range",
 						"min": 2,
 						"max": 50
+					}
+				},
+				{
+					"id": "challenge-unjam",
+					"title": "Challenge: Clear a jam",
+					"description": "Optional, for students who want more. One tap of Y with the flywheel at speed runs a sequence by itself: wait for the flywheel to slow, run the roller backward for about 0.5 seconds, go back to DRIVE. See \"Advanced challenge\" in the README.",
+					"optional": true,
+					"verifier": {
+						"type": "nt4-value",
+						"topic": "/AdvantageKit/RealOutputs/Check/Challenge/Unjam",
+						"check": "range",
+						"min": 1,
+						"max": 1
 					}
 				}
 			]
@@ -1761,6 +1843,19 @@
 						"check": "range",
 						"min": 0,
 						"max": 0.17
+					}
+				},
+				{
+					"id": "challenge-knocked-off",
+					"title": "Challenge: Knocked off course",
+					"description": "Optional, for students who want more. Tap Y (I) to start the test. The estimate must ignore false camera sightings, then find its way back after being knocked 1.5 meters off. See \"Advanced challenge\" in the README.",
+					"optional": true,
+					"verifier": {
+						"type": "nt4-value",
+						"topic": "/AdvantageKit/RealOutputs/Check/Challenge/KnockedOff",
+						"check": "range",
+						"min": 1,
+						"max": 1
 					}
 				}
 			]
@@ -1866,6 +1961,19 @@
 						"topic": "/AdvantageKit/RealOutputs/Check/Subsystem/Shooter/ShotCount/Max",
 						"check": "range",
 						"min": 1
+					}
+				},
+				{
+					"id": "challenge-two-cycle",
+					"title": "Challenge: Two-cycle auto",
+					"description": "Optional, for students who want more. A TwoCycle tree scores, goes back for a second game piece and scores again, with both shots aimed, in under 25 seconds. See \"Advanced challenge\" in the README.",
+					"optional": true,
+					"verifier": {
+						"type": "nt4-value",
+						"topic": "/AdvantageKit/RealOutputs/Check/Challenge/TwoCycle",
+						"check": "range",
+						"min": 1,
+						"max": 1
 					}
 				}
 			]

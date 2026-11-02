@@ -73,6 +73,16 @@
 				"min": 0.01,
 				"max": 1.0
 			}
+		},
+		{
+			"id": "challenge-own-pid",
+			"title": "Challenge: Write your own PID",
+			"description": "Optional, for students who want more. FlywheelPid.java is a PID with feedforward that you write yourself, with anti-windup and no derivative kick, and ShooterSubsystem uses it. See \"Advanced challenge\" in the README.",
+			"optional": true,
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/challenge-own-pid.sh"
+			}
 		}
 	]
 }

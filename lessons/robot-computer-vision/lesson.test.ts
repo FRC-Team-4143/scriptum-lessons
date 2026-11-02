@@ -142,12 +142,14 @@ describe("robot-computer-vision checkpoint list", () => {
 			"aim-state-written",
 			"aim-converges",
 			"aim-no-overshoot",
+			"challenge-knocked-off",
 		]);
 		const topics = lesson.checkpoints.filter((c) => c.verifier.type === "nt4-value").map((c) => c.verifier.topic);
 		expect(topics).toEqual([
 			"/AdvantageKit/RealOutputs/Check/Localization/Accurate",
 			"/AdvantageKit/RealOutputs/Check/Aim/Settled",
 			"/AdvantageKit/RealOutputs/Check/Aim/OvershootRad",
+			"/AdvantageKit/RealOutputs/Check/Challenge/KnockedOff",
 		]);
 	});
 
