@@ -66,4 +66,4 @@ More depth: the team docs page [Variables](https://frc-team-4143.github.io/docs/
 
 ## Checking your work
 
-Click **Checkpoints** in the top bar and run **Verify** whenever you want.
+Open the lesson chip at the top, choose **Checkpoints** and run **Verify** whenever you want.

@@ -82,6 +82,6 @@ match. On the robot the logs are in `/U/logs/bt` (on the USB stick); in simulati
 
 ## Checking your work
 
-Click **Checkpoints** in the top bar and run **Verify** whenever you want. The
+Open the lesson chip at the top, choose **Checkpoints** and run **Verify** whenever you want. The
 checkpoints read the files you've saved in `src/main/deploy/autos/trees`, and the last one,
 **Read the replay**, reads `sample-logs/Answers.java`.

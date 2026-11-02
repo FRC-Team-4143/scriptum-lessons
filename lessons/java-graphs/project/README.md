@@ -83,4 +83,4 @@ edge.
 
 ## Checking your work
 
-Click **Checkpoints** in the top bar and run **Verify** whenever you want.
+Open the lesson chip at the top, choose **Checkpoints** and run **Verify** whenever you want.

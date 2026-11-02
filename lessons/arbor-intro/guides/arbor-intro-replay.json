@@ -102,7 +102,7 @@
 		},
 		{
 			"title": "Check them",
-			"say": "Open **Checkpoints** in the top bar and press **Verify** on **Read the replay**. If one is wrong it says which, with a clue. Switch back to Arbor and replay that part again.",
+			"say": "Open the lesson chip at the top, choose **Checkpoints** and press **Verify** on **Read the replay**. If one is wrong it says which, with a clue. Switch back to Arbor and replay that part again.",
 			"target": {
 				"pane": "editor"
 			},

@@ -10,6 +10,7 @@ and menus. You don't need the terminal.
   window, the repository name sits just left of the branch name. Click it and
   choose the folder you're working on. Your choice stays until you change it,
   even if you open a file from another folder, so pick again for each exercise.
+  Reloading the page clears it, so check the name after a reload.
   Don't see a name there yet? Open any file in the folder, or click the folder's
   row in Source Control, and it appears.
 - **The branch name beside it** is the branch of the repository you picked.

@@ -73,7 +73,7 @@
 		},
 		{
 			"title": "Check your work",
-			"say": "The checkpoints read the trees you've saved. Open **Checkpoints** in the top bar and press **Verify** whenever you like.",
+			"say": "The checkpoints read the trees you've saved. Open the lesson chip at the top, choose **Checkpoints** and press **Verify** whenever you like.",
 			"close": [
 				"arbor"
 			],
