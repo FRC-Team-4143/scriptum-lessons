@@ -35,10 +35,9 @@ public class Robot extends LoggedRobot {
     double angular_speed = 0.0; // radians per second
     distance_meters_ = 0.0; // meters
 
-    // Send the numbers to AdvantageScope.
-    MwLog.log("Robot/LinearSpeed", linear_speed);
-    MwLog.log("Robot/AngularSpeed", angular_speed);
-    MwLog.log("Robot/Distance", distance_meters_);
+    // LOG IT: send linear_speed, angular_speed and distance_meters_ to AdvantageScope. Write one
+    // MwLog.log line for each, using the keys Robot/LinearSpeed, Robot/AngularSpeed and
+    // Robot/Distance. The README shows how.
   }
 
   @Override
