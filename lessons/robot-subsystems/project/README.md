@@ -21,8 +21,10 @@ All of this lives under `src/main/java/frc/robot/`:
 - `subsystems/drive/DrivetrainConstants.java` holds every number that describes the drivetrain: the
   wheel radius, gear ratio, track width, mass and motors that used to live in `Constants.java`. That
   file is gone; each subsystem now keeps its own constants.
-- `subsystems/drive/DriveMath.java` is your `DriveMath` from the Drive Math lesson. It moved here, next
-  to the drivetrain it serves; the code in it is the same.
+- `DriveMath.java` is gone. Its jobs now live inside the drive mechanism that owns the wheels:
+  `mechanisms/DifferentialDriveMech.java` turns wheel radians into meters itself, gets the robot's
+  speeds from the kinematics you used last lesson, and splits arcade drive into left and right.
+  Same math you wrote, now where the competition robot keeps it.
 - `subsystems/shooter/ShooterConstants.java` and `ShooterSubsystem.java` are the new shooter.
 - `OI.java` reads the driver's controller.
 - `RobotContainer.java` registers the subsystems.

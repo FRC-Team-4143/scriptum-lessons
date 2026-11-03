@@ -24,7 +24,6 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.simulation.DifferentialDrivetrainSim;
 import edu.wpi.first.wpilibj.simulation.SimDeviceSim;
 import frc.robot.FieldTargets;
-import frc.robot.subsystems.drive.DriveMath;
 import frc.robot.subsystems.drive.DrivetrainConstants;
 import java.util.List;
 import java.util.Random;
@@ -182,32 +181,29 @@ public class DifferentialDriveMech extends MechBase {
   }
 
   // ---------------------------------------------------------------------------------------------
-  // Units the rest of the robot code actually wants: meters, and meters per second. They use the
-  // DriveMath methods you wrote.
+  // Units the rest of the robot code actually wants: meters, and meters per second. A wheel that
+  // turns some radians rolls that many radians times its radius along the carpet (arc length), the
+  // same conversion you wrote in DriveMath. Now the drive mechanism owns it.
   // ---------------------------------------------------------------------------------------------
 
   /** How far the left side has driven, in meters. */
   public double getLeftMeters() {
-    return DriveMath.radiansToMeters(
-        inputs_.leftPositionRad, DrivetrainConstants.WHEEL_RADIUS_METERS);
+    return inputs_.leftPositionRad * DrivetrainConstants.WHEEL_RADIUS_METERS;
   }
 
   /** How far the right side has driven, in meters. */
   public double getRightMeters() {
-    return DriveMath.radiansToMeters(
-        inputs_.rightPositionRad, DrivetrainConstants.WHEEL_RADIUS_METERS);
+    return inputs_.rightPositionRad * DrivetrainConstants.WHEEL_RADIUS_METERS;
   }
 
   /** How fast the left side is moving, in meters per second. */
   public double getLeftMetersPerSecond() {
-    return DriveMath.radiansToMeters(
-        inputs_.leftVelocityRadPerSec, DrivetrainConstants.WHEEL_RADIUS_METERS);
+    return inputs_.leftVelocityRadPerSec * DrivetrainConstants.WHEEL_RADIUS_METERS;
   }
 
   /** How fast the right side is moving, in meters per second. */
   public double getRightMetersPerSecond() {
-    return DriveMath.radiansToMeters(
-        inputs_.rightVelocityRadPerSec, DrivetrainConstants.WHEEL_RADIUS_METERS);
+    return inputs_.rightVelocityRadPerSec * DrivetrainConstants.WHEEL_RADIUS_METERS;
   }
 
   /** How far the whole robot has driven, in meters: the average of the two sides. */
@@ -217,15 +213,12 @@ public class DifferentialDriveMech extends MechBase {
 
   /** The robot's forward speed, in meters per second. */
   public double getLinearSpeed() {
-    return DriveMath.linearSpeed(getLeftMetersPerSecond(), getRightMetersPerSecond());
+    return getChassisSpeeds().vxMetersPerSecond;
   }
 
   /** The robot's turning speed, in radians per second. Positive is turning left. */
   public double getAngularSpeed() {
-    return DriveMath.angularSpeed(
-        getLeftMetersPerSecond(),
-        getRightMetersPerSecond(),
-        DrivetrainConstants.TRACK_WIDTH_METERS);
+    return getChassisSpeeds().omegaRadiansPerSecond;
   }
 
   // ---------------------------------------------------------------------------------------------
@@ -321,8 +314,16 @@ public class DifferentialDriveMech extends MechBase {
    * @param turn -1.0 (turn left) to 1.0 (turn right)
    */
   public void arcadeDrive(double forward, double turn) {
-    double[] speeds = DriveMath.arcadeToWheelSpeeds(forward, turn);
-    setDutyCycles(speeds[0], speeds[1]);
+    double left = forward + turn;
+    double right = forward - turn;
+    // If either side asks for more than full power, shrink both by the same amount so the robot
+    // still turns the way the driver asked.
+    double biggest = Math.max(Math.abs(left), Math.abs(right));
+    if (biggest > 1.0) {
+      left /= biggest;
+      right /= biggest;
+    }
+    setDutyCycles(left, right);
   }
 
   @Override
@@ -377,9 +378,6 @@ public class DifferentialDriveMech extends MechBase {
     MwLog.log(getLoggingKey() + "ChassisSpeeds", speeds);
     MwLog.log(getLoggingKey() + "LinearSpeed", speeds.vxMetersPerSecond);
     MwLog.log(getLoggingKey() + "AngularSpeed", speeds.omegaRadiansPerSecond);
-    // The same two numbers worked out by hand with your DriveMath methods, to compare.
-    MwLog.log(getLoggingKey() + "LinearSpeedByHand", getLinearSpeed());
-    MwLog.log(getLoggingKey() + "AngularSpeedByHand", getAngularSpeed());
     if (IS_SIM) {
       // Where the simulated robot REALLY is, to compare with the pose your code estimates.
       MwLog.log(getLoggingKey() + "TruePose", sim_.getPose());
