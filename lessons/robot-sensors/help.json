@@ -22,6 +22,19 @@
 		}
 	],
 	"checkpoints": {
+		"log-it": {
+			"hints": [
+				{
+					"never": "A log line has two parts inside the brackets: a name in quotes (the key), then the value. Which three numbers did STEP 2 just work out?",
+					"bit": "One `MwLog.log(key, value);` line per number, at the end of `robotPeriodic()`."
+				},
+				{
+					"never": "Copy each key exactly, capitals too: `Robot/LinearSpeed`, `Robot/AngularSpeed` and `Robot/Distance`. A small typo makes a brand new key that Verify can't find.",
+					"bit": "Keys are case sensitive: `Robot/LinearSpeed`, `Robot/AngularSpeed`, `Robot/Distance`."
+				},
+				"`MwLog.log(\"Robot/LinearSpeed\", linear_speed);` and the same pattern for the other two."
+			]
+		},
 		"linear-speed": {
 			"hints": [
 				{

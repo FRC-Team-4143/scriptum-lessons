@@ -32,7 +32,7 @@ A suggested pace that adds up to the 3 hour session. Take short breaks whenever 
 | Minutes | What to do |
 | --- | --- |
 | 20 | Read about conditions and constants |
-| 35 | Steps 1-2: meters, speeds and distance |
+| 35 | Steps 1-2: meters, speeds and distance, then log them |
 | 25 | Step 3: graph and check your numbers, then fix the gear ratio |
 | 35 | Step 4: the deadband (in `Constants.java` and `Robot.java`) |
 | 40 | Step 5: bang-bang driving, then the "Think about it" discussion |
@@ -62,21 +62,39 @@ Go slower on anything that is new. Finishing every bonus is not expected.
    ```
 
    The track width is `Constants.TRACK_WIDTH_METERS`.
-3. **Check them in AdvantageScope.** Drive forward flat out and watch `Robot/LinearSpeed`. It reads
+3. **LOG IT: send your numbers to AdvantageScope.** A number you never log is a number you can't
+   see. The robot runs this code 50 times a second, far too fast to watch, and a match only happens
+   once, so the log is how you find out what the code really measured. At the end of
+   `robotPeriodic()`, under the `LOG IT` comment, write one line for each number:
+
+   ```java
+   MwLog.log("Robot/Example", example_value);
+   ```
+
+   The first part, in quotes, is the **key**: the name the number gets in AdvantageScope. The slash
+   puts it in a `Robot` folder. The second part is the value to record. Use exactly these keys,
+   capitals and all, because Verify looks for them:
+
+   | Key | Value | Unit |
+   | --- | --- | --- |
+   | `Robot/LinearSpeed` | `linear_speed` | m/s |
+   | `Robot/AngularSpeed` | `angular_speed` | rad/s |
+   | `Robot/Distance` | `distance_meters_` | m |
+4. **Check them in AdvantageScope.** Drive forward flat out and watch `Robot/LinearSpeed`. It reads
    about 50 m/s, far too fast for a real robot! Your math is fine. The encoder sits inside the
    **motor**, and the drivetrain divides by `GEAR_RATIO` to get to the wheel. `GEAR_RATIO` in
    `Constants.java` is still `1.0`, which says the motor and wheel turn together. On our robot the
    gearbox is **8.46:1**: the motor turns 8.46 times for every 1 turn of the wheel. Set `GEAR_RATIO` to
    the real number, press **Start** again and check: full speed should now read about 5.9 m/s. Then
    spin in place and watch `Robot/AngularSpeed`.
-4. **STEP 4: add a deadband.** Add a `DEADBAND` constant of `0.1` to `Constants.java`. Then, in
+5. **STEP 4: add a deadband.** Add a `DEADBAND` constant of `0.1` to `Constants.java`. Then, in
    `teleopPeriodic()`, use an `if` on `forward` and another on `turn`: if the absolute value
    (`Math.abs(...)`) is less than `Constants.DEADBAND`, set it to `0.0`.
-5. **STEP 3: drive exactly 2 meters.** In `autonomousPeriodic()`, write an `if` / `else` on `distance_meters_`:
+6. **STEP 3: drive exactly 2 meters.** In `autonomousPeriodic()`, write an `if` / `else` on `distance_meters_`:
    drive at `0.4` while it is below `2.0`, stop otherwise. Run Auto and see where the robot stops.
-6. **Run Auto again.** Disable, then Enable in Auto a second time. The robot starts over and drives
+7. **Run Auto again.** Disable, then Enable in Auto a second time. The robot starts over and drives
    the same distance again. That is thanks to the **reset** in `autonomousInit()` (see below).
-7. **Click Verify** to check your work.
+8. **Click Verify** to check your work.
 
 ### What "reset" means
 

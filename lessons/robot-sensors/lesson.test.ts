@@ -42,6 +42,34 @@ describe.skipIf(!hasJdk)("robot-sensors script checkpoints", () => {
 		}
 	}, 30_000);
 
+	test("robot-sensors: log-it fails fresh, passes once the three MwLog.log lines are written", async () => {
+		await L.roundTrip(["log-it"], ["Robot.java"]);
+	}, 30_000);
+
+	test("robot-sensors: the log-it check wants each key spelled exactly, inside robotPeriodic()", async () => {
+		const project = await L.makeProject();
+		try {
+			await L.applySolution(project, ["Robot.java"]);
+			const file = join(project, ROBOT_SRC, "Robot.java");
+			const solved = await readFile(file, "utf8");
+
+			await writeFile(file, solved.replace('"Robot/LinearSpeed"', '"Robot/Linearspeed"'), "utf8");
+			const typo = L.verify(project, "log-it");
+			expect(typo.exitCode).not.toBe(0);
+			expect(typo.text).toContain("capitals");
+
+			await writeFile(file, solved.replace('"Robot/Distance", distance_meters_', '"Robot/Distance", linear_speed'), "utf8");
+			expect(L.verify(project, "log-it").exitCode).not.toBe(0);
+
+			const line = 'MwLog.log("Robot/AngularSpeed", angular_speed);';
+			const moved = solved.replace(line, "").replace("public void teleopPeriodic() {", `public void teleopPeriodic() {\n    ${line}`);
+			await writeFile(file, moved, "utf8");
+			expect(L.verify(project, "log-it").exitCode).not.toBe(0);
+		} finally {
+			await rm(project, { recursive: true, force: true });
+		}
+	}, 30_000);
+
 	test("robot-sensors: the deadband check needs the constant in Constants.java", async () => {
 		const project = await L.makeProject();
 		try {

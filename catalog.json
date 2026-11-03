@@ -1294,6 +1294,15 @@
 					}
 				},
 				{
+					"id": "log-it",
+					"title": "Log your numbers",
+					"description": "robotPeriodic() logs linear_speed, angular_speed and distance_meters_ with MwLog.log, under the keys Robot/LinearSpeed, Robot/AngularSpeed and Robot/Distance.",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/robot-sensors/checkpoints/verify/log-it.sh"
+					}
+				},
+				{
 					"id": "linear-speed",
 					"title": "Linear speed",
 					"description": "Drive both sides forward at full speed. Robot/LinearSpeed should read about 5.9 m/s. If it reads about 50, GEAR_RATIO isn't set yet.",
