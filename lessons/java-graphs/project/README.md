@@ -2,7 +2,7 @@
 
 > **New to an idea here?** Press the **Dozer** button in the top bar. His guides explain each idea this lesson uses, and **I'm so lost → Teach me, step by step** walks you through every job.
 
-More depth: the team docs page [Graphs](https://frc-team-4143.github.io/docs/software/java/advanced/graphs).
+More depth: the team docs page [Graphs](https://docs.marswars.org/docs/software/java/advanced/graphs).
 
 In autonomous, the robot drives from spot to spot: the start line, a lane,
 the reef, the coral station. Some spots are joined by a clear lane, and some

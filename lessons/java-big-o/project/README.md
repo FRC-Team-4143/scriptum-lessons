@@ -2,7 +2,7 @@
 
 > **New to an idea here?** Press the **Dozer** button in the top bar. His guides explain each idea this lesson uses, and **I'm so lost → Teach me, step by step** walks you through every job.
 
-More depth: the team docs page [Big-O & Efficiency](https://frc-team-4143.github.io/docs/software/java/advanced/big-o).
+More depth: the team docs page [Big-O & Efficiency](https://docs.marswars.org/docs/software/java/advanced/big-o).
 
 Your scouting app works fine on the five teams you tested it with. Then you
 load a whole district, 3000 teams, and the "did a scout type a team twice?"

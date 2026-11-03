@@ -5,6 +5,8 @@ teams run on the driver station laptop during a match - number displays,
 boolean indicators, a field view, and more, all bound to live NetworkTables
 data.
 
+Companion docs pages: [The Tools](https://docs.marswars.org/docs/software/training/software-tools) and [Elastic](https://docs.marswars.org/docs/software/tools/elastic).
+
 The robot code is already written and already publishing one value for every
 single-topic widget type Elastic has, plus a robot pose driving in a circle
 at `Field2d/Robot` - this lesson is about the tool, not the code. First

@@ -4,7 +4,7 @@
 
 All the code lives in `src/Main.java`. Click **Run** any time to see your output in the terminal.
 
-More depth: the team docs page [Variables](https://frc-team-4143.github.io/docs/software/java/basics/vars-dt).
+More depth: the team docs page [Variables](https://docs.marswars.org/docs/software/java/basics/vars-dt).
 
 ## Which names matter
 

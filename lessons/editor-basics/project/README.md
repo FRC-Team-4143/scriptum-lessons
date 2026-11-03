@@ -9,6 +9,9 @@ program.
 walk you through each part below, one step at a time, right on your screen. Pick any guide and
 do what he says. You can't break anything.
 
+Companion docs pages: [The Tools](https://docs.marswars.org/docs/software/training/software-tools) and [Scriptum](https://docs.marswars.org/docs/software/tools/scriptum).
+On team laptops you'll use the same editor as a desktop app: see [VSCode](https://docs.marswars.org/docs/software/tools/vscode).
+
 ## Your five jobs
 
 Each one is a **checkpoint**. Open the lesson chip at the top and press **Verify** when you've

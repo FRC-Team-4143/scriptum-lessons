@@ -2,7 +2,7 @@
 
 > **New to an idea here?** Press the **Dozer** button in the top bar. His guides explain each idea this lesson uses, and **I'm so lost → Teach me, step by step** walks you through every job.
 
-More depth: the team docs page [Interfaces & Polymorphism](https://frc-team-4143.github.io/docs/software/java/advanced/interfaces).
+More depth: the team docs page [Interfaces & Polymorphism](https://docs.marswars.org/docs/software/java/advanced/interfaces).
 
 A robot runs everything off one 12-volt battery. Drive motors, LEDs, the
 intake: each one pulls current (amps), and if they pull too much at once the

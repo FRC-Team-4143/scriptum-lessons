@@ -2,7 +2,7 @@
 
 > **New to an idea here?** Press the **Dozer** button in the top bar. His guides explain each idea this lesson uses, and **I'm so lost → Teach me, step by step** walks you through every job.
 
-More depth: the team docs page [Trees](https://frc-team-4143.github.io/docs/software/java/advanced/trees).
+More depth: the team docs page [Trees](https://docs.marswars.org/docs/software/java/advanced/trees).
 
 A list is a line of things, one after another. A **tree** branches: each
 item (called a **node**) can point at other nodes below it, called its

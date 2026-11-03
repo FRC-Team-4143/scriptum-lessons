@@ -6,6 +6,9 @@ the robot ticks through. Arbor lets you drag the steps together, fill in their
 settings, and saves the result as a file the robot runs. The same tool
 shows the tree running on the robot, node by node.
 
+Companion docs pages: [Arbor](https://docs.marswars.org/docs/software/tools/arbor), [Behavior Trees](https://docs.marswars.org/docs/software/controls/behavior-trees) and
+[Autonomous](https://docs.marswars.org/docs/software/training/autonomous), the session that introduces Arbor.
+
 This lesson is entirely inside the **Arbor** pane on the right - there's no
 Java to write. The project is `src/main/deploy/autos`: its `trees/` folder
 holds the trees, and `nodes.xml` lists the robot-specific steps you can use.

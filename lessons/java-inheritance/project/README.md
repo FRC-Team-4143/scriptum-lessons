@@ -6,6 +6,8 @@ This lesson extends the `BankAccount` class you built in Classes & Objects
 - it's given to you complete in `src/BankAccount.java` this time, because
 this lesson is about building *on top of* a class, not rewriting it.
 
+More depth: the [Inheritance](https://docs.marswars.org/docs/software/java/basics/classes-objs#inheritance) section of the team docs page Classes and Objects.
+
 ## What you need to do
 
 `BankAccount` is finished - don't edit it. You'll build two specialized

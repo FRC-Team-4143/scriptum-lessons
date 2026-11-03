@@ -11,6 +11,8 @@ Reading code and guessing only gets you so far. A **debugger** lets you freeze t
 line and look inside: what's in every variable, which method called which, and what happens one
 line at a time. In this lesson you'll use it to find all seven bugs.
 
+More depth: the team docs page [Debugging](https://docs.marswars.org/docs/software/tools/debugging).
+
 ## Run it first
 
 Open `src/Main.java` and click the **Run** button, the little triangle (▷) at the top right of the file. You'll see:

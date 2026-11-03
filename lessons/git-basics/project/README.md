@@ -22,7 +22,8 @@ There's no GitHub account or login here. If anything asks you to sign in to
 GitHub, click **Cancel**. Each exercise has a shared copy (`origin`), kept out
 of sight on this machine, that behaves like GitHub would. Only exercises 6 and 7
 use it. This lesson is about how git works, one button at a time. For background on why we use git the way we do,
-see the team's [GitHub docs page](https://frc-team-4143.github.io/docs/software/tools/github).
+see the team's docs pages [Git](https://docs.marswars.org/docs/software/tools/git) and [GitHub](https://docs.marswars.org/docs/software/tools/github), and the training
+page [The Tools](https://docs.marswars.org/docs/software/training/software-tools).
 
 ## Our conventions
 
