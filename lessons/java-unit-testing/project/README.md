@@ -2,7 +2,7 @@
 
 > **New to an idea here?** Press the **Dozer** button in the top bar. His guides explain each idea this lesson uses, and **I'm so lost → Teach me, step by step** walks you through every job.
 
-More depth: the team docs page [Unit Testing](https://frc-team-4143.github.io/docs/software/java/advanced/unit-testing).
+More depth: the team docs page [Unit Testing](https://docs.marswars.org/docs/software/java/advanced/unit-testing).
 
 How do you know your code works? Up to now you ran `Main` and read the
 output yourself. That works once. But robot code changes every week, and

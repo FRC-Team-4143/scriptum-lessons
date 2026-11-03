@@ -6,7 +6,7 @@ does. In this lesson you will see the drivetrain as a subsystem, then build a **
 subsystem from two **mechanisms**, a spinning flywheel and a feeding roller.
 
 Companion docs pages: [Mechanisms and Subsystems](https://docs.marswars.org/docs/software/training/mechanisms-subsystems),
-[Mechanisms](https://docs.marswars.org/docs/software/robot_dev/mechanisms/) and
+[Mechanisms](https://docs.marswars.org/docs/software/robot_dev/mechanisms) and
 [Subsystems](https://docs.marswars.org/docs/software/robot_dev/subsystems)
 
 > **New to an idea here?** Press the **Dozer** button in the top bar. His guides explain each idea this lesson uses, and **I'm so lost → Teach me, step by step** walks you through every job.

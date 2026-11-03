@@ -2,7 +2,7 @@
 
 > **New to an idea here?** Press the **Dozer** button in the top bar. His guides explain each idea this lesson uses, and **I'm so lost → Teach me, step by step** walks you through every job.
 
-More depth: the team docs page [Design Patterns](https://frc-team-4143.github.io/docs/software/java/advanced/design-patterns).
+More depth: the team docs page [Design Patterns](https://docs.marswars.org/docs/software/java/advanced/design-patterns).
 
 Programmers keep running into the same problems: "I want to swap how this
 works without rewriting it", "lots of things need to know when this

@@ -7,6 +7,10 @@ robot drives to a game piece, drives to a scoring spot, **aims at the goal** wit
 and tuned in the Computer Vision lesson, and **shoots**. Last, you teach the robot's `AIM` state to wait
 until the robot is really aimed, so the tree doesn't shoot too early.
 
+Companion docs pages: [Autonomous](https://docs.marswars.org/docs/software/training/autonomous),
+[Behavior Trees](https://docs.marswars.org/docs/software/controls/behavior-trees) and
+[Autonomous (robot code)](https://docs.marswars.org/docs/software/robot_dev/autonomous)
+
 > **New to an idea here?** Press the **Dozer** button in the top bar. His guides explain each idea this lesson uses, and **I'm so lost → Teach me, step by step** walks you through every job.
 
 ## Before you start

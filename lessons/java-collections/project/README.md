@@ -2,7 +2,7 @@
 
 > **New to an idea here?** Press the **Dozer** button in the top bar. His guides explain each idea this lesson uses, and **I'm so lost → Teach me, step by step** walks you through every job.
 
-More depth: the team docs page [Collections](https://frc-team-4143.github.io/docs/software/java/advanced/collections).
+More depth: the team docs page [Collections](https://docs.marswars.org/docs/software/java/advanced/collections).
 
 At a competition, our scouts write down every match: which team played and how
 many points it scored. By the end of the day that is hundreds of numbers. In

@@ -2,7 +2,7 @@
 
 > **New to an idea here?** Press the **Dozer** button in the top bar. His guides explain each idea this lesson uses, and **I'm so lost → Teach me, step by step** walks you through every job.
 
-More depth: the team docs page [Exceptions](https://frc-team-4143.github.io/docs/software/java/advanced/exceptions).
+More depth: the team docs page [Exceptions](https://docs.marswars.org/docs/software/java/advanced/exceptions).
 
 At a competition our scouts type a line for every team in every match, like
 `4143,12,38`: team 4143 scored 38 points in match 12. They type fast, so some

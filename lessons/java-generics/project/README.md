@@ -2,7 +2,7 @@
 
 > **New to an idea here?** Press the **Dozer** button in the top bar. His guides explain each idea this lesson uses, and **I'm so lost → Teach me, step by step** walks you through every job.
 
-More depth: the team docs page [Generics](https://frc-team-4143.github.io/docs/software/java/advanced/generics).
+More depth: the team docs page [Generics](https://docs.marswars.org/docs/software/java/advanced/generics).
 
 In the Collections lesson you wrote `ArrayList<Integer>` and
 `HashMap<Integer, Integer>`. The type in the angle brackets told the list

@@ -5,6 +5,9 @@ autonomous paths - dragging waypoints around the field, adding constraints,
 and letting a trajectory generator solve a path the robot can actually
 follow.
 
+Companion docs pages: [Choreo](https://docs.marswars.org/docs/software/tools/choreo) and [Autonomous](https://docs.marswars.org/docs/software/training/autonomous), the session
+that introduces Choreo.
+
 This lesson is entirely inside the **Choreo** pane on the right - there's no
 Java to write. A starter project (`robot.chor`) matching a typical swerve
 robot's geometry is already loaded.

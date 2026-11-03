@@ -2,7 +2,7 @@
 
 > **New to an idea here?** Press the **Dozer** button in the top bar. His guides explain each idea this lesson uses, and **I'm so lost → Teach me, step by step** walks you through every job.
 
-More depth: the team docs page [Stacks & Queues](https://frc-team-4143.github.io/docs/software/java/advanced/stacks-queues).
+More depth: the team docs page [Stacks & Queues](https://docs.marswars.org/docs/software/java/advanced/stacks-queues).
 
 A list lets you reach any item you like. Sometimes that's more freedom than
 you want. Two simpler shapes show up all over robot code, and the only

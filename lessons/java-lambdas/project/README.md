@@ -2,7 +2,7 @@
 
 > **New to an idea here?** Press the **Dozer** button in the top bar. His guides explain each idea this lesson uses, and **I'm so lost → Teach me, step by step** walks you through every job.
 
-More depth: the team docs page [Lambdas & Functional Interfaces](https://frc-team-4143.github.io/docs/software/java/advanced/lambdas).
+More depth: the team docs page [Lambdas & Functional Interfaces](https://docs.marswars.org/docs/software/java/advanced/lambdas).
 
 So far, a variable has held a *value*: a number, a string, an object. In this
 lesson a variable holds *behavior*: a little piece of code that you can pass

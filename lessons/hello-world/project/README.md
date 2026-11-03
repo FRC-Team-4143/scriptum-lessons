@@ -3,6 +3,8 @@
 A bare-bones Java project to make sure everything works. The code lives in
 `src/Main.java`.
 
+More depth: the team docs page [Quick Reference Guide](https://docs.marswars.org/docs/software/java/basics/quick-ref), a one-page tour of Java.
+
 ## What you need to do
 
 1. Open `src/Main.java` and read it - `main` is where Java starts running,

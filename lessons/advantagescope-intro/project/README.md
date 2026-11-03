@@ -4,6 +4,8 @@ Background: [AdvantageScope](https://docs.advantagescope.org/) is the tool
 teams use to visualize robot telemetry - line graphs, 3D/2D fields, tables,
 and more.
 
+Companion docs pages: [The Tools](https://docs.marswars.org/docs/software/training/software-tools) and [AdvantageScope](https://docs.marswars.org/docs/software/tools/ad-scope).
+
 The robot code is already written and already publishing `FlywheelVelocity` (an
 oscillating value), `GamePieceLoaded` (a toggling boolean), a robot pose
 driving a figure-8 around the field (`RobotPose2d`/`RobotPose3d`), swerve

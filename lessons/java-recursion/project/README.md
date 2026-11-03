@@ -2,6 +2,8 @@
 
 > **New to an idea here?** Press the **Dozer** button in the top bar. His guides explain each idea this lesson uses, and **I'm so lost → Teach me, step by step** walks you through every job.
 
+More depth: the team docs page [Recursion](https://docs.marswars.org/docs/software/java/basics/recursion).
+
 All the code lives in `src/Main.java`. No method bodies are given: write each full declaration yourself, and call your methods from `main` to try them.
 
 ## What you need to do
