@@ -76,6 +76,15 @@ export function buildCatalog(root: string): Built {
 	const outLessons = byOrder.map(({ id, file }) => {
 		const dir = `lessons/${id}`;
 		const checkpoints = ((file.checkpoints as Json[] | undefined) ?? []).map((cp) => {
+			// resetPath: the one project folder Scriptum's "Reset this exercise"
+			// restores for this checkpoint (then runs setupScript with it as $1).
+			// It stays project-relative, unlike the verifier path below.
+			if (cp.resetPath !== undefined) {
+				const reset = String(cp.resetPath);
+				const plain = /^[A-Za-z0-9._-]+(\/[A-Za-z0-9._-]+)*$/.test(reset) && !reset.split("/").some((s) => s === "." || s === "..");
+				if (!plain) problem(`${dir}: checkpoint "${cp.id}" has resetPath "${reset}", which must be a plain folder path inside project/`);
+				else if (!existsSync(join(root, dir, "project", reset))) problem(`${dir}: checkpoint "${cp.id}" resets project/${reset}, which doesn't exist`);
+			}
 			const verifier = cp.verifier as Json;
 			if (verifier?.type === "script") {
 				const rel = String(verifier.path ?? "");

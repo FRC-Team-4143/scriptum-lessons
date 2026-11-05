@@ -2,7 +2,7 @@
 	"about": {
 		"never": "This lesson is about the **editor**: the program you'll write all your code in. Before writing any code, you need to be comfortable making, naming and finding files. That's all this lesson is, and nothing here can break.",
 		"bit": "This lesson covers the editor itself: files, folders, saving, the terminal and running a program.",
-		"lot": "Editor basics. If you already know VS Code, verify each job quickly and move on to Git Basics."
+		"lot": "Editor basics. If you already know VS Code, verify each job quickly and move on to the next lesson."
 	},
 	"checkpoints": {
 		"make-folder": {

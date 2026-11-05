@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
 PROJECT="$1"
-cd "$PROJECT/06-push" 2>/dev/null || { echo "The 06-push folder is missing. Use Start over in the lesson chip."; exit 1; }
+cd "$PROJECT/06-push" 2>/dev/null || { echo "The 06-push folder is missing. Click Reset this exercise next to this checkpoint to get it back."; exit 1; }
 
 origin="$(git remote get-url origin 2>/dev/null || true)"
 if [ -z "$origin" ] || [ ! -d "$origin" ]; then
-	echo "This repository has lost its origin. Use Start over in the lesson chip."
+	echo "This repository has lost its origin. Click Reset this exercise next to this checkpoint to get it back."
 	exit 1
 fi
 

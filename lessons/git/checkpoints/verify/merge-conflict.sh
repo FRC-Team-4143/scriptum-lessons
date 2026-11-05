@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 PROJECT="$1"
-cd "$PROJECT/04-merge-conflict" 2>/dev/null || { echo "The 04-merge-conflict folder is missing. Use Start over in the lesson chip."; exit 1; }
+cd "$PROJECT/04-merge-conflict" 2>/dev/null || { echo "The 04-merge-conflict folder is missing. Click Reset this exercise next to this checkpoint to get it back."; exit 1; }
 
 if [ -d .git/rebase-merge ] || [ -d .git/rebase-apply ] || [ -f .git/MERGE_HEAD ]; then
 	echo "A merge or rebase is still in progress - finish resolving it first."
