@@ -61,6 +61,30 @@ async function makeProject(): Promise<string> {
 	return dir;
 }
 
+const lessonJson = (await Bun.file(join(lessonDir, "lesson.json")).json()) as {
+	checkpoints: { id: string; resetPath?: string }[];
+};
+
+// What Scriptum's "Reset this exercise" does for a checkpoint: put the
+// folder's starting files back, then run the setup script for just it.
+async function resetExercise(project: string, folder: string) {
+	await rm(join(project, folder), { recursive: true, force: true });
+	await cp(join(moduleDir, folder), join(project, folder), { recursive: true });
+	return run(project, ["bash", join(checkpointsDir, "setup.sh"), folder]);
+}
+
+// Every ref in the exercise and in its hidden origin, with the commit it
+// points at: equal snapshots mean byte-identical history.
+function refs(project: string, folder: string): string {
+	const local = git(join(project, folder), "for-each-ref", "--format=%(objectname) %(refname)");
+	requireOk(local, `refs of ${folder}`);
+	const origin = join(process.env.SCRIPTUM_ORIGINS as string, `${folder}.git`);
+	const remote = git(origin, "for-each-ref", "--format=%(objectname) %(refname)");
+	requireOk(remote, `origin refs of ${folder}`);
+	const status = git(join(project, folder), "status", "--porcelain", "--branch");
+	return `${local.text}--origin--\n${remote.text}--status--\n${status.text}`;
+}
+
 function verify(project: string, checkpointId: string) {
 	return run(project, [
 		"bash",
@@ -380,4 +404,83 @@ describe("git-basics lesson", () => {
 			await rm(project, { recursive: true, force: true });
 		}
 	});
+
+	test("every checkpoint resets exactly its own exercise folder", () => {
+		const folders = lessonJson.checkpoints.map((c) => c.resetPath);
+		expect(folders).toEqual([
+			"01-first-commit",
+			"02-feature-branch",
+			"03-merge",
+			"04-merge-conflict",
+			"05-rebase",
+			"06-push",
+			"07-pull",
+			"08-stash",
+		]);
+	});
+
+	test("resetting one exercise gives the same history a full load gives it", async () => {
+		const fresh = await makeProject();
+		const expected = new Map<string, string>();
+		for (const c of lessonJson.checkpoints) {
+			expected.set(c.resetPath as string, refs(fresh, c.resetPath as string));
+		}
+		await rm(fresh, { recursive: true, force: true });
+
+		const project = await makeProject();
+		try {
+			for (const c of lessonJson.checkpoints) {
+				const folder = c.resetPath as string;
+				const result = await resetExercise(project, folder);
+				requireOk(result, `setup.sh ${folder}`);
+				expect(result.text).toContain(`${folder} is back to how it started`);
+				expect(refs(project, folder)).toBe(expected.get(folder) as string);
+				expect(verify(project, c.id).exitCode).not.toBe(0);
+			}
+		} finally {
+			await rm(project, { recursive: true, force: true });
+		}
+	}, 30_000);
+
+	test("resetting a tangled rebase leaves the other exercises alone", async () => {
+		const project = await makeProject();
+		try {
+			// Finish exercise 1 and push exercise 6.
+			const first = join(project, "01-first-commit");
+			await Bun.write(join(first, "roster.txt"), "# Team Roster\nStudent One\n");
+			requireOk(git(first, "commit", "-am", "Add my name to the roster"), "commit");
+			requireOk(git(join(project, "06-push"), "push", "origin", "issue-18-team-colors"), "push");
+
+			// Tangle exercise 5: merge develop in, then wander off on a new branch.
+			const rebase = join(project, "05-rebase");
+			requireOk(git(rebase, "merge", "--no-edit", "develop"), "merge");
+			requireOk(git(rebase, "checkout", "-b", "lost"), "branch");
+			expect(verify(project, "rebase").exitCode).not.toBe(0);
+
+			requireOk(await resetExercise(project, "05-rebase"), "reset 05-rebase");
+
+			expect(git(rebase, "rev-parse", "--verify", "-q", "lost").exitCode).not.toBe(0);
+			requireOk(git(rebase, "rebase", "develop"), "rebase");
+			expect(verify(project, "rebase").exitCode).toBe(0);
+			expect(verify(project, "first-commit").exitCode).toBe(0);
+			expect(verify(project, "push").exitCode).toBe(0);
+		} finally {
+			await rm(project, { recursive: true, force: true });
+		}
+	}, 30_000);
+
+	test("setup.sh refuses a folder that isn't one of the exercises", async () => {
+		const project = await makeProject();
+		try {
+			const before = refs(project, "01-first-commit");
+			for (const bad of ["09-nope", "../01-first-commit", ""]) {
+				const result = run(project, ["bash", join(checkpointsDir, "setup.sh"), bad]);
+				expect(result.exitCode).not.toBe(0);
+				expect(result.text).toContain("isn't one of this lesson's exercises");
+			}
+			expect(refs(project, "01-first-commit")).toBe(before);
+		} finally {
+			await rm(project, { recursive: true, force: true });
+		}
+	}, 30_000);
 });

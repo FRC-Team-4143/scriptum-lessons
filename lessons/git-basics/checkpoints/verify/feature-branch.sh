@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 PROJECT="$1"
-cd "$PROJECT/02-feature-branch" 2>/dev/null || { echo "The 02-feature-branch folder is missing. Use Start over in the lesson chip."; exit 1; }
+cd "$PROJECT/02-feature-branch" 2>/dev/null || { echo "The 02-feature-branch folder is missing. Click Reset this exercise next to this checkpoint to get it back."; exit 1; }
 
 branch="$(git for-each-ref --format='%(refname:short)' refs/heads \
 	| grep -E '^issue-12-[a-z0-9]+(-[a-z0-9]+)*$' | head -n1 || true)"

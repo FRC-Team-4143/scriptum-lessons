@@ -63,3 +63,11 @@ Open the lesson chip at the top and choose **Checkpoints** to see the list and
 run **Verify**.
 Each checkpoint tells you what it's looking for if it doesn't pass yet —
 nothing here is graded, so verify as many times as you want.
+
+## If an exercise gets tangled
+
+Git mistakes are normal, and you can't break anything for good here. If one
+exercise gets into a state you can't undo (a rebase gone wrong, a branch you
+can't find), open **Checkpoints** and click **Reset this exercise** next to that
+exercise's checkpoint. Only that one folder goes back to how it started: your
+other exercises, and the checkpoints you've already passed, stay as they are.
