@@ -93,6 +93,11 @@ export function buildCatalog(root: string): Built {
 			}
 			return cp;
 		});
+		// roadmapUnit: the title of the roadmap unit this lesson goes in, after the
+		// robot units, whatever its track (Git is a Tools lesson in the last unit).
+		if (file.roadmapUnit !== undefined && (typeof file.roadmapUnit !== "string" || file.roadmapUnit.trim() === "")) {
+			problem(`${dir}: "roadmapUnit" must be a unit title, like "Coding as a Team"`);
+		}
 		const setup = typeof file.setupScript === "string" ? file.setupScript : undefined;
 		if (setup && !existsSync(join(root, dir, setup))) problem(`${dir}: setupScript ${setup} doesn't exist`);
 		for (const required of (file.requires as string[] | undefined) ?? []) {
@@ -106,7 +111,7 @@ export function buildCatalog(root: string): Built {
 			id,
 			subdir: `${dir}/project`,
 			...(setup ? { setupScript: `${dir}/${setup}` } : {}),
-			...pick(file, ["requires", "recommends", "showScope", "restrictTools"]),
+			...pick(file, ["requires", "recommends", "roadmapUnit", "showScope", "restrictTools"]),
 			checkpoints,
 		};
 	});

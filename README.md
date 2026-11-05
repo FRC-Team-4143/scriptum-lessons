@@ -49,16 +49,22 @@ folder; the generated `catalog.json` makes them relative to the repo.
 lists lessons worth doing first (the Java Basics a robot lesson uses, for example). Scriptum's
 roadmap builds its path from the FRC Robot lessons: each robot lesson's `requires` and `recommends`,
 and theirs in turn, come just before it, so a student meets each tool and Java idea right before the
-robot lesson that needs it. The Coding as a Team track comes after the last robot unit, as its
-own unit. Other lessons on no robot lesson's path (Java Advanced, Recursion) are shown as optional
-extra practice.
+robot lesson that needs it. A lesson with a `roadmapUnit` (Git's is `"Coding as a Team"`) instead
+goes in a unit of that name after the last robot unit, whatever its track. Other lessons on no
+robot lesson's path (Java Advanced, Recursion) are shown as optional extra practice.
 
 ## What's here
 
-Five tracks, in curriculum order (each lesson's `track` and `order` are in its `lesson.json`):
+Four tracks, in curriculum order (each lesson's `track` and `order` are in its `lesson.json`):
 
 - **Tools**: `editor-basics` (Meet the Editor: files, folders, saving, the terminal, for someone
-  who has never used a code editor), then AdvantageScope, Elastic, Choreo and Arbor introductions.
+  who has never used a code editor), then AdvantageScope, Elastic, Choreo and Arbor introductions,
+  and `git` (Git). Git is grouped with the tools, but on the roadmap it comes last: its
+  `roadmapUnit` is `"Coding as a Team"`, the unit after the robot lessons, and nothing `requires` it.
+  It is eight small scenario repos, one per checkpoint (commit, feature branch, merge, merge
+  conflict, rebase, push, pull, stash), built by `checkpoints/setup.sh`. Each checkpoint's
+  `resetPath` names its folder, so Scriptum's **Reset this exercise** can rebuild one scenario
+  (`setup.sh <folder>`) without touching the others.
   `java-debugging` (Debugging) is a Tools lesson too, but it's off the roadmap (it `recommends`
   `java-methods`, and Unit 0 only takes tools whose recommendations are tools): a program that compiles
   but has seven bugs and nine checkpoints, one bug per debugger skill (breakpoints, step into/out,
@@ -92,12 +98,6 @@ Five tracks, in curriculum order (each lesson's `track` and `order` are in its `
   `robot-subsystems` (Mechanisms and Subsystems), `robot-control-theory` (Control Theory),
   `robot-state-machines` (State Machines), `robot-computer-vision` (Computer Vision) and `robot-autonomous` (Autonomous).
   Each module's `README.md` is the lesson. See [Robot modules](#robot-modules).
-- **Coding as a Team**: the end of the curriculum, after the robot lessons. `git` (Git) is eight
-  small scenario repos, one per checkpoint (commit, feature branch, merge, merge conflict, rebase,
-  push, pull, stash), built by `checkpoints/setup.sh`. Each checkpoint's `resetPath` names its folder,
-  so Scriptum's **Reset this exercise** can rebuild one scenario (`setup.sh <folder>`) without
-  touching the others. Scriptum's roadmap shows this track as its own last unit, and nothing
-  `requires` it.
 
 ## Tutor (Dozer)
 
