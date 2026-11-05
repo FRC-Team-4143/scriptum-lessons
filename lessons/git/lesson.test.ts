@@ -1,12 +1,10 @@
-// Runs the git-basics lesson's setup + verify scripts against a real git
+// Runs the git lesson's setup + verify scripts against a real git
 // checkout on the host (no Docker needed) - the same round trip
 // CheckpointManager drives inside a Scriptum workspace container, just
 // without the container. Confirms every checkpoint fails on the fresh
 // scenario and passes once solved with the exact git commands the lesson's
 // READMEs teach, which is what actually caught the sed/tag bugs while
-// authoring this lesson. Ported from Scriptum's scripts/lessons/git-basics.test.ts
-// when git-basics moved from the bundled catalog to this repo - see
-// Scriptum's docs/decisions/044-remote-catalog-checkpoints.md.
+// authoring this lesson.
 import { describe, expect, test } from "bun:test";
 import { cp, mkdtemp, rm, stat } from "node:fs/promises";
 import { tmpdir } from "node:os";
@@ -52,7 +50,7 @@ function requireOk(
 }
 
 async function makeProject(): Promise<string> {
-	const dir = await mkdtemp(join(tmpdir(), "frc-git-basics-"));
+	const dir = await mkdtemp(join(tmpdir(), "frc-git-"));
 	// The hidden origin the push and pull exercises use, kept with the test's own files.
 	process.env.SCRIPTUM_ORIGINS = join(dir, "..", `${basename(dir)}-origins`);
 	await cp(moduleDir, dir, { recursive: true });
@@ -93,7 +91,7 @@ function verify(project: string, checkpointId: string) {
 	]);
 }
 
-describe("git-basics lesson", () => {
+describe("git lesson", () => {
 	test("every checkpoint fails on the freshly set up scenarios", async () => {
 		const project = await makeProject();
 		try {

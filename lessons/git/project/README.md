@@ -1,4 +1,4 @@
-# Git Basics
+# Git
 
 Eight small git exercises, each in its own numbered folder. Every folder is
 its own real git repository. Everything in this lesson is done with buttons

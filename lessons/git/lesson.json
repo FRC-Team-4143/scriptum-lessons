@@ -1,9 +1,9 @@
 {
-	"title": "Git Basics",
+	"title": "Git",
 	"description": "Commit, branch, merge, resolve a conflict, rebase, then push, pull and stash across eight small scenario repos.",
 	"kind": "git",
-	"track": "Tools",
-	"order": 5,
+	"track": "Coding as a Team",
+	"order": 50,
 	"recommends": [
 		"editor-basics"
 	],

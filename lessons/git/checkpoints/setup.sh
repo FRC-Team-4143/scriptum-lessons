@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Builds the git-basics lesson's eight scenario repos. Runs once, right after
+# Builds the git lesson's eight scenario repos. Runs once, right after
 # the lesson's files are copied into /workspace/project (see
 # ImportManager.executeCatalogLoad in apps/control/src/imports.ts) — real
 # .git directories can't ship as static catalog files, so this script builds
@@ -13,7 +13,7 @@
 #
 # Every commit here uses fixed author/committer identity and dates, so the
 # resulting SHAs are the same on every load. The verify scripts in
-# checkpoints/git-basics/verify/ rely on that: they tag the "before" state of
+# checkpoints/verify/ rely on that: they tag the "before" state of
 # each scenario so they can tell what the student actually changed.
 set -euo pipefail
 
@@ -24,7 +24,7 @@ ROOT="${PWD}"
 SCENARIOS=(01-first-commit 02-feature-branch 03-merge 04-merge-conflict 05-rebase 06-push 07-pull 08-stash)
 
 if [ "$#" -gt 1 ]; then
-	echo "git-basics setup: give at most one exercise folder, got $#." >&2
+	echo "git setup: give at most one exercise folder, got $#." >&2
 	exit 1
 fi
 if [ "$#" -eq 1 ]; then
@@ -32,17 +32,17 @@ if [ "$#" -eq 1 ]; then
 	known=0
 	for name in "${SCENARIOS[@]}"; do [ "$name" = "$ONLY" ] && known=1; done
 	if [ "$known" -ne 1 ]; then
-		echo "git-basics setup: \"$ONLY\" isn't one of this lesson's exercises." >&2
+		echo "git setup: \"$ONLY\" isn't one of this lesson's exercises." >&2
 		exit 1
 	fi
 	if [ ! -d "$ROOT/$ONLY" ]; then
-		echo "git-basics setup: the $ONLY folder is missing under $ROOT." >&2
+		echo "git setup: the $ONLY folder is missing under $ROOT." >&2
 		exit 1
 	fi
 	TARGETS=("$ONLY")
 else
 	if [ ! -d "$ROOT/01-first-commit" ]; then
-		echo "git-basics setup: expected scenario folders under $ROOT, found none." >&2
+		echo "git setup: expected scenario folders under $ROOT, found none." >&2
 		exit 1
 	fi
 	TARGETS=("${SCENARIOS[@]}")
@@ -277,7 +277,7 @@ for name in "${TARGETS[@]}"; do
 done
 
 if [ "${#TARGETS[@]}" -eq 1 ]; then
-	echo "git-basics: ${TARGETS[0]} is back to how it started."
+	echo "git: ${TARGETS[0]} is back to how it started."
 else
-	echo "git-basics: scenario repos ready."
+	echo "git: scenario repos ready."
 fi
