@@ -4,6 +4,8 @@
 	"kind": "robot",
 	"track": "FRC Robot",
 	"order": 28,
+	"roadmapUnit": "Autonomous",
+	"milestone": true,
 	"requires": [
 		"robot-computer-vision",
 		"choreo-intro",

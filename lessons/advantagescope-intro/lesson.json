@@ -4,6 +4,7 @@
 	"kind": "robot",
 	"track": "Tools",
 	"order": 7,
+	"roadmapUnit": "Tools",
 	"restrictTools": [
 		"scope"
 	],

@@ -4,6 +4,8 @@
 	"kind": "robot",
 	"track": "FRC Robot",
 	"order": 25,
+	"roadmapUnit": "Control Theory",
+	"milestone": true,
 	"requires": [
 		"robot-subsystems"
 	],

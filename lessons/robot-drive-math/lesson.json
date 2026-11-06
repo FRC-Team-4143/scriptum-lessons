@@ -4,6 +4,8 @@
 	"kind": "robot",
 	"track": "FRC Robot",
 	"order": 22,
+	"roadmapUnit": "Drive Math and Methods",
+	"milestone": true,
 	"requires": [
 		"robot-sensors"
 	],

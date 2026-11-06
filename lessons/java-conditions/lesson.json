@@ -4,6 +4,7 @@
 	"kind": "plain-java",
 	"track": "Java Basics",
 	"order": 13,
+	"roadmapUnit": "Sensors and Feedback",
 	"recommends": [
 		"java-operators"
 	],

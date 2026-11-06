@@ -4,6 +4,8 @@
 	"kind": "robot",
 	"track": "FRC Robot",
 	"order": 24,
+	"roadmapUnit": "Mechanisms and Subsystems",
+	"milestone": true,
 	"requires": [
 		"robot-odometry"
 	],
