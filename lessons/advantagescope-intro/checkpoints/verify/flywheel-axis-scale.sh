@@ -24,5 +24,5 @@ if jq -e '
 	exit 0
 fi
 
-echo "Lock the Line Graph's left Y axis to roughly 0-600 (right-click the axis)."
+echo "Lock the Line Graph's left Y axis to roughly 0-600 (use the ⋯ button on the Left Axis title)."
 exit 1

@@ -21,10 +21,12 @@ does, and connects automatically. No log file to open.
 With the robot running:
 
 1. Drag **FlywheelVelocity** onto a new **Line Graph** tab's left axis.
-2. Right-click the left axis and lock its range to roughly 0-600 (the
-   flywheel speed is in radians per second, rad/s).
+2. Click the **⋯** button on the **Left Axis** title, choose **Lock Axis**,
+   then **Edit Range** and set it to roughly 0-600 (the flywheel speed is in
+   radians per second, rad/s).
 3. Drag **FlywheelVelocity** again, this time onto the graph's right axis, then
-   right-click the right axis and set its **Filter** to **Differentiate**.
+   click the **⋯** button on the **Right Axis** title and choose
+   **Differentiate**.
    The right axis's own scale is left auto - no need to lock it.
 4. Drag **GamePieceLoaded** onto the graph's discrete field (below the
    left/right axes) - it renders as colored bands instead of a numeric line.
