@@ -4,9 +4,9 @@
 
 All the code lives in `src/Main.java`. Unlike earlier lessons, no method
 bodies are given to fill in - you write the full declaration yourself:
-modifiers, return type, name, and parameter list. `main` is empty too;
-call your methods from there to try them out, the same way you tested code
-directly in `main` in previous lessons.
+modifiers (`public static`), return type, name, and parameter list. `main`
+is empty too; call your methods from there to try them out, the same way you
+tested code directly in `main` in previous lessons.
 
 More depth: the team docs page [Methods](https://docs.marswars.org/docs/software/java/basics/methods).
 
@@ -22,26 +22,27 @@ exist; the rest are classic practice problems.
 1. **Write `clamp`** - the reusable building block. Everything that
    controls a motor needs to keep a value inside a range, so write that
    check once.
-   - `double clamp(double value, double min, double max)` - returns `min`
-     if `value` is below `min`, `max` if it's above `max`, and `value`
-     unchanged otherwise.
+   - `public static double clamp(double value, double min, double max)` -
+     returns `min` if `value` is below `min`, `max` if it's above `max`, and
+     `value` unchanged otherwise.
 2. **Write `scaleJoystick` by calling `clamp`.** The checkpoint can't see
    whether you reused `clamp`, but that's the lesson: don't repeat the
    range check, reuse the method you already wrote.
-   - `double scaleJoystick(double raw_input, double sensitivity)` -
+   - `public static double scaleJoystick(double raw_input, double sensitivity)` -
      `raw_input * sensitivity`, clamped to `[-1.0, 1.0]`.
 3. **Write three classics** using the loop skills from earlier lessons.
    Think about edge cases: what's the answer for `0`, `1`, negatives, or an
    empty string?
-   - `boolean isPrime(int n)` - whether `n` is 2 or greater with no
-     divisors other than 1 and itself.
-   - `int factorial(int n)` - `n * (n-1) * ... * 1`; `0!` is `1`.
-   - `String reverseString(String s)` - a **new** `String` with `s`'s
-     characters in reverse order.
+   - `public static boolean isPrime(int n)` - whether `n` is 2 or greater
+     with no divisors other than 1 and itself.
+   - `public static int factorial(int n)` - `n * (n-1) * ... * 1`; `0!` is
+     `1`.
+   - `public static String reverseString(String s)` - a **new** `String`
+     with `s`'s characters in reverse order.
 4. **Write `isPalindrome` by calling `reverseString`** - the same
    build-on-what-you-have idea as step 2.
-   - `boolean isPalindrome(String s)` - whether `s` reads the same forwards
-     and backwards.
+   - `public static boolean isPalindrome(String s)` - whether `s` reads the
+     same forwards and backwards.
 5. **Call your methods from `main`** (it starts empty) with a few different
    inputs, including edge cases, run, and check the output yourself before
    you verify.

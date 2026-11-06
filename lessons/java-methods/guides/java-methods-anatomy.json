@@ -145,8 +145,8 @@
 		{
 			"title": "Find it",
 			"say": {
-				"never": "It may be further down. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `write a method named clamp` and press **Enter**. The editor scrolls to the right spot and highlights it.",
-				"bit": "It may be further down. Press **Ctrl+F**, type `write a method named clamp` and press Enter to jump to it."
+				"never": "It may be further down. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `method named clamp` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "It may be further down. Press **Ctrl+F**, type `method named clamp` and press Enter to jump to it."
 			},
 			"target": {
 				"pane": "editor"
@@ -156,9 +156,9 @@
 				"target": {
 					"pane": "editor",
 					"selector": ".view-lines .view-line",
-					"text": "write a method named clamp"
+					"text": "method named clamp"
 				},
-				"hint": "find write a method named clamp with Ctrl+F.",
+				"hint": "find method named clamp with Ctrl+F.",
 				"skipIfDone": true
 			},
 			"assist": true
@@ -172,7 +172,7 @@
 			"target": {
 				"pane": "editor",
 				"selector": ".view-lines .view-line",
-				"text": "write a method named clamp"
+				"text": "method named clamp"
 			},
 			"cardAt": "bottom-right",
 			"assist": true
