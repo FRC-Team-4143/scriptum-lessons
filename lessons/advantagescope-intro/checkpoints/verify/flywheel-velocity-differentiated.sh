@@ -21,5 +21,5 @@ if jq -e '
 	exit 0
 fi
 
-echo "Drag FlywheelVelocity onto the Line Graph's right axis, then set its Filter to Differentiate (right-click the right axis)."
+echo "Drag FlywheelVelocity onto the Line Graph's right axis, then choose Differentiate from the ⋯ button on the Right Axis title."
 exit 1
