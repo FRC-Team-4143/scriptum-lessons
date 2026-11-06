@@ -4,6 +4,8 @@
 	"kind": "robot",
 	"track": "FRC Robot",
 	"order": 20,
+	"roadmapUnit": "Motors and Drivetrains",
+	"milestone": true,
 	"requires": [
 		"advantagescope-intro",
 		"elastic-intro"

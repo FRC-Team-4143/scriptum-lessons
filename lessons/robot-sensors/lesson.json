@@ -4,6 +4,8 @@
 	"kind": "robot",
 	"track": "FRC Robot",
 	"order": 21,
+	"roadmapUnit": "Sensors and Feedback",
+	"milestone": true,
 	"requires": [
 		"robot-drivetrain"
 	],

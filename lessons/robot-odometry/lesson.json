@@ -4,6 +4,8 @@
 	"kind": "robot",
 	"track": "FRC Robot",
 	"order": 23,
+	"roadmapUnit": "Objects and Odometry",
+	"milestone": true,
 	"requires": [
 		"robot-drive-math"
 	],
