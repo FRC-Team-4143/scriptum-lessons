@@ -1,6 +1,6 @@
 {
 	"title": "Variables",
-	"description": "Declare variables, define a constant, and define your first enum.",
+	"description": "Declare variables and define constants.",
 	"kind": "plain-java",
 	"track": "Java Basics",
 	"order": 11,
@@ -27,24 +27,6 @@
 			"verifier": {
 				"type": "script",
 				"path": "checkpoints/verify/team-name-constant.sh"
-			}
-		},
-		{
-			"id": "alliance-enum",
-			"title": "Alliance enum",
-			"description": "An Alliance enum with RED and BLUE values (team standard: UpperCamelCase type name, SCREAMING_SNAKE_CASE values).",
-			"verifier": {
-				"type": "script",
-				"path": "checkpoints/verify/alliance-enum.sh"
-			}
-		},
-		{
-			"id": "match-period-enum",
-			"title": "Match period enum",
-			"description": "A MatchPeriod enum with AUTONOMOUS, TELEOP, and ENDGAME values (team standard: UpperCamelCase type name, SCREAMING_SNAKE_CASE values).",
-			"verifier": {
-				"type": "script",
-				"path": "checkpoints/verify/match-period-enum.sh"
 			}
 		},
 		{

@@ -2,7 +2,7 @@
 	"title": "switch",
 	"summary": "One value, many cases, and a default.",
 	"topic": "Java",
-	"order": 249,
+	"order": 250,
 	"steps": [
 		{
 			"title": "switch",
@@ -32,19 +32,19 @@
 		{
 			"title": "In your lesson: switch",
 			"say": {
-				"never": "When you're checking **one** value against a list of exact choices, a `switch` is neater than a long `if` chain. Read it like a menu: \"if the mode is 1, say Tank. If it's 2, say Arcade. For anything else, say Unknown.\" `default` is the \"anything else\" choice.",
-				"bit": "When you're comparing **one** value against a list of exact options, `switch` is cleaner than a long if chain."
+				"never": "When you're checking **one** value against a list of exact choices, a `switch` is neater than a long `if` chain. Read it like a menu: \"if the mode is TANK, say Tank. If it's ARCADE, say Arcade. For anything else, say Unknown.\" `default` is the \"anything else\" choice. Java insists on it here: without it, it complains about a **missing return statement**. Notice the cases say just `TANK`, not `DriveMode.TANK`: inside a switch on a `DriveMode`, Java already knows which enum you mean.",
+				"bit": "Switch on the `DriveMode`. Cases use the bare name (`case TANK:`, not `DriveMode.TANK`). Keep the `default`, or Java reports a missing return."
 			},
 			"board": {
-				"code": "switch (mode) {\n    case 1:\n        return \"Tank\";\n    case 2:\n        return \"Arcade\";\n    default:\n        return \"Unknown mode\";\n}",
+				"code": "switch (mode) {\n    case TANK:\n        return \"Tank\";\n    case ARCADE:\n        return \"Arcade\";\n    default:\n        return \"Unknown mode\";\n}",
 				"marks": [
 					{
 						"text": "switch (mode)",
 						"label": "the value being checked"
 					},
 					{
-						"text": "case 1:",
-						"label": "runs when mode is 1"
+						"text": "case TANK:",
+						"label": "runs when mode is TANK"
 					},
 					{
 						"text": "default:",
@@ -78,7 +78,7 @@
 				"bit": "With `return` each case leaves the method. Without it, cases fall through into the next one, so you end them with `break`."
 			},
 			"board": {
-				"code": "switch (mode) {\n    case 1:\n        name = \"Tank\";\n        break;\n    case 2:\n        name = \"Arcade\";\n        break;\n}",
+				"code": "switch (mode) {\n    case TANK:\n        name = \"Tank\";\n        break;\n    case ARCADE:\n        name = \"Arcade\";\n        break;\n}",
 				"marks": [
 					{
 						"text": "break;",
@@ -142,8 +142,8 @@
 		{
 			"title": "Your turn",
 			"say": {
-				"never": "Your turn! Write `driveModeName` using a `switch`, like the board. Don't forget the `default` at the end.",
-				"bit": "Write `driveModeName` with a switch."
+				"never": "Your turn! Write `driveModeName` using a `switch` on `mode`, like the board, with a case for each of the four `DriveMode` values. Don't forget the `default` at the end.",
+				"bit": "Write `driveModeName` with a switch over the four `DriveMode` values, plus `default`."
 			},
 			"target": {
 				"pane": "editor",

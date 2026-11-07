@@ -501,7 +501,7 @@
 			"order": 11,
 			"track": "Java Basics",
 			"title": "Variables",
-			"description": "Declare variables, define a constant, and define your first enum.",
+			"description": "Declare variables and define constants.",
 			"kind": "plain-java",
 			"subdir": "lessons/java-variables/project",
 			"recommends": [
@@ -524,24 +524,6 @@
 					"verifier": {
 						"type": "script",
 						"path": "lessons/java-variables/checkpoints/verify/team-name-constant.sh"
-					}
-				},
-				{
-					"id": "alliance-enum",
-					"title": "Alliance enum",
-					"description": "An Alliance enum with RED and BLUE values (team standard: UpperCamelCase type name, SCREAMING_SNAKE_CASE values).",
-					"verifier": {
-						"type": "script",
-						"path": "lessons/java-variables/checkpoints/verify/alliance-enum.sh"
-					}
-				},
-				{
-					"id": "match-period-enum",
-					"title": "Match period enum",
-					"description": "A MatchPeriod enum with AUTONOMOUS, TELEOP, and ENDGAME values (team standard: UpperCamelCase type name, SCREAMING_SNAKE_CASE values).",
-					"verifier": {
-						"type": "script",
-						"path": "lessons/java-variables/checkpoints/verify/match-period-enum.sh"
 					}
 				},
 				{
@@ -628,7 +610,7 @@
 			"order": 13,
 			"track": "Java Basics",
 			"title": "Conditions",
-			"description": "Write if/else chains and switch statements.",
+			"description": "Write if/else chains, define an enum, and switch on it.",
 			"kind": "plain-java",
 			"subdir": "lessons/java-conditions/project",
 			"recommends": [
@@ -645,9 +627,18 @@
 					}
 				},
 				{
+					"id": "drive-mode-enum",
+					"title": "DriveMode enum",
+					"description": "A DriveMode enum with TANK, ARCADE, SWERVE, and FIELD_ORIENTED_SWERVE values (team standard: UpperCamelCase type name, SCREAMING_SNAKE_CASE values).",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-conditions/checkpoints/verify/drive-mode-enum.sh"
+					}
+				},
+				{
 					"id": "drive-mode-name",
 					"title": "Drive mode name",
-					"description": "driveModeName(mode) uses a switch statement to name a drive mode.",
+					"description": "driveModeName(mode) uses a switch statement on the DriveMode enum to name a drive mode.",
 					"verifier": {
 						"type": "script",
 						"path": "lessons/java-conditions/checkpoints/verify/drive-mode-name.sh"
@@ -3047,16 +3038,16 @@
 			"path": "lessons/java-variables/guides/java-variables-printing.json"
 		},
 		{
-			"id": "java-variables-constants-enums",
-			"title": "Constants and enums",
-			"summary": "final, SCREAMING_SNAKE_CASE, and enums (UpperCamelCase types) nested in Main.",
+			"id": "java-variables-constants",
+			"title": "Constants",
+			"summary": "final, static and SCREAMING_SNAKE_CASE: values that never change.",
 			"topic": "Java",
 			"order": 203,
 			"modules": [
 				"java-variables"
 			],
 			"kind": "mixed",
-			"path": "lessons/java-variables/guides/java-variables-constants-enums.json"
+			"path": "lessons/java-variables/guides/java-variables-constants.json"
 		},
 		{
 			"id": "java-operators-arithmetic",
@@ -3120,11 +3111,23 @@
 			"path": "lessons/java-conditions/guides/java-conditions-if-chain.json"
 		},
 		{
+			"id": "java-conditions-enums",
+			"title": "Enums",
+			"summary": "Swap magic numbers for an enum: your own type with a fixed list of values.",
+			"topic": "Java",
+			"order": 249,
+			"modules": [
+				"java-conditions"
+			],
+			"kind": "mixed",
+			"path": "lessons/java-conditions/guides/java-conditions-enums.json"
+		},
+		{
 			"id": "java-conditions-switch",
 			"title": "switch",
 			"summary": "One value, many cases, and a default.",
 			"topic": "Java",
-			"order": 249,
+			"order": 250,
 			"modules": [
 				"java-conditions"
 			],
@@ -3136,7 +3139,7 @@
 			"title": "&&, || and !",
 			"summary": "Combining true/false values, and the ternary shortcut.",
 			"topic": "Java",
-			"order": 250,
+			"order": 251,
 			"modules": [
 				"java-conditions"
 			],

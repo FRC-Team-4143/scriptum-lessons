@@ -11,7 +11,7 @@ More depth: the team docs page [Variables](https://docs.marswars.org/docs/softwa
 - **Variables inside `main`:** only the printed line is checked, so name them
   how you like (team standard: `snake_case`, lowercase words joined by
   underscores, like `team_number`).
-- **Constants and enums:** the checkpoints look them up by name, so use exactly
+- **Constants:** the checkpoints look them up by name, so use exactly
   the names below.
 
 ## What you need to do
@@ -39,18 +39,12 @@ More depth: the team docs page [Variables](https://docs.marswars.org/docs/softwa
 
    :::
 
-3. **Add four named values to the `Main` class itself**, outside of `main`.
+3. **Add two constants to the `Main` class itself**, outside of `main`.
    Use exactly these names. Team standard: constants are `final` /
-   `SCREAMING_SNAKE_CASE`, enum type names are `UpperCamelCase` like classes (the enum's values are `SCREAMING_SNAKE_CASE`).
+   `SCREAMING_SNAKE_CASE`.
    - `String TEAM_NAME` - a `public static final` constant equal to
      `"Team 4143"`.
    - `double MAX_SPEED` - a `public static final` constant equal to `5.0`.
-   - An `enum` named `Alliance` with values `RED` and `BLUE`.
-   - An `enum` named `MatchPeriod` with values `AUTONOMOUS`, `TELEOP`, and
-     `ENDGAME`.
-
-   Define both enums as nested types inside `Main`, not as their own
-   top-level types - they're only used by `Main`, so they belong there.
 4. **Run it** and compare your output with this, then verify. The starter
    code already prints the last two lines, to show your constants. They look
    wrong until you fill in the constants in step 3.
