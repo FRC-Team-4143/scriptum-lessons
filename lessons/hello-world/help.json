@@ -1,8 +1,8 @@
 {
 	"about": {
-		"never": "Your first Java program! The line that prints is already written but switched off with `//`. You switch it on, add your name, and run it.",
-		"bit": "A first Java program: uncomment the println line, add your name, run it.",
-		"lot": "Uncomment the `println` in `Main`, replace `YOUR NAME`, run, verify."
+		"never": "Your first Java program! The line that prints is already written but switched off with `//`, and it's missing the `;` every Java statement ends with. You switch it on, add your name and the `;`, and run it.",
+		"bit": "A first Java program: uncomment the println line, add your name and the missing `;`, run it.",
+		"lot": "Uncomment the `println` in `Main`, replace `YOUR NAME`, add the `;`, run, verify."
 	},
 	"checkpoints": {
 		"prints-hello-world": {
@@ -18,9 +18,9 @@
 					"lot": "The `println` is commented out."
 				},
 				{
-					"never": "Delete the two slashes `//` at the start of that line, then change `YOUR NAME` to your actual name. Keep the quote marks.",
-					"bit": "Delete the `//`, then replace `YOUR NAME` with your name.",
-					"lot": "Uncomment it and replace `YOUR NAME`."
+					"never": "Delete the two slashes `//` at the start of that line, then change `YOUR NAME` to your actual name. Keep the quote marks. Then add a `;` at the very end of the line, after the `)`.",
+					"bit": "Delete the `//`, replace `YOUR NAME` with your name, and add `;` at the end.",
+					"lot": "Uncomment it, replace `YOUR NAME`, add the `;`."
 				},
 				{
 					"never": "The line should look like `System.out.println(\"Hello, World! My name is Sam\");` with your name instead of Sam. Save with **Ctrl+S**, click **Run** (▷), then **Verify**.",

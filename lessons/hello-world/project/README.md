@@ -11,9 +11,11 @@ More depth: the team docs page [Quick Reference Guide](https://docs.marswars.org
    `System.out.println` prints a line of text to the terminal.
 2. That line starts with `//`, which makes it a **comment**: Java skips it.
    Delete the `//` so it runs.
-3. Change `YOUR NAME` to your own name and save with **Ctrl+S**.
-4. Click **Run** and look for your greeting in the terminal.
-5. Open **Checkpoints** and run **Verify**. It passes when your program
+3. Change `YOUR NAME` to your own name.
+4. Every Java statement ends with a `;`, and this line is missing it. Add a
+   `;` at the very end, after the `)`, and save with **Ctrl+S**.
+5. Click **Run** and look for your greeting in the terminal.
+6. Open **Checkpoints** and run **Verify**. It passes when your program
    prints `Hello, World! My name is` followed by your name, so experiment
    freely, then put that line back before you verify.
 

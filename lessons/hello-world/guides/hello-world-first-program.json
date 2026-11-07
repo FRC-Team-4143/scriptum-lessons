@@ -135,8 +135,8 @@
 		{
 			"title": "Printing",
 			"say": {
-				"never": "`System.out.println(...)` tells the computer to **print** a line of text on the screen. Whatever is inside the double quotes is printed exactly as you typed it. That text in quotes is called a **String**. The `;` at the end is like the full stop at the end of a sentence. But see the `//` at the start of the line? That makes it a **comment**: a note for people that Java skips. Right now this line does nothing.",
-				"bit": "`System.out.println(...)` prints a line of text. The text in double quotes is a **String**, printed exactly as written. The `;` ends the statement. The `//` in front makes it a **comment**, so Java skips it for now."
+				"never": "`System.out.println(...)` tells the computer to **print** a line of text on the screen. Whatever is inside the double quotes is printed exactly as you typed it. That text in quotes is called a **String**. Every Java statement ends with a `;`, like the full stop at the end of a sentence, and this line is missing its `;`. And see the `//` at the start of the line? That makes it a **comment**: a note for people that Java skips. Right now this line does nothing.",
+				"bit": "`System.out.println(...)` prints a line of text. The text in double quotes is a **String**, printed exactly as written. Every statement ends with a `;`, and this one is missing it. The `//` in front makes it a **comment**, so Java skips it for now."
 			},
 			"target": {
 				"pane": "editor",
@@ -149,8 +149,8 @@
 		{
 			"title": "Switch it on",
 			"say": {
-				"never": "Click right after the `//` at the start of the `System.out.println` line and press **Backspace** twice to delete both slashes. Now the line is real code. Then change `YOUR NAME` to your own name. Keep the quote marks around it. Save with **Ctrl+S**.",
-				"bit": "Delete the `//` in front of `System.out.println`, change `YOUR NAME` to your name (keep the quotes), and save with **Ctrl+S**."
+				"never": "Three small fixes to this one line. First, click right after the `//` at the start of the `System.out.println` line and press **Backspace** twice to delete both slashes. Now the line is real code, and a red wavy line shows up: that's the editor telling you something is missing. Second, change `YOUR NAME` to your own name, keeping the quote marks around it. Third, click at the very end of the line, after the `)`, and type `;`. The red line goes away. Save with **Ctrl+S**.",
+				"bit": "Delete the `//` in front of `System.out.println`, change `YOUR NAME` to your name (keep the quotes), add a `;` at the end after the `)`, and save with **Ctrl+S**."
 			},
 			"target": {
 				"pane": "editor",
@@ -160,8 +160,8 @@
 			"cardAt": "bottom-right",
 			"waitFor": {
 				"hint": {
-					"never": "delete the // and type your name.",
-					"bit": "uncomment the line and add your name."
+					"never": "delete the //, type your name, and add the ;.",
+					"bit": "uncomment it, add your name and the ;."
 				}
 			},
 			"assist": true

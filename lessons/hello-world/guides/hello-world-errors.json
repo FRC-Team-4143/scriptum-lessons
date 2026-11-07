@@ -80,10 +80,10 @@
 				"bit": "Java errors look scary but have the same shape every time."
 			},
 			"board": {
-				"code": "Main.java:4: error: ';' expected\n    System.out.println(\"Hello, World! My name is Sam\")\n                                                      ^",
+				"code": "Main.java:6: error: ';' expected\n    System.out.println(\"Hello, World! My name is Sam\")\n                                                      ^",
 				"marks": [
 					{
-						"text": "Main.java:4",
+						"text": "Main.java:6",
 						"label": "which file, which line"
 					},
 					{
