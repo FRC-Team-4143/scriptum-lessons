@@ -487,8 +487,8 @@
 			"checkpoints": [
 				{
 					"id": "prints-hello-world",
-					"title": "Prints Hello, World!",
-					"description": "Running Main prints \"Hello, World!\" to standard out.",
+					"title": "Says hello with your name",
+					"description": "Running Main prints \"Hello, World! My name is\" followed by your name.",
 					"verifier": {
 						"type": "script",
 						"path": "lessons/hello-world/checkpoints/verify/prints-hello-world.sh"

@@ -135,8 +135,8 @@
 		{
 			"title": "Printing",
 			"say": {
-				"never": "`System.out.println(...)` tells the computer to **print** a line of text on the screen. Whatever is inside the double quotes is printed exactly as you typed it. That text in quotes is called a **String**. The `;` at the end is like the full stop at the end of a sentence.",
-				"bit": "`System.out.println(...)` prints a line of text. The text in double quotes is a **String**, printed exactly as written. The `;` ends the statement."
+				"never": "`System.out.println(...)` tells the computer to **print** a line of text on the screen. Whatever is inside the double quotes is printed exactly as you typed it. That text in quotes is called a **String**. The `;` at the end is like the full stop at the end of a sentence. But see the `//` at the start of the line? That makes it a **comment**: a note for people that Java skips. Right now this line does nothing.",
+				"bit": "`System.out.println(...)` prints a line of text. The text in double quotes is a **String**, printed exactly as written. The `;` ends the statement. The `//` in front makes it a **comment**, so Java skips it for now."
 			},
 			"target": {
 				"pane": "editor",
@@ -147,13 +147,33 @@
 			"assist": true
 		},
 		{
+			"title": "Switch it on",
+			"say": {
+				"never": "Click right after the `//` at the start of the `System.out.println` line and press **Backspace** twice to delete both slashes. Now the line is real code. Then change `YOUR NAME` to your own name. Keep the quote marks around it. Save with **Ctrl+S**.",
+				"bit": "Delete the `//` in front of `System.out.println`, change `YOUR NAME` to your name (keep the quotes), and save with **Ctrl+S**."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "System.out.println"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"hint": {
+					"never": "delete the // and type your name.",
+					"bit": "uncomment the line and add your name."
+				}
+			},
+			"assist": true
+		},
+		{
 			"title": "The pieces",
 			"say": {
-				"never": "Here is the whole program again with each piece labeled. Click through the labels and match each one to the line you wrote.",
-				"bit": "Here it is again, labeled."
+				"never": "Here is the whole program with each piece labeled. Click through the labels and match each one to the lines in your file.",
+				"bit": "Here it is, labeled."
 			},
 			"board": {
-				"code": "public class Main {\n  public static void main(String[] args) {\n    System.out.println(\"Hello, World!\");\n  }\n}",
+				"code": "public class Main {\n  public static void main(String[] args) {\n    System.out.println(\"Hello, World! My name is Sam\");\n  }\n}",
 				"marks": [
 					{
 						"text": "public class Main",
@@ -164,7 +184,7 @@
 						"label": "where the program starts"
 					},
 					{
-						"text": "\"Hello, World!\"",
+						"text": "\"Hello, World! My name is Sam\"",
 						"label": "a String: text in double quotes"
 					},
 					{
@@ -177,13 +197,14 @@
 		{
 			"title": "Run it",
 			"say": {
-				"never": "Click the **Run** button, the little triangle (▷) at the top right of the file. Your program runs, and whatever it prints shows up in the **terminal** at the bottom of the screen.",
-				"bit": "Click the **Run** button (▷) at the top right of the file. The output appears in the terminal at the bottom."
+				"never": "Click the **Run** button, the little triangle (▷) Dozer is pointing at, up at the top right of the file. Your program runs, and whatever it prints shows up in the **terminal** at the bottom of the screen. You should see your own name!",
+				"bit": "Click the **Run** button (▷) Dozer is pointing at. Your greeting appears in the terminal at the bottom."
 			},
 			"target": {
-				"pane": "editor"
+				"pane": "editor",
+				"selector": ".editor-actions .action-label[aria-label^='Run']"
 			},
-			"cardAt": "top-right",
+			"cardAt": "bottom-right",
 			"waitFor": {
 				"hint": {
 					"never": "run the program and read what it prints.",
