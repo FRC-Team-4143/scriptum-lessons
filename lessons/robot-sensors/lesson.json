@@ -11,7 +11,8 @@
 		"java-conditions"
 	],
 	"guides": [
-		"build-and-run"
+		"build-and-run",
+		"deploy-to-field-robot"
 	],
 	"checkpoints": [
 		{

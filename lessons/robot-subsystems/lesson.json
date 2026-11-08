@@ -12,7 +12,8 @@
 	],
 	"guides": [
 		"build-and-run",
-		"robot-odometry-oi"
+		"robot-odometry-oi",
+		"deploy-to-field-robot"
 	],
 	"checkpoints": [
 		{

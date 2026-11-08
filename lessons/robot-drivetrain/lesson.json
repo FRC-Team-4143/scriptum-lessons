@@ -15,7 +15,8 @@
 	],
 	"guides": [
 		"build-and-run",
-		"java-variables"
+		"java-variables",
+		"deploy-to-field-robot"
 	],
 	"checkpoints": [
 		{

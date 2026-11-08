@@ -14,7 +14,8 @@
 	],
 	"guides": [
 		"build-and-run",
-		"robot-drive-math-io-loop"
+		"robot-drive-math-io-loop",
+		"deploy-to-field-robot"
 	],
 	"checkpoints": [
 		{

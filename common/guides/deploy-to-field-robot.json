@@ -1,0 +1,55 @@
+{
+	"title": "Deploy to a robot on the field",
+	"summary": "Take your turn on a real robot through the Field Gateway: get in line, deploy your code, drive it, and give it back.",
+	"topic": "Robot",
+	"kind": "concept",
+	"order": 467,
+	"needs": [
+		"driverStation"
+	],
+	"steps": [
+		{
+			"title": "Open the Robot tab",
+			"say": {
+				"never": "Your code can run on a **real robot** on the field, not just the simulator. Look at the row of icons down the left side of the Driver Station, the strip at the bottom. The **rocket** is the **Robot tab**. Click it. You'll see **ROBOTS ON THE FIELD**: each real robot, who is using it, and how many people are waiting. A green **Field Gateway** light means the field is ready for you.",
+				"bit": "The **rocket** on the left of the Driver Station opens the **Robot tab**: the real robots on the field, who has each one, and the line. Green **Field Gateway** means the field is ready."
+			},
+			"open": [
+				"driverStation"
+			],
+			"target": {
+				"selector": "[data-tour='robot']"
+			},
+			"waitFor": {
+				"target": {
+					"selector": "[data-tour='robot-list']"
+				},
+				"hint": {
+					"never": "click the rocket icon to open the Robot tab.",
+					"bit": "open the Robot tab (the rocket)."
+				},
+				"skipIfDone": true
+			}
+		},
+		{
+			"title": "Get your turn, then DEPLOY",
+			"say": {
+				"never": "Press **JOIN** on the robot your mentor gives you. If someone else has it, you're **in line** (\"You're #2\"): keep coding and using the simulator, and Scriptum tells you when it's your turn. When the robot says **yours**, press **DEPLOY**. The Field Gateway builds your code and copies it onto the robot, and you can watch its 10 steps tick off here, with its output in **Console Output**. If a step fails, a card says which step broke and what to do: read it, fix your code, and press **DEPLOY** again.",
+				"bit": "**JOIN** the robot your mentor gives you (you may be in line; keep coding). When it's **yours**, press **DEPLOY** and watch the 10 steps. If one fails, its card says what broke and what to do; fix it and **DEPLOY** again."
+			},
+			"target": {
+				"selector": "[data-tour='robot-list']"
+			}
+		},
+		{
+			"title": "Drive it, then RELEASE",
+			"say": {
+				"never": "Your code is on the robot. Drive it with **your team's Driver Station on the field**. During **Shop Time**, your Driver Station enables and disables your own robot, and the **spacebar** is the emergency stop. When you're done, press **RELEASE** so the next person gets a turn. The robot's logs (`.wpilog` and `.btlog` files) are copied into **robot-logs/** in your lesson.",
+				"bit": "Drive with your team's Driver Station on the field (in **Shop Time** it enables your robot; **spacebar** = emergency stop). Press **RELEASE** when done; the robot's logs land in **robot-logs/**."
+			},
+			"target": {
+				"selector": "[data-tour='robot-list']"
+			}
+		}
+	]
+}
