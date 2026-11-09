@@ -46,3 +46,44 @@ describe.skipIf(!hasJdk)("robot-drivetrain script checkpoints", () => {
 		}
 	}, 30_000);
 });
+
+// The advanced challenge: the required solution must not pass it, and neither must half of it.
+describe.skipIf(!hasJdk)("robot-drivetrain advanced challenge", () => {
+	test("plain arcade drive doesn't pass", async () => {
+		const project = await L.makeProject();
+		try {
+			await L.applySolution(project, ["Robot.java"]);
+			const result = L.verify(project, "challenge-driver-sticks");
+			expect(result.exitCode).not.toBe(0);
+			expect(result.text).toContain("Expected left 0.25");
+		} finally {
+			await rm(project, { recursive: true, force: true });
+		}
+	}, 30_000);
+
+	test("squaring without keeping the sign doesn't pass", async () => {
+		const project = await L.makeProject();
+		try {
+			await L.overlayChallenge(project);
+			const file = join(project, ROBOT_SRC, "Robot.java");
+			const text = (await readFile(file, "utf8")).replace("forward * Math.abs(forward)", "forward * forward");
+			await writeFile(file, text, "utf8");
+			expect(L.verify(project, "challenge-driver-sticks").exitCode).not.toBe(0);
+		} finally {
+			await rm(project, { recursive: true, force: true });
+		}
+	}, 30_000);
+
+	test("squaring without shrinking both sides doesn't pass", async () => {
+		const project = await L.makeProject();
+		try {
+			await L.overlayChallenge(project);
+			const file = join(project, ROBOT_SRC, "Robot.java");
+			const text = (await readFile(file, "utf8")).replace("Math.max(1.0, Math.abs(forward) + Math.abs(turn))", "1.0");
+			await writeFile(file, text, "utf8");
+			expect(L.verify(project, "challenge-driver-sticks").exitCode).not.toBe(0);
+		} finally {
+			await rm(project, { recursive: true, force: true });
+		}
+	}, 30_000);
+});

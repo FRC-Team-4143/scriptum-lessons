@@ -107,6 +107,19 @@
 				"check": "range",
 				"min": 1
 			}
+		},
+		{
+			"id": "challenge-two-cycle",
+			"title": "Challenge: Two-cycle auto",
+			"description": "A TwoCycle tree scores, goes back for a second game piece and scores again, with both shots aimed, in under 25 seconds. The instructions are in CHALLENGE.md (Open the challenge).",
+			"optional": true,
+			"verifier": {
+				"type": "nt4-value",
+				"topic": "/AdvantageKit/RealOutputs/Check/Challenge/TwoCycle",
+				"check": "range",
+				"min": 1,
+				"max": 1
+			}
 		}
 	]
 }

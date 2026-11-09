@@ -15,9 +15,12 @@ public final class Checks {
           "Drive/DistanceToScoreSpot",
           "Subsystem/Shooter/ShotDistanceFromScoreSpot");
 
+  private static final TwoCycleCheck challenge = new TwoCycleCheck();
+
   private Checks() {}
 
   public static void update() {
     checks.update();
+    challenge.update();
   }
 }

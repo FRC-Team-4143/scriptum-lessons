@@ -70,6 +70,19 @@
 				"min": 1.95,
 				"max": 3.0
 			}
+		},
+		{
+			"id": "challenge-stop-on-mark",
+			"title": "Challenge: Stop on the mark",
+			"description": "Run Auto. The robot really stops within 3 centimeters of 2 meters, and gets there in under 2.5 seconds. Bang-bang can't do it. The instructions are in CHALLENGE.md (Open the challenge).",
+			"optional": true,
+			"verifier": {
+				"type": "nt4-value",
+				"topic": "/AdvantageKit/RealOutputs/Check/Challenge/StopOnMark",
+				"check": "range",
+				"min": 1,
+				"max": 1
+			}
 		}
 	]
 }

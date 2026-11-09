@@ -12,11 +12,14 @@ public final class Checks {
   private static final AimChecks aim = new AimChecks();
   private static final LocalizationChecks localization = new LocalizationChecks();
 
+  private static final KnockedOffCheck challenge = new KnockedOffCheck();
+
   private Checks() {}
 
   public static void update() {
     checks.update();
     localization.update();
     aim.update();
+    challenge.update();
   }
 }

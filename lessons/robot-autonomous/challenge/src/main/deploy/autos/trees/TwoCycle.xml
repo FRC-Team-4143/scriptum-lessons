@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root BTCPP_format="4" main_tree_to_execute="TwoCycle">
+  <BehaviorTree ID="TwoCycle">
+    <Sequence>
+      <FollowPath trajectory="ToPickup"/>
+      <FollowPath trajectory="ToScore"/>
+      <SetWantedState state="AIM"/>
+      <Timeout msec="2000">
+        <RetryUntilSuccessful num_attempts="-1">
+          <IsSystemState state="AIM"/>
+        </RetryUntilSuccessful>
+      </Timeout>
+      <SetWantedState state="SHOOT"/>
+      <Sleep msec="2000"/>
+      <FollowPath trajectory="BackToPickup"/>
+      <FollowPath trajectory="ToScore"/>
+      <SetWantedState state="AIM"/>
+      <Timeout msec="2000">
+        <RetryUntilSuccessful num_attempts="-1">
+          <IsSystemState state="AIM"/>
+        </RetryUntilSuccessful>
+      </Timeout>
+      <SetWantedState state="SHOOT"/>
+      <Sleep msec="2000"/>
+      <SetWantedState state="AUTO"/>
+    </Sequence>
+  </BehaviorTree>
+</root>

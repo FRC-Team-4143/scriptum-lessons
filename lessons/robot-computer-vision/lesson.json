@@ -68,6 +68,19 @@
 				"min": 0,
 				"max": 0.17
 			}
+		},
+		{
+			"id": "challenge-knocked-off",
+			"title": "Challenge: Knocked off course",
+			"description": "Tap Y (I) to start the test. The estimate must ignore false camera sightings, then find its way back after being knocked 1.5 meters off. The instructions are in CHALLENGE.md (Open the challenge).",
+			"optional": true,
+			"verifier": {
+				"type": "nt4-value",
+				"topic": "/AdvantageKit/RealOutputs/Check/Challenge/KnockedOff",
+				"check": "range",
+				"min": 1,
+				"max": 1
+			}
 		}
 	]
 }

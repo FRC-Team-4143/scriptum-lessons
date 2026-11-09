@@ -63,6 +63,19 @@
 				"min": 2.95,
 				"max": 4.2
 			}
+		},
+		{
+			"id": "challenge-waypoint-tour",
+			"title": "Challenge: Waypoint tour",
+			"description": "Run Auto. The robot drives to (2.0, 1.0), then to (3.5, -1.0), and stops there, in under 10 seconds, measured by its true position. The instructions are in CHALLENGE.md (Open the challenge).",
+			"optional": true,
+			"verifier": {
+				"type": "nt4-value",
+				"topic": "/AdvantageKit/RealOutputs/Check/Challenge/WaypointTour",
+				"check": "range",
+				"min": 1,
+				"max": 1
+			}
 		}
 	]
 }

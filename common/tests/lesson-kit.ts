@@ -52,6 +52,10 @@ export function lessonKit(testFileUrl: string) {
 	const overlaySolution = (project: string): Promise<void> =>
 		cp(join(dir, "solution"), project, { recursive: true });
 
+	/** A robot lesson's challenge/ is shaped like project/, and finishes the lesson, challenge included. */
+	const overlayChallenge = (project: string): Promise<void> =>
+		cp(join(dir, "challenge"), project, { recursive: true });
+
 	/** Every checkpoint fails against the starter and passes once the solution is applied. */
 	const roundTrip = async (checkpointIds: string[], files?: string[]): Promise<void> => {
 		const project = await makeProject();
@@ -74,5 +78,5 @@ export function lessonKit(testFileUrl: string) {
 		}
 	};
 
-	return { dir, id, makeProject, verify, applySolution, overlaySolution, roundTrip };
+	return { dir, id, makeProject, verify, applySolution, overlaySolution, overlayChallenge, roundTrip };
 }

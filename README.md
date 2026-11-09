@@ -211,6 +211,11 @@ has to be made in every module (`lessons/robot-*/project/`):
   credentials. Bump the tag in every `build.gradle` together.
 - `lessons/<id>/solution/` holds the reference solution used by that lesson's `lesson.test.ts` to
   round-trip the script checkpoints. The `nt4-value` checkpoints need a running simulator.
+- Each module ends with one **advanced challenge**: an `optional` checkpoint (id `challenge-*`, so it
+  never blocks finishing the lesson or the next one), left out of Dozer's `plan`, with an "Advanced
+  challenge" section in the README. `lessons/<id>/challenge/` is shaped like `project/`, and laid over
+  it finishes the whole lesson, challenge included. The simulator ones are judged by a
+  `lesson/*Check.java` that publishes under `Check/Challenge/...`, usually from the true pose.
 
 ### Java taught along the way
 

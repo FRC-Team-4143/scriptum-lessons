@@ -100,6 +100,16 @@
 				"min": 3.0,
 				"max": 6.5
 			}
+		},
+		{
+			"id": "challenge-smooth-launch",
+			"title": "Challenge: Smooth launch",
+			"description": "DriveMath.smoothStick(targets, speedUpStep, slowDownStep) limits how fast a stick value can change, one loop at a time, and stops on zero before reversing. The instructions are in CHALLENGE.md (Open the challenge).",
+			"optional": true,
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/challenge-smooth-launch.sh"
+			}
 		}
 	]
 }
