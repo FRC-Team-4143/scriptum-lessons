@@ -70,7 +70,7 @@
 		{
 			"title": "Extra: event markers",
 			"say": {
-				"never": "Choreo can also put **event markers** on a path, like \"Intake Out\" or \"Shoot\". The competition robot uses them to run an action partway along a path. This lesson doesn't need markers, so they are a stretch idea in the README.",
+				"never": "Choreo can also put **event markers** on a path, like \"Intake Out\" or \"Shoot\". The competition robot uses them to run an action partway along a path. This lesson doesn't need them.",
 				"bit": "Optional: event markers run an action partway along a path. Not needed here."
 			}
 		}

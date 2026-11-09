@@ -3,15 +3,6 @@ public class Main {
     // Team standard: constants use the `final` keyword and SCREAMING_SNAKE_CASE.
     public static final String TEAM_NAME = "";
 
-    // TODO: define an enum named Alliance with two values: RED and BLUE.
-    // Team standard: the enum name is UpperCamelCase (like a class) and its values are SCREAMING_SNAKE_CASE.
-    // Put it inside this class, as a nested type - not as its own top-level
-    // type below the class. It's used only by Main, so it belongs in Main.
-
-    // TODO: define an enum named MatchPeriod with three values: AUTONOMOUS,
-    // TELEOP, and ENDGAME. Same rules as Alliance: nested inside this class,
-    // UpperCamelCase name, SCREAMING_SNAKE_CASE values.
-
     // TODO: declare a constant named MAX_SPEED holding 5.0.
     // Team standard: constants use the `final` keyword and SCREAMING_SNAKE_CASE.
     public static final double MAX_SPEED = 0.0;

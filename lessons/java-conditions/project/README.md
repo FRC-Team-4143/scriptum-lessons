@@ -17,21 +17,30 @@ only sees the answers, but each step below names the tool to use.
    `"FULL"` at 90 and above. Use an `if` / `else if` / `else` chain. Order
    matters: check the most specific case first, and think about what
    happens exactly at the boundaries (0, 50, 90).
-2. **One value, many cases.** `String driveModeName(int mode)` turns a
-   drive mode number into its name: `1` is `"Tank"`, `2` is `"Arcade"`, `3`
-   is `"Swerve"`, and `4` is `"Field-Oriented Swerve"`. This is what a
-   `switch` statement is for; use its `default` case to return
-   `"Unknown mode"` for anything else.
-3. **Combining conditions.** Each of these is a single `return` of a
+2. **Name the choices.** Drive modes could be numbers (1, 2, 3...), but
+   then nobody can tell what `mode = 3` means. An **enum** gives each one a
+   name instead. Fill in the `DriveMode` enum near the top of `Main` with
+   the values `TANK`, `ARCADE`, `SWERVE`, and `FIELD_ORIENTED_SWERVE`
+   (team standard: enum type names are `UpperCamelCase` like classes, and
+   the values are `SCREAMING_SNAKE_CASE`). Then delete the `//` in front of
+   the `Drive mode SWERVE` line in `main`.
+3. **One value, many cases.** `String driveModeName(DriveMode mode)` turns
+   a drive mode into its name: `TANK` is `"Tank"`, `ARCADE` is `"Arcade"`,
+   `SWERVE` is `"Swerve"`, and `FIELD_ORIENTED_SWERVE` is
+   `"Field-Oriented Swerve"`. This is what a `switch` statement is for.
+   Write each case with the bare value (`case TANK:`, not
+   `case DriveMode.TANK:`), and use the `default` case to return
+   `"Unknown mode"`.
+4. **Combining conditions.** Each of these is a single `return` of a
    boolean expression - no `if` required.
    - `boolean canEnable(boolean has_comms, boolean e_stopped)` - `true` only
      when there's comms **and** the robot is not e-stopped. Use `&&` and `!`.
    - `boolean isWeekend(String day)` - `true` when `day` is `"Saturday"`
      **or** `"Sunday"`. Use `||`.
-4. **Shorthand.** `String motorDirection(boolean is_reversed)` returns
+5. **Shorthand.** `String motorDirection(boolean is_reversed)` returns
    `"REVERSED"` or `"FORWARD"`. Write it with the ternary operator
    (`condition ? ifTrue : ifFalse`) on one line, instead of an `if`/`else`.
-5. **Run it** and confirm the sample outputs in `main` match what you
+6. **Run it** and confirm the sample outputs in `main` match what you
    expect, then try a few inputs of your own (especially edge cases) before
    verifying.
 

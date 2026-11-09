@@ -37,9 +37,9 @@ A suggested pace that adds up to the 3 hour session. Take short breaks whenever 
 | 35 | Step 4: the deadband (in `Constants.java` and `Robot.java`) |
 | 40 | Step 5: bang-bang driving, then the "Think about it" discussion |
 | 15 | Verify |
-| 10 | Bonus challenges |
+| 10 | Catch up on any step that took longer, or help a classmate |
 
-Go slower on anything that is new. Finishing every bonus is not expected.
+Go slower on anything that is new.
 
 ## What you need to do
 
@@ -105,9 +105,3 @@ arrived, and never move. With the reset, `Robot/Distance` goes back to **0** at 
 (it should never go negative), and the simulated robot is put back at its starting spot.
 
 Stuck on a step? Open **Dozer**: he can explain the idea or walk you through it.
-
-## Bonus challenges
-
-- Drive **backward** 2 meters.
-- Drive at `0.2` instead of `0.4`. How far past 2.0 m does it stop now?
-- Log the speed of each side separately (`Robot/LeftSpeed`, `Robot/RightSpeed`).

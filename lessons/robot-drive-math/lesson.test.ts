@@ -56,3 +56,37 @@ describe("robot-drive-math: the student creates two methods", () => {
 		}
 	}, 30_000);
 });
+
+// The advanced challenge: the required solution doesn't have the method, and reversing in one step
+// is the mistake it exists to catch.
+describe.skipIf(!hasJdk)("robot-drive-math advanced challenge", () => {
+	test("the required solution doesn't pass", async () => {
+		const project = await L.makeProject();
+		try {
+			await L.applySolution(project, ["DriveMath.java"]);
+			const result = L.verify(project, "challenge-smooth-launch");
+			expect(result.exitCode).not.toBe(0);
+			expect(result.text).toContain("smoothStick");
+		} finally {
+			await rm(project, { recursive: true, force: true });
+		}
+	}, 30_000);
+
+	test("crossing zero in one step doesn't pass", async () => {
+		const project = await L.makeProject();
+		try {
+			await L.overlayChallenge(project);
+			const file = join(project, ROBOT_SRC, "DriveMath.java");
+			const text = (await readFile(file, "utf8")).replace(
+				"current = smaller <= 0.0 ? 0.0 : Math.copySign(smaller, current);",
+				"current = current > 0.0 ? current - slowDownStep : current + slowDownStep;",
+			);
+			await writeFile(file, text, "utf8");
+			const result = L.verify(project, "challenge-smooth-launch");
+			expect(result.exitCode).not.toBe(0);
+			expect(result.text).toContain("stop");
+		} finally {
+			await rm(project, { recursive: true, force: true });
+		}
+	}, 30_000);
+});

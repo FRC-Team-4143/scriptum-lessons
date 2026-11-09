@@ -1,6 +1,6 @@
 {
 	"title": "Conditions",
-	"description": "Write if/else chains and switch statements.",
+	"description": "Write if/else chains, define an enum, and switch on it.",
 	"kind": "plain-java",
 	"track": "Java Basics",
 	"order": 13,
@@ -19,9 +19,18 @@
 			}
 		},
 		{
+			"id": "drive-mode-enum",
+			"title": "DriveMode enum",
+			"description": "A DriveMode enum with TANK, ARCADE, SWERVE, and FIELD_ORIENTED_SWERVE values (team standard: UpperCamelCase type name, SCREAMING_SNAKE_CASE values).",
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/drive-mode-enum.sh"
+			}
+		},
+		{
 			"id": "drive-mode-name",
 			"title": "Drive mode name",
-			"description": "driveModeName(mode) uses a switch statement to name a drive mode.",
+			"description": "driveModeName(mode) uses a switch statement on the DriveMode enum to name a drive mode.",
 			"verifier": {
 				"type": "script",
 				"path": "checkpoints/verify/drive-mode-name.sh"

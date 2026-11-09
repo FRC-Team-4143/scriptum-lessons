@@ -82,7 +82,7 @@ A suggested pace. Take short breaks whenever the class needs one.
 | 20 | Damp the overshoot with `AIM_KD` |
 | 10 | Final clean run and Verify |
 
-Go slower on anything that is new. The stretch below is optional.
+Go slower on anything that is new.
 
 ## What you need to do
 
@@ -137,14 +137,5 @@ Go slower on anything that is new. The stretch below is optional.
 - **No wild overshoot.** On the same presses, the robot may not swing more than 0.17 rad (about 10 degrees) *past* the
   goal. The check **remembers the worst swing from every press** of **E**, so a bad press stays
   recorded until you press **Start** again. Start fresh and do one clean press with your final numbers.
-
-## Stretch (optional)
-
-- Make a bad estimate visible: set `VISION_XY_STD_METERS` very small (like 0.01) and watch the 2D Field.
-  Does the estimate shake? What does that tell you about the cameras?
-- Aim while driving: have the driver still control forward and back while the robot turns toward the
-  goal. What changes in `case AIM:`?
-- Find the largest `AIM_KP` that still settles with no `AIM_KD`, then find the fastest settle time you
-  can reach with both.
 
 Stuck on a step? Open **Dozer**: he can explain the idea or walk you through it.

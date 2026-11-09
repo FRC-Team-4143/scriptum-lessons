@@ -35,9 +35,9 @@ A suggested pace that adds up to the 3 hour session. Take short breaks whenever 
 | 30 | The mech: setLeft, setRight, arcadeDrive |
 | 15 | Read "How the loop works" and test-drive |
 | 15 | Verify |
-| 15 | Bonus challenges |
+| 15 | Catch up on any step that took longer, or help a classmate |
 
-Go slower on anything that is new. Finishing every bonus is not expected.
+Go slower on anything that is new.
 
 ## What you need to do
 
@@ -63,10 +63,3 @@ Then **Start**, enable Teleop and drive (left stick: W / S forward/back, A / D t
 see the robot drive 2 meters, built from your methods.
 
 Stuck on a step? Open **Dozer**: he can explain the idea or walk you through it.
-
-## Bonus challenges
-
-- Add `metersToRadians(meters, radius)` to `DriveMath` (the opposite of step 1).
-- Add a **slow mode** to `teleopPeriodic()`: multiply forward by `0.5` while a bumper is held.
-- Make the arcade turn gentler near the middle of the stick by **squaring** the stick value but
-  keeping its sign. Hint: `Math.copySign(x * x, x)`.

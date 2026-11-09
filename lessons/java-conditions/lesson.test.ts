@@ -7,6 +7,6 @@ const L = lessonKit(import.meta.url);
 
 describe.skipIf(!hasJdk)("java-conditions checkpoints", () => {
 	test("every checkpoint fails fresh, passes once solved", async () => {
-		await L.roundTrip(["battery-status", "drive-mode-name"]);
+		await L.roundTrip(["battery-status", "drive-mode-enum", "drive-mode-name"]);
 	});
 });

@@ -42,9 +42,9 @@ A suggested pace that adds up to the 3 hour session. Take short breaks whenever 
 | 35 | Step 3: arcade drive |
 | 25 | Look at the AdvantageScope graphs while you drive: what do the left and right outputs do when you turn? |
 | 15 | Step 4: Verify |
-| 20 | Bonus challenges (do these after Verify) |
+| 20 | Catch up on any step that took longer, or help a classmate |
 
-Go slower on anything that is new. Finishing every bonus is not expected.
+Go slower on anything that is new.
 
 ## What you need to do
 
@@ -72,12 +72,3 @@ after each step.
 4. **Click Verify** to check your work.
 
 Stuck on a step? Open **Dozer**: he can explain the idea or walk you through it.
-
-## Bonus challenges
-
-- **Speed limit.** Multiply `forward` by `0.5` so the robot never goes faster than half speed. Which
-  operator do you use?
-- **Backwards robot.** Remove the minus sign from `forward`. What changes? Put it back.
-- **Squared sticks.** Make small stick movements gentler by multiplying `forward` by its own
-  absolute value: `forward = forward * Math.abs(forward);`. (`Math.abs(x)` is a method that gives the
-  size of `x` without its sign.)
