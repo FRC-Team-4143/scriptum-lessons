@@ -3743,6 +3743,29 @@
 			"path": "lessons/robot-subsystems/guides/robot-subsystems-shoot-logic.json"
 		},
 		{
+			"id": "deploy-to-field-robot",
+			"title": "Deploy to a robot on the field",
+			"summary": "Take your turn on a real robot through the Field Gateway: get in line, deploy your code, drive it, and give it back.",
+			"topic": "Robot",
+			"order": 467,
+			"modules": [
+				"robot-drivetrain",
+				"robot-sensors",
+				"robot-drive-math",
+				"robot-odometry",
+				"robot-subsystems",
+				"robot-control-theory",
+				"robot-state-machines",
+				"robot-computer-vision",
+				"robot-autonomous"
+			],
+			"needs": [
+				"driverStation"
+			],
+			"kind": "concept",
+			"path": "common/guides/deploy-to-field-robot.json"
+		},
+		{
 			"id": "robot-control-error",
 			"title": "Error and bang-bang",
 			"summary": "The difference between want and have, and on/off control.",
