@@ -12,7 +12,11 @@ Keep the waypoints in an **array of `Translation2d` objects**, and a field that 
 
 - Subtract your position from the waypoint: `Translation2d` has `minus`, `getNorm()` (how far) and `getAngle()` (which way).
 - Compare that direction with the way you're facing. `Rotation2d` has `minus` and `getRadians()`, and it handles the wraparound at pi for you.
-- Turn toward it, and drive forward only as much as you're facing it. `Math.cos(angle)` is one neat way. Watch the sign: `arcadeDrive`'s turn is positive to the **right**, but angles are positive to the **left**.
+- Turn toward it, and drive forward only as much as you're facing it. Java's `Math.cos(angle)` (cosine, with
+  the angle in radians) is one neat way: it gives `1.0` when the angle is `0` (facing it head on), about `0.7`
+  at 45 degrees, `0.0` at 90 degrees (side on), and a negative number when it's behind you. Multiply your
+  forward speed by it, and the robot slows down while it turns, then speeds up once it's lined up. Watch the
+  sign: `arcadeDrive`'s turn is positive to the **right**, but angles are positive to the **left**.
 - Slow down near the last waypoint, and remember to start over in `autonomousInit()`.
 
 **How it's checked:** run Auto with the simulator running. The check uses where the robot **really** is
