@@ -2,7 +2,7 @@
 	"title": "&&, || and !",
 	"summary": "Combining true/false values, and the ternary shortcut.",
 	"topic": "Java",
-	"order": 250,
+	"order": 251,
 	"steps": [
 		{
 			"title": "Combining",

@@ -8,13 +8,21 @@ public class Main {
         return null;
     }
 
+    // TODO: give this enum its four values: TANK, ARCADE, SWERVE, and
+    // FIELD_ORIENTED_SWERVE, separated by commas.
+    // Team standard: the enum name is UpperCamelCase (like a class) and its
+    // values are SCREAMING_SNAKE_CASE. It's nested inside Main because only
+    // Main uses it.
+    enum DriveMode {
+    }
+
     // TODO: use a switch statement on mode to return the drive mode's name:
-    //   1 -> "Tank"
-    //   2 -> "Arcade"
-    //   3 -> "Swerve"
-    //   4 -> "Field-Oriented Swerve"
-    // Return "Unknown mode" for anything else (the switch's default case).
-    public static String driveModeName(int mode) {
+    //   TANK                  -> "Tank"
+    //   ARCADE                -> "Arcade"
+    //   SWERVE                -> "Swerve"
+    //   FIELD_ORIENTED_SWERVE -> "Field-Oriented Swerve"
+    // Return "Unknown mode" from the switch's default case.
+    public static String driveModeName(DriveMode mode) {
         return null;
     }
 
@@ -38,7 +46,8 @@ public class Main {
 
     public static void main(String[] args) {
         System.out.println("Battery at 75%: " + batteryStatus(75));
-        System.out.println("Drive mode 3: " + driveModeName(3));
+        // TODO: once DriveMode has its values, delete the // on the next line.
+        // System.out.println("Drive mode SWERVE: " + driveModeName(DriveMode.SWERVE));
         System.out.println("Can enable (comms, not e-stopped)? " + canEnable(true, false));
         System.out.println("Is Saturday a weekend? " + isWeekend("Saturday"));
         System.out.println("Motor direction (reversed): " + motorDirection(true));
