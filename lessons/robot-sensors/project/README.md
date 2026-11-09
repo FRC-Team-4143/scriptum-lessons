@@ -82,30 +82,6 @@ arrived, and never move. With the reset, `Robot/Distance` goes back to **0** at 
 
 Stuck on a step? Open **Dozer**: he can explain the idea or walk you through it.
 
-## Advanced challenge (optional)
-
-This one is **optional**. It's for students who finish early and want something harder. It isn't needed to finish the lesson, and Dozer doesn't walk through it: you work it out, the way you would on a real robot. It shows as **Optional** in the Checkpoints list.
-
-### Stop on the mark
-
-Your bang-bang robot coasts about 70 centimeters past 2 meters. Slowing down doesn't fix it, because a
-robot that crawls gives away the match. Make Auto **stop within 3 centimeters of 2.0 meters, in under
-2.5 seconds**. (This also still passes the **Drive 2 meters** checkpoint.)
-
-Things to think about:
-
-- Let the power depend on how far is left: big when far, small when close. Plot `Robot/Distance` and see what happens.
-- That alone overshoots, because a 50 kg robot carries its speed. What else do you know in
-  `robotPeriodic()` that says it's about to overshoot?
-- Power can be negative. Pushing backward is the only real brake a robot has.
-- Keep the numbers as constants so you can tune them, and change one at a time.
-- Keep an `if` / `else` on `distance_meters_` in `autonomousPeriodic()`: "close enough to 2.0, so stop" is a
-  natural one, and the **Deadband and if statements** checkpoint still looks for it.
-
-**How it's checked:** run Auto with the simulator running. The check uses where the robot **really** is
-(`Drive/TruePose`), and judges each run once the robot has stopped for half a second. Plot
-`Check/Challenge/StopErrorMeters` and `Check/Challenge/StopSeconds` to see how close you got.
-
 ## Bonus challenges
 
 - Drive **backward** 2 meters.

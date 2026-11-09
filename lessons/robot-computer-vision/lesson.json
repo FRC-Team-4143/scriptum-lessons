@@ -69,7 +69,7 @@
 		{
 			"id": "challenge-knocked-off",
 			"title": "Challenge: Knocked off course",
-			"description": "Optional, for students who want more. Tap Y (I) to start the test. The estimate must ignore false camera sightings, then find its way back after being knocked 1.5 meters off. See \"Advanced challenge\" in the README.",
+			"description": "Tap Y (I) to start the test. The estimate must ignore false camera sightings, then find its way back after being knocked 1.5 meters off. The instructions are in CHALLENGE.md (Open the challenge).",
 			"optional": true,
 			"verifier": {
 				"type": "nt4-value",

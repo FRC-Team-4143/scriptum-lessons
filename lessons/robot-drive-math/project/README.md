@@ -64,38 +64,6 @@ see the robot drive 2 meters, built from your methods.
 
 Stuck on a step? Open **Dozer**: he can explain the idea or walk you through it.
 
-## Advanced challenge (optional)
-
-This one is **optional**. It's for students who finish early and want something harder. It isn't needed to finish the lesson, and Dozer doesn't walk through it: you work it out, the way you would on a real robot. It shows as **Optional** in the Checkpoints list.
-
-### Smooth launch
-
-Slam a stick forward and the real robot jerks: its wheels slip, and the battery voltage dips. Teams limit how fast a command can change. Add this method to `DriveMath`:
-
-```java
-public static double[] smoothStick(double[] targets, double speedUpStep, double slowDownStep)
-```
-
-`targets` is the stick value for each loop. Return a **new** array of the same length with the smoothed
-value for each loop, starting from `0.0`:
-
-1. Moving **away from zero** changes by at most `speedUpStep` per loop.
-2. Moving **toward zero** changes by at most `slowDownStep` per loop.
-3. Going from forward to backward (or the other way), **stop on exactly zero first**, even if the
-   step could have carried past it.
-4. Land exactly on a target that is closer than one step.
-
-| `targets` | `speedUpStep` | `slowDownStep` | Result |
-| --- | --- | --- | --- |
-| `{1, 1, 1}` | 0.25 | 0.5 | `{0.25, 0.5, 0.75}` |
-| `{1, 0, 0}` | 1.0 | 0.25 | `{1, 0.75, 0.5}` |
-| `{0.5, -1, -1, -1, -1}` | 0.5 | 0.3 | `{0.5, 0.2, 0, -0.5, -1}` |
-
-Write out the third row by hand before you code. Then, if you like, use the same idea on the real robot:
-keep the last value in a field and smooth `forward` in `teleopPeriodic()`.
-
-**How it's checked:** Verify calls `smoothStick` with inputs you haven't seen, including negatives, an empty array and exact boundaries. No simulator needed.
-
 ## Bonus challenges
 
 - Add `metersToRadians(meters, radius)` to `DriveMath` (the opposite of step 1).

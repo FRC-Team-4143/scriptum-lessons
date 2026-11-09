@@ -67,7 +67,7 @@
 		{
 			"id": "challenge-driver-sticks",
 			"title": "Challenge: Driver-friendly sticks",
-			"description": "Optional, for students who want more. Teleop squares each stick but keeps its sign, and past full power shrinks both sides together so the robot can still turn. See \"Advanced challenge\" in the README.",
+			"description": "Teleop squares each stick but keeps its sign, and past full power shrinks both sides together so the robot can still turn. The instructions are in CHALLENGE.md (Open the challenge).",
 			"optional": true,
 			"verifier": {
 				"type": "script",

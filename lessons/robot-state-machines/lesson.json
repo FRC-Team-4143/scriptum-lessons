@@ -47,7 +47,7 @@
 		{
 			"id": "challenge-unjam",
 			"title": "Challenge: Clear a jam",
-			"description": "Optional, for students who want more. One tap of Y with the flywheel at speed runs a sequence by itself: wait for the flywheel to slow, run the roller backward for about 0.5 seconds, go back to DRIVE. See \"Advanced challenge\" in the README.",
+			"description": "One tap of Y with the flywheel at speed runs a sequence by itself: wait for the flywheel to slow, run the roller backward for about 0.5 seconds, go back to DRIVE. The instructions are in CHALLENGE.md (Open the challenge).",
 			"optional": true,
 			"verifier": {
 				"type": "nt4-value",

@@ -83,14 +83,18 @@ describe("FRC Robot advanced challenges", () => {
 	const verify = (id: string, dir: string, path: string | undefined) =>
 		run(dir, ["bash", join(repoRoot, path as string), dir]);
 
-	test.each(ROBOT_LESSONS)("%s has one, last, optional and described in the README", (id) => {
+	test.each(ROBOT_LESSONS)("%s has one, last, optional and described in a hidden CHALLENGE.md", (id) => {
 		const checkpoints = byId.get(id)?.checkpoints ?? [];
 		const optional = checkpoints.filter((c) => c.optional);
 		expect(optional.length).toBe(1);
 		expect(optional[0]?.id).toStartWith("challenge-");
 		expect(checkpoints.at(-1)?.id).toBe(optional[0]?.id);
 		expect(existsSync(join(lessonDir(id), "challenge"))).toBe(true);
-		expect(readFileSync(join(lessonDir(id), "project", "README.md"), "utf8")).toContain("## Advanced challenge (optional)");
+		// Scriptum keeps the challenge out of sight until the lesson is done, so its
+		// instructions aren't in the README and the Explorer hides the file.
+		expect(readFileSync(join(lessonDir(id), "project", "CHALLENGE.md"), "utf8")).toStartWith("# Advanced challenge\n");
+		expect(readFileSync(join(lessonDir(id), "project", "README.md"), "utf8")).not.toContain("Advanced challenge");
+		expect(readFileSync(join(lessonDir(id), "project", ".vscode", "settings.json"), "utf8")).toContain('"CHALLENGE.md": true');
 	});
 
 	test.each(ROBOT_LESSONS)("%s leaves it out of Dozer's plan", (id) => {

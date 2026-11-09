@@ -1258,7 +1258,7 @@
 				{
 					"id": "challenge-driver-sticks",
 					"title": "Challenge: Driver-friendly sticks",
-					"description": "Optional, for students who want more. Teleop squares each stick but keeps its sign, and past full power shrinks both sides together so the robot can still turn. See \"Advanced challenge\" in the README.",
+					"description": "Teleop squares each stick but keeps its sign, and past full power shrinks both sides together so the robot can still turn. The instructions are in CHALLENGE.md (Open the challenge).",
 					"optional": true,
 					"verifier": {
 						"type": "script",
@@ -1330,7 +1330,7 @@
 				{
 					"id": "challenge-stop-on-mark",
 					"title": "Challenge: Stop on the mark",
-					"description": "Optional, for students who want more. Run Auto. The robot really stops within 3 centimeters of 2 meters, and gets there in under 2.5 seconds. Bang-bang can't do it. See \"Advanced challenge\" in the README.",
+					"description": "Run Auto. The robot really stops within 3 centimeters of 2 meters, and gets there in under 2.5 seconds. Bang-bang can't do it. The instructions are in CHALLENGE.md (Open the challenge).",
 					"optional": true,
 					"verifier": {
 						"type": "nt4-value",
@@ -1443,7 +1443,7 @@
 				{
 					"id": "challenge-smooth-launch",
 					"title": "Challenge: Smooth launch",
-					"description": "Optional, for students who want more. DriveMath.smoothStick(targets, speedUpStep, slowDownStep) limits how fast a stick value can change, one loop at a time, and stops on zero before reversing. See \"Advanced challenge\" in the README.",
+					"description": "DriveMath.smoothStick(targets, speedUpStep, slowDownStep) limits how fast a stick value can change, one loop at a time, and stops on zero before reversing. The instructions are in CHALLENGE.md (Open the challenge).",
 					"optional": true,
 					"verifier": {
 						"type": "script",
@@ -1515,7 +1515,7 @@
 				{
 					"id": "challenge-waypoint-tour",
 					"title": "Challenge: Waypoint tour",
-					"description": "Optional, for students who want more. Run Auto. The robot drives to (2.0, 1.0), then to (3.5, -1.0), and stops there, in under 10 seconds, measured by its true position. See \"Advanced challenge\" in the README.",
+					"description": "Run Auto. The robot drives to (2.0, 1.0), then to (3.5, -1.0), and stops there, in under 10 seconds, measured by its true position. The instructions are in CHALLENGE.md (Open the challenge).",
 					"optional": true,
 					"verifier": {
 						"type": "nt4-value",
@@ -1608,7 +1608,7 @@
 				{
 					"id": "challenge-safe-feed",
 					"title": "Challenge: Intake and safe feed",
-					"description": "Optional, for students who want more. A new IntakeSubsystem you build from scratch runs on B, the roller only feeds a fast flywheel, and the intake waits while the shooter feeds. See \"Advanced challenge\" in the README.",
+					"description": "A new IntakeSubsystem you build from scratch runs on B, the roller only feeds a fast flywheel, and the intake waits while the shooter feeds. The instructions are in CHALLENGE.md (Open the challenge).",
 					"optional": true,
 					"verifier": {
 						"type": "nt4-value",
@@ -1698,7 +1698,7 @@
 				{
 					"id": "challenge-own-pid",
 					"title": "Challenge: Write your own PID",
-					"description": "Optional, for students who want more. FlywheelPid.java is a PID with feedforward that you write yourself, with anti-windup and no derivative kick, and ShooterSubsystem uses it. See \"Advanced challenge\" in the README.",
+					"description": "FlywheelPid.java is a PID with feedforward that you write yourself, with anti-windup and no derivative kick, and ShooterSubsystem uses it. The instructions are in CHALLENGE.md (Open the challenge).",
 					"optional": true,
 					"verifier": {
 						"type": "script",
@@ -1755,7 +1755,7 @@
 				{
 					"id": "challenge-unjam",
 					"title": "Challenge: Clear a jam",
-					"description": "Optional, for students who want more. One tap of Y with the flywheel at speed runs a sequence by itself: wait for the flywheel to slow, run the roller backward for about 0.5 seconds, go back to DRIVE. See \"Advanced challenge\" in the README.",
+					"description": "One tap of Y with the flywheel at speed runs a sequence by itself: wait for the flywheel to slow, run the roller backward for about 0.5 seconds, go back to DRIVE. The instructions are in CHALLENGE.md (Open the challenge).",
 					"optional": true,
 					"verifier": {
 						"type": "nt4-value",
@@ -1836,7 +1836,7 @@
 				{
 					"id": "challenge-knocked-off",
 					"title": "Challenge: Knocked off course",
-					"description": "Optional, for students who want more. Tap Y (I) to start the test. The estimate must ignore false camera sightings, then find its way back after being knocked 1.5 meters off. See \"Advanced challenge\" in the README.",
+					"description": "Tap Y (I) to start the test. The estimate must ignore false camera sightings, then find its way back after being knocked 1.5 meters off. The instructions are in CHALLENGE.md (Open the challenge).",
 					"optional": true,
 					"verifier": {
 						"type": "nt4-value",
@@ -1954,7 +1954,7 @@
 				{
 					"id": "challenge-two-cycle",
 					"title": "Challenge: Two-cycle auto",
-					"description": "Optional, for students who want more. A TwoCycle tree scores, goes back for a second game piece and scores again, with both shots aimed, in under 25 seconds. See \"Advanced challenge\" in the README.",
+					"description": "A TwoCycle tree scores, goes back for a second game piece and scores again, with both shots aimed, in under 25 seconds. The instructions are in CHALLENGE.md (Open the challenge).",
 					"optional": true,
 					"verifier": {
 						"type": "nt4-value",

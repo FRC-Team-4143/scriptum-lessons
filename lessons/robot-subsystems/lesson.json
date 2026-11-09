@@ -81,7 +81,7 @@
 		{
 			"id": "challenge-safe-feed",
 			"title": "Challenge: Intake and safe feed",
-			"description": "Optional, for students who want more. A new IntakeSubsystem you build from scratch runs on B, the roller only feeds a fast flywheel, and the intake waits while the shooter feeds. See \"Advanced challenge\" in the README.",
+			"description": "A new IntakeSubsystem you build from scratch runs on B, the roller only feeds a fast flywheel, and the intake waits while the shooter feeds. The instructions are in CHALLENGE.md (Open the challenge).",
 			"optional": true,
 			"verifier": {
 				"type": "nt4-value",
