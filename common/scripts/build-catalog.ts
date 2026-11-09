@@ -4,7 +4,8 @@
 //   bun run index --check    fail if catalog.json is out of date (the tests do this)
 //
 // A lesson is one folder, lessons/<id>/, holding everything about it:
-//   lesson.json      title, kind, track, order, requires, recommends, checkpoints, shared guides it uses
+//   lesson.json      title, kind, track, order, roadmapUnit, milestone, requires, recommends,
+//                    checkpoints, shared guides it uses
 //   project/         the starter files students get
 //   checkpoints/     verify scripts, setup.sh
 //   guides/<id>.json this lesson's Dozer guides (title, summary, topic, order, steps)
@@ -48,6 +49,70 @@ function pick(source: Json, keys: string[]): Json {
 	return out;
 }
 
+/**
+ * The roadmap is built only from `roadmapUnit`, `milestone` and `order` (track
+ * is grouping only), so every lesson says where it goes:
+ *   "roadmapUnit": "Motors and Drivetrains"   a stop in that unit (the unit's title)
+ *   "roadmapUnit": null                       off the roadmap: an optional extra
+ * A unit has at most one `"milestone": true` lesson, its big node. Units go in
+ * the order of their milestone's `order`, or their lowest `order` without one.
+ * A roadmap lesson can't `require` an extra or a lesson in a later unit, or the
+ * roadmap would send students to a locked stop.
+ */
+export function checkRoadmap(lessons: { id: string; order: number; file: Json }[], problem: (message: string) => void) {
+	const units = new Map<string, { at: number; milestone?: string }>();
+	for (const { id, order, file } of lessons) {
+		const dir = `lessons/${id}/lesson.json`;
+		const unit = file.roadmapUnit;
+		if (unit === undefined) {
+			problem(`${dir}: missing "roadmapUnit" (a unit title like "Coding as a Team", or null for an extra)`);
+			continue;
+		}
+		if (unit !== null && (typeof unit !== "string" || unit.trim() === "")) {
+			problem(`${dir}: "roadmapUnit" must be a unit title, like "Coding as a Team", or null for an extra`);
+			continue;
+		}
+		if (file.milestone !== undefined && typeof file.milestone !== "boolean") {
+			problem(`${dir}: "milestone" must be true or false`);
+		}
+		if (unit === null) {
+			if (file.milestone === true) problem(`${dir}: a milestone needs a "roadmapUnit"`);
+			continue;
+		}
+		const entry = units.get(unit) ?? { at: order };
+		if (file.milestone === true) {
+			if (entry.milestone) problem(`${dir}: "${unit}" already has a milestone, ${entry.milestone}`);
+			entry.milestone = id;
+		}
+		units.set(unit, entry);
+	}
+	for (const { order, file } of lessons) {
+		const entry = typeof file.roadmapUnit === "string" ? units.get(file.roadmapUnit) : undefined;
+		if (entry && !entry.milestone) entry.at = Math.min(entry.at, order);
+	}
+	for (const [unit, entry] of units) {
+		if (entry.milestone) entry.at = Number(lessons.find((l) => l.id === entry.milestone)?.order);
+		units.set(unit, entry);
+	}
+	const unitAt = (id: string) => {
+		const unit = lessons.find((l) => l.id === id)?.file.roadmapUnit;
+		return typeof unit === "string" ? units.get(unit)?.at : undefined;
+	};
+	for (const { id, file } of lessons) {
+		const at = unitAt(id);
+		if (at === undefined) continue;
+		for (const required of (file.requires as string[] | undefined) ?? []) {
+			if (!lessons.some((l) => l.id === required)) continue;
+			const requiredAt = unitAt(required);
+			if (requiredAt === undefined) {
+				problem(`lessons/${id}: requires "${required}", which is off the roadmap ("roadmapUnit": null)`);
+			} else if (requiredAt > at) {
+				problem(`lessons/${id}: requires "${required}", which is in a later roadmap unit`);
+			}
+		}
+	}
+}
+
 export function buildCatalog(root: string): Built {
 	const problems: string[] = [];
 	const problem = (message: string) => problems.push(message);
@@ -70,6 +135,7 @@ export function buildCatalog(root: string): Built {
 		lessons.push({ id, order: Number(file.order), file });
 	}
 	const lessonIds = new Set(lessons.map((l) => l.id));
+	checkRoadmap(lessons, problem);
 	const byOrder = [...lessons].sort((a, b) => a.order - b.order || a.id.localeCompare(b.id));
 
 	// --- lessons, with folder-relative paths made catalog-root-relative ---
@@ -93,11 +159,6 @@ export function buildCatalog(root: string): Built {
 			}
 			return cp;
 		});
-		// roadmapUnit: the title of the roadmap unit this lesson goes in, after the
-		// robot units, whatever its track (Git is a Tools lesson in the last unit).
-		if (file.roadmapUnit !== undefined && (typeof file.roadmapUnit !== "string" || file.roadmapUnit.trim() === "")) {
-			problem(`${dir}: "roadmapUnit" must be a unit title, like "Coding as a Team"`);
-		}
 		const setup = typeof file.setupScript === "string" ? file.setupScript : undefined;
 		if (setup && !existsSync(join(root, dir, setup))) problem(`${dir}: setupScript ${setup} doesn't exist`);
 		for (const required of (file.requires as string[] | undefined) ?? []) {
@@ -111,7 +172,11 @@ export function buildCatalog(root: string): Built {
 			id,
 			subdir: `${dir}/project`,
 			...(setup ? { setupScript: `${dir}/${setup}` } : {}),
-			...pick(file, ["requires", "recommends", "roadmapUnit", "showScope", "restrictTools"]),
+			...pick(file, ["requires", "recommends"]),
+			// null (off the roadmap) is left out: Scriptum reads no roadmapUnit as an extra.
+			...(typeof file.roadmapUnit === "string" ? { roadmapUnit: file.roadmapUnit } : {}),
+			...(file.milestone === true ? { milestone: true } : {}),
+			...pick(file, ["showScope", "restrictTools"]),
 			checkpoints,
 		};
 	});

@@ -3,8 +3,8 @@
 	"description": "Commit, branch, merge, resolve a conflict, rebase, then push, pull and stash across eight small scenario repos.",
 	"kind": "git",
 	"track": "Tools",
-	"roadmapUnit": "Coding as a Team",
 	"order": 50,
+	"roadmapUnit": "Coding as a Team",
 	"recommends": [
 		"editor-basics"
 	],

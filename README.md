@@ -14,8 +14,8 @@ One folder per lesson, and everything about a lesson is inside it:
 
 ```text
 lessons/<id>/
-  lesson.json            title, description, kind, track, order, requires, recommends,
-                         checkpoints, and which shared guides the lesson uses
+  lesson.json            title, description, kind, track, order, roadmapUnit, milestone,
+                         requires, recommends, checkpoints, and which shared guides it uses
   project/               the starter files students get (copied into their workspace)
   checkpoints/           verify scripts (verify/<checkpoint id>.sh) and an optional setup.sh
   guides/<guide id>.json this lesson's Dozer guides: title, summary, topic, order, steps
@@ -37,7 +37,7 @@ help only when they're needed. Don't edit it by hand; the tests fail when it is 
 ### Adding a lesson
 
 1. Copy a similar lesson's folder to `lessons/<new-id>/` (the id is lowercase kebab-case).
-2. Edit `lesson.json` (title, order, track, checkpoints) and replace `project/` with the starter files.
+2. Edit `lesson.json` (title, order, track, roadmapUnit, checkpoints) and replace `project/` with the starter files.
 3. Put each checkpoint's verify script in `checkpoints/verify/<checkpoint id>.sh`.
 4. Add guides in `guides/` and hints in `help.json` if the lesson has them.
 5. Run `bun run index`, then `bun test`, and commit.
@@ -46,12 +46,26 @@ Paths in `lesson.json` (`checkpoints/verify/x.sh`, `setupScript`) are relative t
 folder; the generated `catalog.json` makes them relative to the repo.
 
 `requires` locks a lesson until those lessons are complete. `recommends` never locks anything: it
-lists lessons worth doing first (the Java Basics a robot lesson uses, for example). Scriptum's
-roadmap builds its path from the FRC Robot lessons: each robot lesson's `requires` and `recommends`,
-and theirs in turn, come just before it, so a student meets each tool and Java idea right before the
-robot lesson that needs it. A lesson with a `roadmapUnit` (Git's is `"Coding as a Team"`) instead
-goes in a unit of that name after the last robot unit, whatever its track. Other lessons on no
-robot lesson's path (Java Advanced, Recursion) are shown as optional extra practice.
+lists lessons worth doing first (the Java Basics a robot lesson uses, for example).
+
+`track` only groups lessons: Scriptum's lesson list, its Classroom page and lesson access. Where a
+lesson sits on Scriptum's preseason roadmap comes from two other fields, so renaming a track never
+moves anything on the roadmap:
+
+- **`roadmapUnit`** (required). The roadmap unit the lesson is a stop in, which is also the unit's
+  title: `"Tools"` for `editor-basics`, AdvantageScope and Elastic; the robot lesson's title for
+  each robot lesson and the Java Basics and tool lessons it uses first (Choreo and Arbor are in
+  `"Autonomous"`); `"Coding as a Team"` for Git. `null` puts a lesson off the roadmap as optional
+  extra practice (Java Advanced, Recursion, Debugging).
+- **`milestone: true`** on each robot lesson. It's its unit's big node and last stop. At most one
+  per unit.
+
+Units go in the order of their milestone's `order`, or their lowest `order` if they have none.
+Inside a unit, lessons go by `order`, after the lessons in the unit they build on. A stop counts
+toward finishing the roadmap unless another stop `recommends` it and nothing that counts `requires`
+it (the Java warm-ups and `editor-basics` are optional). `bun run index` fails if a lesson has no
+`roadmapUnit`, if a unit has two milestones, or if a roadmap lesson `requires` an extra or a lesson
+in a later unit.
 
 ## What's here
 
@@ -60,13 +74,12 @@ Four tracks, in curriculum order (each lesson's `track` and `order` are in its `
 - **Tools**: `editor-basics` (Meet the Editor: files, folders, saving, the terminal, for someone
   who has never used a code editor), then AdvantageScope, Elastic, Choreo and Arbor introductions,
   and `git` (Git). Git is grouped with the tools, but on the roadmap it comes last: its
-  `roadmapUnit` is `"Coding as a Team"`, the unit after the robot lessons, and nothing `requires` it.
+  `roadmapUnit` is `"Coding as a Team"`, the unit after the robot lessons.
   It is eight small scenario repos, one per checkpoint (commit, feature branch, merge, merge
   conflict, rebase, push, pull, stash), built by `checkpoints/setup.sh`. Each checkpoint's
   `resetPath` names its folder, so Scriptum's **Reset this exercise** can rebuild one scenario
   (`setup.sh <folder>`) without touching the others.
-  `java-debugging` (Debugging) is a Tools lesson too, but it's off the roadmap (it `recommends`
-  `java-methods`, and Unit 0 only takes tools whose recommendations are tools): a program that compiles
+  `java-debugging` (Debugging) is a Tools lesson too, but it's off the roadmap (`"roadmapUnit": null`): a program that compiles
   but has seven bugs and nine checkpoints, one bug per debugger skill (breakpoints, step into/out,
   conditional breakpoints, watches, the call stack, Pause). Its verify scripts run Java under
   `timeout 5`, since one bug is an endless loop.
