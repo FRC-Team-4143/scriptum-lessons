@@ -44,8 +44,8 @@
 		{
 			"title": "Drive it, then RELEASE",
 			"say": {
-				"never": "Your code is on the robot. Drive it with **your team's Driver Station on the field**. During **Shop Time**, your Driver Station enables and disables your own robot, and the **spacebar** is the emergency stop. When you're done, press **RELEASE** so the next person gets a turn. The robot's logs (`.wpilog` and `.btlog` files) are copied into **robot-logs/** in your lesson.",
-				"bit": "Drive with your team's Driver Station on the field (in **Shop Time** it enables your robot; **spacebar** = emergency stop). Press **RELEASE** when done; the robot's logs land in **robot-logs/**."
+				"never": "Your code is on the robot. Drive it with **your team's Driver Station on the field**. During **Shop Time**, your Driver Station enables and disables your own robot, and the **spacebar** is the emergency stop. When you're done, press **RELEASE** so the next person gets a turn. The robot's logs (`.wpilog` and `.btlog` files) are copied into your lesson's **logs/** folder, in a folder named for your turn (like `logs/11-08_1530-team4143/`).",
+				"bit": "Drive with your team's Driver Station on the field (in **Shop Time** it enables your robot; **spacebar** = emergency stop). Press **RELEASE** when done; the robot's logs land in **logs/**."
 			},
 			"target": {
 				"selector": "[data-tour='robot-list']"
