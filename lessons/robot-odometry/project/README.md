@@ -53,7 +53,7 @@ A suggested pace that adds up to the 3 hour session. Take short breaks whenever 
 | 20 | Step 7: drive to x = 3 m in autonomous |
 | 10 | Verify |
 
-Go slower on anything that is new. Finishing every bonus is not expected.
+Go slower on anything that is new.
 
 ## What you need to do
 
@@ -86,10 +86,3 @@ Go slower on anything that is new. Finishing every bonus is not expected.
 8. **Click Verify** to check your work.
 
 Stuck on a step? Open **Dozer**: he can explain the idea or walk you through it.
-
-## Bonus challenges
-
-- Add `getSlowMode()` to `OI` that returns whether a bumper is held, and halve the speed in
-  `Robot` while it is. All the controller knowledge stays inside `OI`.
-- Reset the pose to `new Pose2d(2.0, 4.0, new Rotation2d())` at the start of auto, so the robot
-  starts in the middle of the field.

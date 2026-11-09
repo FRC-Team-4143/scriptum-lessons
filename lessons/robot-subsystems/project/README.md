@@ -46,7 +46,7 @@ A suggested pace that adds up to the 3 hour session. Take short breaks whenever 
 | 10 | Verify |
 | 5 | Wrap-up |
 
-Go slower on anything that is new. Finishing every bonus is not expected.
+Go slower on anything that is new.
 
 ## What you need to do
 
@@ -70,10 +70,3 @@ Go slower on anything that is new. Finishing every bonus is not expected.
 7. **Click Verify.**
 
 Stuck on a step? Open **Dozer**: he can explain the idea or walk you through it.
-
-## Bonus challenges
-
-- Change `SHOOT_DUTY_CYCLE` in `ShooterConstants.java` (try `0.3`, then `1.0`) and watch
-  `Subsystem/Shooter/FlywheelVelocity` in AdvantageScope. How does the top speed change? Notice you
-  choose a *power*, not a speed: the next lessons are about making the flywheel hold an exact speed.
-- Add `OI.getReverseButton()` (the `Y` button) that runs the roller backward, to unjam a game piece.

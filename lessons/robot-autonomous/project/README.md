@@ -67,7 +67,7 @@ A suggested pace. Take short breaks whenever the class needs one.
 | 20 | Fix whatever a check says is wrong |
 | 5 | Verify |
 
-Go slower on anything that is new. The stretch ideas at the end are not expected.
+Go slower on anything that is new.
 
 ## What you need to do
 
@@ -210,16 +210,3 @@ Stuck on a step? Open **Dozer**: he can explain the idea or walk you through it.
 - A **step state**: a state nothing asks for, which `handleStateTransition` picks on the way to the state
   that was asked for (AIMING on the way to AIM).
 - An **`if`/`else` inside a `switch` case**, where each branch picks the next state.
-
-## Stretch
-
-- **Plan B.** Put the Timeout around the wait for AIM inside a `Fallback`, with a second child that just shoots
-  anyway (`SetWantedState SHOOT`). What happens when you move `GOAL` in `DrivetrainConstants.java` so the
-  robot can't aim in time?
-- **Spin up early.** Use a `ParallelDeadline` so the flywheel spins up while the robot drives the second
-  path.
-- **A tunable wait.** Give the tree an input port such as `pickup_wait_msec` (as in the Arbor lesson) and
-  write `{pickup_wait_msec}` in the first Sleep. Change it from Elastic without a rebuild.
-- **Replay a run.** Open a `.btlog` from `logs/bt` in Arbor and step through it.
-- Change the Max Velocity and see how it changes the total time (`Subsystem/Drivetrain/Choreo/TotalTime`).
-- Draw a third path that goes back to Start, and drive it at the end.
