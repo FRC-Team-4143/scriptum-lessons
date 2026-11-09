@@ -10,7 +10,8 @@
 		"robot-control-theory"
 	],
 	"guides": [
-		"build-and-run"
+		"build-and-run",
+		"deploy-to-field-robot"
 	],
 	"checkpoints": [
 		{

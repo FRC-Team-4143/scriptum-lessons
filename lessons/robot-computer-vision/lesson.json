@@ -11,7 +11,8 @@
 	],
 	"guides": [
 		"build-and-run",
-		"camera-streams"
+		"camera-streams",
+		"deploy-to-field-robot"
 	],
 	"checkpoints": [
 		{
