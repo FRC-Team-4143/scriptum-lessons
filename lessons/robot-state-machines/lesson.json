@@ -4,6 +4,8 @@
 	"kind": "robot",
 	"track": "FRC Robot",
 	"order": 26,
+	"roadmapUnit": "State Machines",
+	"milestone": true,
 	"requires": [
 		"robot-control-theory"
 	],

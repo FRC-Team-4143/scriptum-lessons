@@ -9,6 +9,7 @@
 			"description": "Your first steps in the code editor: files, folders, saving, the terminal, and running a program. No experience needed.",
 			"kind": "plain-java",
 			"subdir": "lessons/editor-basics/project",
+			"roadmapUnit": "Tools",
 			"checkpoints": [
 				{
 					"id": "make-folder",
@@ -65,6 +66,7 @@
 			"description": "Configure AdvantageScope's layout to display already-published robot telemetry.",
 			"kind": "robot",
 			"subdir": "lessons/advantagescope-intro/project",
+			"roadmapUnit": "Tools",
 			"restrictTools": [
 				"scope"
 			],
@@ -153,6 +155,7 @@
 			"description": "Configure Elastic's dashboard layout to display already-published robot telemetry.",
 			"kind": "robot",
 			"subdir": "lessons/elastic-intro/project",
+			"roadmapUnit": "Tools",
 			"restrictTools": [
 				"elastic"
 			],
@@ -348,6 +351,7 @@
 			"description": "Build two different autonomous paths with real constraints and confirm they generate correctly.",
 			"kind": "robot",
 			"subdir": "lessons/choreo-intro/project",
+			"roadmapUnit": "Autonomous",
 			"restrictTools": [
 				"choreo"
 			],
@@ -398,6 +402,7 @@
 			"description": "Build an autonomous routine as a behavior tree: a root node, steps and their settings, a Sequence, a Timeout, a tunable value, a SubTree, and the main tree the robot runs, then replay a run that failed and find out why.",
 			"kind": "robot",
 			"subdir": "lessons/arbor-intro/project",
+			"roadmapUnit": "Autonomous",
 			"restrictTools": [
 				"arbor"
 			],
@@ -484,6 +489,7 @@
 			"description": "Basic java hello world project",
 			"kind": "plain-java",
 			"subdir": "lessons/hello-world/project",
+			"roadmapUnit": "Motors and Drivetrains",
 			"checkpoints": [
 				{
 					"id": "prints-hello-world",
@@ -507,6 +513,7 @@
 			"recommends": [
 				"hello-world"
 			],
+			"roadmapUnit": "Motors and Drivetrains",
 			"checkpoints": [
 				{
 					"id": "local-variables",
@@ -566,6 +573,7 @@
 			"recommends": [
 				"java-variables"
 			],
+			"roadmapUnit": "Motors and Drivetrains",
 			"checkpoints": [
 				{
 					"id": "add-ints",
@@ -634,6 +642,7 @@
 			"recommends": [
 				"java-operators"
 			],
+			"roadmapUnit": "Sensors and Feedback",
 			"checkpoints": [
 				{
 					"id": "battery-status",
@@ -693,6 +702,7 @@
 			"recommends": [
 				"java-conditions"
 			],
+			"roadmapUnit": "Drive Math and Methods",
 			"checkpoints": [
 				{
 					"id": "sum-loop",
@@ -734,6 +744,7 @@
 			"recommends": [
 				"java-loops"
 			],
+			"roadmapUnit": "Drive Math and Methods",
 			"checkpoints": [
 				{
 					"id": "array-max",
@@ -802,6 +813,7 @@
 			"recommends": [
 				"java-arrays"
 			],
+			"roadmapUnit": "Drive Math and Methods",
 			"checkpoints": [
 				{
 					"id": "clamp",
@@ -965,6 +977,7 @@
 			"recommends": [
 				"java-methods"
 			],
+			"roadmapUnit": "Objects and Odometry",
 			"checkpoints": [
 				{
 					"id": "deposit",
@@ -1065,6 +1078,7 @@
 			"recommends": [
 				"java-classes-objects"
 			],
+			"roadmapUnit": "Mechanisms and Subsystems",
 			"checkpoints": [
 				{
 					"id": "savings-interest",
@@ -1121,6 +1135,8 @@
 				"java-variables",
 				"java-operators"
 			],
+			"roadmapUnit": "Motors and Drivetrains",
+			"milestone": true,
 			"checkpoints": [
 				{
 					"id": "teleop-code",
@@ -1195,6 +1211,8 @@
 			"recommends": [
 				"java-conditions"
 			],
+			"roadmapUnit": "Sensors and Feedback",
+			"milestone": true,
 			"checkpoints": [
 				{
 					"id": "deadband-and-ifs",
@@ -1268,6 +1286,8 @@
 				"java-arrays",
 				"java-methods"
 			],
+			"roadmapUnit": "Drive Math and Methods",
+			"milestone": true,
 			"checkpoints": [
 				{
 					"id": "radians-to-meters",
@@ -1366,6 +1386,8 @@
 			"recommends": [
 				"java-classes-objects"
 			],
+			"roadmapUnit": "Objects and Odometry",
+			"milestone": true,
 			"checkpoints": [
 				{
 					"id": "oi-class",
@@ -1428,6 +1450,8 @@
 			"recommends": [
 				"java-inheritance"
 			],
+			"roadmapUnit": "Mechanisms and Subsystems",
+			"milestone": true,
 			"checkpoints": [
 				{
 					"id": "shooter-registered",
@@ -1505,6 +1529,8 @@
 			"requires": [
 				"robot-subsystems"
 			],
+			"roadmapUnit": "Control Theory",
+			"milestone": true,
 			"checkpoints": [
 				{
 					"id": "bang-bang-written",
@@ -1582,6 +1608,8 @@
 			"requires": [
 				"robot-control-theory"
 			],
+			"roadmapUnit": "State Machines",
+			"milestone": true,
 			"checkpoints": [
 				{
 					"id": "spin-up-first",
@@ -1629,6 +1657,8 @@
 			"requires": [
 				"robot-state-machines"
 			],
+			"roadmapUnit": "Computer Vision",
+			"milestone": true,
 			"checkpoints": [
 				{
 					"id": "vision-added",
@@ -1699,6 +1729,8 @@
 				"choreo-intro",
 				"arbor-intro"
 			],
+			"roadmapUnit": "Autonomous",
+			"milestone": true,
 			"checkpoints": [
 				{
 					"id": "paths-drawn",

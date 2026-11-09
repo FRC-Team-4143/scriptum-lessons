@@ -4,6 +4,7 @@
 	"kind": "robot",
 	"track": "Tools",
 	"order": 10,
+	"roadmapUnit": "Autonomous",
 	"restrictTools": [
 		"arbor"
 	],

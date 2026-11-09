@@ -4,6 +4,8 @@
 	"kind": "robot",
 	"track": "FRC Robot",
 	"order": 27,
+	"roadmapUnit": "Computer Vision",
+	"milestone": true,
 	"requires": [
 		"robot-state-machines"
 	],
