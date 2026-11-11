@@ -84,8 +84,8 @@ Go slower on anything that is new.
    about 50 m/s, far too fast for a real robot! Your math is fine. The encoder sits inside the
    **motor**, and the drivetrain divides by `GEAR_RATIO` to get to the wheel. `GEAR_RATIO` in
    `Constants.java` is still `1.0`, which says the motor and wheel turn together. On our robot the
-   gearbox is **8.46:1**: the motor turns 8.46 times for every 1 turn of the wheel. Set `GEAR_RATIO` to
-   the real number, press **Start** again and check: full speed should now read about 5.9 m/s. Then
+   gearbox is **10.71:1**: the motor turns 10.71 times for every 1 turn of the wheel. Set `GEAR_RATIO` to
+   the real number, press **Start** again and check: full speed should now read about 4.7 m/s. Then
    spin in place and watch `Robot/AngularSpeed`.
 5. **STEP 4: add a deadband.** Add a `DEADBAND` constant of `0.1` to `Constants.java`. Then, in
    `teleopPeriodic()`, use an `if` on `forward` and another on `turn`: if the absolute value

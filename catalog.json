@@ -1141,7 +1141,7 @@
 				{
 					"id": "drives-straight",
 					"title": "Drives straight",
-					"description": "Fix the right side in Constants.java, then push forward at full speed (W). Drive/TrueSpeed, how fast the robot really moves forward, should reach about 5.9 m/s. If the robot spins instead, a motor's inverted setting is wrong.",
+					"description": "Fix the right side in Constants.java, then push forward at full speed (W). Drive/TrueSpeed, how fast the robot really moves forward, should reach about 4.7 m/s. If the robot spins instead, a motor's inverted setting is wrong.",
 					"verifier": {
 						"type": "nt4-value",
 						"topic": "/AdvantageKit/RealOutputs/Check/Drive/TrueSpeed/Max",
@@ -1236,7 +1236,7 @@
 				{
 					"id": "linear-speed",
 					"title": "Linear speed",
-					"description": "Drive both sides forward at full speed. Robot/LinearSpeed should read about 5.9 m/s. If it reads about 50, GEAR_RATIO isn't set yet.",
+					"description": "Drive both sides forward at full speed. Robot/LinearSpeed should read about 4.7 m/s. If it reads about 50, GEAR_RATIO isn't set yet.",
 					"verifier": {
 						"type": "nt4-value",
 						"topic": "/AdvantageKit/RealOutputs/Check/Robot/LinearSpeed/Max",
@@ -1375,7 +1375,7 @@
 				{
 					"id": "smoothed-speed",
 					"title": "Smoothed speed",
-					"description": "Drive forward at full speed in Teleop. Robot/SmoothedSpeed should read about 6 m/s.",
+					"description": "Drive forward at full speed in Teleop. Robot/SmoothedSpeed should read about 4.7 m/s.",
 					"verifier": {
 						"type": "nt4-value",
 						"topic": "/AdvantageKit/RealOutputs/Check/Robot/SmoothedSpeed/Max",
@@ -1425,7 +1425,7 @@
 				{
 					"id": "chassis-speeds",
 					"title": "Chassis speeds",
-					"description": "Drive forward at full speed. Drive/LinearSpeed (from kinematics) should read about 6 m/s.",
+					"description": "Drive forward at full speed. Drive/LinearSpeed (from kinematics) should read about 4.7 m/s.",
 					"verifier": {
 						"type": "nt4-value",
 						"topic": "/AdvantageKit/RealOutputs/Check/Drive/LinearSpeed/Max",

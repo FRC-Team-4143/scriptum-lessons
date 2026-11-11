@@ -17,7 +17,7 @@ describe("robot-sensors starts with the gear ratio wrong", () => {
 
 	test("the starter says 1.0 and the solution has the real gearbox", async () => {
 		expect(await ratio("./project/src/main/java/frc/robot/Constants.java")).toBe("1.0");
-		expect(await ratio("./solution/Constants.java")).toBe("8.46");
+		expect(await ratio("./solution/Constants.java")).toBe("10.71");
 	});
 });
 
