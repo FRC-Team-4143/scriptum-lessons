@@ -67,6 +67,28 @@ it (the Java warm-ups and `editor-basics` are optional). `bun run index` fails i
 `roadmapUnit`, if a unit has two milestones, or if a roadmap lesson `requires` an extra or a lesson
 in a later unit.
 
+### Lesson versions
+
+Students keep working on the starter code they loaded, but the lesson can change under them.
+`version` in `lesson.json` (a whole number; 1 when missing) is what keeps their code and the
+checkers in step:
+
+- Scriptum records the version each student loaded. While the lesson keeps that version, their
+  Verify runs the newest checkers, so a checker bug fix reaches everyone.
+- Once the lesson's version moves on, students on the old one keep the checkers they loaded with,
+  so Verify keeps working for them. They're told the lesson was updated and that Start over gets
+  the new version, and to copy any code they want to keep somewhere outside Scriptum first,
+  because Start over replaces their files.
+
+**Raise `version`** when a project started from the old starter code would no longer pass the new
+checkers: a renamed method or class, a changed scaffold, a new required step. **Leave it** for typo
+fixes, wording, guides, hints and checker bug fixes.
+
+`common/lesson-versions.json` remembers a hash of each lesson's checkers (its checkpoint list plus
+everything in `checkpoints/`). When they change and `version` didn't, `bun run index` stops and asks
+you to decide: raise `version`, or run `bun run index --compatible <id>` to say old projects still
+pass. Never edit that file by hand.
+
 ## What's here
 
 Four tracks, in curriculum order (each lesson's `track` and `order` are in its `lesson.json`):

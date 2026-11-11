@@ -4,8 +4,9 @@ import { describe, expect, test } from "bun:test";
 import { existsSync, readdirSync, statSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { readFileSync } from "node:fs";
-import { buildCatalog, checkRoadmap } from "../scripts/build-catalog";
+import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { buildCatalog, checkRoadmap, VERSIONS_FILE } from "../scripts/build-catalog";
 
 const repoRoot = resolve(fileURLToPath(new URL("../..", import.meta.url)));
 
@@ -17,6 +18,63 @@ describe("catalog.json", () => {
 	test("is up to date (run `bun run index` after changing a lesson.json or adding a guide)", () => {
 		const { text } = buildCatalog(repoRoot);
 		expect(readFileSync(join(repoRoot, "catalog.json"), "utf8") === text).toBe(true);
+	});
+
+	test(`${VERSIONS_FILE} is up to date (run \`bun run index\`)`, () => {
+		const { versionsText } = buildCatalog(repoRoot);
+		expect(readFileSync(join(repoRoot, VERSIONS_FILE), "utf8") === versionsText).toBe(true);
+	});
+});
+
+describe("lesson versions", () => {
+	// A one-lesson repo in a temp folder, built once to write its version lock.
+	const scratch = (version?: number) => {
+		const root = mkdtempSync(join(tmpdir(), "lesson-versions-"));
+		mkdirSync(join(root, "lessons", "demo", "project"), { recursive: true });
+		mkdirSync(join(root, "lessons", "demo", "checkpoints", "verify"), { recursive: true });
+		mkdirSync(join(root, "common"), { recursive: true });
+		const write = (v?: number) =>
+			writeFileSync(
+				join(root, "lessons", "demo", "lesson.json"),
+				JSON.stringify({ title: "Demo", kind: "plain-java", order: 1, roadmapUnit: null, ...(v ? { version: v } : {}) }),
+			);
+		const check = (body: string) => writeFileSync(join(root, "lessons", "demo", "checkpoints", "verify", "check.sh"), body);
+		write(version);
+		check("echo old");
+		const lock = () => writeFileSync(join(root, VERSIONS_FILE), buildCatalog(root).versionsText);
+		lock();
+		return { root, write, check, lock, done: () => rmSync(root, { recursive: true, force: true }) };
+	};
+
+	test("a missing version is 1, and the catalog carries it", () => {
+		const repo = scratch();
+		const built = JSON.parse(buildCatalog(repo.root).text);
+		expect(built.lessons[0].version).toBe(1);
+		repo.done();
+	});
+
+	test("changed checkers need a new version or --compatible", () => {
+		const repo = scratch();
+		repo.check("echo new");
+		expect(buildCatalog(repo.root).problems).toEqual([expect.stringContaining('its checkers changed but "version" is still 1')]);
+		expect(buildCatalog(repo.root, { compatible: ["demo"] }).problems).toEqual([]);
+		repo.write(2);
+		expect(buildCatalog(repo.root).problems).toEqual([]);
+		repo.done();
+	});
+
+	test("a version never goes down", () => {
+		const repo = scratch(3);
+		repo.write(2);
+		expect(buildCatalog(repo.root).problems).toEqual([expect.stringContaining("went down from 3 to 2")]);
+		repo.done();
+	});
+
+	test("a starter-code-only change needs nothing", () => {
+		const repo = scratch();
+		writeFileSync(join(repo.root, "lessons", "demo", "project", "Main.java"), "class Main {}");
+		expect(buildCatalog(repo.root).problems).toEqual([]);
+		repo.done();
 	});
 });
 
