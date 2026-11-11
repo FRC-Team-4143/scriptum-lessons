@@ -67,8 +67,8 @@
 		{
 			"title": "Type the robot numbers",
 			"say": {
-				"never": "Type these with their units, pressing **Enter** after each: Mass **50 kg**, MOI **7.5 kg m^2**, Bumpers **0.43 m** (front, back and sides), Wheel Radius **0.0762 m**, Motor Rev / Wheel Rev **8.46**, Motor Max Speed **668 rad / s**, Motor Max Torque **1.0 N * m**, Wheel COF **1.5**. Choreo converts each one to the unit it shows, so a number may look different after you press Enter. Click **I did it** when they match, then close the dialog.",
-				"bit": "Mass 50 kg, MOI 7.5 kg m^2, Bumpers 0.43 m, Wheel Radius 0.0762 m, gearing 8.46, 668 rad / s, 1.0 N * m, COF 1.5."
+				"never": "Type these with their units, pressing **Enter** after each: Mass **50 kg**, MOI **7.5 kg m^2**, Bumpers **0.43 m** (front, back and sides), Wheel Radius **0.0762 m**, Motor Rev / Wheel Rev **10.71**, Motor Max Speed **668 rad / s**, Motor Max Torque **1.0 N * m**, Wheel COF **1.5**. Choreo converts each one to the unit it shows, so a number may look different after you press Enter. Click **I did it** when they match, then close the dialog.",
+				"bit": "Mass 50 kg, MOI 7.5 kg m^2, Bumpers 0.43 m, Wheel Radius 0.0762 m, gearing 10.71, 668 rad / s, 1.0 N * m, COF 1.5."
 			},
 			"waitFor": {
 				"hint": "type the robot numbers, then click I did it."

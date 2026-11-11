@@ -23,14 +23,14 @@ describe("robot-autonomous Choreo project", () => {
 		expect(chor.type).toBe("Differential");
 		expect(chor.config.differentialTrackWidth.val).toBeCloseTo(24 * IN_TO_M, 4);
 		expect(chor.config.radius.val).toBeCloseTo(3 * IN_TO_M, 4);
-		expect(chor.config.gearing.val).toBeCloseTo(8.46, 4);
+		expect(chor.config.gearing.val).toBeCloseTo(10.71, 4);
 		expect(chor.config.mass.val).toBeCloseTo(50, 4);
 		const constants = readFileSync(
 			join(L.dir, "project/src/main/java/frc/robot/subsystems/drive/DrivetrainConstants.java"),
 			"utf8",
 		);
 		expect(constants).toContain("Units.inchesToMeters(24.0)");
-		expect(constants).toContain("GEAR_RATIO = 8.46");
+		expect(constants).toContain("GEAR_RATIO = 10.71");
 		expect(constants).toContain("ROBOT_MASS_KG = 50.0");
 	});
 

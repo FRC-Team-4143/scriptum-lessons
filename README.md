@@ -173,7 +173,7 @@ has to be made in every module (`lessons/robot-*/project/`):
 - Modules 1-4 keep the chassis numbers in `Constants.java`; from `robot-subsystems` on that file is gone
   and they live in `subsystems/drive/DrivetrainConstants.java` (static fields, read as
   `DrivetrainConstants.WHEEL_RADIUS_METERS`). The wheel radius (0.0762 m) and track width (0.61 m)
-  and gear ratio (8.46) are the real robot's; the mass is still a placeholder.
+  and gear ratio (10.71) are the real robot's; the mass is still a placeholder.
 - The mech's simulation models how the robot is really built: `REAL_GEAR_RATIO` in the physics, and a
   right motor mounted facing the other way. So wrong constants misbehave like on a real robot. Two
   lessons start wrong on purpose: `robot-drivetrain` has the right motor not inverted (the robot spins)
