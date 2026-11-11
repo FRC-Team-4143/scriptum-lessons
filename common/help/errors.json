@@ -389,6 +389,33 @@
 					"bit": "Fix, save, rerun."
 				}
 			]
+		},
+		{
+			"id": "stack-overflow",
+			"match": "StackOverflowError",
+			"title": "A method that never stops calling itself",
+			"explain": {
+				"never": "A method kept calling itself and never stopped. Each call waits in memory for the next one, until Java runs out of room (the **stack**) and stops the program. The same `at` line repeated over and over under the error is the method that's stuck.",
+				"bit": "Recursion that never reaches its base case.",
+				"lot": "Unbounded recursion."
+			},
+			"hints": [
+				{
+					"never": "Look at the `at` lines under the error. The one repeated over and over is the method that keeps calling itself.",
+					"bit": "The repeated `at` line is the method.",
+					"lot": "Repeated frame."
+				},
+				{
+					"never": "Check it has a **base case**: an `if` at the top that returns an answer **without** calling the method again. It has to come before the call.",
+					"bit": "Is there a base case, before the recursive call?",
+					"lot": "Base case first."
+				},
+				{
+					"never": "Check every call gets **closer** to the base case. Calling it with `n` instead of `n - 1`, or jumping past the base case (from 1 down to -1 when the base case is `n == 0`), never stops. `n <= 1` is safer than `n == 1`.",
+					"bit": "Each call must move toward the base case; use `<=`, not `==`, if it can jump past it.",
+					"lot": "Check progress toward the base case."
+				}
+			]
 		}
 	]
 }

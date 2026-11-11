@@ -3504,6 +3504,42 @@
 			"path": "lessons/java-recursion/guides/java-recursion-stack-overflow.json"
 		},
 		{
+			"id": "java-recursion-digits",
+			"title": "Peeling off digits",
+			"summary": "Use % 10 and / 10 to recurse on a number one digit at a time.",
+			"topic": "Java",
+			"order": 345,
+			"modules": [
+				"java-recursion"
+			],
+			"kind": "mixed",
+			"path": "lessons/java-recursion/guides/java-recursion-digits.json"
+		},
+		{
+			"id": "java-recursion-two-calls",
+			"title": "Calling yourself twice",
+			"summary": "Recursion that makes two smaller calls, and why it needs two base cases.",
+			"topic": "Java",
+			"order": 346,
+			"modules": [
+				"java-recursion"
+			],
+			"kind": "mixed",
+			"path": "lessons/java-recursion/guides/java-recursion-two-calls.json"
+		},
+		{
+			"id": "java-recursion-strings",
+			"title": "Recursion on a String",
+			"summary": "Shrink a String one character at a time with charAt and substring.",
+			"topic": "Java",
+			"order": 347,
+			"modules": [
+				"java-recursion"
+			],
+			"kind": "mixed",
+			"path": "lessons/java-recursion/guides/java-recursion-strings.json"
+		},
+		{
 			"id": "java-inheritance-extends",
 			"title": "extends and super",
 			"summary": "Building SavingsAccount on top of BankAccount.",

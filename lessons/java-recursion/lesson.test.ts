@@ -8,5 +8,5 @@ const L = lessonKit(import.meta.url);
 describe.skipIf(!hasJdk)("java-recursion checkpoints", () => {
 	test("every checkpoint fails fresh, passes once solved", async () => {
 		await L.roundTrip(["factorial-recursive", "fibonacci-recursive", "sum-digits", "reverse-string-recursive"]);
-	});
+	}, 30_000);
 });

@@ -1,0 +1,100 @@
+{
+	"title": "Peeling off digits",
+	"summary": "Use % 10 and / 10 to recurse on a number one digit at a time.",
+	"topic": "Java",
+	"order": 345,
+	"steps": [
+		{
+			"title": "Splitting a number",
+			"say": {
+				"never": "To work with the digits of a number: `% 10` gives you the **last digit**, and `/ 10` gives you **everything before it** (whole-number division throws the leftover away). So `472 % 10` is `2` and `472 / 10` is `47`.",
+				"bit": "`% 10` is the last digit and `/ 10` is the rest."
+			},
+			"board": {
+				"code": "472 % 10   is 2    the last digit\n472 / 10   is 47   everything before it\n47 / 10    is 4\n4 / 10     is 0",
+				"language": "text",
+				"marks": [
+					{
+						"text": "% 10",
+						"label": "last digit"
+					},
+					{
+						"text": "/ 10",
+						"label": "the rest"
+					}
+				]
+			}
+		},
+		{
+			"title": "One digit per call",
+			"say": {
+				"never": "Counting the digits of 472 is 1 plus counting the digits of 47. Each call peels off one digit and hands the rest to a smaller call. When only one digit is left (any number under 10), you can answer straight away: that's the base case.",
+				"bit": "Each call peels off one digit; a number under 10 is the base case."
+			},
+			"board": {
+				"code": "digitCount(472)\n= 1 + digitCount(47)\n= 1 + (1 + digitCount(4))\n= 1 + 1 + 1 = 3",
+				"language": "text",
+				"marks": [
+					{
+						"text": "digitCount(4)",
+						"label": "one digit left: the base case"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Splitting a number",
+			"say": {
+				"never": "`sumDigits` works the same way, but instead of adding 1 for each digit, add **the digit itself**. Use the three questions: the smallest input is one digit, and its sum is just itself. The smaller version is `n / 10`. To finish, add the last digit, `n % 10`.",
+				"bit": "Same shape as `digitCount`, but add the digit (`n % 10`) instead of 1."
+			},
+			"board": {
+				"code": "sumDigits(472)\n= 2 + sumDigits(47)\n= 2 + (7 + sumDigits(4))\n= 2 + 7 + 4 = 13",
+				"language": "text",
+				"marks": [
+					{
+						"text": "sumDigits(4)",
+						"label": "one digit: base case"
+					}
+				]
+			},
+			"assist": true
+		},
+		{
+			"title": "Find it",
+			"say": {
+				"never": "It may be further down. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `write a method named sumDigits` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "Press **Ctrl+F**, type `write a method named sumDigits` and press Enter to jump to it."
+			},
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "write a method named sumDigits"
+				},
+				"hint": "find write a method named sumDigits with Ctrl+F.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Your turn",
+			"say": {
+				"never": "Your turn! Write `sumDigits` just below the TODO. Start with the base case: if `n` is less than 10, return `n`. Then return the last digit plus `sumDigits` of the rest.",
+				"bit": "Write `sumDigits` here: base case first, then last digit + the rest."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "write a method named sumDigits"
+			},
+			"cardAt": "bottom-right",
+			"assist": true
+		}
+	],
+	"kind": "mixed"
+}

@@ -1,0 +1,146 @@
+{
+	"title": "Calling yourself twice",
+	"summary": "Recursion that makes two smaller calls, and why it needs two base cases.",
+	"topic": "Java",
+	"order": 346,
+	"steps": [
+		{
+			"title": "Two smaller problems",
+			"say": {
+				"never": "Some problems split into **two** smaller ones. Think of an elimination bracket. A bracket with 0 rounds is just 1 team. A bracket with more rounds is two smaller brackets whose winners meet in the final. So the team count is the teams in one half **plus** the teams in the other half.",
+				"bit": "Some problems split in two: call yourself twice and combine the two answers."
+			},
+			"board": {
+				"code": "public static int bracketTeams(int rounds) {\n    if (rounds == 0) {\n        return 1;\n    }\n    return bracketTeams(rounds - 1) + bracketTeams(rounds - 1);\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "rounds == 0",
+						"label": "base case"
+					},
+					{
+						"text": "bracketTeams(rounds - 1) +",
+						"label": "one half"
+					},
+					{
+						"text": "+ bracketTeams(rounds - 1)",
+						"label": "the other half"
+					}
+				]
+			}
+		},
+		{
+			"title": "The calls branch",
+			"say": {
+				"never": "With two calls, the calls branch out like a tree. Each one splits in two until it reaches the base case, then the answers add up on the way back. You still don't have to trace it all: trust that each smaller call gives the right answer, and just add them.",
+				"bit": "Two calls branch into a tree of calls; trust each one and combine."
+			},
+			"board": {
+				"code": "bracketTeams(2)\n├─ bracketTeams(1)\n│  ├─ bracketTeams(0) = 1\n│  └─ bracketTeams(0) = 1\n└─ bracketTeams(1)\n   ├─ bracketTeams(0) = 1\n   └─ bracketTeams(0) = 1\n= 4 teams",
+				"language": "text",
+				"marks": [
+					{
+						"text": "bracketTeams(0) = 1",
+						"label": "base case"
+					}
+				]
+			}
+		},
+		{
+			"title": "Jumping past the base case",
+			"say": {
+				"never": "Careful when a call jumps back by **more than one**. Say a method counts down by 2 and stops at `n == 0`. Starting from 5 it goes 5, 3, 1, -1, -3... and never lands on 0, so it never stops. Make sure **every** small input it can land on has an answer, for example with `n <= 0` or a base case that covers two numbers.",
+				"bit": "If a call jumps back by 2, make sure the base case catches every number it can land on, not just one."
+			},
+			"board": {
+				"code": "countBy2(5) -> countBy2(3) -> countBy2(1) -> countBy2(-1) -> ...\n\nif (n == 0)   misses odd numbers\nif (n <= 0)   catches them all",
+				"language": "text",
+				"marks": [
+					{
+						"text": "countBy2(-1)",
+						"label": "jumped right past 0"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Fibonacci",
+			"say": {
+				"never": "Each Fibonacci number is the two before it added together: 0, 1, 1, 2, 3, 5, 8... So the recursive step makes two calls: `fibonacci(n - 1)` and `fibonacci(n - 2)`. Because it reaches back by 2, it needs **two** base cases: `fibonacci(0)` is 0 and `fibonacci(1)` is 1. Neat trick: for both of them, the answer is just `n`, so one `if (n < 2)` covers them.",
+				"bit": "Two calls (`n - 1` and `n - 2`), and a base case that covers both 0 and 1: for `n < 2` the answer is `n`."
+			},
+			"board": {
+				"code": "public static int fibonacci(int n) {\n    if (n < 2) {\n        return n;\n    }\n    return fibonacci(n - 1) + fibonacci(n - 2);\n}",
+				"marks": [
+					{
+						"text": "n < 2",
+						"label": "covers 0 and 1"
+					},
+					{
+						"text": "fibonacci(n - 1) +",
+						"label": "the one before"
+					},
+					{
+						"text": "+ fibonacci(n - 2)",
+						"label": "the one before that"
+					}
+				]
+			},
+			"assist": true
+		},
+		{
+			"title": "In your lesson: Trace it",
+			"say": {
+				"never": "Here's `fibonacci(3)`. It asks for `fibonacci(2)` and `fibonacci(1)`. `fibonacci(2)` asks for `fibonacci(1)` and `fibonacci(0)`. Those are base cases, so they answer right away, and everything adds up to 2.",
+				"bit": "`fibonacci(3)` = `fibonacci(2)` + `fibonacci(1)` = (1 + 0) + 1 = 2."
+			},
+			"board": {
+				"code": "fibonacci(3)\n├─ fibonacci(2)\n│  ├─ fibonacci(1) = 1\n│  └─ fibonacci(0) = 0\n└─ fibonacci(1) = 1\n= 2",
+				"language": "text",
+				"marks": [
+					{
+						"text": "fibonacci(0) = 0",
+						"label": "base case"
+					}
+				]
+			},
+			"assist": true
+		},
+		{
+			"title": "Find it",
+			"say": {
+				"never": "It may be further down. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `write a method named fibonacci` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "Press **Ctrl+F**, type `write a method named fibonacci` and press Enter to jump to it."
+			},
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "write a method named fibonacci"
+				},
+				"hint": "find write a method named fibonacci with Ctrl+F.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Your turn",
+			"say": {
+				"never": "Your turn! Write `fibonacci` just below the TODO: the base case for `n` less than 2 first, then add up the two calls. Then try it from `main` with 0, 1 and 10 (that one should print 55).",
+				"bit": "Write `fibonacci` here, then try 0, 1 and 10 (55) from `main`."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "write a method named fibonacci"
+			},
+			"cardAt": "bottom-right",
+			"assist": true
+		}
+	],
+	"kind": "mixed"
+}

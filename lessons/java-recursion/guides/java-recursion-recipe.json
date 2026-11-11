@@ -89,38 +89,50 @@
 			"assist": true
 		},
 		{
-			"title": "Splitting a number",
+			"title": "Trust the smaller call",
 			"say": {
-				"never": "To work with the digits of a number: `% 10` gives you the **last digit**, and `/ 10` gives you **everything before it**. So counting the digits of 472 is 1 plus counting the digits of 47. Each call peels off one digit.",
-				"bit": "`% 10` is the last digit and `/ 10` is the rest; recursion peels off one digit per call."
+				"never": "Here's the trick that makes recursion click. **Don't** try to follow every call in your head: that gets confusing fast, even for experts.\n\nInstead, when you write the line that calls `triangle(rows - 1)`, just **pretend it already works** and hands you the right answer for the smaller triangle. Your only job is the last bit: how do you turn that answer into the answer for `rows`? For a triangle of 4 rows, the 3-row triangle has 6 dots, so add the bottom row of 4.",
+				"bit": "Don't trace every call in your head. Assume the smaller call already returns the right answer, then ask only: how do I use it to finish?"
 			},
 			"board": {
-				"code": "digitCount(472)\n= 1 + digitCount(47)\n= 1 + (1 + digitCount(4))\n= 1 + 1 + 1 = 3",
-				"language": "java",
+				"code": "triangle(4) = ?\n\nPretend triangle(3) already works: it says 6\nSo triangle(4) = 4 + 6 = 10",
+				"language": "text",
 				"marks": [
 					{
-						"text": "digitCount(4)",
-						"label": "one digit left: the base case"
+						"text": "Pretend triangle(3) already works",
+						"label": "trust the smaller call"
+					},
+					{
+						"text": "4 + 6",
+						"label": "your only job: finish it"
 					}
 				]
 			}
 		},
 		{
-			"title": "In your lesson: Splitting a number",
+			"title": "Three questions",
 			"say": {
-				"never": "To work with the digits of a number: `% 10` gives you the **last digit**, and `/ 10` gives you **everything before it**. So the sum of the digits of 472 is 2 plus the sum of the digits of 47. Each call peels off one digit.",
-				"bit": "For digits: `% 10` is the last digit, `/ 10` is everything before it."
+				"never": "Stuck on a new one? Answer these three questions in order, and each answer becomes a piece of code:\n\n**1. What's the smallest input, and what's its answer?** That's your `if` and its `return`.\n\n**2. What's a smaller version of the problem?** That's what you pass to the call: `n - 1`, `n / 10`, a shorter `String`.\n\n**3. If the smaller call gives you the right answer, what do you do with it to finish?** Add something, multiply, stick a letter on. That's the last `return` line.",
+				"bit": "1. Smallest input and its answer (the `if`). 2. What's smaller (the argument). 3. How to finish with the smaller answer (the last `return`)."
 			},
 			"board": {
-				"code": "sumDigits(472)\n= 2 + sumDigits(47)\n= 2 + (7 + sumDigits(4))\n= 2 + 7 + 4 = 13",
+				"code": "public static int solve(int n) {\n    if (n <= 1) {        // 1. the smallest input\n        return 1;        //    and its answer\n    }\n    int smaller = solve(n - 1);   // 2. a smaller version (trust it!)\n    return n + smaller;           // 3. finish the job\n}",
+				"language": "java",
 				"marks": [
 					{
-						"text": "sumDigits(4)",
-						"label": "one digit: base case"
+						"text": "if (n <= 1)",
+						"label": "question 1"
+					},
+					{
+						"text": "solve(n - 1)",
+						"label": "question 2"
+					},
+					{
+						"text": "n + smaller",
+						"label": "question 3"
 					}
 				]
-			},
-			"assist": true
+			}
 		},
 		{
 			"title": "Open Main.java",

@@ -114,6 +114,7 @@ describe("common/help/errors.json", () => {
 		"null-pointer": "Unhandled exception: java.lang.NullPointerException: Cannot invoke \"Motor.set(double)\" because \"left\" is null",
 		"index-out-of-bounds": "java.lang.ArrayIndexOutOfBoundsException: Index 3 out of bounds for length 3",
 		"divide-by-zero": "java.lang.ArithmeticException: / by zero",
+		"stack-overflow": "Exception in thread \"main\" java.lang.StackOverflowError",
 	};
 
 	test.each(Object.entries(samples))("%s matches its sample line", (id, line) => {

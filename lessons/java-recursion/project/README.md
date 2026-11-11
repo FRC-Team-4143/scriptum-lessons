@@ -14,6 +14,33 @@ empty for you to call your methods from. You've already solved some of
 these with loops; this time, solve them again *without any loops* - each
 method must call itself on a smaller input.
 
+### How to think about it
+
+Recursion feels strange at first, and that's normal. The trick is to
+**not** follow every call in your head. Instead, write the line that calls
+the method on something smaller, and *pretend it already works*.
+
+Take counting the dots in a triangle of dots, `triangle(rows)`. A triangle
+with 4 rows is the bottom row of 4 dots sitting under a triangle with 3
+rows. If `triangle(3)` hands you the right answer (6), then `triangle(4)`
+is just `4 + 6`. You never have to work out *how* `triangle(3)` got 6. You
+only have to finish the job.
+
+So for each method, answer three questions, and each answer is a piece of
+your code:
+
+1. **What's the smallest input, and what's its answer?** That's the `if`
+   at the top, and what it returns.
+2. **What's a smaller version of the problem?** That's what you pass to
+   the method when it calls itself.
+3. **If that smaller call gives you the right answer, how do you finish?**
+   That's the last `return` line.
+
+Still stuck? Press **Dozer**, then **I'm so lost → Teach me, step by
+step**. He has a guide for each method.
+
+### The recipe
+
 For every method, follow the same two-step recipe:
 
 - **Decide the base case** - the smallest input you can answer directly
