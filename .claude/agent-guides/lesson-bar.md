@@ -58,6 +58,13 @@ don't check:
 - `help.json`'s `plan` has one stop per checkpoint, in checkpoint order, using this lesson's own
   guides.
 
+## Lesson versions
+
+- Changed a lesson's checkpoints or anything in `checkpoints/`? Decide whether a project started
+  from the old starter code would still pass. If not, raise `version` in `lesson.json`; if so, run
+  `bun run index --compatible <id>`. Say which you chose, and why, in the PR. See "Lesson
+  versions" in the README.
+
 ## Testing a change
 
 ```bash

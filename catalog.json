@@ -8,6 +8,7 @@
 			"title": "Meet the Editor",
 			"description": "Your first steps in the code editor: files, folders, saving, the terminal, and running a program. No experience needed.",
 			"kind": "plain-java",
+			"version": 1,
 			"subdir": "lessons/editor-basics/project",
 			"roadmapUnit": "Tools",
 			"checkpoints": [
@@ -65,6 +66,7 @@
 			"title": "AdvantageScope",
 			"description": "Configure AdvantageScope's layout to display already-published robot telemetry.",
 			"kind": "robot",
+			"version": 1,
 			"subdir": "lessons/advantagescope-intro/project",
 			"roadmapUnit": "Tools",
 			"restrictTools": [
@@ -154,6 +156,7 @@
 			"title": "Elastic",
 			"description": "Configure Elastic's dashboard layout to display already-published robot telemetry.",
 			"kind": "robot",
+			"version": 1,
 			"subdir": "lessons/elastic-intro/project",
 			"roadmapUnit": "Tools",
 			"restrictTools": [
@@ -350,6 +353,7 @@
 			"title": "Choreo",
 			"description": "Build two different autonomous paths with real constraints and confirm they generate correctly.",
 			"kind": "robot",
+			"version": 1,
 			"subdir": "lessons/choreo-intro/project",
 			"roadmapUnit": "Autonomous",
 			"restrictTools": [
@@ -401,6 +405,7 @@
 			"title": "Arbor",
 			"description": "Build an autonomous routine as a behavior tree: a root node, steps and their settings, a Sequence, a Timeout, a tunable value, a SubTree, and the main tree the robot runs, then replay a run that failed and find out why.",
 			"kind": "robot",
+			"version": 1,
 			"subdir": "lessons/arbor-intro/project",
 			"roadmapUnit": "Autonomous",
 			"restrictTools": [
@@ -488,6 +493,7 @@
 			"title": "Hello, World",
 			"description": "Basic java hello world project",
 			"kind": "plain-java",
+			"version": 1,
 			"subdir": "lessons/hello-world/project",
 			"roadmapUnit": "Motors and Drivetrains",
 			"checkpoints": [
@@ -509,6 +515,7 @@
 			"title": "Variables",
 			"description": "Declare variables and define constants.",
 			"kind": "plain-java",
+			"version": 1,
 			"subdir": "lessons/java-variables/project",
 			"recommends": [
 				"hello-world"
@@ -551,6 +558,7 @@
 			"title": "Operators",
 			"description": "Do arithmetic, conversions, and comparisons with Java's operators.",
 			"kind": "plain-java",
+			"version": 1,
 			"subdir": "lessons/java-operators/project",
 			"recommends": [
 				"java-variables"
@@ -620,6 +628,7 @@
 			"title": "Conditions",
 			"description": "Write if/else chains, define an enum, and switch on it.",
 			"kind": "plain-java",
+			"version": 1,
 			"subdir": "lessons/java-conditions/project",
 			"recommends": [
 				"java-operators"
@@ -689,6 +698,7 @@
 			"title": "Loops",
 			"description": "Write for loops instead of the dangerous while loop.",
 			"kind": "plain-java",
+			"version": 1,
 			"subdir": "lessons/java-loops/project",
 			"recommends": [
 				"java-conditions"
@@ -731,6 +741,7 @@
 			"title": "Arrays",
 			"description": "Write methods that take and return arrays.",
 			"kind": "plain-java",
+			"version": 1,
 			"subdir": "lessons/java-arrays/project",
 			"recommends": [
 				"java-loops"
@@ -800,6 +811,7 @@
 			"title": "Methods",
 			"description": "Write reusable methods, build new methods on top of them instead of copy-pasting, and practice on a few programming-course classics.",
 			"kind": "plain-java",
+			"version": 1,
 			"subdir": "lessons/java-methods/project",
 			"recommends": [
 				"java-arrays"
@@ -869,6 +881,7 @@
 			"title": "Debugging",
 			"description": "Fix a match-log program that compiles and runs but gives wrong answers, using the debugger: breakpoints, stepping in and out, the Variables pane, conditional breakpoints, the call stack and the Pause button.",
 			"kind": "plain-java",
+			"version": 1,
 			"subdir": "lessons/java-debugging/project",
 			"recommends": [
 				"java-methods"
@@ -964,6 +977,7 @@
 			"title": "Classes & Objects",
 			"description": "Build a small BankAccount class: fields, a constructor, and encapsulation - objects that protect their own state instead of exposing raw data to be mutated directly.",
 			"kind": "plain-java",
+			"version": 1,
 			"subdir": "lessons/java-classes-objects/project",
 			"recommends": [
 				"java-methods"
@@ -1015,6 +1029,7 @@
 			"title": "Recursion",
 			"description": "Solve a few problems you already solved with loops, using recursion instead - methods that call themselves down to a base case.",
 			"kind": "plain-java",
+			"version": 1,
 			"subdir": "lessons/java-recursion/project",
 			"recommends": [
 				"java-methods"
@@ -1065,6 +1080,7 @@
 			"title": "Inheritance",
 			"description": "Extend the BankAccount class from Classes & Objects with two subclasses - one that adds a new method, one that overrides an existing one.",
 			"kind": "plain-java",
+			"version": 1,
 			"subdir": "lessons/java-inheritance/project",
 			"recommends": [
 				"java-classes-objects"
@@ -1116,6 +1132,7 @@
 			"title": "Motors and Drivetrains",
 			"description": "Drive a differential drive robot in simulation with MWLib. Learn your first Java (methods, variables, operators) while writing tank drive and arcade drive.",
 			"kind": "robot",
+			"version": 1,
 			"subdir": "lessons/robot-drivetrain/project",
 			"requires": [
 				"advantagescope-intro",
@@ -1205,6 +1222,7 @@
 			"title": "Sensors and Feedback",
 			"description": "Turn encoder readings into speed and distance, ignore stick drift with an if statement, then drive exactly 2 meters with bang-bang control.",
 			"kind": "robot",
+			"version": 1,
 			"subdir": "lessons/robot-sensors/project",
 			"requires": [
 				"robot-drivetrain"
@@ -1291,6 +1309,7 @@
 			"title": "Drive Math and Methods",
 			"description": "Move the drivetrain math into reusable methods: unit conversion, speeds, arcade drive, and an average built with an array and a for loop.",
 			"kind": "robot",
+			"version": 1,
 			"subdir": "lessons/robot-drive-math/project",
 			"requires": [
 				"robot-sensors"
@@ -1403,6 +1422,7 @@
 			"title": "Objects and Odometry",
 			"description": "Write an abstract OI class, then use WPILib kinematics, a NavX gyro and a pose estimator to track where the robot is.",
 			"kind": "robot",
+			"version": 1,
 			"subdir": "lessons/robot-odometry/project",
 			"requires": [
 				"robot-drive-math"
@@ -1480,6 +1500,7 @@
 			"title": "Mechanisms and Subsystems",
 			"description": "Move the drivetrain into a subsystem, then build a shooter subsystem from a flywheel and a roller mechanism.",
 			"kind": "robot",
+			"version": 1,
 			"subdir": "lessons/robot-subsystems/project",
 			"requires": [
 				"robot-odometry"
@@ -1575,6 +1596,7 @@
 			"title": "Control Theory",
 			"description": "Hold the flywheel at speed three ways: bang-bang, feedforward and PID. Then tune the gains and compare how each handles a disturbance.",
 			"kind": "robot",
+			"version": 1,
 			"subdir": "lessons/robot-control-theory/project",
 			"requires": [
 				"robot-subsystems"
@@ -1664,6 +1686,7 @@
 			"title": "State Machines",
 			"description": "Give the shooter a state machine, and make RobotContainer the robot's own state machine that buttons ask for states.",
 			"kind": "robot",
+			"version": 1,
 			"subdir": "lessons/robot-state-machines/project",
 			"requires": [
 				"robot-control-theory"
@@ -1726,6 +1749,7 @@
 			"title": "Computer Vision",
 			"description": "Teach the robot to see AprilTags: feed camera tag solutions to the pose estimator so the robot always knows where it is on the field, then aim at the goal from that estimate.",
 			"kind": "robot",
+			"version": 1,
 			"subdir": "lessons/robot-computer-vision/project",
 			"requires": [
 				"robot-state-machines"
@@ -1809,6 +1833,7 @@
 			"title": "Autonomous",
 			"description": "Draw two paths in Choreo, then build the autonomous routine as a behavior tree in Arbor, the way the competition robot does: follow the first path, pick up, follow the second path, aim at the goal, and shoot. Then make AIM wait until the robot is really aimed.",
 			"kind": "robot",
+			"version": 1,
 			"subdir": "lessons/robot-autonomous/project",
 			"requires": [
 				"robot-computer-vision",
@@ -1929,6 +1954,7 @@
 			"title": "Interfaces & Polymorphism",
 			"description": "Add up a robot's battery draw: write an interface every part promises to follow, an abstract class that shares code between mechanisms, and loops that treat motors, LEDs and intakes all the same way.",
 			"kind": "plain-java",
+			"version": 1,
 			"subdir": "lessons/java-interfaces/project",
 			"recommends": [
 				"java-inheritance"
@@ -1979,6 +2005,7 @@
 			"title": "Collections",
 			"description": "Keep score at a competition: a list of match scores, a set of every team your scouts saw, and a map from team number to total points. Learn which collection fits which job.",
 			"kind": "plain-java",
+			"version": 1,
 			"subdir": "lessons/java-collections/project",
 			"recommends": [
 				"java-classes-objects"
@@ -2029,6 +2056,7 @@
 			"title": "Lambdas & Functional Interfaces",
 			"description": "Wire up a robot's buttons and joystick the way real robot code does: write speed filters as lambdas, build new behavior out of old, and bind buttons to actions with method references.",
 			"kind": "plain-java",
+			"version": 1,
 			"subdir": "lessons/java-lambdas/project",
 			"recommends": [
 				"java-interfaces"
@@ -2079,6 +2107,7 @@
 			"title": "Unit Testing",
 			"description": "Write tests that prove robot math works: check a deadband, a clamp and a unit conversion with @Test and assertEquals, then catch a real shooter bug with a test before you fix it.",
 			"kind": "plain-java",
+			"version": 1,
 			"subdir": "lessons/java-unit-testing/project",
 			"recommends": [
 				"java-methods"
@@ -2129,6 +2158,7 @@
 			"title": "Exceptions",
 			"description": "Read messy scouting text without crashing: throw an exception when the numbers can't be right, write your own checked exception, skip and count the bad lines, and make sure the robot always stops when an auto step fails.",
 			"kind": "plain-java",
+			"version": 1,
 			"subdir": "lessons/java-exceptions/project",
 			"recommends": [
 				"java-classes-objects"
@@ -2188,6 +2218,7 @@
 			"title": "Generics",
 			"description": "Write code once and use it for any type: a Pair that holds a team and its nickname, a RingBuffer that keeps the last few sensor readings, and methods that work on a list of anything, or anything that can be compared.",
 			"kind": "plain-java",
+			"version": 1,
 			"subdir": "lessons/java-generics/project",
 			"recommends": [
 				"java-collections"
@@ -2238,6 +2269,7 @@
 			"title": "Big-O & Efficiency",
 			"description": "Count the steps your code takes. Sort snippets into O(1), O(log n), O(n) and O(n²), then speed up a scouting app's duplicate-team check from millions of steps to a few thousand with a HashSet.",
 			"kind": "plain-java",
+			"version": 1,
 			"subdir": "lessons/java-big-o/project",
 			"recommends": [
 				"java-collections"
@@ -2288,6 +2320,7 @@
 			"title": "Searching & Sorting",
 			"description": "Find a team in a long list, first one item at a time and then by halving with binary search. Sort scouted teams by score with a sort you write yourself, then rank them the way real code does, with List.sort and a Comparator.",
 			"kind": "plain-java",
+			"version": 1,
 			"subdir": "lessons/java-search-sort/project",
 			"recommends": [
 				"java-big-o"
@@ -2338,6 +2371,7 @@
 			"title": "Stacks & Queues",
 			"description": "Give the dashboard an Undo button, catch bracket typos in a typed-in auto, run auto steps in order, and build the indexer's line of game pieces by hand. Learn when the newest thing comes out first and when the oldest does.",
 			"kind": "plain-java",
+			"version": 1,
 			"subdir": "lessons/java-stacks-queues/project",
 			"recommends": [
 				"java-collections"
@@ -2388,6 +2422,7 @@
 			"title": "Trees",
 			"description": "Keep every team at the event in a binary search tree that stays sorted as you add to it, then count the actions in an auto shaped like the robot's behavior trees. Recursion does the walking.",
 			"kind": "plain-java",
+			"version": 1,
 			"subdir": "lessons/java-trees/project",
 			"recommends": [
 				"java-recursion",
@@ -2439,6 +2474,7 @@
 			"title": "Graphs",
 			"description": "Map the field as waypoints joined by lanes, then search it: find out whether the robot can get somewhere at all, the path with the fewest hops, and which waypoints a blocked lane cuts off.",
 			"kind": "plain-java",
+			"version": 1,
 			"subdir": "lessons/java-graphs/project",
 			"recommends": [
 				"java-trees"
@@ -2489,6 +2525,7 @@
 			"title": "Design Patterns",
 			"description": "Use three named shapes for classes on a pretend robot: swap drive modes with Strategy, tell the LEDs and intake about a game piece with Observer, and build the right auto from its name with Factory.",
 			"kind": "plain-java",
+			"version": 1,
 			"subdir": "lessons/java-design-patterns/project",
 			"recommends": [
 				"java-interfaces",
@@ -2540,6 +2577,7 @@
 			"title": "Git",
 			"description": "Commit, branch, merge, resolve a conflict, rebase, then push, pull and stash across eight small scenario repos.",
 			"kind": "git",
+			"version": 1,
 			"subdir": "lessons/git/project",
 			"setupScript": "lessons/git/checkpoints/setup.sh",
 			"recommends": [
