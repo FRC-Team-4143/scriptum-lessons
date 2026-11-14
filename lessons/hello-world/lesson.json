@@ -4,12 +4,13 @@
 	"kind": "plain-java",
 	"track": "Java Basics",
 	"order": 10,
+	"version": 2,
 	"roadmapUnit": "Motors and Drivetrains",
 	"checkpoints": [
 		{
 			"id": "prints-hello-world",
-			"title": "Prints Hello, World!",
-			"description": "Running Main prints \"Hello, World!\" to standard out.",
+			"title": "Says hello with your name",
+			"description": "Running Main prints \"Hello, World! My name is\" followed by your name.",
 			"verifier": {
 				"type": "script",
 				"path": "checkpoints/verify/prints-hello-world.sh"

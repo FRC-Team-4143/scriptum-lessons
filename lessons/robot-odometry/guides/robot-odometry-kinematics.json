@@ -148,8 +148,8 @@
 		{
 			"title": "What to compare",
 			"say": {
-				"never": "Two lines should end up on top of each other. **Drive/LinearSpeed** is WPILib's answer. **Drive/LinearSpeedByHand** is your own DriveMath from last lesson. Same wheels, two routes, so the lines should match. At full stick forward the speed should climb to about 6 meters per second.",
-				"bit": "LinearSpeed (WPILib) and LinearSpeedByHand (your math) should match; full stick is about 6 m/s."
+				"never": "Two lines should end up on top of each other. **Drive/LinearSpeed** is WPILib's answer. **Drive/LinearSpeedByHand** is your own DriveMath from last lesson. Same wheels, two routes, so the lines should match. At full stick forward the speed should climb to about 4.7 meters per second.",
+				"bit": "LinearSpeed (WPILib) and LinearSpeedByHand (your math) should match; full stick is about 4.7 m/s."
 			}
 		},
 		{
@@ -211,8 +211,8 @@
 		{
 			"title": "Full speed",
 			"say": {
-				"never": "Push the left stick all the way forward for a couple of seconds. **Drive/LinearSpeed** should climb to about 6 meters per second. Then press **Verify** in the lesson chip to check the Chassis speeds job.",
-				"bit": "Push the left stick all the way forward. `Drive/LinearSpeed` should reach about 6 m/s. Then press **Verify**."
+				"never": "Push the left stick all the way forward for a couple of seconds. **Drive/LinearSpeed** should climb to about 4.7 meters per second. Then press **Verify** in the lesson chip to check the Chassis speeds job.",
+				"bit": "Push the left stick all the way forward. `Drive/LinearSpeed` should reach about 4.7 m/s. Then press **Verify**."
 			},
 			"target": {
 				"selector": "[data-tour='lesson']"
@@ -223,8 +223,8 @@
 		{
 			"title": "Check it",
 			"say": {
-				"never": "If the two lines match and the speed reaches about 6 m/s, press **Verify** in the lesson chip to check the Chassis speeds job. If the lines disagree, look at your two lines in `getChassisSpeeds()`.",
-				"bit": "Lines match and speed reaches about 6 m/s? Press **Verify**."
+				"never": "If the two lines match and the speed reaches about 4.7 m/s, press **Verify** in the lesson chip to check the Chassis speeds job. If the lines disagree, look at your two lines in `getChassisSpeeds()`.",
+				"bit": "Lines match and speed reaches about 4.7 m/s? Press **Verify**."
 			}
 		}
 	],

@@ -44,7 +44,7 @@
 				"`linear_speed = (left_meters_per_second + right_meters_per_second) / 2.0;`",
 				{
 					"never": "Reading about 50 m/s? That's far too fast for a real robot. The number that links motor turns to wheel turns is in `Constants.java`. Is it the real gearbox's number?",
-					"bit": "About 50 m/s means `GEAR_RATIO` is still wrong: the real gearbox is 8.46:1."
+					"bit": "About 50 m/s means `GEAR_RATIO` is still wrong: the real gearbox is 10.71:1."
 				}
 			]
 		},

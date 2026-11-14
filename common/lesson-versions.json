@@ -1,0 +1,154 @@
+{
+	"advantagescope-intro": {
+		"version": 1,
+		"checkers": "e8d2c6f8dc510d96"
+	},
+	"arbor-intro": {
+		"version": 1,
+		"checkers": "0fe872d13d477970"
+	},
+	"choreo-intro": {
+		"version": 1,
+		"checkers": "92d27b6b20a7f121"
+	},
+	"editor-basics": {
+		"version": 1,
+		"checkers": "76ea77f7ecd63024"
+	},
+	"elastic-intro": {
+		"version": 1,
+		"checkers": "8ec25b088567e23a"
+	},
+	"git": {
+		"version": 1,
+		"checkers": "d8a2de799a299e61"
+	},
+	"hello-world": {
+		"version": 2,
+		"checkers": "aef2c7b3ef258b86"
+	},
+	"java-arrays": {
+		"version": 1,
+		"checkers": "b627e0709ccfa7e6"
+	},
+	"java-big-o": {
+		"version": 1,
+		"checkers": "6146e313af87d52c"
+	},
+	"java-classes-objects": {
+		"version": 1,
+		"checkers": "66666951e6c2a742"
+	},
+	"java-collections": {
+		"version": 1,
+		"checkers": "697dec76414f4d46"
+	},
+	"java-conditions": {
+		"version": 1,
+		"checkers": "f4d7ff1c83181097"
+	},
+	"java-debugging": {
+		"version": 1,
+		"checkers": "60b29159a1cf3824"
+	},
+	"java-design-patterns": {
+		"version": 1,
+		"checkers": "475ef1f75e7ab463"
+	},
+	"java-exceptions": {
+		"version": 1,
+		"checkers": "37b706280fbfac03"
+	},
+	"java-generics": {
+		"version": 1,
+		"checkers": "36f91b1fe42069e7"
+	},
+	"java-graphs": {
+		"version": 1,
+		"checkers": "4b3c546586d021e1"
+	},
+	"java-inheritance": {
+		"version": 1,
+		"checkers": "80824885182f8324"
+	},
+	"java-interfaces": {
+		"version": 1,
+		"checkers": "d5397dc22ff67983"
+	},
+	"java-lambdas": {
+		"version": 1,
+		"checkers": "e5d652990a1afa5c"
+	},
+	"java-loops": {
+		"version": 1,
+		"checkers": "8642faa01c93cf36"
+	},
+	"java-methods": {
+		"version": 1,
+		"checkers": "b95638f0ff90e92a"
+	},
+	"java-operators": {
+		"version": 1,
+		"checkers": "4ee034efc47190a1"
+	},
+	"java-recursion": {
+		"version": 1,
+		"checkers": "09f8845335b5352c"
+	},
+	"java-search-sort": {
+		"version": 1,
+		"checkers": "00e6b4f8c8a9d2b9"
+	},
+	"java-stacks-queues": {
+		"version": 1,
+		"checkers": "0179f2d3c96ca50f"
+	},
+	"java-trees": {
+		"version": 1,
+		"checkers": "3f9da684457d6000"
+	},
+	"java-unit-testing": {
+		"version": 1,
+		"checkers": "2eea908a4fbd727b"
+	},
+	"java-variables": {
+		"version": 1,
+		"checkers": "5ac78c72d0ff85db"
+	},
+	"robot-autonomous": {
+		"version": 1,
+		"checkers": "82606cab90380930"
+	},
+	"robot-computer-vision": {
+		"version": 1,
+		"checkers": "7ba6c3a7266b6446"
+	},
+	"robot-control-theory": {
+		"version": 1,
+		"checkers": "1e170a4c8a2cf712"
+	},
+	"robot-drive-math": {
+		"version": 1,
+		"checkers": "6fa3431237665bc5"
+	},
+	"robot-drivetrain": {
+		"version": 1,
+		"checkers": "5f4a79f5e6ce0cda"
+	},
+	"robot-odometry": {
+		"version": 1,
+		"checkers": "a6c2d0fd65d21adb"
+	},
+	"robot-sensors": {
+		"version": 1,
+		"checkers": "7bc772c9ff9df65e"
+	},
+	"robot-state-machines": {
+		"version": 1,
+		"checkers": "e33905b0ccaf2acf"
+	},
+	"robot-subsystems": {
+		"version": 1,
+		"checkers": "7726ee4b33e7d635"
+	}
+}

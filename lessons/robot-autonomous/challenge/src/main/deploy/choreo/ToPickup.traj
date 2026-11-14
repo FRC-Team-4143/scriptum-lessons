@@ -40,7 +40,7 @@
    },
    "mass":50.0,
    "inertia":7.5,
-   "gearing":8.46,
+   "gearing":10.71,
    "radius":0.0762,
    "vmax":668.0,
    "tmax":1.0,

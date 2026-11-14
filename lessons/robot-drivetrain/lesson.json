@@ -33,7 +33,7 @@
 		{
 			"id": "drives-straight",
 			"title": "Drives straight",
-			"description": "Fix the right side in Constants.java, then push forward at full speed (W). Drive/TrueSpeed, how fast the robot really moves forward, should reach about 5.9 m/s. If the robot spins instead, a motor's inverted setting is wrong.",
+			"description": "Fix the right side in Constants.java, then push forward at full speed (W). Drive/TrueSpeed, how fast the robot really moves forward, should reach about 4.7 m/s. If the robot spins instead, a motor's inverted setting is wrong.",
 			"verifier": {
 				"type": "nt4-value",
 				"topic": "/AdvantageKit/RealOutputs/Check/Drive/TrueSpeed/Max",

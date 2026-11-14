@@ -7,12 +7,17 @@ More depth: the team docs page [Quick Reference Guide](https://docs.marswars.org
 
 ## What you need to do
 
-1. Open `src/Main.java` and read it - `main` is where Java starts running,
-   and `System.out.println` prints a line of text to the terminal.
-2. Click **Run** and confirm `Hello, World!` shows up in the terminal.
-3. Open **Checkpoints** and run **Verify**. It passes as long as your
-   program still prints exactly `Hello, World!`, so experiment freely, then
-   put it back before you verify.
+1. Open `src/Main.java`. `main` is where Java starts running, and
+   `System.out.println` prints a line of text to the terminal.
+2. That line starts with `//`, which makes it a **comment**: Java skips it.
+   Delete the `//` so it runs.
+3. Change `YOUR NAME` to your own name.
+4. Every Java statement ends with a `;`, and this line is missing it. Add a
+   `;` at the very end, after the `)`, and save with **Ctrl+S**.
+5. Click **Run** and look for your greeting in the terminal.
+6. Open **Checkpoints** and run **Verify**. It passes when your program
+   prints `Hello, World! My name is` followed by your name, so experiment
+   freely, then put that line back before you verify.
 
 ## Try stuff
 

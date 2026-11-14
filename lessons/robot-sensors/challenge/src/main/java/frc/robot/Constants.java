@@ -13,7 +13,7 @@ public final class Constants {
   // The chassis. The wheel radius and track width are the real robot's. The gear ratio and mass are
   // still placeholders until they are measured.
   public static final double WHEEL_RADIUS_METERS = Units.inchesToMeters(3.0);
-  public static final double GEAR_RATIO = 8.46; // motor turns for every 1 wheel turn
+  public static final double GEAR_RATIO = 10.71; // motor turns for every 1 wheel turn
   public static final double TRACK_WIDTH_METERS =
       Units.inchesToMeters(24.0); // left to right wheels
   public static final double ROBOT_MASS_KG = 50.0;

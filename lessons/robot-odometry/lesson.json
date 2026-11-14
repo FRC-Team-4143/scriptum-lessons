@@ -31,7 +31,7 @@
 		{
 			"id": "chassis-speeds",
 			"title": "Chassis speeds",
-			"description": "Drive forward at full speed. Drive/LinearSpeed (from kinematics) should read about 6 m/s.",
+			"description": "Drive forward at full speed. Drive/LinearSpeed (from kinematics) should read about 4.7 m/s.",
 			"verifier": {
 				"type": "nt4-value",
 				"topic": "/AdvantageKit/RealOutputs/Check/Drive/LinearSpeed/Max",
