@@ -1,0 +1,137 @@
+{
+	"title": "Recursion on a String",
+	"summary": "Shrink a String one character at a time with charAt and substring.",
+	"topic": "Java",
+	"order": 347,
+	"steps": [
+		{
+			"title": "Pieces of a String",
+			"say": {
+				"never": "To recurse on a `String`, you need to pull one character off and keep the rest. Characters are counted from **0**, so in `\"robot\"` the `r` is at 0 and the `t` is at 4. `charAt` gets one character, `substring` gets a piece, and `length()` says how many characters there are.",
+				"bit": "`charAt(i)` is one character (counting from 0); `substring(a, b)` is a piece from `a` up to, not including, `b`."
+			},
+			"board": {
+				"code": "String s = \"robot\";\ns.length()                       // 5\ns.charAt(0)                      // 'r', the first character\ns.substring(1)                   // \"obot\", everything after the first\ns.charAt(s.length() - 1)         // 't', the last character\ns.substring(0, s.length() - 1)   // \"robo\", everything but the last",
+				"language": "java",
+				"marks": [
+					{
+						"text": "s.charAt(0)",
+						"label": "first"
+					},
+					{
+						"text": "s.substring(1)",
+						"label": "after the first"
+					},
+					{
+						"text": "s.charAt(s.length() - 1)",
+						"label": "last"
+					}
+				]
+			}
+		},
+		{
+			"title": "Shrink the String",
+			"say": {
+				"never": "Here's a method that doubles every letter: `doubled(\"abc\")` is `\"aabbcc\"`. The smallest `String` is the empty one, `\"\"`, and doubling nothing gives nothing. Otherwise, double the first letter and stick the doubled rest after it. Trust the smaller call: `doubled(\"bc\")` already gives `\"bbcc\"`.",
+				"bit": "Handle one character, recurse on the rest; the empty `String` is a good base case."
+			},
+			"board": {
+				"code": "public static String doubled(String s) {\n    if (s.isEmpty()) {\n        return \"\";\n    }\n    String first = s.substring(0, 1);\n    return first + first + doubled(s.substring(1));\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "s.isEmpty()",
+						"label": "base case"
+					},
+					{
+						"text": "doubled(s.substring(1))",
+						"label": "a shorter String"
+					},
+					{
+						"text": "first + first +",
+						"label": "this call's piece"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Reverse it",
+			"say": {
+				"never": "For `reverseString`, use the three questions. Smallest input: a `String` of length 0 or 1 is already its own reverse, so return it. Smaller version: everything **except the last** character. To finish: the reverse starts with the **last** character, then the reverse of the rest. Trust that `reverseString(\"robo\")` gives `\"obor\"`.",
+				"bit": "Last character first, then `reverseString` of everything but the last; length 0 or 1 returns `s`."
+			},
+			"board": {
+				"code": "reverseString(\"robot\")\n= 't' + reverseString(\"robo\")\n= 't' + \"obor\"        (trust it)\n= \"tobor\"",
+				"language": "text",
+				"marks": [
+					{
+						"text": "reverseString(\"robo\")",
+						"label": "everything but the last"
+					}
+				]
+			},
+			"assist": true
+		},
+		{
+			"title": "In your lesson: The pieces",
+			"say": {
+				"never": "Putting it together: the base case checks `s.length() <= 1`. The last character is `s.charAt(s.length() - 1)`, and everything but the last is `s.substring(0, s.length() - 1)`. A character plus a `String` joins them into a new `String`.",
+				"bit": "`s.charAt(s.length() - 1)` + `reverseString(s.substring(0, s.length() - 1))`."
+			},
+			"board": {
+				"code": "public static String reverseString(String s) {\n    if (s.length() <= 1) {\n        return s;\n    }\n    return s.charAt(s.length() - 1) + reverseString(s.substring(0, s.length() - 1));\n}",
+				"marks": [
+					{
+						"text": "s.length() <= 1",
+						"label": "base case"
+					},
+					{
+						"text": "s.charAt(s.length() - 1) +",
+						"label": "the last character"
+					},
+					{
+						"text": "reverseString(s.substring(0, s.length() - 1))",
+						"label": "reverse of the rest"
+					}
+				]
+			},
+			"assist": true
+		},
+		{
+			"title": "Find it",
+			"say": {
+				"never": "It may be further down. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `write a method named reverseString` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "Press **Ctrl+F**, type `write a method named reverseString` and press Enter to jump to it."
+			},
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "write a method named reverseString"
+				},
+				"hint": "find write a method named reverseString with Ctrl+F.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Your turn",
+			"say": {
+				"never": "Your turn! Write `reverseString` just below the TODO, with no loop. Base case first. Then try it from `main` with `\"robot\"`, `\"a\"` and `\"\"`.",
+				"bit": "Write `reverseString` here, then try `\"robot\"`, `\"a\"` and `\"\"`."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "write a method named reverseString"
+			},
+			"cardAt": "bottom-right",
+			"assist": true
+		}
+	],
+	"kind": "mixed"
+}

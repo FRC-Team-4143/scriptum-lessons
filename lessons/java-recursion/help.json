@@ -1,4 +1,94 @@
 {
+	"about": {
+		"never": "This lesson is about **recursion**: a method that solves a problem by calling itself on a smaller version of it. Nobody finds it obvious the first time. The trick is to answer three questions for each method: what's the smallest input and its answer, what's a smaller version, and how do you finish the job if the smaller call already gives you the right answer?",
+		"bit": "Recursion: base case, a smaller call, and finish using that call's answer. Trust the smaller call instead of tracing it."
+	},
+	"checkpoints": {
+		"factorial-recursive": {
+			"why": {
+				"never": "Factorial is the classic first recursion: `4!` is just `4 × 3!`, so the answer for 4 is built from the answer for 3.",
+				"bit": "`n! = n × (n - 1)!`"
+			},
+			"guide": "java-recursion-recipe",
+			"hints": [
+				{
+					"never": "Write the method header first, the same way as in the Methods lesson: `public static int factorial(int n)`. Then put the base case at the top: if `n` is 1 or less, return 1.",
+					"bit": "Header, then `if (n <= 1) return 1;` at the top."
+				},
+				{
+					"never": "For the rest, pretend `factorial(n - 1)` already works. If `factorial(3)` gives you 6, how do you get `factorial(4)` from it? Multiply by 4.",
+					"bit": "Trust `factorial(n - 1)`; multiply it by `n`."
+				},
+				{
+					"never": "The last line returns `n` times the call on `n - 1`. Make sure you `return` it, not just call it. Try `factorial(0)`, `factorial(1)` and `factorial(5)` (120) from `main`.",
+					"bit": "`return n * ...` the call on `n - 1`. Check 0, 1 and 5 (120)."
+				}
+			]
+		},
+		"fibonacci-recursive": {
+			"why": {
+				"never": "Fibonacci shows recursion that calls itself twice: each number is the two before it added together.",
+				"bit": "Two recursive calls, added."
+			},
+			"guide": "java-recursion-two-calls",
+			"hints": [
+				{
+					"never": "Start with the base cases. `fibonacci(0)` is 0 and `fibonacci(1)` is 1. Notice the answer is just `n` for both, so one `if` with `n < 2` handles them.",
+					"bit": "`if (n < 2) return n;`"
+				},
+				{
+					"never": "Each Fibonacci number is the two before it added: trust `fibonacci(n - 1)` and `fibonacci(n - 2)` and add them.",
+					"bit": "Add the calls on `n - 1` and `n - 2`."
+				},
+				{
+					"never": "If you get a `StackOverflowError`, your base case probably only covers 0 or only covers 1. Going back by 2 from 1 lands on -1 and never stops. `fibonacci(10)` should be 55.",
+					"bit": "StackOverflowError = the base case misses 0 or 1. `fibonacci(10)` is 55."
+				}
+			]
+		},
+		"sum-digits": {
+			"why": {
+				"never": "Splitting a number into digits with `%` and `/` lets each call peel off one digit.",
+				"bit": "Peel one digit per call."
+			},
+			"guide": "java-recursion-digits",
+			"hints": [
+				{
+					"never": "`n % 10` is the last digit and `n / 10` is everything before it. Try them on 472 on paper: 2 and 47.",
+					"bit": "`% 10` last digit, `/ 10` the rest."
+				},
+				{
+					"never": "A number under 10 is one digit, so its sum is just itself. That's the base case.",
+					"bit": "`if (n < 10) return n;`"
+				},
+				{
+					"never": "Otherwise, add the last digit to `sumDigits` of the rest. `sumDigits(472)` should be 13.",
+					"bit": "Last digit + `sumDigits(n / 10)`. 472 gives 13."
+				}
+			]
+		},
+		"reverse-string-recursive": {
+			"why": {
+				"never": "Strings can shrink too: each call handles one character and hands a shorter `String` to the next.",
+				"bit": "Shrink the String each call."
+			},
+			"guide": "java-recursion-strings",
+			"hints": [
+				{
+					"never": "Base case: a `String` with 0 or 1 characters is already its own reverse, so `return s;` when `s.length() <= 1`.",
+					"bit": "`if (s.length() <= 1) return s;`"
+				},
+				{
+					"never": "The reverse starts with the **last** character: `s.charAt(s.length() - 1)`. Everything but the last is `s.substring(0, s.length() - 1)`.",
+					"bit": "Last char: `s.charAt(s.length() - 1)`. The rest: `s.substring(0, s.length() - 1)`."
+				},
+				{
+					"never": "Return the last character, then `reverseString` of the rest. Trust it: `reverseString(\"robo\")` gives `\"obor\"`, so `'t' + \"obor\"` is `\"tobor\"`. No loops.",
+					"bit": "Last char + `reverseString(the rest)`."
+				}
+			]
+		}
+	},
 	"plan": [
 		{
 			"checkpoint": "factorial-recursive",
@@ -9,7 +99,19 @@
 		{
 			"checkpoint": "fibonacci-recursive",
 			"guides": [
-				"java-recursion-stack-overflow"
+				"java-recursion-two-calls"
+			]
+		},
+		{
+			"checkpoint": "sum-digits",
+			"guides": [
+				"java-recursion-digits"
+			]
+		},
+		{
+			"checkpoint": "reverse-string-recursive",
+			"guides": [
+				"java-recursion-strings"
 			]
 		}
 	]
