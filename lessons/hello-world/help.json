@@ -1,30 +1,30 @@
 {
 	"about": {
-		"never": "This lesson makes sure everything works: you run a tiny Java program that prints **Hello, World!**. Every programmer's first program does exactly this.",
-		"bit": "A first Java program: run it and make sure it prints Hello, World!",
-		"lot": "Smoke test: run `Main` and check it prints `Hello, World!` exactly."
+		"never": "Your first Java program! The line that prints is already written but switched off with `//`, and it's missing the `;` every Java statement ends with. You switch it on, add your name and the `;`, and run it.",
+		"bit": "A first Java program: uncomment the println line, add your name and the missing `;`, run it.",
+		"lot": "Uncomment the `println` in `Main`, replace `YOUR NAME`, add the `;`, run, verify."
 	},
 	"checkpoints": {
 		"prints-hello-world": {
 			"why": {
-				"never": "The checker runs your program and looks for the exact words `Hello, World!`, with the comma and the exclamation mark.",
-				"lot": "Output must be exactly `Hello, World!`."
+				"never": "The checker runs your program and looks for `Hello, World! My name is` followed by your name. A line that starts with `//` is a **comment**: Java skips it, so it prints nothing until you delete the `//`.",
+				"lot": "Output must contain `Hello, World! My name is <name>`, with `YOUR NAME` replaced."
 			},
 			"guide": "hello-world-first-program",
 			"hints": [
 				{
-					"never": "Open `src/Main.java`. The line with `System.out.println` is the one that prints.",
-					"bit": "Look at the `System.out.println` line in `Main.java`.",
-					"lot": "Check the string literal in `Main.java`."
+					"never": "Open `src/Main.java`. Find the line that starts with `// System.out.println`. The `//` at the front turns it off.",
+					"bit": "Find the `// System.out.println` line in `Main.java`.",
+					"lot": "The `println` is commented out."
 				},
 				{
-					"never": "Between the quote marks it should say exactly `Hello, World!`: capital H, capital W, a comma, a space, and an exclamation mark.",
-					"bit": "It must be exactly `Hello, World!`, punctuation included.",
-					"lot": "Case and punctuation matter."
+					"never": "Delete the two slashes `//` at the start of that line, then change `YOUR NAME` to your actual name. Keep the quote marks. Then add a `;` at the very end of the line, after the `)`.",
+					"bit": "Delete the `//`, replace `YOUR NAME` with your name, and add `;` at the end.",
+					"lot": "Uncomment it, replace `YOUR NAME`, add the `;`."
 				},
 				{
-					"never": "Make the line `System.out.println(\"Hello, World!\");`, save with **Ctrl+S**, click **Run** (▷), then **Verify**.",
-					"bit": "`System.out.println(\"Hello, World!\");` then save, Run, Verify."
+					"never": "The line should look like `System.out.println(\"Hello, World! My name is Sam\");` with your name instead of Sam. Save with **Ctrl+S**, click **Run** (▷), then **Verify**.",
+					"bit": "`System.out.println(\"Hello, World! My name is Sam\");` (your name), then save, Run, Verify."
 				}
 			]
 		}

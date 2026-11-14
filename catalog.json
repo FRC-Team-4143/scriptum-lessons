@@ -493,14 +493,14 @@
 			"title": "Hello, World",
 			"description": "Basic java hello world project",
 			"kind": "plain-java",
-			"version": 1,
+			"version": 2,
 			"subdir": "lessons/hello-world/project",
 			"roadmapUnit": "Motors and Drivetrains",
 			"checkpoints": [
 				{
 					"id": "prints-hello-world",
-					"title": "Prints Hello, World!",
-					"description": "Running Main prints \"Hello, World!\" to standard out.",
+					"title": "Says hello with your name",
+					"description": "Running Main prints \"Hello, World! My name is\" followed by your name.",
 					"verifier": {
 						"type": "script",
 						"path": "lessons/hello-world/checkpoints/verify/prints-hello-world.sh"
