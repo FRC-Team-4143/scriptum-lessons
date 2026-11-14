@@ -4,6 +4,7 @@
 	"kind": "plain-java",
 	"track": "Java Basics",
 	"order": 10,
+	"version": 2,
 	"roadmapUnit": "Motors and Drivetrains",
 	"checkpoints": [
 		{

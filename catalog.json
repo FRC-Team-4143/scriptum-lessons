@@ -493,7 +493,7 @@
 			"title": "Hello, World",
 			"description": "Basic java hello world project",
 			"kind": "plain-java",
-			"version": 1,
+			"version": 2,
 			"subdir": "lessons/hello-world/project",
 			"roadmapUnit": "Motors and Drivetrains",
 			"checkpoints": [
