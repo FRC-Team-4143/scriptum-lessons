@@ -7,6 +7,12 @@
 			]
 		},
 		{
+			"checkpoint": "drive-mode-enum",
+			"guides": [
+				"java-conditions-enums"
+			]
+		},
+		{
 			"checkpoint": "drive-mode-name",
 			"guides": [
 				"java-conditions-switch"

@@ -44,7 +44,7 @@ A suggested pace that adds up to the 3 hour session. Take short breaks whenever 
 | 20 | Try it and watch the states in AdvantageScope |
 | 5 | Verify |
 
-Go slower on anything that is new. Finishing every bonus is not expected.
+Go slower on anything that is new.
 
 ## What you need to do
 
@@ -81,8 +81,3 @@ Go slower on anything that is new. Finishing every bonus is not expected.
 9. **Click Verify.**
 
 Stuck on a step? Open **Dozer**: he can explain the idea or walk you through it.
-
-## Bonus challenges
-
-- Add a `READY` light: log a boolean `Shooter/ReadyToShoot` that is true while the state is `SHOOT`.
-- Make the driver's trigger spin the flywheel to a *different* speed for a close shot.

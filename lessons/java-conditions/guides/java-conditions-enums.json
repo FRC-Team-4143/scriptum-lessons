@@ -1,0 +1,226 @@
+{
+	"title": "Enums",
+	"summary": "Swap magic numbers for an enum: your own type with a fixed list of values.",
+	"topic": "Java",
+	"order": 249,
+	"steps": [
+		{
+			"title": "What's mode 3?",
+			"say": {
+				"never": "Picture code that stores a drive mode as a number: `1` means Tank, `2` means Arcade, `3` means Swerve. Now someone reads `mode = 3`. What does it mean? They'd have to go hunting for the answer. And nothing stops `mode = 7`, which isn't a mode at all. Numbers that secretly stand for something are called **magic numbers**, and they cause bugs.",
+				"bit": "`mode = 3` doesn't say what it means, and nothing stops `mode = 7`. Those are **magic numbers**."
+			},
+			"board": {
+				"code": "int mode = 3;   // which one is 3 again?\nint oops = 7;   // not a real mode, but Java allows it",
+				"language": "java",
+				"marks": [
+					{
+						"text": "3",
+						"label": "a magic number"
+					},
+					{
+						"text": "7",
+						"label": "nothing stops a wrong one"
+					}
+				]
+			}
+		},
+		{
+			"title": "An enum",
+			"say": {
+				"never": "An **enum** fixes that. It's a type you invent yourself with a short, fixed list of allowed values. A `Light` can only be `GREEN` or `RED`, and nothing else. If you misspell one, Java stops you right away, so typos can't sneak in.",
+				"bit": "An enum is your own type with a fixed list of values; misspellings don't compile."
+			},
+			"board": {
+				"code": "enum Light {\n    GREEN,\n    RED\n}\n\nLight now = Light.RED;",
+				"language": "java",
+				"marks": [
+					{
+						"text": "GREEN,",
+						"label": "one allowed value"
+					},
+					{
+						"text": "Light now = Light.RED;",
+						"label": "use it like any type"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: An enum",
+			"say": {
+				"never": "In your lesson, `DriveMode` is an enum. A `DriveMode` can only be `TANK`, `ARCADE`, `SWERVE`, or `FIELD_ORIENTED_SWERVE`. The type is named like a class (`DriveMode`, UpperCamelCase); only the values are in capitals. Now `DriveMode.SWERVE` says exactly what it means, and a mode that doesn't exist won't even compile.",
+				"bit": "`DriveMode` is an enum with four values. `DriveMode.SWERVE` says what it means; a made-up mode won't compile."
+			},
+			"board": {
+				"code": "enum DriveMode {\n    TANK,\n    ARCADE,\n    SWERVE,\n    FIELD_ORIENTED_SWERVE\n}\n\nDriveMode mode = DriveMode.SWERVE;",
+				"marks": [
+					{
+						"text": "enum DriveMode",
+						"label": "a new type named DriveMode"
+					},
+					{
+						"text": "TANK,",
+						"label": "one allowed value"
+					},
+					{
+						"text": "DriveMode.SWERVE",
+						"label": "using one of them"
+					}
+				]
+			},
+			"assist": true
+		},
+		{
+			"title": "Where they go",
+			"say": {
+				"never": "Put an enum **inside the class** that uses it, near the constants at the top. Careful with the curly braces: each `{` needs its own `}`. In this garage program, the `Light` enum sits next to the constant, above the methods.",
+				"bit": "Declare enums inside the class that uses them, next to the constants. Match every `{` with a `}`."
+			},
+			"board": {
+				"code": "public class Garage {\n    public static final int SPOTS = 12;\n    enum Light { GREEN, RED }\n\n    public static void main(String[] args) { ... }\n}",
+				"language": "java",
+				"marks": [
+					{
+						"text": "enum Light { GREEN, RED }",
+						"label": "inside the class, next to constants"
+					},
+					{
+						"text": "public static void main",
+						"label": "the program starts here"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: Where they go",
+			"say": {
+				"never": "`DriveMode` is already **inside** `Main`, near the top, because only `Main` uses it. Its curly braces are there too, with nothing between them yet. Your job is to fill in the values.",
+				"bit": "`DriveMode` already sits **inside** `Main`, with empty braces waiting for its values."
+			},
+			"board": {
+				"code": "public class Main {\n    enum DriveMode {\n    }\n\n    public static String driveModeName(DriveMode mode) { ... }\n}",
+				"marks": [
+					{
+						"text": "enum DriveMode {\n    }",
+						"label": "nested inside Main, waiting for values"
+					}
+				]
+			},
+			"assist": true
+		},
+		{
+			"title": "Open Main.java",
+			"say": {
+				"never": "Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `Main`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "Press **Ctrl+P**, type `Main` and press Enter. Quick Open finds any file by name, so you never have to dig through folders."
+			},
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "Main.java"
+				},
+				"hint": "open Main.java with Ctrl+P.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Find it",
+			"say": {
+				"never": "It may be further down. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `enum DriveMode` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "It may be further down. Press **Ctrl+F**, type `enum DriveMode` and press Enter to jump to it."
+			},
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "enum DriveMode"
+				},
+				"hint": "find enum DriveMode with Ctrl+F.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Fill in the values",
+			"say": {
+				"never": "Between the `{` and the `}` of `DriveMode`, type the four values with a comma between each: `TANK, ARCADE, SWERVE, FIELD_ORIENTED_SWERVE`. No quotes, because these aren't Strings. They're the enum's own names.",
+				"bit": "Between the braces, type `TANK, ARCADE, SWERVE, FIELD_ORIENTED_SWERVE`. No quotes."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "enum DriveMode"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"hint": {
+					"never": "type the four values between the braces.",
+					"bit": "add the four values."
+				}
+			},
+			"assist": true
+		},
+		{
+			"title": "Find it",
+			"say": {
+				"never": "It may be further down. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `Drive mode SWERVE` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "It may be further down. Press **Ctrl+F**, type `Drive mode SWERVE` and press Enter to jump to it."
+			},
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "Drive mode SWERVE"
+				},
+				"hint": "find Drive mode SWERVE with Ctrl+F.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Switch the print on",
+			"say": {
+				"never": "This line in `main` uses `DriveMode.SWERVE`, so it was switched off with `//` until the enum had its values. Delete the `//` now. It prints `null` until you write `driveModeName` next.",
+				"bit": "Delete the `//` in front of this line. It prints `null` until `driveModeName` is written."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "Drive mode SWERVE"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"hint": {
+					"never": "delete the //.",
+					"bit": "uncomment the line."
+				}
+			},
+			"assist": true
+		}
+	],
+	"kind": "mixed"
+}

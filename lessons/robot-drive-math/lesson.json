@@ -4,6 +4,8 @@
 	"kind": "robot",
 	"track": "FRC Robot",
 	"order": 22,
+	"roadmapUnit": "Drive Math and Methods",
+	"milestone": true,
 	"requires": [
 		"robot-sensors"
 	],
@@ -14,7 +16,8 @@
 	],
 	"guides": [
 		"build-and-run",
-		"robot-drive-math-io-loop"
+		"robot-drive-math-io-loop",
+		"deploy-to-field-robot"
 	],
 	"checkpoints": [
 		{
@@ -89,13 +92,23 @@
 		{
 			"id": "smoothed-speed",
 			"title": "Smoothed speed",
-			"description": "Drive forward at full speed in Teleop. Robot/SmoothedSpeed should read about 6 m/s.",
+			"description": "Drive forward at full speed in Teleop. Robot/SmoothedSpeed should read about 4.7 m/s.",
 			"verifier": {
 				"type": "nt4-value",
 				"topic": "/AdvantageKit/RealOutputs/Check/Robot/SmoothedSpeed/Max",
 				"check": "range",
 				"min": 3.0,
 				"max": 6.5
+			}
+		},
+		{
+			"id": "challenge-smooth-launch",
+			"title": "Challenge: Smooth launch",
+			"description": "DriveMath.smoothStick(targets, speedUpStep, slowDownStep) limits how fast a stick value can change, one loop at a time, and stops on zero before reversing. The instructions are in CHALLENGE.md (Open the challenge).",
+			"optional": true,
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/challenge-smooth-launch.sh"
 			}
 		}
 	]

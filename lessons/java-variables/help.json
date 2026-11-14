@@ -10,25 +10,13 @@
 		{
 			"checkpoint": "team-name-constant",
 			"guides": [
-				"java-variables-constants-enums"
-			]
-		},
-		{
-			"checkpoint": "alliance-enum",
-			"guides": [
-				"java-variables-constants-enums"
-			]
-		},
-		{
-			"checkpoint": "match-period-enum",
-			"guides": [
-				"java-variables-constants-enums"
+				"java-variables-constants"
 			]
 		},
 		{
 			"checkpoint": "max-speed-constant",
 			"guides": [
-				"java-variables-constants-enums"
+				"java-variables-constants"
 			]
 		}
 	]

@@ -7,6 +7,6 @@ const L = lessonKit(import.meta.url);
 
 describe.skipIf(!hasJdk)("java-variables checkpoints", () => {
 	test("every checkpoint fails fresh, passes once solved", async () => {
-		await L.roundTrip(["local-variables", "team-name-constant", "alliance-enum", "match-period-enum", "max-speed-constant"]);
+		await L.roundTrip(["local-variables", "team-name-constant", "max-speed-constant"]);
 	});
 });

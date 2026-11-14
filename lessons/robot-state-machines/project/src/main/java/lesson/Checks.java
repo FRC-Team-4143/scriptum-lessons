@@ -9,9 +9,12 @@ public final class Checks {
       new LessonChecks(
           "Drive/LeftOutput", "Subsystem/Shooter/FlywheelVelocity", "Subsystem/Shooter/ShotCount");
 
+  private static final UnjamCheck challenge = new UnjamCheck();
+
   private Checks() {}
 
   public static void update() {
     checks.update();
+    challenge.update();
   }
 }

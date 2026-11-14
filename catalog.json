@@ -8,7 +8,9 @@
 			"title": "Meet the Editor",
 			"description": "Your first steps in the code editor: files, folders, saving, the terminal, and running a program. No experience needed.",
 			"kind": "plain-java",
+			"version": 1,
 			"subdir": "lessons/editor-basics/project",
+			"roadmapUnit": "Tools",
 			"checkpoints": [
 				{
 					"id": "make-folder",
@@ -64,7 +66,9 @@
 			"title": "AdvantageScope",
 			"description": "Configure AdvantageScope's layout to display already-published robot telemetry.",
 			"kind": "robot",
+			"version": 1,
 			"subdir": "lessons/advantagescope-intro/project",
+			"roadmapUnit": "Tools",
 			"restrictTools": [
 				"scope"
 			],
@@ -152,7 +156,9 @@
 			"title": "Elastic",
 			"description": "Configure Elastic's dashboard layout to display already-published robot telemetry.",
 			"kind": "robot",
+			"version": 1,
 			"subdir": "lessons/elastic-intro/project",
+			"roadmapUnit": "Tools",
 			"restrictTools": [
 				"elastic"
 			],
@@ -347,7 +353,9 @@
 			"title": "Choreo",
 			"description": "Build two different autonomous paths with real constraints and confirm they generate correctly.",
 			"kind": "robot",
+			"version": 1,
 			"subdir": "lessons/choreo-intro/project",
+			"roadmapUnit": "Autonomous",
 			"restrictTools": [
 				"choreo"
 			],
@@ -397,7 +405,9 @@
 			"title": "Arbor",
 			"description": "Build an autonomous routine as a behavior tree: a root node, steps and their settings, a Sequence, a Timeout, a tunable value, a SubTree, and the main tree the robot runs, then replay a run that failed and find out why.",
 			"kind": "robot",
+			"version": 1,
 			"subdir": "lessons/arbor-intro/project",
+			"roadmapUnit": "Autonomous",
 			"restrictTools": [
 				"arbor"
 			],
@@ -483,7 +493,9 @@
 			"title": "Hello, World",
 			"description": "Basic java hello world project",
 			"kind": "plain-java",
+			"version": 1,
 			"subdir": "lessons/hello-world/project",
+			"roadmapUnit": "Motors and Drivetrains",
 			"checkpoints": [
 				{
 					"id": "prints-hello-world",
@@ -501,12 +513,14 @@
 			"order": 11,
 			"track": "Java Basics",
 			"title": "Variables",
-			"description": "Declare variables, define a constant, and define your first enum.",
+			"description": "Declare variables and define constants.",
 			"kind": "plain-java",
+			"version": 1,
 			"subdir": "lessons/java-variables/project",
 			"recommends": [
 				"hello-world"
 			],
+			"roadmapUnit": "Motors and Drivetrains",
 			"checkpoints": [
 				{
 					"id": "local-variables",
@@ -527,24 +541,6 @@
 					}
 				},
 				{
-					"id": "alliance-enum",
-					"title": "Alliance enum",
-					"description": "An Alliance enum with RED and BLUE values (team standard: UpperCamelCase type name, SCREAMING_SNAKE_CASE values).",
-					"verifier": {
-						"type": "script",
-						"path": "lessons/java-variables/checkpoints/verify/alliance-enum.sh"
-					}
-				},
-				{
-					"id": "match-period-enum",
-					"title": "Match period enum",
-					"description": "A MatchPeriod enum with AUTONOMOUS, TELEOP, and ENDGAME values (team standard: UpperCamelCase type name, SCREAMING_SNAKE_CASE values).",
-					"verifier": {
-						"type": "script",
-						"path": "lessons/java-variables/checkpoints/verify/match-period-enum.sh"
-					}
-				},
-				{
 					"id": "max-speed-constant",
 					"title": "Max speed constant",
 					"description": "A public static final MAX_SPEED constant equal to 5.0 (team standard: SCREAMING_SNAKE_CASE).",
@@ -562,10 +558,12 @@
 			"title": "Operators",
 			"description": "Do arithmetic, conversions, and comparisons with Java's operators.",
 			"kind": "plain-java",
+			"version": 1,
 			"subdir": "lessons/java-operators/project",
 			"recommends": [
 				"java-variables"
 			],
+			"roadmapUnit": "Motors and Drivetrains",
 			"checkpoints": [
 				{
 					"id": "add-ints",
@@ -628,12 +626,14 @@
 			"order": 13,
 			"track": "Java Basics",
 			"title": "Conditions",
-			"description": "Write if/else chains and switch statements.",
+			"description": "Write if/else chains, define an enum, and switch on it.",
 			"kind": "plain-java",
+			"version": 1,
 			"subdir": "lessons/java-conditions/project",
 			"recommends": [
 				"java-operators"
 			],
+			"roadmapUnit": "Sensors and Feedback",
 			"checkpoints": [
 				{
 					"id": "battery-status",
@@ -645,9 +645,18 @@
 					}
 				},
 				{
+					"id": "drive-mode-enum",
+					"title": "DriveMode enum",
+					"description": "A DriveMode enum with TANK, ARCADE, SWERVE, and FIELD_ORIENTED_SWERVE values (team standard: UpperCamelCase type name, SCREAMING_SNAKE_CASE values).",
+					"verifier": {
+						"type": "script",
+						"path": "lessons/java-conditions/checkpoints/verify/drive-mode-enum.sh"
+					}
+				},
+				{
 					"id": "drive-mode-name",
 					"title": "Drive mode name",
-					"description": "driveModeName(mode) uses a switch statement to name a drive mode.",
+					"description": "driveModeName(mode) uses a switch statement on the DriveMode enum to name a drive mode.",
 					"verifier": {
 						"type": "script",
 						"path": "lessons/java-conditions/checkpoints/verify/drive-mode-name.sh"
@@ -689,10 +698,12 @@
 			"title": "Loops",
 			"description": "Write for loops instead of the dangerous while loop.",
 			"kind": "plain-java",
+			"version": 1,
 			"subdir": "lessons/java-loops/project",
 			"recommends": [
 				"java-conditions"
 			],
+			"roadmapUnit": "Drive Math and Methods",
 			"checkpoints": [
 				{
 					"id": "sum-loop",
@@ -730,10 +741,12 @@
 			"title": "Arrays",
 			"description": "Write methods that take and return arrays.",
 			"kind": "plain-java",
+			"version": 1,
 			"subdir": "lessons/java-arrays/project",
 			"recommends": [
 				"java-loops"
 			],
+			"roadmapUnit": "Drive Math and Methods",
 			"checkpoints": [
 				{
 					"id": "array-max",
@@ -798,10 +811,12 @@
 			"title": "Methods",
 			"description": "Write reusable methods, build new methods on top of them instead of copy-pasting, and practice on a few programming-course classics.",
 			"kind": "plain-java",
+			"version": 1,
 			"subdir": "lessons/java-methods/project",
 			"recommends": [
 				"java-arrays"
 			],
+			"roadmapUnit": "Drive Math and Methods",
 			"checkpoints": [
 				{
 					"id": "clamp",
@@ -866,6 +881,7 @@
 			"title": "Debugging",
 			"description": "Fix a match-log program that compiles and runs but gives wrong answers, using the debugger: breakpoints, stepping in and out, the Variables pane, conditional breakpoints, the call stack and the Pause button.",
 			"kind": "plain-java",
+			"version": 1,
 			"subdir": "lessons/java-debugging/project",
 			"recommends": [
 				"java-methods"
@@ -961,10 +977,12 @@
 			"title": "Classes & Objects",
 			"description": "Build a small BankAccount class: fields, a constructor, and encapsulation - objects that protect their own state instead of exposing raw data to be mutated directly.",
 			"kind": "plain-java",
+			"version": 1,
 			"subdir": "lessons/java-classes-objects/project",
 			"recommends": [
 				"java-methods"
 			],
+			"roadmapUnit": "Objects and Odometry",
 			"checkpoints": [
 				{
 					"id": "deposit",
@@ -1011,6 +1029,7 @@
 			"title": "Recursion",
 			"description": "Solve a few problems you already solved with loops, using recursion instead - methods that call themselves down to a base case.",
 			"kind": "plain-java",
+			"version": 1,
 			"subdir": "lessons/java-recursion/project",
 			"recommends": [
 				"java-methods"
@@ -1061,10 +1080,12 @@
 			"title": "Inheritance",
 			"description": "Extend the BankAccount class from Classes & Objects with two subclasses - one that adds a new method, one that overrides an existing one.",
 			"kind": "plain-java",
+			"version": 1,
 			"subdir": "lessons/java-inheritance/project",
 			"recommends": [
 				"java-classes-objects"
 			],
+			"roadmapUnit": "Mechanisms and Subsystems",
 			"checkpoints": [
 				{
 					"id": "savings-interest",
@@ -1111,6 +1132,7 @@
 			"title": "Motors and Drivetrains",
 			"description": "Drive a differential drive robot in simulation with MWLib. Learn your first Java (methods, variables, operators) while writing tank drive and arcade drive.",
 			"kind": "robot",
+			"version": 1,
 			"subdir": "lessons/robot-drivetrain/project",
 			"requires": [
 				"advantagescope-intro",
@@ -1121,6 +1143,8 @@
 				"java-variables",
 				"java-operators"
 			],
+			"roadmapUnit": "Motors and Drivetrains",
+			"milestone": true,
 			"checkpoints": [
 				{
 					"id": "teleop-code",
@@ -1134,7 +1158,7 @@
 				{
 					"id": "drives-straight",
 					"title": "Drives straight",
-					"description": "Fix the right side in Constants.java, then push forward at full speed (W). Drive/TrueSpeed, how fast the robot really moves forward, should reach about 5.9 m/s. If the robot spins instead, a motor's inverted setting is wrong.",
+					"description": "Fix the right side in Constants.java, then push forward at full speed (W). Drive/TrueSpeed, how fast the robot really moves forward, should reach about 4.7 m/s. If the robot spins instead, a motor's inverted setting is wrong.",
 					"verifier": {
 						"type": "nt4-value",
 						"topic": "/AdvantageKit/RealOutputs/Check/Drive/TrueSpeed/Max",
@@ -1178,6 +1202,16 @@
 						"min": 1.5,
 						"max": 2
 					}
+				},
+				{
+					"id": "challenge-driver-sticks",
+					"title": "Challenge: Driver-friendly sticks",
+					"description": "Teleop squares each stick but keeps its sign, and past full power shrinks both sides together so the robot can still turn. The instructions are in CHALLENGE.md (Open the challenge).",
+					"optional": true,
+					"verifier": {
+						"type": "script",
+						"path": "lessons/robot-drivetrain/checkpoints/verify/challenge-driver-sticks.sh"
+					}
 				}
 			]
 		},
@@ -1188,6 +1222,7 @@
 			"title": "Sensors and Feedback",
 			"description": "Turn encoder readings into speed and distance, ignore stick drift with an if statement, then drive exactly 2 meters with bang-bang control.",
 			"kind": "robot",
+			"version": 1,
 			"subdir": "lessons/robot-sensors/project",
 			"requires": [
 				"robot-drivetrain"
@@ -1195,6 +1230,8 @@
 			"recommends": [
 				"java-conditions"
 			],
+			"roadmapUnit": "Sensors and Feedback",
+			"milestone": true,
 			"checkpoints": [
 				{
 					"id": "deadband-and-ifs",
@@ -1217,7 +1254,7 @@
 				{
 					"id": "linear-speed",
 					"title": "Linear speed",
-					"description": "Drive both sides forward at full speed. Robot/LinearSpeed should read about 5.9 m/s. If it reads about 50, GEAR_RATIO isn't set yet.",
+					"description": "Drive both sides forward at full speed. Robot/LinearSpeed should read about 4.7 m/s. If it reads about 50, GEAR_RATIO isn't set yet.",
 					"verifier": {
 						"type": "nt4-value",
 						"topic": "/AdvantageKit/RealOutputs/Check/Robot/LinearSpeed/Max",
@@ -1249,6 +1286,19 @@
 						"min": 1.95,
 						"max": 3
 					}
+				},
+				{
+					"id": "challenge-stop-on-mark",
+					"title": "Challenge: Stop on the mark",
+					"description": "Run Auto. The robot really stops within 3 centimeters of 2 meters, and gets there in under 2.5 seconds. Bang-bang can't do it. The instructions are in CHALLENGE.md (Open the challenge).",
+					"optional": true,
+					"verifier": {
+						"type": "nt4-value",
+						"topic": "/AdvantageKit/RealOutputs/Check/Challenge/StopOnMark",
+						"check": "range",
+						"min": 1,
+						"max": 1
+					}
 				}
 			]
 		},
@@ -1259,6 +1309,7 @@
 			"title": "Drive Math and Methods",
 			"description": "Move the drivetrain math into reusable methods: unit conversion, speeds, arcade drive, and an average built with an array and a for loop.",
 			"kind": "robot",
+			"version": 1,
 			"subdir": "lessons/robot-drive-math/project",
 			"requires": [
 				"robot-sensors"
@@ -1268,6 +1319,8 @@
 				"java-arrays",
 				"java-methods"
 			],
+			"roadmapUnit": "Drive Math and Methods",
+			"milestone": true,
 			"checkpoints": [
 				{
 					"id": "radians-to-meters",
@@ -1341,13 +1394,23 @@
 				{
 					"id": "smoothed-speed",
 					"title": "Smoothed speed",
-					"description": "Drive forward at full speed in Teleop. Robot/SmoothedSpeed should read about 6 m/s.",
+					"description": "Drive forward at full speed in Teleop. Robot/SmoothedSpeed should read about 4.7 m/s.",
 					"verifier": {
 						"type": "nt4-value",
 						"topic": "/AdvantageKit/RealOutputs/Check/Robot/SmoothedSpeed/Max",
 						"check": "range",
 						"min": 3,
 						"max": 6.5
+					}
+				},
+				{
+					"id": "challenge-smooth-launch",
+					"title": "Challenge: Smooth launch",
+					"description": "DriveMath.smoothStick(targets, speedUpStep, slowDownStep) limits how fast a stick value can change, one loop at a time, and stops on zero before reversing. The instructions are in CHALLENGE.md (Open the challenge).",
+					"optional": true,
+					"verifier": {
+						"type": "script",
+						"path": "lessons/robot-drive-math/checkpoints/verify/challenge-smooth-launch.sh"
 					}
 				}
 			]
@@ -1359,6 +1422,7 @@
 			"title": "Objects and Odometry",
 			"description": "Write an abstract OI class, then use WPILib kinematics, a NavX gyro and a pose estimator to track where the robot is.",
 			"kind": "robot",
+			"version": 1,
 			"subdir": "lessons/robot-odometry/project",
 			"requires": [
 				"robot-drive-math"
@@ -1366,6 +1430,8 @@
 			"recommends": [
 				"java-classes-objects"
 			],
+			"roadmapUnit": "Objects and Odometry",
+			"milestone": true,
 			"checkpoints": [
 				{
 					"id": "oi-class",
@@ -1379,7 +1445,7 @@
 				{
 					"id": "chassis-speeds",
 					"title": "Chassis speeds",
-					"description": "Drive forward at full speed. Drive/LinearSpeed (from kinematics) should read about 6 m/s.",
+					"description": "Drive forward at full speed. Drive/LinearSpeed (from kinematics) should read about 4.7 m/s.",
 					"verifier": {
 						"type": "nt4-value",
 						"topic": "/AdvantageKit/RealOutputs/Check/Drive/LinearSpeed/Max",
@@ -1411,6 +1477,19 @@
 						"min": 2.95,
 						"max": 4.2
 					}
+				},
+				{
+					"id": "challenge-waypoint-tour",
+					"title": "Challenge: Waypoint tour",
+					"description": "Run Auto. The robot drives to (2.0, 1.0), then to (3.5, -1.0), and stops there, in under 10 seconds, measured by its true position. The instructions are in CHALLENGE.md (Open the challenge).",
+					"optional": true,
+					"verifier": {
+						"type": "nt4-value",
+						"topic": "/AdvantageKit/RealOutputs/Check/Challenge/WaypointTour",
+						"check": "range",
+						"min": 1,
+						"max": 1
+					}
 				}
 			]
 		},
@@ -1421,6 +1500,7 @@
 			"title": "Mechanisms and Subsystems",
 			"description": "Move the drivetrain into a subsystem, then build a shooter subsystem from a flywheel and a roller mechanism.",
 			"kind": "robot",
+			"version": 1,
 			"subdir": "lessons/robot-subsystems/project",
 			"requires": [
 				"robot-odometry"
@@ -1428,6 +1508,8 @@
 			"recommends": [
 				"java-inheritance"
 			],
+			"roadmapUnit": "Mechanisms and Subsystems",
+			"milestone": true,
 			"checkpoints": [
 				{
 					"id": "shooter-registered",
@@ -1491,6 +1573,19 @@
 						"min": 0.3,
 						"max": 1
 					}
+				},
+				{
+					"id": "challenge-safe-feed",
+					"title": "Challenge: Intake and safe feed",
+					"description": "A new IntakeSubsystem you build from scratch runs on B, the roller only feeds a fast flywheel, and the intake waits while the shooter feeds. The instructions are in CHALLENGE.md (Open the challenge).",
+					"optional": true,
+					"verifier": {
+						"type": "nt4-value",
+						"topic": "/AdvantageKit/RealOutputs/Check/Challenge/SafeFeed",
+						"check": "range",
+						"min": 1,
+						"max": 1
+					}
 				}
 			]
 		},
@@ -1501,10 +1596,13 @@
 			"title": "Control Theory",
 			"description": "Hold the flywheel at speed three ways: bang-bang, feedforward and PID. Then tune the gains and compare how each handles a disturbance.",
 			"kind": "robot",
+			"version": 1,
 			"subdir": "lessons/robot-control-theory/project",
 			"requires": [
 				"robot-subsystems"
 			],
+			"roadmapUnit": "Control Theory",
+			"milestone": true,
 			"checkpoints": [
 				{
 					"id": "bang-bang-written",
@@ -1568,6 +1666,16 @@
 						"min": 0.01,
 						"max": 1
 					}
+				},
+				{
+					"id": "challenge-own-pid",
+					"title": "Challenge: Write your own PID",
+					"description": "FlywheelPid.java is a PID with feedforward that you write yourself, with anti-windup and no derivative kick, and ShooterSubsystem uses it. The instructions are in CHALLENGE.md (Open the challenge).",
+					"optional": true,
+					"verifier": {
+						"type": "script",
+						"path": "lessons/robot-control-theory/checkpoints/verify/challenge-own-pid.sh"
+					}
 				}
 			]
 		},
@@ -1578,10 +1686,13 @@
 			"title": "State Machines",
 			"description": "Give the shooter a state machine, and make RobotContainer the robot's own state machine that buttons ask for states.",
 			"kind": "robot",
+			"version": 1,
 			"subdir": "lessons/robot-state-machines/project",
 			"requires": [
 				"robot-control-theory"
 			],
+			"roadmapUnit": "State Machines",
+			"milestone": true,
 			"checkpoints": [
 				{
 					"id": "spin-up-first",
@@ -1615,6 +1726,19 @@
 						"min": 2,
 						"max": 50
 					}
+				},
+				{
+					"id": "challenge-unjam",
+					"title": "Challenge: Clear a jam",
+					"description": "One tap of Y with the flywheel at speed runs a sequence by itself: wait for the flywheel to slow, run the roller backward for about 0.5 seconds, go back to DRIVE. The instructions are in CHALLENGE.md (Open the challenge).",
+					"optional": true,
+					"verifier": {
+						"type": "nt4-value",
+						"topic": "/AdvantageKit/RealOutputs/Check/Challenge/Unjam",
+						"check": "range",
+						"min": 1,
+						"max": 1
+					}
 				}
 			]
 		},
@@ -1625,10 +1749,13 @@
 			"title": "Computer Vision",
 			"description": "Teach the robot to see AprilTags: feed camera tag solutions to the pose estimator so the robot always knows where it is on the field, then aim at the goal from that estimate.",
 			"kind": "robot",
+			"version": 1,
 			"subdir": "lessons/robot-computer-vision/project",
 			"requires": [
 				"robot-state-machines"
 			],
+			"roadmapUnit": "Computer Vision",
+			"milestone": true,
 			"checkpoints": [
 				{
 					"id": "vision-added",
@@ -1683,6 +1810,19 @@
 						"min": 0,
 						"max": 0.17
 					}
+				},
+				{
+					"id": "challenge-knocked-off",
+					"title": "Challenge: Knocked off course",
+					"description": "Tap Y (I) to start the test. The estimate must ignore false camera sightings, then find its way back after being knocked 1.5 meters off. The instructions are in CHALLENGE.md (Open the challenge).",
+					"optional": true,
+					"verifier": {
+						"type": "nt4-value",
+						"topic": "/AdvantageKit/RealOutputs/Check/Challenge/KnockedOff",
+						"check": "range",
+						"min": 1,
+						"max": 1
+					}
 				}
 			]
 		},
@@ -1693,12 +1833,15 @@
 			"title": "Autonomous",
 			"description": "Draw two paths in Choreo, then build the autonomous routine as a behavior tree in Arbor, the way the competition robot does: follow the first path, pick up, follow the second path, aim at the goal, and shoot. Then make AIM wait until the robot is really aimed.",
 			"kind": "robot",
+			"version": 1,
 			"subdir": "lessons/robot-autonomous/project",
 			"requires": [
 				"robot-computer-vision",
 				"choreo-intro",
 				"arbor-intro"
 			],
+			"roadmapUnit": "Autonomous",
+			"milestone": true,
 			"checkpoints": [
 				{
 					"id": "paths-drawn",
@@ -1788,6 +1931,19 @@
 						"check": "range",
 						"min": 1
 					}
+				},
+				{
+					"id": "challenge-two-cycle",
+					"title": "Challenge: Two-cycle auto",
+					"description": "A TwoCycle tree scores, goes back for a second game piece and scores again, with both shots aimed, in under 25 seconds. The instructions are in CHALLENGE.md (Open the challenge).",
+					"optional": true,
+					"verifier": {
+						"type": "nt4-value",
+						"topic": "/AdvantageKit/RealOutputs/Check/Challenge/TwoCycle",
+						"check": "range",
+						"min": 1,
+						"max": 1
+					}
 				}
 			]
 		},
@@ -1798,6 +1954,7 @@
 			"title": "Interfaces & Polymorphism",
 			"description": "Add up a robot's battery draw: write an interface every part promises to follow, an abstract class that shares code between mechanisms, and loops that treat motors, LEDs and intakes all the same way.",
 			"kind": "plain-java",
+			"version": 1,
 			"subdir": "lessons/java-interfaces/project",
 			"recommends": [
 				"java-inheritance"
@@ -1848,6 +2005,7 @@
 			"title": "Collections",
 			"description": "Keep score at a competition: a list of match scores, a set of every team your scouts saw, and a map from team number to total points. Learn which collection fits which job.",
 			"kind": "plain-java",
+			"version": 1,
 			"subdir": "lessons/java-collections/project",
 			"recommends": [
 				"java-classes-objects"
@@ -1898,6 +2056,7 @@
 			"title": "Lambdas & Functional Interfaces",
 			"description": "Wire up a robot's buttons and joystick the way real robot code does: write speed filters as lambdas, build new behavior out of old, and bind buttons to actions with method references.",
 			"kind": "plain-java",
+			"version": 1,
 			"subdir": "lessons/java-lambdas/project",
 			"recommends": [
 				"java-interfaces"
@@ -1948,6 +2107,7 @@
 			"title": "Unit Testing",
 			"description": "Write tests that prove robot math works: check a deadband, a clamp and a unit conversion with @Test and assertEquals, then catch a real shooter bug with a test before you fix it.",
 			"kind": "plain-java",
+			"version": 1,
 			"subdir": "lessons/java-unit-testing/project",
 			"recommends": [
 				"java-methods"
@@ -1998,6 +2158,7 @@
 			"title": "Exceptions",
 			"description": "Read messy scouting text without crashing: throw an exception when the numbers can't be right, write your own checked exception, skip and count the bad lines, and make sure the robot always stops when an auto step fails.",
 			"kind": "plain-java",
+			"version": 1,
 			"subdir": "lessons/java-exceptions/project",
 			"recommends": [
 				"java-classes-objects"
@@ -2057,6 +2218,7 @@
 			"title": "Generics",
 			"description": "Write code once and use it for any type: a Pair that holds a team and its nickname, a RingBuffer that keeps the last few sensor readings, and methods that work on a list of anything, or anything that can be compared.",
 			"kind": "plain-java",
+			"version": 1,
 			"subdir": "lessons/java-generics/project",
 			"recommends": [
 				"java-collections"
@@ -2107,6 +2269,7 @@
 			"title": "Big-O & Efficiency",
 			"description": "Count the steps your code takes. Sort snippets into O(1), O(log n), O(n) and O(n²), then speed up a scouting app's duplicate-team check from millions of steps to a few thousand with a HashSet.",
 			"kind": "plain-java",
+			"version": 1,
 			"subdir": "lessons/java-big-o/project",
 			"recommends": [
 				"java-collections"
@@ -2157,6 +2320,7 @@
 			"title": "Searching & Sorting",
 			"description": "Find a team in a long list, first one item at a time and then by halving with binary search. Sort scouted teams by score with a sort you write yourself, then rank them the way real code does, with List.sort and a Comparator.",
 			"kind": "plain-java",
+			"version": 1,
 			"subdir": "lessons/java-search-sort/project",
 			"recommends": [
 				"java-big-o"
@@ -2207,6 +2371,7 @@
 			"title": "Stacks & Queues",
 			"description": "Give the dashboard an Undo button, catch bracket typos in a typed-in auto, run auto steps in order, and build the indexer's line of game pieces by hand. Learn when the newest thing comes out first and when the oldest does.",
 			"kind": "plain-java",
+			"version": 1,
 			"subdir": "lessons/java-stacks-queues/project",
 			"recommends": [
 				"java-collections"
@@ -2257,6 +2422,7 @@
 			"title": "Trees",
 			"description": "Keep every team at the event in a binary search tree that stays sorted as you add to it, then count the actions in an auto shaped like the robot's behavior trees. Recursion does the walking.",
 			"kind": "plain-java",
+			"version": 1,
 			"subdir": "lessons/java-trees/project",
 			"recommends": [
 				"java-recursion",
@@ -2308,6 +2474,7 @@
 			"title": "Graphs",
 			"description": "Map the field as waypoints joined by lanes, then search it: find out whether the robot can get somewhere at all, the path with the fewest hops, and which waypoints a blocked lane cuts off.",
 			"kind": "plain-java",
+			"version": 1,
 			"subdir": "lessons/java-graphs/project",
 			"recommends": [
 				"java-trees"
@@ -2358,6 +2525,7 @@
 			"title": "Design Patterns",
 			"description": "Use three named shapes for classes on a pretend robot: swap drive modes with Strategy, tell the LEDs and intake about a game piece with Observer, and build the right auto from its name with Factory.",
 			"kind": "plain-java",
+			"version": 1,
 			"subdir": "lessons/java-design-patterns/project",
 			"recommends": [
 				"java-interfaces",
@@ -2409,6 +2577,7 @@
 			"title": "Git",
 			"description": "Commit, branch, merge, resolve a conflict, rebase, then push, pull and stash across eight small scenario repos.",
 			"kind": "git",
+			"version": 1,
 			"subdir": "lessons/git/project",
 			"setupScript": "lessons/git/checkpoints/setup.sh",
 			"recommends": [
@@ -3047,16 +3216,16 @@
 			"path": "lessons/java-variables/guides/java-variables-printing.json"
 		},
 		{
-			"id": "java-variables-constants-enums",
-			"title": "Constants and enums",
-			"summary": "final, SCREAMING_SNAKE_CASE, and enums (UpperCamelCase types) nested in Main.",
+			"id": "java-variables-constants",
+			"title": "Constants",
+			"summary": "final, static and SCREAMING_SNAKE_CASE: values that never change.",
 			"topic": "Java",
 			"order": 203,
 			"modules": [
 				"java-variables"
 			],
 			"kind": "mixed",
-			"path": "lessons/java-variables/guides/java-variables-constants-enums.json"
+			"path": "lessons/java-variables/guides/java-variables-constants.json"
 		},
 		{
 			"id": "java-operators-arithmetic",
@@ -3120,11 +3289,23 @@
 			"path": "lessons/java-conditions/guides/java-conditions-if-chain.json"
 		},
 		{
+			"id": "java-conditions-enums",
+			"title": "Enums",
+			"summary": "Swap magic numbers for an enum: your own type with a fixed list of values.",
+			"topic": "Java",
+			"order": 249,
+			"modules": [
+				"java-conditions"
+			],
+			"kind": "mixed",
+			"path": "lessons/java-conditions/guides/java-conditions-enums.json"
+		},
+		{
 			"id": "java-conditions-switch",
 			"title": "switch",
 			"summary": "One value, many cases, and a default.",
 			"topic": "Java",
-			"order": 249,
+			"order": 250,
 			"modules": [
 				"java-conditions"
 			],
@@ -3136,7 +3317,7 @@
 			"title": "&&, || and !",
 			"summary": "Combining true/false values, and the ternary shortcut.",
 			"topic": "Java",
-			"order": 250,
+			"order": 251,
 			"modules": [
 				"java-conditions"
 			],
@@ -3709,6 +3890,29 @@
 			],
 			"kind": "assist",
 			"path": "lessons/robot-subsystems/guides/robot-subsystems-shoot-logic.json"
+		},
+		{
+			"id": "deploy-to-field-robot",
+			"title": "Deploy to a robot on the field",
+			"summary": "Take your turn on a real robot through the Field Gateway: get in line, deploy your code, drive it, and give it back.",
+			"topic": "Robot",
+			"order": 467,
+			"modules": [
+				"robot-drivetrain",
+				"robot-sensors",
+				"robot-drive-math",
+				"robot-odometry",
+				"robot-subsystems",
+				"robot-control-theory",
+				"robot-state-machines",
+				"robot-computer-vision",
+				"robot-autonomous"
+			],
+			"needs": [
+				"driverStation"
+			],
+			"kind": "concept",
+			"path": "common/guides/deploy-to-field-robot.json"
 		},
 		{
 			"id": "robot-control-error",

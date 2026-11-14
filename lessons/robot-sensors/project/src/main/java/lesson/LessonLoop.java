@@ -20,6 +20,8 @@ public class LessonLoop extends SubsystemManager {
           "Robot/AngularSpeed",
           "Robot/Distance");
 
+  private final StopOnMarkCheck challenge = new StopOnMarkCheck();
+
   public LessonLoop(SubsystemIoBase mech) {
     super(BuildConstants.class);
     registerSubsystem(
@@ -51,5 +53,6 @@ public class LessonLoop extends SubsystemManager {
   public void doControlLoop() {
     super.doControlLoop();
     checks.update();
+    challenge.update();
   }
 }

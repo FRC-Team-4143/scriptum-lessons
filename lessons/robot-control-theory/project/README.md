@@ -38,9 +38,9 @@ A suggested pace that adds up to the 3 hour session. Take short breaks whenever 
 | 40 | Step 4: add feedback and tune kP |
 | 20 | Compare how each style recovers from a launch |
 | 10 | Steps 5-6: final settings and Verify |
-| 25 | Extension: the WPILib elevator tuning exercise from the docs |
+| 25 | Catch up on any step that took longer, or help a classmate |
 
-Go slower on anything that is new. Finishing every bonus is not expected.
+Go slower on anything that is new.
 
 ## What you need to do
 
@@ -63,14 +63,3 @@ AdvantageScope. Each run starts the simulation fresh.
 6. **Click Verify.** It checks your latest run.
 
 Stuck on a step? Open **Dozer**: he can explain the idea or walk you through it.
-
-## Bonus challenges
-
-- The docs have two more tuning exercises on WPILib's own simulator: the
-  [elevator](https://docs.wpilib.org/en/stable/docs/software/advanced-controls/introduction/tuning-elevator.html)
-  and the
-  [vertical arm](https://docs.wpilib.org/en/stable/docs/software/advanced-controls/introduction/tuning-vertical-arm.html).
-  Do them after this lesson.
-- Tune live without rebuilding: in AdvantageScope's Tuning mode change the numbers under
-  `Tuning/Subsystem/Shooter/Flywheel/VelocityGains`, then copy the best values into the constants file.
-- Change `SHOOT_VELOCITY` to `400`. Which of your gains still work?

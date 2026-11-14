@@ -1,0 +1,155 @@
+{
+	"title": "Constants",
+	"summary": "final, static and SCREAMING_SNAKE_CASE: values that never change.",
+	"topic": "Java",
+	"order": 203,
+	"steps": [
+		{
+			"title": "A constant",
+			"say": {
+				"never": "A **constant** is a value that never changes, so it's marked `final`. `static` puts it on the class itself, so it must be written *outside* `main`, up near the top of the file. Capital letters with underscores tell every reader \"this one never changes\".",
+				"bit": "A constant is `static final`, declared outside `main`, named in capitals."
+			},
+			"board": {
+				"code": "public static final int SEAT_COUNT = 40;",
+				"language": "java",
+				"marks": [
+					{
+						"text": "static",
+						"label": "belongs to the class, outside main"
+					},
+					{
+						"text": "final",
+						"label": "never changes"
+					}
+				]
+			}
+		},
+		{
+			"title": "In your lesson: A constant",
+			"say": {
+				"never": "In your lesson, `MAX_SPEED` is a constant: the robot's top speed, `5.0`. It's `static final`, written outside `main`, and named in capitals, just like `TEAM_NAME`.",
+				"bit": "`MAX_SPEED` is a constant: `static final`, outside `main`, in capitals."
+			},
+			"board": {
+				"code": "public static final double MAX_SPEED = 5.0;",
+				"marks": [
+					{
+						"text": "static",
+						"label": "belongs to the class, not one method"
+					},
+					{
+						"text": "final",
+						"label": "can never be reassigned"
+					},
+					{
+						"text": "MAX_SPEED",
+						"label": "team standard: ALL_CAPS for constants"
+					}
+				]
+			},
+			"assist": true
+		},
+		{
+			"title": "Open Main.java",
+			"say": {
+				"never": "Hold down **Ctrl** and tap **P**. A small search box pops up at the top. Type `Main`, then press **Enter**. It finds any file by its name, so you never have to dig through folders.",
+				"bit": "Press **Ctrl+P**, type `Main` and press Enter. Quick Open finds any file by name, so you never have to dig through folders."
+			},
+			"open": [
+				"editor"
+			],
+			"close": [
+				"scope",
+				"choreo",
+				"elastic",
+				"preview"
+			],
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".tabs-container .tab",
+					"text": "Main.java"
+				},
+				"hint": "open Main.java with Ctrl+P.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Find it",
+			"say": {
+				"never": "It may be further down. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `TEAM_NAME =` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "It may be further down. Press **Ctrl+F**, type `TEAM_NAME =` and press Enter to jump to it."
+			},
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "TEAM_NAME ="
+				},
+				"hint": "find TEAM_NAME = with Ctrl+F.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Your first TODO",
+			"say": {
+				"never": "This line has a blank waiting to be filled. Put `\"Team 4143\"` between the double quotes. Don't forget the quotes, because it's text.",
+				"bit": "This line is waiting for its value. Put `\"Team 4143\"` between the quotes."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "TEAM_NAME ="
+			},
+			"cardAt": "bottom-right",
+			"assist": true
+		},
+		{
+			"title": "Find it",
+			"say": {
+				"never": "It may be further down. Click in the code, then hold **Ctrl** and tap **F** to open the search box. Type `MAX_SPEED =` and press **Enter**. The editor scrolls to the right spot and highlights it.",
+				"bit": "It may be further down. Press **Ctrl+F**, type `MAX_SPEED =` and press Enter to jump to it."
+			},
+			"target": {
+				"pane": "editor"
+			},
+			"cardAt": "bottom-right",
+			"waitFor": {
+				"target": {
+					"pane": "editor",
+					"selector": ".view-lines .view-line",
+					"text": "MAX_SPEED ="
+				},
+				"hint": "find MAX_SPEED = with Ctrl+F.",
+				"skipIfDone": true
+			},
+			"assist": true
+		},
+		{
+			"title": "Your last constant",
+			"say": {
+				"never": "This line has the wrong value. Change `0.0` to `5.0`. No quotes this time, because it's a number.",
+				"bit": "Change `0.0` to `5.0`. No quotes, because it's a number."
+			},
+			"target": {
+				"pane": "editor",
+				"selector": ".view-lines .view-line",
+				"text": "MAX_SPEED ="
+			},
+			"cardAt": "bottom-right",
+			"assist": true
+		}
+	],
+	"kind": "mixed"
+}

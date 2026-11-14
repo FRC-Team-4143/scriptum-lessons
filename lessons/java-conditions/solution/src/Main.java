@@ -5,12 +5,13 @@ public class Main {
         if (percent < 90) return "MEDIUM";
         return "FULL";
     }
-    public static String driveModeName(int mode) {
+    enum DriveMode { TANK, ARCADE, SWERVE, FIELD_ORIENTED_SWERVE }
+    public static String driveModeName(DriveMode mode) {
         switch (mode) {
-            case 1: return "Tank";
-            case 2: return "Arcade";
-            case 3: return "Swerve";
-            case 4: return "Field-Oriented Swerve";
+            case TANK: return "Tank";
+            case ARCADE: return "Arcade";
+            case SWERVE: return "Swerve";
+            case FIELD_ORIENTED_SWERVE: return "Field-Oriented Swerve";
             default: return "Unknown mode";
         }
     }

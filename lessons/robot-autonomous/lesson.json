@@ -4,6 +4,8 @@
 	"kind": "robot",
 	"track": "FRC Robot",
 	"order": 28,
+	"roadmapUnit": "Autonomous",
+	"milestone": true,
 	"requires": [
 		"robot-computer-vision",
 		"choreo-intro",
@@ -13,7 +15,8 @@
 		"build-and-run",
 		"arbor-behavior-trees",
 		"arbor-trees-more",
-		"camera-streams"
+		"camera-streams",
+		"deploy-to-field-robot"
 	],
 	"checkpoints": [
 		{
@@ -103,6 +106,19 @@
 				"topic": "/AdvantageKit/RealOutputs/Check/Subsystem/Shooter/ShotCount/Max",
 				"check": "range",
 				"min": 1
+			}
+		},
+		{
+			"id": "challenge-two-cycle",
+			"title": "Challenge: Two-cycle auto",
+			"description": "A TwoCycle tree scores, goes back for a second game piece and scores again, with both shots aimed, in under 25 seconds. The instructions are in CHALLENGE.md (Open the challenge).",
+			"optional": true,
+			"verifier": {
+				"type": "nt4-value",
+				"topic": "/AdvantageKit/RealOutputs/Check/Challenge/TwoCycle",
+				"check": "range",
+				"min": 1,
+				"max": 1
 			}
 		}
 	]

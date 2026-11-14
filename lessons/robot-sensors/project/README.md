@@ -37,9 +37,9 @@ A suggested pace that adds up to the 3 hour session. Take short breaks whenever 
 | 35 | Step 4: the deadband (in `Constants.java` and `Robot.java`) |
 | 40 | Step 5: bang-bang driving, then the "Think about it" discussion |
 | 15 | Verify |
-| 10 | Bonus challenges |
+| 10 | Catch up on any step that took longer, or help a classmate |
 
-Go slower on anything that is new. Finishing every bonus is not expected.
+Go slower on anything that is new.
 
 ## What you need to do
 
@@ -84,8 +84,8 @@ Go slower on anything that is new. Finishing every bonus is not expected.
    about 50 m/s, far too fast for a real robot! Your math is fine. The encoder sits inside the
    **motor**, and the drivetrain divides by `GEAR_RATIO` to get to the wheel. `GEAR_RATIO` in
    `Constants.java` is still `1.0`, which says the motor and wheel turn together. On our robot the
-   gearbox is **8.46:1**: the motor turns 8.46 times for every 1 turn of the wheel. Set `GEAR_RATIO` to
-   the real number, press **Start** again and check: full speed should now read about 5.9 m/s. Then
+   gearbox is **10.71:1**: the motor turns 10.71 times for every 1 turn of the wheel. Set `GEAR_RATIO` to
+   the real number, press **Start** again and check: full speed should now read about 4.7 m/s. Then
    spin in place and watch `Robot/AngularSpeed`.
 5. **STEP 4: add a deadband.** Add a `DEADBAND` constant of `0.1` to `Constants.java`. Then, in
    `teleopPeriodic()`, use an `if` on `forward` and another on `turn`: if the absolute value
@@ -105,9 +105,3 @@ arrived, and never move. With the reset, `Robot/Distance` goes back to **0** at 
 (it should never go negative), and the simulated robot is put back at its starting spot.
 
 Stuck on a step? Open **Dozer**: he can explain the idea or walk you through it.
-
-## Bonus challenges
-
-- Drive **backward** 2 meters.
-- Drive at `0.2` instead of `0.4`. How far past 2.0 m does it stop now?
-- Log the speed of each side separately (`Robot/LeftSpeed`, `Robot/RightSpeed`).

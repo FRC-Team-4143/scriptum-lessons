@@ -80,7 +80,7 @@ public class DifferentialDriveMech extends MechBase {
   private static final DCMotor DRIVE_MOTOR = DCMotor.getFalcon500(1);
   // The gearbox really on the robot. The physics always uses this one, so a wrong GEAR_RATIO in the
   // constants makes the sensors read wrong, just like on a real robot.
-  private static final double REAL_GEAR_RATIO = 8.46;
+  private static final double REAL_GEAR_RATIO = 10.71;
   private double last_true_left_meters_ = 0.0;
   private double last_true_right_meters_ = 0.0;
   private double measured_left_meters_ = 0.0;

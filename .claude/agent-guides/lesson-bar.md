@@ -35,6 +35,9 @@ itself: its README, Dozer's guides and the checkpoint messages, with no mentor s
   plain words. Point at the kind of mistake, but don't hand over the answer.
 - **Robot `nt4-value` checkpoints** need a running simulator, so no test covers them. Say so in
   the PR, and say how you checked them, if you did.
+- **Robot advanced challenges** are the exception to the round trip: `solution/` is the required lesson, so a
+  challenge fails on it, and passes only with `challenge/` laid over `project/`. A finished challenge must
+  still pass the lesson's other checkpoints.
 - **No JUnit in the workspace.** Scriptum has no JUnit verifier, and the workspace is a bare JDK.
   `java-unit-testing` ships a small JUnit-style `@Test` and `Assertions`, and grades the
   student's tests by running them against buggy versions of the code ("mutants").
@@ -54,6 +57,13 @@ don't check:
   Java Basics 202-366, Robot 387-466, Java Advanced 501-533.
 - `help.json`'s `plan` has one stop per checkpoint, in checkpoint order, using this lesson's own
   guides.
+
+## Lesson versions
+
+- Changed a lesson's checkpoints or anything in `checkpoints/`? Decide whether a project started
+  from the old starter code would still pass. If not, raise `version` in `lesson.json`; if so, run
+  `bun run index --compatible <id>`. Say which you chose, and why, in the PR. See "Lesson
+  versions" in the README.
 
 ## Testing a change
 

@@ -4,6 +4,7 @@
 	"kind": "robot",
 	"track": "Tools",
 	"order": 9,
+	"roadmapUnit": "Autonomous",
 	"restrictTools": [
 		"choreo"
 	],

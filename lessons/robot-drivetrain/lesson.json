@@ -4,6 +4,8 @@
 	"kind": "robot",
 	"track": "FRC Robot",
 	"order": 20,
+	"roadmapUnit": "Motors and Drivetrains",
+	"milestone": true,
 	"requires": [
 		"advantagescope-intro",
 		"elastic-intro"
@@ -15,7 +17,8 @@
 	],
 	"guides": [
 		"build-and-run",
-		"java-variables"
+		"java-variables",
+		"deploy-to-field-robot"
 	],
 	"checkpoints": [
 		{
@@ -30,7 +33,7 @@
 		{
 			"id": "drives-straight",
 			"title": "Drives straight",
-			"description": "Fix the right side in Constants.java, then push forward at full speed (W). Drive/TrueSpeed, how fast the robot really moves forward, should reach about 5.9 m/s. If the robot spins instead, a motor's inverted setting is wrong.",
+			"description": "Fix the right side in Constants.java, then push forward at full speed (W). Drive/TrueSpeed, how fast the robot really moves forward, should reach about 4.7 m/s. If the robot spins instead, a motor's inverted setting is wrong.",
 			"verifier": {
 				"type": "nt4-value",
 				"topic": "/AdvantageKit/RealOutputs/Check/Drive/TrueSpeed/Max",
@@ -73,6 +76,16 @@
 				"check": "range",
 				"min": 1.5,
 				"max": 2.0
+			}
+		},
+		{
+			"id": "challenge-driver-sticks",
+			"title": "Challenge: Driver-friendly sticks",
+			"description": "Teleop squares each stick but keeps its sign, and past full power shrinks both sides together so the robot can still turn. The instructions are in CHALLENGE.md (Open the challenge).",
+			"optional": true,
+			"verifier": {
+				"type": "script",
+				"path": "checkpoints/verify/challenge-driver-sticks.sh"
 			}
 		}
 	]

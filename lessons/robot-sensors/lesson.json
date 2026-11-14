@@ -4,6 +4,8 @@
 	"kind": "robot",
 	"track": "FRC Robot",
 	"order": 21,
+	"roadmapUnit": "Sensors and Feedback",
+	"milestone": true,
 	"requires": [
 		"robot-drivetrain"
 	],
@@ -11,7 +13,8 @@
 		"java-conditions"
 	],
 	"guides": [
-		"build-and-run"
+		"build-and-run",
+		"deploy-to-field-robot"
 	],
 	"checkpoints": [
 		{
@@ -35,7 +38,7 @@
 		{
 			"id": "linear-speed",
 			"title": "Linear speed",
-			"description": "Drive both sides forward at full speed. Robot/LinearSpeed should read about 5.9 m/s. If it reads about 50, GEAR_RATIO isn't set yet.",
+			"description": "Drive both sides forward at full speed. Robot/LinearSpeed should read about 4.7 m/s. If it reads about 50, GEAR_RATIO isn't set yet.",
 			"verifier": {
 				"type": "nt4-value",
 				"topic": "/AdvantageKit/RealOutputs/Check/Robot/LinearSpeed/Max",
@@ -66,6 +69,19 @@
 				"check": "range",
 				"min": 1.95,
 				"max": 3.0
+			}
+		},
+		{
+			"id": "challenge-stop-on-mark",
+			"title": "Challenge: Stop on the mark",
+			"description": "Run Auto. The robot really stops within 3 centimeters of 2 meters, and gets there in under 2.5 seconds. Bang-bang can't do it. The instructions are in CHALLENGE.md (Open the challenge).",
+			"optional": true,
+			"verifier": {
+				"type": "nt4-value",
+				"topic": "/AdvantageKit/RealOutputs/Check/Challenge/StopOnMark",
+				"check": "range",
+				"min": 1,
+				"max": 1
 			}
 		}
 	]

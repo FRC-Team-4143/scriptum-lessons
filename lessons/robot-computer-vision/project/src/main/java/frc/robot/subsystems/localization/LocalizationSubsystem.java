@@ -19,6 +19,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import lesson.KnockedOffCheck;
 
 /**
  * Works out where the robot is on the field. It owns the pose estimator: every loop it feeds the
@@ -96,7 +97,9 @@ public class LocalizationSubsystem extends MwSubsystem<LocalizationStates, Local
     // Vision: the latest tag solutions from the proxy server. (This also logs them, under
     // Proxy/TagSolutions.) Each one is a pose, the time its picture was taken, and the ids of the
     // AprilTags it was worked out from.
-    List<TagSolutionData> solutions = ProxyServerThread.getInstance().getLatestTagSolutions();
+    // (withFalseSightings adds nothing unless the optional "Knocked off course" test is running.)
+    List<TagSolutionData> solutions =
+        KnockedOffCheck.withFalseSightings(ProxyServerThread.getInstance().getLatestTagSolutions());
     for (TagSolutionData solution : solutions) {
       if (!isNew(solution)) {
         continue;
@@ -158,6 +161,17 @@ public class LocalizationSubsystem extends MwSubsystem<LocalizationStates, Local
     // The tags remembered for the logs were seen from the old spot too: forget them.
     camera_latest_.clear();
     visible_tags_.clear();
+  }
+
+  /**
+   * Used by the "Knocked off course" challenge: pretends something shoved the robot, by moving the
+   * estimate without moving the robot.
+   */
+  public void knockEstimate(double meters) {
+    Pose2d moved = new Pose2d(pose_.getX() + meters, pose_.getY(), pose_.getRotation());
+    pose_estimator_.resetPosition(
+        drive_.getYaw(), drive_.getLeftMeters(), drive_.getRightMeters(), moved);
+    pose_ = moved;
   }
 
   /**
