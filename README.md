@@ -191,7 +191,8 @@ has to be made in every module (`lessons/robot-*/project/`):
 - `lesson/LessonChecks.java` (via `lesson/Checks.java` in modules 5-7) republishes the min and max of
   a few logged values under `Check/...`, so the `nt4-value` checkpoints still pass after the student
   lets go of the sticks. Each module's `.vscode/settings.json` hides it, the build files and other
-  scaffolding from the Explorer.
+  scaffolding from the Explorer. `logs/` is not hidden (only left out of search): Scriptum copies a
+  robot turn's logs there and tells the student so.
 - Modules 1-4 keep the chassis numbers in `Constants.java`; from `robot-subsystems` on that file is gone
   and they live in `subsystems/drive/DrivetrainConstants.java` (static fields, read as
   `DrivetrainConstants.WHEEL_RADIUS_METERS`). The wheel radius (0.0762 m) and track width (0.61 m)

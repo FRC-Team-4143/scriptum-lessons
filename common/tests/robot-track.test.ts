@@ -69,6 +69,22 @@ describe("FRC Robot track", () => {
 });
 
 // Every robot lesson ends with one optional, harder checkpoint. See README.md, "Robot modules".
+describe("FRC Robot lessons in the Explorer", () => {
+	// Scriptum copies a robot turn's logs into the lesson's logs/ folder and
+	// tells the student "added to logs/". The Explorer used to hide that
+	// folder, so they went looking and found nothing (Scriptum problem report
+	// 2). Search still skips it: the logs are binary.
+	test.each(ROBOT_LESSONS)("%s shows its logs/ folder, and keeps it out of search", (id) => {
+		const settings = JSON.parse(readFileSync(join(repoRoot, "lessons", id, "project", ".vscode", "settings.json"), "utf8")) as {
+			"files.exclude": Record<string, boolean>;
+			"search.exclude": Record<string, boolean>;
+		};
+		expect(settings["files.exclude"].logs).toBeUndefined();
+		expect(settings["files.exclude"].build).toBe(true);
+		expect(settings["search.exclude"].logs).toBe(true);
+	});
+});
+
 describe("FRC Robot advanced challenges", () => {
 	const scripts = (id: string) => (byId.get(id)?.checkpoints ?? []).filter((c) => c.verifier.type === "script");
 	const lessonDir = (id: string) => join(repoRoot, "lessons", id);
