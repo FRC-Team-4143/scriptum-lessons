@@ -29,7 +29,6 @@
     ".vscode": true,
     ".gitignore": true,
     "build": true,
-    "logs": true,
     "bin": true,
     "AdvantageKit-License.md": true,
     "WPILib-License.md": true,
