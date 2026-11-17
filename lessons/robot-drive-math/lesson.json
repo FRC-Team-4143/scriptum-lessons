@@ -23,7 +23,7 @@
 		{
 			"id": "radians-to-meters",
 			"title": "radiansToMeters",
-			"description": "DriveMath.radiansToMeters(radians, radius) converts a wheel angle in radians to meters.",
+			"description": "In DriveMath.java: radiansToMeters(radians, radius) converts a wheel angle in radians to meters.",
 			"verifier": {
 				"type": "script",
 				"path": "checkpoints/verify/radians-to-meters.sh"
@@ -32,7 +32,7 @@
 		{
 			"id": "linear-speed",
 			"title": "linearSpeed",
-			"description": "DriveMath.linearSpeed(left, right) is the robot's forward speed.",
+			"description": "In DriveMath.java (you write this one): linearSpeed(left, right) is the robot's forward speed.",
 			"verifier": {
 				"type": "script",
 				"path": "checkpoints/verify/linear-speed.sh"
@@ -41,7 +41,7 @@
 		{
 			"id": "angular-speed",
 			"title": "angularSpeed",
-			"description": "DriveMath.angularSpeed(left, right, trackWidth) is the robot's turning speed.",
+			"description": "In DriveMath.java (you write this one): angularSpeed(left, right, trackWidth) is the robot's turning speed.",
 			"verifier": {
 				"type": "script",
 				"path": "checkpoints/verify/angular-speed.sh"
@@ -50,7 +50,7 @@
 		{
 			"id": "arcade-math",
 			"title": "arcadeToWheelSpeeds",
-			"description": "DriveMath.arcadeToWheelSpeeds(forward, turn) returns {left, right} and never goes past 1.0.",
+			"description": "In DriveMath.java: arcadeToWheelSpeeds(forward, turn) returns {left, right} and never goes past 1.0.",
 			"verifier": {
 				"type": "script",
 				"path": "checkpoints/verify/arcade-math.sh"
@@ -59,7 +59,7 @@
 		{
 			"id": "average",
 			"title": "average",
-			"description": "DriveMath.average(values) adds up an array with a for loop and divides by its length.",
+			"description": "In DriveMath.java: average(values) adds up an array with a for loop and divides by its length.",
 			"verifier": {
 				"type": "script",
 				"path": "checkpoints/verify/average.sh"
@@ -68,7 +68,7 @@
 		{
 			"id": "arcade-forward",
 			"title": "Arcade forward",
-			"description": "In Teleop, push the left stick forward. The drivetrain should drive forward through arcadeDrive.",
+			"description": "Needs setLeftDutyCycle, setRightDutyCycle and arcadeDrive in mechanisms/DifferentialDriveMech.java. In Teleop, push the left stick forward. The drivetrain should drive forward through arcadeDrive.",
 			"verifier": {
 				"type": "nt4-value",
 				"topic": "/AdvantageKit/RealOutputs/Check/Drive/LeftOutput/Max",
@@ -80,7 +80,7 @@
 		{
 			"id": "arcade-turn",
 			"title": "Arcade turn",
-			"description": "In Teleop, push the left stick to the right (D). The right side should reverse.",
+			"description": "Needs arcadeDrive in mechanisms/DifferentialDriveMech.java. In Teleop, push the left stick to the right (D). The right side should reverse.",
 			"verifier": {
 				"type": "nt4-value",
 				"topic": "/AdvantageKit/RealOutputs/Check/Drive/RightOutput/Min",
@@ -92,7 +92,7 @@
 		{
 			"id": "smoothed-speed",
 			"title": "Smoothed speed",
-			"description": "Drive forward at full speed in Teleop. Robot/SmoothedSpeed should read about 4.7 m/s.",
+			"description": "Needs average in DriveMath.java. Drive forward at full speed in Teleop. Robot/SmoothedSpeed should read about 4.7 m/s.",
 			"verifier": {
 				"type": "nt4-value",
 				"topic": "/AdvantageKit/RealOutputs/Check/Robot/SmoothedSpeed/Max",
